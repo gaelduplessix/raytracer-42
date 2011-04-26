@@ -5,10 +5,16 @@
 ** Login   <jochau_g@epitech.net>
 ** 
 ** Started on  Tue Apr 26 11:02:40 2011 gael jochaud-du-plessix
-** Last update Tue Apr 26 11:04:03 2011 loick michard
+** Last update Tue Apr 26 11:06:15 2011 gael jochaud-du-plessix
 */
 
-int main(int ac, ,char **PD)
+#include <stdlib.h>
+
+int main(int ac, char **av)
 {
+  if (ac > 1)
+    {
+      printf("okay\n");
+    }
   return (0);
 }
