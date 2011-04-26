@@ -5,12 +5,12 @@
 ** Login   <jochau_g@epitech.net>
 ** 
 ** Started on  Tue Apr 26 11:02:40 2011 gael jochaud-du-plessix
-** Last update Tue Apr 26 11:12:42 2011 loick michard
+** Last update Tue Apr 26 11:14:50 2011 gael jochaud-du-plessix
 */
 
 #include <stdlib.h>
 
-int main(int ac, char **PD)
+int	     main(int ac, char **PD)
 {
   if (ac > 1)
     {
