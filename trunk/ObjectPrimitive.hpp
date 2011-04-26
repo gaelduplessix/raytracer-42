@@ -5,11 +5,19 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Tue Apr 26 17:54:21 2011 gael jochaud-du-plessix
+// Last update Tue Apr 26 18:43:33 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
 #define _OBJECTPRIMITIVE_HPP_
+
+#include "Vector.hpp"
+#include "Point.hpp"
+#include "Rotation.hpp"
+#include "BoundingBox.hpp"
+#include "Ray.hpp"
+
+class Object;
 
 class ObjectPrimitive
 {

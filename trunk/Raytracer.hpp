@@ -5,11 +5,15 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Tue Apr 26 13:47:51 2011 loick michard
+// Last update Tue Apr 26 18:45:46 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
 #define _RAYTRACER_HPP_
+
+#include "Scene.hpp"
+#include "RenderingConfiguration.hpp"
+#include "RenderingInterface.hpp"
 
 class	Raytracer
 {

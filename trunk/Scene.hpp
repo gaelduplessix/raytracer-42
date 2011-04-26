@@ -5,13 +5,18 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Tue Apr 26 12:19:37 2011 loick michard
+// Last update Tue Apr 26 18:47:34 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SCENE_HPP_
 #define _SCENE_HPP_
 
+#include "Camera.hpp"
+#include "Object.hpp"
+#include "Light.hpp"
+
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -21,9 +26,9 @@ public:
   Scene();
   Scene(vector<Camera> Cameras,
 	vector<Object> Objects,
-	vector<Light> Lights) : _Cameras(Cameras),
-				_Objects(Objects),
-				_Lights(Lights);
+	vector<Light> Lights) : _cameras(Cameras),
+				_objects(Objects),
+				_lights(Lights);
   Scene(string filename);
   ~Scene();
 
@@ -40,9 +45,9 @@ public:
   int			getNbLights() const;
 
 private:
-  vector<Camera>	_Cameras;
-  vector<Object>	_Objects;
-  vector<Light>		_Lights;
+  vector<Camera>	_cameras;
+  vector<Object>	_objects;
+  vector<Light>		_lights;
 };
 
 #endif

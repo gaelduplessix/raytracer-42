@@ -5,13 +5,18 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Tue Apr 26 17:45:46 2011 gael jochaud-du-plessix
+// Last update Tue Apr 26 18:44:46 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECT_HPP_
 #define _OBJECT_HPP_
 
 #include <vector>
+
+#include "Vector.hpp"
+#include "Point.hpp"
+#include "Rotation.hpp"
+#include "ObjectPrimitive.hpp"
 
 using namespace std;
 
