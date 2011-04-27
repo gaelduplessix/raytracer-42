@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Tue Apr 26 22:37:22 2011 gael jochaud-du-plessix
+// Last update Wed Apr 27 22:23:09 2011 samuel olivier
 //
 
 #ifndef _CAMERA_H_
@@ -21,21 +21,22 @@ public:
   Camera();
   ~Camera();
 
-  Point&	getPosition() const;
-  Rotation&	getRotation() const;
-  bool		hasDepthOfField() const;
-  double	getFocalLength() const;
-  double	getApertureSize() const;
-  double	getFocus() const;
+  const Point&		getPosition() const;
+  const Rotation&	getRotation() const;
+  bool			hasDepthOfField() const;
+  double		getFocalLength() const;
+  double		getApertureSize() const;
+  double		getFocus() const;
 
-  void		setPosition(const Point& position);
-  void		setRotation(const Rotation& Rotation);  
-  void		setFocalLength(double focalLength);  
-  void		setApertureSize(double apertureSize);
-  void		setFocus(double focus);
+  void			setPosition(const Point& position);
+  void			setRotation(const Rotation& rotation);  
+  void			setFocalLength(double focalLength);  
+  void			setApertureSize(double apertureSize);
+  void			setFocus(double focus);
 
-  Ray		getRay(double x, double y);
-  Ray		getRayWithSampling(double x, double y, double samplingPos);
+  Ray			getRay(double x, double y);
+  Ray			getRayWithSampling(double x, double y,
+					   double samplingPos);
 
 private:
   Point		_position;

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:51:08 2011 loick michard
-// Last update Wed Apr 27 18:53:04 2011 loick michard
+// Last update Wed Apr 27 22:05:04 2011 samuel olivier
 //
 
 #include "Vector.hpp"

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Wed Apr 27 18:47:46 2011 loick michard
+// Last update Wed Apr 27 22:25:15 2011 samuel olivier
 //
 
 #include "Camera.hpp"
@@ -15,7 +15,76 @@ Camera::Camera()
 
 }
 
+Camera::Camera(const Point& position, const Rotation& rotation,
+	       const double focalLenght, const bool hasDepthOfField,
+	       const double apertureSize, const double focus)
+{
+  _postion = position;
+  _rotation = rotation;
+  _focalLength = focalLenght;
+  _hasDepthOfField = hasDepthOfField;
+  _apertureSize = apertureSize;
+  _focus = focus;
+}
+
 Camera::~Camera()
 {
   
 }
+
+const Point&	Camera::getPosition() const
+{
+  return (_position);
+}
+
+const Rotation&	Camera::getRotation() const
+{
+  return (_rotation);
+}
+
+double		Camera::getFocalLength() const
+{
+  return (_focalLength);
+}
+
+bool		Camera::hasDepthOfField() const
+{
+  return (_hasDepthOfField);
+}
+
+double		Camera::getApertureSize() const
+{
+  return (_apertureSize);
+}
+
+double		Camera::getFocus() const
+{
+  return (_focus);
+}
+
+void		Camera::setPosition(const Point& position)
+{
+  _position = position;
+}
+
+void		Camera::setRotation(const Rotation& rotation)
+{
+  _rotation = rotation;
+}
+
+void		Camera::setFocalLength(double focalLength)
+{
+  _focalLength = focalLength;
+}
+
+void		Camera::setApertureSize(double apertureSize)
+{
+  _apertureSize = apertureSize;
+}
+
+void		Camera::setFocus(double focus)
+{
+  _focus = focus;
+}
+
+
