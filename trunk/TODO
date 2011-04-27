@@ -4,3 +4,5 @@ Camera.cpp -> getRayWithSampling
 Raytracer -> launchRendering
 Raytracer -> stopRendering
 Raytracer -> pauseRendering
+
+Object -> A finir
