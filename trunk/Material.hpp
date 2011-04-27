@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:50:09 2011 loick michard
-// Last update Wed Apr 27 17:49:47 2011 loick michard
+// Last update Wed Apr 27 18:59:20 2011 loick michard
 //
 
 #ifndef _MATERIAL_HPP_
@@ -13,6 +13,7 @@
 
 #include <string>
 #include "Texture.hpp"
+#include "Vector.hpp"
 
 using namespace std;
 
@@ -50,14 +51,14 @@ public:
 private:
   string	_name;
   Color		_color;
-  Texture&	_texture;
+  Texture*	_texture;
   bool		_isTextured;
   double	_specularCoeff;
   double	_specularPow;
   double	_reflectionCoeff;
   double	_transmissionCoeff;
   double	_refractionIndex;
-  Texture&	_heightmap;
+  Texture*	_heightmap;
   bool		_hasBumpMap;
 };
 

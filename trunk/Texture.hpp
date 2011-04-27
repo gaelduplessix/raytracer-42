@@ -5,11 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Wed Apr 27 17:49:31 2011 loick michard
+// Last update Wed Apr 27 18:58:59 2011 loick michard
 //
 
 #ifndef _TEXTURE_HPP_
 #define _TEXTURE_HPP_
+
+#include "Color.hpp"
 
 class Texture
 {

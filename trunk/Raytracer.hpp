@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Wed Apr 27 18:02:16 2011 loick michard
+// Last update Wed Apr 27 18:22:58 2011 loick michard
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -36,9 +36,9 @@ public:
   RenderingInterface&		getRenderingInterface() const;
 
 private:
-  Scene&			_scene;
-  RenderingConfiguration&	_config;
-  RenderingInterface&		_interface;
+  Scene*			_scene;
+  RenderingConfiguration*	_config;
+  RenderingInterface*		_interface;
 };
 
 #endif

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Tue Apr 26 23:09:54 2011 gael jochaud-du-plessix
+// Last update Wed Apr 27 18:55:20 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -38,7 +38,7 @@ public:
   virtual bool		isInBoundingBox(BoundingBox& box) = 0;
 
 private:
-  Object&	_object;
+  Object*	_object;
   Point		_position;
   Rotation	_rotation;
   Point		_absolutePosition;

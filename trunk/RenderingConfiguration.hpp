@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Tue Apr 26 15:49:27 2011 loick michard
+// Last update Wed Apr 27 18:27:06 2011 loick michard
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -109,7 +109,7 @@ private:
   int                   _diffuseLightingSampling;
   bool                  _fieldDepthEnabled;
   int                   _fieldDepthSampling;
-  renderingSamplingMethod _renderingSamplingMethod;
+  renderingSamplingMethod* _renderingSamplingMethod;
 };
 
 #endif
