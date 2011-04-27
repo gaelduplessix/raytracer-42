@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Tue Apr 26 23:01:59 2011 gael jochaud-du-plessix
+// Last update Wed Apr 27 15:22:45 2011 loick michard
 //
 
 #ifndef _COLOR_HPP_
@@ -23,12 +23,12 @@ public:
   int	getA() const;
   int	getHexaValue() const;
 
-  void	setR(int r) const;
-  void	setG(int g) const;
-  void	setB(int b) const;
-  void	setB(int a) const;
-  void	setColor(int color) const;
-  void	setColor(int r, int g, int b, int a) const;
+  void	setR(int r);
+  void	setG(int g);
+  void	setB(int b);
+  void	setA(int a);
+  void	setColor(int color);
+  void	setColor(int r, int g, int b, int a);
 
   Color&	operator+=(Color& color);
   Color&	operator-=(Color& color);
@@ -38,11 +38,11 @@ public:
   Color&	operator&=(Color& color);
 
 private:
-  int	r;
-  int	g;
-  int	b;
-  int	a;
-  int	color;
+  int	_r;
+  int	_g;
+  int	_b;
+  int	_a;
+  int	_color;
 };
 
 Color&	operator+(const Color& color1, const Color& color2);
