@@ -1,2 +1,6 @@
 Camera.cpp -> getRay
 Camera.cpp -> getRayWithSampling
+
+Raytracer -> launchRendering
+Raytracer -> stopRendering
+Raytracer -> pauseRendering

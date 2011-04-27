@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Wed Apr 27 18:22:58 2011 loick michard
+// Last update Wed Apr 27 23:01:35 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -31,9 +31,10 @@ public:
   void setScene(Scene& scene);
   void setRenderingConfiguration(RenderingConfiguration& config);
   void setRenderingInterface(RenderingInterface& interface);
-  Scene&			getScene() const;
-  RenderingConfiguration&	getRenderingConfiguration() const;
-  RenderingInterface&		getRenderingInterface() const;
+
+  const Scene&			getScene(void) const;
+  const RenderingConfiguration&	getRenderingConfiguration(void) const;
+  const RenderingInterface&	getRenderingInterface(void) const;
 
 private:
   Scene*			_scene;

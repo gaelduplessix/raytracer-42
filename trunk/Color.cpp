@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Wed Apr 27 21:56:22 2011 samuel olivier
+// Last update Wed Apr 27 22:45:39 2011 samuel olivier
 //
 
 #include "Color.hpp"
@@ -49,22 +49,22 @@ Color::~Color()
 
 }
 
-int	Color::getR() const
+int	Color::getR(void) const
 {
   return (_r);
 }
 
-int	Color::getG() const
+int	Color::getG(void) const
 {
   return (_g);
 }
 
-int	Color::getB() const
+int	Color::getB(void) const
 {
   return (_b);
 }
 
-int	Color::getA() const
+int	Color::getA(void) const
 {
   return (_a);
 }
