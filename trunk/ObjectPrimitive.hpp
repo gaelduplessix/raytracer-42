@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Tue Apr 26 18:43:33 2011 gael jochaud-du-plessix
+// Last update Tue Apr 26 23:09:54 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -16,6 +16,7 @@
 #include "Rotation.hpp"
 #include "BoundingBox.hpp"
 #include "Ray.hpp"
+#include "Material.hpp"
 
 class Object;
 
@@ -32,15 +33,16 @@ public:
 
   virtual bool		intersectWithRay(Ray& ray) = 0;
   virtual Vector	getNormalVector(Point& intersectPoint) = 0;
-  virtual Vector	getReflectedVector(Point& intersectPoint, Vector& vector);
-  virtual Vector	getRefractedVector(Point& intersectPoint, Vector& vector);
-  virtual bool		isInBoundingBox(BoundingBox& box);
+  virtual Vector	getReflectedVector(Point& intersectPoint, Vector& vector) = 0;
+  virtual Vector	getRefractedVector(Point& intersectPoint, Vector& vector) = 0;
+  virtual bool		isInBoundingBox(BoundingBox& box) = 0;
 
 private:
   Object&	_object;
   Point		_position;
   Rotation	_rotation;
   Point		_absolutePosition;
+  Material	_material;
 };
 
 #endif
