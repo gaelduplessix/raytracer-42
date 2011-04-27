@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Tue Apr 26 18:47:34 2011 gael jochaud-du-plessix
+// Last update Wed Apr 27 18:01:53 2011 loick michard
 //
 
 #ifndef _SCENE_HPP_
@@ -26,9 +26,7 @@ public:
   Scene();
   Scene(vector<Camera> Cameras,
 	vector<Object> Objects,
-	vector<Light> Lights) : _cameras(Cameras),
-				_objects(Objects),
-				_lights(Lights);
+	vector<Light> Lights);
   Scene(string filename);
   ~Scene();
 

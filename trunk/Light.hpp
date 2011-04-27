@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Wed Apr 27 15:09:26 2011 loick michard
+// Last update Wed Apr 27 18:01:01 2011 loick michard
 //
 
 #ifndef _LIGHT_HPP_
@@ -13,6 +13,7 @@
 
 #include "Point.hpp"
 #include "Color.hpp"
+#include "RenderingConfiguration.hpp"
 
 class Light
 {
@@ -28,7 +29,8 @@ public:
   void		setColor(const Color& color);
   void		setIntensity(double intensity);
 
-  double	getDirectLightning(const Ray& ray,const Point& intersectPoint,
+  double	getDirectLightning(const Ray& ray,
+				   const Point& intersectPoint,
 				   const RenderingConfiguration& config) const;
 
 private:

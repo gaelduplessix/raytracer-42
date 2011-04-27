@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Tue Apr 26 18:44:46 2011 gael jochaud-du-plessix
+// Last update Wed Apr 27 18:08:05 2011 loick michard
 //
 
 #ifndef _OBJECT_HPP_
@@ -30,7 +30,7 @@ public:
   ObjectPrimitive&	getPrimitiveAtIndex(int index) const;
   Rotation&		getRotation() const;
   Point&		getPosition() const;
-  void			addPrimitive(ObjectPrimitive primitive);
+  void			addPrimitive(const ObjectPrimitive& primitive);
   void			removePrimitiveAtIndex(int index);
   void			setPosition(const Point& position);
   void			setRotation(const Rotation& rotation);

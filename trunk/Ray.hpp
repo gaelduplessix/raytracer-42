@@ -5,11 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:11:51 2011 loick michard
-// Last update Wed Apr 27 15:24:21 2011 loick michard
+// Last update Wed Apr 27 17:44:42 2011 loick michard
 //
 
 #ifndef _RAY_HPP_
 #define _RAY_HPP_
+
+#include "Color.hpp"
 
 class Ray
 {

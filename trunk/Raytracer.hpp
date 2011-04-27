@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Tue Apr 26 18:45:46 2011 gael jochaud-du-plessix
+// Last update Wed Apr 27 18:02:16 2011 loick michard
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -21,9 +21,7 @@ public:
   Raytracer();
   Raytracer(Scene& scene,
 	    RenderingConfiguration& config,
-	    RenderingInterface& interface) : _scene(scene),
-					     _config(config),
-					     _interface(interface);
+	    RenderingInterface& interface);
   ~Raytracer();
 
   void launchRendering();
