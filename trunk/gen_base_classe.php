@@ -86,7 +86,8 @@ foreach ($class->getters as $getter)
 	  $var_name = lcfirst($matches[2]);
 	  if ($class->hasMember($var_name))
 	    {
-	      echo $getter['type'] . "\t" . $getter['name'] . "\n";
+	      echo $getter['type'] . "\t" . $class->name . '::'
+		. $getter['name'] . "\n";
 	      echo "{\n";
 	      echo "\treturn (_" . $var_name . ");\n";
 	      echo "}\n\n";
@@ -113,7 +114,8 @@ foreach ($class->setters as $setter)
 	      $value_name = $words[count($words) - 1];
 	      if ($class->hasMember($var_name))
 		{
-		  echo $setter['type'] . "\t" . $setter['name'] . "\n";
+		  echo $setter['type'] . "\t" . $class->name . '::'
+		    . $setter['name'] . "\n";
 		  echo "{\n";
 		  echo "\t_" . $var_name . ' = ' . $value_name . ";\n";
 		  echo "}\n\n";
@@ -121,7 +123,8 @@ foreach ($class->setters as $setter)
 	    }
 	  else
 	    {
-	      echo $setter['type'] . "\t" . $setter['name'] . "\n";
+	      echo $setter['type'] . "\t" . $class->name . '::'
+		. $setter['name'] . "\n";
 	      echo "{\n";
 	      foreach ($values as $value)
 		{
@@ -135,4 +138,13 @@ foreach ($class->setters as $setter)
 	    }
 	}
     }
+}
+
+// Génération des opérateurs
+foreach ($class->operators as $operator)
+{
+  echo $operator['type'] . "\t" . $class->name . '::'
+    . $operator['name'] . "\n";
+  echo "{\n\n";
+  echo "}\n\n";
 }
