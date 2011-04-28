@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Wed Apr 27 18:58:59 2011 loick michard
+// Last update Thu Apr 28 19:21:37 2011 loick michard
 //
 
 #ifndef _TEXTURE_HPP_
@@ -19,7 +19,7 @@ public:
   Texture();
   ~Texture();
 
-  virtual Color& getColor(double x, double y) const = 0;
+  virtual const Color& getColor(double x, double y) const = 0;
 
 private:
 
