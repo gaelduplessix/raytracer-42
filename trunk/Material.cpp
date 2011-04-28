@@ -5,6 +5,16 @@ Material::Material()
 
 }
 
+Material::Material(const string& name)
+{
+
+}
+
+Material::Material(const Texture& texture)
+{
+
+}
+
 Material::~Material()
 {
 
