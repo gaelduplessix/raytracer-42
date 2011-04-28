@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Wed Apr 27 18:27:06 2011 loick michard
+// Last update Thu Apr 28 18:02:16 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -41,15 +41,15 @@ public:
   RenderingConfiguration();
   ~RenderingConfiguration();
   
-  int		getAntialiasing() const;
+  int		getAntialiasing(void) const;
   void		setAntialiasing(int antialiasing);
-  bool		isDirectLighting() const;
+  bool		isDirectLighting(void) const;
   void		setDirectLighting(bool antialiasing);
 
-  bool		isReflectionEnabled() const;
-  int		getReflectionMaxDepth() const;
-  bool		isReflectionDiffused() const;
-  int		getReflectionDiffusedSampling() const;
+  bool		isReflectionEnabled(void) const;
+  int		getReflectionMaxDepth(void) const;
+  bool		isReflectionDiffused(void) const;
+  int		getReflectionDiffusedSampling(void) const;
   void		setReflection(bool enabled, int maxDepth = 20,
 			      bool diffused = 0, int diffusedSampling = 0);
   void		setReflectionEnabled(bool enabled = 1);
@@ -57,41 +57,41 @@ public:
   void		setReflectionDiffused(bool diffused = 1);
   void		setReflectionDiffusedSampling(int diffusedSampling);
 
-  bool		isTransparencyEnabled() const;
-  bool		isTransparencyDiffused() const;
-  int		getTransparencyDiffusedSampling() const;
+  bool		isTransparencyEnabled(void) const;
+  bool		isTransparencyDiffused(void) const;
+  int		getTransparencyDiffusedSampling(void) const;
   void		setTransparency(bool enabled,
 				bool diffused = 0, int diffusedSampling = 0);
   void		setTransparencyEnabled(bool enabled = 1);
   void          setTransparencyDiffused(bool diffused = 1);
   void          setTransparencyDiffusedSampling(int diffusedSampling);
 
-  bool		isAmbientOcclusionEnabled() const;
-  int		getAmbientOcclusionSampling() const;
+  bool		isAmbientOcclusionEnabled(void) const;
+  int		getAmbientOcclusionSampling(void) const;
   void		setAmbientOcclusionEnabled(bool enabled = 1);
   void		setAmbientOcclusionSampling(int sampling);
 
-  bool		isPhotonMappingEnabled() const;
-  int		getPhotonMappingSampling() const;
+  bool		isPhotonMappingEnabled(void) const;
+  int		getPhotonMappingSampling(void) const;
   void		setPhotonMappingEnabled(bool enabled= 1);
   void		setPhotonMappingSampling(int sampling);
 
-  bool		isDiffuseLightingEnabled() const;
-  int		getDiffuseLightingSampling() const;
+  bool		isDiffuseLightingEnabled(void) const;
+  int		getDiffuseLightingSampling(void) const;
   void		setDiffuseLightingEnabled(bool enabled= 1);
   void		setDiffuseLightingSampling(int sampling);
 
-  bool		isFieldDepthEnabled() const;
-  int		getFieldDepthSampling() const;
+  bool		isFieldDepthEnabled(void) const;
+  int		getFieldDepthSampling(void) const;
   void		setFieldDepthEnabled(bool enabled= 1);
   void		setFieldDepthSampling(int sampling);
 
-  renderingSamplingMethod getRenderingSamplingMethod() const;
-  void setRenderingSamplingMethod(renderingSamplingMethod rsm);
+  renderingSamplingMethod* getRenderingSamplingMethod(void) const;
+  void setRenderingSamplingMethod(renderingSamplingMethod* rsm);
 
-  int	getWidth() const;
+  int	getWidth(void) const;
   void	setWidth(int width);
-  int   getHeight() const;
+  int   getHeight(void) const;
   void	setHeight(int width);
 
 private:
