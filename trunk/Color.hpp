@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Wed Apr 27 22:45:53 2011 samuel olivier
+// Last update Thu Apr 28 14:08:56 2011 loick michard
 //
 
 #ifndef _COLOR_HPP_
@@ -31,12 +31,12 @@ public:
   void	setColor(int r, int g, int b, int a);
   void	setColor(int color);
 
-  Color&	operator+=(Color& color);
-  Color&	operator-=(Color& color);
-  Color&	operator*=(Color& color);
-  Color&	operator/=(Color& color);
-  Color&	operator%=(Color& color);
-  Color&	operator&=(Color& color);
+  Color&	operator+=(const Color& color);
+  Color&	operator-=(const Color& color);
+  Color&	operator*=(const Color& color);
+  Color&	operator/=(const Color& color);
+  Color&	operator%=(const Color& color);
+  Color&	operator&=(const Color& color);
 
 private:
   int	_r;

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Wed Apr 27 22:45:39 2011 samuel olivier
+// Last update Thu Apr 28 14:10:24 2011 loick michard
 //
 
 #include "Color.hpp"
@@ -115,52 +115,58 @@ void	Color::setColor(int r, int g, int b, int a)
   _a = a;
 }
 
-Color&		Color::operator+=(Color& color)
+Color&		Color::operator+=(const Color& color)
 {
   _r += color.getR();
   _g += color.getG();
   _b += color.getB();
   _a += color.getA();
+  return (*this);
 }
 
-Color&		Color::operator-=(Color& color)
+Color&		Color::operator-=(const Color& color)
 {
   _r -= color.getR();
   _g -= color.getG();
   _b -= color.getB();
   _a -= color.getA();
+  return (*this);
 }
 
-Color&		Color::operator*=(Color& color)
+Color&		Color::operator*=(const Color& color)
 {
   _r *= color.getR();
   _g *= color.getG();
   _b *= color.getB();
   _a *= color.getA();
+  return (*this);
 }
 
-Color&		Color::operator/=(Color& color)
+Color&		Color::operator/=(const Color& color)
 {
   _r /= color.getR();
   _g /= color.getG();
   _b /= color.getB();
   _a /= color.getA();
+  return (*this);
 }
 
-Color&		Color::operator%=(Color& color)
+Color&		Color::operator%=(const Color& color)
 {
   _r %= color.getR();
   _g %= color.getG();
   _b %= color.getB();
   _a %= color.getA();
+  return (*this);
 }
 
-Color&		Color::operator&=(Color& color)
+Color&		Color::operator&=(const Color& color)
 {
   _r &= color.getR();
   _g &= color.getG();
   _b &= color.getB();
   _a &= color.getA();
+  return (*this);
 }
 
 Color		operator+(const Color& color1, const Color& color2)
