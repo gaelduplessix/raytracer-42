@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Thu Apr 28 18:35:29 2011 samuel olivier
+// Last update Thu Apr 28 19:18:57 2011 loick michard
 //
 
 #ifndef _LIGHT_HPP_
@@ -33,7 +33,7 @@ public:
   virtual double
   getDirectLightning(const Ray& ray,
 		     const Point& intersectPoint,
-		     const RenderingConfiguration& config) const;
+		     const RenderingConfiguration& config) const = 0;
 
 private:
   Point		_position;
