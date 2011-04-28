@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Wed Apr 27 19:52:09 2011 loick michard
+// Last update Thu Apr 28 16:44:15 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -15,7 +15,72 @@ Scene::Scene()
   
 }
 
+Scene::Scene(vector<Camera*> cameras,
+	     vector<Object*> objects,
+	     vector<Light*> lights)
+{
+  _cameras = cameras;
+  _objects = objects;
+  _lights = lights;
+}
+
+Scene::Scene(string filename)
+{
+  
+}
+
+
 Scene::~Scene()
 {
   
+}
+
+void				Scene::loadFromFile(string filename)
+{
+  
+}
+
+vector<Camera*>			Scene::getCameras(void) const
+{
+  return (_cameras);
+}
+
+vector<Object*>	Scene::getObjects(void) const
+{
+  return (_objects);
+}
+
+vector<Light*>			Scene::getLights(void) const
+{
+  return (_lights);
+}
+
+const Camera&			Scene::getCamera(int index) const
+{
+  return(*_cameras[index]);
+}
+
+const Object&               Scene::getObject(int index) const
+{
+  return(*_objects[index]);
+}
+
+const Light&			Scene::getLight(int index) const
+{
+  return(*_lights[index]);
+}
+
+int				Scene::getNbCameras(void) const
+{
+  return(_cameras.size());
+}
+
+int				Scene::getNbObjects(void) const
+{
+  return(_objects.size());
+}
+
+int				Scene::getNbLights(void) const
+{
+  return(_lights.size());
 }

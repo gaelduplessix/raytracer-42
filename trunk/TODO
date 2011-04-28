@@ -6,4 +6,6 @@ Raytracer -> stopRendering
 Raytracer -> pauseRendering
 
 Object -> Object::getRefractedVector
-Object -> Object::addPrimitive
+
+Scene -> Scene::Scene(string filename);
+Scene -> Scene::loadFromFile(string filename);

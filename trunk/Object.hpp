@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Thu Apr 28 16:05:56 2011 samuel olivier
+// Last update Thu Apr 28 16:40:22 2011 samuel olivier
 //
 
 #ifndef _OBJECT_HPP_
@@ -24,7 +24,7 @@ class Object
 {
 public:
   Object();
-  Object(vector<ObjectPrimitive> primitives, const Rotation& rotation,
+  Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
   	 const Point& position, bool isSolid);
   ~Object();
 
@@ -43,7 +43,7 @@ public:
 						   const Vector& vector);
 
 private:
-  vector<ObjectPrimitive>	_primitives;
+  vector<ObjectPrimitive*>	_primitives;
   Rotation			_rotation;
   Point				_position;
   bool				_isSolid;
