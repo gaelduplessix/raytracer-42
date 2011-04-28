@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Thu Apr 28 16:21:15 2011 loick michard
+// Last update Thu Apr 28 16:25:37 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -27,9 +27,9 @@ public:
   ObjectPrimitive(Object *object);
   ~ObjectPrimitive();
   
-  const Object&		getObject() const;
-  const Point&		getPosition() const;
-  const Rotation&	getRotation() const;
+  const Object&		getObject(void) const;
+  const Point&		getPosition(void) const;
+  const Rotation&	getRotation(void) const;
 
   void		setObject(Object *object);
   void		setPosition(const Point& position);

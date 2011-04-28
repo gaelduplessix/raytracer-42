@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Thu Apr 28 16:24:25 2011 loick michard
+// Last update Thu Apr 28 16:25:53 2011 loick michard
 //
 
 #include "ObjectPrimitive.hpp"
@@ -25,17 +25,17 @@ ObjectPrimitive::~ObjectPrimitive()
 
 }
 
-const Object&         ObjectPrimitive::getObject() const
+const Object&         ObjectPrimitive::getObject(void) const
 {
   return (*_object);
 }
 
-const Point&          ObjectPrimitive::getPosition() const
+const Point&          ObjectPrimitive::getPosition(void) const
 {
   return (_absolutePosition);
 }
 
-const Rotation&       ObjectPrimitive::getRotation() const
+const Rotation&       ObjectPrimitive::getRotation(void) const
 {
   return (_rotation);
 }
