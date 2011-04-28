@@ -97,7 +97,7 @@ foreach ($class->getters as $getter)
 	      echo $getter['type'] . "\t" . $class->name . '::'
 		. $getter['name'] . "\n";
 	      echo "{\n";
-	      echo "\treturn (_" . $var_name . ");\n";
+	      echo "  return (_" . $var_name . ");\n";
 	      echo "}\n\n";
 	    }
 	}
@@ -125,7 +125,7 @@ foreach ($class->setters as $setter)
 		  echo $setter['type'] . "\t" . $class->name . '::'
 		    . $setter['name'] . "\n";
 		  echo "{\n";
-		  echo "\t_" . $var_name . ' = ' . $value_name . ";\n";
+		  echo "  _" . $var_name . ' = ' . $value_name . ";\n";
 		  echo "}\n\n";
 	        }
 	    }
@@ -140,7 +140,7 @@ foreach ($class->setters as $setter)
 		  array_clean($words);
 		  $value_name = $words[count($words) - 1];
 		  if ($class->hasMember($value_name))
-		    echo "\t_" . $value_name . ' = ' . $value_name . ";\n";
+		    echo "  _" . $value_name . ' = ' . $value_name . ";\n";
 		}
 	      echo "}\n\n";
 	    }

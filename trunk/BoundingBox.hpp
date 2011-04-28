@@ -5,13 +5,14 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:49:27 2011 gael jochaud-du-plessix
-// Last update Tue Apr 26 18:56:09 2011 gael jochaud-du-plessix
+// Last update Thu Apr 28 15:57:09 2011 gael jochaud-du-plessix
 //
 
 #ifndef _BOUNDINGBOX_H_
 #define _BOUNDINGBOX_H_
 
 #include "Vector.hpp"
+#include "Point.hpp"
 
 class BoundingBox
 {
@@ -20,8 +21,8 @@ public:
   ~BoundingBox();
   
   Point		getCenterPosition() const;
-  Point&	getVertex1() const;
-  Point&	getVertex2() const;
+  const Point&	getVertex1() const;
+  const Point&	getVertex2() const;
 private:
   Point	_vertex1;
   Point	_vertex2;
