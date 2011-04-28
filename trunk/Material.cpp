@@ -1,13 +1,3 @@
-//
-// Material.cpp for raytracer in /home/olivie_a//rendu/cpp/raytracer-42
-// 
-// Made by samuel olivier
-// Login   <olivie_a@epitech.net>
-// 
-// Started on  Thu Apr 28 18:55:28 2011 samuel olivier
-// Last update Thu Apr 28 18:55:29 2011 samuel olivier
-//
-
 #include "Material.hpp"
 
 Material::Material()
@@ -20,39 +10,47 @@ Material::~Material()
 
 }
 
-double	Material::getSpecularCoeff() const
-{
-  return (_specularCoeff);
-}
-
-double	Material::getSpecularPow() const
-{
-  return (_specularPow);
-}
-
-double	Material::getReflectionCoeff() const
-{
-  return (_reflectionCoeff);
-}
-
-double	Material::getTransmissionCoeff() const
-{
-  return (_transmissionCoeff);
-}
-
-double	Material::getRefractionIndex() const
-{
-  return (_refractionIndex);
-}
-
-string	Material::getName() const
+string	Material::getName(void) const
 {
   return (_name);
 }
 
-Color&	Material::getColor(double x, double y) const
+const Color&	Material::getColor(double x, double y) const
 {
-  return (_color);
+  if (_isTextured == false)
+    return (_color);
+  else
+    return (_texture->getColor(x, y));
+}
+
+double	Material::getSpecularCoeff(void) const
+{
+  return (_specularCoeff);
+}
+
+double	Material::getSpecularPow(void) const
+{
+  return (_specularPow);
+}
+
+double	Material::getReflectionCoeff(void) const
+{
+  return (_reflectionCoeff);
+}
+
+double	Material::getTransmissionCoeff(void) const
+{
+  return (_transmissionCoeff);
+}
+
+double	Material::getRefractionIndex(void) const
+{
+  return (_refractionIndex);
+}
+
+void	Material::setName(string name)
+{
+  _name = name;
 }
 
 void	Material::setColor(const Color& color)
@@ -60,7 +58,7 @@ void	Material::setColor(const Color& color)
   _color = color;
 }
 
-void	Material::setTexture(const Texture& texture)
+void	Material::setTexture(Texture* texture)
 {
   _texture = texture;
 }
@@ -90,12 +88,7 @@ void	Material::setRefractionIndex(double refractionIndex)
   _refractionIndex = refractionIndex;
 }
 
-void	Material::setName(string name)
-{
-  _name = name;
-}
-
-void	Material::setHeightmap(const Texture& image)
+void	Material::setHeightmap(Texture* image)
 {
   _heightmap = image;
 }

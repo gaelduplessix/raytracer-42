@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:50:09 2011 loick michard
-// Last update Thu Apr 28 18:53:55 2011 samuel olivier
+// Last update Thu Apr 28 19:22:17 2011 samuel olivier
 //
 
 #ifndef _MATERIAL_HPP_
@@ -27,24 +27,24 @@ public:
   Material(const Texture& texture);
   ~Material();
 
+  void		setName(string name);
   void		setColor(const Color& color);
-  void		setTexture(const Texture& texture);
+  void		setTexture(Texture* texture);
   void		setSpecularCoeff(double specularCoeff);
   void		setSpecularPow(double specularPow);
   void		setReflectionCoeff(double reflectionCoeff);
   void		setTransmissionCoeff(double transmissionCoeff);
   void		setRefractionIndex(double refractionIndex);
-  void		setName(string name);
-  void		setHeightmap(const Texture& image);
+  void		setHeightmap(Texture* image);
 
-  double	getSpecularCoeff() const;
-  double	getSpecularPow() const;
-  double	getReflectionCoeff() const;
-  double	getTransmissionCoeff() const;
-  double	getRefractionIndex() const;
-  string	getName() const;
+  string	getName(void) const;
+  const Color&	getColor(double x, double y) const;  
+  double	getSpecularCoeff(void) const;
+  double	getSpecularPow(void) const;
+  double	getReflectionCoeff(void) const;
+  double	getTransmissionCoeff(void) const;
+  double	getRefractionIndex(void) const;
 
-  Color&       	getColor(double x, double y) const;  
   Vector&	getDeformatedNormal(double x, double y,
 				    const Vector& normal) const;
 
