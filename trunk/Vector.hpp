@@ -5,13 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:39:57 2011 loick michard
-// Last update Thu Apr 28 14:01:15 2011 loick michard
+// Last update Thu Apr 28 17:42:38 2011 gael jochaud-du-plessix
 //
 
 #ifndef _VECTOR_H_
 #define _VECTOR_H_
-
-class Rotation;
 
 class Vector
 {
@@ -34,6 +32,14 @@ public:
   Vector&       operator+=(const Vector& vector);
   Vector&       operator-=(const Vector& vector);
   Vector&       operator*=(const Vector& vector);
+  template <typename T>
+  Vector&       operator+=(T value);
+  template <typename T>
+  Vector&       operator-=(T value);
+  template <typename T>
+  Vector&       operator*=(T value);
+  template <typename T>
+  Vector&       operator/=(T value);
 
 private:
   void		rotateX(double alpha);
@@ -44,8 +50,31 @@ private:
   double	_z;
 };
 
-Vector   operator+(const Vector& vector1, const Vector& vector2);
-Vector   operator-(const Vector& vector1, const Vector& vector2);
-Vector   operator*(const Vector& vector1, const Vector& vector2);
+template <class T>
+Vector   operator+(const Vector& vector, T value);
+template <class T>
+Vector   operator-(const Vector& vector, T value);
+template <class T>
+Vector   operator*(const Vector& vector, T value);
+template <class T>
+Vector   operator/(const Vector& vector, T value);
+
+template <class T>
+Vector& Vector::operator+=(T value)
+{
+  _x += value;
+  _y += value;
+  _z += value;
+  return (*this);
+}
+
+template <class T>
+Vector  operator+(const Vector& vector, T value)
+{
+  Vector newVector = vector;
+
+  newVector += value;
+  return (newVector);
+}
 
 #endif

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:21:13 2011 gael jochaud-du-plessix
-// Last update Tue Apr 26 18:26:07 2011 gael jochaud-du-plessix
+// Last update Thu Apr 28 17:00:50 2011 gael jochaud-du-plessix
 //
 
 #ifndef _ROTATION_H_
@@ -13,7 +13,6 @@
 
 #include "Vector.hpp"
 
-class Rotation: Vector
-{
-};
+typedef Vector Rotation;
+
 #endif

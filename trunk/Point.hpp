@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:22:56 2011 gael jochaud-du-plessix
-// Last update Thu Apr 28 15:59:30 2011 gael jochaud-du-plessix
+// Last update Thu Apr 28 17:00:37 2011 gael jochaud-du-plessix
 //
 
 #ifndef _POINT_H_
@@ -13,10 +13,6 @@
 
 #include "Vector.hpp"
 
-class Point: public Vector
-{
-public:
-  void	translate(Vector& vector);
-};
+typedef Vector Point;
 
 #endif

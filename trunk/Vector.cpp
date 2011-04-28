@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Thu Apr 28 14:05:22 2011 loick michard
+// Last update Thu Apr 28 17:43:03 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -144,27 +144,74 @@ Vector&	Vector::operator*=(const Vector& vector)
   return (*this);
 }
 
-Vector	operator+(const Vector& vector1, const Vector& vector2)
-{
-  Vector vector = vector1;
+// template <class T>
+// Vector&	Vector::operator+=(T value)
+// {
+//   _x += value;
+//   _y += value;
+//   _z += value;
+//   return (*this);
+// }
 
-  vector += vector2;
-  return (vector);
+template <class T>
+Vector&	Vector::operator-=(T value)
+{
+  _x -= value;
+  _y -= value;
+  _z -= value;
+  return (*this);
 }
 
-Vector	operator-(const Vector& vector1, const Vector& vector2)
+template <class T>
+Vector&	Vector::operator*=(T value)
 {
-  Vector vector = vector1;
-
-  vector -= vector2;
-  return (vector);
+  _x *= value;
+  _y *= value;
+  _z *= value;
+  return (*this);
 }
 
-Vector	operator*(const Vector& vector1, const Vector& vector2)
+template <class T>
+Vector&	Vector::operator/=(T value)
 {
-  Vector vector = vector1;
-
-  vector *= vector2;
-  return (vector);
+  _x /= value;
+  _y /= value;
+  _z /= value;
+  return (*this);
 }
 
+// template <class T>
+// Vector	operator+(const Vector& vector, T value)
+// {
+//   Vector newVector = vector;
+
+//   newVector += value;
+//   return (newVector);
+// }
+
+template <class T>
+Vector	operator-(const Vector& vector, T value)
+{
+  Vector newVector = vector;
+
+  newVector -= value;
+  return (newVector);
+}
+
+template <class T>
+Vector	operator*(const Vector& vector, T value)
+{
+  Vector newVector = vector;
+
+  newVector *= value;
+  return (newVector);
+}
+
+template <class T>
+Vector	operator/(const Vector& vector, T value)
+{
+  Vector newVector = vector;
+
+  newVector /= value;
+  return (newVector);
+}
