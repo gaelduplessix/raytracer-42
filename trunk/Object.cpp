@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:53:38 2011 loick michard
-// Last update Thu Apr 28 19:14:29 2011 gael jochaud-du-plessix
+// Last update Thu Apr 28 23:15:24 2011 samuel olivier
 //
 
 #include "Object.hpp"
