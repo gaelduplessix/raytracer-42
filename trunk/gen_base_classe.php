@@ -75,6 +75,14 @@ foreach ($lines as $line)
     }
 }
 
+echo '#include "' . $class->name . '.hpp"' . "\n\n";
+
+// Génération des constructeurs
+echo $class->name . '::' . $class->name . '()' . "\n";
+echo "{\n\n}\n\n";
+echo $class->name . '::~' . $class->name . '()' . "\n";
+echo "{\n\n}\n\n";
+
 // Génération des getters
 foreach ($class->getters as $getter)
 {
