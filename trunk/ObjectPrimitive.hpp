@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Wed Apr 27 18:55:20 2011 loick michard
+// Last update Thu Apr 28 16:21:15 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -24,22 +24,28 @@ class ObjectPrimitive
 {
 public:
   ObjectPrimitive();
+  ObjectPrimitive(Object *object);
   ~ObjectPrimitive();
   
-  Object&	getObject() const;
-  Point&	getPosition() const;
-  Rotation&	getRotation() const;
-  Point&	getAbsolutePosition() const;
+  const Object&		getObject() const;
+  const Point&		getPosition() const;
+  const Rotation&	getRotation() const;
 
-  virtual bool		intersectWithRay(Ray& ray) = 0;
-  virtual Vector	getNormalVector(Point& intersectPoint) = 0;
-  virtual Vector	getReflectedVector(Point& intersectPoint, Vector& vector) = 0;
-  virtual Vector	getRefractedVector(Point& intersectPoint, Vector& vector) = 0;
+  void		setObject(Object *object);
+  void		setPosition(const Point& position);
+  void		setRotation(const Rotation& rotation);
+  void		setMaterial(const Material& material);
+
+  virtual bool		intersectWithRay(const Ray& ray) = 0;
+  virtual Vector	getNormalVector(const Point& intersectPoint) = 0;
+  virtual Vector	getReflectedVector(const Point& intersectPoint,
+					   const Vector& vector) = 0;
+  virtual Vector	getRefractedVector(const Point& intersectPoint,
+					   Vector& vector) = 0;
   virtual bool		isInBoundingBox(BoundingBox& box) = 0;
 
 private:
   Object*	_object;
-  Point		_position;
   Rotation	_rotation;
   Point		_absolutePosition;
   Material	_material;
