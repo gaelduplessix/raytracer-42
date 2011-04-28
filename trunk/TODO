@@ -5,4 +5,5 @@ Raytracer -> launchRendering
 Raytracer -> stopRendering
 Raytracer -> pauseRendering
 
-Object -> A finir
+Object -> Object::getRefractedVector
+Object -> Object::addPrimitive

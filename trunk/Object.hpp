@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Wed Apr 27 23:49:15 2011 samuel olivier
+// Last update Thu Apr 28 16:05:56 2011 samuel olivier
 //
 
 #ifndef _OBJECT_HPP_
@@ -24,21 +24,23 @@ class Object
 {
 public:
   Object();
+  Object(vector<ObjectPrimitive> primitives, const Rotation& rotation,
+  	 const Point& position, bool isSolid);
   ~Object();
 
   int				getNbPrimitives() const;
   const ObjectPrimitive&	getPrimitiveAtIndex(int index) const;
   const Rotation&		getRotation() const;
   const Point&			getPosition() const;
+  bool				isSolid();
   void				addPrimitive(ObjectPrimitive *primitive);
   void				removePrimitiveAtIndex(int index);
   void				setPosition(const Point& position);
   void				setRotation(const Rotation& rotation);
-  bool				isSolid();
-  bool				setSolid(int solid=1);
+  void				setSolid(bool solid = true);
 
-  virtual Vector		getRefractedVector(Point& intersectPoint,
-						   Vector& vector);
+  virtual Vector		getRefractedVector(const Point& intersectPoint,
+						   const Vector& vector);
 
 private:
   vector<ObjectPrimitive>	_primitives;
