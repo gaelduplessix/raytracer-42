@@ -5,12 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:53:38 2011 loick michard
-// Last update Thu Apr 28 16:40:47 2011 samuel olivier
+// Last update Thu Apr 28 19:14:29 2011 gael jochaud-du-plessix
 //
 
 #include "Object.hpp"
 
-Object::Object()
+Object::Object(void)
 {
 
 }
@@ -24,7 +24,7 @@ Object::Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
   _isSolid = isSolid;
 }
 
-Object::~Object()
+Object::~Object(void)
 {
   
 }

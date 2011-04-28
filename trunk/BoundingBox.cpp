@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu Apr 28 15:45:41 2011 gael jochaud-du-plessix
-// Last update Thu Apr 28 17:24:11 2011 gael jochaud-du-plessix
+// Last update Thu Apr 28 18:03:05 2011 gael jochaud-du-plessix
 //
 
 #include "BoundingBox.hpp"
@@ -32,7 +32,5 @@ const Point&	BoundingBox::getVertex2() const
 
 Point	BoundingBox::getCenterPosition() const
 {
-  //return ((_vertex1 + 2));
-  Point	a;
-  return (a);
+  return ((_vertex1 + _vertex2) / 2);
 }

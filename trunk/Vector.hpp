@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:39:57 2011 loick michard
-// Last update Thu Apr 28 17:42:38 2011 gael jochaud-du-plessix
+// Last update Thu Apr 28 19:15:58 2011 gael jochaud-du-plessix
 //
 
 #ifndef _VECTOR_H_
@@ -57,10 +57,12 @@ Vector   operator-(const Vector& vector, T value);
 template <class T>
 Vector   operator*(const Vector& vector, T value);
 template <class T>
+Vector   operator*(T value, const Vector& vector);
+template <class T>
 Vector   operator/(const Vector& vector, T value);
 
 template <class T>
-Vector& Vector::operator+=(T value)
+Vector&	Vector::operator+=(T value)
 {
   _x += value;
   _y += value;
@@ -69,11 +71,74 @@ Vector& Vector::operator+=(T value)
 }
 
 template <class T>
-Vector  operator+(const Vector& vector, T value)
+Vector&	Vector::operator-=(T value)
+{
+  _x -= value;
+  _y -= value;
+  _z -= value;
+  return (*this);
+}
+
+template <class T>
+Vector&	Vector::operator*=(T value)
+{
+  _x *= value;
+  _y *= value;
+  _z *= value;
+  return (*this);
+}
+
+template <class T>
+Vector&	Vector::operator/=(T value)
+{
+  _x /= value;
+  _y /= value;
+  _z /= value;
+  return (*this);
+}
+
+template <class T>
+Vector	operator+(const Vector& vector, T value)
 {
   Vector newVector = vector;
 
   newVector += value;
+  return (newVector);
+}
+
+template <class T>
+Vector	operator-(const Vector& vector, T value)
+{
+  Vector newVector = vector;
+
+  newVector -= value;
+  return (newVector);
+}
+
+template <class T>
+Vector	operator*(const Vector& vector, T value)
+{
+  Vector newVector = vector;
+
+  newVector *= value;
+  return (newVector);
+}
+
+template <class T>
+Vector	operator*(T value, const Vector& vector)
+{
+  Vector newVector = vector;
+
+  newVector *= value;
+  return (newVector);
+}
+
+template <class T>
+Vector	operator/(const Vector& vector, T value)
+{
+  Vector newVector = vector;
+
+  newVector /= value;
   return (newVector);
 }
 
