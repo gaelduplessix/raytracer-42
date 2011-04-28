@@ -1,3 +1,4 @@
+
 Camera.cpp -> getRay
 Camera.cpp -> getRayWithSampling
 
@@ -9,3 +10,4 @@ Object -> Object::getRefractedVector
 
 Scene -> Scene::Scene(string filename);
 Scene -> Scene::loadFromFile(string filename);
+
