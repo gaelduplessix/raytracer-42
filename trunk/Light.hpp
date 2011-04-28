@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Wed Apr 27 19:03:09 2011 loick michard
+// Last update Thu Apr 28 18:35:29 2011 samuel olivier
 //
 
 #ifndef _LIGHT_HPP_
@@ -30,9 +30,10 @@ public:
   void		setColor(const Color& color);
   void		setIntensity(double intensity);
 
-  double	getDirectLightning(const Ray& ray,
-				   const Point& intersectPoint,
-				   const RenderingConfiguration& config) const;
+  virtual double
+  getDirectLightning(const Ray& ray,
+		     const Point& intersectPoint,
+		     const RenderingConfiguration& config) const;
 
 private:
   Point		_position;
