@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:50:09 2011 loick michard
-// Last update Wed Apr 27 18:59:20 2011 loick michard
+// Last update Thu Apr 28 18:53:55 2011 samuel olivier
 //
 
 #ifndef _MATERIAL_HPP_
