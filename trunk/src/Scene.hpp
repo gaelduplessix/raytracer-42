@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Thu Apr 28 16:42:36 2011 samuel olivier
+// Last update Fri Apr 29 12:26:35 2011 samuel olivier
 //
 
 #ifndef _SCENE_HPP_
@@ -32,9 +32,9 @@ public:
 
   void			loadFromFile(string filename);
 
-  vector<Camera*>	getCameras(void) const;
-  vector<Object*>	getObjects(void) const;
-  vector<Light*>	getLights(void) const;
+  const vector<Camera*>&	getCameras(void) const;
+  const vector<Object*>&	getObjects(void) const;
+  const vector<Light*>&		getLights(void) const;
   const Camera&		getCamera(int index) const;
   const Object&		getObject(int index) const;
   const Light&		getLight(int index) const;
