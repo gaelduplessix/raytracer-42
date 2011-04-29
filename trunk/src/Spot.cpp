@@ -5,11 +5,28 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Fri Apr 29 17:26:27 2011 loick michard
+// Last update Fri Apr 29 18:40:53 2011 samuel olivier
 //
 
 #include <cmath>
 #include "Spot.hpp"
+
+Spot::Spot()
+{
+
+}
+
+Spot::Spot(const Point &position, const Color &color,
+             double intensity):
+  Light(position, color, intensity)
+{
+
+}
+
+Spot::~Spot()
+{
+
+}
 
 void	Spot::getLighting(const ObjectPrimitive& primitive,
 			  const Point& intersectPoint,

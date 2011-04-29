@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Fri Apr 29 11:38:36 2011 samuel olivier
+// Last update Fri Apr 29 17:47:48 2011 samuel olivier
 //
 
 #include "Light.hpp"
@@ -13,6 +13,13 @@
 Light::Light()
 {
 
+}
+
+Light::Light(const Point &position, const Color &color,
+	     double intensity):
+  _position(position), _color(color), _intensity(intensity)
+{
+  
 }
 
 Light::~Light()

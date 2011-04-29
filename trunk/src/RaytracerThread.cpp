@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 16:39:33 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 17:03:39 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
@@ -15,7 +15,7 @@ RaytracerThread::RaytracerThread(Raytracer* raytracer):
   _raytracer(raytracer), _launched(false), _isInit(false), _progress(0),
   _image(NULL)
 {
-  
+
 }
 
 RaytracerThread::~RaytracerThread()

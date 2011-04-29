@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 17:18:05 2011 loick michard
+// Last update Fri Apr 29 17:46:10 2011 samuel olivier
 //
 
 #ifndef _LIGHT_HPP_
@@ -23,6 +23,7 @@ class Light
 {
 public:
   Light();
+  Light(const Point &position, const Color& color, double intensity=1);
   ~Light();
 
   const Point&	getPosition(void) const;

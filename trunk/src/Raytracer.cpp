@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Fri Apr 29 16:40:14 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 18:46:39 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
@@ -20,8 +20,14 @@ Raytracer::~Raytracer()
 {
   if (_thread)
     delete _thread;
-  if (_interface)
-    delete _interface;
+}
+
+Raytracer::Raytracer(Scene* scene,
+                     RenderingConfiguration* config,
+                     RenderingInterface* interface) :
+  _scene(scene), _config(config), _interface(interface)
+{
+
 }
 
 void
