@@ -5,12 +5,33 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Fri Apr 29 17:20:16 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 18:45:02 2011 samuel olivier
 //
 
 #include <vector>
 #include "Sphere.hpp"
 #include "EquationSolver.hpp"
+
+Sphere::Sphere()
+{
+
+}
+
+Sphere::Sphere(Object*object,
+	       const Point& absolutePosition,
+	       const Rotation& rotation,
+	       const Material& material,
+	       double radius) : ObjectPrimitive(object, absolutePosition,
+						rotation, material),
+				_radius(radius)
+{
+
+}
+
+Sphere::~Sphere()
+{
+
+}
 
 void		Sphere::setRadius(double r)
 {
@@ -43,4 +64,21 @@ Vector		Sphere::getNormalVector(const Point& intersectPoint) const
   Vector	normal = intersectPoint - _absolutePosition;
 
   return (normal);
+}
+
+Vector		Sphere::getReflectedVector(const Point& intersectPoint,
+					   const Vector& vector) const
+{
+
+}
+
+Vector		Sphere::getRefractedVector(const Point& intersectPoint,
+					   Vector& vector) const
+{
+
+}
+
+bool		Sphere::isInBoundingBox(BoundingBox& box) const
+{
+
 }

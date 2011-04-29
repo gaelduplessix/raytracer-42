@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 15:33:54 2011 loick michard
-// Last update Fri Apr 29 16:21:14 2011 loick michard
+// Last update Fri Apr 29 16:50:56 2011 samuel olivier
 //
 
 #include "CinemaCamera.hpp"
@@ -14,6 +14,18 @@
 
 CinemaCamera::CinemaCamera()
 {
+  _width = 16;
+  _height = 9;
+  _focalLength = 16;
+  _hasDepthOfField = false;
+  _apertureSize = 0.9;
+  _focus = 2;
+}
+
+CinemaCamera::CinemaCamera(Point position, Rotation rotation)
+{
+  _position = position;
+  _rotation = rotation;
   _width = 16;
   _height = 9;
   _focalLength = 16;

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 17:18:57 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 18:39:36 2011 samuel olivier
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -27,7 +27,10 @@ class ObjectPrimitive
 {
 public:
   ObjectPrimitive();
-  ObjectPrimitive(Object *object);
+  ObjectPrimitive(Object *object,
+		  const Point& absolutePosition,
+		  const Rotation& rotation,
+		  const Material& material);
   ~ObjectPrimitive();
   
   const Object&		getObject(void) const;

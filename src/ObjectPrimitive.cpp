@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Fri Apr 29 17:19:17 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 18:39:51 2011 samuel olivier
 //
 
 #include "ObjectPrimitive.hpp"
@@ -15,9 +15,15 @@ ObjectPrimitive::ObjectPrimitive()
   _object = NULL;
 }
 
-ObjectPrimitive::ObjectPrimitive(Object *object)
+ObjectPrimitive::ObjectPrimitive(Object *object,
+				 const Point& absolutePosition,
+				 const Rotation& rotation,
+				 const Material& material)
 {
   _object = object;
+  _absolutePosition = absolutePosition;
+  _rotation = rotation;
+  _material = material;
 }
 
 ObjectPrimitive::~ObjectPrimitive()

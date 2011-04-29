@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Fri Apr 29 16:13:19 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 16:35:28 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_

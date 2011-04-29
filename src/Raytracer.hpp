@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Fri Apr 29 16:09:47 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 18:38:26 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -30,9 +30,9 @@ public:
   const static int	NO_INTERFACE_SPECIFIED = 2;
 
   Raytracer();
-  Raytracer(Scene& scene,
-	    RenderingConfiguration& config,
-	    RenderingInterface& interface);
+  Raytracer(Scene* scene,
+	    RenderingConfiguration* config,
+	    RenderingInterface* interface);
   ~Raytracer();
 
   void setScene(Scene& scene);
