@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri Apr 29 15:59:12 2011 franck lavisse
+// Last update Fri Apr 29 16:59:54 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -31,6 +31,10 @@
 #include <QGroupBox>
 #include <QCheckBox>
 #include <QHBoxLayout>
+#include <QComboBox>
+#include <QStringList>
+#include <QSpinBox>
+#include <QLabel>
 
 int	gui(int argc, char **argv);
 
@@ -44,11 +48,16 @@ public:
   void	putPixel(unsigned char color[3], int x, int y);
   void	rendu(void);
   void	init_dock(void);
+  void	accordion(void);	       
+  void	samplingMethod(void);
+  void	aliasing(void);			    
 
 public slots:
   void	launch_raytracer(void);
 
 private:
+  QComboBox	*_samplingMethod;
+  QWidget	*_widget;
   QPushButton	*_Rendu;
   QGridLayout	*_Grid;
   QDockWidget	*_Dock;

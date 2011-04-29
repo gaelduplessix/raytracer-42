@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri Apr 29 15:57:42 2011 franck lavisse
+// Last update Fri Apr 29 16:59:06 2011 franck lavisse
 */
 #include <iostream>
 #include "gui.hpp"
@@ -22,8 +22,7 @@ void	Gui::launch_raytracer(void)
 
 void	Gui::init_dock(void)
 {
-  QWidget *widget = new QWidget();
-
+  _widget = new QWidget();
   _Grid = new QGridLayout();
   _Dock = new QDockWidget();
   _Rendu = new QPushButton("Rendu", _Dock); 
@@ -34,9 +33,9 @@ void	Gui::init_dock(void)
 			 Qt::BottomDockWidgetArea);
   _Rendu->setCursor(Qt::PointingHandCursor);
   QObject::connect(_Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
-  _Grid->addWidget(_Rendu,2,0);
-  widget->setLayout(_Grid);
-  _Dock->setWidget(widget);
+  _Grid->addWidget(_Rendu,250,0);
+  _widget->setLayout(_Grid);
+  _Dock->setWidget(_widget);
   addDockWidget(Qt::LeftDockWidgetArea, _Dock);
 }
 
@@ -73,6 +72,8 @@ int	gui(int argc, char **argv)
   Gui		rt_gui;
 
   rt_gui.init_dock();
+  rt_gui.samplingMethod();
+  rt_gui.aliasing();
   rt_gui.show();
   return app.exec();
 }
