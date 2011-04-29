@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri Apr 29 19:29:28 2011 franck lavisse
+// Last update Fri Apr 29 20:38:49 2011 samuel olivier
 */
 #include <iostream>
 #include "gui.hpp"
@@ -31,7 +31,7 @@ void	Gui::init_dock(void)
 			 Qt::RightDockWidgetArea);
   _Rendu->setCursor(Qt::PointingHandCursor);
   QObject::connect(_Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
-  _Grid->addWidget(_Rendu,250,0);
+  _Grid->addWidget(_Rendu, 250, 0);
   _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);
   addDockWidget(Qt::LeftDockWidgetArea, _Dock);
@@ -41,13 +41,14 @@ Gui::Gui() : QMainWindow()
 {
   QColor	Color;
 
-  setFixedSize(1200,800);
+  setFixedSize(1200, 800);
   _Scene = new QGraphicsScene();
-  Color.setRgb(0,0,0,255);
+  Color.setRgb(0, 0, 0, 255);
   QPen	 Pen(Color, 0, Qt::SolidLine);
   QBrush Brush(Color);
   QPolygon Polygon;
-  Polygon << QPoint(0,0) << QPoint(1100,0) << QPoint(1100,700) << QPoint(0,700);
+  Polygon << QPoint(0, 0) << QPoint(1100, 0) << QPoint(1100, 700)
+	  << QPoint(0, 700);
   _Item = _Scene->addPolygon(Polygon, Pen, Brush);
   _View = new QGraphicsView(_Scene);
 }
@@ -60,7 +61,7 @@ Gui::~Gui()
   delete _Grid;
   delete _Dock;
   delete _Scene;
-  delete _Item;
+  // delete _Item;
   delete _View;
 }
 
@@ -80,5 +81,5 @@ int	gui(int argc, char **argv)
   rt_gui.flou();
   rt_gui.transparence();
   rt_gui.show();
-  return app.exec();
+  return (app.exec());
 }
