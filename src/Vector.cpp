@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Fri Apr 29 17:11:35 2011 loick michard
+// Last update Fri Apr 29 22:30:26 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -106,7 +106,7 @@ void    Vector::rotateZ(double alpha)
   _y = yp;
 }
 
-void	Vector::rotate(Vector& rotation)
+void	Vector::rotate(const Vector& rotation)
 {
   this->rotateX(rotation.getX());
   this->rotateY(rotation.getY());

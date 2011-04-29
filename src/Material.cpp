@@ -1,16 +1,16 @@
 #include "Material.hpp"
 
-Material::Material()
+Material::Material(): _isTextured(false)
 {
 
 }
 
-Material::Material(const string& name)
+Material::Material(const string& name): _isTextured(false)
 {
 
 }
 
-Material::Material(const Texture& texture)
+Material::Material(const Texture& texture): _isTextured(false)
 {
 
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:28:09 2011 loick michard
-// Last update Wed Apr 27 19:10:47 2011 loick michard
+// Last update Fri Apr 29 21:41:57 2011 gael jochaud-du-plessix
 //
 
 #include "RenderingInterface.hpp"
@@ -20,7 +20,7 @@ RenderingInterface::~RenderingInterface()
 
 void RenderingInterface::pixelHasBeenRendered(int x,
 					      int y,
-					      const Color& color)
+					      Color color)
 {
 }
 

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:39:57 2011 loick michard
-// Last update Fri Apr 29 17:13:23 2011 loick michard
+// Last update Fri Apr 29 23:17:54 2011 gael jochaud-du-plessix
 //
 
 #ifndef _VECTOR_H_
@@ -26,7 +26,7 @@ public:
   void		setZ(double value);
 
   double	getNorm(void);
-  void		rotate(Vector& rotation);
+  void		rotate(const Vector& rotation);
   void		normalize(void);
 
   Vector&       operator+=(const Vector& vector);
@@ -42,7 +42,6 @@ public:
   Vector&       operator/=(T value);
   friend double	operator*(const Vector& vector, const Vector& vector2);
   
-private:
   void		rotateX(double alpha);
   void		rotateY(double alpha);
   void		rotateZ(double alpha);

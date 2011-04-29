@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 19:12:52 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 22:54:56 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -31,6 +31,8 @@ void		RaytracerThread::run(void)
   _launched = true;
   while (_launched && _progress < 1)
     _raytracer->renderingLoop(_progress);
+  if (_progress >= 1)
+    _raytracer->getRenderingInterface()->renderingHasFinished();
   _launched = 0;
 }
 

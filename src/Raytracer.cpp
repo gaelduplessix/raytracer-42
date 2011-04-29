@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Fri Apr 29 19:35:03 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 00:55:14 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -37,15 +37,15 @@ Raytracer::setScene(Scene& scene)
 }
 
 void
-Raytracer::setRenderingConfiguration(RenderingConfiguration& config)
+Raytracer::setRenderingConfiguration(RenderingConfiguration* config)
 {
-  _config = &config;
+  _config = config;
 }
 
 void
-Raytracer::setRenderingInterface(RenderingInterface& interface)
+Raytracer::setRenderingInterface(RenderingInterface* interface)
 {
-  _interface = &interface;
+  _interface = interface;
 }
 
 const Scene*
@@ -60,7 +60,7 @@ Raytracer::getRenderingConfiguration(void) const
   return (_config);
 }
 
-const RenderingInterface*
+RenderingInterface*
 Raytracer::getRenderingInterface(void) const
 {
   return (_interface);
@@ -94,25 +94,36 @@ Raytracer::pauseRendering(void)
 
 #include <iostream>
 
+using namespace std;
+
 void		Raytracer::renderingLoop(double& progress)
 {
+  Point		pixelToRender = getPixelToRender(progress);
+  _interface->pixelHasStartedRendering(pixelToRender.getX(),
+				       pixelToRender.getY());
+  Color		pixelColor(0, 0, 0, 0);
   int		imageWidth = _config->getWidth();
   int		imageHeight = _config->getHeight();
   const Camera&	currentCamera = getCurrentCamera();
-  Point		pixelToRender = getPixelToRender(progress);
-  Ray		ray = currentCamera.getRay(pixelToRender.getX(),
-					   pixelToRender.getY());
+  Ray		ray = currentCamera.getRay(pixelToRender.getX() / imageWidth,
+					   pixelToRender.getY() / imageHeight);
+
   const vector<t_intersected_object>&	intersections =
     getIntersectingObjects(ray);
+
   double	k = -1;
   const ObjectPrimitive*	nearestObject =
     getNearestObject(intersections, k);
 
   if (nearestObject)
     {
-      std::cout << pixelToRender.getX() << std::endl;
+      Point	intersectPoint = ray.getPoint() + ray.getVector() * k;
+      calcLightForObject(*nearestObject, intersectPoint, pixelColor);
     }
   progress += 1.f / (imageWidth * imageHeight);
+  _interface->pixelHasBeenRendered(pixelToRender.getX(),
+				   pixelToRender.getY(),
+				   pixelColor);
 }
 
 const Camera&		Raytracer::getCurrentCamera(void)
@@ -129,18 +140,18 @@ Point		Raytracer::getPixelToRender(double progress) const
   if (_config->getRenderingSamplingMethod() == RSM_LINEAR_HORIZONTAL)
     {
       pixelIndex = progress * width * height;
-      return (Point(pixelIndex % height, pixelIndex / height, 0));
+      return (Point(pixelIndex % width, pixelIndex / width, 0));
     }
   else if (_config->getRenderingSamplingMethod() == RSM_LINEAR_VERTICAL)
     {
       pixelIndex = progress * width * height;
-      return (Point(pixelIndex / width, pixelIndex % width, 0));
+      return (Point(pixelIndex / height, pixelIndex % height, 0));
     }
   return (Point(0,0,0));
 }
 
 const vector<t_intersected_object>&
-Raytracer::getIntersectingObjects(Ray ray)
+Raytracer::getIntersectingObjects(Ray ray) const
 {
   int				nb_object;
   int				i = -1;
@@ -171,13 +182,13 @@ Raytracer::getIntersectingObjects(Ray ray)
 
 const ObjectPrimitive*	Raytracer::
 getNearestObject(const vector<t_intersected_object>& intersections,
-		 double &res)
+		 double &res) const
 {
   const ObjectPrimitive	*object;
   int			nbObject;
 
   object = NULL;
-  res = (res) ? -1 : NULL;
+  res = -1;
   nbObject = intersections.size();
   if (nbObject > 0)
     {
@@ -193,5 +204,25 @@ getNearestObject(const vector<t_intersected_object>& intersections,
 	      }
 	}
     }
-  return (object);
+  return (res < 0 ? NULL : object);
+}
+
+void	Raytracer::calcLightForObject(const ObjectPrimitive& object,
+				      const Point& intersectPoint,
+				      Color& color) const
+{
+  const vector<Light*>&	lights = _scene->getLights();
+  int			nbLights = lights.size();
+  Color			objectColor = object.getMaterial().getColor(0, 0);
+
+  color = Color(0, 0, 0);
+  for (int i = 0; i < nbLights; i++)
+    {
+      Color	directLighting;
+      Color	specularLighting;
+      lights[i]->getLighting(object, intersectPoint, *this,
+			     directLighting,
+			     specularLighting);
+      color += objectColor & directLighting;
+    }
 }

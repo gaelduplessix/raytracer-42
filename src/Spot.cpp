@@ -5,11 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Fri Apr 29 18:40:53 2011 samuel olivier
+// Last update Sat Apr 30 00:49:13 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
 #include "Spot.hpp"
+#include "Raytracer.hpp"
 
 Spot::Spot()
 {
@@ -28,6 +29,8 @@ Spot::~Spot()
 
 }
 
+#include <iostream>
+
 void	Spot::getLighting(const ObjectPrimitive& primitive,
 			  const Point& intersectPoint,
 			  const Raytracer &raytracer,
@@ -39,6 +42,17 @@ void	Spot::getLighting(const ObjectPrimitive& primitive,
   double	scalar = lightVector * normal;
   double	cosa = scalar / 
     (lightVector.getNorm() *normal.getNorm());
+  Ray		ray(Color(), intersectPoint, lightVector, 1);
 
-  directLighting = _color * cosa;
+  const vector<t_intersected_object>&       intersections =
+    raytracer.getIntersectingObjects(ray);
+
+  double    k = -1;
+  const ObjectPrimitive*    nearestObject =
+    raytracer.getNearestObject(intersections, k);
+
+  if (nearestObject && k <= 1)
+    directLighting.setColor(0, 0, 0, 0);
+  else
+    directLighting = _color * cosa;
 }

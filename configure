@@ -6,6 +6,6 @@ if ./configure_options/endian
 then
    qmake-qt4 OBJECTS_DIR=./objects DEFINES=IS_BIG_ENDIAN
 else
-   qmake-qt4 OBJECTS_DIR=./objects
+   qmake-qt4 OBJECTS_DIR=./objects LIBS="-lSDL"
 fi
 echo "re:	clean all" >> Makefile
