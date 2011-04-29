@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Fri Apr 29 12:11:58 2011 loick michard
+// Last update Fri Apr 29 13:57:04 2011 loick michard
 //
 
 #include <vector>
@@ -36,4 +36,11 @@ vector<double>	Sphere::intersectWithRay(const Ray& ray)
     ray.getPoint().getZ() * ray.getPoint().getZ() -
     _radius * _radius;
   return (EquationSolver::solveQuadraticEquation(a, b, c));
+}
+
+Vector		Sphere::getNormalVector(const Point& intersectPoint)
+{
+  Vector	normal = intersectPoint - _absolutePosition;
+
+  return (normal);
 }
