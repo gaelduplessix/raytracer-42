@@ -5,13 +5,14 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:03:41 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 14:46:00 2011 samuel olivier
+// Last update Fri Apr 29 16:09:31 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACERTHREAD_HPP_
 #define _RAYTRACERTHREAD_HPP_
 
 #include <QThread>
+#include <QImage>
 #include <vector>
 
 #include "Ray.hpp"
@@ -21,29 +22,25 @@ using namespace std;
 
 class Raytracer;
 
-typedef struct			s_intersected_object
-{
-  const ObjectPrimitive*	primitive;
-  vector<double>		k;
-}				t_intersected_object;
-
 class	RaytracerThread : public QThread
 {
 public:
-  RaytracerThread(const Raytracer* raytracer);
+  RaytracerThread(Raytracer* raytracer);
   ~RaytracerThread();
 
   void	run(void);
   void	stop(void);
+  void	pause(void);
 
-  const	vector<t_intersected_object>&	getIntersectingObjects(Ray ray);
-  const ObjectPrimitive*
-  getNearestObject(const vector<t_intersected_object>&,
-			 double *res);
+  void	initBeforeLaunching(void);
 
 private:
-  const Raytracer*	_raytracer;
-  bool			_launched;
+  Raytracer*			_raytracer;
+  bool				_launched;
+  bool				_isInit;
+  double			_progress;
+  QImage*			_image;
+  vector< vector <bool> >	_raytracedPixels;
 };
 
 #endif
