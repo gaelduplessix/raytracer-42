@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Fri Apr 29 14:03:18 2011 loick michard
+// Last update Fri Apr 29 17:19:17 2011 gael jochaud-du-plessix
 //
 
 #include "ObjectPrimitive.hpp"
@@ -60,7 +60,7 @@ void          ObjectPrimitive::setMaterial(const Material& material)
   _material = material;
 }
 
-Ray           ObjectPrimitive::getModifiedRay(const Ray& ray) const
+Ray           ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const
 {
   Ray	      modified = ray;
   Vector      vector = ray.getVector();

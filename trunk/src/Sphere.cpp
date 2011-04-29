@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Fri Apr 29 14:01:53 2011 loick michard
+// Last update Fri Apr 29 17:20:16 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -24,7 +24,7 @@ vector<double>	Sphere::intersectWithRay(const Ray& ray) const
   double	b;
   double	c;
 
-  newRay = getModifiedRay(ray);
+  newRay = getRayAtSimplePosition(ray);
   a = ray.getVector().getX() * ray.getVector().getX() +
     ray.getVector().getY() * ray.getVector().getY() +
     ray.getVector().getZ() * ray.getVector().getZ();
