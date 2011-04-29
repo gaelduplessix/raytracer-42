@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Wed Apr 27 22:53:59 2011 samuel olivier
+// Last update Fri Apr 29 15:42:54 2011 loick michard
 //
 
 #ifndef _CAMERA_H_
@@ -37,11 +37,14 @@ public:
   void			setApertureSize(double apertureSize);
   void			setFocus(double focus);
 
-  Ray			getRay(double x, double y);
-  Ray			getRayWithSampling(double x, double y,
-					   double samplingPos);
+  virtual Ray			getRay(double x, double y) const = 0;
+  virtual Ray			
+  getRayWithSampling(double x, double y,
+		     double samplingPos) const = 0;
 
-private:
+protected:
+  double	_width;
+  double	_height;
   Point		_position;
   Rotation	_rotation;
   double	_focalLength;
