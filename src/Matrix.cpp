@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 21:17:09 2011 loick michard
-// Last update Thu Apr 28 23:11:13 2011 loick michard
+// Last update Fri Apr 29 13:06:06 2011 loick michard
 //
 
 #include "Matrix.hpp"
@@ -69,8 +69,8 @@ const Matrix&        Matrix::operator+=(const Matrix& matrix)
       && _matrix.size() == matrix._matrix.size()
       && _matrix[0].size() == matrix._matrix[0].size())
     {
-      for (int i = 0; i < _matrix.size() ; i++)
-	for (int j = 0; j < _matrix.size() ; j++)
+      for (unsigned int i = 0; i < _matrix.size() ; i++)
+	for (unsigned int j = 0; j < _matrix.size() ; j++)
 	  _matrix[i][j] += matrix._matrix[i][j];
     }
   return (*this);
@@ -79,9 +79,9 @@ const Matrix&        Matrix::operator+=(const Matrix& matrix)
 Matrix		operator*(const Matrix& matrix1, 
 			  const Matrix& matrix2)
 {
-  int		m;
-  int		n;
-  int		p;
+  unsigned int		m;
+  unsigned int		n;
+  unsigned int		p;
 
   m = matrix1._matrix.size();
   n = matrix2._matrix.size();
@@ -93,11 +93,11 @@ Matrix		operator*(const Matrix& matrix1,
   if (n && m
       && n == matrix1._matrix[0].size())
     {
-      for (int i = 0; i < m; i++)
-	for (int j = 0; j < p; j++)
+      for (unsigned int i = 0; i < m; i++)
+	for (unsigned int j = 0; j < p; j++)
 	  {
 	    matrix._matrix[i][j] = 0;
-	    for(int k = 0; k < n; k++)
+	    for(unsigned int k = 0; k < n; k++)
 	      matrix._matrix[i][j] += 
 		matrix1._matrix[i][k] * matrix1._matrix[k][j];
 	  }
