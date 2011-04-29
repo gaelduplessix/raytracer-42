@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Thu Apr 28 16:44:15 2011 samuel olivier
+// Last update Fri Apr 29 12:47:29 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -35,52 +35,52 @@ Scene::~Scene()
   
 }
 
-void				Scene::loadFromFile(string filename)
+void			Scene::loadFromFile(string filename)
 {
   
 }
 
-vector<Camera*>			Scene::getCameras(void) const
+const vector<Camera*>&	Scene::getCameras(void) const
 {
   return (_cameras);
 }
 
-vector<Object*>	Scene::getObjects(void) const
+const vector<Object*>&	Scene::getObjects(void) const
 {
   return (_objects);
 }
 
-vector<Light*>			Scene::getLights(void) const
+const vector<Light*>&	Scene::getLights(void) const
 {
   return (_lights);
 }
 
-const Camera&			Scene::getCamera(int index) const
+const Camera&		Scene::getCamera(int index) const
 {
   return(*_cameras[index]);
 }
 
-const Object&               Scene::getObject(int index) const
+const Object&		Scene::getObject(int index) const
 {
   return(*_objects[index]);
 }
 
-const Light&			Scene::getLight(int index) const
+const Light&		Scene::getLight(int index) const
 {
   return(*_lights[index]);
 }
 
-int				Scene::getNbCameras(void) const
+int			Scene::getNbCameras(void) const
 {
   return(_cameras.size());
 }
 
-int				Scene::getNbObjects(void) const
+int			Scene::getNbObjects(void) const
 {
   return(_objects.size());
 }
 
-int				Scene::getNbLights(void) const
+int			Scene::getNbLights(void) const
 {
   return(_lights.size());
 }
