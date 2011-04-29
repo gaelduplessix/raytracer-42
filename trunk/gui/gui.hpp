@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri Apr 29 16:59:54 2011 franck lavisse
+// Last update Fri Apr 29 18:06:05 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -35,6 +35,7 @@
 #include <QStringList>
 #include <QSpinBox>
 #include <QLabel>
+#include <QVBoxLayout>
 
 int	gui(int argc, char **argv);
 
@@ -50,7 +51,13 @@ public:
   void	init_dock(void);
   void	accordion(void);	       
   void	samplingMethod(void);
-  void	aliasing(void);			    
+  void	aliasing(void);
+  void	reflection(void);		     
+  void	directLight(void);			
+  void	ambiantOcclusion(void);
+  void	photonMapping(void);
+  void	lumiereDiffuse(void);
+  void	flou(void);
 
 public slots:
   void	launch_raytracer(void);

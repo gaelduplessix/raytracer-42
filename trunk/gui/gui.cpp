@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri Apr 29 16:59:06 2011 franck lavisse
+// Last update Fri Apr 29 18:05:56 2011 franck lavisse
 */
 #include <iostream>
 #include "gui.hpp"
@@ -28,9 +28,7 @@ void	Gui::init_dock(void)
   _Rendu = new QPushButton("Rendu", _Dock); 
   setCentralWidget(_View);
   _Dock->setAllowedAreas(Qt::LeftDockWidgetArea|
-			 Qt::RightDockWidgetArea|
-			 Qt::TopDockWidgetArea|
-			 Qt::BottomDockWidgetArea);
+			 Qt::RightDockWidgetArea);
   _Rendu->setCursor(Qt::PointingHandCursor);
   QObject::connect(_Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
   _Grid->addWidget(_Rendu,250,0);
@@ -74,6 +72,12 @@ int	gui(int argc, char **argv)
   rt_gui.init_dock();
   rt_gui.samplingMethod();
   rt_gui.aliasing();
+  rt_gui.reflection();
+  rt_gui.directLight();
+  rt_gui.ambiantOcclusion();
+  rt_gui.photonMapping();
+  rt_gui.lumiereDiffuse();
+  rt_gui.flou();
   rt_gui.show();
   return app.exec();
 }
