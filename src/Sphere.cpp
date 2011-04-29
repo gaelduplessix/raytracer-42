@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Fri Apr 29 13:57:04 2011 loick michard
+// Last update Fri Apr 29 14:01:53 2011 loick michard
 //
 
 #include <vector>
@@ -17,7 +17,7 @@ void		Sphere::setRadius(double r)
   _radius = r;
 }
 
-vector<double>	Sphere::intersectWithRay(const Ray& ray)
+vector<double>	Sphere::intersectWithRay(const Ray& ray) const
 {
   Ray		newRay;
   double	a;
@@ -38,7 +38,7 @@ vector<double>	Sphere::intersectWithRay(const Ray& ray)
   return (EquationSolver::solveQuadraticEquation(a, b, c));
 }
 
-Vector		Sphere::getNormalVector(const Point& intersectPoint)
+Vector		Sphere::getNormalVector(const Point& intersectPoint) const
 {
   Vector	normal = intersectPoint - _absolutePosition;
 

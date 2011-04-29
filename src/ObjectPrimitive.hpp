@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 13:58:01 2011 loick michard
+// Last update Fri Apr 29 14:03:10 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -39,17 +39,17 @@ public:
   void		setRotation(const Rotation& rotation);
   void		setMaterial(const Material& material);
 
-  virtual vector<double>	intersectWithRay(const Ray& ray) = 0;
+  virtual vector<double>	intersectWithRay(const Ray& ray) const = 0;
 
-  virtual Vector	getNormalVector(const Point& intersectPoint) = 0;
+  virtual Vector	getNormalVector(const Point& intersectPoint) const = 0;
   virtual Vector	getReflectedVector(const Point& intersectPoint,
-					   const Vector& vector) = 0;
+					   const Vector& vector) const = 0;
   virtual Vector	getRefractedVector(const Point& intersectPoint,
-					   Vector& vector) = 0;
-  virtual bool		isInBoundingBox(BoundingBox& box) = 0;
+					   Vector& vector) const = 0;
+  virtual bool		isInBoundingBox(BoundingBox& box) const = 0;
 
 protected:
-  virtual Ray		getModifiedRay(const Ray& ray);
+  virtual Ray		getModifiedRay(const Ray& ray) const;
   Point			_absolutePosition;
 
 private:
