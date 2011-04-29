@@ -5,8 +5,12 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 17:07:56 2011 franck lavisse
-// Last update Fri Apr 29 18:32:15 2011 franck lavisse
+// Last update Fri Apr 29 23:55:24 2011 franck lavisse
 //
+#include <QGroupBox>
+#include <QStringList>
+#include <QVBoxLayout>
+#include <QComboBox>
 #include "gui.hpp"
 
 void	Gui::samplingMethod(void)
@@ -14,6 +18,7 @@ void	Gui::samplingMethod(void)
   QGroupBox	*gbox = new QGroupBox("Methode de sampling");
   QStringList	*List = new QStringList();
   QVBoxLayout	*vbox = new QVBoxLayout();
+  QComboBox	*samplingMethod = new QComboBox();
 
   *List << "Lineaire horizontal"
 	<< "Lineaire vertical"
@@ -21,9 +26,8 @@ void	Gui::samplingMethod(void)
 	<< "Aleatoire vertical"
 	<< "Aleatoire horizontal"
 	<< "Aleatoire 2D";
-  _samplingMethod = new QComboBox();
-  _samplingMethod->addItems(*List);
-  vbox->addWidget(_samplingMethod,0,0);
+  samplingMethod->addItems(*List);
+  vbox->addWidget(samplingMethod,0,0);
   gbox->setLayout(vbox);
   _Grid->addWidget(gbox,0,0);
   _widget->setLayout(_Grid);

@@ -5,8 +5,11 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri Apr 29 20:38:49 2011 samuel olivier
+// Last update Fri Apr 29 23:54:18 2011 franck lavisse
 */
+#include <QPushButton>
+#include <QPen>
+#include <QBrush>
 #include <iostream>
 #include "gui.hpp"
 
@@ -25,13 +28,13 @@ void	Gui::init_dock(void)
   _widget = new QWidget();
   _Grid = new QGridLayout();
   _Dock = new QDockWidget();
-  _Rendu = new QPushButton("Rendu", _Dock); 
+  QPushButton *Rendu = new QPushButton("Rendu", _Dock); 
   setCentralWidget(_View);
   _Dock->setAllowedAreas(Qt::LeftDockWidgetArea|
 			 Qt::RightDockWidgetArea);
-  _Rendu->setCursor(Qt::PointingHandCursor);
-  QObject::connect(_Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
-  _Grid->addWidget(_Rendu, 250, 0);
+  Rendu->setCursor(Qt::PointingHandCursor);
+  QObject::connect(Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
+  _Grid->addWidget(Rendu, 250, 0);
   _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);
   addDockWidget(Qt::LeftDockWidgetArea, _Dock);
@@ -41,7 +44,7 @@ Gui::Gui() : QMainWindow()
 {
   QColor	Color;
 
-  setFixedSize(1200, 800);
+  setFixedSize(1400, 800);
   _Scene = new QGraphicsScene();
   Color.setRgb(0, 0, 0, 255);
   QPen	 Pen(Color, 0, Qt::SolidLine);
@@ -57,11 +60,12 @@ void	Gui::rendu(void){}
 
 Gui::~Gui()
 {
-  delete _Rendu;
+  delete _DockBar;
+  delete _widgetBar;
+  delete _widget;  
   delete _Grid;
   delete _Dock;
   delete _Scene;
-  // delete _Item;
   delete _View;
 }
 
@@ -80,6 +84,7 @@ int	gui(int argc, char **argv)
   rt_gui.lumiereDiffuse();
   rt_gui.flou();
   rt_gui.transparence();
+  rt_gui.menuBar();
   rt_gui.show();
   return (app.exec());
 }

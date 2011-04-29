@@ -5,9 +5,12 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 15:39:43 2011 franck lavisse
-// Last update Fri Apr 29 21:21:03 2011 samuel olivier
+// Last update Fri Apr 29 23:49:27 2011 franck lavisse
 //
-
+#include <QPolygon>
+#include <QColor>
+#include <QPen>
+#include <QBrush>
 #include "gui.hpp"
 #include "../Color.hpp"
 

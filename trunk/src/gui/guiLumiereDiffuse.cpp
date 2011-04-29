@@ -5,8 +5,10 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 18:03:22 2011 franck lavisse
-// Last update Fri Apr 29 19:19:19 2011 franck lavisse
+// Last update Fri Apr 29 23:54:44 2011 franck lavisse
 //
+#include <QCheckBox>
+#include <QSpinBox>
 #include "gui.hpp"
 
 void	Gui::lumiereDiffuse(void)

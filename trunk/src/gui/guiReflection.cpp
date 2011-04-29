@@ -5,8 +5,13 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 17:39:55 2011 franck lavisse
-// Last update Fri Apr 29 17:59:32 2011 franck lavisse
+// Last update Fri Apr 29 23:50:54 2011 franck lavisse
 //
+#include <QLabel>
+#include <QGroupBox>
+#include <QSpinBox>
+#include <QVBoxLayout>
+#include <QGridLayout>
 #include "gui.hpp"
 
 void		Gui::reflection(void)

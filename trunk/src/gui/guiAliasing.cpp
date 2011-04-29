@@ -5,8 +5,12 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 16:04:48 2011 franck lavisse
-// Last update Fri Apr 29 17:26:27 2011 franck lavisse
+// Last update Fri Apr 29 23:46:01 2011 franck lavisse
 //
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QGridLayout>
+#include <QLabel>
 #include "gui.hpp"
 
 void	Gui::aliasing(void)

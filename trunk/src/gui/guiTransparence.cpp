@@ -5,8 +5,11 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:21:11 2011 franck lavisse
-// Last update Fri Apr 29 19:27:32 2011 franck lavisse
+// Last update Fri Apr 29 23:53:30 2011 franck lavisse
 //
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QLabel>
 #include "gui.hpp"
 
 void	Gui::transparence(void)
