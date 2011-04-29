@@ -5,16 +5,14 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed Apr 27 23:02:19 2011 samuel olivier
+// Last update Fri Apr 29 11:41:11 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
 
 Raytracer::Raytracer()
 {
-  _scene = new Scene();
-  _config = new RenderingConfiguration();
-  _interface = new RenderingInterface();
+
 }
 
 Raytracer::~Raytracer()
@@ -40,20 +38,26 @@ Raytracer::setRenderingInterface(RenderingInterface& interface)
   _interface = &interface;
 }
 
-const Scene&
+const Scene*
 Raytracer::getScene(void) const
 {
-  return (*_scene);
+  return (_scene);
 }
 
-const RenderingConfiguration&
+const RenderingConfiguration*
 Raytracer::getRenderingConfiguration(void) const
 {
-  return (*_config);
+  return (_config);
 }
 
-const RenderingInterface&
+const RenderingInterface*
 Raytracer::getRenderingInterface(void) const
 {
-  return (*_interface);
+  return (_interface);
+}
+
+void
+Raytracer::launchRendering(void)
+{
+  
 }
