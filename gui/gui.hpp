@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri Apr 29 14:54:34 2011 franck lavisse
+// Last update Fri Apr 29 15:59:12 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -43,25 +43,18 @@ public:
   ~Gui();
   void	putPixel(unsigned char color[3], int x, int y);
   void	rendu(void);
-  void	layout(void);
-  void	onglet(void);
+  void	init_dock(void);
 
 public slots:
   void	launch_raytracer(void);
 
 private:
-  QWidget	*widget;
-  QTabWidget	*_Tab;
-  QComboBox	*_Box;
+  QPushButton	*_Rendu;
   QGridLayout	*_Grid;
   QDockWidget	*_Dock;
-  QPen	        *_Pen;
-  QBrush        *_Brush;
-  QPushButton   *_Rendu;
   QGraphicsScene*_Scene;
   QGraphicsItem	*_Item;
   QGraphicsView	*_View;
-  QPolygon	*_Polygon;
 };
 
 #endif
