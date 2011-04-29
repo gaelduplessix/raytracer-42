@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri Apr 29 19:32:03 2011 franck lavisse
+// Last update Fri Apr 29 21:19:16 2011 samuel olivier
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -38,6 +38,8 @@
 #include <QVBoxLayout>
 #include <QMenuBar>
 
+class Color;
+
 int	gui(int argc, char **argv);
 
 class	Gui : public QMainWindow
@@ -47,7 +49,8 @@ Q_OBJECT
 public:
   Gui();
   ~Gui();
-  void	putPixel(unsigned char color[3], int x, int y);
+
+  void	putPixel(const Color& color, int x, int y);
   void	rendu(void);
   void	init_dock(void);
   void	accordion(void);	       
