@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:49:27 2011 gael jochaud-du-plessix
-// Last update Thu Apr 28 15:57:09 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 10:05:03 2011 loick michard
 //
 
 #ifndef _BOUNDINGBOX_H_
@@ -18,11 +18,17 @@ class BoundingBox
 {
 public:
   BoundingBox();
+  BoundingBox(const Point& vertex1, const Point& vertex2);
   ~BoundingBox();
+
+  void		setVertices(const Point& vertex1, const Point&vertex2);
+  void		setVertex1(const Point& vertex);
+  void		setVertex2(const Point& vertex);
   
   Point		getCenterPosition() const;
   const Point&	getVertex1() const;
   const Point&	getVertex2() const;
+
 private:
   Point	_vertex1;
   Point	_vertex2;
