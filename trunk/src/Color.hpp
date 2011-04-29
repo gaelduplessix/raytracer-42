@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 17:47:14 2011 samuel olivier
+// Last update Fri Apr 29 21:31:30 2011 gael jochaud-du-plessix
 //
 
 #ifndef _COLOR_HPP_
@@ -15,7 +15,7 @@ class Color
 {
 public:
   Color();
-  Color(int r, int g, int b, int a=0);
+  Color(int r, int g, int b, int a=255);
   Color(int color);
   ~Color();
 

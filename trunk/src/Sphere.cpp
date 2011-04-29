@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Fri Apr 29 18:45:02 2011 samuel olivier
+// Last update Fri Apr 29 23:17:03 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -46,15 +46,17 @@ vector<double>	Sphere::intersectWithRay(const Ray& ray) const
   double	c;
 
   newRay = getRayAtSimplePosition(ray);
-  a = ray.getVector().getX() * ray.getVector().getX() +
-    ray.getVector().getY() * ray.getVector().getY() +
-    ray.getVector().getZ() * ray.getVector().getZ();
-  b = 2 * (ray.getPoint().getX() * ray.getVector().getX() +
-	   ray.getPoint().getY() * ray.getVector().getY() +
-	   ray.getPoint().getZ() * ray.getVector().getZ());
-  c = ray.getPoint().getX() * ray.getPoint().getX() +
-    ray.getPoint().getY() * ray.getPoint().getY() +
-    ray.getPoint().getZ() * ray.getPoint().getZ() -
+  const Vector&	newRayVector = newRay.getVector();
+  const Point&	newRayPoint = newRay.getPoint();
+  a = newRayVector._x * newRayVector._x +
+    newRayVector._y * newRayVector._y +
+    newRayVector._z * newRayVector._z;
+  b = 2 * (newRayPoint._x * newRayVector._x +
+	   newRayPoint._y * newRayVector._y +
+	   newRayPoint._z * newRayVector._z);
+  c = newRayPoint._x * newRayPoint._x +
+    newRayPoint._y * newRayPoint._y +
+    newRayPoint._z * newRayPoint._z -
     _radius * _radius;
   return (EquationSolver::solveQuadraticEquation(a, b, c));
 }

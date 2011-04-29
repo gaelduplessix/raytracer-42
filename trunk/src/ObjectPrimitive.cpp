@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Fri Apr 29 18:39:51 2011 samuel olivier
+// Last update Fri Apr 29 23:47:26 2011 gael jochaud-du-plessix
 //
 
 #include "ObjectPrimitive.hpp"
@@ -44,6 +44,11 @@ const Point&          ObjectPrimitive::getPosition(void) const
 const Rotation&       ObjectPrimitive::getRotation(void) const
 {
   return (_rotation);
+}
+
+const Material&       ObjectPrimitive::getMaterial(void) const
+{
+  return (_material);
 }
 
 void          ObjectPrimitive::setObject(Object *object)

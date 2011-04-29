@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 15:33:54 2011 loick michard
-// Last update Fri Apr 29 16:50:56 2011 samuel olivier
+// Last update Sat Apr 30 00:06:29 2011 gael jochaud-du-plessix
 //
 
 #include "CinemaCamera.hpp"
@@ -38,12 +38,11 @@ Ray		CinemaCamera::getRay(double x, double y) const
 {
   Vector	vector;
   Ray		ray;
-  Rotation	rot = _rotation;
 
   vector.setX(_focalLength);
   vector.setY(_width * (x - 0.5));
-  vector.setZ(_height * (y - 0.5));
-  vector.rotate(rot);
+  vector.setZ(_height * (0.5 - y));
+  vector.rotate(_rotation);
   ray.setVector(vector);
   ray.setPoint(_position);
   ray.setRefractiveIndex(1);
