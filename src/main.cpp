@@ -5,11 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Fri Apr 29 18:31:37 2011 samuel olivier
+// Last update Fri Apr 29 19:41:16 2011 gael jochaud-du-plessix
 //
 
-#include <iostream>
 #include <vector>
+#include "gui.hpp"
 #include "Raytracer.hpp"
 #include "CinemaCamera.hpp"
 #include "Color.hpp"
@@ -34,7 +34,8 @@ Scene		createScene()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> sphere;
-  sphere.push_back(new Sphere(NULL, Point(0, 0, 0), Rotation(0, 0, 0), mat, (double)5));
+  sphere.push_back(new Sphere(NULL, Point(-20, 0, 0),
+			      Rotation(0, 0, 0), mat, 5));
   vector<Object*> obj;
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
@@ -58,7 +59,7 @@ RenderingConfiguration	createConfig()
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
-  // res.setRenderingSamplingMethod(renderingSamplingMethod.RSM_LINEAR_HORIZONTAL);
+  res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
   return (res);
 }
 
@@ -69,7 +70,7 @@ RenderingInterface	createInterface()
   return (res);
 }
 
-int main()
+int main(int ac, char **av)
 {
   Raytracer rt;
   Scene scene = createScene();
@@ -79,5 +80,6 @@ int main()
   rt.setScene(scene);
   rt.setRenderingConfiguration(conf);
   rt.setRenderingInterface(interface);
+  gui(ac, av);
   return (0);
 }

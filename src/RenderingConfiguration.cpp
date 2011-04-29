@@ -1,6 +1,12 @@
 #include "RenderingConfiguration.hpp"
 
-RenderingConfiguration::RenderingConfiguration()
+RenderingConfiguration::RenderingConfiguration():
+  _width(0), _height(0), _currentCamera(0), _antialiasing(0),
+  _directLighting(true), _ambientOcclusionEnabled(false),
+  _ambientOcclusionSampling(0), _photonMappingEnabled(false),
+  _photonMappingSampling(0), _diffuseLightingEnabled(false),
+  _diffuseLightingSampling(0), _fieldDepthEnabled(false),
+  _fieldDepthSampling(0)
 {
 
 }
@@ -8,6 +14,21 @@ RenderingConfiguration::RenderingConfiguration()
 RenderingConfiguration::~RenderingConfiguration()
 {
 
+}
+
+int	RenderingConfiguration::getWidth(void) const
+{
+  return (_width);
+}
+
+int	RenderingConfiguration::getHeight(void) const
+{
+  return (_height);
+}
+
+int	RenderingConfiguration::getCurrentCamera(void) const
+{
+  return (_currentCamera);
 }
 
 int	RenderingConfiguration::getAntialiasing(void) const
@@ -101,15 +122,21 @@ getRenderingSamplingMethod(void) const
   return (_renderingSamplingMethod);
 }
 
-int	RenderingConfiguration::getWidth(void) const
+void	RenderingConfiguration::setWidth(int width)
 {
-  return (_width);
+  _width = width;
 }
 
-int	RenderingConfiguration::getHeight(void) const
+void	RenderingConfiguration::setHeight(int width)
 {
-  return (_height);
+  _height = width;
 }
+
+void	RenderingConfiguration::setCurrentCamera(int id)
+{
+  _currentCamera = id;
+}
+
 
 void	RenderingConfiguration::setAntialiasing(int antialiasing)
 {
@@ -220,14 +247,3 @@ setRenderingSamplingMethod(renderingSamplingMethod rsm)
 {
   _renderingSamplingMethod = rsm;
 }
-
-void	RenderingConfiguration::setWidth(int width)
-{
-  _width = width;
-}
-
-void	RenderingConfiguration::setHeight(int width)
-{
-  _height = width;
-}
-

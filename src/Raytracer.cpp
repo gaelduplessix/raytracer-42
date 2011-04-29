@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Fri Apr 29 18:46:39 2011 samuel olivier
+// Last update Fri Apr 29 19:35:03 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -92,6 +92,34 @@ Raytracer::pauseRendering(void)
   _thread->wait();
 }
 
+#include <iostream>
+
+void		Raytracer::renderingLoop(double& progress)
+{
+  int		imageWidth = _config->getWidth();
+  int		imageHeight = _config->getHeight();
+  const Camera&	currentCamera = getCurrentCamera();
+  Point		pixelToRender = getPixelToRender(progress);
+  Ray		ray = currentCamera.getRay(pixelToRender.getX(),
+					   pixelToRender.getY());
+  const vector<t_intersected_object>&	intersections =
+    getIntersectingObjects(ray);
+  double	k = -1;
+  const ObjectPrimitive*	nearestObject =
+    getNearestObject(intersections, k);
+
+  if (nearestObject)
+    {
+      std::cout << pixelToRender.getX() << std::endl;
+    }
+  progress += 1.f / (imageWidth * imageHeight);
+}
+
+const Camera&		Raytracer::getCurrentCamera(void)
+{
+  return (_scene->getCamera(_config->getCurrentCamera()));
+}
+
 Point		Raytracer::getPixelToRender(double progress) const
 {
   int		width = _config->getWidth();
@@ -102,6 +130,11 @@ Point		Raytracer::getPixelToRender(double progress) const
     {
       pixelIndex = progress * width * height;
       return (Point(pixelIndex % height, pixelIndex / height, 0));
+    }
+  else if (_config->getRenderingSamplingMethod() == RSM_LINEAR_VERTICAL)
+    {
+      pixelIndex = progress * width * height;
+      return (Point(pixelIndex / width, pixelIndex % width, 0));
     }
   return (Point(0,0,0));
 }
@@ -138,13 +171,13 @@ Raytracer::getIntersectingObjects(Ray ray)
 
 const ObjectPrimitive*	Raytracer::
 getNearestObject(const vector<t_intersected_object>& intersections,
-		 double *res)
+		 double &res)
 {
   const ObjectPrimitive	*object;
   int			nbObject;
 
   object = NULL;
-  *res = (res) ? -1 : NULL;
+  res = (res) ? -1 : NULL;
   nbObject = intersections.size();
   if (nbObject > 0)
     {
@@ -153,9 +186,9 @@ getNearestObject(const vector<t_intersected_object>& intersections,
 	  int	nbK = intersections[i].k.size();
 
 	  for (int j = 0 ; j < nbK ; j++)
-	    if (res && (*res < 0 || intersections[i].k[j] < *res))
+	    if (res && (res < 0 || intersections[i].k[j] < res))
 	      {
-		*res = intersections[i].k[j];
+		res = intersections[i].k[j];
 		object = intersections[i].primitive;
 	      }
 	}
