@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Thu Apr 28 14:10:24 2011 loick michard
+// Last update Fri Apr 29 10:49:01 2011 samuel olivier
 //
 
 #include "Color.hpp"
@@ -31,7 +31,7 @@ Color::Color(int color)
   char	*ptr;
 
   ptr = (char *)&color;
-#ifdef BIG_ENDIAN
+#ifdef IS_BIG_ENDIAN
   _r = ptr[3];
   _g = ptr[2];
   _b = ptr[1];
