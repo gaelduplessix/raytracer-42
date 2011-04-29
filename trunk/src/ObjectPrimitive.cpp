@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Thu Apr 28 16:25:53 2011 loick michard
+// Last update Fri Apr 29 11:16:37 2011 loick michard
 //
 
 #include "ObjectPrimitive.hpp"
@@ -60,3 +60,19 @@ void          ObjectPrimitive::setMaterial(const Material& material)
   _material = material;
 }
 
+Ray           ObjectPrimitive::getModifiedRay(const Ray& ray)
+{
+  Ray	      modified = ray;
+  Vector      vector = ray.getVector();
+  Rotation    rotation = _rotation * -1;
+  Point       point = ray.getPoint();
+
+  vector.rotate(rotation);
+  modified.setVector(vector);
+
+  point -= _absolutePosition;
+  point.rotate(rotation);
+  modified.setPoint(point);
+
+  return (modified);
+}

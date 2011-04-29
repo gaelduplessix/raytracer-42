@@ -5,18 +5,21 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Thu Apr 28 16:25:37 2011 loick michard
+// Last update Fri Apr 29 12:06:42 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
 #define _OBJECTPRIMITIVE_HPP_
 
+#include <vector>
 #include "Vector.hpp"
 #include "Point.hpp"
 #include "Rotation.hpp"
 #include "BoundingBox.hpp"
 #include "Ray.hpp"
 #include "Material.hpp"
+
+using namespace std;
 
 class Object;
 
@@ -36,13 +39,17 @@ public:
   void		setRotation(const Rotation& rotation);
   void		setMaterial(const Material& material);
 
-  virtual bool		intersectWithRay(const Ray& ray) = 0;
+  virtual vector<double>	intersectWithRay(const Ray& ray) = 0;
+
   virtual Vector	getNormalVector(const Point& intersectPoint) = 0;
   virtual Vector	getReflectedVector(const Point& intersectPoint,
 					   const Vector& vector) = 0;
   virtual Vector	getRefractedVector(const Point& intersectPoint,
 					   Vector& vector) = 0;
   virtual bool		isInBoundingBox(BoundingBox& box) = 0;
+
+protected:
+  virtual Ray		getModifiedRay(const Ray& ray);
 
 private:
   Object*	_object;
