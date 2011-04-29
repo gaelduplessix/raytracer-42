@@ -1,3 +1,11 @@
-qmake-qt4 -project
-qmake-qt4 OBJECTS_DIR=./objects $1
+#!/bin/bash
+
+qmake-qt4 -project -nopwd src
+make -C configure_options
+if ./configure_options/endian
+then
+   qmake-qt4 OBJECTS_DIR=./objects DEFINES=IS_BIG_ENDIAN
+else
+   qmake-qt4 OBJECTS_DIR=./objects
+fi
 echo "re:	clean all" >> Makefile
