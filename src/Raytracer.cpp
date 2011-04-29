@@ -5,19 +5,19 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Fri Apr 29 11:41:11 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 12:32:31 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
 
 Raytracer::Raytracer()
 {
-
+  _thread = new RaytracerThread(this);
 }
 
 Raytracer::~Raytracer()
 {
-
+  delete _thread;
 }
 
 void
@@ -59,5 +59,12 @@ Raytracer::getRenderingInterface(void) const
 void
 Raytracer::launchRendering(void)
 {
-  
+  _thread->start();
+}
+
+void
+Raytracer::stopRendering(void)
+{
+  _thread->stop();
+  _thread->wait();
 }
