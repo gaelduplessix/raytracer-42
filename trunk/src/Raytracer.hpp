@@ -5,17 +5,16 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Fri Apr 29 11:42:34 2011 samuel olivier
+// Last update Fri Apr 29 13:26:10 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
 #define _RAYTRACER_HPP_
 
-#include <QThread>
-
 #include "Scene.hpp"
 #include "RenderingConfiguration.hpp"
 #include "RenderingInterface.hpp"
+#include "RaytracerThread.hpp"
 
 class	Raytracer : public QThread
 {
@@ -26,10 +25,6 @@ public:
 	    RenderingInterface& interface);
   ~Raytracer();
 
-  void launchRendering();
-  void stopRendering();
-  void pauseRendering();
-
   void setScene(Scene& scene);
   void setRenderingConfiguration(RenderingConfiguration& config);
   void setRenderingInterface(RenderingInterface& interface);
@@ -38,10 +33,15 @@ public:
   const RenderingConfiguration*	getRenderingConfiguration(void) const;
   const RenderingInterface*	getRenderingInterface(void) const;
 
+  void launchRendering();
+  void stopRendering();
+  void pauseRendering();
+
 private:
   Scene*			_scene;
   RenderingConfiguration*	_config;
   RenderingInterface*		_interface;
+  RaytracerThread*		_thread;
 };
 
 #endif
