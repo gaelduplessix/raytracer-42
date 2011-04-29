@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Fri Apr 29 13:26:10 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 14:04:58 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -16,9 +16,13 @@
 #include "RenderingInterface.hpp"
 #include "RaytracerThread.hpp"
 
-class	Raytracer : public QThread
+class	Raytracer
 {
 public:
+  const static int	NO_SCENE_SPECIFIED = 0;
+  const static int	NO_CONFIG_SPECIFIED = 1;
+  const static int	NO_INTERFACE_SPECIFIED = 2;
+
   Raytracer();
   Raytracer(Scene& scene,
 	    RenderingConfiguration& config,
