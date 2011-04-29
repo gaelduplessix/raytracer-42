@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri Apr 29 18:06:05 2011 franck lavisse
+// Last update Fri Apr 29 19:32:03 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -36,6 +36,7 @@
 #include <QSpinBox>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QMenuBar>
 
 int	gui(int argc, char **argv);
 
@@ -57,7 +58,9 @@ public:
   void	ambiantOcclusion(void);
   void	photonMapping(void);
   void	lumiereDiffuse(void);
+  void	transparence(void);
   void	flou(void);
+  void	menuBar(void);
 
 public slots:
   void	launch_raytracer(void);
