@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Thu Apr 28 18:02:01 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 17:11:35 2011 loick michard
 //
 
 #include <cmath>
@@ -142,4 +142,10 @@ Vector&	Vector::operator*=(const Vector& vector)
   _y = yp;
   _z = zp;
   return (*this);
+}
+
+double   operator*(const Vector& vector, const Vector& vector2)
+{
+  return (vector._x * vector2._x + vector._y * vector2._y +
+	  vector._z * vector2._z);
 }
