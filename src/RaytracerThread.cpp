@@ -5,93 +5,72 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 14:45:18 2011 samuel olivier
+// Last update Fri Apr 29 16:39:33 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
 #include "RaytracerThread.hpp"
 
-RaytracerThread::RaytracerThread(const Raytracer* raytracer):
-  _raytracer(raytracer), _launched(false)
+RaytracerThread::RaytracerThread(Raytracer* raytracer):
+  _raytracer(raytracer), _launched(false), _isInit(false), _progress(0),
+  _image(NULL)
 {
   
 }
 
 RaytracerThread::~RaytracerThread()
 {
-  
+  if (_image)
+    delete _image;
 }
 
 #include <iostream>
 
-void	RaytracerThread::run(void)
+void		RaytracerThread::run(void)
 {
+  const Scene*	scene = _raytracer->getScene();
+  int		imageWidth = _raytracer->getRenderingConfiguration()
+    ->getWidth();
+  int		imageHeight = _raytracer->getRenderingConfiguration()
+    ->getHeight();
+
+  if (!_isInit)
+    initBeforeLaunching();
   _launched = true;
   while (_launched)
     {
-      std::cout << "running..." << std::endl;
-      sleep(1);
+      Point	pixelToRender = _raytracer->getPixelToRender(_progress);
+      std::cout << "Pixel: " << pixelToRender.getX() << " : "
+		<< pixelToRender.getY() << std::endl;
+      _progress += 1.f / (imageWidth * imageHeight);
     }
-  std::cout << "stoped." << std::endl;
 }
 
 void	RaytracerThread::stop(void)
 {
   _launched = false;
+  _isInit = false;
 }
 
-const vector<t_intersected_object>&
-RaytracerThread::getIntersectingObjects(Ray ray)
+void	RaytracerThread::pause(void)
 {
-  int				nb_object;
-  int				i = -1;
-  vector<t_intersected_object>	*intersections;
-  const vector<Object*>&	objects = _raytracer->getScene()->getObjects();
-  t_intersected_object		tmp;
-  int				j;
-
-  intersections = new vector<t_intersected_object>;
-  nb_object = objects.size();
-  while (++i < nb_object)
-    {
-      const vector<ObjectPrimitive*>&	primitives = objects[i]->getPrimitives();
-      int				nb_primitive;
-      nb_primitive = primitives.size();
-      j = -1;
-      while (++j < nb_primitive)
-	{
-	  tmp.primitive = primitives[j];
-	  tmp.k = tmp.primitive->intersectWithRay(ray);
-	  if (tmp.k.size() > 0)
-	    intersections->push_back(tmp);
-	}
-    }
-  return (*intersections);
+  _launched = false;
 }
 
-const ObjectPrimitive*	RaytracerThread::
-getNearestObject(const vector<t_intersected_object>& intersections,
-		 double *res)
+void	RaytracerThread::initBeforeLaunching(void)
 {
-  const ObjectPrimitive	*object;
-  int			nbObject;
+  int	width = _raytracer->getRenderingConfiguration()->getWidth();
+  int	height = _raytracer->getRenderingConfiguration()->getHeight();
 
-  object = NULL;
-  *res = (res) ? -1 : NULL;
-  nbObject = intersections.size();
-  if (nbObject > 0)
+  _raytracedPixels.resize(width);
+  for (int i = 0; i < width; i++)
     {
-      for (int i = 0 ; i < nbObject ; i++)
-	{
-	  int	nbK = intersections[i].k.size();
-
-	  for (int j = 0 ; j < nbK ; j++)
-	    if (res && (*res < 0 || intersections[i].k[j] < *res))
-	      {
-		*res = intersections[i].k[j];
-		object = intersections[i].primitive;
-	      }
-	}
+      _raytracedPixels[i].resize(height);
+      for (int j = 0; j < height; j++)
+	_raytracedPixels[i][j] = false;
     }
-  return (object);
+  if (_image)
+    delete _image;
+  _image = new QImage(width, height, QImage::Format_ARGB32);
+  _progress = 0.f;
 }

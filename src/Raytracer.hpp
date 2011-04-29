@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Fri Apr 29 14:04:58 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 16:09:47 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -15,6 +15,12 @@
 #include "RenderingConfiguration.hpp"
 #include "RenderingInterface.hpp"
 #include "RaytracerThread.hpp"
+
+typedef struct			s_intersected_object
+{
+  const ObjectPrimitive*        primitive;
+  vector<double>                k;
+}				t_intersected_object;
 
 class	Raytracer
 {
@@ -40,6 +46,12 @@ public:
   void launchRendering();
   void stopRendering();
   void pauseRendering();
+
+  const vector<t_intersected_object>&
+  getIntersectingObjects(Ray ray);
+  const ObjectPrimitive*
+  getNearestObject(const vector<t_intersected_object>&, double *res);
+  Point getPixelToRender(double progress) const;
 
 private:
   Scene*			_scene;

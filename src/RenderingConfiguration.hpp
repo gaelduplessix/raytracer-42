@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Thu Apr 28 18:02:16 2011 samuel olivier
+// Last update Fri Apr 29 16:13:19 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -86,8 +86,8 @@ public:
   void		setFieldDepthEnabled(bool enabled= 1);
   void		setFieldDepthSampling(int sampling);
 
-  renderingSamplingMethod* getRenderingSamplingMethod(void) const;
-  void setRenderingSamplingMethod(renderingSamplingMethod* rsm);
+  renderingSamplingMethod getRenderingSamplingMethod(void) const;
+  void setRenderingSamplingMethod(renderingSamplingMethod rsm);
 
   int	getWidth(void) const;
   void	setWidth(int width);
@@ -109,7 +109,7 @@ private:
   int                   _diffuseLightingSampling;
   bool                  _fieldDepthEnabled;
   int                   _fieldDepthSampling;
-  renderingSamplingMethod* _renderingSamplingMethod;
+  renderingSamplingMethod _renderingSamplingMethod;
 };
 
 #endif

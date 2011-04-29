@@ -95,7 +95,7 @@ int	RenderingConfiguration::getFieldDepthSampling(void) const
   return (_fieldDepthSampling);
 }
 
-renderingSamplingMethod*	RenderingConfiguration::
+renderingSamplingMethod	RenderingConfiguration::
 getRenderingSamplingMethod(void) const
 {
   return (_renderingSamplingMethod);
@@ -216,7 +216,7 @@ void	RenderingConfiguration::setFieldDepthSampling(int sampling)
 }
 
 void	RenderingConfiguration::
-setRenderingSamplingMethod(renderingSamplingMethod* rsm)
+setRenderingSamplingMethod(renderingSamplingMethod rsm)
 {
   _renderingSamplingMethod = rsm;
 }

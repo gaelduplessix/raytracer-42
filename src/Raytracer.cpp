@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Fri Apr 29 14:05:23 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 16:40:14 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -13,11 +13,15 @@
 Raytracer::Raytracer()
 {
   _thread = new RaytracerThread(this);
+  _interface = new RenderingInterface();
 }
 
 Raytracer::~Raytracer()
 {
-  delete _thread;
+  if (_thread)
+    delete _thread;
+  if (_interface)
+    delete _interface;
 }
 
 void
@@ -73,4 +77,82 @@ Raytracer::stopRendering(void)
 {
   _thread->stop();
   _thread->wait();
+}
+
+void
+Raytracer::pauseRendering(void)
+{
+  _thread->pause();
+  _thread->wait();
+}
+
+Point		Raytracer::getPixelToRender(double progress) const
+{
+  int		width = _config->getWidth();
+  int		height = _config->getHeight();
+  int		pixelIndex;
+
+  if (_config->getRenderingSamplingMethod() == RSM_LINEAR_HORIZONTAL)
+    {
+      pixelIndex = progress * width * height;
+      return (Point(pixelIndex % height, pixelIndex / height, 0));
+    }
+  return (Point(0,0,0));
+}
+
+const vector<t_intersected_object>&
+Raytracer::getIntersectingObjects(Ray ray)
+{
+  int				nb_object;
+  int				i = -1;
+  vector<t_intersected_object>	*intersections;
+  const vector<Object*>&	objects = _scene->getObjects();
+  t_intersected_object		tmp;
+  int				j;
+
+  intersections = new vector<t_intersected_object>;
+  nb_object = objects.size();
+  while (++i < nb_object)
+    {
+      const vector<ObjectPrimitive*>&	primitives =
+	objects[i]->getPrimitives();
+      int				nb_primitive;
+      nb_primitive = primitives.size();
+      j = -1;
+      while (++j < nb_primitive)
+	{
+	  tmp.primitive = primitives[j];
+	  tmp.k = tmp.primitive->intersectWithRay(ray);
+	  if (tmp.k.size() > 0)
+	    intersections->push_back(tmp);
+	}
+    }
+  return (*intersections);
+}
+
+const ObjectPrimitive*	Raytracer::
+getNearestObject(const vector<t_intersected_object>& intersections,
+		 double *res)
+{
+  const ObjectPrimitive	*object;
+  int			nbObject;
+
+  object = NULL;
+  *res = (res) ? -1 : NULL;
+  nbObject = intersections.size();
+  if (nbObject > 0)
+    {
+      for (int i = 0 ; i < nbObject ; i++)
+	{
+	  int	nbK = intersections[i].k.size();
+
+	  for (int j = 0 ; j < nbK ; j++)
+	    if (res && (*res < 0 || intersections[i].k[j] < *res))
+	      {
+		*res = intersections[i].k[j];
+		object = intersections[i].primitive;
+	      }
+	}
+    }
+  return (object);
 }
