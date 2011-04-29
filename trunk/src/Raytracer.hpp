@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Fri Apr 29 18:38:26 2011 samuel olivier
+// Last update Fri Apr 29 19:33:11 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -47,11 +47,14 @@ public:
   void stopRendering();
   void pauseRendering();
 
+  void		renderingLoop(double& progress);
+  const Camera&	getCurrentCamera(void);
+  Point		getPixelToRender(double progress) const;
+
   const vector<t_intersected_object>&
   getIntersectingObjects(Ray ray);
   const ObjectPrimitive*
-  getNearestObject(const vector<t_intersected_object>&, double *res);
-  Point getPixelToRender(double progress) const;
+  getNearestObject(const vector<t_intersected_object>&, double& res);
 
 private:
   Scene*			_scene;

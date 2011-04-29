@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Fri Apr 29 12:47:29 2011 samuel olivier
+// Last update Fri Apr 29 19:20:35 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -17,11 +17,10 @@ Scene::Scene()
 
 Scene::Scene(vector<Camera*> cameras,
 	     vector<Object*> objects,
-	     vector<Light*> lights)
+	     vector<Light*> lights):
+  _cameras(cameras), _objects(objects), _lights(lights)
 {
-  _cameras = cameras;
-  _objects = objects;
-  _lights = lights;
+
 }
 
 Scene::Scene(string filename)
@@ -54,6 +53,8 @@ const vector<Light*>&	Scene::getLights(void) const
 {
   return (_lights);
 }
+
+#include <iostream>
 
 const Camera&		Scene::getCamera(int index) const
 {

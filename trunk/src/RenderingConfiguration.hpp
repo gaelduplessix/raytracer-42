@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Fri Apr 29 16:35:28 2011 samuel olivier
+// Last update Fri Apr 29 19:21:01 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -41,6 +41,14 @@ public:
   RenderingConfiguration();
   ~RenderingConfiguration();
   
+  int	getWidth(void) const;
+  void	setWidth(int width);
+  int   getHeight(void) const;
+  void	setHeight(int width);
+
+  int	getCurrentCamera(void) const;
+  void	setCurrentCamera(int id);
+
   int		getAntialiasing(void) const;
   void		setAntialiasing(int antialiasing);
   bool		isDirectLighting(void) const;
@@ -89,14 +97,10 @@ public:
   renderingSamplingMethod getRenderingSamplingMethod(void) const;
   void setRenderingSamplingMethod(renderingSamplingMethod rsm);
 
-  int	getWidth(void) const;
-  void	setWidth(int width);
-  int   getHeight(void) const;
-  void	setHeight(int width);
-
 private:
   int			_width;
   int			_height;
+  int			_currentCamera;
   int			_antialiasing;
   bool			_directLighting;
   t_reflection		_reflection;

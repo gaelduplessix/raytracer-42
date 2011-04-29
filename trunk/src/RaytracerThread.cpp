@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 17:03:39 2011 samuel olivier
+// Last update Fri Apr 29 19:12:52 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -24,26 +24,14 @@ RaytracerThread::~RaytracerThread()
     delete _image;
 }
 
-#include <iostream>
-
 void		RaytracerThread::run(void)
 {
-  const Scene*	scene = _raytracer->getScene();
-  int		imageWidth = _raytracer->getRenderingConfiguration()
-    ->getWidth();
-  int		imageHeight = _raytracer->getRenderingConfiguration()
-    ->getHeight();
-
   if (!_isInit)
     initBeforeLaunching();
   _launched = true;
-  while (_launched)
-    {
-      Point	pixelToRender = _raytracer->getPixelToRender(_progress);
-      std::cout << "Pixel: " << pixelToRender.getX() << " : "
-		<< pixelToRender.getY() << std::endl;
-      _progress += 1.f / (imageWidth * imageHeight);
-    }
+  while (_launched && _progress < 1)
+    _raytracer->renderingLoop(_progress);
+  _launched = 0;
 }
 
 void	RaytracerThread::stop(void)
