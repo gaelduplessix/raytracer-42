@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 11:05:27 2011 samuel olivier
+// Last update Fri Apr 29 11:37:09 2011 samuel olivier
 //
 
 #ifndef _LIGHT_HPP_
@@ -16,15 +16,17 @@
 #include "Ray.hpp"
 #include "RenderingConfiguration.hpp"
 
+class Raytracer;
+
 class Light
 {
 public:
   Light();
   ~Light();
 
-  Point&	getPosition() const;
-  Color&	getColor() const;
-  double	getIntensity() const;
+  const Point&	getPosition(void) const;
+  const Color&	getColor(void) const;
+  double	getIntensity(void) const;
 
   void		setPosition(const Point& position);
   void		setColor(const Color& color);
@@ -33,7 +35,7 @@ public:
   virtual void
   getLighting(const Ray& ray,
 	      const Point& intersectPoint,
-	      const RenderingConfiguration& config,
+	      const Raytracer &raytracer,
 	      Color& directLighting,
 	      Color& specularLighting) const = 0;
 
