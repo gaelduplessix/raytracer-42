@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Fri Apr 29 12:32:31 2011 gael jochaud-du-plessix
+// Last update Fri Apr 29 14:05:23 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -59,6 +59,12 @@ Raytracer::getRenderingInterface(void) const
 void
 Raytracer::launchRendering(void)
 {
+  if (!_scene)
+    throw (Raytracer::NO_SCENE_SPECIFIED);
+  if (!_config)
+    throw (Raytracer::NO_CONFIG_SPECIFIED);
+  if (!_interface)
+    throw (Raytracer::NO_INTERFACE_SPECIFIED);
   _thread->start();
 }
 
