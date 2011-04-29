@@ -5,8 +5,11 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 18:05:44 2011 franck lavisse
-// Last update Fri Apr 29 19:17:32 2011 franck lavisse
+// Last update Fri Apr 29 23:45:50 2011 franck lavisse
 //
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QGridLayout>
 #include "gui.hpp"
 
 void	Gui::flou(void)

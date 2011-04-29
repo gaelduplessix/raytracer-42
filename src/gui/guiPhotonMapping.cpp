@@ -5,8 +5,12 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 18:00:00 2011 franck lavisse
-// Last update Fri Apr 29 19:16:28 2011 franck lavisse
+// Last update Fri Apr 29 23:46:55 2011 franck lavisse
 //
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QGridLayout>
+#include <QSpinBox>
 #include "gui.hpp"
 
 void	Gui::photonMapping(void)

@@ -5,37 +5,21 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri Apr 29 21:19:16 2011 samuel olivier
+// Last update Fri Apr 29 23:49:50 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
 
 #include <QApplication>
 #include <QWidget>
-#include <QPushButton>
-#include <QPolygon>
-#include <QPoint>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsItem>
-#include <QLine>
-#include <QPen>
-#include <QRect>
 #include <QMainWindow>
 #include <QPainter>
 #include <QDockWidget>
 #include <QLayout>
 #include <QGridLayout>
-#include <QComboBox>
-#include <QTabWidget>
-#include <QGroupBox>
-#include <QCheckBox>
-#include <QHBoxLayout>
-#include <QComboBox>
-#include <QStringList>
-#include <QSpinBox>
-#include <QLabel>
-#include <QVBoxLayout>
 #include <QMenuBar>
 
 class Color;
@@ -69,9 +53,9 @@ public slots:
   void	launch_raytracer(void);
 
 private:
-  QComboBox	*_samplingMethod;
+  QDockWidget	*_DockBar;
+  QWidget	*_widgetBar;
   QWidget	*_widget;
-  QPushButton	*_Rendu;
   QGridLayout	*_Grid;
   QDockWidget	*_Dock;
   QGraphicsScene*_Scene;
