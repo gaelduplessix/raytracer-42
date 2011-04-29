@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Fri Apr 29 13:39:15 2011 loick michard
+// Last update Fri Apr 29 14:00:40 2011 loick michard
 //
 
 #ifndef _SHPERE_HPP_
@@ -18,8 +18,8 @@ class Sphere : public ObjectPrimitive
 public:
   void		setRadius(double r);
 
-  vector<double>	intersectWithRay(const Ray& ray);
-  Vector		getNormalVector(const Point& intersectPoint);
+  vector<double>	intersectWithRay(const Ray& ray) const;
+  Vector		getNormalVector(const Point& intersectPoint) const;
 
 private:
   double	_radius;
