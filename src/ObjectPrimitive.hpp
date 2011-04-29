@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 14:03:10 2011 loick michard
+// Last update Fri Apr 29 17:18:57 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -49,7 +49,7 @@ public:
   virtual bool		isInBoundingBox(BoundingBox& box) const = 0;
 
 protected:
-  virtual Ray		getModifiedRay(const Ray& ray) const;
+  virtual Ray		getRayAtSimplePosition(const Ray& ray) const;
   Point			_absolutePosition;
 
 private:
