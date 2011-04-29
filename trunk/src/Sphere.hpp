@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Fri Apr 29 12:08:44 2011 loick michard
+// Last update Fri Apr 29 13:39:15 2011 loick michard
 //
 
 #ifndef _SHPERE_HPP_
@@ -19,6 +19,7 @@ public:
   void		setRadius(double r);
 
   vector<double>	intersectWithRay(const Ray& ray);
+  Vector		getNormalVector(const Point& intersectPoint);
 
 private:
   double	_radius;

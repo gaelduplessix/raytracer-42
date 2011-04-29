@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 12:06:42 2011 loick michard
+// Last update Fri Apr 29 13:58:01 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -50,11 +50,11 @@ public:
 
 protected:
   virtual Ray		getModifiedRay(const Ray& ray);
+  Point			_absolutePosition;
 
 private:
   Object*	_object;
   Rotation	_rotation;
-  Point		_absolutePosition;
   Material	_material;
 };
 
