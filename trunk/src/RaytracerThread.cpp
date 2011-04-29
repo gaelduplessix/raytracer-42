@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 13:58:23 2011 samuel olivier
+// Last update Fri Apr 29 14:45:18 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
@@ -45,11 +45,12 @@ RaytracerThread::getIntersectingObjects(Ray ray)
 {
   int				nb_object;
   int				i = -1;
-  vector<t_intersected_object>	intersections;
+  vector<t_intersected_object>	*intersections;
   const vector<Object*>&	objects = _raytracer->getScene()->getObjects();
   t_intersected_object		tmp;
   int				j;
 
+  intersections = new vector<t_intersected_object>;
   nb_object = objects.size();
   while (++i < nb_object)
     {
@@ -62,8 +63,35 @@ RaytracerThread::getIntersectingObjects(Ray ray)
 	  tmp.primitive = primitives[j];
 	  tmp.k = tmp.primitive->intersectWithRay(ray);
 	  if (tmp.k.size() > 0)
-	    intersections.push_back(tmp);
+	    intersections->push_back(tmp);
 	}
     }
-  return (intersections);
+  return (*intersections);
+}
+
+const ObjectPrimitive*	RaytracerThread::
+getNearestObject(const vector<t_intersected_object>& intersections,
+		 double *res)
+{
+  const ObjectPrimitive	*object;
+  int			nbObject;
+
+  object = NULL;
+  *res = (res) ? -1 : NULL;
+  nbObject = intersections.size();
+  if (nbObject > 0)
+    {
+      for (int i = 0 ; i < nbObject ; i++)
+	{
+	  int	nbK = intersections[i].k.size();
+
+	  for (int j = 0 ; j < nbK ; j++)
+	    if (res && (*res < 0 || intersections[i].k[j] < *res))
+	      {
+		*res = intersections[i].k[j];
+		object = intersections[i].primitive;
+	      }
+	}
+    }
+  return (object);
 }
