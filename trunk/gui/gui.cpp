@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri Apr 29 18:05:56 2011 franck lavisse
+// Last update Fri Apr 29 19:29:28 2011 franck lavisse
 */
 #include <iostream>
 #include "gui.hpp"
@@ -78,6 +78,7 @@ int	gui(int argc, char **argv)
   rt_gui.photonMapping();
   rt_gui.lumiereDiffuse();
   rt_gui.flou();
+  rt_gui.transparence();
   rt_gui.show();
   return app.exec();
 }
