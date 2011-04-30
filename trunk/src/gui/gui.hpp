@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Sat Apr 30 17:57:44 2011 franck lavisse
+// Last update Sat Apr 30 18:32:08 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -23,6 +23,7 @@
 #include <QMenuBar>
 #include <QCheckBox>
 #include <QSpinBox>
+#include <QComboBox>
 
 class Color;
 
@@ -39,14 +40,27 @@ public:
   bool	getTransparenceBool(void) const;
   int	getTransparenceInt(void) const;
   int	getTransparenceDiffusion(void) const;
+  bool	getFlouBool(void) const;
+  int	getFlouInt(void) const;
+  bool	getLumiereDiffuseBool(void) const;
+  int	getLumiereDiffuseInt(void) const;
+  int	getAliasing(void) const;
+  bool	getAmbiantOcclusionBool(void) const;
+  int	getAmbiantOcclusionInt(void) const;
+  bool	getDirectLight(void) const;
+  int	getReflectionSampling(void) const;
+  int	getReflectionProfondeur(void) const;
+  bool	getPhotonMappingBool(void) const;
+  int	getPhotonMappingInt(void) const;
+  int	getSamplingMethod(void) const;
 
   void	putPixel(const Color& color, int x, int y);
   void	rendu(void);
   void	init_dock(void);
   void	samplingMethod(void);
   void	aliasing(void);
-  void	reflection(void);		     
-  void	directLight(void);			
+  void	reflection(void);
+  void	directLight(void);
   void	ambiantOcclusion(void);
   void	photonMapping(void);
   void	lumiereDiffuse(void);
@@ -69,9 +83,23 @@ private:
   QGraphicsScene*_Scene;
   QGraphicsItem	*_Item;
   QGraphicsView	*_View;
+
   QCheckBox	*_transparence;
   QSpinBox	*_transpBox;
   QSpinBox	*_transpDiffusion;
+  QCheckBox	*_flou;
+  QSpinBox	*_flouBox;
+  QCheckBox	*_lumiereDiffuse;
+  QSpinBox	*_lumiereDiffuseBox;
+  QSpinBox	*_aliasing;
+  QCheckBox	*_ambiantOcclusion;
+  QSpinBox	*_ambiantOcclusionBox;
+  QCheckBox	*_directLight;
+  QSpinBox	*_reflectionProfondeur;
+  QSpinBox	*_reflectionSampling;
+  QCheckBox	*_photonMapping;
+  QSpinBox	*_photonMappingBox;
+  QComboBox	*_samplingMethod;
 };
 
 #endif
