@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 20:38:58 2011 loick michard
+// Last update Sat Apr 30 22:21:10 2011 loick michard
 //
 
 #include <vector>
@@ -25,7 +25,7 @@ Scene		createScene()
 {
   Material	mat("bleu");
   mat.setColor(Color(255, 155, 55, 0));
-  mat.setSpecularCoeff(0.8);
+  mat.setSpecularCoeff(0.3);
   mat.setSpecularPow(50);
   mat.setReflectionCoeff(0.5);
   mat.setTransmissionCoeff(0.5);
