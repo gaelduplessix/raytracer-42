@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 19:18:09 2011 loick michard
+// Last update Sat Apr 30 19:46:52 2011 samuel olivier
 //
 
 #include <vector>
@@ -65,9 +65,9 @@ RenderingConfiguration	createConfig()
   res.setWidth(853);
   res.setHeight(480);
   res.setAntialiasing(1);
-  res.setDirectLighting(false);
-  res.setReflection(false);
-  res.setTransparency(false);
+  res.setDirectLighting(true);
+  res.setReflection(true);
+  res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
