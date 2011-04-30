@@ -84,7 +84,7 @@ public:
   int		getPhotonMappingSampling(void) const;
   void		setPhotonMappingEnabled(bool enabled= 1);
   void		setPhotonMappingSampling(int sampling);
-
+  
   bool		isDiffuseLightingEnabled(void) const;
   int		getDiffuseLightingSampling(void) const;
   void		setDiffuseLightingEnabled(bool enabled= 1);

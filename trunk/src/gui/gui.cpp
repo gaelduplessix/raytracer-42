@@ -5,18 +5,38 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Sat Apr 30 18:32:15 2011 franck lavisse
+// Last update Sat Apr 30 19:37:43 2011 franck lavisse
 */
 #include <QPushButton>
 #include <QPen>
 #include <QBrush>
 #include <iostream>
 #include "gui.hpp"
+#include "../RenderingConfiguration.hpp"
 #include "../Color.hpp"
 
 using namespace std;
 
-void	raytracer(Gui *rt) {rt = rt;}
+void	raytracer(Gui *rt)
+{
+  RenderingConfiguration	config;
+
+  config.setWidth(1100);
+  config.setHeight(700);
+  config.setAntialiasing(rt->getAliasing());
+  config.setDirectLighting(rt->getDirectLight());
+  config.setReflectionEnabled(rt->getReflectionBool());
+  config.setReflectionDiffusedSampling(rt->getReflectionSampling());
+  config.setReflectionMaxDepth(rt->getReflectionProfondeur());
+  config.setTransparency(rt->getTransparenceBool(),
+			 rt->getTransparenceInt(),
+			 rt->getTransparenceDiffusion());
+  config.setAmbientOcclusionEnabled(rt->getAmbiantOcclusionBool());
+  config.setAmbientOcclusionSampling(rt->getAmbiantOcclusionInt());
+  config.setPhotonMappingEnabled(rt->getPhotonMappingBool());
+  config.setPhotonMappingSampling(rt->getPhotonMappingInt());
+  config.setRenderingSamplingMethod(renderingSamplingMethod(rt->getSamplingMethod()));
+}
 
 void	Gui::launch_raytracer(void)
 {

@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 17:39:55 2011 franck lavisse
-// Last update Sat Apr 30 18:20:24 2011 franck lavisse
+// Last update Sat Apr 30 19:25:00 2011 franck lavisse
 //
 #include <QLabel>
 #include <QGroupBox>
@@ -13,6 +13,11 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include "gui.hpp"
+
+bool	Gui::getReflectionBool(void) const
+{
+  return (_reflectionEnabled->checkState());
+}
 
 int	Gui::getReflectionSampling(void) const
 {
@@ -34,12 +39,14 @@ void		Gui::reflection(void)
   QVBoxLayout	*vbox = new QVBoxLayout();
   QGridLayout	*gprofondeur = new QGridLayout();
   QGridLayout	*gsampling = new QGridLayout();
+  _reflectionEnabled = new QCheckBox("Reflection");
   
+  gprofondeur->addWidget(_reflectionEnabled,0,0);
   gprofondeur->addWidget(lprofondeur,1,0);
   gprofondeur->addWidget(_reflectionProfondeur,1,1);  
   gsampling->addWidget(lsampling,1,0);
   gsampling->addWidget(_reflectionSampling,1,1);
-  vbox->addLayout(gprofondeur);  
+  vbox->addLayout(gprofondeur);
   vbox->addLayout(gsampling);
   gbox->setLayout(vbox);
   _Grid->addWidget(gbox,100,0);
