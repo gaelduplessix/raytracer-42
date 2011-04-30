@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 11:56:58 2011 loick michard
+// Last update Sat Apr 30 12:16:19 2011 samuel olivier
 //
 
 #include <vector>
@@ -95,7 +95,7 @@ class SDLInterface : public RenderingInterface
     p[2] = color.getR();
     p[1] = color.getG();
     p[0] = color.getB();
-    if (x == 0 || y == 0)
+    if (y == 0)
       SDL_Flip(screen);
   }
 
