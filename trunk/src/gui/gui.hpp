@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Sat Apr 30 19:22:30 2011 franck lavisse
+// Last update Sat Apr 30 20:08:26 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -24,12 +24,13 @@
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QComboBox>
+#include "../RenderingInterface.hpp"
 
 class Color;
 
 int	gui(int argc, char **argv);
 
-class	Gui : public QMainWindow
+class	Gui : public QMainWindow, public RenderingInterface
 {
 Q_OBJECT
 
@@ -37,6 +38,17 @@ public:
   Gui();
   ~Gui();
 
+  virtual void pixelHasBeenRendered(int x, int y, Color color);
+  virtual void pixelHasStartedRendering(int x, int y);
+  virtual void photonMappingHasBegun();
+  virtual void photonMappingHasFinished();
+  virtual void kdtreeGenerationHasBegun();
+  virtual void kdtreeGenerationHasFinished();
+  virtual void renderingHasBegun();
+  virtual void renderingHasPaused();
+  virtual void renderingHasStoped();
+  virtual void renderingHasFinished();
+  virtual void renderingHasProgressed(double progress);
   bool	getTransparenceBool(void) const;
   int	getTransparenceInt(void) const;
   int	getTransparenceDiffusion(void) const;

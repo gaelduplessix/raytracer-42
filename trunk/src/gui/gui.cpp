@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Sat Apr 30 19:37:43 2011 franck lavisse
+// Last update Sat Apr 30 20:02:11 2011 franck lavisse
 */
 #include <QPushButton>
 #include <QPen>

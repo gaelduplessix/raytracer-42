@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:28:09 2011 loick michard
-// Last update Sat Apr 30 13:49:39 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 20:02:36 2011 franck lavisse
 //
 
 #include "RenderingInterface.hpp"
