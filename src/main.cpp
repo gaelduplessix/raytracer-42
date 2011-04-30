@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 17:12:29 2011 loick michard
+// Last update Sat Apr 30 18:47:18 2011 loick michard
 //
 
 #include <vector>
@@ -23,7 +23,7 @@
 Scene		createScene()
 {
   Material	mat("bleu");
-  mat.setColor(Color(255, 255, 255, 0));
+  mat.setColor(Color(255, 155, 55, 0));
   mat.setSpecularCoeff(0.8);
   mat.setSpecularPow(50);
   mat.setReflectionCoeff(0.5);
@@ -31,7 +31,7 @@ Scene		createScene()
   mat.setRefractionIndex(0.5);
   Material	mat2 = mat;
   mat2.setName("rouge");
-  mat2.setColor(Color(255, 255, 255));
+  mat2.setColor(Color(25, 225, 155));
 
   vector<Camera*> cam;
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
@@ -49,8 +49,8 @@ Scene		createScene()
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(20, -2, 4), Color(255, 0, 0)));
-  light.push_back(new Spot(Point(20, 2, 4), Color(0, 255, 0)));
+  light.push_back(new Spot(Point(20, -2, 4), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(20, 2, 4), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -119,7 +119,7 @@ int main(int ac, char **av)
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
-  //getchar();
+  getchar();
   rt.stopRendering();
   SDL_Quit();
   return (0);

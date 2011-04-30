@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 18:09:21 2011 samuel olivier
+// Last update Sat Apr 30 18:55:54 2011 loick michard
 //
 
 #include <stdio.h>
@@ -110,9 +110,9 @@ Color			Raytracer::throwRay(Ray& ray)
     {
       Point	intersectPoint = ray._point + ray._vector * k;
       calcLightForObject(*nearestObject, intersectPoint,
-			 directLight, specularLight);
+			 ray._vector, directLight, specularLight);
     }
-  return (directLight);
+  return (directLight + specularLight);
 }
 
 Color			Raytracer::renderPixel(double x, double y)
@@ -124,7 +124,7 @@ Color			Raytracer::renderPixel(double x, double y)
     _interface->pixelHasStartedRendering(x, y);
   ray = currentCamera.getRay(x / _config->getWidth(),
 			     y / _config->getHeight());
-  return (throwRay(ray));
+  return (throwRay(ray).satureTo(Color::MAX_VALUE));
 }
 
 void		Raytracer::renderingLoop(double& progress)
@@ -200,6 +200,7 @@ ObjectPrimitive*		Raytracer::getNearestObject(Ray& ray,
 
 void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
 					      const Point& intersectPoint,
+					      const Vector& viewRay,
 					      Color& directLight,
 					      Color& specularLight) const
 {
@@ -212,10 +213,12 @@ void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
       Color		directLighting;
       Color		specularLighting;
 
-      lights[i]->getLighting(object, intersectPoint, *this,
+      lights[i]->getLighting(object, intersectPoint, *this, viewRay,
 			     directLighting,
 			     specularLighting);
-      directLight += objectColor & directLighting;
+      directLight += objectColor * directLighting / 255;
       specularLight += specularLighting;
     }
+  directLight /= 2;
+  specularLight /= 2;
 }

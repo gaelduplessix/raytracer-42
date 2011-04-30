@@ -5,9 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Fri Apr 29 17:47:48 2011 samuel olivier
+// Last update Sat Apr 30 18:56:02 2011 loick michard
 //
 
+#include <cmath>
+#include "Raytracer.hpp"
 #include "Light.hpp"
 
 Light::Light()
@@ -55,4 +57,32 @@ void		Light::setColor(const Color& color)
 void		Light::setIntensity(double intensity)
 {
   _intensity = intensity;
+}
+
+void		
+Light::getLightingFromLightRay(const Vector& lightVector,
+			       const Vector& normal,
+			       const Vector& reflectedVector,
+			       const Raytracer& raytracer,
+			       const Point& intersectPoint,
+			       const Vector& viewRay,
+			       Color& directLighting,
+			       Color& specularLighting) const
+{
+  double        scalar = lightVector * normal;
+  double        cosa = scalar /
+    (lightVector.getNorm() * normal.getNorm());
+  Ray           ray(Color(), intersectPoint, lightVector, 1);
+  double        k = -1;
+  const ObjectPrimitive*    nearestObject =
+    raytracer.getNearestObject(ray, k);
+
+  if (!(nearestObject && k <= 1 && k > EPSILON))
+    {
+      directLighting = _color * cosa;
+      scalar = reflectedVector * viewRay;
+      cosa = scalar /
+	(reflectedVector.getNorm() * viewRay.getNorm());
+      specularLighting =_color * pow(cosa, 50);
+    }
 }

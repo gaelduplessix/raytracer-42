@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Sat Apr 30 16:06:29 2011 loick michard
+// Last update Sat Apr 30 18:43:39 2011 loick michard
 //
 
 #include <cmath>
@@ -22,21 +22,18 @@ Spot::Spot(const Point &position, const Color &color,
 void	Spot::getLighting(const ObjectPrimitive& primitive,
 			  const Point& intersectPoint,
 			  const Raytracer &raytracer,
+			  const Vector& ray,
 			  Color& directLighting,
 			  Color& specularLighting) const
 {
   Vector	lightVector = _position - intersectPoint;
-  Vector	normal = primitive.getNormalVector(intersectPoint);
-  double	scalar = lightVector * normal;
-  double	cosa = scalar / 
-    (lightVector.getNorm() *normal.getNorm());
-  Ray		ray(Color(), intersectPoint, lightVector, 1);
-  double    k = -1;
-  const ObjectPrimitive*    nearestObject;
 
-  nearestObject = raytracer.getNearestObject(ray, k);
-  if (nearestObject && k <= 1 && k > EPSILON)
-    directLighting.setColor(0, 0, 0, 0);
-  else
-    directLighting = _color * cosa;
+  getLightingFromLightRay(lightVector,
+			  primitive.getNormalVector(intersectPoint),
+			  primitive.getReflectedVector(intersectPoint,
+						       lightVector),
+			  raytracer,
+			  intersectPoint, ray,
+			  directLighting,
+			  specularLighting);
 }
