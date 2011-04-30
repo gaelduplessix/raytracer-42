@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 18:23:38 2011 loick michard
+// Last update Sat Apr 30 19:02:17 2011 loick michard
 //
 
 #ifndef _LIGHT_HPP_
@@ -47,6 +47,7 @@ public:
 			       const Raytracer &raytracer,
 			       const Point& intersectPoint,
 			       const Vector& ray,
+			       const ObjectPrimitive& primitive,
 			       Color& directLighting,
 			       Color& specularLighting) const;
 

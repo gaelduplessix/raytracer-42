@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Sat Apr 30 13:12:04 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 19:23:18 2011 loick michard
 //
 
 #include "Camera.hpp"
@@ -60,6 +60,11 @@ double		Camera::getFocus(void) const
   return (_focus);
 }
 
+string		Camera::getName() const
+{
+  return (_name);
+}
+
 void		Camera::setPosition(const Point& position)
 {
   _position = position;
@@ -83,4 +88,9 @@ void		Camera::setApertureSize(double apertureSize)
 void		Camera::setFocus(double focus)
 {
   _focus = focus;
+}
+
+void		Camera::setName(const string& name)
+{
+  _name = name;
 }

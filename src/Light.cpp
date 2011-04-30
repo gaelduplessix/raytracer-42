@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Sat Apr 30 18:56:02 2011 loick michard
+// Last update Sat Apr 30 19:04:09 2011 loick michard
 //
 
 #include <cmath>
@@ -66,6 +66,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 			       const Raytracer& raytracer,
 			       const Point& intersectPoint,
 			       const Vector& viewRay,
+			       const ObjectPrimitive& primitive,
 			       Color& directLighting,
 			       Color& specularLighting) const
 {
@@ -83,6 +84,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
       scalar = reflectedVector * viewRay;
       cosa = scalar /
 	(reflectedVector.getNorm() * viewRay.getNorm());
-      specularLighting =_color * pow(cosa, 50);
+      specularLighting =
+	_color * pow(cosa, primitive.getMaterial().getSpecularPow());
     }
 }

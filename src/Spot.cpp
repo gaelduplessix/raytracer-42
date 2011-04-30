@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Sat Apr 30 18:43:39 2011 loick michard
+// Last update Sat Apr 30 19:02:01 2011 loick michard
 //
 
 #include <cmath>
@@ -34,6 +34,7 @@ void	Spot::getLighting(const ObjectPrimitive& primitive,
 						       lightVector),
 			  raytracer,
 			  intersectPoint, ray,
+			  primitive,
 			  directLighting,
 			  specularLighting);
 }
