@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 12:57:58 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 18:37:12 2011 loick michard
 //
 
 #ifndef _COLOR_HPP_
@@ -14,6 +14,8 @@
 class Color
 {
 public:
+  static const int MAX_VALUE = 255;
+
   Color();
   Color(int r, int g, int b, int a=255);
   Color(int color);
@@ -29,6 +31,8 @@ public:
   void	setA(int a);
   void	setColor(int r, int g, int b, int a);
   void	setColor(int color);
+
+  const Color&	satureTo(int value);
 
   Color&	operator+=(const Color& color);
   Color&	operator-=(const Color& color);

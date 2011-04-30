@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sat Apr 30 18:04:53 2011 samuel olivier
+// Last update Sat Apr 30 18:28:54 2011 loick michard
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -62,6 +62,7 @@ public:
 
   void	calcLightForObject(const ObjectPrimitive& object,
 			   const Point& intersectPoint,
+			   const Vector& viewRay,
 			   Color& directLight,
 			   Color& specularLight) const;
 

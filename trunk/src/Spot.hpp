@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Sat Apr 30 13:51:19 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 18:23:21 2011 loick michard
 //
 
 #ifndef _SPOT_HPP_
@@ -21,6 +21,7 @@ public :
   void getLighting(const ObjectPrimitive& primitive,
 		   const Point& intersectPoint,
 		   const Raytracer &raytracer,
+		   const Vector& ray,
 		   Color& directLighting,
 		   Color& specularLighting) const;
 };

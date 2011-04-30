@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Sat Apr 30 13:46:03 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 18:36:02 2011 loick michard
 //
 
 #include "Color.hpp"
@@ -102,6 +102,14 @@ void	Color::setColor(int r, int g, int b, int a)
   _g = g;
   _b = b;
   _a = a;
+}
+
+const Color&	Color::satureTo(int value)
+{
+  if (_r > value) _r = value;
+  if (_g > value) _g = value;
+  if (_b > value) _b = value;
+  if (_a > value) _a = value;
 }
 
 Color&		Color::operator+=(const Color& color)

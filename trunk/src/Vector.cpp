@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Sat Apr 30 13:40:14 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 18:08:52 2011 loick michard
 //
 
 #include <cmath>
@@ -52,7 +52,7 @@ void	Vector::setZ(double z)
   _z = z;
 }
 
-double	Vector::getNorm(void)
+double	Vector::getNorm(void) const
 {
   return (sqrt(_x * _x + _y * _y + _z * _z));
 }

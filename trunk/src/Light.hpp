@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 17:46:10 2011 samuel olivier
+// Last update Sat Apr 30 18:23:38 2011 loick michard
 //
 
 #ifndef _LIGHT_HPP_
@@ -38,8 +38,17 @@ public:
   getLighting(const ObjectPrimitive& primitive,
 	      const Point& intersectPoint,
 	      const Raytracer &raytracer,
+	      const Vector& ray,
 	      Color& directLighting,
 	      Color& specularLighting) const = 0;
+  void getLightingFromLightRay(const Vector &lightVector,
+			       const Vector &normal,
+			       const Vector &reflectedVector,
+			       const Raytracer &raytracer,
+			       const Point& intersectPoint,
+			       const Vector& ray,
+			       Color& directLighting,
+			       Color& specularLighting) const;
 
 protected:
   Point		_position;
