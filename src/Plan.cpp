@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sat Apr 30 16:25:50 2011 loick michard
+// Last update Sat Apr 30 16:51:27 2011 loick michard
 //
 
 #include <vector>
@@ -44,9 +44,9 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
   if (newRay._vector._z == 0)
     return ;
   double result(- newRay._point._z / newRay._vector._z);
-  if (result < EPSILON)
+  if (result <= EPSILON)
     return ;
-  if (result > EPSILON && (result < res || res < 0))
+  if (result < res || res < 0)
     {
       primitive = (ObjectPrimitive*)this;
       res = result;

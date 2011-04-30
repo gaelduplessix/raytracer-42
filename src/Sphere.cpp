@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sat Apr 30 16:28:51 2011 loick michard
+// Last update Sat Apr 30 16:54:21 2011 loick michard
 //
 
 #include <vector>
@@ -81,9 +81,9 @@ void                  Sphere::intersectWithRay(const Ray& ray,
     _radius * _radius;
   vector<double> solutions =
     EquationSolver::solveQuadraticEquation(a, b, c);
-  for (int i = 0; i++; i < solutions.size())
+  for (int i = 0; i < solutions.size(); i++)
     {
-      if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 1))
+      if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 0))
         {
 	  primitive = (ObjectPrimitive*)this;
 	  res = solutions[i];
