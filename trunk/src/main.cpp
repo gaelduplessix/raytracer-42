@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 16:55:46 2011 loick michard
+// Last update Sat Apr 30 17:12:29 2011 loick michard
 //
 
 #include <vector>
@@ -37,7 +37,7 @@ Scene		createScene()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> sphere;
-  sphere.push_back(new Sphere(NULL, Point(50, 0, 0),
+  sphere.push_back(new Sphere(NULL, Point(50, 0, -5),
 			      Rotation(0, 0, 10), mat, 5));
   sphere.push_back(new Sphere(NULL, Point(30, 4, 2),
   			      Rotation(0, 0, 0), mat, 2));
