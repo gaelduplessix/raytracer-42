@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 21:55:04 2011 loick michard
+// Last update Sat Apr 30 22:24:59 2011 loick michard
 //
 
 #include <stdio.h>
@@ -140,7 +140,7 @@ Color			Raytracer::renderPixel(double x, double y)
   ray = currentCamera.getRay(x / _config->getWidth(),
 			     y / _config->getHeight());
   ray._reflectionLevel = 0;
-  ray._reflectionIntensity = 0;
+  ray._reflectionIntensity = 1;
   Color pixelColor = throwRay(ray);
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
@@ -160,14 +160,23 @@ Color			Raytracer::throwRay(Ray& ray)
       if (_config->isDirectLighting() || _config->isSpecularLighting())
 	calcLightForObject(*nearestObject, intersectPoint,
 			   ray._vector, directLight, specularLight);
-      if (ray._reflectionLevel < 50)
+      if (getRenderingConfiguration()->isReflectionEnabled()
+	  && ray._reflectionLevel < 
+	  getRenderingConfiguration()->getReflectionMaxDepth())
         {
-	  Vector	reflectedVector =
-	    nearestObject->getReflectedVector(intersectPoint,
-					      ray._vector, true);
-	  Ray	reflectedRay(intersectPoint, reflectedVector);
-	  reflectedRay._reflectionLevel = ray._reflectionLevel + 1;
-	  reflectedLight = throwRay(reflectedRay);
+	  ray._reflectionIntensity *= 
+	    nearestObject->getMaterial().getReflectionCoeff();
+	  if (ray._reflectionIntensity > Raytracer::EPSILON_REFLECTION)
+	    {
+	      Vector	reflectedVector =
+		nearestObject->getReflectedVector(intersectPoint,
+						  ray._vector, true);
+	      Ray	reflectedRay(intersectPoint, reflectedVector);
+	      reflectedRay._reflectionLevel = ray._reflectionLevel + 1;
+	      reflectedRay._reflectionIntensity =
+		ray._reflectionIntensity;
+	      reflectedLight = throwRay(reflectedRay);
+	    }
 	}
     }
   return (directLight + specularLight + reflectedLight);
