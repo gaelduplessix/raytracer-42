@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 11:59:03 2011 samuel olivier
+// Last update Sat Apr 30 12:15:00 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
