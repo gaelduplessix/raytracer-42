@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 21:31:30 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 12:05:19 2011 samuel olivier
 //
 
 #ifndef _COLOR_HPP_
@@ -51,7 +51,6 @@ public:
   template <class T>
   Color&	operator&=(T value);
 
-private:
   int	_r;
   int	_g;
   int	_b;
