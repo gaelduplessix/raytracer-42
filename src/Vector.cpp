@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Fri Apr 29 22:30:26 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 11:27:18 2011 loick michard
 //
 
 #include <cmath>
@@ -101,7 +101,7 @@ void    Vector::rotateZ(double alpha)
   double yp;
 
   xp = cos(alpha) * _x - sin(alpha) * _y;
-  yp = - sin(alpha) * _x + cos(alpha) * _y;
+  yp = sin(alpha) * _x + cos(alpha) * _y;
   _x = xp;
   _y = yp;
 }
