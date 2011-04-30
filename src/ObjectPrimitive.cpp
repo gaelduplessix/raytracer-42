@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Fri Apr 29 23:47:26 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 11:20:02 2011 loick michard
 //
 
 #include "ObjectPrimitive.hpp"

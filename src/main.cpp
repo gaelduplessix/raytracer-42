@@ -5,11 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 00:57:12 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 11:11:22 2011 loick michard
 //
 
 #include <vector>
-#include "gui.hpp"
 #include "Raytracer.hpp"
 #include "CinemaCamera.hpp"
 #include "Color.hpp"
@@ -19,6 +18,7 @@
 #include "ObjectPrimitive.hpp"
 #include "Sphere.hpp"
 #include "Spot.hpp"
+#include "Plan.hpp"
 
 Scene		createScene()
 {
@@ -38,17 +38,19 @@ Scene		createScene()
 
   vector<ObjectPrimitive*> sphere;
   sphere.push_back(new Sphere(NULL, Point(50, 0, 0),
-			      Rotation(0, 0, 0), mat, 5));
+			      Rotation(0, 0, 10), mat, 5));
   sphere.push_back(new Sphere(NULL, Point(30, 4, 2),
 			      Rotation(0, 0, 0), mat2, 2));
   sphere.push_back(new Sphere(NULL, Point(30, -4, 2),
-			      Rotation(0, 0, 0), mat2, 2));
+  Rotation(0, 0, 0), mat2, 2));
+  //  sphere.push_back(new Plan(NULL, Point(0, 0, -5),
+  //			    Rotation(0, 0, 0), mat2));
   vector<Object*> obj;
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(0, 10, 0), Color(255, 0, 0)));
-  light.push_back(new Spot(Point(0, -10, 0), Color(0, 255, 0)));
+  light.push_back(new Spot(Point(20, -2, 4), Color(255, 0, 0)));
+  light.push_back(new Spot(Point(20, 2, 4), Color(0, 255, 0)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -67,7 +69,7 @@ RenderingConfiguration	createConfig()
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
-  res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
+  res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
   return (res);
 }
 

@@ -5,11 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sat Apr 30 00:14:10 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 10:57:58 2011 loick michard
 //
 
 #ifndef _RAYTRACER_HPP_
 #define _RAYTRACER_HPP_
+
+#define EPSILON 1e-5
 
 #include "Scene.hpp"
 #include "RenderingConfiguration.hpp"
