@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Sat Apr 30 13:49:25 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 19:31:13 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -52,6 +52,8 @@ public:
   void		setAntialiasing(int antialiasing);
   bool		isDirectLighting(void) const;
   void		setDirectLighting(bool antialiasing);
+  bool		isSpecularLighting(void) const;
+  void		setSpecularLighting(bool antialiasing);
 
   bool		isReflectionEnabled(void) const;
   int		getReflectionMaxDepth(void) const;
@@ -102,6 +104,7 @@ private:
   int			_currentCamera;
   int			_antialiasing;
   bool			_directLighting;
+  bool			_specularLighting;
   t_reflection		_reflection;
   t_transparency	_transparency;
   bool			_ambientOcclusionEnabled;

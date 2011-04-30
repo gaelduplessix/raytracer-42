@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 18:55:54 2011 loick michard
+// Last update Sat Apr 30 19:35:08 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -109,6 +109,7 @@ Color			Raytracer::throwRay(Ray& ray)
   if (nearestObject)
     {
       Point	intersectPoint = ray._point + ray._vector * k;
+      if (_config->isDirectLight() && _config->isSpecularLighting())
       calcLightForObject(*nearestObject, intersectPoint,
 			 ray._vector, directLight, specularLight);
     }
