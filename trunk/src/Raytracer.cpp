@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 11:31:36 2011 samuel olivier
+// Last update Sat Apr 30 11:51:09 2011 root
 //
 
 #include "Raytracer.hpp"
@@ -198,7 +198,8 @@ getNearestObject(const vector<t_intersected_object>& intersections,
 	  int	nbK = intersections[i].k.size();
 
 	  for (int j = 0 ; j < nbK ; j++)
-	    if (res && (res < 0 || intersections[i].k[j] < res))
+	    if (res < 0 || (intersections[i].k[j] < res
+			    && intersections[i].k[j] > EPSILON))
 	      {
 		res = intersections[i].k[j];
 		object = intersections[i].primitive;

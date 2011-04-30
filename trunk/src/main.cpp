@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 11:11:22 2011 loick michard
+// Last update Sat Apr 30 11:51:47 2011 root
 //
 
 #include <vector>
@@ -40,11 +40,11 @@ Scene		createScene()
   sphere.push_back(new Sphere(NULL, Point(50, 0, 0),
 			      Rotation(0, 0, 10), mat, 5));
   sphere.push_back(new Sphere(NULL, Point(30, 4, 2),
-			      Rotation(0, 0, 0), mat2, 2));
+			      Rotation(0, 0, 0), mat, 2));
   sphere.push_back(new Sphere(NULL, Point(30, -4, 2),
-  Rotation(0, 0, 0), mat2, 2));
-  //  sphere.push_back(new Plan(NULL, Point(0, 0, -5),
-  //			    Rotation(0, 0, 0), mat2));
+  Rotation(0, 0, 0), mat, 2));
+  sphere.push_back(new Plan(NULL, Point(0, 0, -5),
+  			    Rotation(0, 0, 0), mat2));
   vector<Object*> obj;
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
