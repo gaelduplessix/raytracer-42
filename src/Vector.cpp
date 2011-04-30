@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Sat Apr 30 18:08:52 2011 loick michard
+// Last update Sat Apr 30 20:48:17 2011 loick michard
 //
 
 #include <cmath>
@@ -57,14 +57,18 @@ double	Vector::getNorm(void) const
   return (sqrt(_x * _x + _y * _y + _z * _z));
 }
 
-void	Vector::normalize(void)
+Vector&	Vector::normalize(void)
 {
   double norm;
 
   norm = this->getNorm();
-  _x = _x / norm;
-  _y = _y / norm;
-  _z = _z / norm;
+  if (norm)
+    {
+      _x = _x / norm;
+      _y = _y / norm;
+      _z = _z / norm;
+    }
+  return (*this);
 }
 
 void	Vector::rotateX(double alpha)

@@ -2,7 +2,7 @@
 
 RenderingConfiguration::RenderingConfiguration():
   _width(0), _height(0), _currentCamera(0), _antialiasing(0),
-  _directLighting(true), _specularLighting(true),
+  _exposure(1.0), _directLighting(true), _specularLighting(true),
   _ambientOcclusionEnabled(false),
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseLightingEnabled(false),
@@ -31,6 +31,12 @@ int	RenderingConfiguration::getAntialiasing(void) const
 {
   return (_antialiasing);
 }
+
+double	RenderingConfiguration::getExposure(void) const
+{
+  return (_exposure);
+}
+
 
 bool	RenderingConfiguration::isDirectLighting(void) const
 {
@@ -142,6 +148,11 @@ void	RenderingConfiguration::setCurrentCamera(int id)
 void	RenderingConfiguration::setAntialiasing(int antialiasing)
 {
   _antialiasing = antialiasing;
+}
+
+void	RenderingConfiguration::setExposure(double exposure)
+{
+  _exposure = exposure;
 }
 
 void	RenderingConfiguration::setDirectLighting(bool directLighting)

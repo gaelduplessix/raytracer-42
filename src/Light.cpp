@@ -5,12 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Sat Apr 30 19:37:25 2011 loick michard
+// Last update Sat Apr 30 20:02:31 2011 loick michard
 //
 
 #include <cmath>
-#include "Raytracer.hpp"
+
 #include "Light.hpp"
+#include "Raytracer.hpp"
 
 Light::Light()
 {

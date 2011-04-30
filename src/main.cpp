@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 19:48:19 2011 franck lavisse
+// Last update Sat Apr 30 20:38:58 2011 loick michard
 //
 
 #include <vector>
@@ -32,7 +32,7 @@ Scene		createScene()
   mat.setRefractionIndex(0.5);
   Material	mat2 = mat;
   mat2.setName("rouge");
-  mat2.setColor(Color(25, 225, 155));
+  mat2.setColor(Color(255, 255, 255));
 
   vector<Camera*> cam;
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
@@ -115,7 +115,7 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  gui(ac, av);
+  //gui(ac, av);
   SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;

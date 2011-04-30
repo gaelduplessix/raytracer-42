@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sat Apr 30 17:51:19 2011 loick michard
+// Last update Sat Apr 30 20:51:32 2011 loick michard
 //
 
 #include "ObjectPrimitive.hpp"
@@ -66,7 +66,7 @@ void          ObjectPrimitive::setMaterial(const Material& material)
   _material = material;
 }
 
-inline Ray           ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const
+inline Ray	ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const
 {
   Ray	      modified = ray;
   Vector      vector = ray._vector;
@@ -84,9 +84,14 @@ inline Ray           ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) con
   return (modified);
 }
 
-Vector		ObjectPrimitive::getReflectedVector(const Point& intersectPoint, const Vector& vector) const
+Vector
+ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
+				    const Vector& vector,
+				    bool doNormalize) const
 {
   Vector	normal = this->getNormalVector(intersectPoint);
+  if (doNormalize)
+    normal.normalize();
   double	scal = normal * vector;
 
   normal._x = - 2 * normal._x * scal + vector._x;
