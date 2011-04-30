@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 17:41:41 2011 loick michard
+// Last update Sat Apr 30 20:51:15 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -45,10 +45,14 @@ public:
 
   virtual void			addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const = 0;
 
-  virtual void			intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const = 0;
-  virtual Vector	getNormalVector(const Point& intersectPoint) const = 0;
+  virtual void
+  intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive,
+		   double &res) const = 0;
+  virtual Vector
+  getNormalVector(const Point& intersectPoint) const = 0;
   Vector	getReflectedVector(const Point& intersectPoint,
-					   const Vector& vector) const;
+				   const Vector& vector,
+				   bool doNormalize=false) const;
   virtual Vector	getRefractedVector(const Point& intersectPoint,
 					   Vector& vector) const = 0;
   virtual bool		isInBoundingBox(BoundingBox& box) const = 0;

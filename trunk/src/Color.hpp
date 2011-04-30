@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 18:37:12 2011 loick michard
+// Last update Sat Apr 30 20:08:09 2011 loick michard
 //
 
 #ifndef _COLOR_HPP_
@@ -33,6 +33,7 @@ public:
   void	setColor(int color);
 
   const Color&	satureTo(int value);
+  const Color&	exposure(double value);
 
   Color&	operator+=(const Color& color);
   Color&	operator-=(const Color& color);

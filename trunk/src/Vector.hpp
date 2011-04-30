@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:39:57 2011 loick michard
-// Last update Sat Apr 30 18:08:58 2011 loick michard
+// Last update Sat Apr 30 20:48:35 2011 loick michard
 //
 
 #ifndef _VECTOR_H_
@@ -26,7 +26,7 @@ public:
 
   double	getNorm(void) const;
   void		rotate(const Vector& rotation, int direction = 0);
-  void		normalize(void);
+  Vector&	normalize(void);
 
   Vector&       operator+=(const Vector& vector);
   Vector&       operator-=(const Vector& vector);

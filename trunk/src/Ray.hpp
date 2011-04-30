@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:11:51 2011 loick michard
-// Last update Sat Apr 30 13:27:35 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 21:45:52 2011 loick michard
 //
 
 #ifndef _RAY_HPP_
@@ -38,6 +38,8 @@ public:
   Point		_point;
   Vector	_vector;
   double	_refractiveIndex;
+  int		_reflectionLevel;
+  double	_reflectionIntensity;
 };
 
 #endif

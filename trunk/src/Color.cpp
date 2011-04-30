@@ -5,8 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Sat Apr 30 18:36:02 2011 loick michard
+// Last update Sat Apr 30 20:11:19 2011 loick michard
 //
+
+#include <cmath>
 
 #include "Color.hpp"
 
@@ -110,6 +112,16 @@ const Color&	Color::satureTo(int value)
   if (_g > value) _g = value;
   if (_b > value) _b = value;
   if (_a > value) _a = value;
+  return (*this);
+}
+
+const Color&	Color::exposure(double value)
+{
+  _r = Color::MAX_VALUE - exp(_r * value) * Color::MAX_VALUE;
+  _g = Color::MAX_VALUE - exp(_g * value) * Color::MAX_VALUE;
+  _b = Color::MAX_VALUE - exp(_b * value) * Color::MAX_VALUE;
+  _a = Color::MAX_VALUE - exp(_a * value) * Color::MAX_VALUE;
+  return (*this);
 }
 
 Color&		Color::operator+=(const Color& color)
