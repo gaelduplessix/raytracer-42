@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Sat Apr 30 16:51:51 2011 franck lavisse
+// Last update Sat Apr 30 17:59:48 2011 franck lavisse
 */
 #include <QPushButton>
 #include <QPen>
@@ -79,3 +79,5 @@ int	gui(int argc, char **argv)
   rt_gui.show();
   return (app.exec());
 }
+
+//int	main(int argc, char **argv) {gui(argc,argv);return(0);}

@@ -5,25 +5,40 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:21:11 2011 franck lavisse
-// Last update Fri Apr 29 23:53:30 2011 franck lavisse
+// Last update Sat Apr 30 17:58:22 2011 franck lavisse
 //
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QLabel>
 #include "gui.hpp"
 
+bool	Gui::getTransparenceBool(void) const
+{
+  return (_transparence->checkState());
+}
+
+int	Gui::getTransparenceInt(void) const
+{
+  return (_transpBox->value());
+}
+
+int	Gui::getTransparenceDiffusion(void) const
+{
+  return (_transpDiffusion->value());
+}
+
 void	Gui::transparence(void)
 {
-  QCheckBox	*check = new QCheckBox("Transparence");
-  QSpinBox	*transp = new QSpinBox();
+  _transparence = new QCheckBox("Transparence");
+  _transpBox = new QSpinBox();
   QGridLayout	*transpGrid = new QGridLayout();
   QLabel	*label =  new QLabel("Diffusion transparence");
-  QSpinBox	*box = new QSpinBox();
-  
-  transpGrid->addWidget(check,0,0);
-  transpGrid->addWidget(transp,0,1);
+  _transpDiffusion = new QSpinBox();
+
+  transpGrid->addWidget(_transparence,0,0);
+  transpGrid->addWidget(_transpBox,0,1);
   transpGrid->addWidget(label,1,0);
-  transpGrid->addWidget(box,1,1);
+  transpGrid->addWidget(_transpDiffusion,1,1);
   _Grid->addLayout(transpGrid,8,0);
   _widget->setLayout(_Grid);  
   _widget->setMaximumHeight(500);
