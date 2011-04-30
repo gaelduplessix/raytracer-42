@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 15:16:45 2011 samuel olivier
+// Last update Sat Apr 30 15:37:47 2011 loick michard
 //
 
 #include <stdio.h>
@@ -112,7 +112,7 @@ void		Raytracer::renderingLoop(double& progress)
   double		k;
   ObjectPrimitive*	nearestObject;
 
-  nearestObject = getNearestObject(k);
+  nearestObject = getNearestObject(ray, k);
   if (nearestObject)
     {
       Point	intersectPoint = ray._point + ray._vector * k;
@@ -160,7 +160,7 @@ Raytracer::getIntersectingObjects(Ray ray, vector<t_intersected_object>&
       const vector<ObjectPrimitive*>&	primitives=objects[i]->getPrimitives();
       int				nb_primitive(primitives.size());
       for (int j = 0 ; j < nb_primitive ; j++)
-	primitives[j]->intersectWithRay(ray, intersection);
+	primitives[j]->addIntersectionWithRay(ray, intersection);
     }
 }
 
@@ -173,8 +173,9 @@ getNearestObject(Ray& ray, double& res) const
 
   for (int i = 0 ; i < nb_object ; i++)
     {
-      const vector<ObjectPrimitive*>&	primitives=objects[i]->getPrimitives();
-      int				nb_primitive(primitives.size());
+      const vector<ObjectPrimitive*>&  
+	primitives=objects[i]->getPrimitives();
+      int nb_primitive(primitives.size());
       for (int j = 0 ; j < nb_primitive ; j++)
 	primitives[j]->intersectWithRay(ray, primitive, res);
     }

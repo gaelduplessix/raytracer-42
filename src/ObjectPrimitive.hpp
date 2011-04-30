@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 13:48:07 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 16:13:52 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -22,6 +22,7 @@
 using namespace std;
 
 class Object;
+struct s_intersected_object;
 
 class ObjectPrimitive
 {
@@ -31,7 +32,7 @@ public:
 		  const Point& absolutePosition,
 		  const Rotation& rotation,
 		  const Material& material);
-  
+
   const Object&		getObject(void) const;
   const Point&		getPosition(void) const;
   const Rotation&	getRotation(void) const;
@@ -42,8 +43,9 @@ public:
   void		setRotation(const Rotation& rotation);
   void		setMaterial(const Material& material);
 
-  virtual vector<double>	intersectWithRay(const Ray& ray) const = 0;
+  virtual void			addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const = 0;
 
+  virtual void			intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const = 0;
   virtual Vector	getNormalVector(const Point& intersectPoint) const = 0;
   virtual Vector	getReflectedVector(const Point& intersectPoint,
 					   const Vector& vector) const = 0;

@@ -5,10 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sat Apr 30 13:48:21 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 16:25:50 2011 loick michard
 //
 
 #include <vector>
+#include "Raytracer.hpp"
 #include "Plan.hpp"
 
 Plan::Plan(Object*object,
@@ -20,16 +21,36 @@ Plan::Plan(Object*object,
 
 }
 
-vector<double>	Plan::intersectWithRay(const Ray& ray) const
+void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const
 {
-  Ray		newRay;
-  vector<double> result;
+  Ray           newRay;
 
   newRay = getRayAtSimplePosition(ray);
   if (newRay._vector._z == 0)
-    return (result);
-  result.push_back(- newRay._point._z / newRay._vector._z);
-  return (result);
+    return ;
+  double result(- newRay._point._z / newRay._vector._z);
+  if (result < EPSILON)
+    return ;
+  vector<double> k;
+  k.push_back(result);
+  intersection.push_back((t_intersected_object){this, k});
+}
+
+void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const
+{
+  Ray           newRay;
+
+  newRay = getRayAtSimplePosition(ray);
+  if (newRay._vector._z == 0)
+    return ;
+  double result(- newRay._point._z / newRay._vector._z);
+  if (result < EPSILON)
+    return ;
+  if (result > EPSILON && (result < res || res < 0))
+    {
+      primitive = (ObjectPrimitive*)this;
+      res = result;
+    }
 }
 
 Vector		Plan::getNormalVector(const Point& intersectPoint) const
