@@ -5,25 +5,25 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sat Apr 30 12:16:24 2011 loick michard
+// Last update Sat Apr 30 12:43:51 2011 gael jochaud-du-plessix
 //
 
 #include "ObjectPrimitive.hpp"
 
-ObjectPrimitive::ObjectPrimitive()
+ObjectPrimitive::ObjectPrimitive():
+  _object(NULL)
 {
-  _object = NULL;
+
 }
 
 ObjectPrimitive::ObjectPrimitive(Object *object,
 				 const Point& absolutePosition,
 				 const Rotation& rotation,
-				 const Material& material)
+				 const Material& material):
+  _object(object), _absolutePosition(absolutePosition),
+  _rotation(rotation), _material(material)
 {
-  _object = object;
-  _absolutePosition = absolutePosition;
-  _rotation = rotation;
-  _material = material;
+
 }
 
 ObjectPrimitive::~ObjectPrimitive()
@@ -74,8 +74,8 @@ void          ObjectPrimitive::setMaterial(const Material& material)
 inline Ray           ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const
 {
   Ray	      modified = ray;
-  Vector      vector = ray.getVector();
-  Point       point = ray.getPoint();
+  Vector      vector = ray._vector;
+  Point       point = ray._point;
 
   point -= _absolutePosition;
   if (_rotation._x || _rotation._y || _rotation._z)

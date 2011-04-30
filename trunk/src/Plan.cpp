@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sat Apr 30 11:09:25 2011 loick michard
+// Last update Sat Apr 30 12:44:33 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -36,9 +36,9 @@ vector<double>	Plan::intersectWithRay(const Ray& ray) const
   vector<double> result;
 
   newRay = getRayAtSimplePosition(ray);
-  if (newRay.getVector()._z == 0)
+  if (newRay._vector._z == 0)
     return (result);
-  result.push_back(- newRay.getPoint()._z / newRay.getVector()._z);
+  result.push_back(- newRay._point._z / newRay._vector._z);
   return (result);
 }
 
