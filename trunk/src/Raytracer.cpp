@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 16:42:15 2011 samuel olivier
+// Last update Sat Apr 30 18:09:21 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -15,7 +15,7 @@
 Raytracer::Raytracer()
 {
   _thread = new RaytracerThread(this);
-  _interface = new RenderingInterface();
+  _interface = NULL;
 }
 
 Raytracer::~Raytracer()
@@ -98,30 +98,45 @@ Raytracer::pauseRendering(void)
 
 using namespace std;
 
-void		Raytracer::renderingLoop(double& progress)
+Color			Raytracer::throwRay(Ray& ray)
 {
-  Point		pixelToRender = getPixelToRender(progress);
-  _interface->pixelHasStartedRendering(pixelToRender._x,
-				       pixelToRender._y);
-  Color		pixelColor(0, 0, 0, 0);
-  int		imageWidth = _config->getWidth();
-  int		imageHeight = _config->getHeight();
-  const Camera&	currentCamera = getCurrentCamera();
-  Ray		ray = currentCamera.getRay(pixelToRender._x / imageWidth,
-					   pixelToRender._y / imageHeight);
   double		k;
   ObjectPrimitive*	nearestObject;
+  Color			directLight, specularLight;
+  Color			reflectedLight, refractedLight;
 
   nearestObject = getNearestObject(ray, k);
   if (nearestObject)
     {
       Point	intersectPoint = ray._point + ray._vector * k;
-      calcLightForObject(*nearestObject, intersectPoint, pixelColor);
+      calcLightForObject(*nearestObject, intersectPoint,
+			 directLight, specularLight);
     }
-  progress += 1.f / (imageWidth * imageHeight);
-  _interface->pixelHasBeenRendered(pixelToRender._x,
-				   pixelToRender._y,
-				   pixelColor);
+  return (directLight);
+}
+
+Color			Raytracer::renderPixel(double x, double y)
+{
+  Ray			ray;
+  const Camera&		currentCamera = getCurrentCamera();
+
+  if (_interface)
+    _interface->pixelHasStartedRendering(x, y);
+  ray = currentCamera.getRay(x / _config->getWidth(),
+			     y / _config->getHeight());
+  return (throwRay(ray));
+}
+
+void		Raytracer::renderingLoop(double& progress)
+{
+  Point		pixelToRender = getPixelToRender(progress);
+  Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
+
+  progress += 1.f / (_config->getWidth() * _config->getHeight());
+  if (_interface)
+    _interface->pixelHasBeenRendered(pixelToRender._x,
+				     pixelToRender._y,
+				     pixelColor);
 }
 
 const Camera&		Raytracer::getCurrentCamera(void)
@@ -185,20 +200,22 @@ ObjectPrimitive*		Raytracer::getNearestObject(Ray& ray,
 
 void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
 					      const Point& intersectPoint,
-					      Color& color) const
+					      Color& directLight,
+					      Color& specularLight) const
 {
   const vector<Light*>&	lights = _scene->getLights();
   int			nbLights = lights.size();
   Color			objectColor = object.getMaterial().getColor(0, 0);
 
-  color = Color(0, 0, 0);
   for (int i = 0; i < nbLights; i++)
     {
       Color		directLighting;
       Color		specularLighting;
+
       lights[i]->getLighting(object, intersectPoint, *this,
 			     directLighting,
 			     specularLighting);
-      color += objectColor & directLighting;
+      directLight += objectColor & directLighting;
+      specularLight += specularLighting;
     }
 }

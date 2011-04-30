@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sat Apr 30 15:16:39 2011 samuel olivier
+// Last update Sat Apr 30 18:04:53 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -49,6 +49,8 @@ public:
   void stopRendering();
   void pauseRendering();
 
+  Color		throwRay(Ray& ray);
+  Color		renderPixel(double x, double y);
   void		renderingLoop(double& progress);
   const Camera&	getCurrentCamera(void);
   Point		getPixelToRender(double progress) const;
@@ -60,7 +62,8 @@ public:
 
   void	calcLightForObject(const ObjectPrimitive& object,
 			   const Point& intersectPoint,
-			   Color& color) const;
+			   Color& directLight,
+			   Color& specularLight) const;
 
 private:
   Scene*			_scene;
