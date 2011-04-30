@@ -5,27 +5,21 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Sat Apr 30 12:47:50 2011 samuel olivier
+// Last update Sat Apr 30 13:40:14 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
 #include "Vector.hpp"
 
-Vector::Vector()
+Vector::Vector():
+  _x(0), _y(0), _z(0)
 {
-  _x = _y = _z = 0;
+
 }
 
-Vector::Vector(double x, double y, double z)
+Vector::Vector(double x, double y, double z):
+  _x(x), _y(y), _z(z)
 {
-  _x = x;
-  _y = y;
-  _z = z;
-}
-
-Vector::~Vector()
-{
-
 }
 
 double	Vector::getX(void) const

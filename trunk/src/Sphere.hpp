@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Fri Apr 29 18:31:01 2011 samuel olivier
+// Last update Sat Apr 30 13:50:53 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SHPERE_HPP_
@@ -16,14 +16,11 @@
 class Sphere : public ObjectPrimitive
 {
 public:
-  Sphere();
   Sphere(Object*object,
 	 const Point& absolutePosition,
 	 const Rotation& rotation,
 	 const Material& material,
 	 double	radius);
-
-  ~Sphere();
 
   void			setRadius(double r);
 

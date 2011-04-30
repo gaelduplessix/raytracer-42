@@ -11,11 +11,6 @@ RenderingConfiguration::RenderingConfiguration():
 
 }
 
-RenderingConfiguration::~RenderingConfiguration()
-{
-
-}
-
 int	RenderingConfiguration::getWidth(void) const
 {
   return (_width);

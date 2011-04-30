@@ -5,16 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sat Apr 30 12:44:33 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 13:48:21 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
 #include "Plan.hpp"
-
-Plan::Plan()
-{
-
-}
 
 Plan::Plan(Object*object,
 	       const Point& absolutePosition,
@@ -25,11 +20,6 @@ Plan::Plan(Object*object,
 
 }
 
-Plan::~Plan()
-{
-
-}
-#include <iostream>
 vector<double>	Plan::intersectWithRay(const Ray& ray) const
 {
   Ray		newRay;

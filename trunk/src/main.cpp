@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 12:34:55 2011 samuel olivier
+// Last update Sat Apr 30 13:53:55 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -95,8 +95,8 @@ class SDLInterface : public RenderingInterface
     p[2] = color._r;
     p[1] = color._g;
     p[0] = color._b;
-    // if (y == 0)
-    //   SDL_Flip(screen);
+    if (y == 0)
+      SDL_Flip(screen);
   }
 
   void renderingHasFinished()

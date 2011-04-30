@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Fri Apr 29 12:56:33 2011 samuel olivier
+// Last update Sat Apr 30 13:47:37 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECT_HPP_
@@ -23,10 +23,8 @@ using namespace std;
 class Object
 {
 public:
-  Object();
   Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
   	 const Point& position, bool isSolid);
-  ~Object();
 
   int					getNbPrimitives() const;
   const ObjectPrimitive&		getPrimitiveAtIndex(int index) const;

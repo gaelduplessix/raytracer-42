@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu Apr 28 15:45:41 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 10:07:00 2011 loick michard
+// Last update Sat Apr 30 13:43:43 2011 gael jochaud-du-plessix
 //
 
 #include "BoundingBox.hpp"
@@ -15,10 +15,10 @@ BoundingBox::BoundingBox()
 
 }
 
-BoundingBox::BoundingBox(const Point& vertex1, const Point& vertex2)
+BoundingBox::BoundingBox(const Point& vertex1, const Point& vertex2):
+  _vertex1(vertex1), _vertex2(vertex2)
 {
-  _vertex1 = vertex1;
-  _vertex2 = vertex2;
+
 }
 
 BoundingBox::~BoundingBox()

@@ -8,13 +8,13 @@
 
 ####### Compiler, tools and options
 
-CC            = gcc -pg
-CXX           = g++ -pg
+CC            = gcc
+CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -m32 -march=i686 -mtune=atom -fasynchronous-unwind-tables -Wall -W -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -m32 -march=i686 -mtune=atom -fasynchronous-unwind-tables -Wall -W -D_REENTRANT $(DEFINES)
 INCPATH       = -I/usr/lib/qt4/mkspecs/linux-g++ -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -Isrc -I.
-LINK          = g++ -pg
+LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS)   -lSDL -lQtGui -lQtCore -lpthread 
 AR            = ar cqs

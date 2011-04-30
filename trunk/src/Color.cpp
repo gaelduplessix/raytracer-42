@@ -5,25 +5,19 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Sat Apr 30 12:06:14 2011 samuel olivier
+// Last update Sat Apr 30 13:46:03 2011 gael jochaud-du-plessix
 //
 
 #include "Color.hpp"
 
-Color::Color()
+Color::Color():
+  _r(0), _g(0), _b(0), _a(0)
 {
-  _r = 0;
-  _g = 0;
-  _b = 0;
-  _a = 0;
 }
 
-Color::Color(int r, int g, int b, int a)
+Color::Color(int r, int g, int b, int a):
+  _r(r), _g(g), _b(b), _a(a)
 {
-  _r = r;
-  _g = g;
-  _b = b;
-  _a = a;
 }
 
 Color::Color(int color)
@@ -42,11 +36,6 @@ Color::Color(int color)
   _b = ptr[2];
   _a = ptr[3];
 #endif
-}
-
-Color::~Color()
-{
-
 }
 
 int	Color::getR(void) const

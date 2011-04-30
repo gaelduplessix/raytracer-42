@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 12:08:20 2011 loick michard
+// Last update Sat Apr 30 13:48:07 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -31,7 +31,6 @@ public:
 		  const Point& absolutePosition,
 		  const Rotation& rotation,
 		  const Material& material);
-  ~ObjectPrimitive();
   
   const Object&		getObject(void) const;
   const Point&		getPosition(void) const;

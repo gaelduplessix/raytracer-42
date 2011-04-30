@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Wed Apr 27 22:54:19 2011 samuel olivier
+// Last update Sat Apr 30 13:12:04 2011 gael jochaud-du-plessix
 //
 
 #include "Camera.hpp"
@@ -17,14 +17,12 @@ Camera::Camera()
 
 Camera::Camera(const Point& position, const Rotation& rotation,
 	       const double focalLenght, const bool hasDepthOfField,
-	       const double apertureSize, const double focus)
+	       const double apertureSize, const double focus):
+  _position(position), _rotation(rotation), _focalLength(focus),
+  _hasDepthOfField(hasDepthOfField), _apertureSize(apertureSize),
+  _focus(focus)
 {
-  _position = position;
-  _rotation = rotation;
-  _focalLength = focalLenght;
-  _hasDepthOfField = hasDepthOfField;
-  _apertureSize = apertureSize;
-  _focus = focus;
+
 }
 
 Camera::~Camera()
