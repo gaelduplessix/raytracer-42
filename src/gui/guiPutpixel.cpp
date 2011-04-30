@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 15:39:43 2011 franck lavisse
-// Last update Fri Apr 29 21:56:53 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 16:46:33 2011 franck lavisse
 //
 
 #include "gui.hpp"
@@ -13,11 +13,8 @@
 
 void	Gui::putPixel(const Color& color, int x, int y)
 {
-  QPolygon	Pixel;
-  QGraphicsItem	*Item;
   QColor	Color(color.getR(), color.getG(), color.getB(), color.getA());
   QPen		PixelPen(Color, 0, Qt::SolidLine);
-  QBrush	PixelBrush(Color);
-
-  _Scene->addRect(x, y, 1, 1, PixelPen, PixelBrush);
+  
+  _Scene->addLine(x,y,x,y,PixelPen);
 }
