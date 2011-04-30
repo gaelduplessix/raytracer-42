@@ -5,11 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 11:44:41 2011 loick michard
-// Last update Sat Apr 30 00:47:22 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 10:59:07 2011 loick michard
 //
 
 #include <cmath>
 #include "EquationSolver.hpp"
+#include "Raytracer.hpp"
 
 vector<double> 
 EquationSolver::solveQuadraticEquation(double a, double b, double c)
@@ -24,13 +25,13 @@ EquationSolver::solveQuadraticEquation(double a, double b, double c)
   if (delta >= 0)
     {
       k = (-b + sqrt(delta)) / (2 * a);
-      if (k > 0.00001)
+      if (k > EPSILON)
       	result.push_back(k);
     }
   if (delta > 0)
     {
       k = (-b - sqrt(delta)) / (2 * a);
-      if (k > 0.00001)
+      if (k > EPSILON)
       	result.push_back(k);
     }
   return (result);

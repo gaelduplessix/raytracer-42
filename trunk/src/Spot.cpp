@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Sat Apr 30 00:49:13 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 10:58:12 2011 loick michard
 //
 
 #include <cmath>
@@ -51,7 +51,7 @@ void	Spot::getLighting(const ObjectPrimitive& primitive,
   const ObjectPrimitive*    nearestObject =
     raytracer.getNearestObject(intersections, k);
 
-  if (nearestObject && k <= 1)
+  if (nearestObject && k <= 1 && k > EPSILON)
     directLighting.setColor(0, 0, 0, 0);
   else
     directLighting = _color * cosa;
