@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sat Apr 30 12:08:01 2011 loick michard
+// Last update Sat Apr 30 12:16:24 2011 loick michard
 //
 
 #include "ObjectPrimitive.hpp"
@@ -77,11 +77,13 @@ inline Ray           ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) con
   Vector      vector = ray.getVector();
   Point       point = ray.getPoint();
 
-  vector.rotate(_rotation, 1);
-  modified.setVector(vector);
-
   point -= _absolutePosition;
-  point.rotate(_rotation, 1);
+  if (_rotation._x || _rotation._y || _rotation._z)
+    {
+      point.rotate(_rotation, 1);
+      vector.rotate(_rotation, 1);
+    }
+  modified.setVector(vector);
   modified.setPoint(point);
 
   return (modified);
