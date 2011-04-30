@@ -5,15 +5,18 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 15:42:54 2011 loick michard
+// Last update Sat Apr 30 19:19:48 2011 loick michard
 //
 
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
+#include <string>
 #include "Point.hpp"
 #include "Rotation.hpp"
 #include "Ray.hpp"
+
+using namespace std;
 
 class Camera
 {
@@ -30,12 +33,14 @@ public:
   double		getFocalLength(void) const;
   double		getApertureSize(void) const;
   double		getFocus(void) const;
+  string		getName() const;
 
   void			setPosition(const Point& position);
   void			setRotation(const Rotation& rotation);  
   void			setFocalLength(double focalLength);  
   void			setApertureSize(double apertureSize);
   void			setFocus(double focus);
+  void			setName(const string& name);
 
   virtual Ray			getRay(double x, double y) const = 0;
   virtual Ray			
@@ -43,6 +48,7 @@ public:
 		     double samplingPos) const = 0;
 
 protected:
+  string	_name;
   double	_width;
   double	_height;
   Point		_position;
