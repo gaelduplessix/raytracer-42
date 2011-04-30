@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Sat Apr 30 12:05:17 2011 loick michard
+// Last update Sat Apr 30 12:47:50 2011 samuel olivier
 //
 
 #include <cmath>
@@ -124,17 +124,17 @@ void	Vector::rotate(const Vector& rotation, int direction)
 
 Vector&	Vector::operator+=(const Vector& vector)
 {
-  _x += vector.getX();
-  _y += vector.getY();
-  _z += vector.getZ();
+  _x += vector._x;
+  _y += vector._y;
+  _z += vector._z;
   return (*this);
 }
 
 Vector&	Vector::operator-=(const Vector& vector)
 {
-  _x -= vector.getX();
-  _y -= vector.getY();
-  _z -= vector.getZ();
+  _x -= vector._x;
+  _y -= vector._y;
+  _z -= vector._z;
   return (*this);
 }
 
@@ -144,9 +144,9 @@ Vector&	Vector::operator*=(const Vector& vector)
   double yp;
   double zp;
 
-  xp = _y * vector.getZ() - _z * vector.getY();
-  yp = _z * vector.getX() - _x * vector.getZ();
-  zp = _x * vector.getY() - _y * vector.getX();
+  xp = _y * vector._z - _z * vector._y;
+  yp = _z * vector._x - _x * vector._z;
+  zp = _x * vector._y - _y * vector._x;
   _x = xp;
   _y = yp;
   _z = zp;
