@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Sat Apr 30 16:26:38 2011 franck lavisse
+// Last update Sat Apr 30 17:57:44 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -21,6 +21,8 @@
 #include <QLayout>
 #include <QGridLayout>
 #include <QMenuBar>
+#include <QCheckBox>
+#include <QSpinBox>
 
 class Color;
 
@@ -34,10 +36,13 @@ public:
   Gui();
   ~Gui();
 
+  bool	getTransparenceBool(void) const;
+  int	getTransparenceInt(void) const;
+  int	getTransparenceDiffusion(void) const;
+
   void	putPixel(const Color& color, int x, int y);
   void	rendu(void);
   void	init_dock(void);
-  void	accordion(void);	       
   void	samplingMethod(void);
   void	aliasing(void);
   void	reflection(void);		     
@@ -64,6 +69,9 @@ private:
   QGraphicsScene*_Scene;
   QGraphicsItem	*_Item;
   QGraphicsView	*_View;
+  QCheckBox	*_transparence;
+  QSpinBox	*_transpBox;
+  QSpinBox	*_transpDiffusion;
 };
 
 #endif
