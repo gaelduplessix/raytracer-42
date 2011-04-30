@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 00:55:14 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 11:31:36 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
@@ -124,6 +124,7 @@ void		Raytracer::renderingLoop(double& progress)
   _interface->pixelHasBeenRendered(pixelToRender.getX(),
 				   pixelToRender.getY(),
 				   pixelColor);
+  delete &intersections;
 }
 
 const Camera&		Raytracer::getCurrentCamera(void)
