@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 12:15:00 2011 samuel olivier
+// Last update Sat Apr 30 12:39:36 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
@@ -99,14 +99,14 @@ using namespace std;
 void		Raytracer::renderingLoop(double& progress)
 {
   Point		pixelToRender = getPixelToRender(progress);
-  _interface->pixelHasStartedRendering(pixelToRender.getX(),
-				       pixelToRender.getY());
+  _interface->pixelHasStartedRendering(pixelToRender._x,
+				       pixelToRender._y);
   Color		pixelColor(0, 0, 0, 0);
   int		imageWidth = _config->getWidth();
   int		imageHeight = _config->getHeight();
   const Camera&	currentCamera = getCurrentCamera();
-  Ray		ray = currentCamera.getRay(pixelToRender.getX() / imageWidth,
-					   pixelToRender.getY() / imageHeight);
+  Ray		ray = currentCamera.getRay(pixelToRender._x / imageWidth,
+					   pixelToRender._y / imageHeight);
 
   const vector<t_intersected_object>&	intersections =
     getIntersectingObjects(ray);
@@ -121,8 +121,8 @@ void		Raytracer::renderingLoop(double& progress)
       calcLightForObject(*nearestObject, intersectPoint, pixelColor);
     }
   progress += 1.f / (imageWidth * imageHeight);
-  _interface->pixelHasBeenRendered(pixelToRender.getX(),
-				   pixelToRender.getY(),
+  _interface->pixelHasBeenRendered(pixelToRender._x,
+				   pixelToRender._y,
 				   pixelColor);
   delete &intersections;
 }

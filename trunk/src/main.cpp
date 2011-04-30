@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 12:16:19 2011 samuel olivier
+// Last update Sat Apr 30 12:34:55 2011 samuel olivier
 //
 
 #include <vector>
@@ -91,12 +91,12 @@ class SDLInterface : public RenderingInterface
       return ;
     int bpp = screen->format->BytesPerPixel;
     p = (Uint8 *)screen->pixels + y * screen->pitch + x * bpp;
-    p[3] = color.getA();
-    p[2] = color.getR();
-    p[1] = color.getG();
-    p[0] = color.getB();
-    if (y == 0)
-      SDL_Flip(screen);
+    p[3] = color._a;
+    p[2] = color._r;
+    p[1] = color._g;
+    p[0] = color._b;
+    // if (y == 0)
+    //   SDL_Flip(screen);
   }
 
   void renderingHasFinished()

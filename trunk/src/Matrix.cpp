@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 21:17:09 2011 loick michard
-// Last update Fri Apr 29 13:06:06 2011 loick michard
+// Last update Sat Apr 30 12:37:41 2011 samuel olivier
 //
 
 #include "Matrix.hpp"
@@ -119,15 +119,15 @@ Vector  operator*(const Vector& vector, const Matrix& matrix)
 
   if (matrix._matrix.size() == 3 && matrix._matrix[0].size() == 3)
     {
-      result.setX(vector.getX() * matrix._matrix[0][0] +
-		  vector.getY() * matrix._matrix[0][1] +
-		  vector.getZ() * matrix._matrix[0][2]);
-      result.setY(vector.getX() * matrix._matrix[1][0] +
-                  vector.getY() * matrix._matrix[1][1] +
-                  vector.getZ() * matrix._matrix[1][2]);
-      result.setZ(vector.getX() * matrix._matrix[2][0] +
-                  vector.getY() * matrix._matrix[2][1] +
-                  vector.getZ() * matrix._matrix[2][2]);
+      result.setX(vector._x * matrix._matrix[0][0] +
+		  vector._y * matrix._matrix[0][1] +
+		  vector._z * matrix._matrix[0][2]);
+      result.setY(vector._x * matrix._matrix[1][0] +
+                  vector._y * matrix._matrix[1][1] +
+                  vector._z * matrix._matrix[1][2]);
+      result.setZ(vector._x * matrix._matrix[2][0] +
+                  vector._y * matrix._matrix[2][1] +
+                  vector._z * matrix._matrix[2][2]);
     }
   return (result);
 }
