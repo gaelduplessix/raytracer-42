@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sat Apr 30 16:51:27 2011 loick michard
+// Last update Sat Apr 30 17:41:08 2011 loick michard
 //
 
 #include <vector>
@@ -59,12 +59,6 @@ Vector		Plan::getNormalVector(const Point& intersectPoint) const
 
   normal.rotate(_rotation);
   return (normal);
-}
-
-Vector		Plan::getReflectedVector(const Point& intersectPoint,
-					   const Vector& vector) const
-{
-
 }
 
 Vector		Plan::getRefractedVector(const Point& intersectPoint,

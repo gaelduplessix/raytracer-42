@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sat Apr 30 13:48:02 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 17:51:19 2011 loick michard
 //
 
 #include "ObjectPrimitive.hpp"
@@ -82,4 +82,15 @@ inline Ray           ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) con
   modified.setPoint(point);
 
   return (modified);
+}
+
+Vector		ObjectPrimitive::getReflectedVector(const Point& intersectPoint, const Vector& vector) const
+{
+  Vector	normal = this->getNormalVector(intersectPoint);
+  double	scal = normal * vector;
+
+  normal._x = - 2 * normal._x * scal + vector._x;
+  normal._y = - 2 * normal._y * scal + vector._y;
+  normal._z = - 2 * normal._z * scal + vector._z;
+  return (normal);
 }
