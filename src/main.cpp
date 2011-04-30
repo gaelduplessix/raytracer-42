@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 11:51:47 2011 root
+// Last update Sat Apr 30 11:56:58 2011 loick michard
 //
 
 #include <vector>
@@ -119,7 +119,7 @@ int main(int ac, char **av)
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
-  getchar();
+  //getchar();
   rt.stopRendering();
   SDL_Quit();
   return (0);

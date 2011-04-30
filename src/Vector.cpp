@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Sat Apr 30 11:27:18 2011 loick michard
+// Last update Sat Apr 30 12:05:17 2011 loick michard
 //
 
 #include <cmath>
@@ -106,11 +106,20 @@ void    Vector::rotateZ(double alpha)
   _y = yp;
 }
 
-void	Vector::rotate(const Vector& rotation)
+void	Vector::rotate(const Vector& rotation, int direction)
 {
-  this->rotateX(rotation.getX());
-  this->rotateY(rotation.getY());
-  this->rotateZ(rotation.getZ());
+  if (!direction)
+    {
+      this->rotateX(rotation._x);
+      this->rotateY(rotation._y);
+      this->rotateZ(rotation._z);
+    }
+  else
+    {
+      this->rotateX(-rotation._x);
+      this->rotateY(-rotation._y);
+      this->rotateZ(-rotation._z);
+    }
 }
 
 Vector&	Vector::operator+=(const Vector& vector)
