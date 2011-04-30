@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Sat Apr 30 19:04:09 2011 loick michard
+// Last update Sat Apr 30 19:37:25 2011 loick michard
 //
 
 #include <cmath>
@@ -70,9 +70,6 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 			       Color& directLighting,
 			       Color& specularLighting) const
 {
-  double        scalar = lightVector * normal;
-  double        cosa = scalar /
-    (lightVector.getNorm() * normal.getNorm());
   Ray           ray(Color(), intersectPoint, lightVector, 1);
   double        k = -1;
   const ObjectPrimitive*    nearestObject =
@@ -80,11 +77,21 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 
   if (!(nearestObject && k <= 1 && k > EPSILON))
     {
-      directLighting = _color * cosa;
-      scalar = reflectedVector * viewRay;
-      cosa = scalar /
-	(reflectedVector.getNorm() * viewRay.getNorm());
-      specularLighting =
-	_color * pow(cosa, primitive.getMaterial().getSpecularPow());
+      double scalar, cosa;
+      if (raytracer.getRenderingConfiguration()->isDirectLighting())
+	{
+	  scalar = lightVector * normal;
+	  cosa = scalar /
+	    (lightVector.getNorm() * normal.getNorm());
+	  directLighting = _color * cosa;
+	}
+      if (raytracer.getRenderingConfiguration()->isSpecularLighting())
+	{
+	  scalar = reflectedVector * viewRay;
+	  cosa = scalar /
+	    (reflectedVector.getNorm() * viewRay.getNorm());
+	  specularLighting =
+	    _color * pow(cosa, primitive.getMaterial().getSpecularPow());
+	}
     }
 }
