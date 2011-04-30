@@ -5,20 +5,24 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:30:28 2011 franck lavisse
-// Last update Fri Apr 29 23:46:34 2011 franck lavisse
+// Last update Sat Apr 30 00:12:26 2011 franck lavisse
 //
 #include <QMenuBar>
+#include <QAction>
 #include <QHBoxLayout>
 #include "gui.hpp"
 
 void	Gui::menuBar(void)
 {
   QMenuBar	*menu = new QMenuBar();
-  QMenu		*file = menu->addMenu("&Fichier");
+  QMenu		*file = menu->addMenu("&Fichier");  
   _widgetBar =	new QWidget();
   _DockBar =	new QDockWidget();
   QHBoxLayout	*box = new QHBoxLayout();
+  QAction	*quitter = new QAction("&Quitter", this);
 
+  QObject::connect(quitter, SIGNAL(triggered()), qApp, SLOT(quit()));
+  file->addAction(quitter);
   _DockBar->setAllowedAreas(Qt::TopDockWidgetArea);
   _DockBar->setFeatures(0);  
   box->addWidget(menu);
