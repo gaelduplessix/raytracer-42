@@ -2,7 +2,8 @@
 
 RenderingConfiguration::RenderingConfiguration():
   _width(0), _height(0), _currentCamera(0), _antialiasing(0),
-  _directLighting(true), _ambientOcclusionEnabled(false),
+  _directLighting(true), _specularLighting(true),
+  _ambientOcclusionEnabled(false),
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseLightingEnabled(false),
   _diffuseLightingSampling(0), _fieldDepthEnabled(false),
