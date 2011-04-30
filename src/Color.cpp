@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Fri Apr 29 10:49:01 2011 samuel olivier
+// Last update Sat Apr 30 12:06:14 2011 samuel olivier
 //
 
 #include "Color.hpp"
@@ -117,108 +117,108 @@ void	Color::setColor(int r, int g, int b, int a)
 
 Color&		Color::operator+=(const Color& color)
 {
-  _r += color.getR();
-  _g += color.getG();
-  _b += color.getB();
-  _a += color.getA();
+  _r += color._r;
+  _g += color._g;
+  _b += color._b;
+  _a += color._a;
   return (*this);
 }
 
 Color&		Color::operator-=(const Color& color)
 {
-  _r -= color.getR();
-  _g -= color.getG();
-  _b -= color.getB();
-  _a -= color.getA();
+  _r -= color._r;
+  _g -= color._g;
+  _b -= color._b;
+  _a -= color._a;
   return (*this);
 }
 
 Color&		Color::operator*=(const Color& color)
 {
-  _r *= color.getR();
-  _g *= color.getG();
-  _b *= color.getB();
-  _a *= color.getA();
+  _r *= color._r;
+  _g *= color._g;
+  _b *= color._b;
+  _a *= color._a;
   return (*this);
 }
 
 Color&		Color::operator/=(const Color& color)
 {
-  _r /= color.getR();
-  _g /= color.getG();
-  _b /= color.getB();
-  _a /= color.getA();
+  _r /= color._r;
+  _g /= color._g;
+  _b /= color._b;
+  _a /= color._a;
   return (*this);
 }
 
 Color&		Color::operator%=(const Color& color)
 {
-  _r %= color.getR();
-  _g %= color.getG();
-  _b %= color.getB();
-  _a %= color.getA();
+  _r %= color._r;
+  _g %= color._g;
+  _b %= color._b;
+  _a %= color._a;
   return (*this);
 }
 
 Color&		Color::operator&=(const Color& color)
 {
-  _r &= color.getR();
-  _g &= color.getG();
-  _b &= color.getB();
-  _a &= color.getA();
+  _r &= color._r;
+  _g &= color._g;
+  _b &= color._b;
+  _a &= color._a;
   return (*this);
 }
 
 Color		operator+(const Color& color1, const Color& color2)
 {
-  Color		res(color1.getR() + color2.getR(),
-		  color1.getG() + color2.getG(),
-		  color1.getB() + color2.getB(),
-		  color1.getA() + color2.getA());
+  Color		res(color1._r + color2._r,
+		  color1._g + color2._g,
+		  color1._b + color2._b,
+		  color1._a + color2._a);
   return (res);
 }
 
 Color		operator-(const Color& color1, const Color& color2)
 {
-  Color		res(color1.getR() - color2.getR(),
-		  color1.getG() - color2.getG(),
-		  color1.getB() - color2.getB(),
-		  color1.getA() - color2.getA());
+  Color		res(color1._r - color2._r,
+		  color1._g - color2._g,
+		  color1._b - color2._b,
+		  color1._a - color2._a);
   return (res);
 }
 
 Color		operator*(const Color& color1, const Color& color2)
 {
-  Color		res(color1.getR() * color2.getR(),
-		  color1.getG() * color2.getG(),
-		  color1.getB() * color2.getB(),
-		  color1.getA() * color2.getA());
+  Color		res(color1._r * color2._r,
+		  color1._g * color2._g,
+		  color1._b * color2._b,
+		  color1._a * color2._a);
   return (res);
 }
 
 Color		operator/(const Color& color1, const Color& color2)
 {
-  Color		res(color1.getR() / color2.getR(),
-		  color1.getG() / color2.getG(),
-		  color1.getB() / color2.getB(),
-		  color1.getA() / color2.getA());
+  Color		res(color1._r / color2._r,
+		  color1._g / color2._g,
+		  color1._b / color2._b,
+		  color1._a / color2._a);
   return (res);
 }
 
 Color		operator%(const Color& color1, const Color& color2)
 {
-  Color		res(color1.getR() % color2.getR(),
-		  color1.getG() % color2.getG(),
-		  color1.getB() % color2.getB(),
-		  color1.getA() % color2.getA());
+  Color		res(color1._r % color2._r,
+		  color1._g % color2._g,
+		  color1._b % color2._b,
+		  color1._a % color2._a);
   return (res);
 }
 
 Color		operator&(const Color& color1, const Color& color2)
 {
-  Color		res(color1.getR() & color2.getR(),
-		  color1.getG() & color2.getG(),
-		  color1.getB() & color2.getB(),
-		  color1.getA() & color2.getA());
+  Color		res(color1._r & color2._r,
+		  color1._g & color2._g,
+		  color1._b & color2._b,
+		  color1._a & color2._a);
   return (res);
 }

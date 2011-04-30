@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 11:51:09 2011 root
+// Last update Sat Apr 30 11:59:03 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
@@ -155,22 +155,19 @@ const vector<t_intersected_object>&
 Raytracer::getIntersectingObjects(Ray ray) const
 {
   int				nb_object;
-  int				i = -1;
   vector<t_intersected_object>	*intersections;
   const vector<Object*>&	objects = _scene->getObjects();
   t_intersected_object		tmp;
-  int				j;
 
   intersections = new vector<t_intersected_object>;
   nb_object = objects.size();
-  while (++i < nb_object)
+  for (int i = 0 ; i < nb_object ; i++)
     {
       const vector<ObjectPrimitive*>&	primitives =
 	objects[i]->getPrimitives();
       int				nb_primitive;
       nb_primitive = primitives.size();
-      j = -1;
-      while (++j < nb_primitive)
+      for (int j = 0 ; j < nb_primitive ; j++)
 	{
 	  tmp.primitive = primitives[j];
 	  tmp.k = tmp.primitive->intersectWithRay(ray);
