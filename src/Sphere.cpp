@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sat Apr 30 16:54:21 2011 loick michard
+// Last update Sat Apr 30 17:40:29 2011 loick michard
 //
 
 #include <vector>
@@ -96,16 +96,10 @@ Vector		Sphere::getNormalVector(const Point& intersectPoint) const
   return (intersectPoint - _absolutePosition);
 }
 
-Vector		Sphere::getReflectedVector(const Point& intersectPoint,
-					   const Vector& vector) const
-{
-
-}
-
 Vector		Sphere::getRefractedVector(const Point& intersectPoint,
 					   Vector& vector) const
 {
-
+  
 }
 
 bool		Sphere::isInBoundingBox(BoundingBox& box) const
