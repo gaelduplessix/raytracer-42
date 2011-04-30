@@ -5,20 +5,30 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 18:03:22 2011 franck lavisse
-// Last update Fri Apr 29 23:54:44 2011 franck lavisse
+// Last update Sat Apr 30 18:06:11 2011 franck lavisse
 //
 #include <QCheckBox>
 #include <QSpinBox>
 #include "gui.hpp"
 
+bool	Gui::getLumiereDiffuseBool(void) const
+{
+  return (_lumiereDiffuse->checkState());
+}
+
+int	Gui::getLumiereDiffuseInt(void) const
+{
+  return (_lumiereDiffuseBox->value());
+}
+
 void	Gui::lumiereDiffuse(void)
 {
-  QCheckBox	*check = new QCheckBox("Lumiere diffuse");
-  QSpinBox	*LD = new QSpinBox();
+  _lumiereDiffuse = new QCheckBox("Lumiere diffuse");
+  _lumiereDiffuseBox = new QSpinBox();
   QGridLayout	*LDGrid = new QGridLayout();
   
-  LDGrid->addWidget(check,1,0);
-  LDGrid->addWidget(LD,1,1);
+  LDGrid->addWidget(_lumiereDiffuse,1,0);
+  LDGrid->addWidget(_lumiereDiffuseBox,1,1);
   _Grid->addLayout(LDGrid,6,0);
   _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);

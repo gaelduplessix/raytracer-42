@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 17:39:55 2011 franck lavisse
-// Last update Fri Apr 29 23:50:54 2011 franck lavisse
+// Last update Sat Apr 30 18:20:24 2011 franck lavisse
 //
 #include <QLabel>
 #include <QGroupBox>
@@ -14,21 +14,31 @@
 #include <QGridLayout>
 #include "gui.hpp"
 
+int	Gui::getReflectionSampling(void) const
+{
+  return (_reflectionSampling->value());
+}
+
+int	Gui::getReflectionProfondeur(void) const
+{
+  return (_reflectionProfondeur->value());
+}
+
 void		Gui::reflection(void)
 {  
   QLabel	*lprofondeur = new QLabel("Profondeur");
   QLabel	*lsampling = new QLabel("Sampling");
   QGroupBox	*gbox = new QGroupBox("Reflection");
-  QSpinBox	*profondeur = new QSpinBox();
-  QSpinBox	*sampling = new QSpinBox();
+  _reflectionProfondeur = new QSpinBox();
+  _reflectionSampling = new QSpinBox();
   QVBoxLayout	*vbox = new QVBoxLayout();
   QGridLayout	*gprofondeur = new QGridLayout();
   QGridLayout	*gsampling = new QGridLayout();
   
   gprofondeur->addWidget(lprofondeur,1,0);
-  gprofondeur->addWidget(profondeur,1,1);  
+  gprofondeur->addWidget(_reflectionProfondeur,1,1);  
   gsampling->addWidget(lsampling,1,0);
-  gsampling->addWidget(sampling,1,1);
+  gsampling->addWidget(_reflectionSampling,1,1);
   vbox->addLayout(gprofondeur);  
   vbox->addLayout(gsampling);
   gbox->setLayout(vbox);
