@@ -36,6 +36,11 @@ bool	RenderingConfiguration::isDirectLighting(void) const
   return (_directLighting);
 }
 
+bool	RenderingConfiguration::isSpecularLighting(void) const
+{
+  return (_specularLighting);
+}
+
 bool	RenderingConfiguration::isReflectionEnabled(void) const
 {
   return (_reflection.enabled);
@@ -138,9 +143,14 @@ void	RenderingConfiguration::setAntialiasing(int antialiasing)
   _antialiasing = antialiasing;
 }
 
-void	RenderingConfiguration::setDirectLighting(bool antialiasing)
+void	RenderingConfiguration::setDirectLighting(bool directLighting)
 {
-  _directLighting = antialiasing;
+  _directLighting = directLighting;
+}
+
+void	RenderingConfiguration::setSpecularLighting(bool specularLighting)
+{
+  _specularLighting = specularLighting;
 }
 
 void	RenderingConfiguration::setReflection(bool enabled,
@@ -179,6 +189,8 @@ void	RenderingConfiguration::setTransparency(bool enabled,
 			      bool diffused, int diffusedSampling)
 {
   _transparency.enabled = enabled;
+  _transparency.diffused = diffused;
+  _transparency.diffusedSampling = diffusedSampling;
 }
 
 void	RenderingConfiguration::setTransparencyEnabled(bool enabled)

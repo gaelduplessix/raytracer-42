@@ -19,6 +19,7 @@
 #include "Sphere.hpp"
 #include "Spot.hpp"
 #include "Plan.hpp"
+// #include "gui/gui.hpp"
 
 Scene		createScene()
 {
@@ -114,7 +115,7 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  //gui(ac, av, &rt);
+  // gui(ac, av);
   SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
