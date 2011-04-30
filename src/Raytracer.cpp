@@ -5,8 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 12:45:15 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 15:16:45 2011 samuel olivier
 //
+
+#include <stdio.h>
 
 #include "Raytracer.hpp"
 
@@ -107,14 +109,10 @@ void		Raytracer::renderingLoop(double& progress)
   const Camera&	currentCamera = getCurrentCamera();
   Ray		ray = currentCamera.getRay(pixelToRender._x / imageWidth,
 					   pixelToRender._y / imageHeight);
+  double		k;
+  ObjectPrimitive*	nearestObject;
 
-  const vector<t_intersected_object>&	intersections =
-    getIntersectingObjects(ray);
-
-  double	k = -1;
-  const ObjectPrimitive*	nearestObject =
-    getNearestObject(intersections, k);
-
+  nearestObject = getNearestObject(k);
   if (nearestObject)
     {
       Point	intersectPoint = ray._point + ray._vector * k;
@@ -124,7 +122,6 @@ void		Raytracer::renderingLoop(double& progress)
   _interface->pixelHasBeenRendered(pixelToRender._x,
 				   pixelToRender._y,
 				   pixelColor);
-  delete &intersections;
 }
 
 const Camera&		Raytracer::getCurrentCamera(void)
@@ -151,59 +148,37 @@ Point		Raytracer::getPixelToRender(double progress) const
   return (Point(0,0,0));
 }
 
-const vector<t_intersected_object>&
-Raytracer::getIntersectingObjects(Ray ray) const
+void
+Raytracer::getIntersectingObjects(Ray ray, vector<t_intersected_object>&
+				  intersection) const
 {
-  int				nb_object;
-  vector<t_intersected_object>	*intersections;
-  const vector<Object*>&	objects = _scene->getObjects();
-  t_intersected_object		tmp;
+  const vector<Object*>&	objects(_scene->getObjects());
+  int				nb_object(objects.size());
 
-  intersections = new vector<t_intersected_object>;
-  nb_object = objects.size();
   for (int i = 0 ; i < nb_object ; i++)
     {
-      const vector<ObjectPrimitive*>&	primitives =
-	objects[i]->getPrimitives();
-      int				nb_primitive;
-      nb_primitive = primitives.size();
+      const vector<ObjectPrimitive*>&	primitives=objects[i]->getPrimitives();
+      int				nb_primitive(primitives.size());
       for (int j = 0 ; j < nb_primitive ; j++)
-	{
-	  tmp.primitive = primitives[j];
-	  tmp.k = tmp.primitive->intersectWithRay(ray);
-	  if (tmp.k.size() > 0)
-	    intersections->push_back(tmp);
-	}
+	primitives[j]->intersectWithRay(ray, intersection);
     }
-  return (*intersections);
 }
 
-const ObjectPrimitive*	Raytracer::
-getNearestObject(const vector<t_intersected_object>& intersections,
-		 double &res) const
+ObjectPrimitive*	Raytracer::
+getNearestObject(Ray& ray, double& res) const
 {
-  const ObjectPrimitive	*object;
-  int			nbObject;
+  const vector<Object*>&	objects(_scene->getObjects());
+  int				nb_object(objects.size());
+  ObjectPrimitive*		primitive;
 
-  object = NULL;
-  res = -1;
-  nbObject = intersections.size();
-  if (nbObject > 0)
+  for (int i = 0 ; i < nb_object ; i++)
     {
-      for (int i = 0 ; i < nbObject ; i++)
-	{
-	  int	nbK = intersections[i].k.size();
-
-	  for (int j = 0 ; j < nbK ; j++)
-	    if (res < 0 || (intersections[i].k[j] < res
-			    && intersections[i].k[j] > EPSILON))
-	      {
-		res = intersections[i].k[j];
-		object = intersections[i].primitive;
-	      }
-	}
+      const vector<ObjectPrimitive*>&	primitives=objects[i]->getPrimitives();
+      int				nb_primitive(primitives.size());
+      for (int j = 0 ; j < nb_primitive ; j++)
+	primitives[j]->intersectWithRay(ray, primitive, res);
     }
-  return (res < 0 ? NULL : object);
+  return ((res < 0) ? NULL : primitive);
 }
 
 void	Raytracer::calcLightForObject(const ObjectPrimitive& object,
