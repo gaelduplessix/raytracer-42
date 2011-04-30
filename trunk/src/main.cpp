@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 16:41:28 2011 samuel olivier
+// Last update Sat Apr 30 16:55:46 2011 loick michard
 //
 
 #include <vector>
@@ -86,7 +86,7 @@ class SDLInterface : public RenderingInterface
   void pixelHasBeenRendered(int x, int y, Color color)
   {
     Uint8 *p;
-
+    
     if (x < 0 || y < 0 || x >= screen->w || y >= screen->h)
       return ;
     int bpp = screen->format->BytesPerPixel;
