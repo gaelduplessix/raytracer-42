@@ -5,18 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:28:09 2011 loick michard
-// Last update Fri Apr 29 21:41:57 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 13:49:39 2011 gael jochaud-du-plessix
 //
 
 #include "RenderingInterface.hpp"
-
-RenderingInterface::RenderingInterface()
-{
-}
-
-RenderingInterface::~RenderingInterface()
-{
-}
 
 void RenderingInterface::pixelHasBeenRendered(int x,
 					      int y,

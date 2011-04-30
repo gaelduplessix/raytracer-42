@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Thu Apr 28 18:50:52 2011 samuel olivier
-// Last update Thu Apr 28 18:50:53 2011 samuel olivier
+// Last update Sat Apr 30 13:35:36 2011 gael jochaud-du-plessix
 //
 
 #include "Ray.hpp"
@@ -14,17 +14,16 @@ Ray::Ray()
 {
 
 }
-
-Ray::Ray(const Color& color, const Point& point,
-	 const Vector& vector, double refractiveIndex)
-{
-  _color = color;
-  _point = point;
-  _vector = vector;
-  _refractiveIndex = refractiveIndex;
+#include <iostream>
+Ray::Ray(const Point& point, const Vector& vector):
+  _point(point), _vector(vector)
+{  
 }
 
-Ray::~Ray()
+Ray::Ray(const Color& color, const Point& point,
+	 const Vector& vector, double refractiveIndex):
+  _color(color), _point(point), _vector(vector),
+  _refractiveIndex(refractiveIndex)
 {
 
 }

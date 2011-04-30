@@ -5,17 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sat Apr 30 12:47:21 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 13:50:41 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
 #include "Sphere.hpp"
 #include "EquationSolver.hpp"
-
-Sphere::Sphere()
-{
-
-}
 
 Sphere::Sphere(Object*object,
 	       const Point& absolutePosition,
@@ -24,11 +19,6 @@ Sphere::Sphere(Object*object,
 	       double radius) : ObjectPrimitive(object, absolutePosition,
 						rotation, material),
 				_radius(radius)
-{
-
-}
-
-Sphere::~Sphere()
 {
 
 }

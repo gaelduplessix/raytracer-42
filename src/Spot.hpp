@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Fri Apr 29 18:25:57 2011 samuel olivier
+// Last update Sat Apr 30 13:51:19 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SPOT_HPP_
@@ -16,9 +16,7 @@
 class	Spot : public Light
 {
 public :
-  Spot();
   Spot(const Point &position, const Color& color, double intensity=1);
-  ~Spot();
 
   void getLighting(const ObjectPrimitive& primitive,
 		   const Point& intersectPoint,

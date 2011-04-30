@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:17:13 2011 loick michard
-// Last update Sat Apr 30 10:18:33 2011 loick michard
+// Last update Sat Apr 30 13:48:28 2011 gael jochaud-du-plessix
 //
 
 #ifndef _PLAN_HPP_
@@ -16,13 +16,10 @@
 class Plan : public ObjectPrimitive
 {
 public:
-  Plan();
   Plan(Object*object,
 	 const Point& absolutePosition,
 	 const Rotation& rotation,
 	 const Material& material);
-
-  ~Plan();
 
   vector<double>	intersectWithRay(const Ray& ray) const;
 

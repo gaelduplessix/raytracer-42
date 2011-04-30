@@ -5,17 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Sat Apr 30 11:42:09 2011 loick michard
+// Last update Sat Apr 30 13:51:13 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
 #include "Spot.hpp"
 #include "Raytracer.hpp"
-
-Spot::Spot()
-{
-
-}
 
 Spot::Spot(const Point &position, const Color &color,
              double intensity):
@@ -23,13 +18,6 @@ Spot::Spot(const Point &position, const Color &color,
 {
 
 }
-
-Spot::~Spot()
-{
-
-}
-
-#include <iostream>
 
 void	Spot::getLighting(const ObjectPrimitive& primitive,
 			  const Point& intersectPoint,

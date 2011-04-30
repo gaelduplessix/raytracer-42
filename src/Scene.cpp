@@ -5,15 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Fri Apr 29 19:20:35 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 13:50:10 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
-
-Scene::Scene()
-{
-  
-}
 
 Scene::Scene(vector<Camera*> cameras,
 	     vector<Object*> objects,
@@ -24,12 +19,6 @@ Scene::Scene(vector<Camera*> cameras,
 }
 
 Scene::Scene(string filename)
-{
-  
-}
-
-
-Scene::~Scene()
 {
   
 }

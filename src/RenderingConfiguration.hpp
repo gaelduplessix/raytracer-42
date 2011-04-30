@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Fri Apr 29 19:21:01 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 13:49:25 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -39,7 +39,6 @@ class RenderingConfiguration
 {
 public:
   RenderingConfiguration();
-  ~RenderingConfiguration();
   
   int	getWidth(void) const;
   void	setWidth(int width);

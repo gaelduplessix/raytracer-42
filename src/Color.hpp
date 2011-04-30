@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 12:05:19 2011 samuel olivier
+// Last update Sat Apr 30 12:57:58 2011 gael jochaud-du-plessix
 //
 
 #ifndef _COLOR_HPP_
@@ -17,7 +17,6 @@ public:
   Color();
   Color(int r, int g, int b, int a=255);
   Color(int color);
-  ~Color();
 
   int	getR(void) const;
   int	getG(void) const;

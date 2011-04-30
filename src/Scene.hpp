@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Fri Apr 29 12:26:35 2011 samuel olivier
+// Last update Sat Apr 30 13:50:20 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SCENE_HPP_
@@ -23,12 +23,10 @@ using namespace std;
 class	Scene
 {
 public:
-  Scene();
   Scene(vector<Camera*> cameras,
 	vector<Object*> objects,
 	vector<Light*> lights);
   Scene(string filename);
-  ~Scene();
 
   void			loadFromFile(string filename);
 

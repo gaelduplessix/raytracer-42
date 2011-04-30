@@ -15,11 +15,6 @@ Material::Material(const Texture& texture): _isTextured(false)
 
 }
 
-Material::~Material()
-{
-
-}
-
 string	Material::getName(void) const
 {
   return (_name);
