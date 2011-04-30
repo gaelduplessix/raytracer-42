@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Sat Apr 30 18:32:08 2011 franck lavisse
+// Last update Sat Apr 30 19:22:30 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -48,6 +48,7 @@ public:
   bool	getAmbiantOcclusionBool(void) const;
   int	getAmbiantOcclusionInt(void) const;
   bool	getDirectLight(void) const;
+  bool	getReflectionBool(void) const;
   int	getReflectionSampling(void) const;
   int	getReflectionProfondeur(void) const;
   bool	getPhotonMappingBool(void) const;
@@ -97,6 +98,7 @@ private:
   QCheckBox	*_directLight;
   QSpinBox	*_reflectionProfondeur;
   QSpinBox	*_reflectionSampling;
+  QCheckBox	*_reflectionEnabled;
   QCheckBox	*_photonMapping;
   QSpinBox	*_photonMappingBox;
   QComboBox	*_samplingMethod;
