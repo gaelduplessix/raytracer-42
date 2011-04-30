@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 12:39:36 2011 samuel olivier
+// Last update Sat Apr 30 12:45:15 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -117,7 +117,7 @@ void		Raytracer::renderingLoop(double& progress)
 
   if (nearestObject)
     {
-      Point	intersectPoint = ray.getPoint() + ray.getVector() * k;
+      Point	intersectPoint = ray._point + ray._vector * k;
       calcLightForObject(*nearestObject, intersectPoint, pixelColor);
     }
   progress += 1.f / (imageWidth * imageHeight);

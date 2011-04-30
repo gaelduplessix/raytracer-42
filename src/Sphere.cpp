@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Fri Apr 29 23:17:03 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 12:47:21 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -46,17 +46,15 @@ vector<double>	Sphere::intersectWithRay(const Ray& ray) const
   double	c;
 
   newRay = getRayAtSimplePosition(ray);
-  const Vector&	newRayVector = newRay.getVector();
-  const Point&	newRayPoint = newRay.getPoint();
-  a = newRayVector._x * newRayVector._x +
-    newRayVector._y * newRayVector._y +
-    newRayVector._z * newRayVector._z;
-  b = 2 * (newRayPoint._x * newRayVector._x +
-	   newRayPoint._y * newRayVector._y +
-	   newRayPoint._z * newRayVector._z);
-  c = newRayPoint._x * newRayPoint._x +
-    newRayPoint._y * newRayPoint._y +
-    newRayPoint._z * newRayPoint._z -
+  a = newRay._vector._x * newRay._vector._x +
+    newRay._vector._y * newRay._vector._y +
+    newRay._vector._z * newRay._vector._z;
+  b = 2 * (newRay._point._x * newRay._vector._x +
+	   newRay._point._y * newRay._vector._y +
+	   newRay._point._z * newRay._vector._z);
+  c = newRay._point._x * newRay._point._x +
+    newRay._point._y * newRay._point._y +
+    newRay._point._z * newRay._point._z -
     _radius * _radius;
   return (EquationSolver::solveQuadraticEquation(a, b, c));
 }

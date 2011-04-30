@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:11:51 2011 loick michard
-// Last update Thu Apr 28 18:50:06 2011 samuel olivier
+// Last update Sat Apr 30 12:42:15 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAY_HPP_
@@ -33,7 +33,7 @@ public:
   const Vector&	getVector() const;
   double	getRefractiveIndex() const;
 
-private:
+public:
   Color		_color;
   Point		_point;
   Vector	_vector;
