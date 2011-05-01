@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May  1 18:36:17 2011 samuel olivier
+// Last update Sun May  1 19:22:42 2011 samuel olivier
 //
 
 #include <cmath>
@@ -98,8 +98,9 @@ Vector		Sphere::getNormalVector(const Point& intersectPoint,
 {
   Vector	normal = intersectPoint - _absolutePosition;
   double	cosA = viewVector * normal;
+
   cosA = cosA / (viewVector.getNorm() * normal.getNorm());
-  if (cosA < 0)
+  if (cosA <= 0)
     return (normal * -1);
   return (normal);
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 19:12:49 2011 samuel olivier
+// Last update Sun May  1 19:55:37 2011 samuel olivier
 //
 
 #include <vector>
@@ -28,8 +28,8 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.6);
   mat.setSpecularPow(50);
   mat.setReflectionCoeff(1);
-  mat.setTransmissionCoeff(0.5);
-  mat.setRefractionIndex(0.5);
+  mat.setTransmissionCoeff(1.5);
+  mat.setRefractionIndex(1.5);
   Material	mat2 = mat;
   mat2.setName("rouge");
   mat2.setColor(Color(255, 255, 255));
@@ -39,7 +39,7 @@ Scene		createScene2()
 
   vector<ObjectPrimitive*> sphere;
   sphere.push_back(new Sphere(NULL, Point(30, 0, 1),
-			      Rotation(0, 0, 10), mat, 5));
+  			      Rotation(0, 0, 10), mat, 5));
   sphere.push_back(new Sphere(NULL, Point(40, -2, -3),
   			      Rotation(0, 0, 0), mat, 2));
   // sphere.push_back(new Sphere(NULL, Point(30, -4, -2),
