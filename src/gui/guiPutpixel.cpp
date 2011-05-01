@@ -11,6 +11,8 @@
 #include "gui.hpp"
 #include "../Color.hpp"
 
+#include <iostream>
+
 void	Gui::putPixel(const Color& color, int x, int y)
 {
   //_image->setPixel(x, y, qRgba(color._r, color._g, color._b, 255));

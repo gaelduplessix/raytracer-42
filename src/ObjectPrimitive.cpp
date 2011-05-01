@@ -5,9 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sat Apr 30 20:51:32 2011 loick michard
+// Last update Sun May  1 16:17:10 2011 samuel olivier
 //
 
+#include <cmath>
 #include "ObjectPrimitive.hpp"
 
 ObjectPrimitive::ObjectPrimitive():
@@ -98,4 +99,17 @@ ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
   normal._y = - 2 * normal._y * scal + vector._y;
   normal._z = - 2 * normal._z * scal + vector._z;
   return (normal);
+}
+
+Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
+						 const Ray& ray) const
+{
+  Vector	objectNormal = getNormalVector(intersectPoint);
+  double	cosTeti = ray._vector * objectNormal;
+  double	index = ray._refractiveIndex / _material.getRefractionIndex();
+  double	sinTeti = (index * index) * (1 - cosTeti * cosTeti);
+  Ray		refractedRay(intersectPoint, index * ray._vector
+			     - ((index * cosTeti + sqrt(1 - sinTeti * sinTeti))
+				* objectNormal));
+  return (ray);
 }

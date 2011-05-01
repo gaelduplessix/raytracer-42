@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Sat Apr 30 17:40:39 2011 loick michard
+// Last update Sat Apr 30 22:11:54 2011 samuel olivier
 //
 
 #ifndef _SHPERE_HPP_
@@ -28,7 +28,7 @@ public:
   void                  intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const;
   Vector	getNormalVector(const Point& intersectPoint) const;
   Vector	getRefractedVector(const Point& intersectPoint,
-                                           Vector& vector) const;
+				   const Ray& ray) const;
   bool		isInBoundingBox(BoundingBox& box) const;
 
 

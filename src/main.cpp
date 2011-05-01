@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 15:50:02 2011 loick michard
+// Last update Sun May  1 15:59:46 2011 samuel olivier
 //
 
 #include <vector>
@@ -19,7 +19,7 @@
 #include "Sphere.hpp"
 #include "Spot.hpp"
 #include "Plan.hpp"
-#include "gui/gui.hpp"
+// #include "gui/gui.hpp"
 
 Scene		createScene2()
 {

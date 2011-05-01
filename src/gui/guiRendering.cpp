@@ -18,4 +18,6 @@ void	Gui::pixelHasBeenRendered(int x, int y, Color color)
   // cout<< x << ":" << y << ":" << color.getR() << "."
   //     << color.getG() << "." << color.getB() << "." << color.getA() << endl;
   putPixel(color, x, y);
+  if (y == 0)
+    show();
 }

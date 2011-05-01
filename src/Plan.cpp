@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sat Apr 30 20:45:39 2011 loick michard
+// Last update Sun May  1 14:35:14 2011 samuel olivier
 //
 
 #include <vector>
@@ -59,12 +59,6 @@ Vector		Plan::getNormalVector(const Point& intersectPoint) const
 
   normal.rotate(_rotation);
   return (normal);
-}
-
-Vector		Plan::getRefractedVector(const Point& intersectPoint,
-					   Vector& vector) const
-{
-
 }
 
 bool		Plan::isInBoundingBox(BoundingBox& box) const

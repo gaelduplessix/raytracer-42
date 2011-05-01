@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:11:51 2011 loick michard
-// Last update Sat Apr 30 21:45:52 2011 loick michard
+// Last update Sun May  1 15:49:02 2011 samuel olivier
 //
 
 #ifndef _RAY_HPP_
@@ -34,12 +34,14 @@ public:
   const Vector&	getVector() const;
   double	getRefractiveIndex() const;
 
-  Color		_color;
-  Point		_point;
-  Vector	_vector;
-  double	_refractiveIndex;
-  int		_reflectionLevel;
-  double	_reflectionIntensity;
+  Color				_color;
+  Point				_point;
+  Vector			_vector;
+  double			_refractiveIndex;
+  int				_reflectionLevel;
+  double			_reflectionIntensity;
+  int				_refractionLevel;
+  double			_refractionIntensity;
 };
 
 #endif

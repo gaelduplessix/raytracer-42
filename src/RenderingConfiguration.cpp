@@ -73,6 +73,11 @@ bool	RenderingConfiguration::isTransparencyEnabled(void) const
   return (_transparency.enabled);
 }
 
+int	RenderingConfiguration::getTransparencyMaxDepth(void) const
+{
+  return (_transparency.maxDepth);
+}
+
 bool	RenderingConfiguration::isTransparencyDiffused(void) const
 {
   return (_transparency.diffused);
@@ -198,16 +203,24 @@ setReflectionDiffusedSampling(int diffusedSampling)
 }
 
 void	RenderingConfiguration::setTransparency(bool enabled,
-			      bool diffused, int diffusedSampling)
+						int maxDepth,
+						bool diffused,
+						int diffusedSampling)
 {
   _transparency.enabled = enabled;
   _transparency.diffused = diffused;
   _transparency.diffusedSampling = diffusedSampling;
+  _transparency.maxDepth = maxDepth;
 }
 
 void	RenderingConfiguration::setTransparencyEnabled(bool enabled)
 {
   _transparency.enabled = enabled;
+}
+
+void	RenderingConfiguration::setTransparencyMaxDepth(int maxDepth)
+{
+  _transparency.maxDepth = maxDepth;
 }
 
 void	RenderingConfiguration::setTransparencyDiffused(bool diffused)

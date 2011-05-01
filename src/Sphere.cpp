@@ -5,10 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sat Apr 30 17:40:29 2011 loick michard
+// Last update Sun May  1 15:05:18 2011 samuel olivier
 //
 
+#include <cmath>
 #include <vector>
+
 #include "Raytracer.hpp"
 #include "Sphere.hpp"
 #include "EquationSolver.hpp"
@@ -96,11 +98,29 @@ Vector		Sphere::getNormalVector(const Point& intersectPoint) const
   return (intersectPoint - _absolutePosition);
 }
 
-Vector		Sphere::getRefractedVector(const Point& intersectPoint,
-					   Vector& vector) const
-{
-  
-}
+// Vector		Sphere::getRefractedVector(const Point& intersectPoint,
+// 					   const Ray& ray) const
+// {
+//   Vector	normal = getNormalVector(intersectPoint);
+//   double	cosTeti = ray._vector * normal;
+//   double	index = ray._refractiveIndex
+//     / _material.getRefractionIndex();
+//   double	sinTeti = (index * index) * (1 - cosTeti * cosTeti);
+//   Ray		refractedRay(intersectPoint,
+// 			     index * ray._vector
+// 			     - ((index * cosTeti + sqrt(1 - sinTeti * sinTeti))
+// 				* normal));
+//   ObjectPrimitive*	uselessPtr;
+//   double		k;
+//   intersectWithRay(refractedRay, uselessPtr, k);
+//   Point		newIntersectPoint(intersectPoint + k * refractedRay._vector);
+//   normal = getNormalVector(newIntersectPoint);
+//   cosTeti = refractedRay._vector * normal;
+//   index = _material.getRefractionIndex() / ray._refractiveIndex;
+//   sinTeti = (index * index) * (1 - cosTeti * cosTeti);
+//   return (index * refractedRay._vector -
+// 	  ((index * cosTeti + sqrt(1 - sinTeti * sinTeti)) * normal));
+// }
 
 bool		Sphere::isInBoundingBox(BoundingBox& box) const
 {
