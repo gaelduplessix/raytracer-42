@@ -116,7 +116,7 @@ ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
 //   return (ray);
 // }
 
-#include <stdio.h>
+#include <iostream>
 
 Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
 						 const Ray& ray,
@@ -133,14 +133,15 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
   else
     n2 = _material.getRefractionIndex();
   double	n = ray._refractiveIndex / n2;
+  n = 1;
   Vector	normal = getNormalVector(intersectPoint,
-  					 ray._vector).normalize();
-  double	cosI = ray._vector * normal;
+                                         ray._vector).normalize();
+  double	cosI = (normal * ray._vector) / (normal.getNorm() * ray._vector.getNorm());
   double	sinT2 = (n * n) * (1.0 - cosI * cosI);
 
   if (sinT2 <= 1)
-    return (Ray(intersectPoint, n * ray._vector
-  			     - ((n + sqrt(1.0 - sinT2))
-  				* normal)));
+      return (Ray(intersectPoint, n * ray._vector
+                               - (normal * (n + sqrt(1.0 - sinT2))
+                                  )));
   return (ray);
 }

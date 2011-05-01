@@ -28,7 +28,7 @@ DEPENDPATH += src \
               src \
               src
 INCLUDEPATH += . src
-
+LIBS += -L/usr/local/lib -lSDL -lSDLmain
 # Input
 HEADERS += src/BoundingBox.hpp \
            src/Vector.hpp \
