@@ -222,7 +222,7 @@ Color			Raytracer::throwRay(Ray& ray)
 	      reflectedLight *
               nearestObject->getMaterial().getReflectionCoeff() +
               refractedLight *
-              nearestObject->getMaterial().getRefractionIndex());
+              nearestObject->getMaterial().getTransmissionCoeff());
     }
   else
     return (directLight + specularLight + reflectedLight + refractedLight);
