@@ -27,7 +27,7 @@ Scene		createScene2()
   mat.setColor(Color(255, 155, 55, 0));
   mat.setSpecularCoeff(0.6);
   mat.setSpecularPow(50);
-  mat.setReflectionCoeff(0.5);
+  mat.setReflectionCoeff(0);
   mat.setTransmissionCoeff(0.5);
   mat.setRefractionIndex(0.5);
   Material	mat2 = mat;
