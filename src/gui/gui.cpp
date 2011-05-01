@@ -5,12 +5,13 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Sat Apr 30 20:02:11 2011 franck lavisse
+// Last update Sun May  1 11:54:33 2011 franck lavisse
 */
 #include <QPushButton>
 #include <QPen>
 #include <QBrush>
 #include <iostream>
+#include <QIcon>
 #include "gui.hpp"
 #include "../RenderingConfiguration.hpp"
 #include "../Color.hpp"
@@ -59,6 +60,7 @@ void	Gui::init_dock(void)
   _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);
   addDockWidget(Qt::LeftDockWidgetArea, _Dock);
+  _widget->setMaximumHeight(520);
 }
 
 Gui::Gui() : QMainWindow()
@@ -85,6 +87,7 @@ int	gui(int argc, char **argv)
   QApplication	app(argc, argv);
   Gui		rt_gui;
 
+  rt_gui.show();
   rt_gui.init_dock();
   rt_gui.samplingMethod();
   rt_gui.aliasing();
@@ -96,7 +99,6 @@ int	gui(int argc, char **argv)
   rt_gui.flou();
   rt_gui.transparence();
   rt_gui.menuBar();
-  rt_gui.show();
   return (app.exec());
 }
 
