@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:03:41 2011 gael jochaud-du-plessix
-// Last update Fri Apr 29 16:09:31 2011 gael jochaud-du-plessix
+// Last update Sat Apr 30 20:14:38 2011 samuel olivier
 //
 
 #ifndef _RAYTRACERTHREAD_HPP_
@@ -33,6 +33,7 @@ public:
   void	pause(void);
 
   void	initBeforeLaunching(void);
+  void	setRaytracedPixel(int x, int y, bool value);
 
 private:
   Raytracer*			_raytracer;

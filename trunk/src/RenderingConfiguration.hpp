@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Sat Apr 30 20:34:34 2011 loick michard
+// Last update Sun May  1 16:10:38 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -31,6 +31,7 @@ typedef struct	s_reflection
 typedef struct	s_transparency
 {
   bool		enabled;
+  int		maxDepth;
   bool          diffused;
   int		diffusedSampling;
 }               t_transparency;
@@ -69,11 +70,13 @@ public:
   void		setReflectionDiffusedSampling(int diffusedSampling);
 
   bool		isTransparencyEnabled(void) const;
+  int		getTransparencyMaxDepth(void) const;
   bool		isTransparencyDiffused(void) const;
   int		getTransparencyDiffusedSampling(void) const;
-  void		setTransparency(bool enabled,
+  void		setTransparency(bool enabled, int maxDepth = 20,
 				bool diffused = 0, int diffusedSampling = 0);
   void		setTransparencyEnabled(bool enabled = 1);
+  void		setTransparencyMaxDepth(int maxDepth);
   void          setTransparencyDiffused(bool diffused = 1);
   void          setTransparencyDiffusedSampling(int diffusedSampling);
 

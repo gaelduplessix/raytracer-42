@@ -5,6 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
+// Last update Sun May  1 16:30:11 2011 samuel olivier
 // Last update Sun May  1 15:49:11 2011 loick michard
 //
 
@@ -160,6 +161,7 @@ Color			Raytracer::throwRay(Ray& ray)
       if (_config->isDirectLighting() || _config->isSpecularLighting())
 	calcLightForObject(*nearestObject, intersectPoint,
 			   ray._vector, directLight, specularLight);
+
       if (getRenderingConfiguration()->isReflectionEnabled()
 	  && ray._reflectionLevel < 
 	  getRenderingConfiguration()->getReflectionMaxDepth())
@@ -168,16 +170,34 @@ Color			Raytracer::throwRay(Ray& ray)
 	    nearestObject->getMaterial().getReflectionCoeff();
 	  if (ray._reflectionIntensity > Raytracer::EPSILON_REFLECTION)
 	    {
-	      Vector	reflectedVector =
-		nearestObject->getReflectedVector(intersectPoint,
-						  ray._vector, true);
-	      Ray	reflectedRay(intersectPoint, reflectedVector);
+	      Ray	reflectedRay(intersectPoint,
+				     nearestObject->
+				     getReflectedVector(intersectPoint,
+						     ray._vector, true));
+
 	      reflectedRay._reflectionLevel = ray._reflectionLevel + 1;
 	      reflectedRay._reflectionIntensity =
 		ray._reflectionIntensity;
 	      reflectedLight = throwRay(reflectedRay);
 	    }
 	}
+
+      if (getRenderingConfiguration()->isTransparencyEnabled()
+      	  && ray._refractionLevel <
+      	  getRenderingConfiguration()->getTransparencyMaxDepth())
+        {
+      	  ray._refractionIntensity *=
+      	    nearestObject->getMaterial().getRefractionIndex();
+      	  if (ray._refractionIntensity > Raytracer::EPSILON_REFRACTION)
+      	    {
+      	      Ray	refractedRay =
+      	  	nearestObject->getRefractedRay(intersectPoint, ray);
+      	      refractedRay._refractionLevel = ray._refractionLevel + 1;
+      	      refractedRay._refractionIntensity =
+      	  	ray._refractionIntensity;
+      	      refractedLight = throwRay(refractedRay);
+      	    }
+      	}
     }
   if (nearestObject)
     {

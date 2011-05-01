@@ -190,5 +190,3 @@ int	gui(int argc, char **argv)
   rt_gui.show();
   return (app.exec());
 }
-
-//int	main(int argc, char **argv) {gui(argc,argv);return(0);}
