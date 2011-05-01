@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sat Apr 30 22:24:59 2011 loick michard
+// Last update Sun May  1 15:49:11 2011 loick michard
 //
 
 #include <stdio.h>
@@ -179,7 +179,16 @@ Color			Raytracer::throwRay(Ray& ray)
 	    }
 	}
     }
-  return (directLight + specularLight + reflectedLight);
+  if (nearestObject)
+    {
+      return (directLight + 
+	      specularLight *
+	      nearestObject->getMaterial().getSpecularCoeff() +
+	      reflectedLight *
+	      nearestObject->getMaterial().getReflectionCoeff());
+    }
+  else
+    return (directLight + specularLight + reflectedLight);
 }
 
 void

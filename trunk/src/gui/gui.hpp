@@ -5,13 +5,15 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Sat Apr 30 20:08:26 2011 franck lavisse
+// Last update Sun May  1 15:41:38 2011 loick michard
 //
 #ifndef __GUI_H__
 #define __GUI_H__
 
+#include <QLabel>
 #include <QApplication>
 #include <QWidget>
+#include <QPixmap>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsItem>
@@ -25,6 +27,7 @@
 #include <QSpinBox>
 #include <QComboBox>
 #include "../RenderingInterface.hpp"
+#include "../Raytracer.hpp"
 
 class Color;
 
@@ -38,17 +41,7 @@ public:
   Gui();
   ~Gui();
 
-  virtual void pixelHasBeenRendered(int x, int y, Color color);
-  virtual void pixelHasStartedRendering(int x, int y);
-  virtual void photonMappingHasBegun();
-  virtual void photonMappingHasFinished();
-  virtual void kdtreeGenerationHasBegun();
-  virtual void kdtreeGenerationHasFinished();
-  virtual void renderingHasBegun();
-  virtual void renderingHasPaused();
-  virtual void renderingHasStoped();
-  virtual void renderingHasFinished();
-  virtual void renderingHasProgressed(double progress);
+  void pixelHasBeenRendered(int x, int y, Color color);
   bool	getTransparenceBool(void) const;
   int	getTransparenceInt(void) const;
   int	getTransparenceDiffusion(void) const;
@@ -81,8 +74,10 @@ public:
   void	flou(void);
   void	menuBar(void);
 
+  Raytracer	_raytracer;
 public slots:
   void	launch_raytracer(void);
+  void	putPixelSlot(int, int);
 
 protected:
   void	paintEvent(void);
@@ -97,6 +92,8 @@ private:
   QGraphicsItem	*_Item;
   QGraphicsView	*_View;
 
+  QLabel	*_label;
+  QPixmap	*_pixmap;
   QCheckBox	*_transparence;
   QSpinBox	*_transpBox;
   QSpinBox	*_transpDiffusion;
@@ -114,6 +111,7 @@ private:
   QCheckBox	*_photonMapping;
   QSpinBox	*_photonMappingBox;
   QComboBox	*_samplingMethod;
+  QImage	*_image;
 };
 
 #endif
