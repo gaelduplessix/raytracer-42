@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 20:11:33 2011 samuel olivier
+// Last update Sun May  1 20:32:56 2011 samuel olivier
 //
 
 #include <vector>
@@ -28,11 +28,14 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.6);
   mat.setSpecularPow(50);
   mat.setReflectionCoeff(1);
-  mat.setTransmissionCoeff(0.9);
-  mat.setRefractionIndex(1.5);
+  mat.setTransmissionCoeff(0);
+  mat.setRefractionIndex(0);
   Material	mat2 = mat;
   mat2.setName("rouge");
   mat2.setColor(Color(255, 255, 255));
+  mat2.setReflectionCoeff(0);
+  mat2.setTransmissionCoeff(0);
+  mat2.setRefractionIndex(0);
 
   vector<Camera*> cam;
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
@@ -66,7 +69,7 @@ RenderingConfiguration	createConfig2()
   res.setHeight(480);
   res.setAntialiasing(1);
   res.setDirectLighting(true);
-  res.setReflection(false);
+  res.setReflection(true);
   res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);

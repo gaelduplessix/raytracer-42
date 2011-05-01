@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sun May  1 19:57:06 2011 samuel olivier
+// Last update Sun May  1 20:26:29 2011 samuel olivier
 //
 
 #include <cmath>
@@ -120,8 +120,14 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
                                          ray._vector).normalize();
   double	cos1 = normal * (ray._vector * -1);
   double	cos2 = sqrt(1 - n * n * (1 - cos1 * cos1));
+  Ray		res = ray;
 
+  res.setPoint(intersectPoint);
   if (cos1 > 0)
-    return (Ray(intersectPoint, ray._vector * n + normal * (n * cos1 - cos2)));
-  return (Ray(intersectPoint, ray._vector * n + normal * (n * cos1 + cos2)));
+    res.setVector(ray._vector * n + normal * (n * cos1 - cos2));
+  else
+    res.setVector(ray._vector * n + normal * (n * cos1 + cos2));
+  return (res);
+  //   return (Ray(intersectPoint, ray._vector * n + normal * (n * cos1 - cos2)));
+  // return (Ray(intersectPoint, ray._vector * n + normal * (n * cos1 + cos2)));
 }
