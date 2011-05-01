@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May  1 15:05:18 2011 samuel olivier
+// Last update Sun May  1 16:57:11 2011 samuel olivier
 //
 
 #include <cmath>
@@ -62,7 +62,7 @@ void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
 }
 
 void                  Sphere::intersectWithRay(const Ray& ray,
-					       ObjectPrimitive*& primitive, 
+					       ObjectPrimitive*& primitive,
 					       double &res) const
 {
   Ray           newRay;

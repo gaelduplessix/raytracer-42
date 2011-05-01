@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sun May  1 16:17:10 2011 samuel olivier
+// Last update Sun May  1 18:18:55 2011 samuel olivier
 //
 
 #include <cmath>
@@ -101,15 +101,40 @@ ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
   return (normal);
 }
 
+// Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
+// 						 const Ray& ray) const
+// {
+//   Vector	objectNormal = getNormalVector(intersectPoint);
+//   objectNormal.normalize();
+//   double	cosTeti = ray._vector * objectNormal;
+//   double	index = ray._refractiveIndex / _material.getRefractionIndex();
+//   double	sinTeti = (index * index) * (1.0 - cosTeti * cosTeti);
+//   if (sinTeti <= 1)
+//     return (Ray(intersectPoint, index * ray._vector
+// 			     - ((index * cosTeti + sqrt(1.0 - sinTeti * sinTeti))
+// 				* objectNormal)));
+//   return (ray);
+// }
+
+#include <stdio.h>
+
 Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
-						 const Ray& ray) const
+						 const Ray& ray,
+						 stack<ObjectPrimitive*>&
+						 refractivePath) const
 {
-  Vector	objectNormal = getNormalVector(intersectPoint);
-  double	cosTeti = ray._vector * objectNormal;
-  double	index = ray._refractiveIndex / _material.getRefractionIndex();
-  double	sinTeti = (index * index) * (1 - cosTeti * cosTeti);
-  Ray		refractedRay(intersectPoint, index * ray._vector
-			     - ((index * cosTeti + sqrt(1 - sinTeti * sinTeti))
-				* objectNormal));
+  if (refractivePath.size() > 0 && this == refractivePath.top())
+    refractivePath.pop();
+  double	n2 = (refractivePath.size() > 0) ?
+    refractivePath.top()->getMaterial().getRefractionIndex() : 1;
+  double	n = ray._refractiveIndex / n2;
+  Vector	normal = getNormalVector(intersectPoint).normalize();
+  double	cosI = ray._vector * normal;
+  double	sinT2 = (n * n) * (1.0 - cosI * cosI);
+
+  if (sinT2 <= 1)
+    return (Ray(intersectPoint, n * ray._vector
+			     - ((n + sqrt(1.0 - sinT2))
+				* normal)));
   return (ray);
 }
