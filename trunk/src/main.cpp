@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sat Apr 30 22:21:10 2011 loick michard
+// Last update Sun May  1 10:53:53 2011 franck lavisse
 //
 
 #include <vector>
@@ -115,14 +115,14 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  //gui(ac, av);
-  SDL_Init(SDL_INIT_VIDEO);
+  gui(ac, av);
+  /*SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
   getchar();
   rt.stopRendering();
-  SDL_Quit();
+  SDL_Quit();*/
   return (0);
 }
