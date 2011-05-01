@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sun May  1 19:00:18 2011 samuel olivier
+// Last update Sun May  1 19:53:53 2011 samuel olivier
 //
 
 #include <cmath>
@@ -118,6 +118,33 @@ ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
 
 #include <iostream>
 
+// Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
+// 						 const Ray& ray,
+// 						 stack<ObjectPrimitive*>&
+// 						 refractivePath) const
+// {
+//   double	n2;
+//   if (refractivePath.size() > 0 && this == refractivePath.top())
+//     {
+//       refractivePath.pop();
+//       n2 = (refractivePath.size() > 0) ?
+//   	refractivePath.top()->getMaterial().getRefractionIndex() : 1;
+//     }
+//   else
+//     n2 = _material.getRefractionIndex();
+//   double	n = ray._refractiveIndex / n2;
+//   n = 1;
+//   Vector	normal = getNormalVector(intersectPoint,
+//                                          ray._vector).normalize();
+//   double	cosI = (normal * ray._vector) / (normal.getNorm() * ray._vector.getNorm());
+//   double	sinT2 = (n * n) * (1.0 - cosI * cosI);
+
+//   if (sinT2 <= 1)
+//       return (Ray(intersectPoint, n * ray._vector
+// 		  - (n * cosI + sqrt(1.0 - sinT2)) * normal));
+//   return (ray);
+// }
+
 Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
 						 const Ray& ray,
 						 stack<ObjectPrimitive*>&
@@ -128,20 +155,17 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
     {
       refractivePath.pop();
       n2 = (refractivePath.size() > 0) ?
-	refractivePath.top()->getMaterial().getRefractionIndex() : 1;
+  	refractivePath.top()->getMaterial().getRefractionIndex() : 1;
     }
   else
     n2 = _material.getRefractionIndex();
   double	n = ray._refractiveIndex / n2;
-  n = 1;
   Vector	normal = getNormalVector(intersectPoint,
                                          ray._vector).normalize();
-  double	cosI = (normal * ray._vector) / (normal.getNorm() * ray._vector.getNorm());
-  double	sinT2 = (n * n) * (1.0 - cosI * cosI);
+  double	cos1 = normal * (ray._vector * -1);
+  double	cos2 = sqrt(1 - n * n * (1 - cos1 * cos1));
 
-  if (sinT2 <= 1)
-      return (Ray(intersectPoint, n * ray._vector
-                               - (normal * (n + sqrt(1.0 - sinT2))
-                                  )));
-  return (ray);
+  if (cos1 > 0)
+    return (Ray(intersectPoint, ray._vector * n + normal * (n * cos1 - cos2)));
+  return (Ray(intersectPoint, ray._vector * n + normal * (n * cos1 + cos2)));
 }

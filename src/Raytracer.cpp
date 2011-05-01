@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May  1 19:15:14 2011 samuel olivier
+// Last update Sun May  1 19:37:12 2011 samuel olivier
 // Last update Sun May  1 15:49:11 2011 loick michard
 //
 
@@ -200,8 +200,8 @@ Color			Raytracer::throwRay(Ray& ray)
       	  if (ray._refractionIntensity > Raytracer::EPSILON_REFRACTION)
       	    {
       	      Ray	refractedRay = //Ray(intersectPoint, ray._vector);
-		nearestObject->getRefractedRay(intersectPoint, ray,
-					       _refractivePath);
+	      	nearestObject->getRefractedRay(intersectPoint, ray,
+	      				       _refractivePath);
 	      ObjectPrimitive*	tmp = NULL;
 	      double		useless;
 
