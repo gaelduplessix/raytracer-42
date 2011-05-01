@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Sun May  1 18:02:47 2011 samuel olivier
+// Last update Sun May  1 18:23:10 2011 samuel olivier
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -50,7 +50,8 @@ public:
   virtual void
   intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive,
 		   double &res) const = 0;
-  virtual Vector	getNormalVector(const Point& intersectPoint) const = 0;
+  virtual Vector	getNormalVector(const Point& intersectPoint,
+					const Vector& viewVector) const = 0;
   virtual bool	isInBoundingBox(BoundingBox& box) const = 0;
 
   Vector	getReflectedVector(const Point& intersectPoint,

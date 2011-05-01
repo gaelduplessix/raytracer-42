@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sun May  1 14:35:14 2011 samuel olivier
+// Last update Sun May  1 18:28:24 2011 samuel olivier
 //
 
 #include <vector>
@@ -53,11 +53,15 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
     }
 }
 
-Vector		Plan::getNormalVector(const Point& intersectPoint) const
+Vector		Plan::getNormalVector(const Point& intersectPoint,
+				      const Vector& viewVector) const
 {
   Vector	normal(0, 0, 100);
-
   normal.rotate(_rotation);
+  double        cosA = viewVector * normal;
+  cosA = cosA / (viewVector.getNorm() * normal.getNorm());
+  if (cosA < 0)
+    return (normal * -1);
   return (normal);
 }
 

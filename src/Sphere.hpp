@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Sat Apr 30 22:11:54 2011 samuel olivier
+// Last update Sun May  1 18:23:57 2011 samuel olivier
 //
 
 #ifndef _SHPERE_HPP_
@@ -26,7 +26,8 @@ public:
 
   void        addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const;
   void                  intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const;
-  Vector	getNormalVector(const Point& intersectPoint) const;
+  Vector	getNormalVector(const Point& intersectPoint,
+				const Vector& viewVector) const;
   Vector	getRefractedVector(const Point& intersectPoint,
 				   const Ray& ray) const;
   bool		isInBoundingBox(BoundingBox& box) const;

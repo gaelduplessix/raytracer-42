@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 18:19:39 2011 samuel olivier
+// Last update Sun May  1 18:40:37 2011 samuel olivier
 //
 
 #include <vector>
@@ -27,7 +27,7 @@ Scene		createScene2()
   mat.setColor(Color(255, 155, 55, 0));
   mat.setSpecularCoeff(0.6);
   mat.setSpecularPow(50);
-  mat.setReflectionCoeff(0);
+  mat.setReflectionCoeff(1);
   mat.setTransmissionCoeff(0.5);
   mat.setRefractionIndex(0.5);
   Material	mat2 = mat;
@@ -121,7 +121,7 @@ int main(int ac, char **av)
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
-  getchar();
+  // getchar();
   rt.stopRendering();
   SDL_Quit();
   return (0);
