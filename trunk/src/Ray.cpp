@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Thu Apr 28 18:50:52 2011 samuel olivier
-// Last update Sat Apr 30 21:48:00 2011 loick michard
+// Last update Sun May  1 16:44:10 2011 samuel olivier
 //
 
 #include "Ray.hpp"
@@ -23,7 +23,8 @@ Ray::Ray(const Point& point, const Vector& vector):
 Ray::Ray(const Color& color, const Point& point,
 	 const Vector& vector, double refractiveIndex):
   _color(color), _point(point), _vector(vector),
-  _refractiveIndex(refractiveIndex), _reflectionLevel(0), _reflectionIntensity(1)
+  _refractiveIndex(refractiveIndex), _reflectionLevel(0),
+  _reflectionIntensity(1), _refractionLevel(0), _refractionIntensity(1)
 
 {
 

@@ -5,11 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May  1 16:30:11 2011 samuel olivier
+// Last update Sun May  1 16:48:44 2011 samuel olivier
 // Last update Sun May  1 15:49:11 2011 loick michard
 //
 
 #include <stdio.h>
+#include <iostream>
 
 #include "Raytracer.hpp"
 
@@ -140,8 +141,10 @@ Color			Raytracer::renderPixel(double x, double y)
     _interface->pixelHasStartedRendering(x, y);
   ray = currentCamera.getRay(x / _config->getWidth(),
                              y / _config->getHeight());
-  ray._reflectionLevel = ray._refractionLevel = 0;
-  ray._reflectionIntensity = ray._refractionIntensity = 1;
+  ray._reflectionLevel = 0;
+  ray._reflectionIntensity = 1;
+  ray._refractionLevel = 0;
+  ray._refractionIntensity = 1;
   Color pixelColor = throwRay(ray);
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
@@ -192,9 +195,10 @@ Color			Raytracer::throwRay(Ray& ray)
       	    {
       	      Ray	refractedRay =
       	  	nearestObject->getRefractedRay(intersectPoint, ray);
+
+	      std::cout << ray._refractionLevel << " : " << getRenderingConfiguration()->getTransparencyMaxDepth() << std::endl;
       	      refractedRay._refractionLevel = ray._refractionLevel + 1;
-      	      refractedRay._refractionIntensity =
-      	  	ray._refractionIntensity;
+      	      refractedRay._refractionIntensity = ray._refractionIntensity;
       	      refractedLight = throwRay(refractedRay);
       	    }
       	}
