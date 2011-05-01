@@ -139,9 +139,9 @@ Color			Raytracer::renderPixel(double x, double y)
   if (_interface)
     _interface->pixelHasStartedRendering(x, y);
   ray = currentCamera.getRay(x / _config->getWidth(),
-			     y / _config->getHeight());
-  ray._reflectionLevel = 0;
-  ray._reflectionIntensity = 1;
+                             y / _config->getHeight());
+  ray._reflectionLevel = ray._refractionLevel = 0;
+  ray._reflectionIntensity = ray._refractionIntensity = 1;
   Color pixelColor = throwRay(ray);
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
@@ -205,10 +205,12 @@ Color			Raytracer::throwRay(Ray& ray)
 	      specularLight *
 	      nearestObject->getMaterial().getSpecularCoeff() +
 	      reflectedLight *
-	      nearestObject->getMaterial().getReflectionCoeff());
+              nearestObject->getMaterial().getReflectionCoeff() +
+              refractedLight *
+              nearestObject->getMaterial().getRefractionIndex());
     }
   else
-    return (directLight + specularLight + reflectedLight);
+    return (directLight + specularLight + reflectedLight + refractedLight);
 }
 
 void
