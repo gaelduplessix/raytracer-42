@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 18:40:37 2011 samuel olivier
+// Last update Sun May  1 19:12:15 2011 samuel olivier
 //
 
 #include <vector>
@@ -66,8 +66,8 @@ RenderingConfiguration	createConfig2()
   res.setHeight(480);
   res.setAntialiasing(1);
   res.setDirectLighting(true);
-  res.setReflection(true);
-  res.setTransparency(true);
+  res.setReflection(false);
+  res.setTransparency(false);
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
@@ -121,7 +121,7 @@ int main(int ac, char **av)
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
-  // getchar();
+  getchar();
   rt.stopRendering();
   SDL_Quit();
   return (0);

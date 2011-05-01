@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May  1 18:51:50 2011 samuel olivier
+// Last update Sun May  1 19:03:59 2011 samuel olivier
 // Last update Sun May  1 15:49:11 2011 loick michard
 //
 
@@ -210,7 +210,7 @@ Color			Raytracer::throwRay(Ray& ray)
 	      	_refractivePath.push(tmp);
       	      refractedRay._refractionLevel = ray._refractionLevel + 1;
       	      refractedRay._refractionIntensity = ray._refractionIntensity;
-	      refractedLight = throwRay(refractedRay);
+	      // refractedLight = throwRay(refractedRay);
       	    }
       	}
     }
