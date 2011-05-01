@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sat Apr 30 22:16:21 2011 loick michard
+// Last update Sun May  1 15:49:03 2011 loick michard
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -26,7 +26,9 @@ typedef struct			s_intersected_object
 
 class	Raytracer
 {
+
 public:
+
   const static int	NO_SCENE_SPECIFIED = 0;
   const static int	NO_CONFIG_SPECIFIED = 1;
   const static int	NO_INTERFACE_SPECIFIED = 2;

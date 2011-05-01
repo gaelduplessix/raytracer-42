@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 10:53:53 2011 franck lavisse
+// Last update Sun May  1 15:50:02 2011 loick michard
 //
 
 #include <vector>
@@ -21,11 +21,11 @@
 #include "Plan.hpp"
 #include "gui/gui.hpp"
 
-Scene		createScene()
+Scene		createScene2()
 {
   Material	mat("bleu");
   mat.setColor(Color(255, 155, 55, 0));
-  mat.setSpecularCoeff(0.3);
+  mat.setSpecularCoeff(0.6);
   mat.setSpecularPow(50);
   mat.setReflectionCoeff(0.5);
   mat.setTransmissionCoeff(0.5);
@@ -58,7 +58,7 @@ Scene		createScene()
   return (res);
 }
 
-RenderingConfiguration	createConfig()
+RenderingConfiguration	createConfig2()
 {
   RenderingConfiguration res;
 
@@ -110,19 +110,19 @@ class SDLInterface : public RenderingInterface
 int main(int ac, char **av)
 {
   Raytracer rt;
-  Scene scene = createScene();
-  RenderingConfiguration conf = createConfig();
+  Scene scene = createScene2();
+  RenderingConfiguration conf = createConfig2();
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  gui(ac, av);
-  /*SDL_Init(SDL_INIT_VIDEO);
+  //gui(ac, av);
+  SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
   getchar();
   rt.stopRendering();
-  SDL_Quit();*/
+  SDL_Quit();
   return (0);
 }

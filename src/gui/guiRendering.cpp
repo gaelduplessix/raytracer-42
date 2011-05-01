@@ -5,22 +5,17 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Sat Apr 30 20:03:34 2011 franck lavisse
-// Last update Sat Apr 30 20:13:37 2011 franck lavisse
+// Last update Sun May  1 14:10:39 2011 loick michard
 //
+
 #include "gui.hpp"
 
+#include <iostream>
+using namespace std;
 void	Gui::pixelHasBeenRendered(int x, int y, Color color)
 {
+  color.setA(255);
+  // cout<< x << ":" << y << ":" << color.getR() << "."
+  //     << color.getG() << "." << color.getB() << "." << color.getA() << endl;
   putPixel(color, x, y);
 }
-
-void	Gui::pixelHasStartedRendering(int x, int y) {}
-void	Gui::photonMappingHasBegun() {}
-void	Gui::photonMappingHasFinished() {}
-void	Gui::kdtreeGenerationHasBegun() {}
-void	Gui::kdtreeGenerationHasFinished() {}
-void	Gui::renderingHasBegun() {}
-void	Gui::renderingHasPaused() {}
-void	Gui::renderingHasStoped() {}
-void	Gui::renderingHasFinished() {}
-void	Gui::renderingHasProgressed(double progress) {}
