@@ -5,12 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May  1 16:48:44 2011 samuel olivier
+// Last update Sun May  1 18:13:25 2011 samuel olivier
 // Last update Sun May  1 15:49:11 2011 loick michard
 //
 
 #include <stdio.h>
-#include <iostream>
+#include <stdio.h>
 
 #include "Raytracer.hpp"
 
@@ -145,6 +145,7 @@ Color			Raytracer::renderPixel(double x, double y)
   ray._reflectionIntensity = 1;
   ray._refractionLevel = 0;
   ray._refractionIntensity = 1;
+  ray._refractiveIndex = 1;
   Color pixelColor = throwRay(ray);
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
@@ -189,17 +190,27 @@ Color			Raytracer::throwRay(Ray& ray)
       	  && ray._refractionLevel <
       	  getRenderingConfiguration()->getTransparencyMaxDepth())
         {
+	  if (_refractivePath.size() > 0)
+	    ray._refractiveIndex =
+	      _refractivePath.top()->getMaterial().getRefractionIndex();
+	  else
+	    ray._refractiveIndex = 1;
       	  ray._refractionIntensity *=
       	    nearestObject->getMaterial().getRefractionIndex();
       	  if (ray._refractionIntensity > Raytracer::EPSILON_REFRACTION)
       	    {
-      	      Ray	refractedRay =
-      	  	nearestObject->getRefractedRay(intersectPoint, ray);
+      	      Ray	refractedRay = //Ray(intersectPoint, ray._vector);
+		nearestObject->getRefractedRay(intersectPoint, ray,
+					       _refractivePath);
+	      ObjectPrimitive*	tmp = NULL;
+	      double		useless;
 
-	      std::cout << ray._refractionLevel << " : " << getRenderingConfiguration()->getTransparencyMaxDepth() << std::endl;
+	      nearestObject->intersectWithRay(refractedRay, tmp, useless);
+	      if (tmp != NULL)
+		_refractivePath.push(tmp);
       	      refractedRay._refractionLevel = ray._refractionLevel + 1;
       	      refractedRay._refractionIntensity = ray._refractionIntensity;
-      	      refractedLight = throwRay(refractedRay);
+	      refractedLight = throwRay(refractedRay);
       	    }
       	}
     }

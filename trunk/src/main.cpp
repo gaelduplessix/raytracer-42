@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 15:59:46 2011 samuel olivier
+// Last update Sun May  1 18:19:39 2011 samuel olivier
 //
 
 #include <vector>
@@ -38,12 +38,12 @@ Scene		createScene2()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> sphere;
-  sphere.push_back(new Sphere(NULL, Point(30, 0, -5),
+  sphere.push_back(new Sphere(NULL, Point(30, 0, 1),
 			      Rotation(0, 0, 10), mat, 5));
-  sphere.push_back(new Sphere(NULL, Point(30, 4, 2),
+  sphere.push_back(new Sphere(NULL, Point(40, -2, -3),
   			      Rotation(0, 0, 0), mat, 2));
-  sphere.push_back(new Sphere(NULL, Point(30, -4, 2),
-  Rotation(0, 0, 0), mat, 2));
+  // sphere.push_back(new Sphere(NULL, Point(30, -4, -2),
+  // 			      Rotation(0, 0, 0), mat, 2));
   sphere.push_back(new Plan(NULL, Point(0, 0, -5),
   			    Rotation(0, 0, 0), mat2));
   vector<Object*> obj;

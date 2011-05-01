@@ -5,13 +5,14 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Sun May  1 16:15:35 2011 samuel olivier
+// Last update Sun May  1 18:02:47 2011 samuel olivier
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
 #define _OBJECTPRIMITIVE_HPP_
 
 #include <vector>
+#include <stack>
 #include "Vector.hpp"
 #include "Point.hpp"
 #include "Rotation.hpp"
@@ -56,7 +57,8 @@ public:
 				   const Vector& vector,
 				   bool doNormalize=false) const;
   Ray		getRefractedRay(const Point& intersectPoint,
-				const Ray& ray) const;
+				const Ray& ray,
+				stack<ObjectPrimitive*>& refractivePath) const;
 
 protected:
   inline virtual Ray		getRayAtSimplePosition(const Ray& ray) const;
