@@ -5,24 +5,27 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Mon May  2 14:46:19 2011 samuel olivier
+// Last update Mon May  2 19:43:02 2011 gael jochaud-du-plessix
 //
 
 #include "Material.hpp"
 
-Material::Material(): _isTextured(false)
+Material::Material(): 
+  _isTextured(false), _name(""), _color(Color(0, 0, 0)), _texture(NULL),
+  _specularCoeff(0), _specularPow(50), _reflectionCoeff(0),
+  _transmissionCoeff(0), _refractionIndex(1), _heightmap(NULL),
+  _hasBumpMap(false)
 {
 
 }
 
-Material::Material(const string& name): _isTextured(false)
+Material::Material(const string& name):
+  _isTextured(false), _color(Color(0, 0, 0)), _texture(NULL),
+  _specularCoeff(0), _specularPow(50), _reflectionCoeff(0),
+  _transmissionCoeff(0), _refractionIndex(1), _heightmap(NULL),
+  _hasBumpMap(false)
 {
   string	mnew = name;
-}
-
-Material::Material(const Texture& texture): _isTextured(false)
-{
-
 }
 
 string	Material::getName(void) const

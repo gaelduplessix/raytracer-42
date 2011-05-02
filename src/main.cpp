@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  2 18:27:58 2011 gael jochaud-du-plessix
+// Last update Mon May  2 20:46:50 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -23,39 +23,66 @@
 
 Scene		createScene2()
 {
-  Material	mat("bleu");
+  Material	mat("base");
   mat.setColor(Color(255, 255, 255, 0));
   mat.setSpecularCoeff(0.6);
   mat.setSpecularPow(50);
-  mat.setReflectionCoeff(0);
-  mat.setTransmissionCoeff(1);
-  mat.setRefractionIndex(2);
-  Material	mat2 = mat;
-  mat2.setName("rouge");
-  mat2.setColor(Color(255, 0, 0));
-  mat2.setReflectionCoeff(0);
-  mat2.setTransmissionCoeff(0);
-  mat2.setRefractionIndex(0);
-  Material	matFloor(mat2);
+  Material	reflection = mat;
+  reflection.setReflectionCoeff(1);
+  Material	refraction = mat;
+  refraction.setTransmissionCoeff(1);
+  refraction.setRefractionIndex(2);
+  Material	matFloor("sol");
+  matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
+  matFloor.setSpecularCoeff(0.2);
+  matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 0, 5), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> sphere;
-  sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
-  			      Rotation(0, 0, 0), mat, 5));
-  sphere.push_back(new Sphere(NULL, Point(100, 0, 0),
-  			      Rotation(0, 0, 0), mat2, 20));
-  sphere.push_back(new Plan(NULL, Point(0, 0, -5),
+  sphere.push_back(new Sphere(NULL, Point(30, -3, 3),
+  			      Rotation(0, 0, 0), reflection, 3));
+  sphere.push_back(new Sphere(NULL, Point(20, 4, 3),
+  			      Rotation(0, 0, 0), refraction, 3));
+
+  refraction.setTransmissionCoeff(0.8);
+  refraction.setRefractionIndex(1.5);
+  sphere.push_back(new Plan(NULL, Point(25, 0, 0),
+  			    Rotation(0, -3.14 / 2, -3.14 / 6), refraction));
+  // sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
+  // 			      Rotation(0, 0, 0), mat3, 2));
+  // Mur fond
+  matFloor.setColor(Color(200, 200, 200));
+  sphere.push_back(new Plan(NULL, Point(40, 0, 0),
+  			    Rotation(0, -3.14 / 2, 0), matFloor));
+  // Mur derriere
+  sphere.push_back(new Plan(NULL, Point(-0.5, 0, 0),
+  			    Rotation(0, -3.14 / 2, 0), matFloor));
+
+  // Sol
+  matFloor.setColor(Color(38, 53, 61));
+  sphere.push_back(new Plan(NULL, Point(0, 0, 0),
   			    Rotation(0, 0, 0), matFloor));
+  // Plafond
+  sphere.push_back(new Plan(NULL, Point(0, 0, 15),
+  			    Rotation(0, 0, 0), matFloor));
+  // Mur droit
+  matFloor.setColor(Color(14, 102, 56));
+  sphere.push_back(new Plan(NULL, Point(0, 10, 0),
+  			    Rotation(3.14 / 2, 0, 0), matFloor));
+  // Mur gauche
+  matFloor.setColor(Color(178, 24, 45));
+  sphere.push_back(new Plan(NULL, Point(0, -10, 0),
+  			    Rotation(3.14 / 2, 0, 0), matFloor));
   vector<Object*> obj;
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(20, -50, 4), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(20, 50, 4), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(100, 50, 20), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(-5, 0, 4), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(5, 0, 4), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(35, 0, 5), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -75,7 +102,7 @@ RenderingConfiguration	createConfig2()
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
-  res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
+  res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
   return (res);
 }
 
@@ -101,7 +128,7 @@ class SDLInterface : public RenderingInterface
     p[2] = color._r;
     p[1] = color._g;
     p[0] = color._b;
-    if (y == 0)
+    if (x == 0)
       SDL_Flip(screen);
   }
 
