@@ -5,8 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May  2 12:51:43 2011 samuel olivier
-// Last update Sun May  1 15:49:11 2011 loick michard
+   Last update Mon May  2 16:15:45 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -101,12 +100,15 @@ const Camera&		Raytracer::getCurrentCamera(void)
   return (_scene->getCamera(_config->getCurrentCamera()));
 }
 
+#include <iostream>
+
 void		Raytracer::renderingLoop(double& progress)
 {
   Point		pixelToRender = getPixelToRender(progress);
   Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
 
-  progress += 1.f / (_config->getWidth() * _config->getHeight());
+  progress = (double)++_thread->_currentPixel
+    / (_config->getWidth() * _config->getHeight());
   if (_interface)
     _interface->pixelHasBeenRendered(pixelToRender._x,
 				     pixelToRender._y,
@@ -117,17 +119,16 @@ Point			Raytracer::getPixelToRender(double progress) const
 {
   int			width = _config->getWidth();
   int			height = _config->getHeight();
-  int			pixelIndex;
 
   if (_config->getRenderingSamplingMethod() == RSM_LINEAR_HORIZONTAL)
     {
-      pixelIndex = progress * width * height;
-      return (Point(pixelIndex % width, pixelIndex / width, 0));
+      return (Point(_thread->_currentPixel % width,
+		    _thread->_currentPixel / width, 0));
     }
   else if (_config->getRenderingSamplingMethod() == RSM_LINEAR_VERTICAL)
     {
-      pixelIndex = progress * width * height;
-      return (Point(pixelIndex / height, pixelIndex % height, 0));
+      return (Point(_thread->_currentPixel / height,
+		    _thread->_currentPixel % height, 0));
     }
   return (Point(0,0,0));
 }
@@ -141,11 +142,6 @@ Color			Raytracer::renderPixel(double x, double y)
     _interface->pixelHasStartedRendering(x, y);
   ray = currentCamera.getRay(x / _config->getWidth(),
                              y / _config->getHeight());
-  ray._reflectionLevel = 0;
-  ray._reflectionIntensity = 1;
-  ray._refractionLevel = 0;
-  ray._refractionIntensity = 1;
-  ray._refractiveIndex = 1;
   Color pixelColor = throwRay(ray);
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
@@ -222,15 +218,19 @@ Color			Raytracer::throwRay(Ray& ray)
 	      refractedLight = throwRay(refractedRay);
       	    }
       	}
-      return (directLight + 
-	      specularLight *
-	      nearestObject->getMaterial().getSpecularCoeff() +
-	      reflectedLight *
-              nearestObject->getMaterial().getReflectionCoeff() +
-              refractedLight *
-              nearestObject->getMaterial().getTransmissionCoeff());
+      return ((((((directLight
+		   * (1.0 - nearestObject->getMaterial().getSpecularCoeff()))
+		  + (specularLight
+		     * nearestObject->getMaterial().getSpecularCoeff()))
+		 * (1.0 - nearestObject->getMaterial().getReflectionCoeff()))
+		+ (reflectedLight
+		   * nearestObject->getMaterial().getReflectionCoeff()))
+	       * (1.0 - nearestObject->getMaterial().getTransmissionCoeff()))
+	      + refractedLight
+	      * nearestObject->getMaterial().getTransmissionCoeff());
     }
-  return (directLight + specularLight + reflectedLight + refractedLight);
+  else
+    return (directLight);
 }
 
 void
@@ -288,5 +288,5 @@ void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
 			     specularLighting);
       directLight += objectColor * directLighting / 255;
       specularLight += specularLighting;
-    }  
+    }
 }

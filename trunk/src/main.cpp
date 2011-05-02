@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  2 14:38:45 2011 samuel olivier
+// Last update Mon May  2 16:08:37 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -24,39 +24,38 @@
 Scene		createScene2()
 {
   Material	mat("bleu");
-  mat.setColor(Color(255, 5, 55, 255));
-  mat.setSpecularCoeff(0.6);
+  mat.setColor(Color(255, 255, 255, 0));
+  mat.setSpecularCoeff(0.5);
   mat.setSpecularPow(50);
   mat.setReflectionCoeff(0);
-  mat.setTransmissionCoeff(0.6);
+  mat.setTransmissionCoeff(0);
   mat.setRefractionIndex(2);
-  Material	mat3 = mat;
-  mat3.setColor(Color(255, 255, 255));
   Material	mat2 = mat;
   mat2.setName("rouge");
-  mat2.setColor(Color(80, 80, 80));
-  mat2.setReflectionCoeff(0.2);
+  mat2.setColor(Color(255, 0, 0));
+  mat2.setReflectionCoeff(0);
   mat2.setTransmissionCoeff(0);
+  mat2.setRefractionIndex(0);
+  Material	matFloor(mat2);
+  matFloor.setColor(Color(255, 255, 255));
 
   vector<Camera*> cam;
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> sphere;
   sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
-  			      Rotation(0, 0, 10), mat, 4));
-  sphere.push_back(new Sphere(NULL, Point(60, -5, -3),
-  			      Rotation(0, 0, 0), mat3, 2));
-  // sphere.push_back(new Sphere(NULL, Point(30, -4, -2),
-  // 			      Rotation(0, 0, 0), mat, 2));
+  			      Rotation(0, 0, 0), mat, 5));
+  sphere.push_back(new Sphere(NULL, Point(100, 0, 0),
+  			      Rotation(0, 0, 0), mat2, 20));
   sphere.push_back(new Plan(NULL, Point(0, 0, -5),
-  			    Rotation(0, 0, 0), mat2));
+  			    Rotation(0, 0, 0), matFloor));
   vector<Object*> obj;
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(20, -50, 4), Color(255, 0, 0)));
-  light.push_back(new Spot(Point(0, 0, 30), Color(0, 255, 255)));
-  light.push_back(new Spot(Point(50, 0, 10), Color(0, 255, 255)));
+  light.push_back(new Spot(Point(20, -50, 4), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(20, 50, 4), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(50, 0, 20), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -69,6 +68,7 @@ RenderingConfiguration	createConfig2()
   res.setWidth(853);
   res.setHeight(480);
   res.setAntialiasing(1);
+  res.setExposure(1.5);
   res.setDirectLighting(true);
   res.setReflection(true);
   res.setTransparency(true);
@@ -129,5 +129,4 @@ int main(int ac, char **av)
   rt.stopRendering();
   SDL_Quit();
   return (0);
-  ac = (int)av;
 }
