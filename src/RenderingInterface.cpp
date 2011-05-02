@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:28:09 2011 loick michard
-// Last update Sat Apr 30 20:02:36 2011 franck lavisse
+// Last update Mon May  2 14:48:37 2011 samuel olivier
 //
 
 #include "RenderingInterface.hpp"
@@ -14,10 +14,12 @@ void RenderingInterface::pixelHasBeenRendered(int x,
 					      int y,
 					      Color color)
 {
+  color._r = x + y;
 }
 
 void RenderingInterface::pixelHasStartedRendering(int x, int y)
 {
+  x = y;
 }
 
 void RenderingInterface::photonMappingHasBegun()
@@ -54,4 +56,5 @@ void RenderingInterface::renderingHasFinished()
 
 void RenderingInterface::renderingHasProgressed(double progress)
 {
+  progress = progress;
 }

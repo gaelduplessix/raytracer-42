@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May  1 20:18:08 2011 samuel olivier
+// Last update Mon May  2 12:51:43 2011 samuel olivier
 // Last update Sun May  1 15:49:11 2011 loick michard
 //
 
@@ -151,6 +151,8 @@ Color			Raytracer::renderPixel(double x, double y)
   return (pixelColor);
 }
 
+#include <stdio.h>
+
 Color			Raytracer::throwRay(Ray& ray)
 {
   double		k;
@@ -158,6 +160,9 @@ Color			Raytracer::throwRay(Ray& ray)
   Color			directLight, specularLight;
   Color			reflectedLight, refractedLight;
 
+  // printf("refraction : %d | reflection : %d\n",
+  // 	 ray._refractionLevel,
+  // 	 ray._reflectionLevel);
   nearestObject = getNearestObject(ray, k);
   if (nearestObject)
     {
@@ -172,7 +177,7 @@ Color			Raytracer::throwRay(Ray& ray)
         {
 	  ray._reflectionIntensity *= 
 	    nearestObject->getMaterial().getReflectionCoeff();
-	  if (ray._reflectionIntensity > Raytracer::EPSILON_REFLECTION)
+	  if (ray._reflectionIntensity > EPSILON_REFLECTION)
 	    {
 	      Ray	reflectedRay(intersectPoint,
 				     nearestObject->
@@ -180,6 +185,8 @@ Color			Raytracer::throwRay(Ray& ray)
 						     ray._vector, true));
 
 	      reflectedRay._reflectionLevel = ray._reflectionLevel + 1;
+	      reflectedRay._refractionLevel = ray._refractionLevel;
+	      reflectedRay._refractionIntensity = ray._refractionIntensity;
 	      reflectedRay._reflectionIntensity =
 		ray._reflectionIntensity;
 	      reflectedLight = throwRay(reflectedRay);
@@ -209,13 +216,12 @@ Color			Raytracer::throwRay(Ray& ray)
 	      if (tmp != NULL)
 	      	_refractivePath.push(tmp);
       	      refractedRay._refractionLevel = ray._refractionLevel + 1;
+	      refractedRay._reflectionLevel = ray._reflectionLevel;
+	      refractedRay._reflectionIntensity = ray._reflectionIntensity;
       	      refractedRay._refractionIntensity = ray._refractionIntensity;
 	      refractedLight = throwRay(refractedRay);
       	    }
       	}
-    }
-  if (nearestObject)
-    {
       return (directLight + 
 	      specularLight *
 	      nearestObject->getMaterial().getSpecularCoeff() +
@@ -224,8 +230,7 @@ Color			Raytracer::throwRay(Ray& ray)
               refractedLight *
               nearestObject->getMaterial().getTransmissionCoeff());
     }
-  else
-    return (directLight + specularLight + reflectedLight + refractedLight);
+  return (directLight + specularLight + reflectedLight + refractedLight);
 }
 
 void

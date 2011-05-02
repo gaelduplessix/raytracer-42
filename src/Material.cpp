@@ -1,3 +1,13 @@
+//
+// Material.cpp for raytracer in /home/olivie_a//rendu/cpp/raytracer-42/src
+// 
+// Made by samuel olivier
+// Login   <olivie_a@epitech.net>
+// 
+// Started on  Sun May  1 20:39:22 2011 samuel olivier
+// Last update Mon May  2 14:46:19 2011 samuel olivier
+//
+
 #include "Material.hpp"
 
 Material::Material(): _isTextured(false)
@@ -7,7 +17,7 @@ Material::Material(): _isTextured(false)
 
 Material::Material(const string& name): _isTextured(false)
 {
-
+  string	mnew = name;
 }
 
 Material::Material(const Texture& texture): _isTextured(false)

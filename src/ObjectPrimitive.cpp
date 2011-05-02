@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sun May  1 20:26:29 2011 samuel olivier
+// Last update Mon May  2 14:40:50 2011 samuel olivier
 //
 
 #include <cmath>
@@ -21,8 +21,8 @@ ObjectPrimitive::ObjectPrimitive(Object *object,
 				 const Point& absolutePosition,
 				 const Rotation& rotation,
 				 const Material& material):
-  _object(object), _absolutePosition(absolutePosition),
-  _rotation(rotation), _material(material)
+  _absolutePosition(absolutePosition), _rotation(rotation),
+  _material(material), _object(object)
 {
 
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Sun May  1 18:28:24 2011 samuel olivier
+// Last update Mon May  2 14:47:21 2011 samuel olivier
 //
 
 #include <vector>
@@ -63,9 +63,11 @@ Vector		Plan::getNormalVector(const Point& intersectPoint,
   if (cosA < 0)
     return (normal * -1);
   return (normal);
+  intersectPoint.getX();
 }
 
 bool		Plan::isInBoundingBox(BoundingBox& box) const
 {
-
+  box = box;
+  return (true);
 }

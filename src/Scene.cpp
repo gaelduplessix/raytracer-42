@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sat Apr 30 13:50:10 2011 gael jochaud-du-plessix
+// Last update Mon May  2 14:51:34 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -20,12 +20,12 @@ Scene::Scene(vector<Camera*> cameras,
 
 Scene::Scene(string filename)
 {
-  
+  filename = filename;
 }
 
 void			Scene::loadFromFile(string filename)
 {
-  
+  filename = filename;
 }
 
 const vector<Camera*>&	Scene::getCameras(void) const
