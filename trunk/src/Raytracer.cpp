@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May  2 16:17:54 2011 gael jochaud-du-plessix
+// Last update Mon May  2 20:45:40 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -133,6 +133,8 @@ Point			Raytracer::getPixelToRender(double progress) const
   return (Point(0,0,0));
 }
 
+#include <stdio.h>
+
 Color			Raytracer::renderPixel(double x, double y)
 {
   Ray			ray;
@@ -143,11 +145,10 @@ Color			Raytracer::renderPixel(double x, double y)
   ray = currentCamera.getRay(x / _config->getWidth(),
                              y / _config->getHeight());
   Color pixelColor = throwRay(ray);
+
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
 }
-
-#include <stdio.h>
 
 Color			Raytracer::throwRay(Ray& ray)
 {
@@ -156,9 +157,6 @@ Color			Raytracer::throwRay(Ray& ray)
   Color			directLight, specularLight;
   Color			reflectedLight, refractedLight;
 
-  // printf("refraction : %d | reflection : %d\n",
-  // 	 ray._refractionLevel,
-  // 	 ray._reflectionLevel);
   nearestObject = getNearestObject(ray, k);
   if (nearestObject)
     {
@@ -166,8 +164,8 @@ Color			Raytracer::throwRay(Ray& ray)
       if (_config->isDirectLighting() || _config->isSpecularLighting())
 	calcLightForObject(*nearestObject, intersectPoint,
 			   ray._vector, directLight, specularLight);
-
-      if (getRenderingConfiguration()->isReflectionEnabled()
+      if (getRenderingConfiguration()->isReflectionEnabled() &&
+	  nearestObject->getMaterial().getReflectionCoeff() > 0
 	  && ray._reflectionLevel < 
 	  getRenderingConfiguration()->getReflectionMaxDepth())
         {
@@ -189,7 +187,8 @@ Color			Raytracer::throwRay(Ray& ray)
 	    }
 	}
 
-      if (getRenderingConfiguration()->isTransparencyEnabled()
+      if (getRenderingConfiguration()->isTransparencyEnabled() &&
+	  nearestObject->getMaterial().getTransmissionCoeff() > 0
       	  && ray._refractionLevel <
       	  getRenderingConfiguration()->getTransparencyMaxDepth())
         {
@@ -199,7 +198,7 @@ Color			Raytracer::throwRay(Ray& ray)
 	  else
 	    ray._refractiveIndex = 1;
       	  ray._refractionIntensity *=
-      	    nearestObject->getMaterial().getRefractionIndex();
+      	    nearestObject->getMaterial().getTransmissionCoeff();
       	  if (ray._refractionIntensity > Raytracer::EPSILON_REFRACTION)
       	    {
       	      Ray	refractedRay =
@@ -207,10 +206,14 @@ Color			Raytracer::throwRay(Ray& ray)
 	      				       _refractivePath);
 	      ObjectPrimitive*	tmp = NULL;
 	      double		useless = -1;
-
 	      nearestObject->intersectWithRay(refractedRay, tmp, useless);
-	      if (tmp != NULL)
-	      	_refractivePath.push(tmp);
+	      if (tmp != NULL && useless > 0)
+		_refractivePath.push(tmp);
+	      else
+		{
+		  refractedRay._vector = ray._vector;
+		  refractedRay._refractiveIndex = ray._refractiveIndex; 
+		}
       	      refractedRay._refractionLevel = ray._refractionLevel + 1;
 	      refractedRay._reflectionLevel = ray._reflectionLevel;
 	      refractedRay._reflectionIntensity = ray._reflectionIntensity;

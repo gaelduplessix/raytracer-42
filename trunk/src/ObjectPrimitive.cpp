@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Mon May  2 18:43:37 2011 gael jochaud-du-plessix
+// Last update Mon May  2 20:28:53 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -97,11 +97,11 @@ ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
     normal.normalize();
   double	scal = normal * vector;
 
-  normal._x = - 2 * normal._x * scal + vector._x;
-  normal._y = - 2 * normal._y * scal + vector._y;
-  normal._z = - 2 * normal._z * scal + vector._z;
+  normal = normal * (-2 * scal) + vector;
   return (normal);
 }
+
+#include <stdio.h>
 
 Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
 						 const Ray& ray,
@@ -119,17 +119,16 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
     n2 = _material.getRefractionIndex();
   double	n = ray._refractiveIndex / n2;
   Vector	normal = getNormalVector(intersectPoint,
-                                         ray._vector).normalize();
-  Vector viewRay = ray._vector;
-  viewRay.normalize();
-  double	cos1 = normal * (viewRay * -1);
+                                         ray._vector);
+  Ray		res(intersectPoint, ray._vector);
+  res._vector.normalize();
+  double	cos1 = normal * (res._vector * -1);
   double	cos2 = sqrt(1 - (n * n) * (1 - (cos1 * cos1)));
-  Ray		res = ray;
 
   res.setPoint(intersectPoint);
-  if (cos1 > 0)
-    res.setVector((viewRay * n) + normal * ((n * cos1) - cos2));
+  if (cos2 * cos2 < 0)
+    res.setVector((res._vector * n) + normal * ((n * cos1) - cos2));
   else
-    res.setVector((viewRay * n) + normal * ((n * cos1) + cos2));
+    res.setVector((res._vector * n) + normal * ((n * cos1) + cos2));
   return (res);
 }

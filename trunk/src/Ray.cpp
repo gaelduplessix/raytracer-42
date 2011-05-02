@@ -5,12 +5,14 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Thu Apr 28 18:50:52 2011 samuel olivier
-// Last update Mon May  2 15:23:36 2011 gael jochaud-du-plessix
+// Last update Mon May  2 20:10:14 2011 gael jochaud-du-plessix
 //
 
 #include "Ray.hpp"
 
-Ray::Ray()
+Ray::Ray():
+   _reflectionLevel(0), _reflectionIntensity(1),
+  _refractionLevel(0), _refractionIntensity(1), _refractiveIndex(1)
 {
 
 }
