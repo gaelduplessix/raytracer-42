@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  2 20:46:50 2011 gael jochaud-du-plessix
+// Last update Mon May  2 23:55:13 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -49,8 +49,8 @@ Scene		createScene2()
 
   refraction.setTransmissionCoeff(0.8);
   refraction.setRefractionIndex(1.5);
-  sphere.push_back(new Plan(NULL, Point(25, 0, 0),
-  			    Rotation(0, -3.14 / 2, -3.14 / 6), refraction));
+  // sphere.push_back(new Plan(NULL, Point(25, 0, 0),
+  // 			    Rotation(0, -3.14 / 2, -3.14 / 6), refraction));
   // sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
   // 			      Rotation(0, 0, 0), mat3, 2));
   // Mur fond
