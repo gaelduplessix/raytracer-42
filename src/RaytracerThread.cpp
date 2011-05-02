@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 20:16:15 2011 samuel olivier
+// Last update Mon May  2 15:11:33 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -63,6 +63,7 @@ void	RaytracerThread::initBeforeLaunching(void)
     delete _image;
   _image = new QImage(width, height, QImage::Format_ARGB32);
   _progress = 0.f;
+  _currentPixel = 0;
 }
 
 void	RaytracerThread::setRaytracedPixel(int x, int y, bool value)
