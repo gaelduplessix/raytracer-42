@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Mon May  2 17:07:25 2011 gael jochaud-du-plessix
+// Last update Mon May  2 22:24:24 2011 loick michard
 //
 
 #include <vector>
@@ -19,6 +19,11 @@ Plan::Plan(Object*object,
   ObjectPrimitive(object, absolutePosition, rotation, material)
 {
 
+}
+
+const Color&	       Plan::getColor(const Point& intersectPoint) const
+{
+  _material.getColor(0, 0);
 }
 
 void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const

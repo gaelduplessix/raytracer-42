@@ -5,12 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May  2 18:04:59 2011 gael jochaud-du-plessix
+// Last update Tue May  3 00:14:47 2011 loick michard
 //
 
 #include <cmath>
 #include <vector>
-
 #include "Raytracer.hpp"
 #include "Sphere.hpp"
 #include "EquationSolver.hpp"
@@ -29,6 +28,26 @@ Sphere::Sphere(Object*object,
 void		Sphere::setRadius(double r)
 {
   _radius = r;
+}
+
+const Color&	Sphere::getColor(const Point& intersectPoint) const
+{
+  Point newPoint = intersectPoint - _absolutePosition;
+  Vector vn(0, 0, -1);
+  Vector ve(1, 0, 0);
+
+  newPoint.rotate(Rotation(0, 0, 0));
+  newPoint.normalize();
+  double phi = acos(- (vn * newPoint));
+  double x = phi / M_PI;
+  double theta = (acos((newPoint * ve) / sin(phi))) / (2 * M_PI);
+  vn *= ve;
+  double y;
+  if (vn * newPoint > 0)
+    y = theta;
+  else
+    y =  1 - theta;
+  _material.getColor(y, x);
 }
 
 void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const
