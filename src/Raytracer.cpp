@@ -5,11 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May  2 20:45:40 2011 gael jochaud-du-plessix
+// Last update Mon May  2 23:58:08 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "Raytracer.hpp"
 
@@ -17,6 +19,7 @@ Raytracer::Raytracer()
 {
   _thread = new RaytracerThread(this);
   _interface = NULL;
+  srand(time(NULL));
 }
 
 Raytracer::~Raytracer()
@@ -104,7 +107,7 @@ const Camera&		Raytracer::getCurrentCamera(void)
 
 void		Raytracer::renderingLoop(double& progress)
 {
-  Point		pixelToRender = getPixelToRender(progress);
+  Point		pixelToRender = getPixelToRender();
   Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
 
   progress = (double)++_thread->_currentPixel
@@ -115,7 +118,7 @@ void		Raytracer::renderingLoop(double& progress)
 				     pixelColor);
 }
 
-Point			Raytracer::getPixelToRender(double progress) const
+Point			Raytracer::getPixelToRender(void) const
 {
   int			width = _config->getWidth();
   int			height = _config->getHeight();
@@ -138,14 +141,25 @@ Point			Raytracer::getPixelToRender(double progress) const
 Color			Raytracer::renderPixel(double x, double y)
 {
   Ray			ray;
+  double		subx, suby;
+  int			antialiasing = _config->getAntialiasing();
   const Camera&		currentCamera = getCurrentCamera();
-
+  Color			pixelColor;
+  
   if (_interface)
     _interface->pixelHasStartedRendering(x, y);
-  ray = currentCamera.getRay(x / _config->getWidth(),
-                             y / _config->getHeight());
-  Color pixelColor = throwRay(ray);
-
+  for (int i = 0; i < antialiasing; ++i)
+    {
+      subx = x + (double)i / antialiasing;
+      for (int j = 0; j < antialiasing; ++j)
+	{
+	  suby = y + (double)j / antialiasing;
+	  ray = currentCamera.getRay(subx / _config->getWidth(),
+				     suby / _config->getHeight());
+	  pixelColor += throwRay(ray);
+	}
+    }
+  pixelColor /= antialiasing * antialiasing;
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
 }
@@ -155,7 +169,6 @@ Color			Raytracer::throwRay(Ray& ray)
   double		k;
   ObjectPrimitive*	nearestObject;
   Color			directLight, specularLight;
-  Color			reflectedLight, refractedLight;
 
   nearestObject = getNearestObject(ray, k);
   if (nearestObject)
@@ -164,63 +177,12 @@ Color			Raytracer::throwRay(Ray& ray)
       if (_config->isDirectLighting() || _config->isSpecularLighting())
 	calcLightForObject(*nearestObject, intersectPoint,
 			   ray._vector, directLight, specularLight);
-      if (getRenderingConfiguration()->isReflectionEnabled() &&
-	  nearestObject->getMaterial().getReflectionCoeff() > 0
-	  && ray._reflectionLevel < 
-	  getRenderingConfiguration()->getReflectionMaxDepth())
-        {
-	  ray._reflectionIntensity *= 
-	    nearestObject->getMaterial().getReflectionCoeff();
-	  if (ray._reflectionIntensity > EPSILON_REFLECTION)
-	    {
-	      Ray	reflectedRay(intersectPoint,
-				     nearestObject->
-				     getReflectedVector(intersectPoint,
-						     ray._vector, true));
-
-	      reflectedRay._reflectionLevel = ray._reflectionLevel + 1;
-	      reflectedRay._refractionLevel = ray._refractionLevel;
-	      reflectedRay._refractionIntensity = ray._refractionIntensity;
-	      reflectedRay._reflectionIntensity =
-		ray._reflectionIntensity;
-	      reflectedLight = throwRay(reflectedRay);
-	    }
-	}
-
-      if (getRenderingConfiguration()->isTransparencyEnabled() &&
-	  nearestObject->getMaterial().getTransmissionCoeff() > 0
-      	  && ray._refractionLevel <
-      	  getRenderingConfiguration()->getTransparencyMaxDepth())
-        {
-	  if (_refractivePath.size() > 0)
-	    ray._refractiveIndex =
-	      _refractivePath.top()->getMaterial().getRefractionIndex();
-	  else
-	    ray._refractiveIndex = 1;
-      	  ray._refractionIntensity *=
-      	    nearestObject->getMaterial().getTransmissionCoeff();
-      	  if (ray._refractionIntensity > Raytracer::EPSILON_REFRACTION)
-      	    {
-      	      Ray	refractedRay =
-	      	nearestObject->getRefractedRay(intersectPoint, ray,
-	      				       _refractivePath);
-	      ObjectPrimitive*	tmp = NULL;
-	      double		useless = -1;
-	      nearestObject->intersectWithRay(refractedRay, tmp, useless);
-	      if (tmp != NULL && useless > 0)
-		_refractivePath.push(tmp);
-	      else
-		{
-		  refractedRay._vector = ray._vector;
-		  refractedRay._refractiveIndex = ray._refractiveIndex; 
-		}
-      	      refractedRay._refractionLevel = ray._refractionLevel + 1;
-	      refractedRay._reflectionLevel = ray._reflectionLevel;
-	      refractedRay._reflectionIntensity = ray._reflectionIntensity;
-      	      refractedRay._refractionIntensity = ray._refractionIntensity;
-	      refractedLight = throwRay(refractedRay);
-      	    }
-      	}
+      Color reflectedLight = calcReflectedLight(nearestObject,
+						intersectPoint,
+						ray);
+      Color refractedLight = calcTransmetedLight(nearestObject,
+						 intersectPoint,
+						 ray);
       return ((((((directLight
 		   * (1.0 - nearestObject->getMaterial().getSpecularCoeff()))
 		  + (specularLight
@@ -292,4 +254,72 @@ void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
       directLight += objectColor * directLighting / 255;
       specularLight += specularLighting;
     }
+}
+
+Color	Raytracer::calcReflectedLight(const ObjectPrimitive* nearestObject,
+				      const Point& intersectPoint,
+				      Ray& ray)
+{
+  if (getRenderingConfiguration()->isReflectionEnabled() &&
+      nearestObject->getMaterial().getReflectionCoeff() > 0
+      && ray._reflectionLevel <
+      getRenderingConfiguration()->getReflectionMaxDepth())
+    {
+      ray._reflectionIntensity *= 
+	nearestObject->getMaterial().getReflectionCoeff();
+      if (ray._reflectionIntensity > EPSILON_REFLECTION)
+	{
+	  Ray	reflectedRay(intersectPoint,
+			     nearestObject->
+			     getReflectedVector(intersectPoint,
+						ray._vector, true));
+
+	  reflectedRay._reflectionLevel = ray._reflectionLevel + 1;
+	  reflectedRay._refractionLevel = ray._refractionLevel;
+	  reflectedRay._refractionIntensity = ray._refractionIntensity;
+	  reflectedRay._reflectionIntensity =
+	    ray._reflectionIntensity;
+	  return (throwRay(reflectedRay));
+	}
+    }
+}
+
+Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
+				       const Point& intersectPoint,
+				       Ray& ray)
+{
+  if (getRenderingConfiguration()->isTransparencyEnabled() &&
+      nearestObject->getMaterial().getTransmissionCoeff() > 0
+      && ray._refractionLevel <
+      getRenderingConfiguration()->getTransparencyMaxDepth())
+    {
+      if (_refractivePath.size() > 0)
+	ray._refractiveIndex =
+	  _refractivePath.top()->getMaterial().getRefractionIndex();
+      else
+	ray._refractiveIndex = 1;
+      ray._refractionIntensity *=
+	nearestObject->getMaterial().getTransmissionCoeff();
+      if (ray._refractionIntensity > Raytracer::EPSILON_REFRACTION)
+	{
+	  Ray	refractedRay =
+	    nearestObject->getRefractedRay(intersectPoint, ray,
+					   _refractivePath);
+	  ObjectPrimitive*	tmp = NULL;
+	  double		useless = -1;
+	  nearestObject->intersectWithRay(refractedRay, tmp, useless);
+	  if (tmp != NULL && useless > 0)
+	    _refractivePath.push(tmp);
+	  else
+	    {
+	      refractedRay._vector = ray._vector;
+	      refractedRay._refractiveIndex = ray._refractiveIndex; 
+	    }
+	  refractedRay._refractionLevel = ray._refractionLevel + 1;
+	  refractedRay._reflectionLevel = ray._reflectionLevel;
+	  refractedRay._reflectionIntensity = ray._reflectionIntensity;
+	  refractedRay._refractionIntensity = ray._refractionIntensity;
+	  return (throwRay(refractedRay));
+	}
+    }  
 }

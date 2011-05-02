@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sun May  1 21:05:44 2011 samuel olivier
+// Last update Mon May  2 23:57:58 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -59,7 +59,7 @@ public:
   Color		renderPixel(double x, double y);
   void		renderingLoop(double& progress);
   const Camera&	getCurrentCamera(void);
-  Point		getPixelToRender(double progress) const;
+  Point		getPixelToRender(void) const;
 
   void	getIntersectingObjects(Ray ray, vector<t_intersected_object>&
 			       intersection) const;
@@ -71,6 +71,12 @@ public:
 			   const Vector& viewRay,
 			   Color& directLight,
 			   Color& specularLight) const;
+  Color	calcReflectedLight(const ObjectPrimitive* nearestObject,
+			   const Point& intersectPoint,
+			   Ray& ray);
+  Color	calcTransmetedLight(const ObjectPrimitive* nearestObject,
+			    const Point& intersectPoint,
+			    Ray& ray);
 
 private:
   Scene*			_scene;
