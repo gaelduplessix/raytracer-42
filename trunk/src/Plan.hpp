@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:17:13 2011 loick michard
-// Last update Sun May  1 18:28:35 2011 samuel olivier
+// Last update Mon May  2 22:23:54 2011 loick michard
 //
 
 #ifndef _PLAN_HPP_
@@ -21,6 +21,7 @@ public:
 	 const Rotation& rotation,
 	 const Material& material);
 
+  const Color& getColor(const Point& intersectPoint) const;
   void		        addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const;
   void                  intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const;
   Vector	getNormalVector(const Point& intersectPoint,

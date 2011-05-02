@@ -241,7 +241,7 @@ void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
 {
   const vector<Light*>&	lights = _scene->getLights();
   int			nbLights = lights.size();
-  Color			objectColor = object.getMaterial().getColor(0, 0);
+  Color			objectColor = object.getColor(intersectPoint);
 
   for (int i = 0; i < nbLights; i++)
     {

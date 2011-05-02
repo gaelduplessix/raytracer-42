@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Sun May  1 18:23:10 2011 samuel olivier
+// Last update Mon May  2 22:23:08 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -44,6 +44,7 @@ public:
   void		setRotation(const Rotation& rotation);
   void		setMaterial(const Material& material);
 
+  virtual const Color& getColor(const Point& intersectPoint) const = 0;
   virtual void	addIntersectionWithRay(const Ray& ray,
 				       vector<struct s_intersected_object>&
 				       intersection) const = 0;

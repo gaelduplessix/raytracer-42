@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  2 23:55:13 2011 gael jochaud-du-plessix
+// Last update Tue May  3 00:21:26 2011 root
 //
 
 #include <vector>
@@ -19,6 +19,8 @@
 #include "Sphere.hpp"
 #include "Spot.hpp"
 #include "Plan.hpp"
+#include "Texture.hpp"
+
 // #include "gui/gui.hpp"
 
 Scene		createScene2()
@@ -35,7 +37,7 @@ Scene		createScene2()
   Material	matFloor("sol");
   matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
-  matFloor.setSpecularCoeff(0.2);
+  matFloor.setSpecularCoeff(0.5);
   matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
@@ -44,10 +46,13 @@ Scene		createScene2()
   vector<ObjectPrimitive*> sphere;
   sphere.push_back(new Sphere(NULL, Point(30, -3, 3),
   			      Rotation(0, 0, 0), reflection, 3));
+  Material special = refraction;
+  special.setTexture(new Texture("terre.jpg"));
+  special.setTransmissionCoeff(0);
   sphere.push_back(new Sphere(NULL, Point(20, 4, 3),
-  			      Rotation(0, 0, 0), refraction, 3));
+  			      Rotation(0, 0, 0), special, 3));
 
-  refraction.setTransmissionCoeff(0.8);
+  refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
   // sphere.push_back(new Plan(NULL, Point(25, 0, 0),
   // 			    Rotation(0, -3.14 / 2, -3.14 / 6), refraction));
@@ -94,7 +99,7 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(1);
+  res.setAntialiasing(4);
   res.setExposure(1.5);
   res.setDirectLighting(true);
   res.setReflection(true);

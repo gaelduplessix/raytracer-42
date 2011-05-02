@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Mon May  2 19:43:02 2011 gael jochaud-du-plessix
+// Last update Mon May  2 22:34:55 2011 loick michard
 //
 
 #include "Material.hpp"
@@ -79,6 +79,7 @@ void	Material::setColor(const Color& color)
 void	Material::setTexture(Texture* texture)
 {
   _texture = texture;
+  _isTextured = true;
 }
 
 void	Material::setSpecularCoeff(double specularCoeff)
