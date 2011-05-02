@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Mon May  2 14:40:50 2011 samuel olivier
+// Last update Mon May  2 16:55:27 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -84,6 +84,8 @@ inline Ray	ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const
 
   return (modified);
 }
+
+#include <iostream>
 
 Vector
 ObjectPrimitive::getReflectedVector(const Point& intersectPoint,

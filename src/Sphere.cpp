@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May  2 14:53:26 2011 samuel olivier
+// Last update Mon May  2 17:00:36 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -100,7 +100,7 @@ Vector		Sphere::getNormalVector(const Point& intersectPoint,
   cosA = cosA / (viewVector.getNorm() * normal.getNorm());
   if (cosA <= 0)
     return (normal * -1);
-  return (normal);
+  return (normal.normalize());
 }
 
 bool		Sphere::isInBoundingBox(BoundingBox& box) const

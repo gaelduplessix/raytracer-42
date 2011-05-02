@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Sat Apr 30 20:02:31 2011 loick michard
+// Last update Mon May  2 17:27:34 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -78,21 +78,20 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 
   if (!(nearestObject && k <= 1 && k > EPSILON))
     {
-      double scalar, cosa;
+      double scalar;
       if (raytracer.getRenderingConfiguration()->isDirectLighting())
 	{
-	  scalar = lightVector * normal;
-	  cosa = scalar /
+	  scalar = lightVector * normal /
 	    (lightVector.getNorm() * normal.getNorm());
-	  directLighting = _color * cosa;
+	  directLighting = _color * scalar;
 	}
       if (raytracer.getRenderingConfiguration()->isSpecularLighting())
 	{
-	  scalar = reflectedVector * viewRay;
-	  cosa = scalar /
+	  scalar = reflectedVector * viewRay /
 	    (reflectedVector.getNorm() * viewRay.getNorm());
-	  specularLighting =
-	    _color * pow(cosa, primitive.getMaterial().getSpecularPow());
+	  if (scalar > 0)
+	    specularLighting =
+	      _color * pow(scalar, primitive.getMaterial().getSpecularPow());
 	}
     }
 }

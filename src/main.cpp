@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  2 16:08:37 2011 gael jochaud-du-plessix
+// Last update Mon May  2 17:31:38 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -25,10 +25,10 @@ Scene		createScene2()
 {
   Material	mat("bleu");
   mat.setColor(Color(255, 255, 255, 0));
-  mat.setSpecularCoeff(0.5);
+  mat.setSpecularCoeff(0.6);
   mat.setSpecularPow(50);
   mat.setReflectionCoeff(0);
-  mat.setTransmissionCoeff(0);
+  mat.setTransmissionCoeff(1);
   mat.setRefractionIndex(2);
   Material	mat2 = mat;
   mat2.setName("rouge");
@@ -55,7 +55,7 @@ Scene		createScene2()
   vector<Light*> light;
   light.push_back(new Spot(Point(20, -50, 4), Color(255, 255, 255)));
   light.push_back(new Spot(Point(20, 50, 4), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(50, 0, 20), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(100, 50, 20), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);

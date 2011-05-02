@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Mon May  2 14:47:21 2011 samuel olivier
+// Last update Mon May  2 17:07:25 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -56,14 +56,13 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
 Vector		Plan::getNormalVector(const Point& intersectPoint,
 				      const Vector& viewVector) const
 {
-  Vector	normal(0, 0, 100);
+  Vector	normal(0, 0, 1);
   normal.rotate(_rotation);
   double        cosA = viewVector * normal;
   cosA = cosA / (viewVector.getNorm() * normal.getNorm());
   if (cosA < 0)
     return (normal * -1);
   return (normal);
-  intersectPoint.getX();
 }
 
 bool		Plan::isInBoundingBox(BoundingBox& box) const
