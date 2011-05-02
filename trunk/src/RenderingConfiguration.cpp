@@ -9,7 +9,8 @@ RenderingConfiguration::RenderingConfiguration():
   _diffuseLightingSampling(0), _fieldDepthEnabled(false),
   _fieldDepthSampling(0)
 {
-
+  _transparency.enabled = false;
+  _reflection.enabled = false;
 }
 
 int	RenderingConfiguration::getWidth(void) const

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sun May  1 16:02:44 2011 samuel olivier
+// Last update Sun May  1 21:05:44 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -34,8 +34,8 @@ public:
   const static int	NO_SCENE_SPECIFIED = 0;
   const static int	NO_CONFIG_SPECIFIED = 1;
   const static int	NO_INTERFACE_SPECIFIED = 2;
-  const static int	EPSILON_REFLECTION = 1e-2;
-  const static int	EPSILON_REFRACTION = 1e-2;
+  const static double	EPSILON_REFLECTION = 1e-2;
+  const static double	EPSILON_REFRACTION = 1e-2;
 
   Raytracer();
   Raytracer(Scene* scene,

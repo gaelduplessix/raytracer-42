@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May  1 19:22:42 2011 samuel olivier
+// Last update Mon May  2 14:53:26 2011 samuel olivier
 //
 
 #include <cmath>
@@ -51,14 +51,12 @@ void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
     _radius * _radius;
   vector<double> solutions = 
     EquationSolver::solveQuadraticEquation(a, b, c);
-  for (int i = 0; i++; i < solutions.size())
-    {
-      if (solutions[i] > EPSILON)
-	{
-	  intersection.push_back((t_intersected_object){this, solutions});
-	  break;
-	}
-    } 
+  for (unsigned int i = 0 ; i++ ; i < solutions.size())
+    if (solutions[i] > EPSILON)
+      {
+	intersection.push_back((t_intersected_object){this, solutions});
+	break;
+      }
 }
 
 void                  Sphere::intersectWithRay(const Ray& ray,
@@ -83,7 +81,7 @@ void                  Sphere::intersectWithRay(const Ray& ray,
     _radius * _radius;
   vector<double> solutions =
     EquationSolver::solveQuadraticEquation(a, b, c);
-  for (int i = 0; i < solutions.size(); i++)
+  for (unsigned int i = 0; i < solutions.size(); i++)
     {
       if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 0))
         {
@@ -107,5 +105,6 @@ Vector		Sphere::getNormalVector(const Point& intersectPoint,
 
 bool		Sphere::isInBoundingBox(BoundingBox& box) const
 {
-
+  box = box;
+  return (true);
 }
