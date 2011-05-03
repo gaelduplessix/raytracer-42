@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Mon May  2 23:27:44 2011 loick michard
+// Last update Tue May  3 11:51:53 2011 gael jochaud-du-plessix
 //
 
 #include <QString>
@@ -21,26 +21,24 @@ Texture::~Texture()
 {
 
 }
-#include <iostream>
-const Color& Texture::getColor(double x, double y) const
+
+Color Texture::getColor(double x, double y) const
 {
   int	xi;
   int	yi;
 
+  if (x > 1)
+    x = x - (int)x;
+  if (y > 1)
+    y = y - (int)y;
+  if (x < 0)
+    x = 1 - (x - (int)(-x));
+  if (y < 0)
+    y = 1 - (y - (int)(-y));
   xi = x * _image->width();
   yi = y * _image->height();
-  while (xi <= 0)
-    xi += _image->width();
-  while (yi <= 0)
-    yi += _image->height();
-  xi %= _image->width();
-  yi %= _image->height();
   if (_image)
-    {
-      QRgb rgb = _image->pixel(xi, yi);
-      QColor color(rgb);
-      return (Color(color.red(), color.green(), color.blue()));
-    }
+    return (Color(_image->pixel(xi, yi)));
   else
     return (Color(255, 255, 255));
 }

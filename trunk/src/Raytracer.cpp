@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May  2 23:58:08 2011 gael jochaud-du-plessix
+// Last update Tue May  3 10:46:13 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -282,6 +282,7 @@ Color	Raytracer::calcReflectedLight(const ObjectPrimitive* nearestObject,
 	  return (throwRay(reflectedRay));
 	}
     }
+  return (Color());
 }
 
 Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
@@ -321,5 +322,6 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 	  refractedRay._refractionIntensity = ray._refractionIntensity;
 	  return (throwRay(refractedRay));
 	}
-    }  
+    }
+  return (Color());
 }

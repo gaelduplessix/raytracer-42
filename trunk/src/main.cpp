@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Tue May  3 00:21:26 2011 root
+// Last update Tue May  3 10:52:54 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -58,28 +58,28 @@ Scene		createScene2()
   // 			    Rotation(0, -3.14 / 2, -3.14 / 6), refraction));
   // sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
   // 			      Rotation(0, 0, 0), mat3, 2));
-  // Mur fond
+  //Mur fond
   matFloor.setColor(Color(200, 200, 200));
-  sphere.push_back(new Plan(NULL, Point(40, 0, 0),
+  sphere.push_back(new Plan(NULL, Point(40, -5, 0),
   			    Rotation(0, -3.14 / 2, 0), matFloor));
   // Mur derriere
-  sphere.push_back(new Plan(NULL, Point(-0.5, 0, 0),
+  sphere.push_back(new Plan(NULL, Point(-0.5, -5, 0),
   			    Rotation(0, -3.14 / 2, 0), matFloor));
 
   // Sol
   matFloor.setColor(Color(38, 53, 61));
-  sphere.push_back(new Plan(NULL, Point(0, 0, 0),
+  sphere.push_back(new Plan(NULL, Point(20, -5, 0),
   			    Rotation(0, 0, 0), matFloor));
   // Plafond
-  sphere.push_back(new Plan(NULL, Point(0, 0, 15),
+  sphere.push_back(new Plan(NULL, Point(20, -5, 10),
   			    Rotation(0, 0, 0), matFloor));
   // Mur droit
   matFloor.setColor(Color(14, 102, 56));
-  sphere.push_back(new Plan(NULL, Point(0, 10, 0),
+  sphere.push_back(new Plan(NULL, Point(20, 10, 0),
   			    Rotation(3.14 / 2, 0, 0), matFloor));
   // Mur gauche
   matFloor.setColor(Color(178, 24, 45));
-  sphere.push_back(new Plan(NULL, Point(0, -10, 0),
+  sphere.push_back(new Plan(NULL, Point(20, -10, 0),
   			    Rotation(3.14 / 2, 0, 0), matFloor));
   vector<Object*> obj;
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
@@ -99,9 +99,10 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(4);
-  res.setExposure(1.5);
+  res.setAntialiasing(1);
+  res.setExposure(3);
   res.setDirectLighting(true);
+  res.setSpecularLighting(true);
   res.setReflection(true);
   res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Mon May  2 22:19:42 2011 loick michard
+// Last update Tue May  3 11:12:42 2011 gael jochaud-du-plessix
 //
 
 #ifndef _TEXTURE_HPP_
@@ -23,7 +23,7 @@ public:
   Texture(const string& path);
   ~Texture();
 
-  virtual const Color& getColor(double x, double y) const;
+  virtual Color getColor(double x, double y) const;
 
 private:
   QImage	*_image;

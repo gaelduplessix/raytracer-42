@@ -5,11 +5,13 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 20:08:09 2011 loick michard
+// Last update Tue May  3 11:27:25 2011 gael jochaud-du-plessix
 //
 
 #ifndef _COLOR_HPP_
 #define _COLOR_HPP_
+
+#include <QColor>
 
 class Color
 {
@@ -18,7 +20,8 @@ public:
 
   Color();
   Color(int r, int g, int b, int a=255);
-  Color(int color);
+  explicit Color(int color);
+  Color(QRgb color);
 
   int	getR(void) const;
   int	getG(void) const;

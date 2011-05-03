@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Tue May  3 00:14:47 2011 loick michard
+// Last update Tue May  3 11:48:09 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -36,7 +36,7 @@ const Color&	Sphere::getColor(const Point& intersectPoint) const
   Vector vn(0, 0, -1);
   Vector ve(1, 0, 0);
 
-  newPoint.rotate(Rotation(0, 0, 0));
+  newPoint.rotate(_rotation);
   newPoint.normalize();
   double phi = acos(- (vn * newPoint));
   double x = phi / M_PI;
