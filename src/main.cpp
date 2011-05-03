@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Tue May  3 10:52:54 2011 gael jochaud-du-plessix
+// Last update Tue May  3 13:48:51 2011 loick michard
 //
 
 #include <vector>
@@ -20,6 +20,7 @@
 #include "Spot.hpp"
 #include "Plan.hpp"
 #include "Texture.hpp"
+#include "CheckerBoard.hpp"
 
 // #include "gui/gui.hpp"
 
@@ -47,7 +48,9 @@ Scene		createScene2()
   sphere.push_back(new Sphere(NULL, Point(30, -3, 3),
   			      Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  special.setTexture(new Texture("terre.jpg"));
+  //special.setTexture(new Texture("terre.jpg"));
+  special.setTexture(new CheckerBoard(Color(255, 0, 0), 
+				      Color(0, 0, 255), 10, 10));
   special.setTransmissionCoeff(0);
   sphere.push_back(new Sphere(NULL, Point(20, 4, 3),
   			      Rotation(0, 0, 0), special, 3));
@@ -59,6 +62,8 @@ Scene		createScene2()
   // sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
   // 			      Rotation(0, 0, 0), mat3, 2));
   //Mur fond
+  matFloor.setTexture(new CheckerBoard(Color(255, 0, 0),
+                                      Color(0, 0, 255), 10, 10));
   matFloor.setColor(Color(200, 200, 200));
   sphere.push_back(new Plan(NULL, Point(40, -5, 0),
   			    Rotation(0, -3.14 / 2, 0), matFloor));

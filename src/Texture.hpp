@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Tue May  3 11:12:42 2011 gael jochaud-du-plessix
+// Last update Tue May  3 13:45:16 2011 loick michard
 //
 
 #ifndef _TEXTURE_HPP_
@@ -20,13 +20,21 @@ using namespace std;
 class Texture
 {
 public:
-  Texture(const string& path);
+  Texture();
+  Texture(const string& path, 
+	  double repeatWidth = 1, double repeatHeight = 1);
+  Texture(double repeatWidth, double repeatHeight);
   ~Texture();
 
   virtual Color getColor(double x, double y) const;
+  virtual Color getPixel(double x, double y) const;
+
+protected:
+  double	_repeatWidth;
+  double	_repeatHeight;
 
 private:
-  QImage	*_image;
+  QImage        *_image;
 };
 
 #endif
