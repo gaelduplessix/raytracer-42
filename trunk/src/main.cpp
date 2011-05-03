@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Tue May  3 13:48:51 2011 loick michard
+// Last update Tue May  3 13:51:44 2011 loick michard
 //
 
 #include <vector>
@@ -62,8 +62,8 @@ Scene		createScene2()
   // sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
   // 			      Rotation(0, 0, 0), mat3, 2));
   //Mur fond
-  matFloor.setTexture(new CheckerBoard(Color(255, 0, 0),
-                                      Color(0, 0, 255), 10, 10));
+  //matFloor.setTexture(new CheckerBoard(Color(255, 0, 0),
+  //                                  Color(0, 0, 255), 10, 10));
   matFloor.setColor(Color(200, 200, 200));
   sphere.push_back(new Plan(NULL, Point(40, -5, 0),
   			    Rotation(0, -3.14 / 2, 0), matFloor));
