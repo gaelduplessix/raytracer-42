@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Tue May  3 22:11:24 2011 gael jochaud-du-plessix
+// Last update Tue May  3 22:42:32 2011 loick michard
 //
 
 #include <vector>
@@ -20,6 +20,7 @@
 #include "Spot.hpp"
 #include "Plan.hpp"
 #include "Texture.hpp"
+#include "PerlinNoise.hpp"
 
 // #include "gui/gui.hpp"
 
@@ -27,7 +28,7 @@ Scene		createScene2()
 {
   Material	mat("base");
   mat.setColor(Color(255, 255, 255, 0));
-  mat.setSpecularCoeff(0.6);
+  mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
   reflection.setReflectionCoeff(1);
@@ -47,12 +48,15 @@ Scene		createScene2()
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  special.setTexture(new Texture("terre.jpg"));
+  special.setTexture(new PerlinNoise());
   special.setTransmissionCoeff(0);
+  special.setReflectionCoeff(0.2);
   primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
 				  Rotation(0, 0, 0), reflection, 3));
-  primitives.push_back(new Sphere(NULL, Point(20, 4, 0),
-				  Rotation(0, 0, 0), refraction, 3));
+  primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
+				  Rotation(0, 0, 0), special, 3));
+  primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
+                                  Rotation(0, 0, 0), refraction, 1));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
 
@@ -78,7 +82,7 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(4);
+  res.setAntialiasing(8);
   res.setExposure(2);
   res.setDirectLighting(true);
   res.setSpecularLighting(true);
