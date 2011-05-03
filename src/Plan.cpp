@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Mon May  2 22:24:24 2011 loick michard
+// Last update Tue May  3 10:53:33 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -53,8 +53,13 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
     return ;
   if (result < res || res < 0)
     {
-      primitive = (ObjectPrimitive*)this;
-      res = result;
+      Point intersectPoint = newRay._point + newRay._vector * result;
+      if (intersectPoint._x > 0 && intersectPoint._y > 0
+	  && intersectPoint._x < 10 && intersectPoint._y < 10)
+	{
+	  primitive = (ObjectPrimitive*)this;
+	  res = result;
+	}
     }
 }
 

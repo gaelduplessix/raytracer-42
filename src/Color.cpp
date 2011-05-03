@@ -5,12 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Sat Apr 30 20:11:19 2011 loick michard
+// Last update Tue May  3 11:28:16 2011 gael jochaud-du-plessix
 //
 
-#include <cmath>
-
 #include "Color.hpp"
+
+#include <cmath>
+#include <QColor>
 
 Color::Color():
   _r(0), _g(0), _b(0), _a(0)
@@ -38,6 +39,14 @@ Color::Color(int color)
   _b = ptr[2];
   _a = ptr[3];
 #endif
+}
+
+Color::Color(QRgb color)
+{
+  _r = qRed(color);
+  _g = qGreen(color);
+  _b = qBlue(color);
+  _a = qAlpha(color);
 }
 
 int	Color::getR(void) const
