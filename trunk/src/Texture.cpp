@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Tue May  3 11:51:53 2011 gael jochaud-du-plessix
+// Last update Tue May  3 12:01:54 2011 gael jochaud-du-plessix
 //
 
 #include <QString>
@@ -21,7 +21,7 @@ Texture::~Texture()
 {
 
 }
-
+#include <iostream>
 Color Texture::getColor(double x, double y) const
 {
   int	xi;
@@ -32,9 +32,9 @@ Color Texture::getColor(double x, double y) const
   if (y > 1)
     y = y - (int)y;
   if (x < 0)
-    x = 1 - (x - (int)(-x));
+    x = 1 + (x + (int)(-x));
   if (y < 0)
-    y = 1 - (y - (int)(-y));
+    y = 1 + (y + (int)(-y));
   xi = x * _image->width();
   yi = y * _image->height();
   if (_image)
