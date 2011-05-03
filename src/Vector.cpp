@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Sat Apr 30 20:48:17 2011 loick michard
+// Last update Tue May  3 14:52:42 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -108,9 +108,9 @@ void	Vector::rotate(const Vector& rotation, int direction)
 {
   if (!direction)
     {
-      this->rotateX(rotation._x);
-      this->rotateY(rotation._y);
       this->rotateZ(rotation._z);
+      this->rotateY(rotation._y);
+      this->rotateX(rotation._x);
     }
   else
     {

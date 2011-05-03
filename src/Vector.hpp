@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:39:57 2011 loick michard
-// Last update Sat Apr 30 20:48:35 2011 loick michard
+// Last update Tue May  3 17:11:38 2011 gael jochaud-du-plessix
 //
 
 #ifndef _VECTOR_H_
@@ -15,7 +15,7 @@ class Vector
 {
 public:
   Vector();
-  Vector(double x, double y, double z);
+  Vector(double x, double y, double z=0);
   
   double	getX(void) const;
   double	getY(void) const;

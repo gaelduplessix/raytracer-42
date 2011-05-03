@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Tue May  3 22:11:24 2011 gael jochaud-du-plessix
+// Last update Tue May  3 12:55:17 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -33,7 +33,7 @@ Scene		createScene2()
   reflection.setReflectionCoeff(1);
   Material	refraction = mat;
   refraction.setTransmissionCoeff(1);
-  refraction.setRefractionIndex(1.5);
+  refraction.setRefractionIndex(2);
   Material	matFloor("sol");
   matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
@@ -41,27 +41,49 @@ Scene		createScene2()
   matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 0, 5), Rotation(0, 0, 0)));
 
-  vector<ObjectPrimitive*> primitives;
-  //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
-  //				  Rotation(0, 0, 0), reflection, 3));
+  vector<ObjectPrimitive*> sphere;
+  sphere.push_back(new Sphere(NULL, Point(30, -3, 3),
+  			      Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
   special.setTexture(new Texture("terre.jpg"));
   special.setTransmissionCoeff(0);
-  primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
-				  Rotation(0, 0, 0), reflection, 3));
-  primitives.push_back(new Sphere(NULL, Point(20, 4, 0),
-				  Rotation(0, 0, 0), refraction, 3));
+  sphere.push_back(new Sphere(NULL, Point(20, 4, 3),
+  			      Rotation(0, 0, 0), special, 3));
+
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
+  // sphere.push_back(new Plan(NULL, Point(25, 0, 0),
+  // 			    Rotation(0, -3.14 / 2, -3.14 / 6), refraction));
+  // sphere.push_back(new Sphere(NULL, Point(30, 0, 0),
+  // 			      Rotation(0, 0, 0), mat3, 2));
+  //Mur fond
+  matFloor.setColor(Color(200, 200, 200));
+  Plan *plane = new Plan(NULL, Point(40, -5, 0),
+				    Rotation(0, -3.14 / 2, 0), matFloor);
+  sphere.push_back(plane);
+  // Mur derriere
+  sphere.push_back(new Plan(NULL, Point(-0.5, -5, 0),
+  			    Rotation(0, -3.14 / 2, 0), matFloor));
 
-  // primitives.push_back(new Plan(NULL, Point(0, 0, -5),
-  // 				Rotation(0, 0, 0), matFloor));
-
+  // Sol
+  matFloor.setColor(Color(38, 53, 61));
+  sphere.push_back(new Plan(NULL, Point(20, -5, 0),
+  			    Rotation(0, 0, 0), matFloor));
+  // Plafond
+  sphere.push_back(new Plan(NULL, Point(20, -5, 10),
+   			    Rotation(0, 0, 0), matFloor));
+  // Mur droit
+  matFloor.setColor(Color(14, 102, 56));
+  sphere.push_back(new Plan(NULL, Point(20, 10, 0),
+  			    Rotation(3.14 / 2, 0, 0), matFloor));
+  // Mur gauche
+  matFloor.setColor(Color(178, 24, 45));
+  sphere.push_back(new Plan(NULL, Point(20, -10, 0),
+  			    Rotation(3.14 / 2, 0, 0), matFloor));
   vector<Object*> obj;
-  obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
-			   true));
+  obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
   vector<Light*> light;
   light.push_back(new Spot(Point(-5, 0, 4), Color(255, 255, 255)));
@@ -78,8 +100,8 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(4);
-  res.setExposure(2);
+  res.setAntialiasing(1);
+  res.setExposure(3);
   res.setDirectLighting(true);
   res.setSpecularLighting(true);
   res.setReflection(true);
@@ -88,7 +110,6 @@ RenderingConfiguration	createConfig2()
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
-  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 
