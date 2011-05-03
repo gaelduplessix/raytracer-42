@@ -5,28 +5,41 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Tue May  3 12:01:54 2011 gael jochaud-du-plessix
+// Last update Tue May  3 13:47:17 2011 loick michard
 //
 
 #include <QString>
 #include <QColor>
 #include "Texture.hpp"
 
-Texture::Texture(const string& path)
+Texture::Texture()
+{
+
+}
+
+Texture::Texture(const string& path, 
+		 double repeatWidth, double repeatHeight)
 {
   _image = new QImage(QString(path.c_str()));
+  _repeatWidth = repeatWidth;
+  _repeatHeight = repeatHeight;
+}
+
+Texture::Texture(double repeatWidth, double repeatHeight):
+  _repeatWidth(repeatWidth), _repeatHeight(repeatHeight)
+{
+
 }
 
 Texture::~Texture()
 {
 
 }
-#include <iostream>
+
 Color Texture::getColor(double x, double y) const
 {
-  int	xi;
-  int	yi;
-
+  x *= _repeatWidth;
+  y *= _repeatHeight;
   if (x > 1)
     x = x - (int)x;
   if (y > 1)
@@ -35,10 +48,14 @@ Color Texture::getColor(double x, double y) const
     x = 1 + (x + (int)(-x));
   if (y < 0)
     y = 1 + (y + (int)(-y));
-  xi = x * _image->width();
-  yi = y * _image->height();
+  return (this->getPixel(x, y));
+}
+
+Color Texture::getPixel(double x, double y) const
+{
   if (_image)
-    return (Color(_image->pixel(xi, yi)));
+    return (Color(_image->pixel(x * _image->width(),
+                                y * _image->height())));
   else
     return (Color(255, 255, 255));
 }
