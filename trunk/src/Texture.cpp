@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Tue May  3 13:47:17 2011 loick michard
+// Last update Tue May  3 16:32:25 2011 loick michard
 //
 
 #include <QString>
@@ -33,7 +33,7 @@ Texture::Texture(double repeatWidth, double repeatHeight):
 
 Texture::~Texture()
 {
-
+  delete _image;
 }
 
 Color Texture::getColor(double x, double y) const
