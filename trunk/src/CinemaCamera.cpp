@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 15:33:54 2011 loick michard
-// Last update Sat Apr 30 13:45:12 2011 gael jochaud-du-plessix
+// Last update Tue May  3 21:57:18 2011 gael jochaud-du-plessix
 //
 
 #include "CinemaCamera.hpp"

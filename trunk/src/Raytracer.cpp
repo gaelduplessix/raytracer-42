@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Tue May  3 10:46:13 2011 gael jochaud-du-plessix
+// Last update Tue May  3 22:11:49 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -159,7 +159,8 @@ Color			Raytracer::renderPixel(double x, double y)
 	  pixelColor += throwRay(ray);
 	}
     }
-  pixelColor /= antialiasing * antialiasing;
+  if (antialiasing > 0)
+    pixelColor /= antialiasing * antialiasing;
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
 }
@@ -194,6 +195,8 @@ Color			Raytracer::throwRay(Ray& ray)
 	      + refractedLight
 	      * nearestObject->getMaterial().getTransmissionCoeff());
     }
+  else if (_config->getCubeMap() != NULL)
+    return (_config->getCubeMap()->getMapColor(ray._vector));
   else
     return (directLight);
 }

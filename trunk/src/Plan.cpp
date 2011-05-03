@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Tue May  3 10:53:33 2011 gael jochaud-du-plessix
+// Last update Tue May  3 14:50:50 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -16,14 +16,38 @@ Plan::Plan(Object*object,
 	       const Point& absolutePosition,
 	       const Rotation& rotation,
 	       const Material& material): 
-  ObjectPrimitive(object, absolutePosition, rotation, material)
+  ObjectPrimitive(object, absolutePosition, rotation, material),
+  _limitX(-1), _limitY(-1)
 {
 
 }
 
+void  Plan::setLimitX(double limitX)
+{
+  _limitX = limitX;
+}
+
+void  Plan::setLimitY(double limitY)
+{
+  _limitY = limitY;
+}
+
+double        Plan::getLimitX(void)
+{
+  return (_limitX);
+}
+
+double        Plan::getLimitY(void)
+{
+  return (_limitY);  
+}
+
+
 const Color&	       Plan::getColor(const Point& intersectPoint) const
 {
-  _material.getColor(0, 0);
+  Point simplePoint = intersectPoint - _absolutePosition;
+  simplePoint.rotate(_rotation);
+  _material.getColor(simplePoint._x, simplePoint._y);
 }
 
 void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const
@@ -41,6 +65,8 @@ void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_inters
   intersection.push_back((t_intersected_object){this, k});
 }
 
+#include <iostream>
+
 void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const
 {
   Ray           newRay;
@@ -53,13 +79,18 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
     return ;
   if (result < res || res < 0)
     {
-      Point intersectPoint = newRay._point + newRay._vector * result;
-      if (intersectPoint._x > 0 && intersectPoint._y > 0
-	  && intersectPoint._x < 10 && intersectPoint._y < 10)
-	{
-	  primitive = (ObjectPrimitive*)this;
-	  res = result;
-	}
+      if (_limitX > 0 || _limitY > 0)
+      	{
+      	  Point	intersectPoint = newRay._point + newRay._vector * result;
+      	  if (_limitX > 0 && ((intersectPoint._x < 0)
+      			      || (intersectPoint._x > _limitX)))
+      	    return ;
+      	  if (_limitY > 0 && ((intersectPoint._y < 0)
+      			      || (intersectPoint._y > _limitY)))
+      	    return ;
+      	}
+      primitive = (ObjectPrimitive*)this;
+      res = result;
     }
 }
 

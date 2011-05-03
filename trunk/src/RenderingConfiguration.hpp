@@ -5,11 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Sun May  1 16:10:38 2011 samuel olivier
+// Last update Tue May  3 17:23:17 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
 #define _RENDERINGCONFIGURATION_HPP_
+
+#include "CubeMap.hpp"
 
 enum	renderingSamplingMethod{
   RSM_LINEAR_HORIZONTAL,
@@ -80,6 +82,9 @@ public:
   void          setTransparencyDiffused(bool diffused = 1);
   void          setTransparencyDiffusedSampling(int diffusedSampling);
 
+  CubeMap*	getCubeMap(void) const;
+  void		setCubeMap(CubeMap *map);
+
   bool		isAmbientOcclusionEnabled(void) const;
   int		getAmbientOcclusionSampling(void) const;
   void		setAmbientOcclusionEnabled(bool enabled = 1);
@@ -113,6 +118,7 @@ private:
   bool			_specularLighting;
   t_reflection		_reflection;
   t_transparency	_transparency;
+  CubeMap*		_cubeMap;
   bool			_ambientOcclusionEnabled;
   int			_ambientOcclusionSampling;
   bool                  _photonMappingEnabled;
