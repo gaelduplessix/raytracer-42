@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:14:13 2011 loick michard
-// Last update Wed May  4 13:09:44 2011 loick michard
+// Last update Wed May  4 18:13:43 2011 loick michard
 //
 
 #include <cmath>
@@ -45,7 +45,7 @@ void	PerlinNoise::setWoodProperties()
 
 void    PerlinNoise::setMarbleProperties()
 {
-  _octaves = 6;
+  _octaves = 5;
   _step = 10;
   _persistance = 0.9;
   _marbleEffect = true;
@@ -94,8 +94,6 @@ Color	PerlinNoise::getPixel(double x, double y) const
   y *= _height;
 
   double value = this->getPerlinNoise(x, y);
-  if (_marbleEffect)
-    value = cos(x /_width + value);
   if (_woodEffect)
     {
       value = 20 * value;
