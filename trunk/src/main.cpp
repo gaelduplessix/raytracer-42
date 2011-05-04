@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 17:43:47 2011 loick michard
+// Last update Wed May  4 18:07:17 2011 loick michard
 //
 
 #include <vector>
@@ -48,19 +48,20 @@ Scene		createScene2()
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  Texture *perlin = new PerlinNoise();//new Texture("heightmap.png");
-  //perlin->setWoodProperties();
+  PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
+  perlin->setMarbleProperties();
+  special.setTexture(perlin);
   //special.setHeightmap(perlin);
-  special.setNormalDeformation(Material::WAVES_X);
+  //special.setNormalDeformation(Material::WAVES_X);
   special.setTransmissionCoeff(0);
   special.setColor(Color(255, 255, 255));
-  special.setReflectionCoeff(1);
-  primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
-  				  Rotation(0, 0, 0), reflection, 3));
+  special.setReflectionCoeff(0);
+  //primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
+  //				  Rotation(0, 0, 0), reflection, 3));
   primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
-				  Rotation(0, 0, 0), special, 3));
-  primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
-                                Rotation(0, 0, 0), refraction, 1));
+				  Rotation(0, 0, 3.14), special, 3));
+  //primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
+  //                            Rotation(0, 0, 0), refraction, 1));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
 
@@ -96,7 +97,7 @@ RenderingConfiguration	createConfig2()
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
-  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+  //  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 
