@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May  4 11:29:41 2011 samuel olivier
+// Last update Wed May  4 12:19:37 2011 loick michard
 //
 
 #ifndef _CYLINDER_HPP_
@@ -24,7 +24,8 @@ public:
 
   void			setRadius(double r);
 
-  Color	      getColor(const Point& intersectPoint) const;
+  void		getMappedCoords(const Point& intersectPoint,
+				double& x, double &y) const;
   void        addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const;
   void                  intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const;
   Vector	getNormalVector(const Point& intersectPoint,

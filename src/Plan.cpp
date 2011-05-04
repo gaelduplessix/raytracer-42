@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Wed May  4 10:49:18 2011 loick michard
+// Last update Wed May  4 12:18:13 2011 loick michard
 //
 
 #include <vector>
@@ -43,11 +43,13 @@ double        Plan::getLimitY(void)
 }
 
 
-Color	       Plan::getColor(const Point& intersectPoint) const
+void  Plan::getMappedCoords(const Point& intersectPoint,
+		      double& x, double &y) const
 {
   Point simplePoint = intersectPoint - _absolutePosition;
   simplePoint.rotate(_rotation);
-  return (_material.getColor(simplePoint._x, simplePoint._y));
+  x = simplePoint._x;
+  y = simplePoint._y;
 }
 
 void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const
