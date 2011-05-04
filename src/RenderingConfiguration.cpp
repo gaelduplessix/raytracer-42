@@ -2,12 +2,12 @@
 
 RenderingConfiguration::RenderingConfiguration():
   _width(0), _height(0), _currentCamera(0), _antialiasing(0),
-  _exposure(1.0), _directLighting(true), _specularLighting(true),
-  _cubeMap(NULL), _backgroundColor(Color(0, 0, 0)),
+  _exposure(1.0), _directLighting(true), _diffuseLighting(true),
+  _specularLighting(true), _cubeMap(NULL), _backgroundColor(Color(0, 0, 0)),
   _ambientOcclusionEnabled(false),
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
-  _photonMappingSampling(0), _diffuseLightingEnabled(false),
-  _diffuseLightingSampling(0), _fieldDepthEnabled(false),
+  _photonMappingSampling(0), _diffuseShadingEnabled(false),
+  _diffuseShadingSampling(0), _fieldDepthEnabled(false),
   _fieldDepthSampling(0)
 {
   _transparency.enabled = false;
@@ -43,6 +43,11 @@ double	RenderingConfiguration::getExposure(void) const
 bool	RenderingConfiguration::isDirectLighting(void) const
 {
   return (_directLighting);
+}
+
+bool	RenderingConfiguration::isDiffuseLighting(void) const
+{
+  return (_diffuseLighting);
 }
 
 bool	RenderingConfiguration::isSpecularLighting(void) const
@@ -120,14 +125,14 @@ int	RenderingConfiguration::getPhotonMappingSampling(void) const
   return (_photonMappingSampling);
 }
 
-bool	RenderingConfiguration::isDiffuseLightingEnabled(void) const
+bool	RenderingConfiguration::isDiffuseShadingEnabled(void) const
 {
-  return (_diffuseLightingEnabled);
+  return (_diffuseShadingEnabled);
 }
 
-int	RenderingConfiguration::getDiffuseLightingSampling(void) const
+int	RenderingConfiguration::getDiffuseShadingSampling(void) const
 {
-  return (_diffuseLightingSampling);
+  return (_diffuseShadingSampling);
 }
 
 bool	RenderingConfiguration::isFieldDepthEnabled(void) const
@@ -175,6 +180,11 @@ void	RenderingConfiguration::setExposure(double exposure)
 void	RenderingConfiguration::setDirectLighting(bool directLighting)
 {
   _directLighting = directLighting;
+}
+
+void	RenderingConfiguration::setDiffuseLighting(bool value)
+{
+  _diffuseLighting = value;
 }
 
 void	RenderingConfiguration::setSpecularLighting(bool specularLighting)
@@ -276,14 +286,14 @@ void	RenderingConfiguration::setPhotonMappingSampling(int sampling)
   _photonMappingSampling = sampling;
 }
 
-void	RenderingConfiguration::setDiffuseLightingEnabled(bool enabled)
+void	RenderingConfiguration::setDiffuseShadingEnabled(bool enabled)
 {
-  _diffuseLightingEnabled = enabled;
+  _diffuseShadingEnabled = enabled;
 }
 
-void	RenderingConfiguration::setDiffuseLightingSampling(int sampling)
+void	RenderingConfiguration::setDiffuseShadingSampling(int sampling)
 {
-  _diffuseLightingSampling = sampling;
+  _diffuseShadingSampling = sampling;
 }
 
 void	RenderingConfiguration::setFieldDepthEnabled(bool enabled)

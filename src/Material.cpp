@@ -5,25 +5,27 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Wed May  4 17:41:25 2011 loick michard
+// Last update Wed May  4 18:17:08 2011 gael jochaud-du-plessix
 //
 
 #include "Material.hpp"
 
 Material::Material(): 
   _isTextured(false), _name(""), _color(Color(0, 0, 0)), _texture(NULL),
-  _limitTexture(NULL), _specularCoeff(0), _specularPow(50), _reflectionCoeff(0),
-  _transmissionCoeff(0), _refractionIndex(1), _heightmap(NULL),
-  _hasBumpMap(false), _hasNormalDeformation(false), _deformationType(-1)
+  _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
+  _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
+  _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
+  _deformationType(-1)
 {
 
 }
 
 Material::Material(const string& name):
   _isTextured(false), _color(Color(0, 0, 0)), _texture(NULL),
-  _limitTexture(NULL), _specularCoeff(0), _specularPow(50), _reflectionCoeff(0),
-  _transmissionCoeff(0), _refractionIndex(1), _heightmap(NULL),
-  _hasBumpMap(false), _hasNormalDeformation(false), _deformationType(-1)
+  _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
+  _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
+  _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
+  _deformationType(-1)
 {
   string	mnew = name;
 }
