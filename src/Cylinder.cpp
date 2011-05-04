@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May  4 12:44:15 2011 samuel olivier
+// Last update Wed May  4 16:34:04 2011 samuel olivier
 //
 
 #include <cmath>
@@ -30,17 +30,19 @@ void		Cylinder::setRadius(double r)
   _radius = r;
 }
 
+#include <stdio.h>
+
 void		Cylinder::getMappedCoords(const Point& intersectPoint,
-					  double& x, double &y) const
+				double& x, double &y) const
 {
   Point newPoint = intersectPoint - _absolutePosition;
   Vector vn(0, 0, -1);
   Vector ve(1, 0, 0);
 
+  y = -newPoint._z;
   newPoint.rotate(_rotation);
   newPoint.normalize();
   double phi = acos(- (vn * newPoint));
-  double x2 = phi / M_PI;
   double theta = (acos((newPoint * ve) / sin(phi))) / (2 * M_PI);
   vn *= ve;
   double y2;
@@ -49,7 +51,6 @@ void		Cylinder::getMappedCoords(const Point& intersectPoint,
   else
     y2 =  1 - theta;
   x = y2;
-  y = x2;
 }
 
 void
