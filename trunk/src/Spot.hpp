@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Wed May  4 22:20:38 2011 gael jochaud-du-plessix
+// Last update Wed May  4 22:36:27 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SPOT_HPP_
@@ -18,6 +18,9 @@ class	Spot : public Light
 public :
   Spot(const Point &position, const Color& color, double intensity=1);
 
+  void   setDirectLightPow(double value);
+  double getDirectLightPow(void) const;
+
   void getLighting(const ObjectPrimitive& primitive,
 		   const Point& intersectPoint,
 		   const Raytracer &raytracer,
@@ -27,6 +30,9 @@ public :
 
   Color getDirectLighting(const Raytracer& raytracer,
 			  const Ray& ray) const;
+
+private:
+  double _directLightPow;
 };
 
 #endif

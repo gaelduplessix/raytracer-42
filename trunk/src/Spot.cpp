@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Wed May  4 22:27:56 2011 gael jochaud-du-plessix
+// Last update Wed May  4 22:39:06 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -14,9 +14,19 @@
 
 Spot::Spot(const Point &position, const Color &color,
              double intensity):
-  Light(position, color, intensity)
+  Light(position, color, intensity), _directLightPow(10000)
 {
 
+}
+
+void Spot::setDirectLightPow(double value)
+{
+  _directLightPow = value;
+}
+
+double Spot::getDirectLightPow(void) const
+{
+  return (_directLightPow);
 }
 
 void	Spot::getLighting(const ObjectPrimitive& primitive,
@@ -53,6 +63,7 @@ Color Spot::getDirectLighting(const Raytracer& raytracer,
     (lightRay._vector.getNorm() * ray._vector.getNorm());
   
   if (scalar > 0)
-    return (lightColor * scalar * pow(scalar, 10000) * (1 - absorptionCoeff));
+    return (lightColor * scalar * pow(scalar, _directLightPow)
+	    * (1 - absorptionCoeff));
   return (Color());
 }
