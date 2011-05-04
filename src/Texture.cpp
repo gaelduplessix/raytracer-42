@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Wed May  4 10:35:23 2011 loick michard
+// Last update Wed May  4 13:08:28 2011 loick michard
 //
 
 #include <QString>
@@ -58,4 +58,14 @@ Color Texture::getPixel(double x, double y) const
                                 y * _image->height())));
   else
     return (Color(255, 255, 255));
+}
+
+int    Texture::getWidth() const
+{
+  return (_image->width());
+}
+
+int    Texture::getHeight() const
+{
+  return (_image->height());
 }

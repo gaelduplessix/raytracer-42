@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Tue May  3 13:45:16 2011 loick michard
+// Last update Wed May  4 13:06:35 2011 loick michard
 //
 
 #ifndef _TEXTURE_HPP_
@@ -28,6 +28,8 @@ public:
 
   virtual Color getColor(double x, double y) const;
   virtual Color getPixel(double x, double y) const;
+  virtual int	getWidth() const;
+  virtual int	getHeight() const;
 
 protected:
   double	_repeatWidth;

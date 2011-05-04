@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:10:41 2011 loick michard
-// Last update Wed May  4 10:22:22 2011 loick michard
+// Last update Wed May  4 13:09:04 2011 loick michard
 //
 
 #ifndef _PERLIN_NOISE_HPP_
@@ -42,6 +42,8 @@ public:
 			     double x, double y) const;
   double get1DInterpolation(double a,
 			    double b, double x) const;
+  int	 getWidth() const;
+  int	 getHeight() const;
 
 private:
   void		_initPerlinNoise();

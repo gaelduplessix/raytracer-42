@@ -1,11 +1,11 @@
 //
-// Material.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42
+// Material.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42/src
 // 
 // Made by loick michard
 // Login   <michar_l@epitech.net>
 // 
-// Started on  Wed Apr 27 15:50:09 2011 loick michard
-// Last update Wed May  4 14:17:11 2011 gael jochaud-du-plessix
+// Started on  Wed May  4 17:40:55 2011 loick michard
+// Last update Wed May  4 17:40:56 2011 loick michard
 //
 
 #ifndef _MATERIAL_HPP_
@@ -22,6 +22,10 @@ class QImage;
 class Material
 {
 public:
+  static const int WAVES_X = 0;
+  static const int WAVES_Y = 1;
+  static const int WAVES_Z = 2;
+
   Material();
   Material(const string& name);
 
@@ -35,10 +39,14 @@ public:
   void		setTransmissionCoeff(double transmissionCoeff);
   void		setRefractionIndex(double refractionIndex);
   void		setHeightmap(Texture* image);
+  void		setNormalDeformation(int deformation,
+				     int deformationCoeff = 10);
+
 
   string	getName(void) const;
   Color		getColor(double x, double y) const;
   bool		isLimitedAtPoint(double x, double y) const;
+  Color		getHeightmapColor(double x, double y) const;
   double	getSpecularCoeff(void) const;
   double	getSpecularPow(void) const;
   double	getReflectionCoeff(void) const;
@@ -47,6 +55,12 @@ public:
 
   Vector&	getDeformatedNormal(double x, double y,
 				    const Vector& normal) const;
+
+  bool		_hasBumpMap;
+  bool		_hasNormalDeformation;
+  int		_deformationType;
+  int		_deformationCoeff;
+  Texture*	_heightmap;
 
 private:
   string	_name;
@@ -59,8 +73,6 @@ private:
   double	_reflectionCoeff;
   double	_transmissionCoeff;
   double	_refractionIndex;
-  Texture*	_heightmap;
-  bool		_hasBumpMap;
 };
 
 #endif

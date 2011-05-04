@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Wed May  4 12:32:31 2011 loick michard
+// Last update Wed May  4 17:34:19 2011 loick michard
 //
 
 #include <cmath>
@@ -76,12 +76,55 @@ ObjectPrimitive::getColor(const Point& intersectPoint) const
   getMappedCoords(intersectPoint, x, y);
   return (_material.getColor(x, y));
 }
-
+#include <iostream>
 Vector
 ObjectPrimitive::getNormal(const Point& intersectPoint,
 			   const Vector& viewVector) const
 {
-  return (this->getNormalVector(intersectPoint, viewVector));
+  if (_material._hasNormalDeformation)
+    {
+      Vector normal = this->getNormalVector(intersectPoint, viewVector);
+
+      if (_material._hasBumpMap)
+	{
+	  double x, y;
+	  getMappedCoords(intersectPoint, x, y);
+	  double p = 0.002;
+	  
+	  x = (double)_material.getHeightmapColor(x - p, y)._r / 255.0
+	    - (double)_material.getHeightmapColor(x + p, y)._r / 255.0;
+	  y = (double)_material.getHeightmapColor(x, y - p)._r / 255.0
+	    - (double)_material.getHeightmapColor(x, y + p)._r / 255.0;
+	  normal._x += x * 10;
+	  normal._y += y * 10;
+	  normal._z += y;
+	  normal.normalize();
+	}
+      if (_material._deformationType == Material::WAVES_X)
+	{
+	  normal._x += cos((intersectPoint._x - _absolutePosition._x) * 
+			   _material._deformationCoeff) *
+	    (normal.getNorm() / 2);
+	  normal.normalize();
+	}
+      if (_material._deformationType == Material::WAVES_Y)
+	{
+          normal._y += cos((intersectPoint._y - _absolutePosition._y) *
+			    _material._deformationCoeff) *
+            (normal.getNorm() / 2);
+          normal.normalize();
+        }
+      if (_material._deformationType == Material::WAVES_Z)
+	{
+          normal._z += cos((intersectPoint._z - _absolutePosition._z) *
+			    _material._deformationCoeff) *
+            (normal.getNorm() / 2);
+          normal.normalize();
+        }
+      return (normal);
+    }
+  else
+    return (this->getNormalVector(intersectPoint, viewVector));
 }
 
 inline Ray	ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const

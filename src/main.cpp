@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 17:05:22 2011 gael jochaud-du-plessix
+// Last update Wed May  4 17:43:47 2011 loick michard
 //
 
 #include <vector>
@@ -21,10 +21,9 @@
 #include "Plan.hpp"
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
-#include "CheckerBoard.hpp"
-#include "Cylinder.hpp"
 
 // #include "gui/gui.hpp"
+
 Scene		createScene2()
 {
   Material	mat("base");
@@ -32,10 +31,10 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(0);
+  reflection.setReflectionCoeff(1);
   Material	refraction = mat;
-  refraction.setTransmissionCoeff(0.8);
-  refraction.setRefractionIndex(1);
+  refraction.setTransmissionCoeff(1);
+  refraction.setRefractionIndex(1.5);
   Material	matFloor("sol");
   matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
@@ -43,47 +42,40 @@ Scene		createScene2()
   matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 5, 0), Rotation(0, 0, -0.2)));
+  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  CheckerBoard *checker = new CheckerBoard(Color(255, 255, 255),
-					   Color(0, 0, 0, 0),
-					   5, 5);
-  PerlinNoise *perlin = new PerlinNoise();
-  perlin->setWoodProperties();
-  special.setTransmissionCoeff(0.8);
-  special.setReflectionCoeff(0);
-  special.setLimitTexture(new Texture("stripes.png", 0.05, 0.05));
-  //special.setTexture(perlin)
-  special.setTexture(new Texture("terre.jpg", 1.0/8, 1.0/8));
-  Plan* plane = new Plan(NULL, Point(20, -5, -5),
-			 Rotation(3.14/2, 0, 0), special);
-  plane->setLimitX(8);
-  plane->setLimitY(8);
-  primitives.push_back(plane);
-  // primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
-  // 				  Rotation(0, 0, 0), refraction, 3));
-  refraction.setColor(Color(255, 0, 0));  
-  refraction.setTransmissionCoeff(0);
-  //refraction.setRefractionIndex(2);
-  // primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
-  //                                 Rotation(0, 0, 0), refraction, 2));
+  Texture *perlin = new PerlinNoise();//new Texture("heightmap.png");
+  //perlin->setWoodProperties();
+  //special.setHeightmap(perlin);
+  special.setNormalDeformation(Material::WAVES_X);
+  special.setTransmissionCoeff(0);
+  special.setColor(Color(255, 255, 255));
+  special.setReflectionCoeff(1);
+  primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
+  				  Rotation(0, 0, 0), reflection, 3));
+  primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
+				  Rotation(0, 0, 0), special, 3));
+  primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
+                                Rotation(0, 0, 0), refraction, 1));
+  refraction.setTransmissionCoeff(0.9);
+  refraction.setRefractionIndex(1.5);
 
-  primitives.push_back(new Plan(NULL, Point(0, 0, -5),
-  				Rotation(0, 0, 0), matFloor));
+  // primitives.push_back(new Plan(NULL, Point(0, 0, -5),
+  // 				Rotation(0, 0, 0), matFloor));
 
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
 			   true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(20, 20, 10), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(20, -20, 10), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(0, 0, 5), Color(255, 255, 255)));
-  
+  light.push_back(new Spot(Point(0, 5, 4), Color(255, 255, 255)));
+  //light.push_back(new Spot(Point(5, 0, 4), Color(255, 255, 255)));
+  //light.push_back(new Spot(Point(35, 0, 5), Color(255, 255, 255)));
+
   Scene		res(cam, obj, light);
   return (res);
 }
@@ -94,7 +86,7 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(1);
+  res.setAntialiasing(4);
   res.setExposure(2);
   res.setDirectLighting(true);
   res.setSpecularLighting(false);
@@ -103,8 +95,8 @@ RenderingConfiguration	createConfig2()
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
-  res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
-  // res.setCubeMap(new CubeMap("cubemaps/DallasW"));
+  res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
+  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 
@@ -130,7 +122,7 @@ class SDLInterface : public RenderingInterface
     p[2] = color._r;
     p[1] = color._g;
     p[0] = color._b;
-    if (y == 0)
+    if (x == 0)
       SDL_Flip(screen);
   }
 
