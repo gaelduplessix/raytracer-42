@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Tue May  3 16:32:25 2011 loick michard
+// Last update Wed May  4 10:35:23 2011 loick michard
 //
 
 #include <QString>

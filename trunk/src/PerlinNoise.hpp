@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:10:41 2011 loick michard
-// Last update Tue May  3 18:11:20 2011 loick michard
+// Last update Wed May  4 10:22:22 2011 loick michard
 //
 
 #ifndef _PERLIN_NOISE_HPP_
@@ -21,6 +21,16 @@ public:
   PerlinNoise(double repeatWidth, double repeatHeight,
 	      int width = 100, int height = 100);
   ~PerlinNoise();
+
+
+  void    setPersistance(double persistance);
+  void    setStep(double step);
+  void    setOctaves(double octaves);
+  void    setColor1(const Color& color1);
+  void    setColor2(const Color& color2);
+
+  void    setWoodProperties();
+  void    setMarbleProperties();
 
   Color getPixel(double x, double y) const;
 
@@ -43,6 +53,10 @@ private:
   double	_step;
   double	_persistance;
   double*	_perlinNoise;
+  bool		_woodEffect;
+  bool		_marbleEffect;
+  Color		_color1;
+  Color		_color2;
 };
 
 #endif

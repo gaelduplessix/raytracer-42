@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:14:13 2011 loick michard
-// Last update Tue May  3 19:14:12 2011 loick michard
+// Last update Wed May  4 10:22:33 2011 loick michard
 //
 
 #include <cmath>
@@ -13,7 +13,8 @@
 
 PerlinNoise::PerlinNoise(int width, int height):
   Texture(1, 1), _width(width), _height(height),
-  _octaves(5), _step(40), _persistance(0.6)
+  _octaves(7), _step(20), _persistance(0.9), _woodEffect(false),
+  _marbleEffect(false), _color1(0, 0, 0), _color2(255, 255, 255)
 {
   this->_initPerlinNoise();
 }
@@ -21,7 +22,8 @@ PerlinNoise::PerlinNoise(int width, int height):
 PerlinNoise::PerlinNoise(double repeatWidth, double repeatHeight,
 			 int width, int height):
   Texture(repeatWidth, repeatHeight), _width(width), _height(height),
-  _octaves(5), _step(40), _persistance(0.6)
+  _octaves(5), _step(40), _persistance(0.6), _woodEffect(false),
+  _marbleEffect(false), _color1(0, 0, 0), _color2(255, 255, 255)
 {
   this->_initPerlinNoise();
 }
@@ -30,23 +32,68 @@ PerlinNoise::~PerlinNoise()
 {
   delete _perlinNoise;
 }
-#include <iostream>
+
+void	PerlinNoise::setWoodProperties()
+{
+  _octaves = 5;
+  _step = 40;
+  _persistance = 0.6;
+  _woodEffect = true;
+  _color1 = Color(184, 133, 39);
+  _color2 = Color(110, 54, 19);
+}
+
+void    PerlinNoise::setMarbleProperties()
+{
+  _octaves = 6;
+  _step = 10;
+  _persistance = 0.9;
+  _marbleEffect = true;
+  _color1 = Color(240, 233, 234);
+  _color2 = Color(7, 94, 34);
+}
+
+void	PerlinNoise::setColor1(const Color& color1)
+{
+  _color1 = color1;
+}
+
+void	PerlinNoise::setColor2(const Color& color2)
+{
+  _color2 = color2;
+}
+
+void	PerlinNoise::setOctaves(double octaves)
+{
+  _octaves = octaves;
+}
+
+void    PerlinNoise::setStep(double step)
+{
+  _step = step;
+}
+
+void    PerlinNoise::setPersistance(double persistance)
+{
+  _persistance = persistance;
+}
+
 Color	PerlinNoise::getPixel(double x, double y) const
 {
   x *= _width;
   y *= _height;
 
   double value = this->getPerlinNoise(x, y);
-  //value = cos(x /_width + value);
-  value = 20 * value;
-  value = value - (int)(value);
-  Color r(184, 133, 39);
-  Color b(110, 54, 19);
-  return Color((r._r * value + b._r * (1 - value)),
-	       (r._g * value + b._g * (1 - value)),
-	       (r._b * value + b._b * (1 - value)));
-  
-  return (Color(value, value, value));
+  if (_marbleEffect)
+    value = cos(x /_width + value);
+  if (_woodEffect)
+    {
+      value = 20 * value;
+      value = value - (int)(value);
+    }
+  return Color((_color1._r * value + _color2._r * (1 - value)),
+	       (_color1._g * value + _color2._g * (1 - value)),
+	       (_color1._b * value + _color2._b * (1 - value)));
 }
 
 void	PerlinNoise::_initPerlinNoise()
