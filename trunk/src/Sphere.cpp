@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May  4 12:25:42 2011 gael jochaud-du-plessix
+// Last update Wed May  4 14:37:15 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -72,9 +72,18 @@ void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
     _radius * _radius;
   vector<double> solutions = 
     EquationSolver::solveQuadraticEquation(a, b, c);
+  vector<double> validSolutions;
   for (unsigned int i = 0 ; i < solutions.size(); i++)
     if (solutions[i] > EPSILON)
-      intersection.push_back((t_intersected_object){this, solutions});
+      {
+	Point	intersectPoint = ray._point + ray._vector * solutions[i];
+	double x, y;
+	getMappedCoords(intersectPoint, x, y);
+	if (!_material.isLimitedAtPoint(x, y))
+	  validSolutions.push_back(solutions[i]);
+      }
+  if (validSolutions.size() > 0)
+    intersection.push_back((t_intersected_object){this, validSolutions});
 }
 
 void                  Sphere::intersectWithRay(const Ray& ray,
@@ -103,8 +112,14 @@ void                  Sphere::intersectWithRay(const Ray& ray,
     {
       if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 0))
         {
-	  primitive = (ObjectPrimitive*)this;
-	  res = solutions[i];
+	  Point	intersectPoint = ray._point + ray._vector * solutions[i];
+	  double x, y;
+	  getMappedCoords(intersectPoint, x, y);
+	  if (!_material.isLimitedAtPoint(x, y))
+	    {
+	      primitive = (ObjectPrimitive*)this;
+	      res = solutions[i];
+	    }
 	}
     }
 }

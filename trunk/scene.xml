@@ -1,0 +1,35 @@
+<scene>
+  <cameras>
+    <camera type="cinema">
+      <position>0, 0, 0</position>
+      <rotation type="degree">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+  <materials>
+    <material name="test_material">
+      <color type="rgb">255, 255, 255</color>
+      <texture type="procedural">wood</texture>
+      <limitTexture type="file">stripes.png</limitTexture>
+      <specular>0.8</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <transmission>0</transmission>
+      <refractionIndex>1.33</refractionIndex>
+      <heightmap>moon.png</heightmap>
+    </material>
+  </materials>
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">3.14, 0, 0</rotation>
+      <solid>false</solid>
+      <primitives>
+	<primitive type="sphere" material="test_material">
+	  <position>0, 0, 0</position>
+	  <rotation>0, 0, 0</rotation>
+	  <radius>2</radius>
+	</primitive>
+      </primitives>
+    </object>
+  </objects>
+</scene>

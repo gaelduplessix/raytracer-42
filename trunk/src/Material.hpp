@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:50:09 2011 loick michard
-// Last update Wed May  4 10:44:37 2011 loick michard
+// Last update Wed May  4 14:17:11 2011 gael jochaud-du-plessix
 //
 
 #ifndef _MATERIAL_HPP_
@@ -28,6 +28,7 @@ public:
   void		setName(string name);
   void		setColor(const Color& color);
   void		setTexture(Texture* texture);
+  void		setLimitTexture(Texture* texture);
   void		setSpecularCoeff(double specularCoeff);
   void		setSpecularPow(double specularPow);
   void		setReflectionCoeff(double reflectionCoeff);
@@ -36,7 +37,8 @@ public:
   void		setHeightmap(Texture* image);
 
   string	getName(void) const;
-  Color		getColor(double x, double y) const;  
+  Color		getColor(double x, double y) const;
+  bool		isLimitedAtPoint(double x, double y) const;
   double	getSpecularCoeff(void) const;
   double	getSpecularPow(void) const;
   double	getReflectionCoeff(void) const;
@@ -50,6 +52,7 @@ private:
   string	_name;
   Color		_color;
   Texture*	_texture;
+  Texture*	_limitTexture;
   bool		_isTextured;
   double	_specularCoeff;
   double	_specularPow;
