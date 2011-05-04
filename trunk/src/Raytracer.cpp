@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Tue May  3 22:11:49 2011 gael jochaud-du-plessix
+// Last update Tue May  3 23:28:34 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -198,7 +198,7 @@ Color			Raytracer::throwRay(Ray& ray)
   else if (_config->getCubeMap() != NULL)
     return (_config->getCubeMap()->getMapColor(ray._vector));
   else
-    return (directLight);
+    return (_config->getBackgroundColor());
 }
 
 void

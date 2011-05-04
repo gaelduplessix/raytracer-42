@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Tue May  3 17:23:17 2011 gael jochaud-du-plessix
+// Last update Tue May  3 23:29:38 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -82,6 +82,9 @@ public:
   void          setTransparencyDiffused(bool diffused = 1);
   void          setTransparencyDiffusedSampling(int diffusedSampling);
 
+  const Color&	getBackgroundColor(void) const;
+  void		setBackgroundColor(const Color& color);
+
   CubeMap*	getCubeMap(void) const;
   void		setCubeMap(CubeMap *map);
 
@@ -119,6 +122,7 @@ private:
   t_reflection		_reflection;
   t_transparency	_transparency;
   CubeMap*		_cubeMap;
+  Color			_backgroundColor;
   bool			_ambientOcclusionEnabled;
   int			_ambientOcclusionSampling;
   bool                  _photonMappingEnabled;
