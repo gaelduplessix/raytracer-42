@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Wed May  4 18:16:02 2011 gael jochaud-du-plessix
+// Last update Wed May  4 22:26:57 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -103,9 +103,6 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 			       Color& specularLighting) const
 {
   Ray           ray(intersectPoint, lightVector);
-  double        k = -1;
-  const ObjectPrimitive*    nearestObject =
-    raytracer.getNearestObject(ray, k);
   vector<t_intersected_object>	intersections;
   raytracer.getIntersectingObjects(ray, intersections);
   Color		lightColor = _color;

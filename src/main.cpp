@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 18:16:20 2011 gael jochaud-du-plessix
+// Last update Wed May  4 22:30:13 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -33,8 +33,8 @@ Scene		createScene2()
   Material	reflection = mat;
   reflection.setReflectionCoeff(1);
   Material	refraction = mat;
-  refraction.setTransmissionCoeff(1);
-  refraction.setRefractionIndex(1.5);
+  refraction.setTransmissionCoeff(0.8);
+  refraction.setRefractionIndex(1);
   Material	matFloor("sol");
   matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
@@ -48,8 +48,8 @@ Scene		createScene2()
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  Texture *perlin = new PerlinNoise();//new Texture("heightmap.png");
-  //perlin->setWoodProperties();
+  PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
+  //perlin->setMarbleProperties();
   //special.setHeightmap(perlin);
   special.setTransmissionCoeff(0);
   special.setTexture(perlin);
@@ -57,8 +57,8 @@ Scene		createScene2()
   				  Rotation(0, 0, 0), special, 3));
   primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
 				  Rotation(0, 0, 0), special, 3));
-  primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
-                                Rotation(0, 0, 0), matFloor, 1));
+  primitives.push_back(new Sphere(NULL, Point(15, 0, 2),
+                                Rotation(0, 0, 0), refraction, 1));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
 
@@ -72,7 +72,7 @@ Scene		createScene2()
   vector<Light*> light;
   light.push_back(new Spot(Point(0, 5, 4), Color(255, 255, 255)));
   light.push_back(new Spot(Point(5, 0, 4), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(35, 0, 5), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(35, 0, 5), Color(255, 0, 0)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -87,6 +87,8 @@ RenderingConfiguration	createConfig2()
   res.setAntialiasing(1);
   res.setExposure(2);
   res.setDiffuseLighting(true);
+  res.setDirectLighting(true);
+  res.setDirectLightingCoeff(1);
   res.setSpecularLighting(false);
   res.setReflection(true);
   res.setTransparency(true);
