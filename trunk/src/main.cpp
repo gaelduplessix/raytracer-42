@@ -97,14 +97,14 @@ RenderingConfiguration	createConfig2()
   res.setAntialiasing(1);
   res.setExposure(2);
   res.setDirectLighting(true);
-  res.setSpecularLighting(true);
+  res.setSpecularLighting(false);
   res.setReflection(true);
   res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
   res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
-  //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+  // res.setCubeMap(new CubeMap("cubemaps/DallasW"));
   return (res);
 }
 
