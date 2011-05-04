@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 11:37:13 2011 gael jochaud-du-plessix
+// Last update Wed May  4 12:24:21 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -74,7 +74,7 @@ Scene		createScene2()
   vector<Light*> light;
   light.push_back(new Spot(Point(30, 20, 10), Color(255, 255, 255)));
   light.push_back(new Spot(Point(30, -20, 10), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(28, 0, 0), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(10, 0, 2), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);

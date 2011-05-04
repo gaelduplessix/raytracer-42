@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Wed May  4 12:09:36 2011 gael jochaud-du-plessix
+// Last update Wed May  4 12:21:30 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -60,22 +60,19 @@ void		Light::setIntensity(double intensity)
   _intensity = intensity;
 }
 
-#include <iostream>
-
 double
 Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections) const
 {
   double	coeff = 0;
   int		nbIntersect = intersections.size();
 
-  //std::cout << intersections.size() << std::endl;
-  // for (int i = 0; i < nbIntersect; i++)
-  //   {
-  //     coeff += 1 -
-  // 	intersections[i].primitive->getMaterial().getTransmissionCoeff();
-  //   }
-  //if (intersections.size())
-  //coeff = 1;
+  for (int i = 0; i < nbIntersect && coeff < 1; i++)
+    {
+      coeff += 1 -
+  	intersections[i].primitive->getMaterial().getTransmissionCoeff();
+    }
+  if (coeff > 1)
+    coeff = 1;
   return (coeff);
 }
 
@@ -90,7 +87,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 			       Color& directLighting,
 			       Color& specularLighting) const
 {
-  Ray           ray(Color(), intersectPoint, lightVector, 1);
+  Ray           ray(intersectPoint, lightVector);
   double        k = -1;
   // const ObjectPrimitive*    nearestObject =
   //   raytracer.getNearestObject(ray, k);
