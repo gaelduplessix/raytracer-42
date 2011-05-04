@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 12:24:21 2011 gael jochaud-du-plessix
+// Last update Wed May  4 12:31:35 2011 samuel olivier
 //
 
 #include <vector>
@@ -22,9 +22,9 @@
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
 #include "CheckerBoard.hpp"
+#include "Cylinder.hpp"
 
 // #include "gui/gui.hpp"
-
 Scene		createScene2()
 {
   Material	mat("base");
@@ -32,7 +32,7 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(1);
+  reflection.setReflectionCoeff(0);
   Material	refraction = mat;
   refraction.setTransmissionCoeff(0.8);
   refraction.setRefractionIndex(1);
@@ -51,18 +51,19 @@ Scene		createScene2()
   Material special = refraction;
   CheckerBoard *perlin = new CheckerBoard(5, 5);
   //perlin->setWoodProperties();
-  special.setTexture(perlin);
+  // special.setTexture(perlin);
+  special.setTexture(new Texture("terre.jpg"));
   special.setTransmissionCoeff(0);
   special.setReflectionCoeff(0);
-  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
+  primitives.push_back(new Cylinder(NULL, Point(30, 0, 0),
 				  Rotation(0, 0, 0), special, 3));
-  primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
-  				  Rotation(0, 0, 0), refraction, 3));
+  // primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
+  // 				  Rotation(0, 0, 0), refraction, 3));
   refraction.setColor(Color(255, 0, 0));  
   refraction.setTransmissionCoeff(0);
   //refraction.setRefractionIndex(2);
-  primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
-                                  Rotation(0, 0, 0), refraction, 2));
+  // primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
+  //                                 Rotation(0, 0, 0), refraction, 2));
 
   primitives.push_back(new Plan(NULL, Point(0, 0, -5),
   				Rotation(0, 0, 0), matFloor));
