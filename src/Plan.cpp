@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Wed May  4 15:43:44 2011 gael jochaud-du-plessix
+// Last update Wed May  4 17:06:42 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -63,9 +63,10 @@ void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_inters
   if (result < EPSILON)
     return ;
   vector<double> k;
+  Point		 intersectPoint;
   if (_limitX > 0 || _limitY > 0)
     {
-      Point	intersectPoint = newRay._point + newRay._vector * result;
+      intersectPoint = newRay._point + newRay._vector * result;
       if (_limitX > 0 && ((intersectPoint._x < 0)
 			  || (intersectPoint._x > _limitX)))
 	return ;
@@ -73,8 +74,14 @@ void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_inters
 			  || (intersectPoint._y > _limitY)))
 	return ;
     }
-  k.push_back(result);
-  intersection.push_back((t_intersected_object){this, k});
+  intersectPoint = ray._point + ray._vector * result;
+  double x, y;
+  getMappedCoords(intersectPoint, x, y);
+  if (!_material.isLimitedAtPoint(x, y))
+    {
+      k.push_back(result);
+      intersection.push_back((t_intersected_object){this, k});
+    }
 }
 
 #include <iostream>
@@ -91,9 +98,10 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
     return ;
   if (result < res || res < 0)
     {
+      Point	intersectPoint;
       if (_limitX > 0 || _limitY > 0)
       	{
-      	  Point	intersectPoint = newRay._point + newRay._vector * result;
+      	  intersectPoint = newRay._point + newRay._vector * result;
       	  if (_limitX > 0 && ((intersectPoint._x < 0)
       			      || (intersectPoint._x > _limitX)))
       	    return ;
@@ -101,8 +109,14 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
       			      || (intersectPoint._y > _limitY)))
       	    return ;
       	}
-      primitive = (ObjectPrimitive*)this;
-      res = result;
+      intersectPoint = ray._point + ray._vector * result;
+      double x, y;
+      getMappedCoords(intersectPoint, x, y);
+      if (!_material.isLimitedAtPoint(x, y))
+	{
+	  primitive = (ObjectPrimitive*)this;
+	  res = result;
+	}
     }
 }
 
