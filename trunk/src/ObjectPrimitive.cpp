@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Mon May  2 20:28:53 2011 gael jochaud-du-plessix
+// Last update Wed May  4 12:17:37 2011 loick michard
 //
 
 #include <cmath>
@@ -65,6 +65,23 @@ void          ObjectPrimitive::setRotation(const Rotation& rotation)
 void          ObjectPrimitive::setMaterial(const Material& material)
 {
   _material = material;
+}
+
+Color	      
+ObjectPrimitive::getColor(const Point& intersectPoint) const
+{
+  double      x;
+  double      y;
+
+  getMappedCoords(intersectPoint, x, y);
+  return (_material.getColor(x, y));
+}
+
+Vector
+ObjectPrimitive::getNormal(const Point& intersectPoint,
+			   const Vector& viewVector) const
+{
+  return (this->getNormalVector(intersectPoint, viewVector));
 }
 
 inline Ray	ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const

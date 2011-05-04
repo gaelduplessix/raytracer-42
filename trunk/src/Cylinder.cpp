@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May  4 11:55:16 2011 samuel olivier
+// Last update Wed May  4 12:23:10 2011 loick michard
 //
 
 #include <cmath>
@@ -18,9 +18,7 @@ Cylinder::Cylinder(Object*object,
 		   const Point& absolutePosition,
 		   const Rotation& rotation,
 		   const Material& material,
-		   double radius) : ObjectPrimitive(object, absolutePosition,
-						    rotation, material),
-				    _radius(radius)
+		   double radius) : ObjectPrimitive(object,absolutePosition, rotation, material),_radius(radius)
 {
 
 }
@@ -30,10 +28,9 @@ void		Cylinder::setRadius(double r)
   _radius = r;
 }
 
-Color		Cylinder::getColor(const Point& intersectPoint) const
+void		Cylinder::getMappedCoords(const Point& intersectPoint,
+					  double& x, double &y) const
 {
-  if (_material.isTextured() == false)
-    return (_material.getColor(0, 0));
   Point newPoint = intersectPoint - _absolutePosition;
   Vector vn(0, 0, -1);
   Vector ve(1, 0, 0);
@@ -41,15 +38,16 @@ Color		Cylinder::getColor(const Point& intersectPoint) const
   newPoint.rotate(_rotation);
   newPoint.normalize();
   double phi = acos(- (vn * newPoint));
-  double x = phi / M_PI;
+  double x2 = phi / M_PI;
   double theta = (acos((newPoint * ve) / sin(phi))) / (2 * M_PI);
   vn *= ve;
-  double y;
+  double y2;
   if (vn * newPoint > 0)
-    y = theta;
+    y2 = theta;
   else
-    y =  1 - theta;
-  return (_material.getColor(y, x));
+    y2 =  1 - theta;
+  x = y2;
+  y = x2;
 }
 
 void
