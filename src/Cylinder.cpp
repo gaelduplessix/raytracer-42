@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May  4 16:34:04 2011 samuel olivier
+// Last update Wed May  4 22:07:08 2011 samuel olivier
 //
 
 #include <cmath>
@@ -73,12 +73,18 @@ Cylinder::addIntersectionWithRay(const Ray& ray,
     _radius * _radius;
   vector<double> solutions = 
     EquationSolver::solveQuadraticEquation(a, b, c);
-  for (unsigned int i = 0 ; i < solutions.size() ;  i++)
+  vector<double> validSolutions;
+  for (unsigned int i = 0 ; i < solutions.size(); i++)
     if (solutions[i] > EPSILON)
       {
-	intersection.push_back((t_intersected_object){this, solutions});
-	break;
+        Point   intersectPoint = ray._point + ray._vector * solutions[i];
+        double x, y;
+        getMappedCoords(intersectPoint, x, y);
+        if (!_material.isLimitedAtPoint(x, y))
+          validSolutions.push_back(solutions[i]);
       }
+  if (validSolutions.size() > 0)
+    intersection.push_back((t_intersected_object){this, validSolutions});
 }
 
 void                  Cylinder::intersectWithRay(const Ray& ray,
@@ -104,9 +110,15 @@ void                  Cylinder::intersectWithRay(const Ray& ray,
     {
       if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 0))
         {
-	  primitive = (ObjectPrimitive*)this;
-	  res = solutions[i];
-	}
+          Point intersectPoint = ray._point + ray._vector * solutions[i];
+          double x, y;
+          getMappedCoords(intersectPoint, x, y);
+          if (!_material.isLimitedAtPoint(x, y))
+            {
+              primitive = (ObjectPrimitive*)this;
+              res = solutions[i];
+            }
+        }
     }
 }
 

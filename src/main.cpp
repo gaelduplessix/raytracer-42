@@ -21,6 +21,7 @@
 #include "Plan.hpp"
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
+#include "Cone.hpp"
 
 // #include "gui/gui.hpp"
 
@@ -45,8 +46,8 @@ Scene		createScene2()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
-  //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
-  //				  Rotation(0, 0, 0), reflection, 3));
+  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
+				Rotation(0, 0, 0), reflection, 1.0));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
@@ -90,8 +91,8 @@ RenderingConfiguration	createConfig2()
   res.setDirectLighting(true);
   res.setDirectLightingCoeff(1);
   res.setSpecularLighting(false);
-  res.setReflection(true);
-  res.setTransparency(true);
+  res.setReflection(false);
+  res.setTransparency(false);
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseShadingEnabled(false);
   res.setFieldDepthEnabled(false);
