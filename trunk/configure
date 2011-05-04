@@ -1,10 +1,19 @@
 #!/bin/bash
-qmake-qt4 -project -nopwd src/*.cpp
-make -C configure_options
-if ./configure_options/endian
-then
-    qmake-qt4 OBJECTS_DIR=./objects LIBS="-lSDL" DEFINES=IS_BIG_ENDIAN
+
+exec=`type -P qmake-qt4 || type -P qmake || echo "not found"`
+
+if [ $exec == "not found" ]; then
+    echo "Qt not found"
+    exit
 else
-    qmake-qt4 OBJECTS_DIR=./objects LIBS="-lSDL"    
+    $exec -project -nopwd src/*.cpp src/gui/*.cpp
+    make -C configure_options
+    if ./configure_options/endian
+    then
+	$exec OBJECTS_DIR=./objects LIBS="-lSDL" DEFINES=IS_BIG_ENDIAN
+    else
+	$exec OBJECTS_DIR=./objects LIBS="-lSDL"
+
+    fi
+    echo "re:	clean all" >> Makefile
 fi
-echo "re:	clean all" >> Makefile
