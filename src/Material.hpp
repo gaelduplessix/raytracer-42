@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:50:09 2011 loick michard
-// Last update Mon May  2 19:42:50 2011 gael jochaud-du-plessix
+// Last update Wed May  4 10:44:37 2011 loick michard
 //
 
 #ifndef _MATERIAL_HPP_
@@ -36,7 +36,7 @@ public:
   void		setHeightmap(Texture* image);
 
   string	getName(void) const;
-  const Color&	getColor(double x, double y) const;  
+  Color		getColor(double x, double y) const;  
   double	getSpecularCoeff(void) const;
   double	getSpecularPow(void) const;
   double	getReflectionCoeff(void) const;

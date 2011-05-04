@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:17:13 2011 loick michard
-// Last update Tue May  3 12:50:12 2011 gael jochaud-du-plessix
+// Last update Wed May  4 10:49:03 2011 loick michard
 //
 
 #ifndef _PLAN_HPP_
@@ -26,7 +26,7 @@ public:
   double	getLimitX(void);
   double	getLimitY(void);
 
-  const Color& getColor(const Point& intersectPoint) const;
+  Color	getColor(const Point& intersectPoint) const;
   void	addIntersectionWithRay(const Ray& ray,
 			       vector<struct s_intersected_object>&
 			       intersection) const;

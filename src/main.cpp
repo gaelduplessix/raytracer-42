@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Tue May  3 22:42:32 2011 loick michard
+// Last update Wed May  4 10:51:33 2011 loick michard
 //
 
 #include <vector>
@@ -48,9 +48,11 @@ Scene		createScene2()
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  special.setTexture(new PerlinNoise());
+  PerlinNoise *perlin = new PerlinNoise();
+  //perlin->setWoodProperties();
+  special.setTexture(perlin);
   special.setTransmissionCoeff(0);
-  special.setReflectionCoeff(0.2);
+  special.setReflectionCoeff(0);
   primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
 				  Rotation(0, 0, 0), reflection, 3));
   primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
@@ -82,7 +84,7 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(8);
+  res.setAntialiasing(1);
   res.setExposure(2);
   res.setDirectLighting(true);
   res.setSpecularLighting(true);

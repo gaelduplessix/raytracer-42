@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Tue May  3 11:48:09 2011 gael jochaud-du-plessix
+// Last update Wed May  4 10:48:30 2011 loick michard
 //
 
 #include <cmath>
@@ -30,7 +30,7 @@ void		Sphere::setRadius(double r)
   _radius = r;
 }
 
-const Color&	Sphere::getColor(const Point& intersectPoint) const
+Color		Sphere::getColor(const Point& intersectPoint) const
 {
   Point newPoint = intersectPoint - _absolutePosition;
   Vector vn(0, 0, -1);
@@ -47,7 +47,7 @@ const Color&	Sphere::getColor(const Point& intersectPoint) const
     y = theta;
   else
     y =  1 - theta;
-  _material.getColor(y, x);
+  return (_material.getColor(y, x));
 }
 
 void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const

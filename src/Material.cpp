@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Mon May  2 22:34:55 2011 loick michard
+// Last update Wed May  4 10:44:15 2011 loick michard
 //
 
 #include "Material.hpp"
@@ -33,12 +33,11 @@ string	Material::getName(void) const
   return (_name);
 }
 
-const Color&	Material::getColor(double x, double y) const
+Color	Material::getColor(double x, double y) const
 {
-  if (_isTextured == false)
-    return (_color);
-  else
+  if (_isTextured && _texture)
     return (_texture->getColor(x, y));
+  return (_color);
 }
 
 double	Material::getSpecularCoeff(void) const
