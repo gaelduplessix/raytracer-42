@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Wed May  4 12:17:37 2011 loick michard
+// Last update Wed May  4 12:32:31 2011 loick michard
 //
 
 #include <cmath>
@@ -109,7 +109,7 @@ ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
 				    const Vector& vector,
 				    bool doNormalize) const
 {
-  Vector	normal = this->getNormalVector(intersectPoint, vector);
+  Vector	normal = this->getNormal(intersectPoint, vector);
   if (doNormalize)
     normal.normalize();
   double	scal = normal * vector;
@@ -135,8 +135,8 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
   else
     n2 = _material.getRefractionIndex();
   double	n = ray._refractiveIndex / n2;
-  Vector	normal = getNormalVector(intersectPoint,
-                                         ray._vector);
+  Vector	normal = getNormal(intersectPoint,
+				   ray._vector);
   Ray		res(intersectPoint, ray._vector);
   res._vector.normalize();
   double	cos1 = normal * (res._vector * -1);
