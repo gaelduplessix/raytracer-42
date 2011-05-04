@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 13:29:25 2011 gael jochaud-du-plessix
+// Last update Wed May  4 15:50:35 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -43,20 +43,27 @@ Scene		createScene2()
   matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 5, 0), Rotation(0, 0, -0.2)));
 
   vector<ObjectPrimitive*> primitives;
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  CheckerBoard *perlin = new CheckerBoard(5, 5);
-  //perlin->setWoodProperties();
-  // special.setTexture(perlin);
-  // special.setTexture(new Texture("terre.jpg"));
-  special.setTransmissionCoeff(0);
+  CheckerBoard *checker = new CheckerBoard(Color(255, 255, 255),
+					   Color(0, 0, 0, 0),
+					   5, 5);
+  PerlinNoise *perlin = new PerlinNoise();
+  perlin->setWoodProperties();
+  special.setTransmissionCoeff(0.8);
   special.setReflectionCoeff(0);
-  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
-				  Rotation(0, 0, 0), special, 3));
+  //special.setLimitTexture(new Texture("stripes.png"));
+  //special.setTexture(perlin)
+  special.setTexture(new Texture("terre.jpg", 1.0/8, 1.0/8));
+  Plan* plane = new Plan(NULL, Point(20, -5, -5),
+			 Rotation(3.14/2, 0, 0), special);
+  plane->setLimitX(8);
+  plane->setLimitY(8);
+  primitives.push_back(plane);
   // primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
   // 				  Rotation(0, 0, 0), refraction, 3));
   refraction.setColor(Color(255, 0, 0));  
@@ -73,9 +80,9 @@ Scene		createScene2()
 			   true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(30, 20, 0), Color(255, 255, 255)));
-  //light.push_back(new Spot(Point(30, -20, 10), Color(255, 255, 255)));
-  //light.push_back(new Spot(Point(0, 0, 5), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(20, 20, 10), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(20, -20, 10), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(0, 0, 5), Color(255, 255, 255)));
   
   Scene		res(cam, obj, light);
   return (res);

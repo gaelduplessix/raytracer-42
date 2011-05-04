@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Wed May  4 12:18:13 2011 loick michard
+// Last update Wed May  4 15:43:44 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -63,6 +63,16 @@ void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_inters
   if (result < EPSILON)
     return ;
   vector<double> k;
+  if (_limitX > 0 || _limitY > 0)
+    {
+      Point	intersectPoint = newRay._point + newRay._vector * result;
+      if (_limitX > 0 && ((intersectPoint._x < 0)
+			  || (intersectPoint._x > _limitX)))
+	return ;
+      if (_limitY > 0 && ((intersectPoint._y < 0)
+			  || (intersectPoint._y > _limitY)))
+	return ;
+    }
   k.push_back(result);
   intersection.push_back((t_intersected_object){this, k});
 }

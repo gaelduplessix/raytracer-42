@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Wed May  4 13:31:43 2011 gael jochaud-du-plessix
+// Last update Wed May  4 15:36:00 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -61,7 +61,8 @@ void		Light::setIntensity(double intensity)
 }
 
 double
-Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections) const
+Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections,
+			  Ray& lightRay, Color& lightColor) const
 {
   double	coeff = 0;
   int		nbIntersect = intersections.size();
@@ -73,9 +74,16 @@ Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections) const
       for (int j = 0; j < nbK; j++)
 	{
 	  if (intersections[i].k[j] < 1)
-	    coeff += 1 -
-	      intersections[i].primitive->getMaterial()
-	      .getTransmissionCoeff();
+	    {
+	      Point intersectPoint = lightRay._point + lightRay._vector
+		* intersections[i].k[j];
+	      Color objectColor =
+		intersections[i].primitive->getColor(intersectPoint);
+	      lightColor &= objectColor;
+	      coeff += 1 -
+	      	intersections[i].primitive->getMaterial()
+	      	.getTransmissionCoeff();
+	    }
 	}
     }
   if (coeff > 1)
@@ -100,7 +108,9 @@ Light::getLightingFromLightRay(const Vector& lightVector,
     raytracer.getNearestObject(ray, k);
   vector<t_intersected_object>	intersections;
   raytracer.getIntersectingObjects(ray, intersections);
-  double	absorptionCoeff = getAbsorptionCoeff(intersections);
+  Color		lightColor = _color;
+  double	absorptionCoeff = getAbsorptionCoeff(intersections, ray,
+						     lightColor);
   double	scalar;
   
   if (raytracer.getRenderingConfiguration()->isDirectLighting())
@@ -108,7 +118,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
       scalar = lightVector * normal /
 	(lightVector.getNorm() * normal.getNorm());
       if (scalar > 0)
-	directLighting = _color * scalar * (1 - absorptionCoeff);
+	directLighting = lightColor * scalar * (1 - absorptionCoeff);
     }
   if (raytracer.getRenderingConfiguration()->isSpecularLighting())
     {
@@ -116,7 +126,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 	(reflectedVector.getNorm() * viewRay.getNorm());
       if (scalar > 0)
 	specularLighting =
-	  _color * pow(scalar, primitive.getMaterial().getSpecularPow())
+	  lightColor * pow(scalar, primitive.getMaterial().getSpecularPow())
 	  * (1 - absorptionCoeff);
     }
 }

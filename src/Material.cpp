@@ -5,25 +5,25 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Wed May  4 10:44:15 2011 loick michard
+// Last update Wed May  4 14:42:05 2011 gael jochaud-du-plessix
 //
 
 #include "Material.hpp"
 
 Material::Material(): 
   _isTextured(false), _name(""), _color(Color(0, 0, 0)), _texture(NULL),
-  _specularCoeff(0), _specularPow(50), _reflectionCoeff(0),
-  _transmissionCoeff(0), _refractionIndex(1), _heightmap(NULL),
-  _hasBumpMap(false)
+  _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
+  _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
+  _heightmap(NULL), _hasBumpMap(false)
 {
 
 }
 
 Material::Material(const string& name):
   _isTextured(false), _color(Color(0, 0, 0)), _texture(NULL),
-  _specularCoeff(0), _specularPow(50), _reflectionCoeff(0),
-  _transmissionCoeff(0), _refractionIndex(1), _heightmap(NULL),
-  _hasBumpMap(false)
+  _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
+  _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
+  _heightmap(NULL), _hasBumpMap(false)
 {
   string	mnew = name;
 }
@@ -38,6 +38,13 @@ Color	Material::getColor(double x, double y) const
   if (_isTextured && _texture)
     return (_texture->getColor(x, y));
   return (_color);
+}
+
+bool	Material::isLimitedAtPoint(double x, double y) const
+{
+  if (_limitTexture)
+    return (_limitTexture->getColor(x, y)._a == 0);
+  return (false);
 }
 
 double	Material::getSpecularCoeff(void) const
@@ -79,6 +86,11 @@ void	Material::setTexture(Texture* texture)
 {
   _texture = texture;
   _isTextured = true;
+}
+
+void	Material::setLimitTexture(Texture* texture)
+{
+  _limitTexture = texture;
 }
 
 void	Material::setSpecularCoeff(double specularCoeff)
