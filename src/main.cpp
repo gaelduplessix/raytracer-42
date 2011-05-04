@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 10:51:33 2011 loick michard
+// Last update Wed May  4 11:37:13 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -21,6 +21,7 @@
 #include "Plan.hpp"
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
+#include "CheckerBoard.hpp"
 
 // #include "gui/gui.hpp"
 
@@ -33,8 +34,8 @@ Scene		createScene2()
   Material	reflection = mat;
   reflection.setReflectionCoeff(1);
   Material	refraction = mat;
-  refraction.setTransmissionCoeff(1);
-  refraction.setRefractionIndex(1.5);
+  refraction.setTransmissionCoeff(0.8);
+  refraction.setRefractionIndex(1);
   Material	matFloor("sol");
   matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
@@ -42,37 +43,38 @@ Scene		createScene2()
   matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 5, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  PerlinNoise *perlin = new PerlinNoise();
+  CheckerBoard *perlin = new CheckerBoard(5, 5);
   //perlin->setWoodProperties();
   special.setTexture(perlin);
   special.setTransmissionCoeff(0);
   special.setReflectionCoeff(0);
-  primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
-				  Rotation(0, 0, 0), reflection, 3));
-  primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
+  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
 				  Rotation(0, 0, 0), special, 3));
-  primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
-                                  Rotation(0, 0, 0), refraction, 1));
-  refraction.setTransmissionCoeff(0.9);
-  refraction.setRefractionIndex(1.5);
+  primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
+  				  Rotation(0, 0, 0), refraction, 3));
+  refraction.setColor(Color(255, 0, 0));  
+  refraction.setTransmissionCoeff(0);
+  //refraction.setRefractionIndex(2);
+  primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
+                                  Rotation(0, 0, 0), refraction, 2));
 
-  // primitives.push_back(new Plan(NULL, Point(0, 0, -5),
-  // 				Rotation(0, 0, 0), matFloor));
+  primitives.push_back(new Plan(NULL, Point(0, 0, -5),
+  				Rotation(0, 0, 0), matFloor));
 
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
 			   true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(-5, 0, 4), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(5, 0, 4), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(35, 0, 5), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(30, 20, 10), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(30, -20, 10), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(28, 0, 0), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -93,8 +95,8 @@ RenderingConfiguration	createConfig2()
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseLightingEnabled(false);
   res.setFieldDepthEnabled(false);
-  res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
-  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+  res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
+  //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 
@@ -120,7 +122,7 @@ class SDLInterface : public RenderingInterface
     p[2] = color._r;
     p[1] = color._g;
     p[0] = color._b;
-    if (x == 0)
+    if (y == 0)
       SDL_Flip(screen);
   }
 

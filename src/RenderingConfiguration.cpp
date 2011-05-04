@@ -3,7 +3,8 @@
 RenderingConfiguration::RenderingConfiguration():
   _width(0), _height(0), _currentCamera(0), _antialiasing(0),
   _exposure(1.0), _directLighting(true), _specularLighting(true),
-  _cubeMap(NULL), _ambientOcclusionEnabled(false),
+  _cubeMap(NULL), _backgroundColor(Color(0, 0, 0)),
+  _ambientOcclusionEnabled(false),
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseLightingEnabled(false),
   _diffuseLightingSampling(0), _fieldDepthEnabled(false),
@@ -92,6 +93,11 @@ int	RenderingConfiguration::getTransparencyDiffusedSampling(void) const
 CubeMap*	RenderingConfiguration::getCubeMap(void) const
 {
   return (_cubeMap);
+}
+
+const Color&	RenderingConfiguration::getBackgroundColor(void) const
+{
+  return (_backgroundColor);
 }
 
 bool	RenderingConfiguration::isAmbientOcclusionEnabled(void) const
@@ -237,6 +243,11 @@ void	RenderingConfiguration::setTransparencyDiffused(bool diffused)
 void	RenderingConfiguration::setCubeMap(CubeMap* map)
 {
   _cubeMap = map;
+}
+
+void	RenderingConfiguration::setBackgroundColor(const Color& color)
+{
+  _backgroundColor = color;
 }
 
 void	RenderingConfiguration::

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May  4 10:48:30 2011 loick michard
+// Last update Wed May  4 12:07:47 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -72,10 +72,7 @@ void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
     EquationSolver::solveQuadraticEquation(a, b, c);
   for (unsigned int i = 0 ; i++ ; i < solutions.size())
     if (solutions[i] > EPSILON)
-      {
-	intersection.push_back((t_intersected_object){this, solutions});
-	break;
-      }
+      intersection.push_back((t_intersected_object){this, solutions});
 }
 
 void                  Sphere::intersectWithRay(const Ray& ray,

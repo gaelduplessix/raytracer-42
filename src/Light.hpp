@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 19:02:17 2011 loick michard
+// Last update Wed May  4 11:49:03 2011 gael jochaud-du-plessix
 //
 
 #ifndef _LIGHT_HPP_
@@ -41,6 +41,7 @@ public:
 	      const Vector& ray,
 	      Color& directLighting,
 	      Color& specularLighting) const = 0;
+
   void getLightingFromLightRay(const Vector &lightVector,
 			       const Vector &normal,
 			       const Vector &reflectedVector,
@@ -50,6 +51,8 @@ public:
 			       const ObjectPrimitive& primitive,
 			       Color& directLighting,
 			       Color& specularLighting) const;
+  double	getAbsorptionCoeff(vector<struct s_intersected_object>&
+				   intersections) const;
 
 protected:
   Point		_position;
