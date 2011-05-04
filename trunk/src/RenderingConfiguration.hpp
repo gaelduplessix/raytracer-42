@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Wed May  4 18:13:31 2011 gael jochaud-du-plessix
+// Last update Wed May  4 21:46:31 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -57,6 +57,8 @@ public:
   void		setExposure(double exposure);
   bool		isDirectLighting(void) const;
   void		setDirectLighting(bool antialiasing);
+  void		setDirectLightingCoeff(double coef);
+  double	getDirectLightingCoeff(void) const;
   bool		isSpecularLighting(void) const;
   void		setSpecularLighting(bool antialiasing);
   bool		isDiffuseLighting(void) const;
@@ -121,6 +123,7 @@ private:
   int			_antialiasing;
   double		_exposure;
   bool			_directLighting;
+  double		_directLightingCoeff;
   bool			_diffuseLighting;
   bool			_specularLighting;
   t_reflection		_reflection;

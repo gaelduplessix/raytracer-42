@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May  4 12:20:47 2011 gael jochaud-du-plessix
+// Last update Wed May  4 22:20:50 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -169,7 +169,7 @@ Color			Raytracer::throwRay(Ray& ray)
 {
   double		k;
   ObjectPrimitive*	nearestObject;
-  Color			directLight, specularLight;
+  Color			diffuseLight, specularLight;
 
   nearestObject = getNearestObject(ray, k);
   if (nearestObject)
@@ -177,28 +177,32 @@ Color			Raytracer::throwRay(Ray& ray)
       Point	intersectPoint = ray._point + ray._vector * k;
       if (_config->isDirectLighting() || _config->isSpecularLighting())
 	calcLightForObject(*nearestObject, intersectPoint,
-			   ray._vector, directLight, specularLight);
+			   ray._vector, diffuseLight, specularLight);
       Color reflectedLight = calcReflectedLight(nearestObject,
 						intersectPoint,
 						ray);
       Color refractedLight = calcTransmetedLight(nearestObject,
 						 intersectPoint,
 						 ray);
-      return ((((((directLight
-		   * (1.0 - nearestObject->getMaterial().getSpecularCoeff()))
-		  + (specularLight
-		     * nearestObject->getMaterial().getSpecularCoeff()))
-		 * (1.0 - nearestObject->getMaterial().getReflectionCoeff()))
-		+ (reflectedLight
-		   * nearestObject->getMaterial().getReflectionCoeff()))
-	       * (1.0 - nearestObject->getMaterial().getTransmissionCoeff()))
-	      + refractedLight
-	      * nearestObject->getMaterial().getTransmissionCoeff());
+      Color mixedColor =
+	(((((diffuseLight
+	     * (1.0 - nearestObject->getMaterial().getSpecularCoeff()))
+	    + (specularLight
+	       * nearestObject->getMaterial().getSpecularCoeff()))
+	   * (1.0 - nearestObject->getMaterial().getReflectionCoeff()))
+	  + (reflectedLight
+	     * nearestObject->getMaterial().getReflectionCoeff()))
+	 * (1.0 - nearestObject->getMaterial().getTransmissionCoeff()))
+	+ refractedLight
+	* nearestObject->getMaterial().getTransmissionCoeff();
+      mixedColor += calcDirectLight(ray);
+      return (mixedColor);
     }
   else if (_config->getCubeMap() != NULL)
-    return (_config->getCubeMap()->getMapColor(ray._vector));
+    return (_config->getCubeMap()->getMapColor(ray._vector)
+	    + calcDirectLight(ray));
   else
-    return (_config->getBackgroundColor());
+    return (_config->getBackgroundColor() + calcDirectLight(ray));
 }
 
 void
@@ -327,4 +331,20 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 	}
     }
   return (Color());
+}
+
+Color	Raytracer::calcDirectLight(const Ray& ray)
+{
+  Color	directLight;
+
+  if (_config->isDirectLighting())
+    {
+      const vector<Light*>&	lights = _scene->getLights();
+      int			nbLights = lights.size();
+
+      for (int i = 0; i < nbLights; i++)
+	directLight += lights[i]->getDirectLighting(*this, ray);
+      return (directLight * _config->getDirectLightingCoeff());
+    }
+  return (directLight);
 }

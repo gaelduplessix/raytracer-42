@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Sat Apr 30 18:23:21 2011 loick michard
+// Last update Wed May  4 22:20:38 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SPOT_HPP_
@@ -24,6 +24,9 @@ public :
 		   const Vector& ray,
 		   Color& directLighting,
 		   Color& specularLighting) const;
+
+  Color getDirectLighting(const Raytracer& raytracer,
+			  const Ray& ray) const;
 };
 
 #endif

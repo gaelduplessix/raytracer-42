@@ -2,9 +2,9 @@
 
 RenderingConfiguration::RenderingConfiguration():
   _width(0), _height(0), _currentCamera(0), _antialiasing(0),
-  _exposure(1.0), _directLighting(true), _diffuseLighting(true),
-  _specularLighting(true), _cubeMap(NULL), _backgroundColor(Color(0, 0, 0)),
-  _ambientOcclusionEnabled(false),
+  _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
+  _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
+  _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseShadingEnabled(false),
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
@@ -43,6 +43,11 @@ double	RenderingConfiguration::getExposure(void) const
 bool	RenderingConfiguration::isDirectLighting(void) const
 {
   return (_directLighting);
+}
+
+double	RenderingConfiguration::getDirectLightingCoeff(void) const
+{
+  return (_directLightingCoeff);
 }
 
 bool	RenderingConfiguration::isDiffuseLighting(void) const
@@ -180,6 +185,11 @@ void	RenderingConfiguration::setExposure(double exposure)
 void	RenderingConfiguration::setDirectLighting(bool directLighting)
 {
   _directLighting = directLighting;
+}
+
+void	RenderingConfiguration::setDirectLightingCoeff(double coeff)
+{
+  _directLightingCoeff = coeff;
 }
 
 void	RenderingConfiguration::setDiffuseLighting(bool value)

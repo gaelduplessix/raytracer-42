@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Mon May  2 23:57:58 2011 gael jochaud-du-plessix
+// Last update Wed May  4 21:42:30 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -77,6 +77,8 @@ public:
   Color	calcTransmetedLight(const ObjectPrimitive* nearestObject,
 			    const Point& intersectPoint,
 			    Ray& ray);
+
+  Color	calcDirectLight(const Ray& ray);
 
 private:
   Scene*			_scene;
