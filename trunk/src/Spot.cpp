@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Sun May  1 18:35:57 2011 samuel olivier
+// Last update Wed May  4 12:53:09 2011 loick michard
 //
 
 #include <cmath>
@@ -29,8 +29,8 @@ void	Spot::getLighting(const ObjectPrimitive& primitive,
   Vector	lightVector = _position - intersectPoint;
 
   getLightingFromLightRay(lightVector,
-			  primitive.getNormalVector(intersectPoint,
-						    lightVector),
+			  primitive.getNormal(intersectPoint,
+					      lightVector),
 			  primitive.getReflectedVector(intersectPoint,
 						       lightVector),
 			  raytracer,

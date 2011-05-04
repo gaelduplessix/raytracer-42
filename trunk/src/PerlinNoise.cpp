@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:14:13 2011 loick michard
-// Last update Wed May  4 10:22:33 2011 loick michard
+// Last update Wed May  4 13:09:44 2011 loick michard
 //
 
 #include <cmath>
@@ -76,6 +76,16 @@ void    PerlinNoise::setStep(double step)
 void    PerlinNoise::setPersistance(double persistance)
 {
   _persistance = persistance;
+}
+
+int	PerlinNoise::getWidth() const
+{
+  return (_width);
+}
+
+int	PerlinNoise::getHeight()const
+{
+  return (_height);
 }
 
 Color	PerlinNoise::getPixel(double x, double y) const
