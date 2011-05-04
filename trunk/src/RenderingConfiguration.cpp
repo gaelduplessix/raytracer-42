@@ -8,7 +8,8 @@ RenderingConfiguration::RenderingConfiguration():
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseShadingEnabled(false),
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
-  _fieldDepthSampling(0)
+  _fieldDepthSampling(0), _additiveAmbiantLighting(-1),
+  _minimalAmbiantLighting(-1)
 {
   _transparency.enabled = false;
   _reflection.enabled = false;
@@ -148,6 +149,16 @@ bool	RenderingConfiguration::isFieldDepthEnabled(void) const
 int	RenderingConfiguration::getFieldDepthSampling(void) const
 {
   return (_fieldDepthSampling);
+}
+
+double	RenderingConfiguration::getAdditiveAmbiantLighting(void) const
+{
+  return (_additiveAmbiantLighting);
+}
+
+double	RenderingConfiguration::getMinimalAmbiantLighting(void) const
+{
+  return (_minimalAmbiantLighting);
 }
 
 renderingSamplingMethod	RenderingConfiguration::
@@ -314,6 +325,16 @@ void	RenderingConfiguration::setFieldDepthEnabled(bool enabled)
 void	RenderingConfiguration::setFieldDepthSampling(int sampling)
 {
   _fieldDepthSampling = sampling;
+}
+
+void	RenderingConfiguration::setAdditiveAmbiantLighting(double value)
+{
+  _additiveAmbiantLighting = value;
+}
+
+void	RenderingConfiguration::setMinimalAmbiantLighting(double value)
+{
+  _minimalAmbiantLighting = value;
 }
 
 void	RenderingConfiguration::

@@ -109,7 +109,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
   double	absorptionCoeff = getAbsorptionCoeff(intersections, ray,
 						     lightColor);
   double	scalar;
-  
+
   if (raytracer.getRenderingConfiguration()->isDiffuseLighting())
     {
       scalar = lightVector * normal /

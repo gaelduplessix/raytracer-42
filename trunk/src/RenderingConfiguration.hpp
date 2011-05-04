@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Wed May  4 21:46:31 2011 gael jochaud-du-plessix
+   Last update Wed May  4 22:41:57 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -64,7 +64,6 @@ public:
   bool		isDiffuseLighting(void) const;
   void		setDiffuseLighting(bool value);
 
-
   bool		isReflectionEnabled(void) const;
   int		getReflectionMaxDepth(void) const;
   bool		isReflectionDiffused(void) const;
@@ -113,6 +112,11 @@ public:
   void		setFieldDepthEnabled(bool enabled= 1);
   void		setFieldDepthSampling(int sampling);
 
+  double	getAdditiveAmbiantLighting(void) const;
+  double	getMinimalAmbiantLighting(void) const;
+  void		setAdditiveAmbiantLighting(double value);
+  void		setMinimalAmbiantLighting(double value);
+
   renderingSamplingMethod getRenderingSamplingMethod(void) const;
   void setRenderingSamplingMethod(renderingSamplingMethod rsm);
 
@@ -138,6 +142,8 @@ private:
   int                   _diffuseShadingSampling;
   bool                  _fieldDepthEnabled;
   int                   _fieldDepthSampling;
+  double		_additiveAmbiantLighting;
+  double		_minimalAmbiantLighting;
   renderingSamplingMethod _renderingSamplingMethod;
 };
 
