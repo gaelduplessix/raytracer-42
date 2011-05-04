@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Wed May  4 12:21:30 2011 gael jochaud-du-plessix
+// Last update Wed May  4 12:55:17 2011 samuel olivier
 //
 
 #include <cmath>
@@ -61,15 +61,26 @@ void		Light::setIntensity(double intensity)
 }
 
 double
-Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections) const
+Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections,
+			  const ObjectPrimitive* currentObject) const
 {
   double	coeff = 0;
   int		nbIntersect = intersections.size();
+  int		nbK;
 
   for (int i = 0; i < nbIntersect && coeff < 1; i++)
     {
-      coeff += 1 -
-  	intersections[i].primitive->getMaterial().getTransmissionCoeff();
+      if (intersections[i].primitive != currentObject)
+	{
+	  nbK = intersections[i].k.size();
+	  for (int j = 0; j < nbK; j++)
+	    {
+	      if (intersections[i].k[j] < 1)
+		coeff += 1 -
+		  intersections[i].primitive->getMaterial()
+		  .getTransmissionCoeff();
+	    }
+	}
     }
   if (coeff > 1)
     coeff = 1;
@@ -89,12 +100,12 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 {
   Ray           ray(intersectPoint, lightVector);
   double        k = -1;
-  // const ObjectPrimitive*    nearestObject =
-  //   raytracer.getNearestObject(ray, k);
+  const ObjectPrimitive*    nearestObject =
+    raytracer.getNearestObject(ray, k);
   vector<t_intersected_object>	intersections;
   raytracer.getIntersectingObjects(ray, intersections);
-  double	absorptionCoeff = getAbsorptionCoeff(intersections);
-
+  double	absorptionCoeff = getAbsorptionCoeff(intersections,
+						     &primitive);
   //if (!(nearestObject && k <= 1 && k > EPSILON))
     {
       double scalar;
