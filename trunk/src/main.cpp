@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 15:50:35 2011 gael jochaud-du-plessix
+// Last update Wed May  4 17:05:22 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -56,7 +56,7 @@ Scene		createScene2()
   perlin->setWoodProperties();
   special.setTransmissionCoeff(0.8);
   special.setReflectionCoeff(0);
-  //special.setLimitTexture(new Texture("stripes.png"));
+  special.setLimitTexture(new Texture("stripes.png", 0.05, 0.05));
   //special.setTexture(perlin)
   special.setTexture(new Texture("terre.jpg", 1.0/8, 1.0/8));
   Plan* plane = new Plan(NULL, Point(20, -5, -5),
