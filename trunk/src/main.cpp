@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 12:55:45 2011 samuel olivier
+// Last update Wed May  4 13:29:25 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -43,7 +43,7 @@ Scene		createScene2()
   matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 5, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
@@ -55,7 +55,7 @@ Scene		createScene2()
   // special.setTexture(new Texture("terre.jpg"));
   special.setTransmissionCoeff(0);
   special.setReflectionCoeff(0);
-  primitives.push_back(new Cylinder(NULL, Point(30, 0, 5),
+  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
 				  Rotation(0, 0, 0), special, 3));
   // primitives.push_back(new Sphere(NULL, Point(18, 0, 0),
   // 				  Rotation(0, 0, 0), refraction, 3));
@@ -73,9 +73,9 @@ Scene		createScene2()
 			   true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(30, 20, 10), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(30, -20, 10), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(0, 0, 5), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(30, 20, 0), Color(255, 255, 255)));
+  //light.push_back(new Spot(Point(30, -20, 10), Color(255, 255, 255)));
+  //light.push_back(new Spot(Point(0, 0, 5), Color(255, 255, 255)));
   
   Scene		res(cam, obj, light);
   return (res);
