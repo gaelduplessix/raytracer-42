@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Tue May  3 23:29:38 2011 gael jochaud-du-plessix
+// Last update Wed May  4 18:13:31 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -59,6 +59,9 @@ public:
   void		setDirectLighting(bool antialiasing);
   bool		isSpecularLighting(void) const;
   void		setSpecularLighting(bool antialiasing);
+  bool		isDiffuseLighting(void) const;
+  void		setDiffuseLighting(bool value);
+
 
   bool		isReflectionEnabled(void) const;
   int		getReflectionMaxDepth(void) const;
@@ -98,10 +101,10 @@ public:
   void		setPhotonMappingEnabled(bool enabled= 1);
   void		setPhotonMappingSampling(int sampling);
   
-  bool		isDiffuseLightingEnabled(void) const;
-  int		getDiffuseLightingSampling(void) const;
-  void		setDiffuseLightingEnabled(bool enabled= 1);
-  void		setDiffuseLightingSampling(int sampling);
+  bool		isDiffuseShadingEnabled(void) const;
+  int		getDiffuseShadingSampling(void) const;
+  void		setDiffuseShadingEnabled(bool enabled= 1);
+  void		setDiffuseShadingSampling(int sampling);
 
   bool		isFieldDepthEnabled(void) const;
   int		getFieldDepthSampling(void) const;
@@ -118,6 +121,7 @@ private:
   int			_antialiasing;
   double		_exposure;
   bool			_directLighting;
+  bool			_diffuseLighting;
   bool			_specularLighting;
   t_reflection		_reflection;
   t_transparency	_transparency;
@@ -127,8 +131,8 @@ private:
   int			_ambientOcclusionSampling;
   bool                  _photonMappingEnabled;
   int                   _photonMappingSampling;
-  bool                  _diffuseLightingEnabled;
-  int                   _diffuseLightingSampling;
+  bool                  _diffuseShadingEnabled;
+  int                   _diffuseShadingSampling;
   bool                  _fieldDepthEnabled;
   int                   _fieldDepthSampling;
   renderingSamplingMethod _renderingSamplingMethod;

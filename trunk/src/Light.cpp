@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Wed May  4 15:36:00 2011 gael jochaud-du-plessix
+// Last update Wed May  4 18:16:02 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -113,7 +113,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 						     lightColor);
   double	scalar;
   
-  if (raytracer.getRenderingConfiguration()->isDirectLighting())
+  if (raytracer.getRenderingConfiguration()->isDiffuseLighting())
     {
       scalar = lightVector * normal /
 	(lightVector.getNorm() * normal.getNorm());

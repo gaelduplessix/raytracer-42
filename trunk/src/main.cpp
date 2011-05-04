@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 18:07:17 2011 loick michard
+// Last update Wed May  4 18:16:20 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -48,25 +48,22 @@ Scene		createScene2()
   //primitives.push_back(new Sphere(NULL, Point(30, -3, 3),
   //				  Rotation(0, 0, 0), reflection, 3));
   Material special = refraction;
-  PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
-  perlin->setMarbleProperties();
-  special.setTexture(perlin);
+  Texture *perlin = new PerlinNoise();//new Texture("heightmap.png");
+  //perlin->setWoodProperties();
   //special.setHeightmap(perlin);
-  //special.setNormalDeformation(Material::WAVES_X);
   special.setTransmissionCoeff(0);
-  special.setColor(Color(255, 255, 255));
-  special.setReflectionCoeff(0);
-  //primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
-  //				  Rotation(0, 0, 0), reflection, 3));
+  special.setTexture(perlin);
+  primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
+  				  Rotation(0, 0, 0), special, 3));
   primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
-				  Rotation(0, 0, 3.14), special, 3));
-  //primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
-  //                            Rotation(0, 0, 0), refraction, 1));
+				  Rotation(0, 0, 0), special, 3));
+  primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
+                                Rotation(0, 0, 0), matFloor, 1));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
 
-  // primitives.push_back(new Plan(NULL, Point(0, 0, -5),
-  // 				Rotation(0, 0, 0), matFloor));
+  primitives.push_back(new Plan(NULL, Point(0, 0, -5),
+  				Rotation(0, 0, 0), matFloor));
 
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
@@ -74,8 +71,8 @@ Scene		createScene2()
 
   vector<Light*> light;
   light.push_back(new Spot(Point(0, 5, 4), Color(255, 255, 255)));
-  //light.push_back(new Spot(Point(5, 0, 4), Color(255, 255, 255)));
-  //light.push_back(new Spot(Point(35, 0, 5), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(5, 0, 4), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(35, 0, 5), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -87,17 +84,17 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(4);
+  res.setAntialiasing(1);
   res.setExposure(2);
-  res.setDirectLighting(true);
+  res.setDiffuseLighting(true);
   res.setSpecularLighting(false);
   res.setReflection(true);
   res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);
-  res.setDiffuseLightingEnabled(false);
+  res.setDiffuseShadingEnabled(false);
   res.setFieldDepthEnabled(false);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
-  //  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+  //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 
