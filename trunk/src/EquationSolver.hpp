@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 11:41:00 2011 loick michard
-// Last update Fri Apr 29 12:07:56 2011 loick michard
+// Last update Thu May  5 17:27:36 2011 loick michard
 //
 
 #ifndef _EQUATION_SOLVER_HPP_
@@ -18,7 +18,16 @@ using namespace std;
 class	EquationSolver
 {
 public:
-  static vector<double> solveQuadraticEquation(double a, double b, double c);
+  static vector<double> solveQuadraticEquation(double a, double b, double c,
+					       bool all = false);
+  static vector<double> solveCubicEquation(double a, double b, 
+					   double c, double d,
+					   bool all = false);
+  static vector<double> solveQuarticEquation(double a, double b,
+                                           double c, double d,
+                                           double e, bool all = false);
+  static vector<double>
+  CardanMethod(double p, double q);
 };
 
 #endif

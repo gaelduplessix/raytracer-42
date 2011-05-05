@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Thu May  5 16:42:20 2011 samuel olivier
+// Last update Thu May  5 18:24:26 2011 loick michard
 //
 
 #include <vector>
@@ -22,7 +22,6 @@
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
 #include "Cone.hpp"
-#include "ParrallelLight.hpp"
 
 // #include "gui/gui.hpp"
 #include <iostream>
@@ -53,8 +52,8 @@ Scene		createScene2()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
-  // primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
-  // 				Rotation(0, 0, 0), reflection, 1.0));
+  //primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
+  //				Rotation(0, 0, 0), reflection, 1.0));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
@@ -65,8 +64,8 @@ Scene		createScene2()
   // 				  Rotation(0, 0, 0), special, 3));
   // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
   // 				  Rotation(0, 0, 0), reflection, 3));
-  primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
-				  Rotation(0, 0, 0), refraction, 1.5));
+  //primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
+  //				  Rotation(0, 0, 0), refraction, 1.5));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
   primitives.push_back(new Plan(NULL, Point(0, 0, -5),
@@ -76,8 +75,8 @@ Scene		createScene2()
 			   true));
 
   vector<Light*> light;
-  light.push_back(new ParrallelLight(Point(0, -3, -3), Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(30, 0, 5), Color(255, 255, 255)));
+  //light.push_back(new ParrallelLight(Point(0, -3, -3), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(30, 13, 5), Color(255, 255, 255)));
   // light.push_back(new Spot(Point(18, 10, 0), Color(255, 0, 0)));
 
   Scene		res(cam, obj, light);
