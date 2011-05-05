@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Thu May  5 09:10:46 2011 samuel olivier
+// Last update Thu May  5 15:46:57 2011 samuel olivier
 //
 
 #include <cmath>
@@ -62,7 +62,7 @@ void		Light::setIntensity(double intensity)
 
 double
 Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections,
-			  Ray& lightRay, Color& lightColor) const
+			  Ray& lightRay, Color& lightColor, bool limited) const
 {
   double	coeff = 0;
   int		nbIntersect = intersections.size();
@@ -73,7 +73,7 @@ Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections,
       nbK = intersections[i].k.size();
       for (int j = 0; j < nbK; j++)
 	{
-	  if (intersections[i].k[j] < 1)
+	  if (!limited || intersections[i].k[j] < 1)
 	    {
 	      Point intersectPoint = lightRay._point + lightRay._vector
 		* intersections[i].k[j];
