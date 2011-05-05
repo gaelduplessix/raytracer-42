@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Wed May  4 22:20:24 2011 gael jochaud-du-plessix
+// Last update Thu May  5 15:47:29 2011 samuel olivier
 //
 
 #ifndef _LIGHT_HPP_
@@ -53,7 +53,8 @@ public:
 			       Color& specularLighting) const;
   double	getAbsorptionCoeff(vector<struct s_intersected_object>&
 				   intersections, Ray& lightRay,
-				   Color& lightColor) const;
+				   Color& lightColor,
+				   bool limited = true) const;
   virtual Color	getDirectLighting(const Raytracer& raytracer,
 				  const Ray& ray) const = 0;
 

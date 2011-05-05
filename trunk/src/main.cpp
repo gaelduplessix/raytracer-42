@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Thu May  5 14:52:31 2011 samuel olivier
+// Last update Thu May  5 16:42:20 2011 samuel olivier
 //
 
 #include <vector>
@@ -25,6 +25,12 @@
 #include "ParrallelLight.hpp"
 
 // #include "gui/gui.hpp"
+#include <iostream>
+#include <SDL/SDL.h>
+#include "RenderingInterface.hpp"
+
+using namespace std;
+
 
 Scene		createScene2()
 {
@@ -47,8 +53,8 @@ Scene		createScene2()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
-  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
-				Rotation(0, 0, 0), reflection, 1.0));
+  // primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
+  // 				Rotation(0, 0, 0), reflection, 1.0));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
@@ -63,10 +69,8 @@ Scene		createScene2()
 				  Rotation(0, 0, 0), refraction, 1.5));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
-
   primitives.push_back(new Plan(NULL, Point(0, 0, -5),
   				Rotation(0, 0, 0), matFloor));
-
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
 			   true));
@@ -103,12 +107,6 @@ RenderingConfiguration	createConfig2()
   //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
-
-#include <iostream>
-#include <SDL/SDL.h>
-#include "RenderingInterface.hpp"
-
-using namespace std;
 
 SDL_Surface	*screen;
 
