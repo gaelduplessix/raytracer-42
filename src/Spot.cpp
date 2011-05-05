@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Wed May  4 22:39:06 2011 gael jochaud-du-plessix
+// Last update Thu May  5 14:40:55 2011 samuel olivier
 //
 
 #include <cmath>
@@ -19,12 +19,12 @@ Spot::Spot(const Point &position, const Color &color,
 
 }
 
-void Spot::setDirectLightPow(double value)
+void	Spot::setDirectLightPow(double value)
 {
   _directLightPow = value;
 }
 
-double Spot::getDirectLightPow(void) const
+double	Spot::getDirectLightPow(void) const
 {
   return (_directLightPow);
 }
@@ -48,10 +48,11 @@ void	Spot::getLighting(const ObjectPrimitive& primitive,
 			  primitive,
 			  directLighting,
 			  specularLighting);
+  directLighting *= _intensity;
 }
 
-Color Spot::getDirectLighting(const Raytracer& raytracer,
-			      const Ray& ray) const
+Color	Spot::getDirectLighting(const Raytracer& raytracer,
+				const Ray& ray) const
 {
   Ray	lightRay = Ray(ray._point, _position - ray._point);
   vector<t_intersected_object>  intersections;

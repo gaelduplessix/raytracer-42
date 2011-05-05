@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May  4 22:35:15 2011 gael jochaud-du-plessix
+// Last update Thu May  5 14:52:31 2011 samuel olivier
 //
 
 #include <vector>
@@ -22,19 +22,20 @@
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
 #include "Cone.hpp"
+#include "ParrallelLight.hpp"
 
 // #include "gui/gui.hpp"
 
 Scene		createScene2()
 {
   Material	mat("base");
-  mat.setColor(Color(255, 255, 255, 0));
+  mat.setColor(Color(255, 0, 0, 0));
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(1);
+  reflection.setReflectionCoeff(0);
   Material	refraction = mat;
-  refraction.setTransmissionCoeff(1);
+  refraction.setTransmissionCoeff(0);
   refraction.setRefractionIndex(1.33);
   Material	matFloor("sol");
   matFloor.setReflectionCoeff(0);
@@ -54,12 +55,12 @@ Scene		createScene2()
   //special.setHeightmap(perlin);
   special.setTransmissionCoeff(0);
   special.setTexture(perlin);
-  primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
-  				  Rotation(0, 0, 0), special, 3));
-  primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
-				  Rotation(0, 0, 0), reflection, 3));
+  // primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
+  // 				  Rotation(0, 0, 0), special, 3));
+  // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
+  // 				  Rotation(0, 0, 0), reflection, 3));
   primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
-                                Rotation(0, 0, 0), refraction, 1));
+				  Rotation(0, 0, 0), refraction, 1.5));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
 
@@ -71,9 +72,9 @@ Scene		createScene2()
 			   true));
 
   vector<Light*> light;
-  light.push_back(new Spot(Point(0, 5, 4), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(30, 0, 5), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(18, 10, 0), Color(255, 0, 0)));
+  light.push_back(new ParrallelLight(Point(0, -3, -3), Color(255, 255, 255)));
+  // light.push_back(new Spot(Point(30, 0, 5), Color(255, 255, 255)));
+  // light.push_back(new Spot(Point(18, 10, 0), Color(255, 0, 0)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -90,12 +91,14 @@ RenderingConfiguration	createConfig2()
   res.setDiffuseLighting(true);
   res.setDirectLighting(true);
   res.setDirectLightingCoeff(1);
-  res.setSpecularLighting(false);
-  res.setReflection(false);
-  res.setTransparency(false);
+  res.setSpecularLighting(true);
+  res.setReflection(true);
+  res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseShadingEnabled(false);
   res.setFieldDepthEnabled(false);
+  // res.setAdditiveAmbiantLighting(0.5);
+  // res.setMinimalAmbiantLighting(0.5);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
   //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);

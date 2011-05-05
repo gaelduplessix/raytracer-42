@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May  4 22:20:50 2011 gael jochaud-du-plessix
+// Last update Thu May  5 14:22:49 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -169,22 +169,22 @@ Color			Raytracer::throwRay(Ray& ray)
 {
   double		k;
   ObjectPrimitive*	nearestObject;
-  Color			diffuseLight, specularLight;
 
   nearestObject = getNearestObject(ray, k);
   if (nearestObject)
     {
+      Color	diffuseLight, specularLight;
       Point	intersectPoint = ray._point + ray._vector * k;
       if (_config->isDirectLighting() || _config->isSpecularLighting())
 	calcLightForObject(*nearestObject, intersectPoint,
 			   ray._vector, diffuseLight, specularLight);
-      Color reflectedLight = calcReflectedLight(nearestObject,
-						intersectPoint,
-						ray);
-      Color refractedLight = calcTransmetedLight(nearestObject,
-						 intersectPoint,
-						 ray);
-      Color mixedColor =
+      Color	reflectedLight = calcReflectedLight(nearestObject,
+						    intersectPoint,
+						    ray);
+      Color	refractedLight = calcTransmetedLight(nearestObject,
+						     intersectPoint,
+						     ray);
+      Color	mixedColor =
 	(((((diffuseLight
 	     * (1.0 - nearestObject->getMaterial().getSpecularCoeff()))
 	    + (specularLight
@@ -196,6 +196,7 @@ Color			Raytracer::throwRay(Ray& ray)
 	+ refractedLight
 	* nearestObject->getMaterial().getTransmissionCoeff();
       mixedColor += calcDirectLight(ray);
+      
       return (mixedColor);
     }
   else if (_config->getCubeMap() != NULL)
@@ -239,7 +240,7 @@ ObjectPrimitive*		Raytracer::getNearestObject(Ray& ray,
     }
   return (primitive);
 }
-
+;
 void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
 					      const Point& intersectPoint,
 					      const Vector& viewRay,
@@ -267,10 +268,10 @@ Color	Raytracer::calcReflectedLight(const ObjectPrimitive* nearestObject,
 				      const Point& intersectPoint,
 				      Ray& ray)
 {
-  if (getRenderingConfiguration()->isReflectionEnabled() &&
+  if (_config->isReflectionEnabled() &&
       nearestObject->getMaterial().getReflectionCoeff() > 0
       && ray._reflectionLevel <
-      getRenderingConfiguration()->getReflectionMaxDepth())
+      _config->getReflectionMaxDepth())
     {
       ray._reflectionIntensity *= 
 	nearestObject->getMaterial().getReflectionCoeff();
@@ -296,10 +297,10 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 				       const Point& intersectPoint,
 				       Ray& ray)
 {
-  if (getRenderingConfiguration()->isTransparencyEnabled() &&
+  if (_config->isTransparencyEnabled() &&
       nearestObject->getMaterial().getTransmissionCoeff() > 0
       && ray._refractionLevel <
-      getRenderingConfiguration()->getTransparencyMaxDepth())
+      _config->getTransparencyMaxDepth())
     {
       if (_refractivePath.size() > 0)
 	ray._refractiveIndex =
@@ -333,9 +334,9 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
   return (Color());
 }
 
-Color	Raytracer::calcDirectLight(const Ray& ray)
+Color		Raytracer::calcDirectLight(const Ray& ray)
 {
-  Color	directLight;
+  Color		directLight;
 
   if (_config->isDirectLighting())
     {
