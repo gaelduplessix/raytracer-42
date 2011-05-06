@@ -5,11 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May  4 12:12:03 2011 loick michard
+// Last update Thu May  5 18:27:51 2011 loick michard
 //
 
-#ifndef _SHPERE_HPP_
-#define _SHPERE_HPP_
+#ifndef _SPHERE_HPP_
+#define _SPHERE_HPP_
 
 #include "ObjectPrimitive.hpp"
 
