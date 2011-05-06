@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri May  6 18:58:14 2011 franck lavisse
+// Last update Fri May  6 19:09:01 2011 samuel olivier
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -31,6 +31,8 @@
 #include "../Sphere.hpp"
 #include "../Spot.hpp"
 #include "../Plan.hpp"
+#include "../Triangle.hpp"
+#include "../Parallelogram.hpp"
 
 using namespace std;
 
@@ -51,14 +53,15 @@ Scene           *createScene()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> sphere;
-  sphere.push_back(new Sphere(NULL, Point(30, 0, -5),
-                              Rotation(0, 0, 10), mat, 5));
-  sphere.push_back(new Sphere(NULL, Point(30, 4, 2),
-                              Rotation(0, 0, 0), mat, 2));
-  sphere.push_back(new Sphere(NULL, Point(30, -4, 2),
-			      Rotation(0, 0, 0), mat, 2));
-  sphere.push_back(new Plan(NULL, Point(0, 0, -5),
-                            Rotation(0, 0, 0), mat2));
+  sphere.push_back(new Triangle(NULL, Point(30, 0, 1),
+				Rotation(0, 0, 10), mat, Point(25, 0, 0),
+				Point(27.5, 5, 0)));
+  // sphere.push_back(new Sphere(NULL, Point(30, 4, 2),
+  //                             Rotation(0, 0, 0), mat, 2));
+  // sphere.push_back(new Sphere(NULL, Point(30, -4, 2),
+  // 			      Rotation(0, 0, 0), mat, 2));
+  // sphere.push_back(new Plan(NULL, Point(0, 0, -5),
+  //                           Rotation(0, 0, 0), mat2));
   vector<Object*> obj;
   obj.push_back(new Object(sphere, Rotation(0, 0, 0), Point(0, 0, 0), true));
 
@@ -156,7 +159,6 @@ void	Gui::init_dock(void)
 }
 
 void	Gui::paintEvent(QPaintEvent*) {
-  cout << "salut" << endl;
   *_pixmap = _pixmap->fromImage(*_image);
   _pixlabel->setPixmap(*_pixmap);
 }
