@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  1 15:54:27 2011 franck lavisse
+// Last update Fri May  6 19:00:33 2011 franck lavisse
 //
 
 #include <vector>
@@ -25,7 +25,7 @@
 #include "ParrallelLight.hpp"
 #include "Triangle.hpp"
 
-// #include "gui/gui.hpp"
+#include "gui/gui.hpp"
 #include <iostream>
 #include <SDL/SDL.h>
 #include "RenderingInterface.hpp"
@@ -65,9 +65,9 @@ Scene		createScene2()
   // 				  Rotation(0, 0, 0), special, 3));
   // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
   // 				  Rotation(0, 0, 0), reflection, 3));
-  primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
-				    special, Point(5, 1.5, -1),
-				    Point(7.5, 0, 0)));
+  //  primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
+  //				    special, Point(5, 1.5, -1),
+  //				    Point(7.5, 0, 0)));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
   primitives.push_back(new Plan(NULL, Point(0, 0, -5),

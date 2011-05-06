@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri May  6 18:22:30 2011 franck lavisse
+// Last update Fri May  6 18:58:14 2011 franck lavisse
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -15,10 +15,10 @@
 #include <QLabel>
 #include <QIcon>
 #include <QFrame>
+#include <QTimer>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SDL/SDL.h>
-#include "guisfml.hpp"
 #include "gui.hpp"
 #include "../RenderingConfiguration.hpp"
 #include "../Color.hpp"
@@ -82,7 +82,6 @@ RenderingConfiguration  *createConfig()
   res->setReflection(true);
   res->setTransparency(true);
   res->setAmbientOcclusionEnabled(false);
-  res->setDiffuseLightingEnabled(false);
   res->setFieldDepthEnabled(false);
   res->setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
   return (res);
@@ -92,21 +91,21 @@ void	raytracer(Gui *rt)
 {
   RenderingConfiguration	*config = createConfig();
 
-  /*config.setWidth(1100);
-  config.setHeight(700);
-  config.setAntialiasing(rt->getAliasing());
-  config.setDirectLighting(rt->getDirectLight());
-  config.setReflectionEnabled(rt->getReflectionBool());
-  config.setReflectionDiffusedSampling(rt->getReflectionSampling());
-  config.setReflectionMaxDepth(rt->getReflectionProfondeur());
-  config.setTransparency(rt->getTransparenceBool(),
+  config->setWidth(1100);
+  config->setHeight(700);
+  config->setAntialiasing(rt->getAliasing());
+  config->setDirectLighting(rt->getDirectLight());
+  config->setReflectionEnabled(rt->getReflectionBool());
+  config->setReflectionDiffusedSampling(rt->getReflectionSampling());
+  config->setReflectionMaxDepth(rt->getReflectionProfondeur());
+  config->setTransparency(rt->getTransparenceBool(),
 			 rt->getTransparenceInt(),
 			 rt->getTransparenceDiffusion());
-  config.setAmbientOcclusionEnabled(rt->getAmbiantOcclusionBool());
-  config.setAmbientOcclusionSampling(rt->getAmbiantOcclusionInt());
-  config.setPhotonMappingEnabled(rt->getPhotonMappingBool());
-  config.setPhotonMappingSampling(rt->getPhotonMappingInt());
-  config.setRenderingSamplingMethod(renderingSamplingMethod(rt->getSamplingMethod()));*/
+  config->setAmbientOcclusionEnabled(rt->getAmbiantOcclusionBool());
+  config->setAmbientOcclusionSampling(rt->getAmbiantOcclusionInt());
+  config->setPhotonMappingEnabled(rt->getPhotonMappingBool());
+  config->setPhotonMappingSampling(rt->getPhotonMappingInt());
+  config->setRenderingSamplingMethod(renderingSamplingMethod(rt->getSamplingMethod()));
   Scene *scene = createScene();
 
   rt->_raytracer.setScene(*scene);
@@ -156,20 +155,8 @@ void	Gui::init_dock(void)
   _widget->setMaximumHeight(550);
 }
 
-SDL_Surface     *put_pixel(int x, int y, SDL_Surface *screen, int i)
-{
-  SDL_Surface   *pixel;
-  SDL_Rect      coord;
-
-  coord.x = x;
-  coord.y = y;
-  pixel = SDL_CreateRGBSurface(SDL_HWSURFACE, 1, 1, 32, 0, 0, 0, 0);
-  SDL_FillRect(pixel, NULL, SDL_MapRGB(pixel->format, i, i, i));
-  SDL_BlitSurface(pixel, NULL, screen, &coord);
-  return (screen);
-}
-
 void	Gui::paintEvent(QPaintEvent*) {
+  cout << "salut" << endl;
   *_pixmap = _pixmap->fromImage(*_image);
   _pixlabel->setPixmap(*_pixmap);
 }
@@ -182,34 +169,14 @@ Gui::Gui() : QMainWindow()
   resize(1400, 800);
   _image = new QImage(1130, 720, QImage::Format_ARGB32);
   _pixlabel = new QLabel();
+  setCentralWidget(_pixlabel);
   _pixmap = new QPixmap(1130, 720);
   pixelColor.setR(0);
   pixelColor.setG(255);
   pixelColor.setB(0);
-  //  QColor	mycolor(pixelColor._r,
-			//			pixelColor._g,
-  //			pixelColor._b);
-  //  QPen		mypen(mycolor);
-  //  QBrush	mybrush(mycolor);
   timer.setInterval(10000000);
   QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(repaint()));
   _pixmap->fill(Qt::black);
-  setCentralWidget(_pixlabel);
-
-  //  QPainter	p(_pixmap);
-  //  p.setPen(mypen);
-  //  p.drawLine(200,100,100,150);
-  putPixel(pixelColor, 200, 100);
-  putPixel(pixelColor, 201, 101);
-  putPixel(pixelColor, 201, 100);
-  putPixel(pixelColor, 200, 101);
-  putPixel(pixelColor, 200, 100);
-  putPixel(pixelColor, 200, 100);
-  //  QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(repaint()));
-  /*  for (int x = 0; x < 1100; x++)
-    {
-      putPixel(pixelColor, x, 300);
-      }*/
 }
 
 void	Gui::rendu(void){}
