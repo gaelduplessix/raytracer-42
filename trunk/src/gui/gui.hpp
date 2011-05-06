@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri May  6 17:05:30 2011 franck lavisse
+// Last update Fri May  6 18:31:38 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -28,7 +28,6 @@
 #include <QComboBox>
 #include "../RenderingInterface.hpp"
 #include "../Raytracer.hpp"
-#include "guisfml.hpp"
 
 class Color;
 
