@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Thu May  5 15:46:57 2011 samuel olivier
+// Last update Fri May  6 19:04:09 2011 loick michard
 //
 
 #include <cmath>
@@ -59,7 +59,7 @@ void		Light::setIntensity(double intensity)
 {
   _intensity = intensity;
 }
-
+#include <iostream>
 double
 Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections,
 			  Ray& lightRay, Color& lightColor, bool limited) const

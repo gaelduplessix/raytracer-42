@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 11:44:41 2011 loick michard
-// Last update Thu May  5 18:05:58 2011 loick michard
+// Last update Fri May  6 15:26:47 2011 loick michard
 //
 
 #include <cmath>
@@ -70,7 +70,7 @@ EquationSolver::solveCubicEquation(double a, double b,
 				   bool all)
 {
   if (a == 0)
-    return (EquationSolver::solveQuadraticEquation(b, c, d));
+    return (EquationSolver::solveQuadraticEquation(b, c, d, all));
   vector<double> solutions = CardanMethod(- ((b * b)/ (3.0 * a * a)) 
 					  + (c / a),
 					  (b / (27.0 * a)) *
@@ -101,14 +101,18 @@ EquationSolver::solveQuarticEquation(double a, double b,
   double r = - 3.0 * pow((b / 4.0) / a, 4) + 
     c * (((b / 4.0) * (b / 4.0)) / (a * a * a)) -
     ((1.0 / 4.0) * b * d) / (a * a) + e / a;
-  double y0 = 
+  vector<double> sols= 
     EquationSolver::solveCubicEquation(8.0, - 4.0 * p, 
 				       - 8.0 * r,
 				       4.0 * r * p - q * q,
-				       true)[0];
+				       true);
+  if (sols.size() == 0)
+    return (sols);
+  double y0 = sols[0];
   double a0 = sqrt(-p + 2 * y0);
-  double b0 = (2 * y0 - p != 0) ? - q / (2 * a0) :
-    y0 * y0 -r;
+  double b0 = (2 * y0 - p != 0) ? 
+    - q / (2 * a0) :
+    y0 * y0 - r;
   vector<double> sol1 = 
     EquationSolver::solveQuadraticEquation(1, -a0, y0 - b0, true);
   vector<double> sol2 =
