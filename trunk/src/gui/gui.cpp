@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Sun May  1 15:49:43 2011 loick michard
+// Last update Fri May  6 17:15:00 2011 franck lavisse
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -14,6 +14,11 @@
 #include <iostream>
 #include <QLabel>
 #include <QIcon>
+#include <QFrame>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SDL/SDL.h>
+#include "guisfml.hpp"
 #include "gui.hpp"
 #include "../RenderingConfiguration.hpp"
 #include "../Color.hpp"
@@ -116,7 +121,7 @@ void	Gui::launch_raytracer(void)
   cout << "test" << endl;
   raytracer(this);
 }
-#include <iostream>
+
 void	Gui::putPixelSlot(int x, int y)
 {
   QPainter painter(_pixmap);
@@ -126,6 +131,11 @@ void	Gui::putPixelSlot(int x, int y)
   if (y == 0)
     _label->setPixmap(*_pixmap);
 }
+
+#include <sys/types.h>
+#include <unistd.h>
+#include <signal.h>
+
 
 void	Gui::init_dock(void)
 {
@@ -137,7 +147,8 @@ void	Gui::init_dock(void)
   _Dock->setAllowedAreas(Qt::LeftDockWidgetArea |
 			 Qt::RightDockWidgetArea);
   Rendu->setCursor(Qt::PointingHandCursor);
-  QObject::connect(Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
+  // QObject::connect(this, SIGNAL(perso()), this, SLOT(repaint()));
+  // QObject::connect(Rendu, SIGNAL(clicked()), this, SLOT(repaint()));
   _Grid->addWidget(Rendu, 250, 0);
   _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);
@@ -145,26 +156,61 @@ void	Gui::init_dock(void)
   _widget->setMaximumHeight(550);
 }
 
+SDL_Surface     *put_pixel(int x, int y, SDL_Surface *screen, int i)
+{
+  SDL_Surface   *pixel;
+  SDL_Rect      coord;
+
+  coord.x = x;
+  coord.y = y;
+  pixel = SDL_CreateRGBSurface(SDL_HWSURFACE, 1, 1, 32, 0, 0, 0, 0);
+  SDL_FillRect(pixel, NULL, SDL_MapRGB(pixel->format, i, i, i));
+  SDL_BlitSurface(pixel, NULL, screen, &coord);
+  return (screen);
+}
+
+void	Gui::paintEvent(QPaintEvent*) {
+  static int	i = 0;
+  if (i == 0)
+    {
+      _pixlabel->setPixmap(*_pixmap);
+      i = 20;
+    }
+  --i;
+  if (i < 0)
+    i = 0;
+}
+
 Gui::Gui() : QMainWindow()
 {
+  QTimer timer;
+  Color	pixelColor;
+
   resize(1400, 800);
-  _label = new QLabel();
+  _pixlabel = new QLabel();
+  _pixmap = new QPixmap(1130, 720);
+  pixelColor.setR(0);
+  pixelColor.setG(255);
+  pixelColor.setB(0);
+  //  QColor	mycolor(pixelColor._r,
+			//			pixelColor._g,
+  //			pixelColor._b);
+  //  QPen		mypen(mycolor);
+  //  QBrush	mybrush(mycolor);
+  timer.setInterval(10000000);
+  QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(repaint()));
+  _pixmap->fill(Qt::black);
+  setCentralWidget(_pixlabel);
 
-  //_image = new QImage(853, 480, QImage::Format_ARGB32);
-
-  //_pixmap->fill(QColor(255, 255, 255, 255));
-  _pixmap = new QPixmap(853, 480);//QPixmap::fromImage(*_image);
-  _label->setPixmap(*_pixmap);
-  setCentralWidget(_label);
-
-  putPixel(Color(255, 0, 0), 10, 10);
-  //_Scene = new QGraphicsScene();
-  //QPen	 Pen(Qt::black, 0, Qt::SolidLine);
-  //QBrush Brush(Qt::black);
-  //QPolygon* Polygon = new QPolygon();
-  //*Polygon << QPoint(0, 0) << QPoint(1100, 0)
-  //	   << QPoint(1100, 700) << QPoint(0, 700);
-  //_Scene->addPolygon(*Polygon, Pen, Brush);
+  //  QPainter	p(_pixmap);
+  //  p.setPen(mypen);
+  //  p.drawLine(200,100,100,150);
+  putPixel(pixelColor, 200, 100);
+  //  QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(repaint()));
+  /*  for (int x = 0; x < 1100; x++)
+    {
+      putPixel(pixelColor, x, 300);
+      }*/
 }
 
 void	Gui::rendu(void){}

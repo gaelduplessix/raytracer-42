@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Sun May  1 15:41:38 2011 loick michard
+// Last update Fri May  6 17:05:30 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -28,6 +28,7 @@
 #include <QComboBox>
 #include "../RenderingInterface.hpp"
 #include "../Raytracer.hpp"
+#include "guisfml.hpp"
 
 class Color;
 
@@ -41,7 +42,8 @@ public:
   Gui();
   ~Gui();
 
-  void pixelHasBeenRendered(int x, int y, Color color);
+  void	SDLWidget(void);
+  void	pixelHasBeenRendered(int x, int y, Color color);
   bool	getTransparenceBool(void) const;
   int	getTransparenceInt(void) const;
   int	getTransparenceDiffusion(void) const;
@@ -73,14 +75,17 @@ public:
   void	transparence(void);
   void	flou(void);
   void	menuBar(void);
-
   Raytracer	_raytracer;
-public slots:
-  void	launch_raytracer(void);
-  void	putPixelSlot(int, int);
 
 protected:
-  void	paintEvent(void);
+  virtual void	paintEvent(QPaintEvent*);
+
+public slots:
+  void	launch_raytracer(void);
+  void	putPixelSlot(int, int);  
+
+signals:
+  void	perso();
 
 private:
   QDockWidget	*_DockBar;
@@ -91,9 +96,10 @@ private:
   QGraphicsScene*_Scene;
   QGraphicsItem	*_Item;
   QGraphicsView	*_View;
-
-  QLabel	*_label;
   QPixmap	*_pixmap;
+  QLabel	*_label;
+  QLabel	*_pixlabel;
+
   QCheckBox	*_transparence;
   QSpinBox	*_transpBox;
   QSpinBox	*_transpDiffusion;
