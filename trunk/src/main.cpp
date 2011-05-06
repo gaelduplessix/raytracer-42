@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Fri May  6 17:40:42 2011 loick michard
+// Last update Fri May  6 19:23:10 2011 loick michard
 //
 
 #include <vector>
@@ -24,7 +24,7 @@
 #include "Cone.hpp"
 #include "Torus.hpp"
 #include "CubeTroue.hpp"
-// #include "gui/gui.hpp"
+#include "gui/gui.hpp"
 #include <iostream>
 #include <SDL/SDL.h>
 #include "RenderingInterface.hpp"
@@ -38,7 +38,7 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(0);
+  reflection.setReflectionCoeff(1);
   reflection.setTransmissionCoeff(0);
   reflection.setRefractionIndex(1.33);
   Material	refraction = mat;
@@ -54,8 +54,8 @@ Scene		createScene2()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
-  //  primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
-  //				     Rotation(0.3, 0.5, 0), reflection));
+  primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
+				     Rotation(0.3, 0.5, 0), reflection));
   primitives.push_back(new Torus(NULL, Point(23, -5, 0),
 				 Rotation(0.3, 0.5, 0), reflection, 3, 0.8));
   //primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
@@ -83,7 +83,7 @@ Scene		createScene2()
 
   vector<Light*> light;
   //light.push_back(new ParrallelLight(Point(0, -3, -3), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
+  //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
   //light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
@@ -96,7 +96,7 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(1);
+  res.setAntialiasing(4);
   res.setExposure(2);
   res.setDiffuseLighting(true);
   res.setDirectLighting(true);
@@ -148,14 +148,14 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  //gui(ac, av);
-  SDL_Init(SDL_INIT_VIDEO);
+  gui(ac, av);
+  /*SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
   getchar();
   rt.stopRendering();
-  SDL_Quit();
+  SDL_Quit();*/
   return (0);
 }
