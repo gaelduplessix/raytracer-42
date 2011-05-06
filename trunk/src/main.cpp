@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Thu May  5 18:24:26 2011 loick michard
+// Last update Fri May  6 14:35:01 2011 samuel olivier
 //
 
 #include <vector>
@@ -22,6 +22,8 @@
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
 #include "Cone.hpp"
+#include "ParrallelLight.hpp"
+#include "Triangle.hpp"
 
 // #include "gui/gui.hpp"
 #include <iostream>
@@ -29,7 +31,6 @@
 #include "RenderingInterface.hpp"
 
 using namespace std;
-
 
 Scene		createScene2()
 {
@@ -52,8 +53,8 @@ Scene		createScene2()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
-  //primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
-  //				Rotation(0, 0, 0), reflection, 1.0));
+  // primitives.push_back(new Sphere(NULL, Point(12, 0, 0),
+  // 				  Rotation(0, 0, 0), reflection, 0.3));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
@@ -64,8 +65,9 @@ Scene		createScene2()
   // 				  Rotation(0, 0, 0), special, 3));
   // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
   // 				  Rotation(0, 0, 0), reflection, 3));
-  //primitives.push_back(new Sphere(NULL, Point(15, 0, 0),
-  //				  Rotation(0, 0, 0), refraction, 1.5));
+  primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
+				    special, Point(5, 1.5, -1),
+				    Point(7.5, 0, 0)));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
   primitives.push_back(new Plan(NULL, Point(0, 0, -5),
@@ -75,8 +77,8 @@ Scene		createScene2()
 			   true));
 
   vector<Light*> light;
-  //light.push_back(new ParrallelLight(Point(0, -3, -3), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(30, 13, 5), Color(255, 255, 255)));
+  // light.push_back(new ParrallelLight(Point(-1, -3, -3), Color(255, 255, 255), 0.1));
+  light.push_back(new Spot(Point(10, -2, 3), Color(255, 255, 255), 1));
   // light.push_back(new Spot(Point(18, 10, 0), Color(255, 0, 0)));
 
   Scene		res(cam, obj, light);
@@ -100,8 +102,8 @@ RenderingConfiguration	createConfig2()
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseShadingEnabled(false);
   res.setFieldDepthEnabled(false);
-  // res.setAdditiveAmbiantLighting(0.5);
-  // res.setMinimalAmbiantLighting(0.5);
+  // res.setAdditiveAmbiantLighting(0.1);
+  // res.setMinimalAmbiantLighting(0.1);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
   //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
