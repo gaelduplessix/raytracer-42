@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri May  6 17:15:00 2011 franck lavisse
+// Last update Fri May  6 18:22:30 2011 franck lavisse
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -148,7 +148,7 @@ void	Gui::init_dock(void)
 			 Qt::RightDockWidgetArea);
   Rendu->setCursor(Qt::PointingHandCursor);
   // QObject::connect(this, SIGNAL(perso()), this, SLOT(repaint()));
-  // QObject::connect(Rendu, SIGNAL(clicked()), this, SLOT(repaint()));
+   QObject::connect(Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
   _Grid->addWidget(Rendu, 250, 0);
   _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);
@@ -170,15 +170,8 @@ SDL_Surface     *put_pixel(int x, int y, SDL_Surface *screen, int i)
 }
 
 void	Gui::paintEvent(QPaintEvent*) {
-  static int	i = 0;
-  if (i == 0)
-    {
-      _pixlabel->setPixmap(*_pixmap);
-      i = 20;
-    }
-  --i;
-  if (i < 0)
-    i = 0;
+  *_pixmap = _pixmap->fromImage(*_image);
+  _pixlabel->setPixmap(*_pixmap);
 }
 
 Gui::Gui() : QMainWindow()
@@ -187,6 +180,7 @@ Gui::Gui() : QMainWindow()
   Color	pixelColor;
 
   resize(1400, 800);
+  _image = new QImage(1130, 720, QImage::Format_ARGB32);
   _pixlabel = new QLabel();
   _pixmap = new QPixmap(1130, 720);
   pixelColor.setR(0);
@@ -205,6 +199,11 @@ Gui::Gui() : QMainWindow()
   //  QPainter	p(_pixmap);
   //  p.setPen(mypen);
   //  p.drawLine(200,100,100,150);
+  putPixel(pixelColor, 200, 100);
+  putPixel(pixelColor, 201, 101);
+  putPixel(pixelColor, 201, 100);
+  putPixel(pixelColor, 200, 101);
+  putPixel(pixelColor, 200, 100);
   putPixel(pixelColor, 200, 100);
   //  QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(repaint()));
   /*  for (int x = 0; x < 1100; x++)
@@ -236,3 +235,5 @@ int	gui(int argc, char **argv)
   rt_gui.show();
   return (app.exec());
 }
+
+//int	main(int argc, char **argv) {gui(argc,argv);return(0);}
