@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May  4 22:22:47 2011 samuel olivier
+// Last update Thu May  5 19:44:11 2011 samuel olivier
 //
 
 #include <cmath>
@@ -131,13 +131,16 @@ void                  Cone::intersectWithRay(const Ray& ray,
 Vector		Cone::getNormalVector(const Point& intersectPoint,
 				      const Vector& viewVector) const
 {
-  Vector	normal = intersectPoint - _absolutePosition;
-  normal._z = -normal._z * _angle;
+  // Vector	normal = intersectPoint - _absolutePosition;
+  // normal._z = -normal._z * _angle;
+  Vector	normal(intersectPoint._x - _absolutePosition._x,
+		       intersectPoint._y - _absolutePosition._y,
+		       _absolutePosition._z * _angle * intersectPoint._z);
   double	cosA = viewVector * normal
     / (viewVector.getNorm() * normal.getNorm());
 
-  if (cosA <= 0)
-    return (normal.normalize() * -1);
+  // if (cosA <= 0)
+  //   return (normal.normalize() * -1);
   return (normal.normalize());
 }
 

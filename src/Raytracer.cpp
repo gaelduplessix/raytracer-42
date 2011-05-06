@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May  5 14:22:49 2011 samuel olivier
+// Last update Thu May  5 19:35:08 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -240,7 +240,7 @@ ObjectPrimitive*		Raytracer::getNearestObject(Ray& ray,
     }
   return (primitive);
 }
-;
+
 void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
 					      const Point& intersectPoint,
 					      const Vector& viewRay,

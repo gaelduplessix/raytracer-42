@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Wed May  4 12:15:45 2011 loick michard
+// Last update Fri May  6 11:40:41 2011 samuel olivier
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
