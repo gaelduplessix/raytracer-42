@@ -5,13 +5,16 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:30:28 2011 franck lavisse
-// Last update Sun May  1 12:25:11 2011 loick michard
+// Last update Thu May  5 15:01:01 2011 franck lavisse
 //
 #include <QMenuBar>
 #include <QAction>
 #include <QHBoxLayout>
 #include <QString>
+#include <iostream>
 #include "gui.hpp"
+
+using namespace std;
 
 void	Gui::menuBar(void)
 {
