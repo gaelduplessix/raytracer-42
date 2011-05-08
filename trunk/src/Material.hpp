@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May  4 17:40:55 2011 loick michard
-// Last update Wed May  4 17:40:56 2011 loick michard
+// Last update Sun May  8 22:42:32 2011 samuel olivier
 //
 
 #ifndef _MATERIAL_HPP_
@@ -36,6 +36,7 @@ public:
   void		setSpecularCoeff(double specularCoeff);
   void		setSpecularPow(double specularPow);
   void		setReflectionCoeff(double reflectionCoeff);
+  void		setDiffusedReflectionCoeff(double diffusedReflectionCoeff);
   void		setTransmissionCoeff(double transmissionCoeff);
   void		setRefractionIndex(double refractionIndex);
   void		setHeightmap(Texture* image);
@@ -50,6 +51,7 @@ public:
   double	getSpecularCoeff(void) const;
   double	getSpecularPow(void) const;
   double	getReflectionCoeff(void) const;
+  double	getDiffusedReflectionCoeff(void) const;
   double	getTransmissionCoeff(void) const;
   double	getRefractionIndex(void) const;
 
@@ -70,6 +72,7 @@ private:
   bool		_isTextured;
   double	_specularCoeff;
   double	_specularPow;
+  double	_diffusedReflectionCoeff;
   double	_reflectionCoeff;
   double	_transmissionCoeff;
   double	_refractionIndex;

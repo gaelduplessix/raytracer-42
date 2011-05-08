@@ -66,14 +66,14 @@ bool	RenderingConfiguration::isReflectionEnabled(void) const
   return (_reflection.enabled);
 }
 
-int	RenderingConfiguration::getReflectionMaxDepth(void) const
-{
-  return (_reflection.maxDepth);
-}
-
 bool	RenderingConfiguration::isReflectionDiffused(void) const
 {
   return (_reflection.diffused);
+}
+
+int	RenderingConfiguration::getReflectionMaxDepth(void) const
+{
+  return (_reflection.maxDepth);
 }
 
 int	RenderingConfiguration::getReflectionDiffusedSampling(void) const

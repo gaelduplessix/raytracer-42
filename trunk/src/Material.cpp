@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Wed May  4 18:17:08 2011 gael jochaud-du-plessix
+// Last update Mon May  9 00:17:41 2011 samuel olivier
 //
 
 #include "Material.hpp"
@@ -15,7 +15,7 @@ Material::Material():
   _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
   _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1)
+  _deformationType(-1), _diffusedReflectionCoeff(0.1)
 {
 
 }
@@ -25,7 +25,7 @@ Material::Material(const string& name):
   _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
   _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1)
+  _deformationType(-1), _diffusedReflectionCoeff(0.1)
 {
   string	mnew = name;
 }
@@ -69,6 +69,11 @@ double	Material::getSpecularPow(void) const
 double	Material::getReflectionCoeff(void) const
 {
   return (_reflectionCoeff);
+}
+
+double	Material::getDiffusedReflectionCoeff(void) const
+{
+  return (_diffusedReflectionCoeff);
 }
 
 double	Material::getTransmissionCoeff(void) const
@@ -115,6 +120,11 @@ void	Material::setSpecularPow(double specularPow)
 void	Material::setReflectionCoeff(double reflectionCoeff)
 {
   _reflectionCoeff = reflectionCoeff;
+}
+
+void	Material::setDiffusedReflectionCoeff(double diffusedReflectionCoeff)
+{
+  _diffusedReflectionCoeff = diffusedReflectionCoeff;
 }
 
 void	Material::setTransmissionCoeff(double transmissionCoeff)
