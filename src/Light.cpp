@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Fri May  6 19:04:09 2011 loick michard
+// Last update Sun May  8 19:00:32 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -103,17 +103,30 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 			       Color& specularLighting) const
 {
   Ray           ray(intersectPoint, lightVector);
-  vector<t_intersected_object>	intersections;
-  raytracer.getIntersectingObjects(ray, intersections);
-  Color		lightColor = _color;
-  double	absorptionCoeff = getAbsorptionCoeff(intersections, ray,
-						     lightColor);
-  double	scalar;
   const RenderingConfiguration* renderConf = 
     raytracer.getRenderingConfiguration();
+
+  Color		lightColor = _color;
+  double	absorptionCoeff = 0;
+  if (!renderConf->isTransparencyEnabled())
+    {
+      double                k;
+      ObjectPrimitive*      nearestObject;
+      nearestObject = raytracer.getNearestObject(ray, k);
+      if (nearestObject)
+	return ;
+    }
+  else
+    {
+      vector<t_intersected_object>	intersections;
+      raytracer.getIntersectingObjects(ray, intersections);
+      absorptionCoeff = getAbsorptionCoeff(intersections, ray,
+  						     lightColor);
+    }
+  double	scalar;
   double	minAmbiant = renderConf->getMinimalAmbiantLighting();
   double	addAmbiant = renderConf->getAdditiveAmbiantLighting();
-
+  
   if (minAmbiant < 0)
     minAmbiant = 0;
   if (addAmbiant < 0)

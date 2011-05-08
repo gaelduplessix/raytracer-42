@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Fri May  6 19:23:10 2011 loick michard
+// Last update Sun May  8 20:34:58 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -18,13 +18,14 @@
 #include "ObjectPrimitive.hpp"
 #include "Sphere.hpp"
 #include "Spot.hpp"
+#include "ParrallelLight.hpp"
 #include "Plan.hpp"
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
 #include "Cone.hpp"
 #include "Torus.hpp"
 #include "CubeTroue.hpp"
-#include "gui/gui.hpp"
+//#include "gui/gui.hpp"
 #include <iostream>
 #include <SDL/SDL.h>
 #include "RenderingInterface.hpp"
@@ -54,12 +55,12 @@ Scene		createScene2()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
-  primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
-				     Rotation(0.3, 0.5, 0), reflection));
-  primitives.push_back(new Torus(NULL, Point(23, -5, 0),
-				 Rotation(0.3, 0.5, 0), reflection, 3, 0.8));
-  //primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
-  //				Rotation(0, 0, 0), reflection, 1.0));
+  // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
+  // 				     Rotation(0.3, 0.5, 0), reflection));
+  // primitives.push_back(new Torus(NULL, Point(23, 0, 0),
+  // 				 Rotation(0.3, 0.5, 0), matFloor, 3, 0.8));
+  primitives.push_back(new Sphere(NULL, Point(20, 0, 0),
+  				Rotation(0, 0, 0), matFloor, 2.0));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
@@ -75,15 +76,15 @@ Scene		createScene2()
   //				    Point(7.5, 0, 0)));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
-  //  primitives.push_back(new Plan(NULL, Point(0, 0, -5),
-  //				Rotation(0, 0, 0), matFloor));
+  primitives.push_back(new Plan(NULL, Point(0, 0, -5),
+  				Rotation(0, 0, 0), matFloor));
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
 			   true));
 
   vector<Light*> light;
-  //light.push_back(new ParrallelLight(Point(0, -3, -3), Color(255, 255, 255)));
-  //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
+  //light.push_back(new ParrallelLight(Point(0, 3, 3), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
   //light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
@@ -96,7 +97,7 @@ RenderingConfiguration	createConfig2()
 
   res.setWidth(853);
   res.setHeight(480);
-  res.setAntialiasing(4);
+  res.setAntialiasing(1);
   res.setExposure(2);
   res.setDiffuseLighting(true);
   res.setDirectLighting(true);
@@ -148,14 +149,26 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  gui(ac, av);
-  /*SDL_Init(SDL_INIT_VIDEO);
+  //gui(ac, av);
+  SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
   rt.launchRendering();
-  getchar();
+  SDL_Event event;
+  bool quit = false;
+  while (!quit)
+    {
+      if (SDL_WaitEvent(&event))
+	{
+	  if (event.type == SDL_QUIT
+              || (event.type == SDL_KEYDOWN
+                  && (event.key.keysym.sym == SDLK_ESCAPE
+		      || event.key.keysym.sym == SDLK_RETURN)))
+	    quit = true;
+	}
+    }
   rt.stopRendering();
-  SDL_Quit();*/
+  SDL_Quit();
   return (0);
 }
