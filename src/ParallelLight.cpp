@@ -1,24 +1,24 @@
 //
-// ParrallelLight.cpp for Raytracer in /home/olivie_a//rendu/cpp/raytracer-42
+// ParallelLight.cpp for Raytracer in /home/olivie_a//rendu/cpp/raytracer-42
 // 
 // Made by samuel olivier
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Thu May  5 10:39:44 2011 samuel olivier
-// Last update Thu May  5 16:38:39 2011 samuel olivier
+// Last update Sun May  8 20:40:10 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
-#include "ParrallelLight.hpp"
+#include "ParallelLight.hpp"
 
-ParrallelLight::ParrallelLight(const Point &direction, const Color& color,
+ParallelLight::ParallelLight(const Point &direction, const Color& color,
 			       double intensity) : Light(direction * -1, color,
 							 intensity)
 {
 
 }
 
-Color   ParrallelLight::getDirectLighting(const Raytracer& raytracer,
+Color   ParallelLight::getDirectLighting(const Raytracer& raytracer,
                                 const Ray& ray) const
 {
   return (Color());
@@ -26,7 +26,7 @@ Color   ParrallelLight::getDirectLighting(const Raytracer& raytracer,
 
 #include <stdio.h>
 
-void    ParrallelLight::getLighting(const ObjectPrimitive& primitive,
+void    ParallelLight::getLighting(const ObjectPrimitive& primitive,
 				    const Point& intersectPoint,
 				    const Raytracer &raytracer,
 				    const Vector& ray,

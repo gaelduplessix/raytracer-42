@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Fri May  6 17:13:49 2011 samuel olivier
+// Last update Sun May  8 20:52:20 2011 gael jochaud-du-plessix
 //
 
 #ifndef _PARALLELOGRAM_HPP_
@@ -18,10 +18,10 @@ class Parallelogram : public ObjectPrimitive
 public:
   Parallelogram(Object*object,
 		const Point& absolutePosition,
-		const Rotation& rotation,
-		const Material& material,
 		const Point& vertex1,
-		const Point& vertex2);
+		const Point& vertex2,
+		const Rotation& rotation,
+		const Material& material);
 
   void		setVertex1(const Point& vertex1);
   void		setVertex2(const Point& vertex2);

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  8 20:34:58 2011 gael jochaud-du-plessix
+// Last update Sun May  8 21:22:37 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -17,8 +17,9 @@
 #include "Rotation.hpp"
 #include "ObjectPrimitive.hpp"
 #include "Sphere.hpp"
+#include "Parallelogram.hpp"
 #include "Spot.hpp"
-#include "ParrallelLight.hpp"
+#include "ParallelLight.hpp"
 #include "Plan.hpp"
 #include "Texture.hpp"
 #include "PerlinNoise.hpp"
@@ -50,17 +51,55 @@ Scene		createScene2()
   matFloor.setColor(Color(255, 255, 255));
   matFloor.setSpecularCoeff(0.5);
   matFloor.setSpecularPow(50);
+  Material	object = matFloor;
+  object.setColor(Color(255, 0, 0));
+  object.setTransmissionCoeff(0.6);
+  object.setRefractionIndex(1);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, -4, 0), Rotation(0, 0, 0.3)));
 
   vector<ObjectPrimitive*> primitives;
   // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
   // 				     Rotation(0.3, 0.5, 0), reflection));
   // primitives.push_back(new Torus(NULL, Point(23, 0, 0),
   // 				 Rotation(0.3, 0.5, 0), matFloor, 3, 0.8));
-  primitives.push_back(new Sphere(NULL, Point(20, 0, 0),
-  				Rotation(0, 0, 0), matFloor, 2.0));
+
+  // Face de devant
+  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
+  					 Point(20, 1, 4),
+  					 Point(20, 4, 1),
+  					 Rotation(0, 0, 0), object));
+
+  // Face de derriere
+  primitives.push_back(new Parallelogram(NULL, Point(23, 1, 1),
+  					 Point(23, 1, 4),
+  					 Point(23, 4, 1),
+  					 Rotation(0, 0, 0), object));
+
+  // Face de dessous
+  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
+  					 Point(23, 1, 1),
+  					 Point(20, 4, 1),
+  					 Rotation(0, 0, 0), object));
+
+  // Face de dessus
+  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 4),
+  					 Point(23, 1, 4),
+  					 Point(20, 4, 4),
+  					 Rotation(0, 0, 0), object));
+
+  // Face de gauche
+  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
+  					 Point(20, 1, 4),
+  					 Point(23, 1, 1),
+  					 Rotation(0, 0, 0), object));
+
+  // Face de droite
+  primitives.push_back(new Parallelogram(NULL, Point(20, 4, 1),
+  					 Point(20, 4, 4),
+  					 Point(23, 4, 1),
+  					 Rotation(0, 0, 0), object));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
@@ -83,9 +122,11 @@ Scene		createScene2()
 			   true));
 
   vector<Light*> light;
-  //light.push_back(new ParrallelLight(Point(0, 3, 3), Color(255, 255, 255)));
+  // light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(21.5, 2.5, 2.5), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(10, 0, 2), Color(255, 255, 255)));
   light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  //light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);

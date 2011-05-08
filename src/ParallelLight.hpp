@@ -1,23 +1,23 @@
 //
-// ParrallelLight.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42
+// ParallelLight.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42
 // 
 // Made by loick michard
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Thu May  5 14:39:22 2011 samuel olivier
+// Last update Sun May  8 20:40:33 2011 gael jochaud-du-plessix
 //
 
-#ifndef _PARRALLELLIGHT_HPP_
-#define _PARRALLELLIGHT_HPP_
+#ifndef _PARALLELLIGHT_HPP_
+#define _PARALLELLIGHT_HPP_
 
 #include "Light.hpp"
 
-class	ParrallelLight : public Light
+class	ParallelLight : public Light
 {
 public :
-  ParrallelLight(const Vector &direction, const Color& color,
-		 double intensity = 1);
+  ParallelLight(const Vector &direction, const Color& color,
+		double intensity = 1);
 
   void getLighting(const ObjectPrimitive& primitive,
                    const Point& intersectPoint,
