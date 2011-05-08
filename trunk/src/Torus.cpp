@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu May  5 18:31:12 2011 loick michard
-// Last update Fri May  6 19:03:47 2011 loick michard
+// Last update Sun May  8 18:43:56 2011 gael jochaud-du-plessix
 //
 
 #include "Torus.hpp"
@@ -72,9 +72,7 @@ Torus::addIntersectionWithRay(const Ray& ray,
   vector<double> validSolutions;
   for (unsigned int i = 0 ; i < solutions.size(); i++)
     if (solutions[i] > EPSILON)
-      {
-	validSolutions.push_back(solutions[i]);
-      }
+      validSolutions.push_back(solutions[i]);
   if (validSolutions.size() > 0)
     intersection.push_back((t_intersected_object){this, validSolutions});
 }
