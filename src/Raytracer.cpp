@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May  8 17:51:32 2011 loick michard
+// Last update Mon May  9 00:15:23 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -281,6 +281,48 @@ void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
     }
 }
 
+#include <stdio.h>
+
+Color	Raytracer::calcDiffusedReflection(Ray& ray,
+					  const ObjectPrimitive* nearestObject)
+{
+  if (!_config->isReflectionDiffused())
+    return (throwRay(ray));
+  double	diffCoeff
+    = nearestObject->getMaterial().getDiffusedReflectionCoeff();
+  Vector	newV1(ray._vector._z, ray._vector._y, -ray._vector._x);
+  Vector	newV2 = newV1;
+  newV2 *= ray._vector;
+  Color		res;
+  int		sampling = _config->getReflectionDiffusedSampling();
+  int		i = 1;
+
+  res = throwRay(ray);
+  while (i < sampling)
+    {
+      double	xoffs, yoffs;
+      Vector	newV;
+      do
+	{
+	  xoffs = (((double)rand() / RAND_MAX)) * diffCoeff;
+	  yoffs = (((double)rand() / RAND_MAX)) * diffCoeff;
+	}
+      while ((xoffs * xoffs + yoffs * yoffs) > (diffCoeff * diffCoeff));
+      newV = ray._vector + newV1 * xoffs + newV2 * yoffs;
+      newV.normalize();
+      Ray	newRay(ray._point, newV);
+      newRay._reflectionLevel = _config->getReflectionMaxDepth();
+      newRay._reflectionIntensity = ray._reflectionIntensity;
+      newRay._refractionLevel = ray._refractionLevel;
+      newRay._refractionIntensity = ray._refractionIntensity;
+      res += throwRay(newRay);
+      i++;
+    }
+  if (sampling > 1)
+    res /= sampling;
+  return (res);
+}
+
 Color	Raytracer::calcReflectedLight(const ObjectPrimitive* nearestObject,
 				      const Point& intersectPoint,
 				      Ray& ray)
@@ -300,11 +342,10 @@ Color	Raytracer::calcReflectedLight(const ObjectPrimitive* nearestObject,
 						ray._vector, true));
 
 	  reflectedRay._reflectionLevel = ray._reflectionLevel + 1;
+	  reflectedRay._reflectionIntensity = ray._reflectionIntensity;
 	  reflectedRay._refractionLevel = ray._refractionLevel;
 	  reflectedRay._refractionIntensity = ray._refractionIntensity;
-	  reflectedRay._reflectionIntensity =
-	    ray._reflectionIntensity;
-	  return (throwRay(reflectedRay));
+	  return (calcDiffusedReflection(reflectedRay, nearestObject));
 	}
     }
   return (Color());

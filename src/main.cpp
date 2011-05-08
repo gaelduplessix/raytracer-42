@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Sun May  8 21:22:37 2011 gael jochaud-du-plessix
+// Last update Mon May  9 00:21:08 2011 samuel olivier
 //
 
 #include <vector>
@@ -26,7 +26,7 @@
 #include "Cone.hpp"
 #include "Torus.hpp"
 #include "CubeTroue.hpp"
-//#include "gui/gui.hpp"
+// #include "gui/gui.hpp"
 #include <iostream>
 #include <SDL/SDL.h>
 #include "RenderingInterface.hpp"
@@ -59,7 +59,7 @@ Scene		createScene2()
   object.setRefractionIndex(1);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, -4, 0), Rotation(0, 0, 0.3)));
+  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
   // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
@@ -67,47 +67,48 @@ Scene		createScene2()
   // primitives.push_back(new Torus(NULL, Point(23, 0, 0),
   // 				 Rotation(0.3, 0.5, 0), matFloor, 3, 0.8));
 
-  // Face de devant
-  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
-  					 Point(20, 1, 4),
-  					 Point(20, 4, 1),
-  					 Rotation(0, 0, 0), object));
+  // // Face de devant
+  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
+  // 					 Point(20, 1, 4),
+  // 					 Point(20, 4, 1),
+  // 					 Rotation(0, 0, 0), object));
 
-  // Face de derriere
-  primitives.push_back(new Parallelogram(NULL, Point(23, 1, 1),
-  					 Point(23, 1, 4),
-  					 Point(23, 4, 1),
-  					 Rotation(0, 0, 0), object));
+  // // Face de derriere
+  // primitives.push_back(new Parallelogram(NULL, Point(23, 1, 1),
+  // 					 Point(23, 1, 4),
+  // 					 Point(23, 4, 1),
+  // 					 Rotation(0, 0, 0), object));
 
-  // Face de dessous
-  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
-  					 Point(23, 1, 1),
-  					 Point(20, 4, 1),
-  					 Rotation(0, 0, 0), object));
+  // // Face de dessous
+  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
+  // 					 Point(23, 1, 1),
+  // 					 Point(20, 4, 1),
+  // 					 Rotation(0, 0, 0), object));
 
-  // Face de dessus
-  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 4),
-  					 Point(23, 1, 4),
-  					 Point(20, 4, 4),
-  					 Rotation(0, 0, 0), object));
+  // // Face de dessus
+  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 4),
+  // 					 Point(23, 1, 4),
+  // 					 Point(20, 4, 4),
+  // 					 Rotation(0, 0, 0), object));
 
-  // Face de gauche
-  primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
-  					 Point(20, 1, 4),
-  					 Point(23, 1, 1),
-  					 Rotation(0, 0, 0), object));
+  // // Face de gauche
+  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
+  // 					 Point(20, 1, 4),
+  // 					 Point(23, 1, 1),
+  // 					 Rotation(0, 0, 0), object));
 
-  // Face de droite
-  primitives.push_back(new Parallelogram(NULL, Point(20, 4, 1),
-  					 Point(20, 4, 4),
-  					 Point(23, 4, 1),
-  					 Rotation(0, 0, 0), object));
+  // // Face de droite
+  // primitives.push_back(new Parallelogram(NULL, Point(20, 4, 1),
+  // 					 Point(20, 4, 4),
+  // 					 Point(23, 4, 1),
+  // 					 Rotation(0, 0, 0), object));
+
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
   //special.setHeightmap(perlin);
-  // primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
-  // 				  Rotation(0, 0, 0), special, 3));
+  primitives.push_back(new Sphere(NULL, Point(20, 0, 0),
+  				  Rotation(0, 0, 0), special, 3));
   // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
   // 				  Rotation(0, 0, 0), reflection, 3));
   //primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
@@ -123,10 +124,10 @@ Scene		createScene2()
 
   vector<Light*> light;
   // light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(21.5, 2.5, 2.5), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(10, 0, 2), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(10, 2.5, 2.5), Color(255, 255, 255)));
+  // light.push_back(new Spot(Point(10, 0, 2), Color(255, 255, 255)));
+  // light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
+  // light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -149,11 +150,13 @@ RenderingConfiguration	createConfig2()
   res.setAmbientOcclusionEnabled(false);
   res.setDiffuseShadingEnabled(false);
   res.setFieldDepthEnabled(false);
+  res.setReflectionDiffused();
+  res.setReflectionDiffusedSampling(20);
   // res.setAdditiveAmbiantLighting(0.1);
   // res.setMinimalAmbiantLighting(0.1);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
   //res.setFieldDepthSampling(20);
-  //  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+   // res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 

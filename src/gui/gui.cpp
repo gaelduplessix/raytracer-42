@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Fri May  6 19:36:15 2011 loick michard
+// Last update Sun May  8 13:29:37 2011 samuel olivier
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -63,12 +63,12 @@ Scene           *createScene()
   cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
-  primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
-                                     Rotation(0.3, 0.5, 0), reflection));
-  primitives.push_back(new Torus(NULL, Point(23, -5, 0),
-                                 Rotation(0.3, 0.5, 0), reflection, 3, 0.8));
-  //primitives.push_back(new Sphere(NULL, Point(30, 0, 0),            
-  //                            Rotation(0, 0, 0), reflection, 1.0));           
+  // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
+  //                                    Rotation(0.3, 0.5, 0), reflection));
+  // primitives.push_back(new Torus(NULL, Point(23, -5, 0),
+  //                                Rotation(0.3, 0.5, 0), reflection, 3, 0.8));
+  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),            
+                             Rotation(0, 0, 0), reflection, 1.0));           
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");  //perlin->setMarbleProperties();                                              
   //special.setHeightmap(perlin);                                               

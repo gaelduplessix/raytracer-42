@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Tue May  3 14:52:42 2011 gael jochaud-du-plessix
+// Last update Sun May  8 13:11:11 2011 samuel olivier
 //
 
 #include <cmath>
@@ -49,6 +49,13 @@ void	Vector::setY(double y)
 
 void	Vector::setZ(double z)
 {
+  _z = z;
+}
+
+void	Vector::setVector(double x, double y, double z)
+{
+  _x = x;
+  _y = y;
   _z = z;
 }
 

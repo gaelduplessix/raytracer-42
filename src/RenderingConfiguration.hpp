@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Thu May  5 14:46:44 2011 samuel olivier
+// Last update Mon May  9 00:14:43 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -69,7 +69,8 @@ public:
   bool		isReflectionDiffused(void) const;
   int		getReflectionDiffusedSampling(void) const;
   void		setReflection(bool enabled, int maxDepth = 20,
-			      bool diffused = 0, int diffusedSampling = 0);
+			      bool diffused = false,
+			      int diffusedSampling = 0);
   void		setReflectionEnabled(bool enabled = 1);
   void		setReflectionMaxDepth(int maxDepth);
   void		setReflectionDiffused(bool diffused = 1);

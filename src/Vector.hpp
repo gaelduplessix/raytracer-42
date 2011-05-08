@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:39:57 2011 loick michard
-// Last update Tue May  3 17:11:38 2011 gael jochaud-du-plessix
+// Last update Sun May  8 13:10:45 2011 samuel olivier
 //
 
 #ifndef _VECTOR_H_
@@ -23,6 +23,7 @@ public:
   void		setX(double value);
   void		setY(double value);
   void		setZ(double value);
+  void		setVector(double x, double y, double z);
 
   double	getNorm(void) const;
   void		rotate(const Vector& rotation, int direction = 0);
