@@ -36,18 +36,20 @@ using namespace std;
 Scene		createScene2()
 {
   Material	mat("base");
-  mat.setColor(Color(255, 0, 0, 0));
+  mat.setColor(Color(255, 255, 55, 0));
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(1);
+  reflection.setReflectionCoeff(0.1);
   reflection.setTransmissionCoeff(0);
   reflection.setRefractionIndex(1.33);
   Material	refraction = mat;
   refraction.setTransmissionCoeff(0);
+  refraction.setReflectionCoeff(1);
+  refraction.setColor(Color(255, 25, 95, 0));
   refraction.setRefractionIndex(1.33);
   Material	matFloor("sol");
-  matFloor.setReflectionCoeff(0);
+  matFloor.setReflectionCoeff(0.3);
   matFloor.setColor(Color(255, 255, 255));
   matFloor.setSpecularCoeff(0.5);
   matFloor.setSpecularPow(50);
@@ -104,8 +106,6 @@ Scene		createScene2()
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
   //special.setHeightmap(perlin);
-  special.setTransmissionCoeff(0);
-  special.setTexture(perlin);
   // primitives.push_back(new Sphere(NULL, Point(20, -4, 0),
   // 				  Rotation(0, 0, 0), special, 3));
   // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
@@ -152,7 +152,8 @@ RenderingConfiguration	createConfig2()
   // res.setAdditiveAmbiantLighting(0.1);
   // res.setMinimalAmbiantLighting(0.1);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
-  //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+  //res.setFieldDepthSampling(20);
+  //  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 

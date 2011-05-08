@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May  5 19:35:08 2011 samuel olivier
+// Last update Sun May  8 17:51:32 2011 loick michard
 //
 
 #include <stdio.h>
@@ -109,9 +109,9 @@ void		Raytracer::renderingLoop(double& progress)
 {
   Point		pixelToRender = getPixelToRender();
   Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
-
+  
   progress = (double)++_thread->_currentPixel
-    / (_config->getWidth() * _config->getHeight());
+	/ (_config->getWidth() * _config->getHeight());
   if (_interface)
     _interface->pixelHasBeenRendered(pixelToRender._x,
 				     pixelToRender._y,
@@ -143,6 +143,8 @@ Color			Raytracer::renderPixel(double x, double y)
   Ray			ray;
   double		subx, suby;
   int			antialiasing = _config->getAntialiasing();
+  int			samplingDepth = 
+    (_config->isFieldDepthEnabled()) ? _config->getFieldDepthSampling() : 1;
   const Camera&		currentCamera = getCurrentCamera();
   Color			pixelColor;
   
@@ -154,13 +156,28 @@ Color			Raytracer::renderPixel(double x, double y)
       for (int j = 0; j < antialiasing; ++j)
 	{
 	  suby = y + (double)j / antialiasing;
-	  ray = currentCamera.getRay(subx / _config->getWidth(),
-				     suby / _config->getHeight());
-	  pixelColor += throwRay(ray);
+	  if (samplingDepth > 1)
+	    {
+	      for (int k = 0; k < samplingDepth; k++)
+		{
+		  ray = currentCamera.getRayWithSampling(subx /
+							 _config->getWidth(),
+							 suby / 
+							 _config->getHeight(),
+							 0);
+		  pixelColor += throwRay(ray);
+		}
+	    }
+	  else
+	    {
+	      ray = currentCamera.getRay(subx / _config->getWidth(),
+					 suby / _config->getHeight());
+	      pixelColor += throwRay(ray);
+	    }
 	}
     }
   if (antialiasing > 0)
-    pixelColor /= antialiasing * antialiasing;
+    pixelColor /= antialiasing * antialiasing * samplingDepth;
   pixelColor.exposure(- _config->getExposure() / Color::MAX_VALUE);
   return (pixelColor);
 }
