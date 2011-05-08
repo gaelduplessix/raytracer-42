@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri May  6 15:54:06 2011 loick michard
-// Last update Fri May  6 16:37:31 2011 loick michard
+// Last update Sun May  8 11:28:31 2011 loick michard
 //
 
 #include <cmath>
@@ -36,7 +36,7 @@ void            CubeTroue::getMappedCoords(const Point& intersectPoint,
   x = 0;
   y = 0;
 }
-
+#include <iostream>
 void
 CubeTroue::addIntersectionWithRay(const Ray& ray,
 				  vector<struct s_intersected_object>& intersection) const

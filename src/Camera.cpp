@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Sat Apr 30 19:23:18 2011 loick michard
+// Last update Sun May  8 15:22:16 2011 loick michard
 //
 
 #include "Camera.hpp"
@@ -87,6 +87,7 @@ void		Camera::setApertureSize(double apertureSize)
 
 void		Camera::setFocus(double focus)
 {
+  _hasDepthOfField = true;
   _focus = focus;
 }
 

@@ -324,7 +324,8 @@ void	RenderingConfiguration::setFieldDepthEnabled(bool enabled)
 
 void	RenderingConfiguration::setFieldDepthSampling(int sampling)
 {
-  _fieldDepthSampling = sampling;
+  _fieldDepthEnabled = true;
+  _fieldDepthSampling = (sampling > 0) ? sampling : 1;
 }
 
 void	RenderingConfiguration::setAdditiveAmbiantLighting(double value)

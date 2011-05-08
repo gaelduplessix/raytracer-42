@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Wed May  4 17:34:19 2011 loick michard
+// Last update Sun May  8 11:57:24 2011 loick michard
 //
 
 #include <cmath>
@@ -136,8 +136,8 @@ inline Ray	ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const
   point -= _absolutePosition;
   if (_rotation._x || _rotation._y || _rotation._z)
     {
-      point.rotate(_rotation, 1);
-      vector.rotate(_rotation, 1);
+      point.rotate(_rotation, true);
+      vector.rotate(_rotation, true);
     }
   modified.setVector(vector);
   modified.setPoint(point);
