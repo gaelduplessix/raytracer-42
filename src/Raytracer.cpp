@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May  9 00:15:23 2011 samuel olivier
+// Last update Mon May  9 16:46:03 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -201,6 +201,12 @@ Color			Raytracer::throwRay(Ray& ray)
       Color	refractedLight = calcTransmetedLight(nearestObject,
 						     intersectPoint,
 						     ray);
+      double	ambientOcclusionCoeff = 0;
+      Color	ambientOcclusion = calcAmbiantOcclusion(nearestObject,
+							intersectPoint,
+							ray,
+							ambientOcclusionCoeff);
+
       Color	mixedColor =
 	(((((diffuseLight
 	     * (1.0 - nearestObject->getMaterial().getSpecularCoeff()))
@@ -213,7 +219,8 @@ Color			Raytracer::throwRay(Ray& ray)
 	+ refractedLight
 	* nearestObject->getMaterial().getTransmissionCoeff();
       mixedColor += calcDirectLight(ray);
-      
+      mixedColor = (ambientOcclusion * mixedColor) / 255;
+      mixedColor *= (1 - ambientOcclusionCoeff);
       return (mixedColor);
     }
   else if (_config->getCubeMap() != NULL)
@@ -250,7 +257,7 @@ ObjectPrimitive*		Raytracer::getNearestObject(Ray& ray,
   for (int i = 0 ; i < nbObject ; i++)
     {
       const vector<ObjectPrimitive*>&  
-	primitives=objects[i]->getPrimitives();
+	primitives = objects[i]->getPrimitives();
       int nb_primitive(primitives.size());
       for (int j = 0 ; j < nb_primitive ; j++)
 	primitives[j]->intersectWithRay(ray, primitive, res);
@@ -283,6 +290,50 @@ void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
 
 #include <stdio.h>
 
+Color	Raytracer::calcAmbiantOcclusion(const ObjectPrimitive* object,
+					const Point& intersectPoint,
+					Ray& ray, double& coeff)
+{
+  if (_config->isAmbientOcclusionEnabled() == false)
+    return (Color(255, 255, 255));
+  else
+    {
+      int			i;
+      Vector			newV;
+      Color			res;
+      int			sampling
+	= _config->getAmbientOcclusionSampling();
+      Vector			normal
+	= object->getNormal(intersectPoint, ray._vector) * -1;
+      ObjectPrimitive*		nearestObject;
+      double			k;
+
+      coeff = 0;
+      i = 0;
+      res = 0;
+      while (i < sampling)
+	{
+	  do
+	    {
+	      newV.setVector(2 * ((double)rand() / RAND_MAX) - 1,
+			     2 * ((double)rand() / RAND_MAX) - 1,
+			     2 * ((double)rand() / RAND_MAX) - 1);
+	    } while (newV * normal < 0);
+	  Ray	newRay(intersectPoint, newV);
+
+	  nearestObject = getNearestObject(newRay, k);
+	  if (nearestObject != NULL)
+	      coeff = coeff + 1;
+	  res += (nearestObject == NULL) ? Color(255, 255, 255) :
+	    nearestObject->getColor(intersectPoint + newV * k);
+	  i++;
+	}
+      res /= sampling;
+      coeff /= sampling;
+      return (res);
+    }
+}
+
 Color	Raytracer::calcDiffusedReflection(Ray& ray,
 					  const ObjectPrimitive* nearestObject)
 {
@@ -295,10 +346,9 @@ Color	Raytracer::calcDiffusedReflection(Ray& ray,
   newV2 *= ray._vector;
   Color		res;
   int		sampling = _config->getReflectionDiffusedSampling();
-  int		i = 1;
+  int		i = 0;
 
-  res = throwRay(ray);
-  while (i < sampling)
+  while (i < sampling && diffCoeff > 0)
     {
       double	xoffs, yoffs;
       Vector	newV;
@@ -318,7 +368,7 @@ Color	Raytracer::calcDiffusedReflection(Ray& ray,
       res += throwRay(newRay);
       i++;
     }
-  if (sampling > 1)
+  if (diffCoeff > 0 && sampling > 1)
     res /= sampling;
   return (res);
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sun May  8 23:18:58 2011 samuel olivier
+// Last update Mon May  9 01:01:40 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -71,6 +71,10 @@ public:
 			   const Vector& viewRay,
 			   Color& directLight,
 			   Color& specularLight) const;
+
+  Color	calcAmbiantOcclusion(const ObjectPrimitive* nearestObject,
+			     const Point& intersectPoint,
+			     Ray& ray, double& coef);
   Color	calcDiffusedReflection(Ray& ray,
 			       const ObjectPrimitive* nearestObject);
   Color	calcReflectedLight(const ObjectPrimitive* nearestObject,

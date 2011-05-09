@@ -60,6 +60,7 @@ void		Light::setIntensity(double intensity)
   _intensity = intensity;
 }
 
+
 double
 Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections,
 			  Ray& lightRay, Color& lightColor, bool limited) const
@@ -110,8 +111,8 @@ Light::getLightingFromLightRay(const Vector& lightVector,
   double	absorptionCoeff = 0;
   if (!renderConf->isTransparencyEnabled())
     {
-      double                k;
-      ObjectPrimitive*      nearestObject;
+      double                k = -1;
+      ObjectPrimitive*      nearestObject = NULL;
       nearestObject = raytracer.getNearestObject(ray, k);
       if (nearestObject)
 	return ;
