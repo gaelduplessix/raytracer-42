@@ -1,11 +1,11 @@
 //
-// Plan.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42
+// Plane.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42
 // 
 // Made by loick michard
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:17:13 2011 loick michard
-// Last update Wed May  4 12:13:19 2011 loick michard
+// Last update Mon May  9 15:10:38 2011 gael jochaud-du-plessix
 //
 
 #ifndef _PLAN_HPP_
@@ -13,10 +13,10 @@
 
 #include "ObjectPrimitive.hpp"
 
-class Plan : public ObjectPrimitive
+class Plane : public ObjectPrimitive
 {
 public:
-  Plan(Object*object,
+  Plane(Object*object,
 	 const Point& absolutePosition,
 	 const Rotation& rotation,
 	 const Material& material);

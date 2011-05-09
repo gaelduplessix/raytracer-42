@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:10:41 2011 loick michard
-// Last update Wed May  4 13:09:04 2011 loick michard
+// Last update Mon May  9 14:52:53 2011 gael jochaud-du-plessix
 //
 
 #ifndef _PERLIN_NOISE_HPP_
@@ -17,8 +17,7 @@
 class PerlinNoise : public Texture
 {
 public:
-  PerlinNoise(int width = 100, int height = 100);
-  PerlinNoise(double repeatWidth, double repeatHeight,
+  PerlinNoise(double repeatWidth = 1, double repeatHeight = 1,
 	      int width = 100, int height = 100);
   ~PerlinNoise();
 
