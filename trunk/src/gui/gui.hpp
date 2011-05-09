@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Mon May  9 15:47:18 2011 franck lavisse
+// Last update Mon May  9 16:15:31 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -42,7 +42,11 @@ public:
   Gui();
   ~Gui();
 
-  void	pixelHasBeenRendered(int x, int y, Color color);
+  virtual void	pixelHasBeenRendered(int x, int y, Color color);
+  virtual void	renderingHasPaused(void);
+  virtual void	renderingHasFinished(void);
+  virtual void	renderingHasBegun(void);
+  virtual void	renderingHasStoped(void);
   void	putPixel(const Color& color, int x, int y);
   void	init_dock(void);
   void	samplingMethod(void);
@@ -103,6 +107,7 @@ private:
   QLabel	*_label;
   QLabel	*_pixlabel;
   QImage	*_image;
+  QTimer	*_timer;
 
   QCheckBox	*_diffuseLight;
   QCheckBox	*_diffuseShading;
