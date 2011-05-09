@@ -5,13 +5,14 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:30:28 2011 franck lavisse
-// Last update Thu May  5 15:01:01 2011 franck lavisse
+// Last update Mon May  9 17:03:51 2011 franck lavisse
 //
 #include <QMenuBar>
 #include <QAction>
 #include <QHBoxLayout>
 #include <QString>
 #include <iostream>
+#include <QKeySequence>
 #include "gui.hpp"
 
 using namespace std;
@@ -30,6 +31,11 @@ void	Gui::menuBar(void)
   file->addAction(openScene);
   file->addAction(saveConfig);
   file->addAction(quitter);
+  quitter->setShortcut(QKeySequence("Ctrl+Q"));
+  quitter->setIcon(QIcon("quitter.png"));
+  openScene->setIcon(QIcon("opendossier.png"));
+  newScene->setIcon(QIcon("nouveau.png"));
+  saveConfig->setIcon(QIcon("save.png"));
   setMenuBar(menu);
   //_DockBar->setAllowedAreas(Qt::TopDockWidgetArea);
   //  _DockBar->setFeatures(0);  

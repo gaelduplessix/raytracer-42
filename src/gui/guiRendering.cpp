@@ -5,18 +5,38 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Sat Apr 30 20:03:34 2011 franck lavisse
-// Last update Fri May  6 18:20:29 2011 franck lavisse
+// Last update Mon May  9 16:27:07 2011 franck lavisse
 //
-
+#include <QTimer>
+#include <iostream>
 #include "gui.hpp"
 
-#include <iostream>
 using namespace std;
+
+void	Gui::renderingHasPaused(void)
+{
+  cout << "Rendering has paused" << endl;
+}
+
+void	Gui::renderingHasFinished(void)
+{
+  _timer->disconnect();
+  cout << "Rendering has finished" << endl;
+}
+
+void	Gui::renderingHasBegun(void)
+{
+  QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(repaint()));
+  cout << "Rendering has begun" << endl;
+}
+
+void	Gui::renderingHasStoped(void)
+{
+  cout << "Rendering has stoped" << endl;
+}
+
 void	Gui::pixelHasBeenRendered(int x, int y, Color color)
 {
   color.setA(255);
-  //cout<< x << ":" << y << ":" << color.getR() << "."
-  //  << color.getG() << "." << color.getB() << "." << color.getA() << endl;
-
   putPixel(color, x, y);
 }

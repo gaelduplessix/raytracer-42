@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:21:11 2011 franck lavisse
-// Last update Mon May  9 15:55:06 2011 franck lavisse
+// Last update Mon May  9 16:01:28 2011 franck lavisse
 //
 #include <QCheckBox>
 #include <QSpinBox>
@@ -48,6 +48,6 @@ void	Gui::transparence(void)
   transpGrid->addWidget(_transpDiffusion,1,1);
   gbox->setLayout(transpGrid);
   _Grid->addWidget(gbox,8,0);
-  _widget->setLayout(_Grid);  
+  _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);
 }
