@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Sun May  8 20:40:33 2011 gael jochaud-du-plessix
+// Last update Mon May  9 00:08:16 2011 gael jochaud-du-plessix
 //
 
 #ifndef _PARALLELLIGHT_HPP_
@@ -27,7 +27,7 @@ public :
                    Color& specularLighting) const;
 
   Color getDirectLighting(const Raytracer& raytracer,
-                          const Ray& ray) const;
+                          Ray& ray) const;
 };
 
 #endif

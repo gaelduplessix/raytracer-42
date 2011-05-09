@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  9 00:21:08 2011 samuel olivier
+// Last update Mon May  9 01:35:40 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -19,6 +19,8 @@
 #include "Sphere.hpp"
 #include "Parallelogram.hpp"
 #include "Spot.hpp"
+#include "ParallelogramLight.hpp"
+#include "SphericalLight.hpp"
 #include "ParallelLight.hpp"
 #include "Plan.hpp"
 #include "Texture.hpp"
@@ -26,7 +28,7 @@
 #include "Cone.hpp"
 #include "Torus.hpp"
 #include "CubeTroue.hpp"
-// #include "gui/gui.hpp"
+//#include "gui/gui.hpp"
 #include <iostream>
 #include <SDL/SDL.h>
 #include "RenderingInterface.hpp"
@@ -36,20 +38,19 @@ using namespace std;
 Scene		createScene2()
 {
   Material	mat("base");
-  mat.setColor(Color(255, 255, 55, 0));
+  mat.setColor(Color(255, 0, 0, 0));
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(0.1);
+  reflection.setReflectionCoeff(1);
   reflection.setTransmissionCoeff(0);
   reflection.setRefractionIndex(1.33);
   Material	refraction = mat;
+  refraction.setColor(Color(255, 255, 255));
   refraction.setTransmissionCoeff(0);
-  refraction.setReflectionCoeff(1);
-  refraction.setColor(Color(255, 25, 95, 0));
-  refraction.setRefractionIndex(1.33);
+  refraction.setRefractionIndex(1);
   Material	matFloor("sol");
-  matFloor.setReflectionCoeff(0.3);
+  matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
   matFloor.setSpecularCoeff(0.5);
   matFloor.setSpecularPow(50);
@@ -59,56 +60,26 @@ Scene		createScene2()
   object.setRefractionIndex(1);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 2, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
   // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
   // 				     Rotation(0.3, 0.5, 0), reflection));
   // primitives.push_back(new Torus(NULL, Point(23, 0, 0),
   // 				 Rotation(0.3, 0.5, 0), matFloor, 3, 0.8));
-
-  // // Face de devant
-  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
-  // 					 Point(20, 1, 4),
-  // 					 Point(20, 4, 1),
-  // 					 Rotation(0, 0, 0), object));
-
-  // // Face de derriere
-  // primitives.push_back(new Parallelogram(NULL, Point(23, 1, 1),
-  // 					 Point(23, 1, 4),
-  // 					 Point(23, 4, 1),
-  // 					 Rotation(0, 0, 0), object));
-
-  // // Face de dessous
-  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
+  // Face de dessous
+  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 2),
   // 					 Point(23, 1, 1),
-  // 					 Point(20, 4, 1),
+  // 					 Point(20, 4, 2),
   // 					 Rotation(0, 0, 0), object));
-
-  // // Face de dessus
-  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 4),
-  // 					 Point(23, 1, 4),
-  // 					 Point(20, 4, 4),
-  // 					 Rotation(0, 0, 0), object));
-
-  // // Face de gauche
-  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 1),
-  // 					 Point(20, 1, 4),
-  // 					 Point(23, 1, 1),
-  // 					 Rotation(0, 0, 0), object));
-
-  // // Face de droite
-  // primitives.push_back(new Parallelogram(NULL, Point(20, 4, 1),
-  // 					 Point(20, 4, 4),
-  // 					 Point(23, 4, 1),
-  // 					 Rotation(0, 0, 0), object));
-
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
   //special.setHeightmap(perlin);
-  primitives.push_back(new Sphere(NULL, Point(20, 0, 0),
-  				  Rotation(0, 0, 0), special, 3));
+  special.setTransmissionCoeff(0);
+  special.setTexture(perlin);
+  primitives.push_back(new Sphere(NULL, Point(18, 2.5, 0),
+  				  Rotation(0, 0, 0), special, 1));
   // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
   // 				  Rotation(0, 0, 0), reflection, 3));
   //primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
@@ -116,18 +87,26 @@ Scene		createScene2()
   //				    Point(7.5, 0, 0)));
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
-  primitives.push_back(new Plan(NULL, Point(0, 0, -5),
+  primitives.push_back(new Plan(NULL, Point(0, 0, -2),
   				Rotation(0, 0, 0), matFloor));
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
 			   true));
 
   vector<Light*> light;
-  // light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(10, 2.5, 2.5), Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(10, 0, 2), Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
+  //light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
+  // light.push_back(new SphericalLight(Point(21.5, 2.5, 2.5), 0.5,
+  // 				     Color(255, 255, 255)));
+  light.push_back(new SphericalLight(Point(10, 0, 2), 0.5,
+  				     Color(255, 255, 255)));
+  // light.push_back(new SphericalLight(Point(22, 2.5, 2), 0.5,
+  // 				     Color(255, 0, 0)));
+  light.push_back(new SphericalLight(Point(20, 10, 0), 0.5,
+  				     Color(255, 255, 255)));
+  // light.push_back(new ParallelogramLight(Point(20, 1, 2),
+  // 					 Point(22, 1, 1),
+  // 					 Point(20, 4, 2),
+  // 					 Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -148,15 +127,13 @@ RenderingConfiguration	createConfig2()
   res.setReflection(true);
   res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);
-  res.setDiffuseShadingEnabled(false);
+  res.setDiffuseShadingEnabled(true);
+  res.setDiffuseShadingSampling(10);
   res.setFieldDepthEnabled(false);
-  res.setReflectionDiffused();
-  res.setReflectionDiffusedSampling(20);
   // res.setAdditiveAmbiantLighting(0.1);
   // res.setMinimalAmbiantLighting(0.1);
   res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
-  //res.setFieldDepthSampling(20);
-   // res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+  //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 

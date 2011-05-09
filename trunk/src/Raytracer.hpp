@@ -80,7 +80,7 @@ public:
 			    const Point& intersectPoint,
 			    Ray& ray);
 
-  Color	calcDirectLight(const Ray& ray);
+  Color	calcDirectLight(Ray& ray);
 
 private:
   Scene*			_scene;

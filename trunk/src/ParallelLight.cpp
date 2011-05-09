@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Thu May  5 10:39:44 2011 samuel olivier
-// Last update Sun May  8 20:40:10 2011 gael jochaud-du-plessix
+// Last update Mon May  9 00:08:26 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -19,7 +19,7 @@ ParallelLight::ParallelLight(const Point &direction, const Color& color,
 }
 
 Color   ParallelLight::getDirectLighting(const Raytracer& raytracer,
-                                const Ray& ray) const
+					 Ray& ray) const
 {
   return (Color());
 }

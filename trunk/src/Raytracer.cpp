@@ -224,7 +224,7 @@ Color			Raytracer::throwRay(Ray& ray)
 }
 
 void
-Raytracer::getIntersectingObjects(Ray ray, vector<t_intersected_object>&
+Raytracer::getIntersectingObjects(const Ray ray, vector<t_intersected_object>&
 				  intersection) const
 {
   const vector<Object*>&		objects(_scene->getObjects());
@@ -392,7 +392,7 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
   return (Color());
 }
 
-Color		Raytracer::calcDirectLight(const Ray& ray)
+Color		Raytracer::calcDirectLight(Ray& ray)
 {
   Color		directLight;
 
