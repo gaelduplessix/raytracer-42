@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 17:52:40 2011 franck lavisse
-// Last update Sat Apr 30 18:15:35 2011 franck lavisse
+// Last update Mon May  9 13:37:43 2011 franck lavisse
 //
 #include <QCheckBox>
 #include <QSpinBox>
@@ -20,7 +20,8 @@ bool	Gui::getDirectLight(void) const
 void	Gui::directLight(void)
 {
   _directLight = new QCheckBox("Lumiere directe");
-  
+
+  _directLight->setChecked(true);
   _Grid->addWidget(_directLight,3,0);
   _widget->setLayout(_Grid);
   _Dock->setWidget(_widget);

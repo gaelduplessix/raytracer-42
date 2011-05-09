@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Fri May  6 18:31:38 2011 franck lavisse
+// Last update Mon May  9 15:47:18 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -24,6 +24,7 @@
 #include <QGridLayout>
 #include <QMenuBar>
 #include <QCheckBox>
+#include <QDoubleSpinBox>
 #include <QSpinBox>
 #include <QComboBox>
 #include "../RenderingInterface.hpp"
@@ -41,28 +42,8 @@ public:
   Gui();
   ~Gui();
 
-  void	SDLWidget(void);
   void	pixelHasBeenRendered(int x, int y, Color color);
-  bool	getTransparenceBool(void) const;
-  int	getTransparenceInt(void) const;
-  int	getTransparenceDiffusion(void) const;
-  bool	getFlouBool(void) const;
-  int	getFlouInt(void) const;
-  bool	getLumiereDiffuseBool(void) const;
-  int	getLumiereDiffuseInt(void) const;
-  int	getAliasing(void) const;
-  bool	getAmbiantOcclusionBool(void) const;
-  int	getAmbiantOcclusionInt(void) const;
-  bool	getDirectLight(void) const;
-  bool	getReflectionBool(void) const;
-  int	getReflectionSampling(void) const;
-  int	getReflectionProfondeur(void) const;
-  bool	getPhotonMappingBool(void) const;
-  int	getPhotonMappingInt(void) const;
-  int	getSamplingMethod(void) const;
-
   void	putPixel(const Color& color, int x, int y);
-  void	rendu(void);
   void	init_dock(void);
   void	samplingMethod(void);
   void	aliasing(void);
@@ -70,10 +51,37 @@ public:
   void	directLight(void);
   void	ambiantOcclusion(void);
   void	photonMapping(void);
-  void	lumiereDiffuse(void);
   void	transparence(void);
   void	flou(void);
   void	menuBar(void);
+  void	exposure(void);
+  void	specularLight(void);
+  void	diffuseLight(void);
+  void	diffuseShading(void);
+
+  bool	getTransparenceBool(void) const;
+  int	getTransparenceInt(void) const;
+  int	getTransparenceDiffusion(void) const;
+  bool	getFlouBool(void) const;
+  int	getFlouInt(void) const;
+  int	getAliasing(void) const;
+  bool	getAmbiantOcclusionBool(void) const;
+  int	getAmbiantOcclusionInt(void) const;
+  bool	getDirectLight(void) const;
+  bool	getReflectionBool(void) const;
+  int	getReflectionProfondeur(void) const;
+  bool	getReflectionDiffuseBool(void) const;
+  int	getReflectionDiffuseSampling(void) const;
+  bool	getPhotonMappingBool(void) const;
+  int	getPhotonMappingInt(void) const;
+  int	getSamplingMethod(void) const;
+  bool	getExposureBool(void) const;
+  int	getExposureValue(void) const;  
+  bool	getSpecularLightBool(void) const;
+  int	getSpecularLightValue(void) const;
+  bool	getDiffuseLightBool(void) const;
+  bool	getDiffuseShading(void) const;
+
   Raytracer	_raytracer;
 
 protected:
@@ -81,10 +89,6 @@ protected:
 
 public slots:
   void	launch_raytracer(void);
-  void	putPixelSlot(int, int);  
-
-signals:
-  void	perso();
 
 private:
   QDockWidget	*_DockBar;
@@ -98,25 +102,30 @@ private:
   QPixmap	*_pixmap;
   QLabel	*_label;
   QLabel	*_pixlabel;
+  QImage	*_image;
 
+  QCheckBox	*_diffuseLight;
+  QCheckBox	*_diffuseShading;
+  QCheckBox	*_specularLight;
+  QSpinBox	*_specularLightBox;
   QCheckBox	*_transparence;
-  QSpinBox	*_transpBox;
+  QDoubleSpinBox	*_transpBox;
   QSpinBox	*_transpDiffusion;
   QCheckBox	*_flou;
   QSpinBox	*_flouBox;
-  QCheckBox	*_lumiereDiffuse;
-  QSpinBox	*_lumiereDiffuseBox;
   QSpinBox	*_aliasing;
   QCheckBox	*_ambiantOcclusion;
   QSpinBox	*_ambiantOcclusionBox;
   QCheckBox	*_directLight;
   QSpinBox	*_reflectionProfondeur;
-  QSpinBox	*_reflectionSampling;
   QCheckBox	*_reflectionEnabled;
+  QCheckBox	*_reflectionDiffuse;
+  QSpinBox	*_reflectionDiffuseSampling;
   QCheckBox	*_photonMapping;
   QSpinBox	*_photonMappingBox;
   QComboBox	*_samplingMethod;
-  QImage	*_image;
+  QCheckBox	*_exposure;
+  QSpinBox	*_exposureBox;
 };
 
 #endif

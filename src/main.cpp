@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  9 01:35:40 2011 gael jochaud-du-plessix
+// Last update Mon May  9 13:32:36 2011 franck lavisse
 //
 
 #include <vector>
@@ -28,7 +28,7 @@
 #include "Cone.hpp"
 #include "Torus.hpp"
 #include "CubeTroue.hpp"
-//#include "gui/gui.hpp"
+#include "gui/gui.hpp"
 #include <iostream>
 #include <SDL/SDL.h>
 #include "RenderingInterface.hpp"
@@ -171,8 +171,8 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  //gui(ac, av);
-  SDL_Init(SDL_INIT_VIDEO);
+  gui(ac, av);
+  /*SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
@@ -190,7 +190,7 @@ int main(int ac, char **av)
 	    quit = true;
 	}
     }
-  rt.stopRendering();
+    rt.stopRendering();*/
   SDL_Quit();
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Sun May  8 13:29:37 2011 samuel olivier
+// Last update Mon May  9 15:32:07 2011 franck lavisse
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -132,7 +132,7 @@ void	raytracer(Gui *rt)
   config->setAntialiasing(rt->getAliasing());
   config->setDirectLighting(rt->getDirectLight());
   config->setReflectionEnabled(rt->getReflectionBool());
-  config->setReflectionDiffusedSampling(rt->getReflectionSampling());
+  //  config->setReflectionDiffusedSampling(rt->getReflectionSampling());
   config->setReflectionMaxDepth(rt->getReflectionProfondeur());
   config->setTransparency(rt->getTransparenceBool(),
 			 rt->getTransparenceInt(),
@@ -150,92 +150,34 @@ void	raytracer(Gui *rt)
   rt->_raytracer.launchRendering();
 }
 
-void	Gui::launch_raytracer(void)
+void	Gui::launch_raytracer(void) {raytracer(this);}
 
-{ 
-  cout << "test" << endl;
-  raytracer(this);
-}
-
-void	Gui::putPixelSlot(int x, int y)
+Gui::~Gui() 
 {
-  QPainter painter(_pixmap);
-
-  painter.setPen(QPen(QColor(255, 0, 0, 255)));
-  painter.drawPoint(x, y);
-  if (y == 0)
-    _label->setPixmap(*_pixmap);
+  delete _transparence;
+  delete _transpBox;
+  delete _transpDiffusion;
+  delete _flou;
+  delete _flouBox;
+  delete _diffuseLight;
+  delete _diffuseShading;
+  delete _aliasing;
+  delete _ambiantOcclusion;
+  delete _ambiantOcclusionBox;
+  delete _directLight;
+  delete _reflectionProfondeur;
+  delete _reflectionEnabled;
+  delete _photonMapping;
+  delete _photonMappingBox;
+  delete _samplingMethod;
+  delete _exposure;
+  delete _exposureBox;
 }
-
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
-
-
-void	Gui::init_dock(void)
-{
-  _widget = new QWidget();
-  _Grid = new QGridLayout();
-  _Dock = new QDockWidget();
-  QPushButton *Rendu = new QPushButton("Rendu", _Dock);
-
-  _Dock->setAllowedAreas(Qt::LeftDockWidgetArea |
-			 Qt::RightDockWidgetArea);
-  Rendu->setCursor(Qt::PointingHandCursor);
-  // QObject::connect(this, SIGNAL(perso()), this, SLOT(repaint()));
-   QObject::connect(Rendu, SIGNAL(clicked()), this, SLOT(launch_raytracer()));
-  _Grid->addWidget(Rendu, 250, 0);
-  _widget->setLayout(_Grid);
-  _Dock->setWidget(_widget);
-  addDockWidget(Qt::LeftDockWidgetArea, _Dock);
-  _widget->setMaximumHeight(550);
-}
-
-void	Gui::paintEvent(QPaintEvent*) {
-  *_pixmap = _pixmap->fromImage(*_image);
-  _pixlabel->setPixmap(*_pixmap);
-}
-
-Gui::Gui() : QMainWindow()
-{
-  QTimer timer;
-  Color	pixelColor;
-
-  resize(1400, 800);
-  _image = new QImage(1130, 720, QImage::Format_ARGB32);
-  _pixlabel = new QLabel();
-  setCentralWidget(_pixlabel);
-  _pixmap = new QPixmap(1130, 720);
-  pixelColor.setR(0);
-  pixelColor.setG(255);
-  pixelColor.setB(0);
-  timer.setInterval(10000000);
-  QObject::connect(&timer, SIGNAL(timeout()), this, SLOT(repaint()));
-  _pixmap->fill(Qt::black);
-}
-
-void	Gui::rendu(void){}
-
-Gui::~Gui() {}
 
 int	gui(int argc, char **argv)
 {
   QApplication	app(argc, argv);
   Gui		rt_gui;
   
-  rt_gui.init_dock();
-  rt_gui.samplingMethod();
-  rt_gui.aliasing();
-  rt_gui.reflection();
-  rt_gui.directLight();
-  rt_gui.ambiantOcclusion();
-  rt_gui.photonMapping();
-  rt_gui.lumiereDiffuse();
-  rt_gui.flou();
-  rt_gui.transparence();
-  rt_gui.menuBar();
-  rt_gui.show();
   return (app.exec());
 }
-
-//int	main(int argc, char **argv) {gui(argc,argv);return(0);}
