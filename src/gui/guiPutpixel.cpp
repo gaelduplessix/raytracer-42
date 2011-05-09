@@ -5,13 +5,22 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 15:39:43 2011 franck lavisse
-// Last update Fri May  6 18:16:47 2011 franck lavisse
+// Last update Mon May  9 22:59:28 2011 franck lavisse
 //
 #include <iostream>
+#include <QFileDialog>
 #include "gui.hpp"
 #include "../Color.hpp"
 
 using namespace std;
+
+void	Gui::saveImage(void)
+{
+  //  QMessageBox::information(this, "Sauvegarde de scene",
+  //  _image->save("raytracer.png", "PNG");
+  QString file = QFileDialog::getSaveFileName(this, "Enregistrer une scene", QString(), ".png");
+  _image->save(file, "PNG");
+}
 
 void	Gui::putPixel(const Color& color, int x, int y)
 {

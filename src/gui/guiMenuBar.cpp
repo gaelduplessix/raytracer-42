@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:30:28 2011 franck lavisse
-// Last update Mon May  9 17:49:04 2011 franck lavisse
+// Last update Mon May  9 22:51:10 2011 franck lavisse
 //
 #include <QMenuBar>
 #include <QAction>
@@ -46,11 +46,12 @@ void	Gui::menuBar(void)
   QMenu		*file = _menu->addMenu("&Fichier");  
   QAction	*openScene = new QAction("&Charger une scene", this);
   QAction	*quitter = new QAction("&Quitter", this);
-  QAction	*saveConfig = new QAction("&Sauvegarder la configuration de la scene", this);
+  QAction	*saveConfig = new QAction("&Sauvegarder la scene", this);
   QAction	*newScene = new QAction("&Nouvelle scene", this);
 
   _toolbar = addToolBar("42");
   QObject::connect(quitter, SIGNAL(triggered()), qApp, SLOT(quit()));
+  QObject::connect(saveConfig, SIGNAL(triggered()), this, SLOT(saveImage()));
   file->addAction(newScene);
   file->addAction(openScene);
   file->addAction(saveConfig);

@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Mon May  9 17:53:29 2011 franck lavisse
+// Last update Mon May  9 22:48:14 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -90,6 +90,7 @@ protected:
   virtual void	paintEvent(QPaintEvent*);
 
 public slots:
+  void	saveImage(void);
   virtual void	renderingHasStoped(void);
   virtual void	renderingHasPaused(void);
   virtual void	renderingHasBegun(void);
