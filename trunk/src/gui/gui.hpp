@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Mon May  9 17:27:10 2011 franck lavisse
+// Last update Mon May  9 17:53:29 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -43,10 +43,7 @@ public:
   ~Gui();
 
   virtual void	pixelHasBeenRendered(int x, int y, Color color);
-  virtual void	renderingHasPaused(void);
   virtual void	renderingHasFinished(void);
-  virtual void	renderingHasBegun(void);
-  virtual void	renderingHasStoped(void);
   void	putPixel(const Color& color, int x, int y);
   void	init_dock(void);
   void	samplingMethod(void);
@@ -93,9 +90,13 @@ protected:
   virtual void	paintEvent(QPaintEvent*);
 
 public slots:
+  virtual void	renderingHasStoped(void);
+  virtual void	renderingHasPaused(void);
+  virtual void	renderingHasBegun(void);
   void	launch_raytracer(void);
 
 private:
+  int		isRendering;
   QDockWidget	*_DockBar;
   QWidget	*_widgetBar;
   QWidget	*_widget;

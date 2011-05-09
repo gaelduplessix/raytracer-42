@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Mon May  9 17:56:14 2011 gael jochaud-du-plessix
+// Last update Mon May  9 22:06:04 2011 franck lavisse
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -150,7 +150,11 @@ void	raytracer(Gui *rt)
   rt->_raytracer.launchRendering();
 }
 
-void	Gui::launch_raytracer(void) {raytracer(this);}
+void	Gui::launch_raytracer(void)
+{
+  isRendering = 1;
+  raytracer(this);
+}
 
 Gui::~Gui() 
 {
@@ -178,6 +182,6 @@ int	gui(int argc, char **argv)
 {
   QApplication	app(argc, argv);
   Gui		rt_gui;
-  
+
   return (app.exec());
 }

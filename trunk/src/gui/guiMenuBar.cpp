@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:30:28 2011 franck lavisse
-// Last update Mon May  9 17:28:19 2011 franck lavisse
+// Last update Mon May  9 17:49:04 2011 franck lavisse
 //
 #include <QMenuBar>
 #include <QAction>
@@ -24,7 +24,10 @@ void	Gui::menuEdition(void)
   QAction	*stop = new QAction("&Stop", this);
   QAction	*play = new QAction("&Continuer", this);
   QAction	*pause = new QAction("&Pause", this);
-  
+
+  QObject::connect(stop, SIGNAL(triggered()), this, SLOT(renderingHasStoped()));
+  QObject::connect(play, SIGNAL(triggered()), this, SLOT(renderingHasBegun()));
+  QObject::connect(pause, SIGNAL(triggered()), this, SLOT(renderingHasPaused()));
   edition->addAction(stop);
   edition->addAction(play);
   edition->addAction(pause);
