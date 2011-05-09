@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:30:28 2011 franck lavisse
-// Last update Mon May  9 17:17:16 2011 franck lavisse
+// Last update Mon May  9 17:28:19 2011 franck lavisse
 //
 #include <QMenuBar>
 #include <QAction>
@@ -18,10 +18,29 @@
 
 using namespace std;
 
+void	Gui::menuEdition(void)
+{
+  QMenu		*edition = _menu->addMenu("&Edition");
+  QAction	*stop = new QAction("&Stop", this);
+  QAction	*play = new QAction("&Continuer", this);
+  QAction	*pause = new QAction("&Pause", this);
+  
+  edition->addAction(stop);
+  edition->addAction(play);
+  edition->addAction(pause);
+  stop->setIcon(QIcon("stop.png"));
+  play->setIcon(QIcon("play.png"));
+  pause->setIcon(QIcon("pause.png"));
+  _toolbar->addSeparator();
+  _toolbar->addAction(play);
+  _toolbar->addAction(pause);
+  _toolbar->addAction(stop);
+}
+
 void	Gui::menuBar(void)
 {
-  QMenuBar	*menu = new QMenuBar();
-  QMenu		*file = menu->addMenu("&Fichier");  
+  _menu = new QMenuBar();
+  QMenu		*file = _menu->addMenu("&Fichier");  
   QAction	*openScene = new QAction("&Charger une scene", this);
   QAction	*quitter = new QAction("&Quitter", this);
   QAction	*saveConfig = new QAction("&Sauvegarder la configuration de la scene", this);
@@ -38,9 +57,10 @@ void	Gui::menuBar(void)
   openScene->setIcon(QIcon("opendossier.png"));
   newScene->setIcon(QIcon("nouveau.png"));
   saveConfig->setIcon(QIcon("save.png"));
-  setMenuBar(menu);
+  setMenuBar(_menu);
   _toolbar->addAction(newScene);
   _toolbar->addAction(openScene);
   _toolbar->addAction(saveConfig);
   _toolbar->addAction(quitter);
+  menuEdition();
 }

@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Mon May  9 17:16:32 2011 franck lavisse
+// Last update Mon May  9 17:27:10 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -62,6 +62,7 @@ public:
   void	specularLight(void);
   void	diffuseLight(void);
   void	diffuseShading(void);
+  void	menuEdition(void);
 
   bool	getTransparenceBool(void) const;
   int	getTransparenceInt(void) const;
@@ -109,6 +110,7 @@ private:
   QImage	*_image;
   QTimer	*_timer;
   QToolBar	*_toolbar;
+  QMenuBar	*_menu;
 
   QCheckBox	*_diffuseLight;
   QCheckBox	*_diffuseShading;
