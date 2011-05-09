@@ -1,16 +1,16 @@
 //
 // Material.cpp for raytracer in /home/olivie_a//rendu/cpp/raytracer-42/src
-// 
+//
 // Made by samuel olivier
 // Login   <olivie_a@epitech.net>
-// 
+//
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Mon May  9 00:17:41 2011 samuel olivier
+// Last update Tue May 10 01:24:33 2011 melvin laplanche
 //
 
 #include "Material.hpp"
 
-Material::Material(): 
+Material::Material():
   _isTextured(false), _name(""), _color(Color(0, 0, 0)), _texture(NULL),
   _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
@@ -21,13 +21,13 @@ Material::Material():
 }
 
 Material::Material(const string& name):
-  _isTextured(false), _color(Color(0, 0, 0)), _texture(NULL),
+  _name(name), _isTextured(false), _color(Color(0, 0, 0)), _texture(NULL),
   _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
   _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
   _deformationType(-1), _diffusedReflectionCoeff(0.1)
 {
-  string	mnew = name;
+
 }
 
 string	Material::getName(void) const
@@ -137,7 +137,7 @@ void	Material::setRefractionIndex(double refractionIndex)
   _refractionIndex = refractionIndex;
 }
 
-void	Material::setNormalDeformation(int deformation, 
+void	Material::setNormalDeformation(int deformation,
 				       int deformationCoeff)
 {
   _hasNormalDeformation = 1;

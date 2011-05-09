@@ -1,11 +1,11 @@
 //
 // Object.hpp for raytracer in /home/michar_l//Raytracer
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Sat Apr 30 13:47:37 2011 gael jochaud-du-plessix
+// Last update Tue May 10 00:20:58 2011 melvin laplanche
 //
 
 #ifndef _OBJECT_HPP_
@@ -25,6 +25,8 @@ class Object
 public:
   Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
   	 const Point& position, bool isSolid);
+
+  Object();
 
   int					getNbPrimitives() const;
   const ObjectPrimitive&		getPrimitiveAtIndex(int index) const;

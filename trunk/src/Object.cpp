@@ -1,11 +1,11 @@
 //
 // Object.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Wed Apr 27 18:53:38 2011 loick michard
-// Last update Sat Apr 30 13:47:29 2011 gael jochaud-du-plessix
+// Last update Tue May 10 00:21:18 2011 melvin laplanche
 //
 
 #include "Object.hpp"
@@ -14,6 +14,10 @@ Object::Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
 	       const Point& position, bool isSolid):
   _primitives(primitives), _rotation(rotation), _position(position),
   _isSolid(isSolid)
+{
+}
+
+Object::Object(void)
 {
 }
 
