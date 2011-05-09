@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May  4 22:07:08 2011 samuel olivier
+// Last update Mon May  9 21:39:38 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -20,7 +20,8 @@ Cylinder::Cylinder(Object*object,
 		   const Material& material,
 		   double radius) : ObjectPrimitive(object,absolutePosition,
 						    rotation, material),
-				    _radius(radius)
+				    _radius(radius), _limitMin(-1),
+				    _limitMax(-1)
 {
 
 }
@@ -30,12 +31,22 @@ void		Cylinder::setRadius(double r)
   _radius = r;
 }
 
-#include <stdio.h>
+void		Cylinder::setLimitMin(double z)
+{
+  _limitMin = z;
+}
+
+void		Cylinder::setLimitMax(double z)
+{
+  _limitMax = z;
+}
 
 void		Cylinder::getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const
 {
-  Point newPoint = intersectPoint - _absolutePosition;
+  Point	intersect = intersectPoint;
+  intersect.rotate(_rotation, true);
+  Point newPoint = intersect - _absolutePosition;
   Vector vn(0, 0, -1);
   Vector ve(1, 0, 0);
 
@@ -77,10 +88,17 @@ Cylinder::addIntersectionWithRay(const Ray& ray,
   for (unsigned int i = 0 ; i < solutions.size(); i++)
     if (solutions[i] > EPSILON)
       {
-        Point   intersectPoint = ray._point + ray._vector * solutions[i];
+	bool	limited = false;
+	Point   intersectPoint;
+	intersectPoint = newRay._point + newRay._vector * solutions[i];
+	if (_limitMin > 0 && ((intersectPoint._z < -_limitMin)))
+	  limited = true;
+	if (_limitMax > 0 && ((intersectPoint._z > _limitMax)))
+	  limited = true;
+        intersectPoint = ray._point + ray._vector * solutions[i];
         double x, y;
         getMappedCoords(intersectPoint, x, y);
-        if (!_material.isLimitedAtPoint(x, y))
+        if (!limited && !_material.isLimitedAtPoint(x, y))
           validSolutions.push_back(solutions[i]);
       }
   if (validSolutions.size() > 0)
@@ -110,10 +128,20 @@ void                  Cylinder::intersectWithRay(const Ray& ray,
     {
       if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 0))
         {
-          Point intersectPoint = ray._point + ray._vector * solutions[i];
+	  Point intersectPoint;
+	  bool	limited = false;
+	  if (_limitMin > 0 || _limitMax > 0)
+	    {
+	      intersectPoint = newRay._point + newRay._vector * solutions[i];
+	      if (_limitMin > 0 && ((intersectPoint._z < -_limitMin)))
+		limited = true;
+	      if (_limitMax > 0 && ((intersectPoint._z > _limitMax)))
+		limited = true;
+	    }
+          intersectPoint = ray._point + ray._vector * solutions[i];
           double x, y;
           getMappedCoords(intersectPoint, x, y);
-          if (!_material.isLimitedAtPoint(x, y))
+          if (!limited && !_material.isLimitedAtPoint(x, y))
             {
               primitive = (ObjectPrimitive*)this;
               res = solutions[i];
@@ -125,8 +153,11 @@ void                  Cylinder::intersectWithRay(const Ray& ray,
 Vector		Cylinder::getNormalVector(const Point& intersectPoint,
 					  const Vector& viewVector) const
 {
-  Vector	normal = intersectPoint - _absolutePosition;
+  Point		pos = intersectPoint;
+  pos.rotate(_rotation, true);
+  Vector	normal = pos - _absolutePosition;
   normal._z = 0;
+  normal.rotate(_rotation);
   double	cosA = viewVector * normal;
 
   cosA = cosA / (viewVector.getNorm() * normal.getNorm());

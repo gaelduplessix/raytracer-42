@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May  4 17:04:03 2011 samuel olivier
+// Last update Mon May  9 22:09:14 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CONE_HPP_
@@ -23,6 +23,8 @@ public:
 	   double angle);
 
   void		setAngle(double angle);
+  void		setLimitMin(double z);
+  void		setLimitMax(double z);
 
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;
@@ -34,6 +36,8 @@ public:
 
 private:
   double	_angle;
+  double	_limitMin;
+  double	_limitMax;
 };
 
 #endif

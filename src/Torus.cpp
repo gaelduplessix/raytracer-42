@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu May  5 18:31:12 2011 loick michard
-// Last update Sun May  8 13:38:44 2011 loick michard
+// Last update Mon May  9 23:42:45 2011 gael jochaud-du-plessix
 //
 
 #include "Torus.hpp"
@@ -134,8 +134,11 @@ Vector		Torus::getNormalVector(const Point& intersectPoint,
   normal._z = intersection._z * k;
   double cosA = viewVector * normal;
   cosA = cosA / (viewVector.getNorm() * normal.getNorm());
-  if (cosA < 0)
-    return (normal.normalize() * -1);
+  if (_material.getReflectionCoeff() > 0)
+    {
+      if (cosA < 0)
+	return (normal.normalize() * -1);
+    }
   return (normal.normalize());
 }
 
