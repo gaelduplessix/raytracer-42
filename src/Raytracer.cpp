@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May  9 16:46:03 2011 samuel olivier
+// Last update Mon May  9 17:03:25 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -322,7 +322,7 @@ Color	Raytracer::calcAmbiantOcclusion(const ObjectPrimitive* object,
 	  Ray	newRay(intersectPoint, newV);
 
 	  nearestObject = getNearestObject(newRay, k);
-	  if (nearestObject != NULL)
+	  if (nearestObject != NULL && k < 7)
 	      coeff = coeff + 1;
 	  res += (nearestObject == NULL) ? Color(255, 255, 255) :
 	    nearestObject->getColor(intersectPoint + newV * k);
