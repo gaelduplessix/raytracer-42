@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Mon May  9 00:14:43 2011 samuel olivier
+// Last update Mon May  9 14:57:16 2011 franck lavisse
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -52,7 +52,7 @@ public:
   void	setCurrentCamera(int id);
 
   int		getAntialiasing(void) const;
-  void		setAntialiasing(int antialiasing);
+  void		setAntialiasing(int antialiasing);  
   double	getExposure(void) const;
   void		setExposure(double exposure);
   bool		isDirectLighting(void) const;
