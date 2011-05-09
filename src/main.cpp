@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  9 19:46:56 2011 samuel olivier
+// Last update Mon May  9 22:02:18 2011 franck lavisse
 //
 
 #include <cmath>
@@ -35,7 +35,7 @@
 #include "CubeTroue.hpp"
 #include "RenderingInterface.hpp"
 
-// #include "gui/gui.hpp"
+#include "gui/gui.hpp"
 
 using namespace std;
 
@@ -80,7 +80,7 @@ Scene		createScene2()
   // 					 Point(20, 4, 2),
   // 					 Rotation(0, 0, 0), object));
   Material special = refraction;
-  PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
+  //  PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
   //special.setHeightmap(perlin);
   primitives.push_back(new Sphere(NULL, Point(17, 0, 0),
@@ -195,8 +195,8 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  // gui(ac, av);
-  SDL_Init(SDL_INIT_VIDEO);
+  gui(ac, av);
+  /*SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
@@ -215,6 +215,6 @@ int main(int ac, char **av)
   	}
     }
   rt.stopRendering();
-  SDL_Quit();
+  SDL_Quit();*/
   return (0);
 }

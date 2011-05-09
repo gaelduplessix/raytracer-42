@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Sat Apr 30 20:03:34 2011 franck lavisse
-// Last update Mon May  9 16:27:07 2011 franck lavisse
+// Last update Mon May  9 22:10:46 2011 franck lavisse
 //
 #include <QTimer>
 #include <iostream>
@@ -15,23 +15,30 @@ using namespace std;
 
 void	Gui::renderingHasPaused(void)
 {
+  _raytracer.pauseRendering();
   cout << "Rendering has paused" << endl;
 }
 
 void	Gui::renderingHasFinished(void)
 {
+  isRendering = 0;
   _timer->disconnect();
   cout << "Rendering has finished" << endl;
 }
 
 void	Gui::renderingHasBegun(void)
 {
-  QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(repaint()));
-  cout << "Rendering has begun" << endl;
+  if (isRendering)
+    {
+      _raytracer.launchRendering();
+      cout << "Rendering has begun" << endl;
+    }
 }
 
 void	Gui::renderingHasStoped(void)
 {
+  isRendering = 0;
+  _raytracer.stopRendering();
   cout << "Rendering has stoped" << endl;
 }
 
