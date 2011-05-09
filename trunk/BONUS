@@ -1,6 +1,10 @@
+Lumiere ambiante
+Lumiere parrallele
+Lumiere Direct
 Reflection
+Reflection diffuse
 Transparence avec Refraction (Plusieurs objets imbriques ;))
-Gestion des ombres avec transparence (Couleurs filtrees)
+Gestion des ombres avec transparence (Couleurs filtrees, absorbance)
 Textures procedurales (Bruit de Perlin, Damier)
 Textures avec images
 Decoupage Texturel
@@ -8,3 +12,6 @@ Deformation de la Normale (Vague + Bruit de Perlin + Bump Mapping)
 Objets Limites
 HDR Map (environnement)
 Antialiasing
+Ambient Occlusion
+Flou de profondeur
+Ombres diffuses
