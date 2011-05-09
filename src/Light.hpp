@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Thu May  5 15:47:29 2011 samuel olivier
+// Last update Mon May  9 00:06:36 2011 gael jochaud-du-plessix
 //
 
 #ifndef _LIGHT_HPP_
@@ -55,8 +55,9 @@ public:
 				   intersections, Ray& lightRay,
 				   Color& lightColor,
 				   bool limited = true) const;
+
   virtual Color	getDirectLighting(const Raytracer& raytracer,
-				  const Ray& ray) const = 0;
+				  Ray& ray) const = 0;
 
 protected:
   Point		_position;

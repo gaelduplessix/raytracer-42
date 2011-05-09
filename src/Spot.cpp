@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Thu May  5 19:35:35 2011 samuel olivier
+// Last update Mon May  9 00:23:06 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -53,19 +53,20 @@ void	Spot::getLighting(const ObjectPrimitive& primitive,
 }
 
 Color	Spot::getDirectLighting(const Raytracer& raytracer,
-				const Ray& ray) const
+				Ray& ray) const
 {
   Ray	lightRay = Ray(ray._point, _position - ray._point);
-  vector<t_intersected_object>  intersections;
-  raytracer.getIntersectingObjects(ray, intersections);
-  Color         lightColor = _color;
-  double        absorptionCoeff = getAbsorptionCoeff(intersections, lightRay,
-                                                     lightColor);
+  Color	lightColor = _color;
+  double                k;
+  ObjectPrimitive*      nearestObject;
+
+  nearestObject = raytracer.getNearestObject(lightRay, k);
+  if (nearestObject && k < 1)
+    return (Color());
   double	scalar = lightRay._vector * ray._vector /
     (lightRay._vector.getNorm() * ray._vector.getNorm());
-  
+
   if (scalar > 0)
-    return (lightColor * scalar * pow(scalar, _directLightPow)
-	    * (1 - absorptionCoeff));
+    return (lightColor * scalar * pow(scalar, _directLightPow));
   return (Color());
 }

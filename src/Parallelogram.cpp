@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May  8 20:51:47 2011 gael jochaud-du-plessix
+// Last update Sun May  8 23:12:43 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -95,9 +95,9 @@ Parallelogram::addIntersectionWithRay(const Ray& ray,
   intersection.push_back((t_intersected_object){this, k});  
 }
 
-void                  Parallelogram::intersectWithRay(const Ray& ray,
-						 ObjectPrimitive*& primitive,
-						 double &res) const
+void	Parallelogram::intersectWithRay(const Ray& ray,
+					ObjectPrimitive*& primitive,
+					double &res) const
 {
   Vector	v1 = _vertex1 - _absolutePosition;
   Vector	v2 = _vertex2 - _absolutePosition;
