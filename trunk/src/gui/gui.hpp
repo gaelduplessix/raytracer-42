@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Mon May  9 16:15:31 2011 franck lavisse
+// Last update Mon May  9 17:16:32 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -108,6 +108,7 @@ private:
   QLabel	*_pixlabel;
   QImage	*_image;
   QTimer	*_timer;
+  QToolBar	*_toolbar;
 
   QCheckBox	*_diffuseLight;
   QCheckBox	*_diffuseShading;
