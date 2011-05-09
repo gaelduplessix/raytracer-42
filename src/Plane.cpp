@@ -1,49 +1,49 @@
 //
-// Plan.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
+// Plane.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
 // 
 // Made by loick michard
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Fri May  6 13:22:10 2011 samuel olivier
+// Last update Mon May  9 15:10:21 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
 #include "Raytracer.hpp"
-#include "Plan.hpp"
+#include "Plane.hpp"
 
-Plan::Plan(Object*object,
-	       const Point& absolutePosition,
-	       const Rotation& rotation,
-	       const Material& material): 
+Plane::Plane(Object*object,
+	     const Point& absolutePosition,
+	     const Rotation& rotation,
+	     const Material& material): 
   ObjectPrimitive(object, absolutePosition, rotation, material),
   _limitX(-1), _limitY(-1)
 {
 
 }
 
-void  Plan::setLimitX(double limitX)
+void  Plane::setLimitX(double limitX)
 {
   _limitX = limitX;
 }
 
-void  Plan::setLimitY(double limitY)
+void  Plane::setLimitY(double limitY)
 {
   _limitY = limitY;
 }
 
-double        Plan::getLimitX(void)
+double        Plane::getLimitX(void)
 {
   return (_limitX);
 }
 
-double        Plan::getLimitY(void)
+double        Plane::getLimitY(void)
 {
   return (_limitY);  
 }
 
 
-void  Plan::getMappedCoords(const Point& intersectPoint,
+void  Plane::getMappedCoords(const Point& intersectPoint,
 		      double& x, double &y) const
 {
   Point simplePoint = intersectPoint - _absolutePosition;
@@ -52,7 +52,7 @@ void  Plan::getMappedCoords(const Point& intersectPoint,
   y = simplePoint._y;
 }
 
-void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const
+void		       Plane::addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>& intersection) const
 {
   Ray           newRay;
 
@@ -86,7 +86,7 @@ void		       Plan::addIntersectionWithRay(const Ray& ray, vector<struct s_inters
 
 #include <iostream>
 
-void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const
+void                  Plane::intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const
 {
   Ray           newRay;
 
@@ -120,7 +120,7 @@ void                  Plan::intersectWithRay(const Ray& ray, ObjectPrimitive*& p
     }
 }
 
-Vector		Plan::getNormalVector(const Point& intersectPoint,
+Vector		Plane::getNormalVector(const Point& intersectPoint,
 				      const Vector& viewVector) const
 {
   Vector	normal(0, 0, 1);
@@ -132,7 +132,7 @@ Vector		Plan::getNormalVector(const Point& intersectPoint,
   return (normal);
 }
 
-bool		Plan::isInBoundingBox(BoundingBox& box) const
+bool		Plane::isInBoundingBox(BoundingBox& box) const
 {
   box = box;
   return (true);

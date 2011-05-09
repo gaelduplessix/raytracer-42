@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Wed May  4 13:06:35 2011 loick michard
+// Last update Mon May  9 17:09:34 2011 gael jochaud-du-plessix
 //
 
 #ifndef _TEXTURE_HPP_
@@ -31,7 +31,6 @@ public:
   virtual int	getWidth() const;
   virtual int	getHeight() const;
 
-protected:
   double	_repeatWidth;
   double	_repeatHeight;
 

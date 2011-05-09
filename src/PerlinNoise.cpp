@@ -5,19 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:14:13 2011 loick michard
-// Last update Wed May  4 18:13:43 2011 loick michard
+// Last update Mon May  9 14:52:07 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
 #include "PerlinNoise.hpp"
-
-PerlinNoise::PerlinNoise(int width, int height):
-  Texture(1, 1), _width(width), _height(height),
-  _octaves(7), _step(20), _persistance(0.9), _woodEffect(false),
-  _marbleEffect(false), _color1(0, 0, 0), _color2(255, 255, 255)
-{
-  this->_initPerlinNoise();
-}
 
 PerlinNoise::PerlinNoise(double repeatWidth, double repeatHeight,
 			 int width, int height):

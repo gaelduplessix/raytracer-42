@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Mon May  9 15:32:07 2011 franck lavisse
+// Last update Mon May  9 17:56:14 2011 gael jochaud-du-plessix
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -30,7 +30,7 @@
 #include "../ObjectPrimitive.hpp"
 #include "../Sphere.hpp"
 #include "../Spot.hpp"
-#include "../Plan.hpp"
+#include "../Plane.hpp"
 #include "../Triangle.hpp"
 #include "../Parallelogram.hpp"
 #include "../Torus.hpp"

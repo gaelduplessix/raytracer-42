@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sun May  8 11:57:24 2011 loick michard
+// Last update Mon May  9 17:53:27 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -89,15 +89,22 @@ ObjectPrimitive::getNormal(const Point& intersectPoint,
 	{
 	  double x, y;
 	  getMappedCoords(intersectPoint, x, y);
-	  double p = 0.002;
-	  
-	  x = (double)_material.getHeightmapColor(x - p, y)._r / 255.0
+	  double p = 5.0 * _material._heightmap->_repeatWidth
+	    / _material._heightmap->getWidth();
+
+	  double normX, normY;
+	  normX = (double)_material.getHeightmapColor(x - p, y)._r / 255.0
 	    - (double)_material.getHeightmapColor(x + p, y)._r / 255.0;
-	  y = (double)_material.getHeightmapColor(x, y - p)._r / 255.0
+	  normY = (double)_material.getHeightmapColor(x, y - p)._r / 255.0
 	    - (double)_material.getHeightmapColor(x, y + p)._r / 255.0;
-	  normal._x += x * 10;
-	  normal._y += y * 10;
-	  normal._z += y;
+
+	  Vector        newV1(normal._z, normal._y, -normal._x);
+	  Vector        newV2 = newV1;
+	  newV2 *= normal;
+
+	  normX *= 10;
+	  normY *= 10;
+	  normal = normal + newV1 * normX + newV2 * normY;
 	  normal.normalize();
 	}
       if (_material._deformationType == Material::WAVES_X)
