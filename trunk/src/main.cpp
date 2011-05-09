@@ -5,14 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May  9 22:02:18 2011 franck lavisse
+// Last update Mon May  9 23:44:11 2011 gael jochaud-du-plessix
 //
 
-#include <cmath>
 #include <vector>
-#include <iostream>
-#include <SDL/SDL.h>
-
 #include "Raytracer.hpp"
 #include "CinemaCamera.hpp"
 #include "Color.hpp"
@@ -31,11 +27,13 @@
 #include "PerlinNoise.hpp"
 #include "CheckerBoard.hpp"
 #include "Cone.hpp"
+#include "Cylinder.hpp"
 #include "Torus.hpp"
 #include "CubeTroue.hpp"
+//#include "gui/gui.hpp"
+#include <iostream>
+#include <SDL/SDL.h>
 #include "RenderingInterface.hpp"
-
-#include "gui/gui.hpp"
 
 using namespace std;
 
@@ -46,15 +44,13 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setColor(Color(255, 255, 255));
   reflection.setReflectionCoeff(1);
-  reflection.setDiffusedReflectionCoeff(0.1);
   reflection.setTransmissionCoeff(0);
   reflection.setRefractionIndex(1.33);
   Material	refraction = mat;
   refraction.setColor(Color(255, 255, 255));
-  refraction.setTransmissionCoeff(0);
-  refraction.setRefractionIndex(1);
+  refraction.setTransmissionCoeff(1);
+  refraction.setRefractionIndex(1.33);
   Material	matFloor("sol");
   matFloor.setReflectionCoeff(0);
   matFloor.setColor(Color(255, 255, 255));
@@ -67,7 +63,7 @@ Scene		createScene2()
   object.setSpecularCoeff(0.8);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(-9, 0, 3), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 2, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
   // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
@@ -80,54 +76,47 @@ Scene		createScene2()
   // 					 Point(20, 4, 2),
   // 					 Rotation(0, 0, 0), object));
   Material special = refraction;
-  //  PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
+  PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
   //special.setHeightmap(perlin);
-  primitives.push_back(new Sphere(NULL, Point(17, 0, 0),
-  				  Rotation(0, 0, 0), reflection, 3));
+  special.setTransmissionCoeff(0);
+  special.setTexture(perlin);
+  matFloor.setHeightmap(new Texture("water.jpg", 10, 10));
+  matFloor.setReflectionCoeff(0.8);
+  matFloor.setColor(Color(93, 167, 227));
+  //object.setHeightmap(new Texture("water.jpg", 1, 1));
+  Cone*	cone = new Cone(NULL, Point(20, 2.5, 1),
+			Rotation(0, 0, 0), object, 2);
+  // cylinder->setLimitMax(2);
+  // cylinder->setLimitMin(1);
+  primitives.push_back(cone);
+  primitives.push_back(new Torus(NULL, Point(20, 2.5, 1),
+				 Rotation(0, -1, 0), object, 2, 0.5));
   // primitives.push_back(new Sphere(NULL, Point(18, 4, 0),
   // 				  Rotation(0, 0, 0), reflection, 3));
   //primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
   //				    special, Point(5, 1.5, -1),
   //				    Point(7.5, 0, 0)));
-
   refraction.setTransmissionCoeff(0.9);
   refraction.setRefractionIndex(1.5);
   primitives.push_back(new Plane(NULL, Point(0, 0, -2),
-				 Rotation(0, 0, 0), matFloor));
-  primitives.push_back(new Plane(NULL, Point(0, 0, 10),
-  				Rotation(0, 0, 0), matFloor));
-  primitives.push_back(new Plane(NULL, Point(33, 0, 0),
-  				Rotation(0, M_PI_2, 0), matFloor));
-  primitives.push_back(new Plane(NULL, Point(-9, 0, 0),
-  				Rotation(0, M_PI_2, 0), matFloor));
-  matFloor.setColor(Color(255, 0, 0));
-  primitives.push_back(new Plane(NULL, Point(0, -8, -3),
-  				Rotation(M_PI_2, 0, 0), matFloor));
-  matFloor.setColor(Color(0, 255, 0));
-  primitives.push_back(new Plane(NULL, Point(0, 8, -3),
-  				Rotation(M_PI_2, 0, 0), matFloor));
-
+  				 Rotation(0, 0, 0), matFloor));
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
 			   true));
 
   vector<Light*> light;
-  // light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(3, 0, 2.5), Color(255, 255, 255)));
-  light.push_back(new ParallelogramLight(Point(11, -3, 8),
-					 Point(15, -3, 8),
-					 Point(11, 3, 8),
-					 Color(252, 255, 190)));
-  light.push_back(new ParallelogramLight(Point(-10, -1, 7),
-					 Point(-10, -1, 5),
-					 Point(-11, 1, 7),
-					 Color(252, 255, 190)));
-  // light.push_back(new Spot(Point(1, -2, 8), Color(255, 255, 255), 0.5));
-  // light.push_back(new Spot(Point(1, 2, 8), Color(255, 255, 255), 0.5));
-  // light.push_back(new Spot(Point(10, 0, 2), Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
+  //light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(1, 2.5, 10),
+			   Color(255, 255, 255)));
+  light.push_back(new Spot(Point(1, 0, 7),
+			   Color(255, 255, 255)));
+  light.push_back(new Spot(Point(2, 10, 5),
+			   Color(255, 255, 255)));
+  // light.push_back(new ParallelogramLight(Point(15, 1, 3),
+  // 					 Point(17, 1, 3),
+  // 					 Point(15, 4, 3),
+  // 					 Color(255, 255, 255)));
 
   Scene		res(cam, obj, light);
   return (res);
@@ -140,24 +129,21 @@ RenderingConfiguration	createConfig2()
   res.setWidth(853);
   res.setHeight(480);
   res.setAntialiasing(1);
-  res.setExposure(3);
+  res.setExposure(2);
   res.setDiffuseLighting(true);
   res.setDirectLighting(true);
   res.setDirectLightingCoeff(1);
   res.setSpecularLighting(true);
   res.setReflection(true);
-  res.setReflectionDiffused(false);
-  res.setReflectionDiffusedSampling(10);
   res.setTransparency(true);
   res.setAmbientOcclusionEnabled(false);
-  res.setAmbientOcclusionSampling(10);
-  res.setDiffuseShadingEnabled(true);
-  res.setDiffuseShadingSampling(10);
+  res.setDiffuseShadingEnabled(false);
+  res.setDiffuseShadingSampling(50);
   res.setFieldDepthEnabled(false);
   // res.setAdditiveAmbiantLighting(0.1);
   // res.setMinimalAmbiantLighting(0.1);
-  res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
-  //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
+  res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
+  res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 
@@ -177,7 +163,7 @@ class SDLInterface : public RenderingInterface
     p[2] = color._r;
     p[1] = color._g;
     p[0] = color._b;
-    if (y == 0)
+    if (x == 0)
       SDL_Flip(screen);
   }
 
@@ -195,8 +181,8 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  gui(ac, av);
-  /*SDL_Init(SDL_INIT_VIDEO);
+  //gui(ac, av);
+  SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
@@ -206,15 +192,15 @@ int main(int ac, char **av)
   while (!quit)
     {
       if (SDL_WaitEvent(&event))
-  	{
-  	  if (event.type == SDL_QUIT
+	{
+	  if (event.type == SDL_QUIT
               || (event.type == SDL_KEYDOWN
                   && (event.key.keysym.sym == SDLK_ESCAPE
-  		      || event.key.keysym.sym == SDLK_RETURN)))
-  	    quit = true;
-  	}
+		      || event.key.keysym.sym == SDLK_RETURN)))
+	    quit = true;
+	}
     }
   rt.stopRendering();
-  SDL_Quit();*/
+  SDL_Quit();
   return (0);
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Thu May  5 19:44:11 2011 samuel olivier
+// Last update Mon May  9 23:32:43 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -20,7 +20,7 @@ Cone::Cone(Object*object,
 		   const Material& material,
 		   double angle) : ObjectPrimitive(object,absolutePosition,
 						    rotation, material),
-				    _angle(angle)
+				   _angle(angle), _limitMin(-1), _limitMax(-1)
 {
 
 }
@@ -30,10 +30,22 @@ void		Cone::setAngle(double angle)
   _angle = angle;
 }
 
+void            Cone::setLimitMin(double z)
+{
+  _limitMin = z;
+}
+
+void            Cone::setLimitMax(double z)
+{
+  _limitMax = z;
+}
+
 void		Cone::getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const
 {
-  Point newPoint = intersectPoint - _absolutePosition;
+  Point	intersect = intersectPoint;
+  intersect.rotate(_rotation, true);
+  Point newPoint = intersect - _absolutePosition;
   Vector vn(0, 0, -1);
   Vector ve(1, 0, 0);
 
@@ -79,10 +91,20 @@ Cone::addIntersectionWithRay(const Ray& ray,
   for (unsigned int i = 0 ; i < solutions.size(); i++)
     if (solutions[i] > EPSILON)
       {
-        Point   intersectPoint = ray._point + ray._vector * solutions[i];
+	  Point intersectPoint;
+	  bool  limited = false;
+          if (_limitMin > 0 || _limitMax > 0)
+            {
+              intersectPoint = newRay._point + newRay._vector * solutions[i];
+              if (_limitMin > 0 && ((intersectPoint._z < -_limitMin)))
+                limited = true;
+              if (_limitMax > 0 && ((intersectPoint._z > _limitMax)))
+                limited = true;
+            }
+        intersectPoint = ray._point + ray._vector * solutions[i];
         double x, y;
         getMappedCoords(intersectPoint, x, y);
-        if (!_material.isLimitedAtPoint(x, y))
+        if (!limited && !_material.isLimitedAtPoint(x, y))
           validSolutions.push_back(solutions[i]);
       }
   if (validSolutions.size() > 0)
@@ -116,10 +138,20 @@ void                  Cone::intersectWithRay(const Ray& ray,
     {
       if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 0))
         {
-          Point intersectPoint = ray._point + ray._vector * solutions[i];
+	  Point intersectPoint;
+	  bool  limited = false;
+          if (_limitMin > 0 || _limitMax > 0)
+            {
+              intersectPoint = newRay._point + newRay._vector * solutions[i];
+              if (_limitMin > 0 && ((intersectPoint._z < -_limitMin)))
+                limited = true;
+              if (_limitMax > 0 && ((intersectPoint._z > _limitMax)))
+                limited = true;
+            }
+          intersectPoint = ray._point + ray._vector * solutions[i];
           double x, y;
           getMappedCoords(intersectPoint, x, y);
-          if (!_material.isLimitedAtPoint(x, y))
+          if (!limited && !_material.isLimitedAtPoint(x, y))
             {
               primitive = (ObjectPrimitive*)this;
               res = solutions[i];
@@ -131,16 +163,17 @@ void                  Cone::intersectWithRay(const Ray& ray,
 Vector		Cone::getNormalVector(const Point& intersectPoint,
 				      const Vector& viewVector) const
 {
-  // Vector	normal = intersectPoint - _absolutePosition;
-  // normal._z = -normal._z * _angle;
-  Vector	normal(intersectPoint._x - _absolutePosition._x,
-		       intersectPoint._y - _absolutePosition._y,
-		       _absolutePosition._z * _angle * intersectPoint._z);
+  Point		intersect = intersectPoint;
+  intersect.rotate(_rotation, true);
+  Vector	normal(intersect._x - _absolutePosition._x,
+		       intersect._y - _absolutePosition._y,
+		       -1 * (intersect._z - _absolutePosition._z)
+		       * _angle);
   double	cosA = viewVector * normal
     / (viewVector.getNorm() * normal.getNorm());
 
-  // if (cosA <= 0)
-  //   return (normal.normalize() * -1);
+  if (cosA <= 0)
+    return (normal.normalize() * -1);
   return (normal.normalize());
 }
 

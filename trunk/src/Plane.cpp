@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Mon May  9 15:10:21 2011 gael jochaud-du-plessix
+// Last update Mon May  9 20:24:24 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -84,9 +84,9 @@ void		       Plane::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
     }
 }
 
-#include <iostream>
-
-void                  Plane::intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double &res) const
+void                  Plane::intersectWithRay(const Ray& ray,
+					      ObjectPrimitive*& primitive,
+					      double &res) const
 {
   Ray           newRay;
 
