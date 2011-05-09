@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 15:39:43 2011 franck lavisse
-// Last update Mon May  9 22:59:28 2011 franck lavisse
+// Last update Mon May  9 23:10:37 2011 franck lavisse
 //
 #include <iostream>
 #include <QFileDialog>
@@ -18,7 +18,7 @@ void	Gui::saveImage(void)
 {
   //  QMessageBox::information(this, "Sauvegarde de scene",
   //  _image->save("raytracer.png", "PNG");
-  QString file = QFileDialog::getSaveFileName(this, "Enregistrer une scene", QString(), ".png");
+  QString file = QFileDialog::getSaveFileName(this, "Enregistrer une scene", QString(), "Images *.png *.gif *.jpeg");
   _image->save(file, "PNG");
 }
 
