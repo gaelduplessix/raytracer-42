@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Tue May 10 14:01:13 2011 franck lavisse
+// Last update Tue May 10 14:06:07 2011 franck lavisse
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -157,6 +157,7 @@ void	raytracer(Gui *rt)
 
 void	Gui::launch_raytracer(void)
 {
+  isStarted = 1;
   isRendering = 1;
   raytracer(this);
 }

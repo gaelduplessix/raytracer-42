@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 15:39:43 2011 franck lavisse
-// Last update Tue May 10 13:10:23 2011 franck lavisse
+// Last update Tue May 10 14:07:03 2011 franck lavisse
 //
 #include <iostream>
 #include <string>
@@ -34,7 +34,6 @@ void	Gui::saveImage(void)
       format = file.toStdString();
       found = format.find(".");
       format = format.substr(found + 1);
-      cout << format << endl;
       if (format.compare(validFormat[0]) != 0 &&
 	  format.compare(validFormat[1]) != 0 &&
 	  format.compare(validFormat[2]) != 0 &&
@@ -43,7 +42,6 @@ void	Gui::saveImage(void)
 	  format = "png";
 	  file += ".png";
 	}
-      cout << format <<  endl << file.toStdString() << endl;
     }
   _image->save(file);
 }
