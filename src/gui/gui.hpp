@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Mon May  9 22:48:14 2011 franck lavisse
+// Last update Tue May 10 13:34:02 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -70,6 +70,7 @@ public:
   bool	getAmbiantOcclusionBool(void) const;
   int	getAmbiantOcclusionInt(void) const;
   bool	getDirectLight(void) const;
+  int	getDirectLightInt(void) const;
   bool	getReflectionBool(void) const;
   int	getReflectionProfondeur(void) const;
   bool	getReflectionDiffuseBool(void) const;
@@ -119,7 +120,7 @@ private:
   QCheckBox	*_specularLight;
   QSpinBox	*_specularLightBox;
   QCheckBox	*_transparence;
-  QDoubleSpinBox	*_transpBox;
+  QDoubleSpinBox*_transpBox;
   QSpinBox	*_transpDiffusion;
   QCheckBox	*_flou;
   QSpinBox	*_flouBox;
@@ -127,6 +128,7 @@ private:
   QCheckBox	*_ambiantOcclusion;
   QSpinBox	*_ambiantOcclusionBox;
   QCheckBox	*_directLight;
+  QSpinBox	*_directLightBox;
   QSpinBox	*_reflectionProfondeur;
   QCheckBox	*_reflectionEnabled;
   QCheckBox	*_reflectionDiffuse;

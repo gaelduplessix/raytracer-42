@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Mon May  9 22:06:04 2011 franck lavisse
+// Last update Tue May 10 14:01:13 2011 franck lavisse
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -130,10 +130,14 @@ void	raytracer(Gui *rt)
   config->setWidth(1100);
   config->setHeight(700);
   config->setAntialiasing(rt->getAliasing());
+  config->setExposure(rt->getExposureValue());
   config->setDirectLighting(rt->getDirectLight());
-  config->setReflectionEnabled(rt->getReflectionBool());
-  //  config->setReflectionDiffusedSampling(rt->getReflectionSampling());
-  config->setReflectionMaxDepth(rt->getReflectionProfondeur());
+  config->setDirectLightingCoeff(rt->getDirectLightInt());  
+  config->setSpecularLighting(rt->getSpecularLightBool());
+  config->setReflection(rt->getReflectionBool(),
+			rt->getReflectionProfondeur(),
+			rt->getReflectionDiffuseBool(),			
+			rt->getReflectionDiffuseSampling());
   config->setTransparency(rt->getTransparenceBool(),
 			 rt->getTransparenceInt(),
 			 rt->getTransparenceDiffusion());
@@ -141,6 +145,7 @@ void	raytracer(Gui *rt)
   config->setAmbientOcclusionSampling(rt->getAmbiantOcclusionInt());
   config->setPhotonMappingEnabled(rt->getPhotonMappingBool());
   config->setPhotonMappingSampling(rt->getPhotonMappingInt());
+  config->setDiffuseShadingEnabled(rt->getDiffuseShading());
   config->setRenderingSamplingMethod(renderingSamplingMethod(rt->getSamplingMethod()));
   Scene *scene = createScene();
 
