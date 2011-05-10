@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 15:39:43 2011 franck lavisse
-// Last update Tue May 10 00:41:28 2011 franck lavisse
+// Last update Tue May 10 12:22:00 2011 loick michard
 //
 #include <iostream>
 #include <string>
@@ -19,16 +19,10 @@ using namespace std;
 
 void	Gui::saveImage(void)
 {
-  vector<string> validFormat(4);
-  validFormat[0] = "png";
-  validFormat[1] = "gif";
-  validFormat[2] = "bmp";
-  validFormat[3] = "peg";
-  string format;
   //  _image->save("raytracer.png", "PNG");
-  QString file = QFileDialog::getExistingDirectory(this);
-  //  QString file = QFileDialog::getSaveFileName(this, "Enregistrer une scene", QString(), "Images (*.png *.gif *.jpeg *.bmp)");
-  if (file != NULL)
+  //QString file = QFileDialog::getExistingDirectory(this);
+  QString file = QFileDialog::getSaveFileName(this, "Enregistrer une scene", QString(), "Images (*.png *.gif *.jpeg *.bmp)");
+  /*if (file != NULL)
     {
       format = file.toStdString();
       format = format.substr(format.size() - 3, format.size());
@@ -43,8 +37,8 @@ void	Gui::saveImage(void)
       if (format.compare("peg") == 0)
 	format = "jpeg";
       cout << format <<  endl << file.toStdString() << endl;
-      _image->save(file, format.c_str());
-    }
+    }*/
+  _image->save(file);
 }
 
 void	Gui::putPixel(const Color& color, int x, int y)
