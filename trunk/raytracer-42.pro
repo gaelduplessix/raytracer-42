@@ -37,6 +37,7 @@ HEADERS += src/BoundingBox.hpp \
            src/RenderingInterface.hpp \
            src/Rotation.hpp \
            src/Scene.hpp \
+           src/Sett.hpp \
            src/Sphere.hpp \
            src/SphericalLight.hpp \
            src/Spot.hpp \
@@ -73,6 +74,7 @@ SOURCES += src/BoundingBox.cpp \
            src/RenderingConfiguration.cpp \
            src/RenderingInterface.cpp \
            src/Scene.cpp \
+           src/Sett.cpp \
            src/Sphere.cpp \
            src/SphericalLight.cpp \
            src/Spot.cpp \

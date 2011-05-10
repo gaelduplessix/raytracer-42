@@ -15,7 +15,8 @@ Material::Material():
   _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
   _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1), _diffusedReflectionCoeff(0.1)
+  _deformationType(-1), _diffusedReflectionCoeff(0.1),
+  _diffusedTransmissionCoeff(0.1)
 {
 
 }
@@ -25,7 +26,8 @@ Material::Material(const string& name):
   _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
   _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1), _diffusedReflectionCoeff(0.1)
+  _deformationType(-1), _diffusedReflectionCoeff(0.1),
+  _diffusedTransmissionCoeff(0.1)
 {
 
 }
@@ -74,6 +76,11 @@ double	Material::getReflectionCoeff(void) const
 double	Material::getDiffusedReflectionCoeff(void) const
 {
   return (_diffusedReflectionCoeff);
+}
+
+double	Material::getDiffusedTransmissionCoeff(void) const
+{
+  return (_diffusedTransmissionCoeff);
 }
 
 double	Material::getTransmissionCoeff(void) const
@@ -125,6 +132,11 @@ void	Material::setReflectionCoeff(double reflectionCoeff)
 void	Material::setDiffusedReflectionCoeff(double diffusedReflectionCoeff)
 {
   _diffusedReflectionCoeff = diffusedReflectionCoeff;
+}
+
+void	Material::setDiffusedTransmissionCoeff(double diffusedTransmissionCoeff)
+{
+  _diffusedTransmissionCoeff = diffusedTransmissionCoeff;
 }
 
 void	Material::setTransmissionCoeff(double transmissionCoeff)

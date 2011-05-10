@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May  9 17:03:25 2011 samuel olivier
+// Last update Mon May  9 22:43:52 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -401,6 +401,46 @@ Color	Raytracer::calcReflectedLight(const ObjectPrimitive* nearestObject,
   return (Color());
 }
 
+Color	Raytracer::calcDiffusedTransmission(Ray& ray,
+					    const ObjectPrimitive*
+					    nearestObject)
+{
+  if (!_config->isTransparencyDiffused())
+    return (throwRay(ray));
+  double	diffCoeff
+    = nearestObject->getMaterial().getDiffusedTransmissionCoeff();
+  Vector	newV1(ray._vector._z, ray._vector._y, -ray._vector._x);
+  Vector	newV2 = newV1;
+  newV2 *= ray._vector;
+  Color		res;
+  int		sampling = _config->getTransparencyDiffusedSampling();
+  int		i = 0;
+
+  while (i < sampling && diffCoeff > 0)
+    {
+      double	xoffs, yoffs;
+      Vector	newV;
+      do
+	{
+	  xoffs = (((double)rand() / RAND_MAX)) * diffCoeff;
+	  yoffs = (((double)rand() / RAND_MAX)) * diffCoeff;
+	}
+      while ((xoffs * xoffs + yoffs * yoffs) > (diffCoeff * diffCoeff));
+      newV = ray._vector + newV1 * xoffs + newV2 * yoffs;
+      newV.normalize();
+      Ray	newRay(ray._point, newV);
+      newRay._reflectionLevel = ray._reflectionLevel;
+      newRay._reflectionIntensity = ray._reflectionIntensity;
+      newRay._refractionLevel = _config->getTransparencyMaxDepth();
+      newRay._refractionIntensity = ray._refractionIntensity;
+      res += throwRay(newRay);
+      i++;
+    }
+  if (diffCoeff > 0 && sampling > 1)
+    res /= sampling;
+  return (res);
+}
+
 Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 				       const Point& intersectPoint,
 				       Ray& ray)
@@ -436,7 +476,7 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 	  refractedRay._reflectionLevel = ray._reflectionLevel;
 	  refractedRay._reflectionIntensity = ray._reflectionIntensity;
 	  refractedRay._refractionIntensity = ray._refractionIntensity;
-	  return (throwRay(refractedRay));
+	  return (calcDiffusedTransmission(refractedRay, nearestObject));
 	}
     }
   return (Color());
