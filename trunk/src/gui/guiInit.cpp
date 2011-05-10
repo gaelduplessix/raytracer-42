@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Mon May  9 13:53:53 2011 franck lavisse
-// Last update Mon May  9 17:54:30 2011 franck lavisse
+// Last update Tue May 10 12:55:21 2011 franck lavisse
 //
 #include <QPushButton>
 #include <QTimer>
@@ -49,7 +49,7 @@ Gui::Gui() : QMainWindow()
   pixelColor.setR(0);
   pixelColor.setG(255);
   pixelColor.setB(0);
-  _timer->setInterval(10000000);
+  _timer->setInterval(900000000);
   QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(repaint()));
   _pixmap->fill(Qt::black);
   init_dock();
