@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Mon May  9 13:53:53 2011 franck lavisse
-// Last update Tue May 10 12:55:21 2011 franck lavisse
+// Last update Tue May 10 14:05:56 2011 franck lavisse
 //
 #include <QPushButton>
 #include <QTimer>
@@ -41,6 +41,7 @@ Gui::Gui() : QMainWindow()
 
   _timer = new QTimer();
   isRendering = 0;
+  isStarted = 0;
   resize(1400, 800);
   _image = new QImage(1130, 720, QImage::Format_ARGB32);
   _pixlabel = new QLabel();

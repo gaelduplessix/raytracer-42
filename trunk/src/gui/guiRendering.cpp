@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Sat Apr 30 20:03:34 2011 franck lavisse
-// Last update Mon May  9 22:10:46 2011 franck lavisse
+// Last update Tue May 10 14:07:31 2011 franck lavisse
 //
 #include <QTimer>
 #include <iostream>
@@ -27,9 +27,15 @@ void	Gui::renderingHasFinished(void)
 }
 
 void	Gui::renderingHasBegun(void)
-{
+{  
   if (isRendering)
     {
+      _raytracer.launchRendering();
+      cout << "Rendering has begun" << endl;
+    }
+  else if (!isStarted)
+    {
+      isStarted = 1;
       _raytracer.launchRendering();
       cout << "Rendering has begun" << endl;
     }

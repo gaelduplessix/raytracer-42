@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Wed Apr 27 13:06:58 2011 franck lavisse
-// Last update Tue May 10 13:34:02 2011 franck lavisse
+// Last update Tue May 10 14:05:46 2011 franck lavisse
 //
 #ifndef __GUI_H__
 #define __GUI_H__
@@ -98,6 +98,7 @@ public slots:
   void	launch_raytracer(void);
 
 private:
+  int		isStarted;
   int		isRendering;
   QDockWidget	*_DockBar;
   QWidget	*_widgetBar;
