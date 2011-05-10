@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Tue May 10 00:20:58 2011 melvin laplanche
+// Last update Tue May 10 13:52:03 2011 samuel olivier
 //
 
 #ifndef _OBJECT_HPP_
@@ -43,7 +43,7 @@ public:
   virtual const Vector&		getRefractedVector(const Point& intersectPoint,
 						   const Vector& vector);
 
-private:
+protected:
   vector<ObjectPrimitive*>	_primitives;
   Rotation			_rotation;
   Point				_position;

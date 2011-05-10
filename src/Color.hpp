@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Tue May  3 11:27:25 2011 gael jochaud-du-plessix
+// Last update Tue May 10 12:49:04 2011 samuel olivier
 //
 
 #ifndef _COLOR_HPP_

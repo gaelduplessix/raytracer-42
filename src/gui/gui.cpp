@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Tue May 10 14:06:07 2011 franck lavisse
+// Last update Tue May 10 14:56:21 2011 samuel olivier
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -37,6 +37,7 @@
 #include "../CubeTroue.hpp"
 #include "../PerlinNoise.hpp"
 #include "../CubeMap.hpp"
+#include "../Sett.hpp"
 
 using namespace std;
 
@@ -68,7 +69,7 @@ Scene           *createScene()
   // primitives.push_back(new Torus(NULL, Point(23, -5, 0),
   //                                Rotation(0.3, 0.5, 0), reflection, 3, 0.8));
   primitives.push_back(new Sphere(NULL, Point(30, 0, 0),            
-                             Rotation(0, 0, 0), reflection, 1.0));           
+                             Rotation(0, 0, 0), reflection, 3.0));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");  //perlin->setMarbleProperties();                                              
   //special.setHeightmap(perlin);                                               

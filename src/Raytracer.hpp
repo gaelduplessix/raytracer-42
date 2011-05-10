@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Mon May  9 01:01:40 2011 samuel olivier
+// Last update Mon May  9 22:35:47 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -80,6 +80,8 @@ public:
   Color	calcReflectedLight(const ObjectPrimitive* nearestObject,
 			   const Point& intersectPoint,
 			   Ray& ray);
+  Color	calcDiffusedTransmission(Ray& ray,
+			       const ObjectPrimitive* nearestObject);
   Color	calcTransmetedLight(const ObjectPrimitive* nearestObject,
 			    const Point& intersectPoint,
 			    Ray& ray);

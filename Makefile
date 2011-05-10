@@ -71,6 +71,7 @@ SOURCES       = src/BoundingBox.cpp \
 		src/RenderingConfiguration.cpp \
 		src/RenderingInterface.cpp \
 		src/Scene.cpp \
+		src/Sett.cpp \
 		src/Sphere.cpp \
 		src/SphericalLight.cpp \
 		src/Spot.cpp \
@@ -124,6 +125,7 @@ OBJECTS       = objects/BoundingBox.o \
 		objects/RenderingConfiguration.o \
 		objects/RenderingInterface.o \
 		objects/Scene.o \
+		objects/Sett.o \
 		objects/Sphere.o \
 		objects/SphericalLight.o \
 		objects/Spot.o \
@@ -245,7 +247,7 @@ qmake:  FORCE
 
 dist: 
 	@$(CHK_DIR_EXISTS) objects/raytracer-421.0.0 || $(MKDIR) objects/raytracer-421.0.0 
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) objects/raytracer-421.0.0/ && $(COPY_FILE) --parents src/BoundingBox.hpp src/Camera.hpp src/CheckerBoard.hpp src/CinemaCamera.hpp src/Color.hpp src/Cone.hpp src/CubeMap.hpp src/CubeTroue.hpp src/Cylinder.hpp src/DirectLight.hpp src/EquationSolver.hpp src/Light.hpp src/Material.hpp src/Matrix.hpp src/Object.hpp src/ObjectPrimitive.hpp src/ParallelLight.hpp src/Parallelogram.hpp src/ParallelogramLight.hpp src/PerlinNoise.hpp src/Plane.hpp src/Point.hpp src/Ray.hpp src/Raytracer.hpp src/RaytracerThread.hpp src/RenderingConfiguration.hpp src/RenderingInterface.hpp src/Rotation.hpp src/Scene.hpp src/Sphere.hpp src/SphericalLight.hpp src/Spot.hpp src/Texture.hpp src/Torus.hpp src/Triangle.hpp src/Vector.hpp src/gui/gui.hpp objects/raytracer-421.0.0/ && $(COPY_FILE) --parents src/BoundingBox.cpp src/Camera.cpp src/CheckerBoard.cpp src/CinemaCamera.cpp src/Color.cpp src/Cone.cpp src/CubeMap.cpp src/CubeTroue.cpp src/Cylinder.cpp src/DirectLight.cpp src/EquationSolver.cpp src/Light.cpp src/main.cpp src/Material.cpp src/Matrix.cpp src/Object.cpp src/ObjectPrimitive.cpp src/ParallelLight.cpp src/Parallelogram.cpp src/ParallelogramLight.cpp src/PerlinNoise.cpp src/Plane.cpp src/Ray.cpp src/Raytracer.cpp src/RaytracerThread.cpp src/RenderingConfiguration.cpp src/RenderingInterface.cpp src/Scene.cpp src/Sphere.cpp src/SphericalLight.cpp src/Spot.cpp src/Texture.cpp src/Torus.cpp src/Triangle.cpp src/Vector.cpp src/gui/gui.cpp src/gui/guiAliasing.cpp src/gui/guiAmbiantOcclusion.cpp src/gui/guiDiffuseLight.cpp src/gui/guiDiffuseShading.cpp src/gui/guiDirectLight.cpp src/gui/guiExposure.cpp src/gui/guiFlou.cpp src/gui/guiInit.cpp src/gui/guiLumiereDiffuse.cpp src/gui/guiMenuBar.cpp src/gui/guiPhotonMapping.cpp src/gui/guiPutpixel.cpp src/gui/guiReflection.cpp src/gui/guiRendering.cpp src/gui/guiSamplingMethod.cpp src/gui/guiSpecularLight.cpp src/gui/guiTransparence.cpp objects/raytracer-421.0.0/ && (cd `dirname objects/raytracer-421.0.0` && $(TAR) raytracer-421.0.0.tar raytracer-421.0.0 && $(COMPRESS) raytracer-421.0.0.tar) && $(MOVE) `dirname objects/raytracer-421.0.0`/raytracer-421.0.0.tar.gz . && $(DEL_FILE) -r objects/raytracer-421.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) objects/raytracer-421.0.0/ && $(COPY_FILE) --parents src/BoundingBox.hpp src/Camera.hpp src/CheckerBoard.hpp src/CinemaCamera.hpp src/Color.hpp src/Cone.hpp src/CubeMap.hpp src/CubeTroue.hpp src/Cylinder.hpp src/DirectLight.hpp src/EquationSolver.hpp src/Light.hpp src/Material.hpp src/Matrix.hpp src/Object.hpp src/ObjectPrimitive.hpp src/ParallelLight.hpp src/Parallelogram.hpp src/ParallelogramLight.hpp src/PerlinNoise.hpp src/Plane.hpp src/Point.hpp src/Ray.hpp src/Raytracer.hpp src/RaytracerThread.hpp src/RenderingConfiguration.hpp src/RenderingInterface.hpp src/Rotation.hpp src/Scene.hpp src/Sett.hpp src/Sphere.hpp src/SphericalLight.hpp src/Spot.hpp src/Texture.hpp src/Torus.hpp src/Triangle.hpp src/Vector.hpp src/gui/gui.hpp objects/raytracer-421.0.0/ && $(COPY_FILE) --parents src/BoundingBox.cpp src/Camera.cpp src/CheckerBoard.cpp src/CinemaCamera.cpp src/Color.cpp src/Cone.cpp src/CubeMap.cpp src/CubeTroue.cpp src/Cylinder.cpp src/DirectLight.cpp src/EquationSolver.cpp src/Light.cpp src/main.cpp src/Material.cpp src/Matrix.cpp src/Object.cpp src/ObjectPrimitive.cpp src/ParallelLight.cpp src/Parallelogram.cpp src/ParallelogramLight.cpp src/PerlinNoise.cpp src/Plane.cpp src/Ray.cpp src/Raytracer.cpp src/RaytracerThread.cpp src/RenderingConfiguration.cpp src/RenderingInterface.cpp src/Scene.cpp src/Sett.cpp src/Sphere.cpp src/SphericalLight.cpp src/Spot.cpp src/Texture.cpp src/Torus.cpp src/Triangle.cpp src/Vector.cpp src/gui/gui.cpp src/gui/guiAliasing.cpp src/gui/guiAmbiantOcclusion.cpp src/gui/guiDiffuseLight.cpp src/gui/guiDiffuseShading.cpp src/gui/guiDirectLight.cpp src/gui/guiExposure.cpp src/gui/guiFlou.cpp src/gui/guiInit.cpp src/gui/guiLumiereDiffuse.cpp src/gui/guiMenuBar.cpp src/gui/guiPhotonMapping.cpp src/gui/guiPutpixel.cpp src/gui/guiReflection.cpp src/gui/guiRendering.cpp src/gui/guiSamplingMethod.cpp src/gui/guiSpecularLight.cpp src/gui/guiTransparence.cpp objects/raytracer-421.0.0/ && (cd `dirname objects/raytracer-421.0.0` && $(TAR) raytracer-421.0.0.tar raytracer-421.0.0 && $(COMPRESS) raytracer-421.0.0.tar) && $(MOVE) `dirname objects/raytracer-421.0.0`/raytracer-421.0.0.tar.gz . && $(DEL_FILE) -r objects/raytracer-421.0.0
 
 
 clean:compiler_clean 
@@ -700,6 +702,20 @@ objects/Scene.o: src/Scene.cpp src/Scene.hpp \
 		src/RenderingConfiguration.hpp \
 		src/CubeMap.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objects/Scene.o src/Scene.cpp
+
+objects/Sett.o: src/Sett.cpp src/Sett.hpp \
+		src/Object.hpp \
+		src/Vector.hpp \
+		src/Point.hpp \
+		src/Rotation.hpp \
+		src/ObjectPrimitive.hpp \
+		src/BoundingBox.hpp \
+		src/Ray.hpp \
+		src/Color.hpp \
+		src/Material.hpp \
+		src/Texture.hpp \
+		src/Parallelogram.hpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objects/Sett.o src/Sett.cpp
 
 objects/Sphere.o: src/Sphere.cpp src/Raytracer.hpp \
 		src/Scene.hpp \
