@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Mon May  9 13:45:31 2011 franck lavisse
-// Last update Mon May  9 14:31:34 2011 franck lavisse
+// Last update Tue May 10 14:00:37 2011 franck lavisse
 //
 #include "gui.hpp"
 
@@ -25,6 +25,8 @@ void	Gui::exposure(void)
   _exposureBox = new QSpinBox();
   QGridLayout	*EGrid = new QGridLayout();
 
+  _exposure->setChecked(true);
+  _exposureBox->setValue(2);
   EGrid->addWidget(_exposure,1,0);
   EGrid->addWidget(_exposureBox,1,1);
   _Grid->addLayout(EGrid,9,0);

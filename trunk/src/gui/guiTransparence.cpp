@@ -5,7 +5,7 @@
 // Login   <laviss_f@epitech.net>
 // 
 // Started on  Fri Apr 29 19:21:11 2011 franck lavisse
-// Last update Mon May  9 16:01:28 2011 franck lavisse
+// Last update Tue May 10 13:35:34 2011 franck lavisse
 //
 #include <QCheckBox>
 #include <QSpinBox>
@@ -41,6 +41,7 @@ void	Gui::transparence(void)
   _transparence->setChecked(true);
   _transpBox->setValue(1);
   _transpBox->setRange(0,1);
+  _transpBox->setSingleStep(0.01);
   _transpDiffusion->setValue(20);
   transpGrid->addWidget(_transparence,0,0);
   transpGrid->addWidget(_transpBox,0,1);
