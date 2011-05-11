@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Wed May 11 18:51:24 2011 melvin laplanche
+// Last update Thu May 12 00:36:30 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -13,7 +13,7 @@
 #include "Raytracer.hpp"
 #include "Parallelogram.hpp"
 
-ParallelogramLight::ParallelogramLight(void)
+ParallelogramLight::ParallelogramLight(void) : _directLightPow(10000)
 {
 
 }

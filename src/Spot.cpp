@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Wed May 11 18:56:17 2011 melvin laplanche
+// Last update Thu May 12 00:34:51 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -19,7 +19,7 @@ Spot::Spot(const Point &position, const Color &color,
 
 }
 
-Spot::Spot(void)
+Spot::Spot(void) : _directLightPow(10000)
 {
 
 }
