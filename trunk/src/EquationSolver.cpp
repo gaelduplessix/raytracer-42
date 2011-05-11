@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 11:44:41 2011 loick michard
-// Last update Sun May  8 14:30:11 2011 loick michard
+// Last update Wed May 11 12:43:04 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -13,6 +13,29 @@
 #include "Raytracer.hpp"
 
 #define EPSILON_ZERO 0.00000001
+
+vector<double>
+EquationSolver::solveEquation(vector<double> &coeffs)
+{
+  vector<double>	result;
+  int			degree = coeffs.size() - 1;
+
+  if (degree == 1)
+    {
+      result.push_back(- coeffs[0] / coeffs[1]);
+      return (result);
+    }
+  else if (degree == 2)
+    return (EquationSolver::solveQuadraticEquation(coeffs[2], coeffs[1],
+						   coeffs[0]));
+  else if (degree == 3)
+    return (EquationSolver::solveCubicEquation(coeffs[3], coeffs[2],
+					       coeffs[1], coeffs[0]));
+  else if (degree == 4)
+    return (EquationSolver::solveQuarticEquation(coeffs[4], coeffs[3],
+						 coeffs[2], coeffs[1],
+						 coeffs[0], true));
+}
 
 vector<double> 
 EquationSolver::solveQuadraticEquation(double a, double b, double c,
