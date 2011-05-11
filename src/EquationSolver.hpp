@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 11:41:00 2011 loick michard
-// Last update Thu May  5 17:27:36 2011 loick michard
+// Last update Wed May 11 12:37:26 2011 gael jochaud-du-plessix
 //
 
 #ifndef _EQUATION_SOLVER_HPP_
@@ -18,6 +18,8 @@ using namespace std;
 class	EquationSolver
 {
 public:
+  static vector<double> solveEquation(vector<double> &coeffs);
+
   static vector<double> solveQuadraticEquation(double a, double b, double c,
 					       bool all = false);
   static vector<double> solveCubicEquation(double a, double b, 

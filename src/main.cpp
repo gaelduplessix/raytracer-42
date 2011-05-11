@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May 11 11:26:48 2011 samuel olivier
+// Last update Wed May 11 12:45:40 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -20,6 +20,7 @@
 #include "Vector.hpp"
 #include "Rotation.hpp"
 #include "ObjectPrimitive.hpp"
+#include "EquationPrimitive.hpp"
 #include "Sphere.hpp"
 #include "Parallelogram.hpp"
 #include "Spot.hpp"
@@ -34,8 +35,8 @@
 #include "Cylinder.hpp"
 #include "Torus.hpp"
 #include "CubeTroue.hpp"
-#include "RenderingInterface.hpp"
 #include "Sett.hpp"
+#include "RenderingInterface.hpp"
 
 #include "gui/gui.hpp"
 
@@ -48,9 +49,9 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(0);
+  reflection.setReflectionCoeff(1);
   reflection.setTransmissionCoeff(0);
-  reflection.setRefractionIndex(1);
+  reflection.setRefractionIndex(1.33);
   Material	refraction = mat;
   refraction.setColor(Color(255, 255, 255));
   refraction.setTransmissionCoeff(0);
@@ -67,7 +68,7 @@ Scene		createScene2()
   object.setSpecularCoeff(0.8);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, -6, 5), Rotation(0, 0.2, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
 
   vector<ObjectPrimitive*> primitives;
   // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
@@ -85,26 +86,30 @@ Scene		createScene2()
   //special.setHeightmap(perlin);
   special.setTransmissionCoeff(0);
   special.setTexture(perlin);
-  matFloor.setHeightmap(new Texture("water.jpg", 10, 10));
-  matFloor.setReflectionCoeff(0.8);
-  matFloor.setColor(Color(93, 167, 227));
+  // matFloor.setHeightmap(new Texture("water.jpg", 10, 10));
+  // matFloor.setReflectionCoeff(0.8);
+  // matFloor.setColor(Color(93, 167, 227));
   //object.setHeightmap(new Texture("water.jpg", 1, 1));
   Cone*	cone = new Cone(NULL, Point(20, 2.5, 1),
 			Rotation(0, 0, 0), object, 2);
   // cylinder->setLimitMax(2);
   // cylinder->setLimitMin(1);
   // primitives.push_back(cone);
-  primitives.push_back(new Torus(NULL, Point(20, 0, 1),
-  				 Rotation(0, 0.3, 0), object, 2, 0.5));
-  // primitives.push_back(new Sphere(NULL, Point(18, -4, 0),
-  // 				  Rotation(0, 0, 0), reflection, 3));
+  // primitives.push_back(new Torus(NULL, Point(20, 2.5, 1),
+  // 				 Rotation(0, -1, 0), object, 2, 0.5));
+  primitives.push_back(new Sphere(NULL, Point(20, 0, 2),
+  				  Rotation(0, 0, 0), object, 2));
+  // string eqObject = "x^2 + y ^ 2 + z ^ 2 - 4";
+  // primitives.push_back(new EquationPrimitive(eqObject,
+  // 					     NULL, Point(20, -7, 2),
+  //  					     Rotation(0, 0, 0), object));
   //primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
   //				    special, Point(5, 1.5, -1),
   //				    Point(7.5, 0, 0)));
   // refraction.setTransmissionCoeff(0.9);
   // refraction.setRefractionIndex(1.5);
-  // primitives.push_back(new Plane(NULL, Point(0, 0, -6),
-  // 				 Rotation(0, 0, 0), reflection));
+  primitives.push_back(new Plane(NULL, Point(0, 0, -4),
+  				 Rotation(0, 0, 0), matFloor));
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
   			   true));
@@ -118,8 +123,8 @@ Scene		createScene2()
   // 				    Color(255, 255, 255)));
   light.push_back(new Spot(Point(1, 0, 7),
   			   Color(255, 255, 255)));
-  // light.push_back(new Spot(Point(2, 10, 5),
-  // 			   Color(255, 255, 255)));
+  light.push_back(new Spot(Point(2, 10, 5),
+  			   Color(255, 255, 255)));
   // light.push_back(new ParallelogramLight(Point(15, 1, 3),
   // 					 Point(17, 1, 3),
   // 					 Point(15, 4, 3),
@@ -136,7 +141,7 @@ RenderingConfiguration	createConfig2()
   res.setWidth(853);
   res.setHeight(480);
   res.setAntialiasing(1);
-  res.setExposure(2);
+  res.setExposure(4);
   res.setDiffuseLighting(true);
   res.setDirectLighting(true);
   res.setDirectLightingCoeff(1);
@@ -150,8 +155,8 @@ RenderingConfiguration	createConfig2()
   res.setFieldDepthEnabled(false);
   // res.setAdditiveAmbiantLighting(0.1);
   // res.setMinimalAmbiantLighting(0.1);
-  res.setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
-  res.setCubeMap(new CubeMap("cubemaps/DallasW"));
+  res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
+  //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);
 }
 
@@ -171,7 +176,7 @@ class SDLInterface : public RenderingInterface
     p[2] = color._r;
     p[1] = color._g;
     p[0] = color._b;
-    if (x == 0)
+    if (y == 0)
       SDL_Flip(screen);
   }
 
