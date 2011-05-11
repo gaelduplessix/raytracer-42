@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May 11 16:02:13 2011 samuel olivier
+// Last update Wed May 11 18:59:31 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -221,6 +221,8 @@ Color			Raytracer::throwRay(Ray& ray)
       mixedColor += calcDirectLight(ray);
       mixedColor = (ambientOcclusion * mixedColor) / 255;
       mixedColor *= (1 - ambientOcclusionCoeff);
+      if (_config->isAdditiveAmbiantLighting())
+	mixedColor += _config->getAdditiveAmbiantLighting();
       return (mixedColor);
     }
   else if (_config->getCubeMap() != NULL)
@@ -424,13 +426,18 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 					   _refractivePath);
 	  ObjectPrimitive*	tmp = NULL;
 	  double		useless = -1;
-	  if (nearestObject->getObject()->isSolid() == false)
+	  Object*		tmpObject;
+
+	  tmpObject = nearestObject->getObject();
+	  if (tmpObject && tmpObject->isSolid() == false)
 	    nearestObject->intersectWithRay(refractedRay, tmp, useless);
-	  else
+	  else if (tmpObject)
 	    nearestObject->getObject()->intersectWithRay(refractedRay,
 							 tmp, useless);
 	  if (tmp != NULL && useless > 0)
-	    _refractivePath.push(tmp);
+	    {
+	      _refractivePath.push(tmp);
+	    }
 	  else
 	    {
 	      refractedRay._vector = ray._vector;

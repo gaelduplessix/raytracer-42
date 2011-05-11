@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May 11 16:22:33 2011 samuel olivier
+// Last update Wed May 11 19:03:46 2011 samuel olivier
 //
 
 #include <vector>
@@ -49,8 +49,8 @@ Scene		createScene2()
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
   Material	reflection = mat;
-  reflection.setReflectionCoeff(1);
-  reflection.setTransmissionCoeff(1);
+  reflection.setReflectionCoeff(0);
+  reflection.setTransmissionCoeff(0);
   reflection.setRefractionIndex(1.33);
   Material	refraction = mat;
   refraction.setColor(Color(255, 255, 255));
@@ -75,11 +75,6 @@ Scene		createScene2()
   // 				     Rotation(0.3, 0.5, 0), reflection));
   // primitives.push_back(new Torus(NULL, Point(23, 0, 0),
   // 				 Rotation(0.3, 0.5, 0), matFloor, 3, 0.8));
-  // Face de dessous
-  // primitives.push_back(new Parallelogram(NULL, Point(20, 1, 2),
-  // 					 Point(23, 1, 1),
-  // 					 Point(20, 4, 2),
-  // 					 Rotation(0, 0, 0), object));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();//new Texture("heightmap.png");
   //perlin->setMarbleProperties();
@@ -97,8 +92,8 @@ Scene		createScene2()
   // primitives.push_back(cone);
   // primitives.push_back(new Torus(NULL, Point(20, 0, 1),
   // 				 Rotation(0, 0.3, 0), object, 2, 0.5));
-  // primitives.push_back(new Sphere(NULL, Point(18, -4, 0),
-  // 				  Rotation(0, 0, 0), reflection, 3));
+  primitives.push_back(new Sphere(NULL, Point(18, 2, 0),
+  				  Rotation(0, 0, 0), reflection, 3));
   //primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
   //				    special, Point(5, 1.5, -1),
   //				    Point(7.5, 0, 0)));
@@ -107,11 +102,11 @@ Scene		createScene2()
   primitives.push_back(new Plane(NULL, Point(0, 0, -4),
   				 Rotation(0, 0, 0), matFloor));
   vector<Object*> obj;
-  // obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
-  // 			   true));
-  obj.push_back(new Sett(Rotation(0, 0, 0), Point(25, 0, -5), true,
-  			 Vector(0, 5, 0), Vector(0, 0, 5), Vector(5, 0, 0),
-  			 reflection));
+  obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
+  			   true));
+  // obj.push_back(new Sett(Rotation(0, 0, 0), Point(25, 0, -5), true,
+  // 			 Vector(0, 5, 0), Vector(0, 0, 5), Vector(5, 0, 0),
+  // 			 reflection));
 
   vector<Light*> light;
   //light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
@@ -144,13 +139,19 @@ RenderingConfiguration	createConfig2()
   res.setSpecularLighting(true);
   res.setReflection(true);
   res.setTransparency(true);
+
   res.setAmbientOcclusionEnabled(false);
   res.setAmbientOcclusionSampling(10);
+
   res.setDiffuseShadingEnabled(false);
   res.setDiffuseShadingSampling(50);
+
+  res.setMinimalAmbiantLightingEnabled(false);
+  res.setAdditiveAmbiantLightingEnabled(true);
+  res.setAdditiveAmbiantLighting(Color(150, 0, 0));
+  res.setMinimalAmbiantLighting(0);
+
   res.setFieldDepthEnabled(false);
-  // res.setAdditiveAmbiantLighting(0.1);
-  // res.setMinimalAmbiantLighting(0.1);
   res.setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
   //res.setCubeMap(new CubeMap("cubemaps/Tantolunden6"));
   return (res);

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Wed May 11 11:26:16 2011 samuel olivier
+// Last update Wed May 11 18:14:57 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -106,10 +106,15 @@ public:
   void		setFieldDepthEnabled(bool enabled= 1);
   void		setFieldDepthSampling(int sampling);
 
-  double	getAdditiveAmbiantLighting(void) const;
+  const Color&	getAdditiveAmbiantLighting(void) const;
   double	getMinimalAmbiantLighting(void) const;
-  void		setAdditiveAmbiantLighting(double value);
+  void		setAdditiveAmbiantLighting(const Color& value);
   void		setMinimalAmbiantLighting(double value);
+  bool		isMinimalAmbiantLighting(void) const;
+  bool		isAdditiveAmbiantLighting(void) const;
+  void		setAdditiveAmbiantLightingEnabled(bool value = true);
+  void		setMinimalAmbiantLightingEnabled(bool value = true);
+
 
   renderingSamplingMethod getRenderingSamplingMethod(void) const;
   void setRenderingSamplingMethod(renderingSamplingMethod rsm);
@@ -136,7 +141,9 @@ private:
   int                   _diffuseShadingSampling;
   bool                  _fieldDepthEnabled;
   int                   _fieldDepthSampling;
-  double		_additiveAmbiantLighting;
+  bool			_additiveAmbiantLightingEnabled;
+  bool			_minimalAmbiantLightingEnabled;
+  Color			_additiveAmbiantLighting;
   double		_minimalAmbiantLighting;
   renderingSamplingMethod _renderingSamplingMethod;
 };

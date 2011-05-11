@@ -8,8 +8,9 @@ RenderingConfiguration::RenderingConfiguration():
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseShadingEnabled(false),
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
-  _fieldDepthSampling(0), _additiveAmbiantLighting(-1),
-  _minimalAmbiantLighting(-1)
+  _fieldDepthSampling(0), _additiveAmbiantLighting(Color(0, 0, 0)),
+  _minimalAmbiantLighting(0), _additiveAmbiantLightingEnabled(false),
+  _minimalAmbiantLightingEnabled(false)
 {
   _transparency.enabled = false;
   _reflection.enabled = false;
@@ -141,7 +142,17 @@ int	RenderingConfiguration::getFieldDepthSampling(void) const
   return (_fieldDepthSampling);
 }
 
-double	RenderingConfiguration::getAdditiveAmbiantLighting(void) const
+bool	RenderingConfiguration::isMinimalAmbiantLighting(void) const
+{
+  return (_minimalAmbiantLightingEnabled);
+}
+
+bool	RenderingConfiguration::isAdditiveAmbiantLighting(void) const
+{
+  return (_additiveAmbiantLightingEnabled);
+}
+
+const Color&	RenderingConfiguration::getAdditiveAmbiantLighting(void) const
 {
   return (_additiveAmbiantLighting);
 }
@@ -297,7 +308,17 @@ void	RenderingConfiguration::setFieldDepthSampling(int sampling)
   _fieldDepthSampling = (sampling > 0) ? sampling : 1;
 }
 
-void	RenderingConfiguration::setAdditiveAmbiantLighting(double value)
+void	RenderingConfiguration::setAdditiveAmbiantLightingEnabled(bool value)
+{
+  _additiveAmbiantLightingEnabled = value;
+}
+
+void	RenderingConfiguration::setMinimalAmbiantLightingEnabled(bool value)
+{
+  _minimalAmbiantLightingEnabled = value;
+}
+
+void	RenderingConfiguration::setAdditiveAmbiantLighting(const Color& value)
 {
   _additiveAmbiantLighting = value;
 }
