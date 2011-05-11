@@ -5,7 +5,7 @@
 ** Login   <laviss_f@epitech.net>
 ** 
 ** Started on  Tue Apr 26 15:13:06 2011 franck lavisse
-// Last update Tue May 10 14:56:21 2011 samuel olivier
+// Last update Wed May 11 11:35:08 2011 samuel olivier
 */
 #include <QPixmap>
 #include <QPushButton>
@@ -140,8 +140,7 @@ void	raytracer(Gui *rt)
 			rt->getReflectionDiffuseBool(),			
 			rt->getReflectionDiffuseSampling());
   config->setTransparency(rt->getTransparenceBool(),
-			 rt->getTransparenceInt(),
-			 rt->getTransparenceDiffusion());
+			  rt->getTransparenceInt());
   config->setAmbientOcclusionEnabled(rt->getAmbiantOcclusionBool());
   config->setAmbientOcclusionSampling(rt->getAmbiantOcclusionInt());
   config->setPhotonMappingEnabled(rt->getPhotonMappingBool());
