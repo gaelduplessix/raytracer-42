@@ -1,11 +1,11 @@
 //
 // Spot.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Mon May  9 00:23:06 2011 gael jochaud-du-plessix
+// Last update Wed May 11 18:56:17 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -13,8 +13,13 @@
 #include "Raytracer.hpp"
 
 Spot::Spot(const Point &position, const Color &color,
-             double intensity):
+	   double intensity):
   Light(position, color, intensity), _directLightPow(10000)
+{
+
+}
+
+Spot::Spot(void)
 {
 
 }

@@ -1,11 +1,11 @@
 //
 // ParallelLight.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Mon May  9 00:08:16 2011 gael jochaud-du-plessix
+// Last update Wed May 11 18:51:35 2011 melvin laplanche
 //
 
 #ifndef _PARALLELLIGHT_HPP_
@@ -16,6 +16,7 @@
 class	ParallelLight : public Light
 {
 public :
+  ParallelLight(void);
   ParallelLight(const Vector &direction, const Color& color,
 		double intensity = 1);
 

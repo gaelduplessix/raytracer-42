@@ -1,11 +1,11 @@
 //
 // ObjectPrimitive.hpp for raytracer in /home/jochau_g//dev/c/raytracer/raytracer-42
-// 
+//
 // Made by gael jochaud-du-plessix
 // Login   <jochau_g@epitech.net>
-// 
+//
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Wed May 11 15:55:30 2011 samuel olivier
+// Last update Wed May 11 21:44:55 2011 melvin laplanche
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -28,7 +28,7 @@ struct s_intersected_object;
 class ObjectPrimitive
 {
 public:
-  ObjectPrimitive();
+  ObjectPrimitive(void);
   ObjectPrimitive(Object *object,
 		  const Point& absolutePosition,
 		  const Rotation& rotation,
@@ -45,7 +45,7 @@ public:
   void		setMaterial(const Material& material);
 
   Color		getColor(const Point& intersectPoint) const;
-  virtual void 	getMappedCoords(const Point& intersectPoint, 
+  virtual void 	getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const = 0;
 
   virtual void	addIntersectionWithRay(const Ray& ray,

@@ -2,34 +2,53 @@
   <cameras>
     <camera type="cinema">
       <position>0, 0, 0</position>
-      <rotation type="degree">0, 0, 0</rotation>
+      <rotation type="radian">0, 0, 0</rotation>
     </camera>
   </cameras>
+
   <materials>
-    <material name="test_material">
-      <color type="rgb">255, 255, 255</color>
-      <texture type="procedural">wood</texture>
-      <limitTexture type="file">stripes.png</limitTexture>
-      <specular>0.8</specular>
+    <material name="sol">
+      <color>255, 255, 255</color>
+      <specular>0.5</specular>
       <specularPow>50</specularPow>
       <reflection>0</reflection>
-      <transmission>0</transmission>
-      <refractionIndex>1.33</refractionIndex>
-      <heightmap>moon.png</heightmap>
     </material>
   </materials>
   <objects>
     <object>
       <position>0, 0, 0</position>
-      <rotation type="radian">3.14, 0, 0</rotation>
-      <solid>false</solid>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>true</solid>
+
       <primitives>
-	<primitive type="sphere" material="test_material">
-	  <position>0, 0, 0</position>
-	  <rotation>0, 0, 0</rotation>
-	  <radius>2</radius>
+	<primitive type="sphere" material="sol">
+	  <position>30, 0, 0</position>
+	  <rotation type="radian">0, 0, 0</rotation>
+	  <radius>1</radius>
+	</primitive>
+
+	<primitive type="cubeTroue" material="sol">
+	  <position>30, 0, 0</position>
+	  <rotation type="radian">0, 0, 0</rotation>
+	  <coeff>11.8</coeff>
 	</primitive>
       </primitives>
     </object>
   </objects>
-</scene>
+
+  <lights>
+    <light type="spot">
+      <position>0,0,5</position>
+      <color>FF0000</color>
+      <intensity>1</intensity>
+      <directLight>1</directLight>
+    </light>
+    <light type="spot">
+      <position>0,0,-5</position>
+      <color>00FF00</color>
+      <intensity>1</intensity>
+      <directLight>1</directLight>
+    </light>
+  </lights>
+  </scene>
+

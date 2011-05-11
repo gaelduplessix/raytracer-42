@@ -6,13 +6,13 @@ if [ $exec == "not found" ]; then
     echo "Qt not found"
     exit
 else
-    $exec -project -nopwd src/*.cpp src/equation-solver/*.cpp
+    $exec -project -nopwd src/
     make -C configure_options
     if ./configure_options/endian
     then
-	$exec OBJECTS_DIR=./objects LIBS="-lSDL" DEFINES=IS_BIG_ENDIAN
+	$exec QT+=xml OBJECTS_DIR=./objects LIBS="-lSDL" DEFINES=IS_BIG_ENDIAN
     else
-	$exec OBJECTS_DIR=./objects LIBS="-lSDL"
+	$exec QT+=xml OBJECTS_DIR=./objects LIBS="-lSDL"
 
     fi
     echo "re:	clean all" >> Makefile

@@ -1,11 +1,11 @@
 //
 // Cone.hpp for ratracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Mon May  9 22:09:14 2011 gael jochaud-du-plessix
+// Last update Wed May 11 23:22:23 2011 melvin laplanche
 //
 
 #ifndef _CONE_HPP_
@@ -21,6 +21,8 @@ public:
 	   const Rotation& rotation,
 	   const Material& material,
 	   double angle);
+
+  Cone(void);
 
   void		setAngle(double angle);
   void		setLimitMin(double z);

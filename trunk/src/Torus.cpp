@@ -1,11 +1,11 @@
 //
 // Torus.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Thu May  5 18:31:12 2011 loick michard
-// Last update Mon May  9 23:42:45 2011 gael jochaud-du-plessix
+// Last update Wed May 11 19:25:05 2011 melvin laplanche
 //
 
 #include "Torus.hpp"
@@ -16,10 +16,15 @@ Torus::Torus(Object*object,
 	     const Point& absolutePosition,
 	     const Rotation& rotation,
 	     const Material& material,
-	     double R, double r) : ObjectPrimitive(object, 
+	     double R, double r) : ObjectPrimitive(object,
 						   absolutePosition,
 						   rotation, material),
 				   _R(R), _r(r)
+{
+
+}
+
+Torus::Torus(void)
 {
 
 }
@@ -41,7 +46,7 @@ void            Torus::getMappedCoords(const Point& intersectPoint,
   y = 0;
 }
 #include <iostream>
-void		
+void
 Torus::addIntersectionWithRay(const Ray& ray,
 			      vector<struct s_intersected_object>& intersection) const
 {
@@ -79,7 +84,7 @@ Torus::addIntersectionWithRay(const Ray& ray,
 }
 
 void		Torus::intersectWithRay(const Ray& ray,
-					ObjectPrimitive*& primitive, 
+					ObjectPrimitive*& primitive,
 					double &res) const
 {
   Ray           newRay;

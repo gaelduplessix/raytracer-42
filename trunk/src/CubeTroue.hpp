@@ -1,21 +1,23 @@
 //
 // CubeTroue.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42/src
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri May  6 15:49:30 2011 loick michard
-// Last update Fri May  6 16:03:23 2011 loick michard
+// Last update Thu May 12 00:01:20 2011 melvin laplanche
 //
 
 #ifndef _CUBE_TROUE_HPP_
-#define _CuBE_TROUE_HPP_
+#define _CUBE_TROUE_HPP_
 
 #include "ObjectPrimitive.hpp"
 
 class CubeTroue: public ObjectPrimitive
 {
 public:
+  CubeTroue(void);
+
   CubeTroue(Object*object,
 	    const Point& absolutePosition,
 	    const Rotation& rotation,

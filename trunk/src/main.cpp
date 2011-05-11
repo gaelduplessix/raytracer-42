@@ -1,11 +1,11 @@
 //
 // main.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May 11 19:03:46 2011 samuel olivier
+// Last update Thu May 12 00:20:40 2011 melvin laplanche
 //
 
 #include <vector>
@@ -164,7 +164,7 @@ class SDLInterface : public RenderingInterface
   void pixelHasBeenRendered(int x, int y, Color color)
   {
     Uint8 *p;
-    
+
     if (x < 0 || y < 0 || x >= screen->w || y >= screen->h)
       return ;
     int bpp = screen->format->BytesPerPixel;
@@ -186,8 +186,13 @@ class SDLInterface : public RenderingInterface
 int main(int ac, char **av)
 {
   Raytracer rt;
-  Scene scene = createScene2();
+  Scene scene; //= createScene2();
   RenderingConfiguration conf = createConfig2();
+
+  if (av[1] != NULL)
+    scene.loadFromFile(av[1]);
+  else
+    scene = createScene2();
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);

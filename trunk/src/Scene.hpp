@@ -1,22 +1,43 @@
 //
 // Scene.hpp for raytracer in /home/michar_l//Raytracer
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sat Apr 30 13:50:20 2011 gael jochaud-du-plessix
+// Last update Thu May 12 00:05:37 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
 #define _SCENE_HPP_
+#define _USE_MATH_DEFINES // Pour la portabilité de PI (visual C++)
 
-#include "Camera.hpp"
-#include "Object.hpp"
-#include "Light.hpp"
-
+#include <math.h>
 #include <vector>
 #include <string>
+#include <iostream>
+#include <QString>
+#include <QColor>
+#include <QtXml>
+#include <sstream>
+
+#include "CinemaCamera.hpp"
+#include "PerlinNoise.hpp"
+#include "Rotation.hpp"
+#include "Vector.hpp"
+#include "Object.hpp"
+#include "Light.hpp"
+#include "Plane.hpp"
+#include "Torus.hpp"
+#include "Triangle.hpp"
+#include "Cone.hpp"
+#include "Cylinder.hpp"
+#include "CubeTroue.hpp"
+#include "ParallelLight.hpp"
+#include "ParallelogramLight.hpp"
+#include "SphericalLight.hpp"
+#include "Spot.hpp"
+#include "Sphere.hpp"
 
 using namespace std;
 
@@ -26,24 +47,84 @@ public:
   Scene(vector<Camera*> cameras,
 	vector<Object*> objects,
 	vector<Light*> lights);
-  Scene(string filename);
+  Scene(vector<Camera*> cameras,
+	vector<Object*> objects,
+	vector<Light*> lights,
+	vector<Material*> materials);
+   Scene(string filename);
+   Scene(void);
 
-  void			loadFromFile(string filename);
+   void			loadFromFile(string filename);
 
-  const vector<Camera*>&	getCameras(void) const;
-  const vector<Object*>&	getObjects(void) const;
-  const vector<Light*>&		getLights(void) const;
-  const Camera&		getCamera(int index) const;
-  const Object&		getObject(int index) const;
-  const Light&		getLight(int index) const;
-  int			getNbCameras(void) const;
-  int			getNbObjects(void) const;
-  int			getNbLights(void) const;
+   const vector<Camera*>&		getCameras(void) const;
+   const vector<Object*>&		getObjects(void) const;
+   const vector<Light*>&		getLights(void) const;
+   const vector<Material*>&		getMaterials(void) const;
+   const Camera&			getCamera(int) const;
+   const Object&			getObject(int) const;
+   const Light&				getLight(int) const;
+   const Material&			getMaterial(int) const;
+   int					getNbCameras(void) const;
+   int					getNbObjects(void) const;
+   int					getNbLights(void) const;
+   int					getNbMaterials(void) const;
 
-private:
-  vector<Camera*>	_cameras;
-  vector<Object*>	_objects;
-  vector<Light*>	_lights;
+ private:
+   vector<Camera*>		_cameras;
+   vector<Object*>		_objects;
+   vector<Light*>		_lights;
+   vector<Material*>		_materials;
+
+  QDomDocument		_loadFromFile_checkAndGetFile(string filename);
+  void			_loadFromFile_validFirstDepth(QDomNode n);
+  void			_dispatcher(QDomNode	node,
+				    bool&	has_cameras,
+				    bool&	has_materials,
+				    bool&	has_objects,
+				    bool&	has_lights);
+  void			_parseCameras(QDomNode);
+  void			_parseCamera(QDomNode);
+  void			_parseCameraCinema(QDomNode);
+  void			_parseMaterials(QDomNode);
+  void			_parseMaterial(QDomNode);
+  void			_parseObjects(QDomNode);
+  void			_parseObject(QDomNode);
+  void			_parseObjectOptions(QDomNode);
+  Point			_parsePosition(QDomNode, string);
+  Rotation		_parseRotation(QDomNode);
+  void			_checkContentIsSingleText(QDomNode, string);
+  void			_putWarning(string, QDomNode);
+  void			_putError(string, QDomNode);
+  void			_failIfMaterialNameExists(QString, QDomNode);
+  void			_failIfMaterialNameDoesntExists(QString, QDomNode);
+  void			_parseMaterialOptions(QDomNode, QString);
+  QRgb			_parseColor(QDomNode);
+  bool			_isDouble(QString);
+  bool			_isInt(QString);
+  bool			_isHexa(QString);
+  double		_parseDouble(QDomNode, double, double, string);
+  int			_parseInt(QDomNode, int, int, string);
+  void			_parseNormalDef(QDomNode, Material*);
+  string		_parseFile(QDomNode, string);
+  Texture*		_parseTexture(QDomNode, string);
+  bool			_parseBoolean(QDomNode, string);
+  void			_parsePrimitives(QDomNode, Object*);
+  void			_parsePrimitive(QDomNode, Object*);
+  Sphere*		_parseSphere(QDomNode, QString, Object*);
+  Torus*		_parseTorus(QDomNode, QString, Object*);
+  Plane*		_parsePlane(QDomNode, QString, Object*);
+  Cone*			_parseCone(QDomNode, QString, Object*);
+  Cylinder*		_parseCylinder(QDomNode, QString, Object*);
+  CubeTroue*		_parseCubeTroue(QDomNode, QString, Object*);
+  Triangle*		_parseTriangle(QDomNode, QString, Object*);
+  Material		_getMaterialByName(QString);
+  void			_parseLight(QDomNode);
+  void			_parseLights(QDomNode);
+  Spot*			_parseSpotLight(QDomNode);
+  ParallelLight*	_parseParallelLight(QDomNode);
+  SphericalLight*	_parseSphericalLight(QDomNode);
+  ParallelogramLight*	_parseParallelogramLight(QDomNode);
+  bool			_parseCommonElement(QDomNode,
+					    ObjectPrimitive*, bool&, bool&);
 };
-
 #endif
