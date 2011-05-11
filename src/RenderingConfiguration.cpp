@@ -91,16 +91,6 @@ int	RenderingConfiguration::getTransparencyMaxDepth(void) const
   return (_transparency.maxDepth);
 }
 
-bool	RenderingConfiguration::isTransparencyDiffused(void) const
-{
-  return (_transparency.diffused);
-}
-
-int	RenderingConfiguration::getTransparencyDiffusedSampling(void) const
-{
-  return (_transparency.diffusedSampling);
-}
-
 CubeMap*	RenderingConfiguration::getCubeMap(void) const
 {
   return (_cubeMap);
@@ -239,20 +229,10 @@ void	RenderingConfiguration::setReflectionDiffused(bool diffused)
   _reflection.diffused = diffused;
 }
 
-void	RenderingConfiguration::
-setReflectionDiffusedSampling(int diffusedSampling)
-{
-  _reflection.diffusedSampling = diffusedSampling;
-}
-
 void	RenderingConfiguration::setTransparency(bool enabled,
-						int maxDepth,
-						bool diffused,
-						int diffusedSampling)
+						int maxDepth)
 {
   _transparency.enabled = enabled;
-  _transparency.diffused = diffused;
-  _transparency.diffusedSampling = diffusedSampling;
   _transparency.maxDepth = maxDepth;
 }
 
@@ -266,11 +246,6 @@ void	RenderingConfiguration::setTransparencyMaxDepth(int maxDepth)
   _transparency.maxDepth = maxDepth;
 }
 
-void	RenderingConfiguration::setTransparencyDiffused(bool diffused)
-{
-  _transparency.diffused = diffused;
-}
-
 void	RenderingConfiguration::setCubeMap(CubeMap* map)
 {
   _cubeMap = map;
@@ -279,12 +254,6 @@ void	RenderingConfiguration::setCubeMap(CubeMap* map)
 void	RenderingConfiguration::setBackgroundColor(const Color& color)
 {
   _backgroundColor = color;
-}
-
-void	RenderingConfiguration::
-setTransparencyDiffusedSampling(int diffusedSampling)
-{
-  _transparency.diffusedSampling = diffusedSampling;
 }
 
 void	RenderingConfiguration::setAmbientOcclusionEnabled(bool enabled)
