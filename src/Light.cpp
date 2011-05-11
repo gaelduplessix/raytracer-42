@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Sun May  8 23:49:40 2011 gael jochaud-du-plessix
+// Last update Wed May 11 18:15:18 2011 samuel olivier
 //
 
 #include <cmath>
@@ -122,20 +122,17 @@ Light::getLightingFromLightRay(const Vector& lightVector,
       vector<t_intersected_object>	intersections;
       raytracer.getIntersectingObjects(ray, intersections);
       absorptionCoeff = getAbsorptionCoeff(intersections, ray,
-  						     lightColor);
+					   lightColor);
     }
   double	scalar;
   double	minAmbiant = renderConf->getMinimalAmbiantLighting();
-  double	addAmbiant = renderConf->getAdditiveAmbiantLighting();
-  
-  if (minAmbiant < 0)
-    minAmbiant = 0;
-  if (addAmbiant < 0)
-    addAmbiant = 0;
+
   if (renderConf->isDiffuseLighting())
     {
       scalar = lightVector * normal /
-	(lightVector.getNorm() * normal.getNorm()) + minAmbiant + addAmbiant;
+	(lightVector.getNorm() * normal.getNorm());
+      if (scalar < minAmbiant && renderConf->isMinimalAmbiantLighting())
+	scalar = minAmbiant;
       if (scalar > 0)
 	directLighting = lightColor * scalar * (1 - absorptionCoeff);
     }
