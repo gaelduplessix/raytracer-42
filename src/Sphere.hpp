@@ -1,11 +1,11 @@
 //
 // Sphere.hpp for ratracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Thu May  5 18:27:51 2011 loick michard
+// Last update Wed May 11 19:16:57 2011 melvin laplanche
 //
 
 #ifndef _SPHERE_HPP_
@@ -21,6 +21,8 @@ public:
 	 const Rotation& rotation,
 	 const Material& material,
 	 double	radius);
+
+  Sphere(void);
 
   void			setRadius(double r);
 

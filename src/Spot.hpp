@@ -1,11 +1,11 @@
 //
 // Spot.hpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Mon May  9 00:07:53 2011 gael jochaud-du-plessix
+// Last update Wed May 11 18:56:51 2011 melvin laplanche
 //
 
 #ifndef _SPOT_HPP_
@@ -16,6 +16,7 @@
 class	Spot : public Light
 {
 public :
+  Spot(void);
   Spot(const Point &position, const Color& color, double intensity=1);
 
   void   setDirectLightPow(double value);

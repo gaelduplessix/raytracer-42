@@ -1,17 +1,22 @@
 //
 // CubeTroue.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42/src
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri May  6 15:54:06 2011 loick michard
-// Last update Sun May  8 11:28:31 2011 loick michard
+// Last update Wed May 11 23:54:42 2011 melvin laplanche
 //
 
 #include <cmath>
 #include "CubeTroue.hpp"
 #include "EquationSolver.hpp"
 #include "Raytracer.hpp"
+
+CubeTroue::CubeTroue(void) : _coeff(11.8)
+{
+
+}
 
 CubeTroue::CubeTroue(Object*object,
 		     const Point& absolutePosition,
@@ -95,15 +100,15 @@ void            CubeTroue::intersectWithRay(const Ray& ray,
     newRay._point._x - 5 * newRay._vector._x * newRay._vector._x +
     6 * newRay._vector._y * newRay._vector._y * newRay._point._y *
     newRay._point._y - 5 * newRay._vector._y * newRay._vector._y +
-    6 * newRay._vector._z * newRay._vector._z * newRay._point._z * 
+    6 * newRay._vector._z * newRay._vector._z * newRay._point._z *
     newRay._point._z - 5 * newRay._vector._z * newRay._vector._z;
-  double d = 4 * newRay._vector._x * pow (newRay._point._x, 3) 
+  double d = 4 * newRay._vector._x * pow (newRay._point._x, 3)
     - 10 * newRay._vector._x * newRay._point._x +
     4 * newRay._vector._y * pow (newRay._point._y, 3)
     - 10 * newRay._vector._y * newRay._point._y +
     4 * newRay._vector._z * pow (newRay._point._z, 3)
     - 10 * newRay._vector._z * newRay._point._z;
-  double e = pow (newRay._point._x, 4) - 5 * newRay._point._x * 
+  double e = pow (newRay._point._x, 4) - 5 * newRay._point._x *
     newRay._point._x + pow (newRay._point._y, 4) - 5 * newRay._point._y
     * newRay._point._y + pow (newRay._point._z, 4) - 5 * newRay._point._z
     * newRay._point._z + _coeff;

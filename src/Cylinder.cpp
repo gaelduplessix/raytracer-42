@@ -1,11 +1,11 @@
 //
 // Cylinder.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May  9 21:39:38 2011 gael jochaud-du-plessix
+// Last update Wed May 11 23:32:44 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -22,6 +22,11 @@ Cylinder::Cylinder(Object*object,
 						    rotation, material),
 				    _radius(radius), _limitMin(-1),
 				    _limitMax(-1)
+{
+
+}
+
+Cylinder::Cylinder(void) : _limitMin(-1), _limitMax(-1)
 {
 
 }
@@ -82,7 +87,7 @@ Cylinder::addIntersectionWithRay(const Ray& ray,
   c = newRay._point._x * newRay._point._x +
     newRay._point._y * newRay._point._y -
     _radius * _radius;
-  vector<double> solutions = 
+  vector<double> solutions =
     EquationSolver::solveQuadraticEquation(a, b, c);
   vector<double> validSolutions;
   for (unsigned int i = 0 ; i < solutions.size(); i++)

@@ -1,11 +1,11 @@
 //
 // Triangle.hpp for ratracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Fri May  6 13:20:31 2011 samuel olivier
+// Last update Wed May 11 23:16:27 2011 melvin laplanche
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -22,6 +22,8 @@ public:
 	 const Material& material,
 	 const Point& vertex1,
 	 const Point& vertex2);
+
+  Triangle(void);
 
   void		setVertex1(const Point& vertex1);
   void		setVertex2(const Point& vertex2);

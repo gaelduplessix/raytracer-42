@@ -1,11 +1,11 @@
 //
 // Cylinder.hpp for ratracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Mon May  9 20:21:09 2011 gael jochaud-du-plessix
+// Last update Wed May 11 23:32:03 2011 melvin laplanche
 //
 
 #ifndef _CYLINDER_HPP_
@@ -21,6 +21,8 @@ public:
 	   const Rotation& rotation,
 	   const Material& material,
 	   double radius);
+
+  Cylinder(void);
 
   void		setRadius(double r);
   void		setLimitMin(double z);

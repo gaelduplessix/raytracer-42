@@ -1,11 +1,11 @@
 //
 // ParallelogramLight.hpp for raytracer in /home/jochau_g//Desktop/raytracer-42/src
-// 
+//
 // Made by gael jochaud-du-plessix
 // Login   <jochau_g@epitech.net>
-// 
+//
 // Started on  Sun May  8 22:43:24 2011 gael jochaud-du-plessix
-// Last update Mon May  9 00:08:00 2011 gael jochaud-du-plessix
+// Last update Wed May 11 18:50:13 2011 melvin laplanche
 //
 
 #ifndef _PARALLELOGRAM_LIGHT_HPP_
@@ -16,6 +16,7 @@
 class	ParallelogramLight : public Light
 {
 public :
+  ParallelogramLight(void);
   ParallelogramLight(const Point &position1,
 		     const Point &position2,
 		     const Point &position3,

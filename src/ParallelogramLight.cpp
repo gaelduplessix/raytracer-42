@@ -1,17 +1,22 @@
 //
 // ParallelogramLight.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Mon May  9 00:41:26 2011 gael jochaud-du-plessix
+// Last update Wed May 11 18:51:24 2011 melvin laplanche
 //
 
 #include <cmath>
 #include "ParallelogramLight.hpp"
 #include "Raytracer.hpp"
 #include "Parallelogram.hpp"
+
+ParallelogramLight::ParallelogramLight(void)
+{
+
+}
 
 ParallelogramLight::ParallelogramLight(const Point &position,
 				       const Point &position2,

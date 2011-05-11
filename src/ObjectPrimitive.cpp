@@ -1,11 +1,11 @@
 //
 // ObjectPrimitive.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Wed May 11 15:56:27 2011 samuel olivier
+// Last update Wed May 11 21:44:35 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -13,8 +13,7 @@
 #include "ObjectPrimitive.hpp"
 #include "Object.hpp"
 
-ObjectPrimitive::ObjectPrimitive():
-  _object(NULL)
+ObjectPrimitive::ObjectPrimitive(void)
 {
 
 }
@@ -69,7 +68,7 @@ void		ObjectPrimitive::setMaterial(const Material& material)
   _material = material;
 }
 
-Color	      
+Color
 ObjectPrimitive::getColor(const Point& intersectPoint) const
 {
   double      x;
@@ -111,7 +110,7 @@ ObjectPrimitive::getNormal(const Point& intersectPoint,
 	}
       if (_material._deformationType == Material::WAVES_X)
 	{
-	  normal._x += cos((intersectPoint._x - _absolutePosition._x) * 
+	  normal._x += cos((intersectPoint._x - _absolutePosition._x) *
 			   _material._deformationCoeff) *
 	    (normal.getNorm() / 2);
 	  normal.normalize();

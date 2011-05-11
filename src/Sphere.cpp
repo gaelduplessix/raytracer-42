@@ -1,11 +1,11 @@
 //
 // Sphere.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May  8 10:35:32 2011 loick michard
+// Last update Wed May 11 19:17:16 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -21,6 +21,11 @@ Sphere::Sphere(Object*object,
 	       double radius) : ObjectPrimitive(object, absolutePosition,
 						rotation, material),
 				_radius(radius)
+{
+
+}
+
+Sphere::Sphere(void)
 {
 
 }
@@ -70,7 +75,7 @@ void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
     newRay._point._y * newRay._point._y +
     newRay._point._z * newRay._point._z -
     _radius * _radius;
-  vector<double> solutions = 
+  vector<double> solutions =
     EquationSolver::solveQuadraticEquation(a, b, c);
   vector<double> validSolutions;
   for (unsigned int i = 0 ; i < solutions.size(); i++)

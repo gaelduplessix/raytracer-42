@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Wed May 11 16:05:37 2011 samuel olivier
+// Last update Wed May 11 21:45:12 2011 melvin laplanche
 //
 
 #ifndef _OBJECT_HPP_
@@ -26,7 +26,7 @@ public:
   Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
   	 const Point& position, bool isSolid);
 
-  Object();
+  Object(void);
 
   int					getNbPrimitives() const;
   const ObjectPrimitive&		getPrimitiveAtIndex(int index) const;

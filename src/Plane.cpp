@@ -1,21 +1,27 @@
 //
 // Plane.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Mon May  9 20:24:24 2011 gael jochaud-du-plessix
+// Last update Wed May 11 22:17:25 2011 melvin laplanche
 //
 
 #include <vector>
 #include "Raytracer.hpp"
 #include "Plane.hpp"
 
+Plane::Plane(void):
+  _limitX(-1), _limitY(-1)
+{
+
+}
+
 Plane::Plane(Object*object,
 	     const Point& absolutePosition,
 	     const Rotation& rotation,
-	     const Material& material): 
+	     const Material& material):
   ObjectPrimitive(object, absolutePosition, rotation, material),
   _limitX(-1), _limitY(-1)
 {
@@ -39,7 +45,7 @@ double        Plane::getLimitX(void)
 
 double        Plane::getLimitY(void)
 {
-  return (_limitY);  
+  return (_limitY);
 }
 
 

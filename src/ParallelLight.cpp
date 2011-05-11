@@ -1,19 +1,24 @@
 //
 // ParallelLight.cpp for Raytracer in /home/olivie_a//rendu/cpp/raytracer-42
-// 
+//
 // Made by samuel olivier
 // Login   <olivie_a@epitech.net>
-// 
+//
 // Started on  Thu May  5 10:39:44 2011 samuel olivier
-// Last update Mon May  9 00:08:26 2011 gael jochaud-du-plessix
+// Last update Wed May 11 18:53:11 2011 melvin laplanche
 //
 
 #include "Raytracer.hpp"
 #include "ParallelLight.hpp"
 
 ParallelLight::ParallelLight(const Point &direction, const Color& color,
-			       double intensity) : Light(direction * -1, color,
-							 intensity)
+			     double intensity) : Light(direction * -1, color,
+						       intensity)
+{
+
+}
+
+ParallelLight::ParallelLight(void)
 {
 
 }
