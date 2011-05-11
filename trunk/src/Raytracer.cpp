@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May 11 11:23:01 2011 samuel olivier
+// Last update Wed May 11 16:02:13 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -424,7 +424,11 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 					   _refractivePath);
 	  ObjectPrimitive*	tmp = NULL;
 	  double		useless = -1;
-	  nearestObject->intersectWithRay(refractedRay, tmp, useless);
+	  if (nearestObject->getObject()->isSolid() == false)
+	    nearestObject->intersectWithRay(refractedRay, tmp, useless);
+	  else
+	    nearestObject->getObject()->intersectWithRay(refractedRay,
+							 tmp, useless);
 	  if (tmp != NULL && useless > 0)
 	    _refractivePath.push(tmp);
 	  else

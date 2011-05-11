@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May 11 12:45:40 2011 gael jochaud-du-plessix
+// Last update Wed May 11 16:22:33 2011 samuel olivier
 //
 
 #include <vector>
@@ -38,7 +38,7 @@
 #include "Sett.hpp"
 #include "RenderingInterface.hpp"
 
-#include "gui/gui.hpp"
+// #include "gui/gui.hpp"
 
 using namespace std;
 
@@ -50,7 +50,7 @@ Scene		createScene2()
   mat.setSpecularPow(50);
   Material	reflection = mat;
   reflection.setReflectionCoeff(1);
-  reflection.setTransmissionCoeff(0);
+  reflection.setTransmissionCoeff(1);
   reflection.setRefractionIndex(1.33);
   Material	refraction = mat;
   refraction.setColor(Color(255, 255, 255));
@@ -68,7 +68,7 @@ Scene		createScene2()
   object.setSpecularCoeff(0.8);
 
   vector<Camera*> cam;
-  cam.push_back(new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0)));
+  cam.push_back(new CinemaCamera(Point(0, 0, 5), Rotation(0, 0.2, 0)));
 
   vector<ObjectPrimitive*> primitives;
   // primitives.push_back(new CubeTroue(NULL, Point(23, 5, 0),
@@ -95,14 +95,10 @@ Scene		createScene2()
   // cylinder->setLimitMax(2);
   // cylinder->setLimitMin(1);
   // primitives.push_back(cone);
-  // primitives.push_back(new Torus(NULL, Point(20, 2.5, 1),
-  // 				 Rotation(0, -1, 0), object, 2, 0.5));
-  primitives.push_back(new Sphere(NULL, Point(20, 0, 2),
-  				  Rotation(0, 0, 0), object, 2));
-  // string eqObject = "x^2 + y ^ 2 + z ^ 2 - 4";
-  // primitives.push_back(new EquationPrimitive(eqObject,
-  // 					     NULL, Point(20, -7, 2),
-  //  					     Rotation(0, 0, 0), object));
+  // primitives.push_back(new Torus(NULL, Point(20, 0, 1),
+  // 				 Rotation(0, 0.3, 0), object, 2, 0.5));
+  // primitives.push_back(new Sphere(NULL, Point(18, -4, 0),
+  // 				  Rotation(0, 0, 0), reflection, 3));
   //primitives.push_back(new Triangle(NULL, Point(7.5, -1.5, -1), Rotation(0, 0,0),
   //				    special, Point(5, 1.5, -1),
   //				    Point(7.5, 0, 0)));
@@ -111,18 +107,18 @@ Scene		createScene2()
   primitives.push_back(new Plane(NULL, Point(0, 0, -4),
   				 Rotation(0, 0, 0), matFloor));
   vector<Object*> obj;
-  obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
-  			   true));
-  // obj.push_back(new Sett(Rotation(0, 0, 0), Point(25, 0, -5), true,
-  // 			 Vector(0, 5, 0), Vector(0, 0, 5), Vector(5, 0, 0),
-  // 			 reflection));
+  // obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
+  // 			   true));
+  obj.push_back(new Sett(Rotation(0, 0, 0), Point(25, 0, -5), true,
+  			 Vector(0, 5, 0), Vector(0, 0, 5), Vector(5, 0, 0),
+  			 reflection));
 
   vector<Light*> light;
   //light.push_back(new ParallelLight(Point(0, -3, -3), Color(255, 255, 255)));
   // light.push_back(new ParallelLight(Point(1, -3, -3),
   // 				    Color(255, 255, 255)));
-  light.push_back(new Spot(Point(1, 0, 7),
-  			   Color(255, 255, 255)));
+  // light.push_back(new Spot(Point(1, 0, 7),
+  // 			   Color(255, 255, 255)));
   light.push_back(new Spot(Point(2, 10, 5),
   			   Color(255, 255, 255)));
   // light.push_back(new ParallelogramLight(Point(15, 1, 3),
@@ -188,32 +184,32 @@ class SDLInterface : public RenderingInterface
 
 int main(int ac, char **av)
 {
-  // Raytracer rt;
-  // Scene scene = createScene2();
-  // RenderingConfiguration conf = createConfig2();
+  Raytracer rt;
+  Scene scene = createScene2();
+  RenderingConfiguration conf = createConfig2();
 
-  // rt.setScene(scene);
-  // rt.setRenderingConfiguration(&conf);
-  gui(ac, av);
-  // SDL_Init(SDL_INIT_VIDEO);
-  // screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-  // SDLInterface	interface;
-  // rt.setRenderingInterface(&interface);
-  // rt.launchRendering();
-  // SDL_Event event;
-  // bool quit = false;
-  // while (!quit)
-  //   {
-  //     if (SDL_WaitEvent(&event))
-  // 	{
-  // 	  if (event.type == SDL_QUIT
-  //             || (event.type == SDL_KEYDOWN
-  //                 && (event.key.keysym.sym == SDLK_ESCAPE
-  // 		      || event.key.keysym.sym == SDLK_RETURN)))
-  // 	    quit = true;
-  // 	}
-  //   }
-  // rt.stopRendering();
-  // SDL_Quit();
+  rt.setScene(scene);
+  rt.setRenderingConfiguration(&conf);
+  // gui(ac, av);
+  SDL_Init(SDL_INIT_VIDEO);
+  screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+  SDLInterface	interface;
+  rt.setRenderingInterface(&interface);
+  rt.launchRendering();
+  SDL_Event event;
+  bool quit = false;
+  while (!quit)
+    {
+      if (SDL_WaitEvent(&event))
+  	{
+  	  if (event.type == SDL_QUIT
+              || (event.type == SDL_KEYDOWN
+                  && (event.key.keysym.sym == SDLK_ESCAPE
+  		      || event.key.keysym.sym == SDLK_RETURN)))
+  	    quit = true;
+  	}
+    }
+  rt.stopRendering();
+  SDL_Quit();
   return (0);
 }

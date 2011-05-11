@@ -5,11 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Mon May  9 17:53:27 2011 gael jochaud-du-plessix
+// Last update Wed May 11 15:56:27 2011 samuel olivier
 //
 
 #include <cmath>
+
 #include "ObjectPrimitive.hpp"
+#include "Object.hpp"
 
 ObjectPrimitive::ObjectPrimitive():
   _object(NULL)
@@ -27,42 +29,42 @@ ObjectPrimitive::ObjectPrimitive(Object *object,
 
 }
 
-const Object&         ObjectPrimitive::getObject(void) const
+Object*		ObjectPrimitive::getObject(void) const
 {
-  return (*_object);
+  return (_object);
 }
 
-const Point&          ObjectPrimitive::getPosition(void) const
+const Point&	ObjectPrimitive::getPosition(void) const
 {
   return (_absolutePosition);
 }
 
-const Rotation&       ObjectPrimitive::getRotation(void) const
+const Rotation&	ObjectPrimitive::getRotation(void) const
 {
   return (_rotation);
 }
 
-const Material&       ObjectPrimitive::getMaterial(void) const
+const Material&	ObjectPrimitive::getMaterial(void) const
 {
   return (_material);
 }
 
-void          ObjectPrimitive::setObject(Object *object)
+void		ObjectPrimitive::setObject(Object *object)
 {
   _object = object;
 }
 
-void          ObjectPrimitive::setPosition(const Point& position)
+void		ObjectPrimitive::setPosition(const Point& position)
 {
   _absolutePosition = position;
 }
 
-void          ObjectPrimitive::setRotation(const Rotation& rotation)
+void		ObjectPrimitive::setRotation(const Rotation& rotation)
 {
   _rotation = rotation;
 }
 
-void          ObjectPrimitive::setMaterial(const Material& material)
+void		ObjectPrimitive::setMaterial(const Material& material)
 {
   _material = material;
 }
@@ -176,7 +178,11 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
 						 refractivePath) const
 {
   double	n2;
-  if (refractivePath.size() > 0 && this == refractivePath.top())
+  if (refractivePath.size() > 0 && (this == refractivePath.top()
+				    || (_object && refractivePath.top()
+					->_object->isSolid() &&
+					this->_object ==
+					refractivePath.top()->_object)))
     {
       refractivePath.pop();
       n2 = (refractivePath.size() > 0) ?
@@ -193,9 +199,6 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
   double	cos2 = sqrt(1 - (n * n) * (1 - (cos1 * cos1)));
 
   res.setPoint(intersectPoint);
-  if (cos2 * cos2 < 0)
-    res.setVector((res._vector * n) + normal * ((n * cos1) - cos2));
-  else
-    res.setVector((res._vector * n) + normal * ((n * cos1) + cos2));
+  res.setVector((res._vector * n) + normal * ((n * cos1) + cos2));
   return (res);
 }

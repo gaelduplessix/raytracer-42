@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Tue May 10 13:52:03 2011 samuel olivier
+// Last update Wed May 11 16:05:37 2011 samuel olivier
 //
 
 #ifndef _OBJECT_HPP_
@@ -42,6 +42,10 @@ public:
 
   virtual const Vector&		getRefractedVector(const Point& intersectPoint,
 						   const Vector& vector);
+
+  void				intersectWithRay(const Ray& ray,
+						 ObjectPrimitive*& primitive,
+						 double& k) const;
 
 protected:
   vector<ObjectPrimitive*>	_primitives;
