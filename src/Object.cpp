@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:53:38 2011 loick michard
-// Last update Tue May 10 00:21:18 2011 melvin laplanche
+// Last update Wed May 11 16:04:46 2011 samuel olivier
 //
 
 #include "Object.hpp"
@@ -83,4 +83,14 @@ void			Object::setRotation(const Rotation& rotation)
 void			Object::setSolid(bool solid)
 {
   _isSolid = solid;
+}
+
+void			Object::intersectWithRay(const Ray& ray, ObjectPrimitive*& primitive, double& k) const
+{
+  int			nbPrimitive;
+  int			i = -1;
+
+  nbPrimitive = _primitives.size();
+  while (++i < nbPrimitive && primitive == NULL)
+    _primitives[i]->intersectWithRay(ray, primitive, k);
 }
