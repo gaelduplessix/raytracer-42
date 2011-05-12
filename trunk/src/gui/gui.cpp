@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 12 19:19:00 2011 loick michard
+// Last update Thu May 12 21:56:31 2011 loick michard
 //
 
 #include <QApplication>
@@ -226,6 +226,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(pauseRendering()));
   QObject::connect(_ui->action_Stop, SIGNAL(triggered()),
                    this, SLOT(stopRendering()));
+  QObject::connect(_ui->action_SaveImage, SIGNAL(triggered()),
+                   this, SLOT(saveImage()));
   _scene = createScene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
