@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Thu May 12 19:38:03 2011 loick michard
+// Last update Thu May 12 22:44:03 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -31,7 +31,10 @@ void RaytracerGUI::closeEvent(QCloseEvent *event)
 			     | QMessageBox::Cancel,
 			     QMessageBox::Cancel);
       if (ret == QMessageBox::Yes)
-	event->accept();
+	{
+	  event->accept();
+	  _raytracer->stopRendering();
+	}
       else
 	event->ignore();
     }
@@ -95,10 +98,13 @@ void    RaytracerGUI::pauseRendering(void)
 
 void    RaytracerGUI::renderingHasFinished(void)
 {
-  sendSuccessMessage(tr("Rendu termine").toStdString());
-  _timer->setSingleShot(true);
-  _ui->_progressBar->setHidden(true);
-  _isRendering = false;
+  if (_isRendering)
+    {
+      sendSuccessMessage(tr("Rendu termine").toStdString());
+      _isRendering = false;
+      _timer->setSingleShot(true);
+      _ui->_progressBar->setHidden(true);
+    }
 }
 
 void    RaytracerGUI::renderingHasBegun(void)
@@ -116,7 +122,6 @@ void    RaytracerGUI::renderingHasProgressed(double progress)
 void    RaytracerGUI::stopRendering(void)
 {
   _raytracer->stopRendering();
-  _isRendering = false;
   _pause = false;
 }
 
@@ -126,7 +131,8 @@ void    RaytracerGUI::loadScene(void)
     QFileDialog::getOpenFileName(this, tr("Charger une scene"), 
 				 "", "*.xml;;", 0, 
 				 QFileDialog::DontUseNativeDialog).toStdString();
-  _scene->loadFromFile(scene);
+  if (scene != "")
+    _scene->loadFromFile(scene);
 }
 
 void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
@@ -152,7 +158,7 @@ void    RaytracerGUI::startRender()
   try
     {
       _ui->_progressBar->setHidden(false);
-      if (pause)
+      if (_pause)
 	sendSuccessMessage(tr("Reprise du rendu").toStdString());
       else
 	sendSuccessMessage(tr("Depart du rendu").toStdString());
@@ -163,5 +169,33 @@ void    RaytracerGUI::startRender()
   catch(int error)
     {
       std::cout << "ERREUR" << error << std::endl;
+    }
+}
+
+void		RaytracerGUI::saveImage()
+{
+  int   found;
+  vector<string> validFormat(4);
+  validFormat[0] = "png";
+  validFormat[1] = "gif";
+  validFormat[2] = "bmp";
+  validFormat[3] = "jpeg";
+  string format;
+
+  QString file = QFileDialog::getSaveFileName(this, "Enregistrer une scene", QString(), "*.png;;*.gif;;*.jpeg;;*.bmp", 0, QFileDialog::DontUseNativeDialog);
+  if (file != "")
+    {
+      format = file.toStdString();
+      found = format.find(".");
+      format = format.substr(found + 1);
+      if (format.compare(validFormat[0]) != 0 &&
+          format.compare(validFormat[1]) != 0 &&
+          format.compare(validFormat[2]) != 0 &&
+          format.compare(validFormat[3]) != 0)
+        {
+          format = "png";
+          file += ".png";
+        }
+      _image->save(file);
     }
 }

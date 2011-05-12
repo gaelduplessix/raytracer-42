@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Thu May 12 18:04:10 2011 loick michard
+// Last update Thu May 12 22:17:03 2011 loick michard
 //
 
 #include "Color.hpp"
@@ -129,7 +129,7 @@ const Color&	Color::exposure(double value)
   _r = Color::MAX_VALUE - exp(_r * value) * Color::MAX_VALUE;
   _g = Color::MAX_VALUE - exp(_g * value) * Color::MAX_VALUE;
   _b = Color::MAX_VALUE - exp(_b * value) * Color::MAX_VALUE;
-  _a = Color::MAX_VALUE - exp(_a * value) * Color::MAX_VALUE;
+  _a = 255;
   return (*this);
 }
 

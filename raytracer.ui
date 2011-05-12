@@ -50,7 +50,7 @@
          <x>0</x>
          <y>0</y>
          <width>758</width>
-         <height>552</height>
+         <height>522</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
@@ -88,7 +88,7 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>120</height>
+        <height>150</height>
        </size>
       </property>
       <property name="title">
@@ -161,9 +161,8 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>&amp;Fichier</string>
     </property>
-    <addaction name="action_Nouvelle_sc_ne"/>
     <addaction name="action_Charger"/>
-    <addaction name="action_Sauvegarder_une_sc_ne"/>
+    <addaction name="action_SaveImage"/>
     <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menu_Rendu">
@@ -1116,9 +1115,8 @@ border-color: rgb(108, 108, 108);</string>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="action_Nouvelle_sc_ne"/>
    <addaction name="action_Charger"/>
-   <addaction name="action_Sauvegarder_une_sc_ne"/>
+   <addaction name="action_SaveImage"/>
    <addaction name="separator"/>
    <addaction name="action_Play"/>
    <addaction name="action_Pause"/>
@@ -1135,7 +1133,7 @@ border-color: rgb(108, 108, 108);</string>
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="action_Nouvelle_sc_ne">
+  <action name="action">
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/images/document-new.png</normaloff>:/images/document-new.png</iconset>
@@ -1159,13 +1157,13 @@ border-color: rgb(108, 108, 108);</string>
     <bool>true</bool>
    </property>
   </action>
-  <action name="action_Sauvegarder_une_sc_ne">
+  <action name="action_SaveImage">
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/images/document-save.png</normaloff>:/images/document-save.png</iconset>
+     <normaloff>:/images/image.png</normaloff>:/images/image.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Sauvegarder une scène</string>
+    <string>&amp;Enregistrer l'image</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -1177,7 +1175,7 @@ border-color: rgb(108, 108, 108);</string>
      <normaloff>:/images/play.png</normaloff>:/images/play.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Play</string>
+    <string>&amp;Lancer</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
