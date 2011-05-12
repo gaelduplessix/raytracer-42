@@ -9,9 +9,9 @@ RenderingConfiguration::RenderingConfiguration():
   _ambientOcclusionSampling(0), _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseShadingEnabled(false),
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
-  _fieldDepthSampling(0), _additiveAmbiantLighting(Color(0, 0, 0)),
-  _minimalAmbiantLighting(0), _additiveAmbiantLightingEnabled(false),
-  _minimalAmbiantLightingEnabled(false)
+  _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
+  _additiveAmbiantLighting(Color(0, 0, 0)),
+  _minimalAmbiantLightingEnabled(false), _minimalAmbiantLighting(0)
 {
   _transparency.enabled = false;
   _reflection.enabled = false;

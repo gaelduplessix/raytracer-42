@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 11 11:35:28 2011 gael jochaud-du-plessix
+// Last update Thu May 12 16:20:14 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -39,7 +39,7 @@ EquationPrimitive::EquationPrimitive(string equation,
   replacements[2] = "(Z0 + k * VZ)";
   for (int i = 0; i < 3; i++)
     {
-      int pos;
+      unsigned int pos;
       while ((pos = equation.find(vars[i])) != string::npos)
   	equation.replace(pos, vars[i].size(), replacements[i]);
     }
@@ -55,6 +55,8 @@ void		EquationPrimitive::getMappedCoords(const Point& intersectPoint,
 {
   x = 0;
   y = 0;
+  return ;
+  (void)intersectPoint;
 }
 
 void        EquationPrimitive::
@@ -64,7 +66,7 @@ addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>&
   Ray newRay = getRayAtSimplePosition(ray);
   vector< EqNode* >	coeffNodes;
   vector< double >	coeffs;
-  int			degree = _equation_intersect.getDegree();  
+  unsigned int		degree = _equation_intersect.getDegree();  
   if (degree >= 1 && degree <= 4)
     {
       coeffNodes.resize(degree + 1);
@@ -96,7 +98,7 @@ void	EquationPrimitive::intersectWithRay(const Ray& ray,
   Ray newRay = getRayAtSimplePosition(ray);
   vector< EqNode* >	coeffNodes;
   vector< double >	coeffs;
-  int			degree = _equation_intersect.getDegree();  
+  unsigned int		degree = _equation_intersect.getDegree();  
   if (degree >= 1 && degree <= 4)
     {
       coeffNodes.resize(degree + 1);

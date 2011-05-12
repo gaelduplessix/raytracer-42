@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Thu May 12 16:40:18 2011 loick michard
+// Last update Thu May 12 17:17:22 2011 gael jochaud-du-plessix
 //
 
 #ifndef _GUI_HPP_
@@ -54,18 +54,18 @@ protected:
   virtual void  paintEvent(QPaintEvent*);
 
 private:
+  Ui::MainWindow		*_ui;
   RenderingConfiguration	*_config;
   Raytracer			*_raytracer;
   QColor			*_backgroundColor;
   QColor			*_ambiantColor;
-  QImage			*_image;
   CubeMap			*_cubeMap;
   Scene				*_scene;
-  QTimer			*_timer;
+  QImage			*_image;
   QPixmap			*_pixmap;
-  Ui::MainWindow		*_ui;
-  int				_progress;
   bool				_isRendering;
+  QTimer			*_timer;
+  int				_progress;
 };
 
 #endif

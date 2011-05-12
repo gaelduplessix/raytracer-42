@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May  8 23:12:43 2011 gael jochaud-du-plessix
+// Last update Thu May 12 16:46:56 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -20,9 +20,7 @@ Parallelogram::Parallelogram(Object*object,
 			     const Point& vertex2,
 			     const Rotation& rotation,
 			     const Material& material):
-  ObjectPrimitive(object,
-		  absolutePosition,
-		  rotation, material),
+  ObjectPrimitive(object, absolutePosition, rotation, material),
   _vertex1(vertex1), _vertex2(vertex2)
 {
 
@@ -43,6 +41,8 @@ void		Parallelogram::getMappedCoords(const Point& intersectPoint,
 {
   x = 0;
   y = 0;
+  return ;
+  (void)intersectPoint;
 }
 
 void
@@ -147,7 +147,7 @@ void	Parallelogram::intersectWithRay(const Ray& ray,
 }
 
 Vector		Parallelogram::getNormalVector(const Point& intersectPoint,
-					const Vector& viewVector) const
+					       const Vector& viewVector) const
 {
   Vector	normal = _absolutePosition - _vertex1;
   normal *= (_absolutePosition - _vertex2);
@@ -157,6 +157,7 @@ Vector		Parallelogram::getNormalVector(const Point& intersectPoint,
   if (cosA <= 0)
     return (normal.normalize() * -1);
   return (normal.normalize());
+  (void)intersectPoint;
 }
 
 bool		Parallelogram::isInBoundingBox(BoundingBox& box) const

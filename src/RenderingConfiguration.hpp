@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Wed May 11 18:14:57 2011 samuel olivier
+// Last update Thu May 12 17:01:10 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -124,6 +124,7 @@ private:
   int			_height;
   int			_currentCamera;
   int			_antialiasing;
+  renderingSamplingMethod _renderingSamplingMethod;
   double		_exposure;
   bool			_directLighting;
   double		_directLightingCoeff;
@@ -142,10 +143,9 @@ private:
   bool                  _fieldDepthEnabled;
   int                   _fieldDepthSampling;
   bool			_additiveAmbiantLightingEnabled;
-  bool			_minimalAmbiantLightingEnabled;
   Color			_additiveAmbiantLighting;
+  bool			_minimalAmbiantLightingEnabled;
   double		_minimalAmbiantLighting;
-  renderingSamplingMethod _renderingSamplingMethod;
 };
 
 #endif

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 11 23:16:17 2011 melvin laplanche
+// Last update Thu May 12 17:11:41 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -47,6 +47,8 @@ void		Triangle::getMappedCoords(const Point& intersectPoint,
 {
   x = 0;
   y = 0;
+  return ;
+  (void)intersectPoint;
 }
 
 void
@@ -150,8 +152,6 @@ void                  Triangle::intersectWithRay(const Ray& ray,
     }
 }
 
-#include <stdio.h>
-
 Vector		Triangle::getNormalVector(const Point& intersectPoint,
 					const Vector& viewVector) const
 {
@@ -166,6 +166,7 @@ Vector		Triangle::getNormalVector(const Point& intersectPoint,
   if (cosA <= 0)
     return (normal.normalize() * -1);
   return (normal.normalize());
+  (void)intersectPoint;
 }
 
 bool		Triangle::isInBoundingBox(BoundingBox& box) const

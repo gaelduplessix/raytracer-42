@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Tue May  3 11:28:16 2011 gael jochaud-du-plessix
+// Last update Thu May 12 16:29:54 2011 gael jochaud-du-plessix
 //
 
 #include "Color.hpp"
@@ -238,5 +238,23 @@ Color		operator&(const Color& color1, const Color& color2)
 		  color1._g & color2._g,
 		  color1._b & color2._b,
 		  color1._a & color2._a);
+  return (res);
+}
+
+Color&          Color::operator*=(double value)
+{
+  _r *= value;
+  _g *= value;
+  _b *= value;
+  _a *= value;
+  return (*this);
+}
+
+Color           Color::operator*(double value)
+{
+  Color         res(getR() * value,
+                    getG() * value,
+                    getB() * value,
+                    getA() * value);
   return (res);
 }

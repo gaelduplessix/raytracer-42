@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 15:11:51 2011 loick michard
-// Last update Sun May  1 15:49:02 2011 samuel olivier
+// Last update Thu May 12 16:56:17 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAY_HPP_
@@ -21,27 +21,22 @@ public:
   Ray();
   Ray(const Point& point,
       const Vector& vector);
-  Ray(const Color& color, const Point& point,
-      const Vector& vector, double refractiveIndex);
 
-  void		setColor(const Color& color);
   void		setPoint(const Point& point);
   void		setVector(const Vector& vector);
   void		setRefractiveIndex(double refractiveIndex);
 
-  const Color&	getColor() const;
   const Point&	getPoint() const;
   const Vector&	getVector() const;
   double	getRefractiveIndex() const;
 
-  Color				_color;
   Point				_point;
   Vector			_vector;
-  double			_refractiveIndex;
   int				_reflectionLevel;
   double			_reflectionIntensity;
   int				_refractionLevel;
   double			_refractionIntensity;
+  double			_refractiveIndex;
 };
 
 #endif

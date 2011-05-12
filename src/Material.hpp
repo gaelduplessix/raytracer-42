@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May  4 17:40:55 2011 loick michard
-// Last update Mon May  9 22:32:31 2011 samuel olivier
+// Last update Thu May 12 16:37:25 2011 gael jochaud-du-plessix
 //
 
 #ifndef _MATERIAL_HPP_
@@ -44,7 +44,6 @@ public:
   void		setNormalDeformation(int deformation,
 				     int deformationCoeff = 10);
 
-
   string	getName(void) const;
   Color		getColor(double x, double y) const;
   bool		isLimitedAtPoint(double x, double y) const;
@@ -60,12 +59,6 @@ public:
   Vector&	getDeformatedNormal(double x, double y,
 				    const Vector& normal) const;
 
-  bool		_hasBumpMap;
-  bool		_hasNormalDeformation;
-  int		_deformationType;
-  int		_deformationCoeff;
-  Texture*	_heightmap;
-
 private:
   string	_name;
   Color		_color;
@@ -74,11 +67,18 @@ private:
   bool		_isTextured;
   double	_specularCoeff;
   double	_specularPow;
-  double	_diffusedReflectionCoeff;
   double	_reflectionCoeff;
-  double	_diffusedTransmissionCoeff;
   double	_transmissionCoeff;
   double	_refractionIndex;
+  double	_diffusedReflectionCoeff;
+  double	_diffusedTransmissionCoeff;
+
+public:
+  Texture*	_heightmap;
+  bool		_hasBumpMap;
+  bool		_hasNormalDeformation;
+  int		_deformationType;
+  int		_deformationCoeff;
 };
 
 #endif
