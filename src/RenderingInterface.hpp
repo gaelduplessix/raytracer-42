@@ -5,13 +5,16 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 15:20:09 2011 loick michard
-// Last update Thu May 12 15:43:25 2011 gael jochaud-du-plessix
+// Last update Thu May 12 16:57:23 2011 loick michard
 //
 
 #ifndef _RENDERINGINTERFACE_HPP_
 #define _RENDERINGINTERFACE_HPP_
 
+#include <string>
 #include "Color.hpp"
+
+using namespace std;
 
 class RenderingInterface
 {
@@ -27,6 +30,10 @@ public:
   virtual void renderingHasStoped(void);
   virtual void renderingHasFinished(void);
   virtual void renderingHasProgressed(double progress);
+  virtual void sendWarningMessage(string message);
+  virtual void sendErrorMessage(string message);
+  virtual void sendSuccessMessage(string message);
+  virtual void sendMessage(string message);
 };
 
 #endif
