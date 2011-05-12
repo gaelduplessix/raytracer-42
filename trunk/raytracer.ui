@@ -248,14 +248,14 @@ border-color: rgb(108, 108, 108);</string>
             <property name="margin">
              <number>0</number>
             </property>
-            <item row="0" column="0">
+            <item row="1" column="0">
              <widget class="QLabel" name="label_2">
               <property name="text">
                <string>Largueur</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="1" column="1">
              <widget class="QSpinBox" name="_width">
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -271,14 +271,14 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
+            <item row="2" column="0">
              <widget class="QLabel" name="label_3">
               <property name="text">
                <string>Hauteur</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="2" column="1">
              <widget class="QSpinBox" name="_height">
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -294,28 +294,28 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
+            <item row="3" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
                <string>Caméra</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="3" column="1">
              <widget class="QComboBox" name="_camera">
               <property name="editable">
                <bool>false</bool>
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
+            <item row="4" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
                <string>Antialiasing</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="4" column="1">
              <widget class="QSpinBox" name="_antialiasing">
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -334,7 +334,7 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="0">
+            <item row="8" column="0">
              <spacer name="verticalSpacer_2">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -347,7 +347,7 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </spacer>
             </item>
-            <item row="6" column="0" colspan="2">
+            <item row="7" column="0" colspan="2">
              <widget class="QGroupBox" name="_depthField">
               <property name="title">
                <string>Profondeur de champ</string>
@@ -395,6 +395,50 @@ border-color: rgb(108, 108, 108);</string>
                 </widget>
                </item>
               </layout>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="_mode">
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+              </property>
+              <item>
+               <property name="text">
+                <string>Linéaire horizontal</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Linéaire vertical</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Depixelisation</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Aléatoire horizontal</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Aléatoire vertical</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Aléatoire</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Mode</string>
+              </property>
              </widget>
             </item>
            </layout>
