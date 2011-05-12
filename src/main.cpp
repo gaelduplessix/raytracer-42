@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Thu May 12 16:30:50 2011 gael jochaud-du-plessix
+// Last update Thu May 12 17:21:44 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -186,38 +186,38 @@ class SDLInterface : public RenderingInterface
 
 int main(int ac, char **av)
 {
-  Raytracer rt;
-  Scene scene; //= createScene2();
-  RenderingConfiguration conf = createConfig2();
+  // Raytracer rt;
+  // Scene scene; //= createScene2();
+  // RenderingConfiguration conf = createConfig2();
 
-  if (av[1] != NULL)
-    scene.loadFromFile(av[1]);
-  else
-    scene = createScene2();
+  // if (av[1] != NULL)
+  //   scene.loadFromFile(av[1]);
+  // else
+  //   scene = createScene2();
 
-  rt.setScene(scene);
-  rt.setRenderingConfiguration(&conf);
+  // rt.setScene(scene);
+  // rt.setRenderingConfiguration(&conf);
   ac = ac;
-  //gui(ac, av);
-    SDL_Init(SDL_INIT_VIDEO);
-  screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-  SDLInterface	interface;
-  rt.setRenderingInterface(&interface);
-  rt.launchRendering();
-  SDL_Event event;
-  bool quit = false;
-  while (!quit)
-    {
-      if (SDL_WaitEvent(&event))
-  	{
-  	  if (event.type == SDL_QUIT
-              || (event.type == SDL_KEYDOWN
-                  && (event.key.keysym.sym == SDLK_ESCAPE
-  		      || event.key.keysym.sym == SDLK_RETURN)))
-  	    quit = true;
-  	}
-    }
-  rt.stopRendering();
-  SDL_Quit();
+  gui(ac, av);
+  //   SDL_Init(SDL_INIT_VIDEO);
+  // screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+  // SDLInterface	interface;
+  // rt.setRenderingInterface(&interface);
+  // rt.launchRendering();
+  // SDL_Event event;
+  // bool quit = false;
+  // while (!quit)
+  //   {
+  //     if (SDL_WaitEvent(&event))
+  // 	{
+  // 	  if (event.type == SDL_QUIT
+  //             || (event.type == SDL_KEYDOWN
+  //                 && (event.key.keysym.sym == SDLK_ESCAPE
+  // 		      || event.key.keysym.sym == SDLK_RETURN)))
+  // 	    quit = true;
+  // 	}
+  //   }
+  // rt.stopRendering();
+  // SDL_Quit();
   return (0);
 }
