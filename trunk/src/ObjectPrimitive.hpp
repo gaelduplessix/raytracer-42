@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Wed May 11 21:44:55 2011 melvin laplanche
+// Last update Thu May 12 16:39:14 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -69,12 +69,11 @@ public:
 				stack<ObjectPrimitive*>& refractivePath) const;
 
 protected:
-  inline virtual Ray		getRayAtSimplePosition(const Ray& ray) const;
-  Point				_absolutePosition;
-
-  Object*	_object;
+  virtual Ray			getRayAtSimplePosition(const Ray& ray) const;
+  Point		_absolutePosition;
   Rotation	_rotation;
   Material	_material;
+  Object*	_object;
 };
 
 #endif

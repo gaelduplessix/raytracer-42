@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu May 12 15:26:47 2011 melvin laplanche
+// Last update Thu May 12 17:10:30 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -37,8 +37,7 @@ bool			Scene::_parseCommonElement(QDomNode	    n,
       rotation = true;
     }
   }
-  else
-    return false;
+  return (false);
 }
 
 EquationPrimitive*		Scene::_parseEquation(QDomNode n,
@@ -100,6 +99,7 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 		    "and an equation", n);
   return new EquationPrimitive(equationValue, obj,
 			       positionValue, rotationValue, mat);
+  (void)material;
 }
 
 Sphere*			Scene::_parseSphere(QDomNode	n,
@@ -519,7 +519,6 @@ void			Scene::_parseObjectOptions(QDomNode	n)
   bool				position = false;
   bool				rotation = false;
   bool				solid = false;
-  bool				solidValue = false;
   bool				primitive = false;
 
   while (n.isNull() == false)

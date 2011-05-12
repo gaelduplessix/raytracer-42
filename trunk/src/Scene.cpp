@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Thu May 12 14:22:29 2011 melvin laplanche
+// Last update Thu May 12 17:05:18 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -131,9 +131,9 @@ Point			Scene::_parsePosition(QDomNode	n,
   this->_checkContentIsSingleText(n, name);
   values = n.toElement().text().remove(QChar(' ')).split(",");
   if (values.count() == 3)
-    p = {values[0].toDouble(&test[0]),
-	 values[1].toDouble(&test[1]),
-	 values[2].toDouble(&test[2])};
+    p = Point(values[0].toDouble(&test[0]),
+	      values[1].toDouble(&test[1]),
+	      values[2].toDouble(&test[2]));
   if (!test[0] || !test[1] || !test[2])
     this->_putError("A " + name + " must have 3 integers values separated "
 		    "with comma", n);
@@ -161,9 +161,12 @@ Rotation		Scene::_parseRotation(QDomNode	n)
   }
   values = n.toElement().text().remove(QChar(' ')).split(",");
   if (values.count() == 3)
-    r = {values[0].toDouble(&test[0]) * ((radian) ? (1) : (M_PI / 180)),
-	 values[1].toDouble(&test[1]) * ((radian) ? (1) : (M_PI / 180)),
-	 values[2].toDouble(&test[2]) * ((radian) ? (1) : (M_PI / 180))};
+    r = Rotation(values[0].toDouble(&test[0]) * ((radian) ? (1)
+						 : (M_PI / 180)),
+		 values[1].toDouble(&test[1]) * ((radian) ? (1)
+						 : (M_PI / 180)),
+		 values[2].toDouble(&test[2]) * ((radian) ? (1)
+						 : (M_PI / 180)));
   if (!test[0] || !test[1] || !test[2])
     this->_putError("A rotation must have 3 integers values "
 		    "separated with comma", n);
@@ -226,10 +229,11 @@ bool			Scene::_parseBoolean(QDomNode	n,
   this->_checkContentIsSingleText(n, name);
   value = n.toElement().text().toStdString();
   if (value == "false")
-    return false;
+    return (false);
   else if (value == "true")
-    return true;
+    return (true);
   this->_putError(name + " must be a boolean", n);
+  return (false);
 }
 
 int			Scene::_parseInt(QDomNode	n,
@@ -261,9 +265,9 @@ QRgb			Scene::_parseColor(QDomNode	n)
   QColor		color;
   QString		value;
   int			a = 255;
-  int			r;
-  int			g;
-  int			b;
+  int			r = 0;
+  int			g = 0;
+  int			b = 0;
 
   this->_checkContentIsSingleText(n, "color");
   value = n.toElement().text().remove(QChar(' '));

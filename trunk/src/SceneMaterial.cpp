@@ -5,11 +5,10 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Thu May 12 14:18:39 2011 melvin laplanche
+// Last update Thu May 12 17:07:16 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
-
 
 void			Scene::_failIfMaterialNameExists(QString	name,
 							 QDomNode	n)
@@ -46,6 +45,7 @@ Material		Scene::_getMaterialByName(QString	name)
   for (int i = 0; i < nbMat; i++)
     if (this->_materials[i]->getName() == toFind)
       return *_materials[i];
+  return (Material());
 }
 
 void			Scene::_parseMaterialOptions(QDomNode	n,
@@ -264,4 +264,5 @@ Texture*			Scene::_parseTexture(QDomNode	n,
   else if (attrValue == "file")
     return new Texture(this->_parseFile(n, obj_name));
   this->_putError("normalDeformation type must be an integer", n);
+  return (NULL);
 }

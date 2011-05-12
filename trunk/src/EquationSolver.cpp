@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 11:44:41 2011 loick michard
-// Last update Wed May 11 12:43:04 2011 gael jochaud-du-plessix
+// Last update Thu May 12 16:22:16 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -35,6 +35,7 @@ EquationSolver::solveEquation(vector<double> &coeffs)
     return (EquationSolver::solveQuarticEquation(coeffs[4], coeffs[3],
 						 coeffs[2], coeffs[1],
 						 coeffs[0], true));
+  return (result);
 }
 
 vector<double> 

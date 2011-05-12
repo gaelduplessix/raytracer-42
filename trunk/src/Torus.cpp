@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May  5 18:31:12 2011 loick michard
-// Last update Wed May 11 19:25:05 2011 melvin laplanche
+// Last update Thu May 12 17:10:57 2011 gael jochaud-du-plessix
 //
 
 #include "Torus.hpp"
@@ -44,8 +44,10 @@ void            Torus::getMappedCoords(const Point& intersectPoint,
 {
   x = 0;
   y = 0;
+  return ;
+  (void)intersectPoint;
 }
-#include <iostream>
+
 void
 Torus::addIntersectionWithRay(const Ray& ray,
 			      vector<struct s_intersected_object>& intersection) const

@@ -5,15 +5,15 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Thu May  5 10:39:44 2011 samuel olivier
-// Last update Wed May 11 18:53:11 2011 melvin laplanche
+// Last update Thu May 12 16:40:31 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
 #include "ParallelLight.hpp"
 
 ParallelLight::ParallelLight(const Point &direction, const Color& color,
-			     double intensity) : Light(direction * -1, color,
-						       intensity)
+			     double intensity) :
+  Light(direction * -1, color, intensity)
 {
 
 }
@@ -27,6 +27,8 @@ Color   ParallelLight::getDirectLighting(const Raytracer& raytracer,
 					 Ray& ray) const
 {
   return (Color());
+  (void)raytracer;
+  (void)ray;
 }
 
 #include <stdio.h>
@@ -51,4 +53,6 @@ void    ParallelLight::getLighting(const ObjectPrimitive& primitive,
   if (scalar > 0)
     directLighting = lightColor * _intensity * (1 - absorptionCoeff)
       * scalar;
+  return ;
+  (void)specularLighting;
 }

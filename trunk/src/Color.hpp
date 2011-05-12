@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Tue May 10 12:49:04 2011 samuel olivier
+// Last update Thu May 12 16:29:10 2011 gael jochaud-du-plessix
 //
 
 #ifndef _COLOR_HPP_
@@ -50,13 +50,12 @@ public:
   template <class T>
   Color&	operator-=(T value);
   template <class T>
-  Color&	operator*=(T value);
-  template <class T>
   Color&	operator/=(T value);
   template <class T>
   Color&	operator%=(T value);
-  template <class T>
-  Color&	operator&=(T value);
+
+  Color&	operator*=(double value);
+  Color		operator*(double value);
 
   int	_r;
   int	_g;
@@ -76,13 +75,9 @@ Color		operator+(const Color& color1, T value);
 template <class T>
 Color		operator-(const Color& color1, T value);
 template <class T>
-Color		operator*(const Color& color1, T value);
-template <class T>
 Color		operator/(const Color& color1, T value);
 template <class T>
 Color		operator%(const Color& color1, T value);
-template <class T>
-Color		operator&(const Color& color1, T value);
 
 template <class T>
 Color&		Color::operator+=(T value)
@@ -101,16 +96,6 @@ Color&		Color::operator-=(T value)
   _g -= value;
   _b -= value;
   _a -= value;
-  return (*this);
-}
-
-template <class T>
-Color&		Color::operator*=(T value)
-{
-  _r *= value;
-  _g *= value;
-  _b *= value;
-  _a *= value;
   return (*this);
 }
 
@@ -135,16 +120,6 @@ Color&		Color::operator%=(T value)
 }
 
 template <class T>
-Color&		Color::operator&=(T value)
-{
-  _r &= value;
-  _g &= value;
-  _b &= value;
-  _a &= value;
-  return (*this);
-}
-
-template <class T>
 Color		operator+(const Color& color1, T value)
 {
   Color		res(color1.getR() + value,
@@ -161,16 +136,6 @@ Color		operator-(const Color& color1, T value)
 		    color1.getG() - value,
 		    color1.getB() - value,
 		    color1.getA() - value);
-  return (res);
-}
-
-template <class T>
-Color		operator*(const Color& color1, T value)
-{
-  Color		res(color1.getR() * value,
-		    color1.getG() * value,
-		    color1.getB() * value,
-		    color1.getA() * value);
   return (res);
 }
 
@@ -193,16 +158,5 @@ Color		operator%(const Color& color1, T value)
 		    color1.getA() % value);
   return (res);
 }
-
-template <class T>
-Color		operator&(const Color& color1, T value)
-{
-  Color		res(color1.getR() & value,
-		    color1.getG() & value,
-		    color1.getB() & value,
-		    color1.getA() & value);
-  return (res);
-}
-
 
 #endif

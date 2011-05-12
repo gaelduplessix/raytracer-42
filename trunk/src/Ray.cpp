@@ -5,37 +5,23 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Thu Apr 28 18:50:52 2011 samuel olivier
-// Last update Mon May  2 20:10:14 2011 gael jochaud-du-plessix
+// Last update Thu May 12 16:56:21 2011 gael jochaud-du-plessix
 //
 
 #include "Ray.hpp"
 
 Ray::Ray():
-   _reflectionLevel(0), _reflectionIntensity(1),
+  _point(Point(0, 0, 0)), _vector(0, 0, 0),
+  _reflectionLevel(0), _reflectionIntensity(1),
   _refractionLevel(0), _refractionIntensity(1), _refractiveIndex(1)
 {
 
 }
-#include <iostream>
+
 Ray::Ray(const Point& point, const Vector& vector):
   _point(point), _vector(vector), _reflectionLevel(0), _reflectionIntensity(1),
   _refractionLevel(0), _refractionIntensity(1), _refractiveIndex(1)
-{  
-}
-
-Ray::Ray(const Color& color, const Point& point,
-	 const Vector& vector, double refractiveIndex):
-  _color(color), _point(point), _vector(vector),
-  _refractiveIndex(refractiveIndex), _reflectionLevel(0),
-  _reflectionIntensity(1), _refractionLevel(0), _refractionIntensity(1)
-
 {
-
-}
-
-const Color&	Ray::getColor() const
-{
-  return (_color);
 }
 
 const Point&	Ray::getPoint() const
@@ -51,11 +37,6 @@ const Vector&	Ray::getVector() const
 double	Ray::getRefractiveIndex() const
 {
   return (_refractiveIndex);
-}
-
-void	Ray::setColor(const Color& color)
-{
-  _color = color;
 }
 
 void	Ray::setPoint(const Point& point)

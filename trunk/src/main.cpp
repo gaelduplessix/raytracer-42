@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Thu May 12 16:12:14 2011 melvin laplanche
+// Last update Thu May 12 16:30:50 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -87,6 +87,7 @@ Scene		createScene2()
   //object.setHeightmap(new Texture("water.jpg", 1, 1));
   Cone*	cone = new Cone(NULL, Point(20, 2.5, 1),
 			Rotation(0, 0, 0), object, 2);
+  cone = cone;
   // cylinder->setLimitMax(2);
   // cylinder->setLimitMin(1);
   // primitives.push_back(cone);
@@ -196,8 +197,9 @@ int main(int ac, char **av)
 
   rt.setScene(scene);
   rt.setRenderingConfiguration(&conf);
-  gui(ac, av);
-  /*SDL_Init(SDL_INIT_VIDEO);
+  ac = ac;
+  //gui(ac, av);
+    SDL_Init(SDL_INIT_VIDEO);
   screen = SDL_SetVideoMode(853, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
   SDLInterface	interface;
   rt.setRenderingInterface(&interface);
@@ -214,8 +216,8 @@ int main(int ac, char **av)
   		      || event.key.keysym.sym == SDLK_RETURN)))
   	    quit = true;
   	}
-	}*/
-  //rt.stopRendering();
-  //SDL_Quit();
+    }
+  rt.stopRendering();
+  SDL_Quit();
   return (0);
 }

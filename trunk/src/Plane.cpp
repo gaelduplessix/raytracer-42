@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Wed May 11 22:17:25 2011 melvin laplanche
+// Last update Thu May 12 16:50:06 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -127,7 +127,7 @@ void                  Plane::intersectWithRay(const Ray& ray,
 }
 
 Vector		Plane::getNormalVector(const Point& intersectPoint,
-				      const Vector& viewVector) const
+				       const Vector& viewVector) const
 {
   Vector	normal(0, 0, 1);
   normal.rotate(_rotation);
@@ -136,6 +136,7 @@ Vector		Plane::getNormalVector(const Point& intersectPoint,
   if (cosA < 0)
     return (normal * -1);
   return (normal);
+  (void)intersectPoint;
 }
 
 bool		Plane::isInBoundingBox(BoundingBox& box) const

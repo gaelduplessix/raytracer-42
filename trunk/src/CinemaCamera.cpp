@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 15:33:54 2011 loick michard
-// Last update Sun May  8 19:19:58 2011 loick michard
+// Last update Thu May 12 16:14:08 2011 gael jochaud-du-plessix
 //
 
 #include <stdlib.h>
@@ -13,20 +13,16 @@
 #include "Rotation.hpp"
 #include "Vector.hpp"
 
-CinemaCamera::CinemaCamera()
+CinemaCamera::CinemaCamera():
+  Camera(Point(0, 0, 0), Rotation(0, 0, 0), 1.6, false, 0.2, 2)
 {
   _width = 1.6;
   _height = 0.9;
-  _focalLength = 1.6;
-  _hasDepthOfField = false;
-  _apertureSize = 0.2;
-  _focus = 2;
 }
 
-CinemaCamera::CinemaCamera(Point position, Rotation rotation)
+CinemaCamera::CinemaCamera(Point position, Rotation rotation):
+  Camera(position, rotation, 1.6, false, 0.2, 2)
 {
-  _position = position;
-  _rotation = rotation;
   _width = 1.6;
   _height = 0.9;
   _focalLength = 1.6;
@@ -70,4 +66,5 @@ CinemaCamera::getRayWithSampling(double x, double y,
     }  
   else
     return (getRay(x, y));
+  samplingPos = samplingPos;
 }

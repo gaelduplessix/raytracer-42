@@ -5,29 +5,29 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Tue May 10 01:24:33 2011 melvin laplanche
+// Last update Thu May 12 16:38:06 2011 gael jochaud-du-plessix
 //
 
 #include "Material.hpp"
 
 Material::Material():
-  _isTextured(false), _name(""), _color(Color(0, 0, 0)), _texture(NULL),
-  _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
+  _name(""), _color(Color(0, 0, 0)), _texture(NULL), _limitTexture(NULL),
+  _isTextured(false), _specularCoeff(0),  _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
+  _diffusedReflectionCoeff(0.1), _diffusedTransmissionCoeff(0.1),
   _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1), _diffusedReflectionCoeff(0.1),
-  _diffusedTransmissionCoeff(0.1)
+  _deformationType(-1), _deformationCoeff(10)
 {
 
 }
 
 Material::Material(const string& name):
-  _name(name), _isTextured(false), _color(Color(0, 0, 0)), _texture(NULL),
-  _limitTexture(NULL), _specularCoeff(0), _specularPow(50),
+  _name(name), _color(Color(0, 0, 0)), _texture(NULL), _limitTexture(NULL),
+  _isTextured(false), _specularCoeff(0),  _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
+  _diffusedReflectionCoeff(0.1), _diffusedTransmissionCoeff(0.1),
   _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1), _diffusedReflectionCoeff(0.1),
-  _diffusedTransmissionCoeff(0.1)
+  _deformationType(-1), _deformationCoeff(10)
 {
 
 }
