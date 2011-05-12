@@ -2,6 +2,7 @@
 
 RenderingConfiguration::RenderingConfiguration():
   _width(0), _height(0), _currentCamera(0), _antialiasing(0),
+  _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
   _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),

@@ -5,35 +5,31 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Mon May  2 15:11:33 2011 gael jochaud-du-plessix
+// Last update Thu May 12 15:25:15 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
 #include "RaytracerThread.hpp"
 
 RaytracerThread::RaytracerThread(Raytracer* raytracer):
-  _raytracer(raytracer), _launched(false), _isInit(false), _progress(0),
-  _image(NULL)
+  _raytracer(raytracer), _launched(false), _isInit(false), _progress(0)
 {
-
 }
 
 RaytracerThread::~RaytracerThread()
 {
-  if (_image)
-    delete _image;
 }
 
 void		RaytracerThread::run(void)
 {
   if (!_isInit)
     initBeforeLaunching();
-  _launched = true;
+  _launched = true;  
   while (_launched && _progress < 1)
     _raytracer->renderingLoop(_progress);
   if (_progress >= 1 && _raytracer->getRenderingInterface())
     _raytracer->getRenderingInterface()->renderingHasFinished();
-  _launched = 0;
+  _launched = false;
 }
 
 void	RaytracerThread::stop(void)
@@ -52,6 +48,7 @@ void	RaytracerThread::initBeforeLaunching(void)
   int	width = _raytracer->getRenderingConfiguration()->getWidth();
   int	height = _raytracer->getRenderingConfiguration()->getHeight();
 
+  _isInit = true;
   _raytracedPixels.resize(width);
   for (int i = 0; i < width; i++)
     {
@@ -59,9 +56,6 @@ void	RaytracerThread::initBeforeLaunching(void)
       for (int j = 0; j < height; j++)
 	_raytracedPixels[i][j] = false;
     }
-  if (_image)
-    delete _image;
-  _image = new QImage(width, height, QImage::Format_ARGB32);
   _progress = 0.f;
   _currentPixel = 0;
 }
