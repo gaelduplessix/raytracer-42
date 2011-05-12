@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May 12 15:21:31 2011 gael jochaud-du-plessix
+// Last update Thu May 12 15:41:59 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -75,6 +75,8 @@ Raytracer::getRenderingInterface(void) const
 void
 Raytracer::launchRendering(void)
 {
+  if (_thread->isLaunched())
+    return ;
   if (!_scene)
     throw (Raytracer::NO_SCENE_SPECIFIED);
   if (!_config)
@@ -82,6 +84,7 @@ Raytracer::launchRendering(void)
   if (!_interface)
     throw (Raytracer::NO_INTERFACE_SPECIFIED);
   _thread->start();
+  _interface->renderingHasBegun();
 }
 
 void
@@ -89,6 +92,7 @@ Raytracer::stopRendering(void)
 {
   _thread->stop();
   _thread->wait();
+  _interface->renderingHasStoped();
 }
 
 void
@@ -96,6 +100,7 @@ Raytracer::pauseRendering(void)
 {
   _thread->pause();
   _thread->wait();
+  _interface->renderingHasPaused();
 }
 
 const Camera&		Raytracer::getCurrentCamera(void)
@@ -108,14 +113,14 @@ const Camera&		Raytracer::getCurrentCamera(void)
 void		Raytracer::renderingLoop(double& progress)
 {
   Point		pixelToRender = getPixelToRender();
+  _interface->pixelHasStartedRendering(pixelToRender._x, pixelToRender._y);
   Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
-  
+
   progress = (double)++_thread->_currentPixel
 	/ (_config->getWidth() * _config->getHeight());
-  if (_interface)
-    _interface->pixelHasBeenRendered(pixelToRender._x,
-				     pixelToRender._y,
-				     pixelColor);
+  _interface->pixelHasBeenRendered(pixelToRender._x, pixelToRender._y,
+				   pixelColor);
+  _interface->renderingHasProgressed(progress);
 }
 
 Point			Raytracer::getPixelToRender(void) const

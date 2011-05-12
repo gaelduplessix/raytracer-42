@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Thu May 12 15:25:15 2011 gael jochaud-du-plessix
+// Last update Thu May 12 15:41:46 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -16,8 +16,14 @@ RaytracerThread::RaytracerThread(Raytracer* raytracer):
 {
 }
 
-RaytracerThread::~RaytracerThread()
+bool  RaytracerThread::isLaunched(void)
 {
+  return (_launched);
+}
+
+bool  RaytracerThread::isInit(void)
+{
+  return (_isInit);
 }
 
 void		RaytracerThread::run(void)
@@ -28,7 +34,10 @@ void		RaytracerThread::run(void)
   while (_launched && _progress < 1)
     _raytracer->renderingLoop(_progress);
   if (_progress >= 1 && _raytracer->getRenderingInterface())
-    _raytracer->getRenderingInterface()->renderingHasFinished();
+    {
+      _raytracer->getRenderingInterface()->renderingHasFinished();
+      _isInit = false;
+    }
   _launched = false;
 }
 
@@ -36,6 +45,7 @@ void	RaytracerThread::stop(void)
 {
   _launched = false;
   _isInit = false;
+  _raytracer->getRenderingInterface()->renderingHasFinished();
 }
 
 void	RaytracerThread::pause(void)
