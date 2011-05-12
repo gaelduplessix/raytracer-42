@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 15:20:09 2011 loick michard
-// Last update Mon May  9 16:06:33 2011 franck lavisse
+// Last update Thu May 12 15:43:25 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGINTERFACE_HPP_
@@ -15,8 +15,7 @@
 
 class RenderingInterface
 {
-public:
-  
+public:  
   virtual void pixelHasBeenRendered(int x, int y, Color color);
   virtual void pixelHasStartedRendering(int x, int y);
   virtual void photonMappingHasBegun(void);
