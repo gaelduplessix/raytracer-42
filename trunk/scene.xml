@@ -21,7 +21,7 @@
       <solid>true</solid>
 	<primitives>
 	  <primitive type="equation" material="sol">
-	    <position>30, 0, 0</position>
+	    <position>20, 0, 0</position>
 	    <rotation type="radian">0, 0, 0</rotation>
 	    <equation>x^2 + y^2 + z^2 - 25</equation>
 	  </primitive>
