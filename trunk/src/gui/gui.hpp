@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Thu May 12 00:39:16 2011 loick michard
+// Last update Thu May 12 15:32:17 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -46,6 +46,7 @@ public slots:
   void	selectBackgroundColor();
   void	selectAmbiantColor();
   void	startRender();
+  void	loadScene();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);

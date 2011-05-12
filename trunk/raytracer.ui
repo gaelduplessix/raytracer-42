@@ -162,7 +162,7 @@ p, li { white-space: pre-wrap; }
      <string>&amp;Fichier</string>
     </property>
     <addaction name="action_Nouvelle_sc_ne"/>
-    <addaction name="action_Charger_une_sc_ne"/>
+    <addaction name="action_Charger"/>
     <addaction name="action_Sauvegarder_une_sc_ne"/>
     <addaction name="actionQuitter"/>
    </widget>
@@ -227,8 +227,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>305</width>
-          <height>549</height>
+          <width>315</width>
+          <height>534</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -267,7 +267,7 @@ border-color: rgb(108, 108, 108);</string>
                <number>100000</number>
               </property>
               <property name="value">
-               <number>800</number>
+               <number>854</number>
               </property>
              </widget>
             </item>
@@ -290,7 +290,7 @@ border-color: rgb(108, 108, 108);</string>
                <number>100000</number>
               </property>
               <property name="value">
-               <number>600</number>
+               <number>480</number>
               </property>
              </widget>
             </item>
@@ -493,53 +493,6 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2">
-             <widget class="QGroupBox" name="_directLighting">
-              <property name="title">
-               <string>Lumière directe</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_8">
-               <property name="leftMargin">
-                <number>15</number>
-               </property>
-               <property name="topMargin">
-                <number>15</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <item row="0" column="1">
-                <widget class="QDoubleSpinBox" name="_directLightingIntensity">
-                 <property name="buttonSymbols">
-                  <enum>QAbstractSpinBox::PlusMinus</enum>
-                 </property>
-                 <property name="maximum">
-                  <double>2.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_8">
-                 <property name="text">
-                  <string>Intensité</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
             <item row="3" column="0" colspan="2">
              <widget class="QCheckBox" name="_specularLighting">
               <property name="text">
@@ -618,6 +571,53 @@ border-color: rgb(108, 108, 108);</string>
               <property name="checked">
                <bool>true</bool>
               </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QGroupBox" name="_directLighting">
+              <property name="title">
+               <string>Lumière directe</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_8">
+               <property name="leftMargin">
+                <number>15</number>
+               </property>
+               <property name="topMargin">
+                <number>15</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="_directLightingIntensity">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::PlusMinus</enum>
+                 </property>
+                 <property name="maximum">
+                  <double>2.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>Intensité</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
            </layout>
@@ -1117,7 +1117,7 @@ border-color: rgb(108, 108, 108);</string>
     <bool>false</bool>
    </attribute>
    <addaction name="action_Nouvelle_sc_ne"/>
-   <addaction name="action_Charger_une_sc_ne"/>
+   <addaction name="action_Charger"/>
    <addaction name="action_Sauvegarder_une_sc_ne"/>
    <addaction name="separator"/>
    <addaction name="action_Play"/>
@@ -1147,7 +1147,7 @@ border-color: rgb(108, 108, 108);</string>
     <bool>true</bool>
    </property>
   </action>
-  <action name="action_Charger_une_sc_ne">
+  <action name="action_Charger">
    <property name="icon">
     <iconset resource="ressources.qrc">
      <normaloff>:/images/document-open.png</normaloff>:/images/document-open.png</iconset>

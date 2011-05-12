@@ -20,10 +20,10 @@
       <rotation type="radian">0, 0, 0</rotation>
       <solid>true</solid>
 	<primitives>
-	  <primitive type="equation" material="sol">
+	  <primitive type="sphere" material="sol">
 	    <position>20, 0, 0</position>
 	    <rotation type="radian">0, 0, 0</rotation>
-	    <equation>x^2 + y^2 + z^2 - 25</equation>
+	    <radius>3</radius>
 	  </primitive>
 	</primitives>
     </object>

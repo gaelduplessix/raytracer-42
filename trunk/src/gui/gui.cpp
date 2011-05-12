@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 12 15:15:07 2011 loick michard
+// Last update Thu May 12 15:31:27 2011 loick michard
 //
 
 #include <QApplication>
@@ -247,6 +247,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
   _timer->setInterval(200);
   _timer->start();
   QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(repaint()));
+  QObject::connect(_ui->action_Charger, SIGNAL(triggered()),
+                   this, SLOT(loadScene()));
 }
 
 RaytracerGUI::~RaytracerGUI()

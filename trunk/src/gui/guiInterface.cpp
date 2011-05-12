@@ -5,9 +5,10 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Thu May 12 15:24:00 2011 gael jochaud-du-plessix
+// Last update Thu May 12 15:40:13 2011 loick michard
 //
 
+#include <QFileDialog>
 #include "gui.hpp"
 
 void    RaytracerGUI::pauseRendering(void)
@@ -28,7 +29,16 @@ void    RaytracerGUI::renderingHasBegun(void)
 void    RaytracerGUI::stopRendering(void)
 {
   _raytracer->stopRendering();
-  _isRendering = false;
+    _isRendering = false;
+}
+
+void    RaytracerGUI::loadScene(void)
+{
+  string scene = 
+    QFileDialog::getOpenFileName(this, tr("Charger une scene"), 
+				 "", "*.xml;;", 0, 
+				 QFileDialog::DontUseNativeDialog).toStdString();
+  _scene->loadFromFile(scene);
 }
 
 void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
