@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May 12 15:41:59 2011 gael jochaud-du-plessix
+// Last update Thu May 12 17:23:21 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -107,8 +107,6 @@ const Camera&		Raytracer::getCurrentCamera(void)
 {
   return (_scene->getCamera(_config->getCurrentCamera()));
 }
-
-#include <iostream>
 
 void		Raytracer::renderingLoop(double& progress)
 {
