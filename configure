@@ -6,7 +6,7 @@ if [ $exec == "not found" ]; then
     echo "Qt not found"
     exit
 else
-    $exec -project -nopwd src/
+    $exec -project -nopwd FORMS="raytracer.ui" RESOURCES="ressources.qrc" src/
     make -C configure_options
     if ./configure_options/endian
     then
