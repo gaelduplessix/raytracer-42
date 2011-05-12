@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 12 16:49:14 2011 loick michard
+// Last update Thu May 12 19:19:00 2011 loick michard
 //
 
 #include <QApplication>
@@ -199,6 +199,8 @@ void RaytracerGUI::drawWindow()
 {
   if (_isRendering)
     _ui->_progressBar->setValue(_progress);
+  _ui->_console->setHtml(_message.c_str());
+  _ui->_console->moveCursor(QTextCursor::End);
   repaint();
 }
 
@@ -208,7 +210,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _backgroundColor(new QColor(0, 0, 0)), 
     _ambiantColor(new QColor(255, 255, 255)), _cubeMap(NULL),
     _scene(NULL), _image(NULL), _pixmap(new QPixmap()),
-    _isRendering(false)
+    _isRendering(false), _pause(false)
 {
   _ui->setupUi(this);
   _ui->_progressBar->setHidden(true);

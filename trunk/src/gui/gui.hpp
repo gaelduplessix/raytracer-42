@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Thu May 12 17:17:22 2011 gael jochaud-du-plessix
+// Last update Thu May 12 19:20:54 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -17,10 +17,14 @@ void	gui(int ac, char **av);
 #include <QImage>
 #include <QTimer>
 #include <QPixmap>
+#include <string>
+#include <QCloseEvent>
 #include "ui_raytracer.h"
 #include "RenderingConfiguration.hpp"
 #include "Raytracer.hpp"
 #include "CubeMap.hpp"
+
+using namespace std;
 
 namespace Ui {
   class MainWindow;
@@ -35,10 +39,16 @@ class RaytracerGUI : public QMainWindow, public RenderingInterface
   virtual ~RaytracerGUI();
   
   void setConfiguration();
-  void    renderingHasFinished(void);
-  void    renderingHasBegun(void);
+  void renderingHasFinished(void);
+  void renderingHasBegun(void);
   void pixelHasBeenRendered(int x, int y, Color color);
   void renderingHasProgressed(double progress);
+
+  void sendWarningMessage(string message);
+  void sendErrorMessage(string message);
+  void sendSuccessMessage(string message);
+  void sendMessage(string message);
+  void closeEvent(QCloseEvent *event);
 
 public slots:
   void  pauseRendering(void);
@@ -54,18 +64,20 @@ protected:
   virtual void  paintEvent(QPaintEvent*);
 
 private:
-  Ui::MainWindow		*_ui;
   RenderingConfiguration	*_config;
   Raytracer			*_raytracer;
   QColor			*_backgroundColor;
   QColor			*_ambiantColor;
+  QImage			*_image;
   CubeMap			*_cubeMap;
   Scene				*_scene;
-  QImage			*_image;
-  QPixmap			*_pixmap;
-  bool				_isRendering;
   QTimer			*_timer;
+  QPixmap			*_pixmap;
+  Ui::MainWindow		*_ui;
   int				_progress;
+  string			_message;
+  bool				_isRendering;
+  bool				_pause;
 };
 
 #endif
