@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 12 00:40:48 2011 loick michard
+// Last update Thu May 12 15:15:07 2011 loick michard
 //
 
 #include <QApplication>
@@ -78,6 +78,18 @@ Scene           *createScene()
 
 void RaytracerGUI::setConfiguration()
 {
+  if (_ui->_mode->currentIndex() == 0)
+    _config->setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
+  else if (_ui->_mode->currentIndex() == 1)
+    _config->setRenderingSamplingMethod(RSM_LINEAR_VERTICAL);
+  else if (_ui->_mode->currentIndex() == 2)
+    _config->setRenderingSamplingMethod(RSM_UNPIXELISING);
+  else if (_ui->_mode->currentIndex() == 3)
+    _config->setRenderingSamplingMethod(RSM_RANDOM_HORIZONTAL);
+  else if (_ui->_mode->currentIndex() == 4)
+    _config->setRenderingSamplingMethod(RSM_RANDOM_VERTICAL);
+  else
+    _config->setRenderingSamplingMethod(RSM_RANDOM_PIXEL);
   _config->setWidth(_ui->_width->value());
   _config->setHeight(_ui->_height->value());
   _config->setCurrentCamera(0);
