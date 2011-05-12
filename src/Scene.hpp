@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Thu May 12 00:05:37 2011 melvin laplanche
+// Last update Thu May 12 01:04:39 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -38,6 +38,7 @@
 #include "SphericalLight.hpp"
 #include "Spot.hpp"
 #include "Sphere.hpp"
+#include "EquationPrimitive.hpp"
 
 using namespace std;
 
@@ -117,6 +118,7 @@ public:
   Cylinder*		_parseCylinder(QDomNode, QString, Object*);
   CubeTroue*		_parseCubeTroue(QDomNode, QString, Object*);
   Triangle*		_parseTriangle(QDomNode, QString, Object*);
+  EquationPrimitive*	_parseEquation(QDomNode, QString, Object*);
   Material		_getMaterialByName(QString);
   void			_parseLight(QDomNode);
   void			_parseLights(QDomNode);
@@ -126,5 +128,6 @@ public:
   ParallelogramLight*	_parseParallelogramLight(QDomNode);
   bool			_parseCommonElement(QDomNode,
 					    ObjectPrimitive*, bool&, bool&);
+
 };
 #endif

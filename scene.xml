@@ -19,20 +19,13 @@
       <position>0, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
       <solid>true</solid>
-
-      <primitives>
-	<primitive type="sphere" material="sol">
-	  <position>30, 0, 0</position>
-	  <rotation type="radian">0, 0, 0</rotation>
-	  <radius>1</radius>
-	</primitive>
-
-	<primitive type="cubeTroue" material="sol">
-	  <position>30, 0, 0</position>
-	  <rotation type="radian">0, 0, 0</rotation>
-	  <coeff>11.8</coeff>
-	</primitive>
-      </primitives>
+	<primitives>
+	  <primitive type="equation" material="sol">
+	    <position>30, 0, 0</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <equation>x^2 + y^2 + z^2 - 25</equation>
+	  </primitive>
+	</primitives>
     </object>
   </objects>
 
