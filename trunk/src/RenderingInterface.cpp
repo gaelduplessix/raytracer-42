@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:28:09 2011 loick michard
-// Last update Mon May  2 14:48:37 2011 samuel olivier
+// Last update Thu May 12 16:57:05 2011 loick michard
 //
 
 #include "RenderingInterface.hpp"
@@ -57,4 +57,24 @@ void RenderingInterface::renderingHasFinished()
 void RenderingInterface::renderingHasProgressed(double progress)
 {
   progress = progress;
+}
+
+void RenderingInterface::sendWarningMessage(string message)
+{
+  message = message;
+}
+
+void RenderingInterface::sendErrorMessage(string message)
+{
+  message = message;
+}
+
+void RenderingInterface::sendSuccessMessage(string message)
+{
+  message = message;
+}
+
+void RenderingInterface::sendMessage(string message)
+{
+  message = message;
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 12 15:31:27 2011 loick michard
+// Last update Thu May 12 16:49:14 2011 loick michard
 //
 
 #include <QApplication>
@@ -185,28 +185,6 @@ void    RaytracerGUI::selectAmbiantColor()
       _ui->_ambiantColor->setChecked(true);
     }
 }
-#include <iostream>
-void	RaytracerGUI::startRender()
-{
-  setConfiguration();
-  if (!_isRendering)
-    {
-      if (_image)
-	delete _image;
-      _image = new QImage(_ui->_width->value(),
-			  _ui->_height->value(),
-			  QImage::Format_ARGB32);
-    }
-  try
-    {
-      _raytracer->launchRendering();
-      _isRendering = true;
-    }
-  catch(int error)
-    {
-      std::cout << "ERREUR" << error << std::endl;
-    }
-}
 
 void RaytracerGUI::paintEvent(QPaintEvent*)
 {
@@ -215,6 +193,13 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
       *_pixmap = _pixmap->fromImage(*_image);
       _ui->_image->setPixmap(*_pixmap);
     }
+}
+
+void RaytracerGUI::drawWindow()
+{
+  if (_isRendering)
+    _ui->_progressBar->setValue(_progress);
+  repaint();
 }
 
 RaytracerGUI::RaytracerGUI(QWidget *parent)
@@ -244,9 +229,9 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);
   _timer = new QTimer();
-  _timer->setInterval(200);
+  _timer->setInterval(50);
   _timer->start();
-  QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(repaint()));
+  QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(drawWindow()));
   QObject::connect(_ui->action_Charger, SIGNAL(triggered()),
                    this, SLOT(loadScene()));
 }

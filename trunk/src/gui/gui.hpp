@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Thu May 12 15:32:17 2011 loick michard
+// Last update Thu May 12 16:40:18 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -38,6 +38,7 @@ class RaytracerGUI : public QMainWindow, public RenderingInterface
   void    renderingHasFinished(void);
   void    renderingHasBegun(void);
   void pixelHasBeenRendered(int x, int y, Color color);
+  void renderingHasProgressed(double progress);
 
 public slots:
   void  pauseRendering(void);
@@ -47,6 +48,7 @@ public slots:
   void	selectAmbiantColor();
   void	startRender();
   void	loadScene();
+  void	drawWindow();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
@@ -62,6 +64,7 @@ private:
   QTimer			*_timer;
   QPixmap			*_pixmap;
   Ui::MainWindow		*_ui;
+  int				_progress;
   bool				_isRendering;
 };
 
