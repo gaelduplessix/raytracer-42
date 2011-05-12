@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Thu May 12 00:04:48 2011 melvin laplanche
+// Last update Thu May 12 14:22:29 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -364,7 +364,6 @@ void		Scene::loadFromFile(string filename)
 		      has_objects, has_lights);
     node = node.nextSibling();
   }
-  cout << "D: Parser out" << endl;
 }
 
 void			Scene::_dispatcher(QDomNode	node,

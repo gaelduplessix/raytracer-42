@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu May 12 01:06:06 2011 melvin laplanche
+// Last update Thu May 12 14:28:04 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -87,7 +87,8 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
       else
       {
 	this->_checkContentIsSingleText(n, "equation");
-	equationValue = n.nodeValue().toStdString();
+	equationValue = n.toElement().text().toStdString();
+	cerr << "D: " << equationValue;
 	equation = true;
       }
     }
