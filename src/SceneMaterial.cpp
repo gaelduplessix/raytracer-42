@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Wed May 11 21:37:25 2011 melvin laplanche
+// Last update Thu May 12 14:18:39 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -119,7 +119,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 			  "the first defined will be used", n);
       else
       {
-	mat->setSpecularCoeff(this->_parseDouble(n, 0.d, 0.d, "specular"));
+	mat->setSpecularCoeff(this->_parseDouble(n, 0, 0, "specular"));
 	specular = true;
       }
     }
@@ -130,7 +130,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 			  "the first defined will be used", n);
       else
       {
-	mat->setSpecularPow(this->_parseDouble(n, 0.d, 0.d, "specularPow"));
+	mat->setSpecularPow(this->_parseDouble(n, 0, 0, "specularPow"));
 	specularPow = true;
       }
     }
@@ -141,7 +141,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 			  "the first defined will be used", n);
       else
       {
-	mat->setReflectionCoeff(this->_parseDouble(n, 0.d, 0.d, "reflection"));
+	mat->setReflectionCoeff(this->_parseDouble(n, 0, 0, "reflection"));
 	reflection = true;
       }
     }
@@ -152,7 +152,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 			  "the first defined will be used", n);
       else
       {
-	mat->setTransmissionCoeff(_parseDouble(n, 0.d, 0.d, "transmission"));
+	mat->setTransmissionCoeff(_parseDouble(n, 0, 0, "transmission"));
 	transmission = true;
       }
     }
@@ -163,7 +163,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 			  "the first defined will be used", n);
       else
       {
-	mat->setRefractionIndex(_parseDouble(n, 0.d, 0.d, "refractionIndex"));
+	mat->setRefractionIndex(_parseDouble(n, 0, 0, "refractionIndex"));
 	refractionIndex = true;
       }
     }
@@ -174,7 +174,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 			  "the first defined will be used", n);
       else
       {
-	mat->setDiffusedReflectionCoeff(this->_parseInt(n, 0.d, 0.d,
+	mat->setDiffusedReflectionCoeff(this->_parseInt(n, 0, 0,
 						  "diffusedReflection"));
 	diffusedRef = true;
       }
@@ -186,7 +186,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 			  "the first defined will be used", n);
       else
       {
-	mat->setDiffusedReflectionCoeff(this->_parseInt(n, 0.d, 0.d,
+	mat->setDiffusedReflectionCoeff(this->_parseInt(n, 0, 0,
 							"diffusedReflection"));
 	diffusedRef = true;
       }
