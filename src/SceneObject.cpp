@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sun May 15 01:57:31 2011 melvin laplanche
+// Last update Sun May 15 17:09:49 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -37,7 +37,9 @@ bool			Scene::_parseCommonElement(QDomNode	    n,
       rotation = true;
     }
   }
-  return false;
+  else
+    return false;
+  return true;
 }
 
 EquationPrimitive*		Scene::_parseEquation(QDomNode n,

@@ -43,12 +43,6 @@
       <intensity>1</intensity>
       <directLight>1</directLight>
     </light>
-    <light type="sspot">
-      <position>0,0,-5</position>
-      <color>00FF00</color>
-      <intensity>1</intensity>
-      <directLight>1</directLight>
-    </light>
   </lights>
   </scene>
 

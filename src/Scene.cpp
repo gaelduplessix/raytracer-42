@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sun May 15 02:50:47 2011 melvin laplanche
+// Last update Sun May 15 17:05:31 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -32,6 +32,11 @@ Scene::Scene(vector<Camera*> cameras,
 Scene::Scene(void): _hasError(false), _parsingDone(false), _interface(NULL)
 {
 
+}
+
+Scene::~Scene(void)
+{
+  this->_clearOldScene();
 }
 
 bool	Scene::isValid(void) const
@@ -432,6 +437,38 @@ string			Scene::_parseFile(QDomNode	n,
   return (value.toStdString());
 }
 
+void		Scene::_clearOldScene(void)
+{
+  int size;
+
+  this->_hasError = false;
+  this->_parsingDone = false;
+  size = this->_cameras.size();
+  for (int i = 0; i < size; i++)
+  {
+    delete this->_cameras[0];
+    this->_cameras.erase(this->_cameras.begin());
+  }
+  size = this->_lights.size();
+  for (int i = 0; i < size; i++)
+  {
+    delete this->_lights[0];
+    this->_lights.erase(this->_lights.begin());
+  }
+  size = this->_materials.size();
+  for (int i = 0; i < size; i++)
+  {
+    delete this->_materials[0];
+    this->_materials.erase(this->_materials.begin());
+  }
+  size = this->_objects.size();
+  for (int i = 0; i < size; i++)
+  {
+    delete this->_objects[0];
+    this->_objects.erase(this->_objects.begin());
+  }
+}
+
 void		Scene::loadFromFile(string		filename,
 				    RenderingInterface*	interface)
 {
@@ -441,8 +478,7 @@ void		Scene::loadFromFile(string		filename,
   bool		has_lights = false;
   QDomDocument	document;
 
-  this->_hasError = false;
-  this->_parsingDone = false;
+  this->_clearOldScene();
   this->_interface = interface;
   this->_interface->sendMessage("Start parsing " + filename);
   document = this->_loadFromFile_checkAndGetFile(filename);
