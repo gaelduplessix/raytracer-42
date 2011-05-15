@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Sun May 15 00:45:10 2011 melvin laplanche
+// Last update Sun May 15 17:07:52 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -50,23 +50,6 @@ bool			Scene::_materialExists(QString	name)
       return true;
   return false;
 }
-
-/*bool			Scene::_failIfMaterialNameExists(QString	name,
-							 QDomNode	n)
-{
-  this->_putError("The material " + toFind + " already exists", n);
-}*/
-
-
-/*void			Scene::_failIfMaterialNameDoesntExists(QString	name,
-							       QDomNode	n)
-{
-
-this->_putError("The material " + toFind + " doesnt exists"
-		  " (you must define a material before use it)", n);
-
-}*/
-
 
 Material		Scene::_getMaterialByName(QString	name)
 {

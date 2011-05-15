@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sun May 15 02:49:36 2011 melvin laplanche
+// Last update Sun May 15 16:32:59 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -54,6 +54,7 @@ public:
 	vector<Light*> lights,
 	vector<Material*> materials);
   Scene(void);
+  ~Scene(void);
 
   void				loadFromFile(string, RenderingInterface*);
 
@@ -80,6 +81,7 @@ private:
   vector<Light*>		_lights;
   vector<Material*>		_materials;
 
+  void			_clearOldScene(void);
   QDomDocument		_loadFromFile_checkAndGetFile(string filename);
   bool			_loadFromFile_validFirstDepth(QDomNode n);
   void			_dispatcher(QDomNode	node,
