@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Sun May 15 02:08:01 2011 melvin laplanche
+// Last update Sun May 15 02:48:37 2011 melvin laplanche
 //
 
 #include <QMessageBox>
@@ -144,10 +144,12 @@ void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
 
 void    RaytracerGUI::startRender()
 {
-  setConfiguration();
-  _timer->setSingleShot(false);
-  _timer->start();
-  if (!_isRendering)
+  if (_scene != NULL && _scene->isValid())
+  {
+    setConfiguration();
+    _timer->setSingleShot(false);
+    _timer->start();
+    if (!_isRendering)
     {
       if (_image)
 	delete _image;
@@ -155,7 +157,7 @@ void    RaytracerGUI::startRender()
                           _ui->_height->value(),
                           QImage::Format_ARGB32);
     }
-  try
+    try
     {
       _ui->_progressBar->setHidden(false);
       if (_pause)
@@ -166,10 +168,13 @@ void    RaytracerGUI::startRender()
       _raytracer->launchRendering();
       _isRendering = true;
     }
-  catch(int error)
+    catch(int error)
     {
       std::cerr << "ERREUR" << error << std::endl;
     }
+  }
+  else
+    sendErrorMessage("You must load a scene before trying to make a render.");
 }
 
 void		RaytracerGUI::saveImage()
