@@ -9,6 +9,7 @@
   <materials>
     <material name="sol">
       <color>255, 255, 255</color>
+      <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
       <reflection>0</reflection>
@@ -37,6 +38,12 @@
       <directLight>1</directLight>
     </light>
     <light type="spot">
+      <position>0,0,-5</position>
+      <color>00FF00</color>
+      <intensity>1</intensity>
+      <directLight>1</directLight>
+    </light>
+    <light type="sspot">
       <position>0,0,-5</position>
       <color>00FF00</color>
       <intensity>1</intensity>

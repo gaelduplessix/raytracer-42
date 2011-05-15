@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sun May 15 00:48:32 2011 melvin laplanche
+// Last update Sun May 15 02:49:36 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -69,7 +69,7 @@ public:
   int					getNbObjects(void) const;
   int					getNbLights(void) const;
   int					getNbMaterials(void) const;
-  bool					getState(void) const;
+  bool					isValid(void) const;
 
 private:
   bool				_hasError;

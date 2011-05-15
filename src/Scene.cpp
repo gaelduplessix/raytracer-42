@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sun May 15 00:48:08 2011 melvin laplanche
+// Last update Sun May 15 02:50:47 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -34,7 +34,7 @@ Scene::Scene(void): _hasError(false), _parsingDone(false), _interface(NULL)
 
 }
 
-bool	Scene::getState(void) const
+bool	Scene::isValid(void) const
 {
   return (_hasError == false && _parsingDone);
 }
@@ -465,7 +465,7 @@ void		Scene::loadFromFile(string		filename,
     }
   }
   this->_parsingDone = true;
-  if (getState())
+  if (this->isValid())
     this->_putSuccess("Parsing finished");
   else
     this->_putError("Parsing exited abnormally");
