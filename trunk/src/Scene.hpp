@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Thu May 12 01:04:39 2011 melvin laplanche
+// Last update Sun May 15 00:48:32 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -22,6 +22,7 @@
 #include <sstream>
 
 #include "CinemaCamera.hpp"
+#include "RenderingInterface.hpp"
 #include "PerlinNoise.hpp"
 #include "Rotation.hpp"
 #include "Vector.hpp"
@@ -52,32 +53,35 @@ public:
 	vector<Object*> objects,
 	vector<Light*> lights,
 	vector<Material*> materials);
-   Scene(string filename);
-   Scene(void);
+  Scene(void);
 
-   void			loadFromFile(string filename);
+  void				loadFromFile(string, RenderingInterface*);
 
-   const vector<Camera*>&		getCameras(void) const;
-   const vector<Object*>&		getObjects(void) const;
-   const vector<Light*>&		getLights(void) const;
-   const vector<Material*>&		getMaterials(void) const;
-   const Camera&			getCamera(int) const;
-   const Object&			getObject(int) const;
-   const Light&				getLight(int) const;
-   const Material&			getMaterial(int) const;
-   int					getNbCameras(void) const;
-   int					getNbObjects(void) const;
-   int					getNbLights(void) const;
-   int					getNbMaterials(void) const;
+  const vector<Camera*>&		getCameras(void) const;
+  const vector<Object*>&		getObjects(void) const;
+  const vector<Light*>&			getLights(void) const;
+  const vector<Material*>&		getMaterials(void) const;
+  const Camera&				getCamera(int) const;
+  const Object&				getObject(int) const;
+  const Light&				getLight(int) const;
+  const Material&			getMaterial(int) const;
+  int					getNbCameras(void) const;
+  int					getNbObjects(void) const;
+  int					getNbLights(void) const;
+  int					getNbMaterials(void) const;
+  bool					getState(void) const;
 
- private:
-   vector<Camera*>		_cameras;
-   vector<Object*>		_objects;
-   vector<Light*>		_lights;
-   vector<Material*>		_materials;
+private:
+  bool				_hasError;
+  bool				_parsingDone;
+  RenderingInterface*		_interface;
+  vector<Camera*>		_cameras;
+  vector<Object*>		_objects;
+  vector<Light*>		_lights;
+  vector<Material*>		_materials;
 
   QDomDocument		_loadFromFile_checkAndGetFile(string filename);
-  void			_loadFromFile_validFirstDepth(QDomNode n);
+  bool			_loadFromFile_validFirstDepth(QDomNode n);
   void			_dispatcher(QDomNode	node,
 				    bool&	has_cameras,
 				    bool&	has_materials,
@@ -93,11 +97,12 @@ public:
   void			_parseObjectOptions(QDomNode);
   Point			_parsePosition(QDomNode, string);
   Rotation		_parseRotation(QDomNode);
-  void			_checkContentIsSingleText(QDomNode, string);
+  bool			_checkContentIsSingleText(QDomNode, string);
   void			_putWarning(string, QDomNode);
   void			_putError(string, QDomNode);
-  void			_failIfMaterialNameExists(QString, QDomNode);
-  void			_failIfMaterialNameDoesntExists(QString, QDomNode);
+  void			_putError(string);
+  void			_putSuccess(string);
+  void			_putInfo(string);
   void			_parseMaterialOptions(QDomNode, QString);
   QRgb			_parseColor(QDomNode);
   bool			_isDouble(QString);
@@ -128,6 +133,6 @@ public:
   ParallelogramLight*	_parseParallelogramLight(QDomNode);
   bool			_parseCommonElement(QDomNode,
 					    ObjectPrimitive*, bool&, bool&);
-
+  bool			_materialExists(QString);
 };
 #endif

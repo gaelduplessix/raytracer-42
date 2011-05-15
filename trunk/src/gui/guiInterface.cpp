@@ -1,11 +1,11 @@
 //
 // guiInterface.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42-gui
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Thu May 12 22:44:03 2011 loick michard
+// Last update Sun May 15 02:08:01 2011 melvin laplanche
 //
 
 #include <QMessageBox>
@@ -23,7 +23,7 @@ void RaytracerGUI::closeEvent(QCloseEvent *event)
       msgBox.setInformativeText("Etes-vous sur de vouloir fermer la fenetre?");
       msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
       msgBox.setDefaultButton(QMessageBox::Cancel);
-      int ret = 
+      int ret =
 	QMessageBox::warning(this, tr("Raytracer"),
 			     tr("Un rendu est en cours.\n"
 				"Etes-vous sur de vouloir fermer la fenetre?"),
@@ -47,7 +47,7 @@ void RaytracerGUI::sendWarningMessage(string message)
     _message += "<br/>";
   _message += "<span style=\"color:blue;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Warning : </b>";
+  _message += "Warning: </b>";
   _message += message;
   _message += "</span>";
 }
@@ -59,7 +59,7 @@ void RaytracerGUI::sendErrorMessage(string message)
     _message += "<br/>";
   _message += "<span style=\"color:red;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Erreur : </b>";
+  _message += "Error: </b>";
   _message += message;
   _message += "</span>";
 }
@@ -71,7 +71,7 @@ void RaytracerGUI::sendSuccessMessage(string message)
     _message += "<br/>";
   _message += "<span style=\"color:green;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Succes : </b>";
+  _message += "Success: </b>";
   _message += message;
   _message += "</span>";
 }
@@ -83,7 +83,7 @@ void RaytracerGUI::sendMessage(string message)
     _message += "<br/>";
   _message += "<span>";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Info : </b>";
+  _message += "Info: </b>";
   _message += message;
   _message += "</span>";
 }
@@ -109,7 +109,7 @@ void    RaytracerGUI::renderingHasFinished(void)
 
 void    RaytracerGUI::renderingHasBegun(void)
 {
-  
+
 }
 
 void    RaytracerGUI::renderingHasProgressed(double progress)
@@ -127,12 +127,12 @@ void    RaytracerGUI::stopRendering(void)
 
 void    RaytracerGUI::loadScene(void)
 {
-  string scene = 
-    QFileDialog::getOpenFileName(this, tr("Charger une scene"), 
-				 "", "*.xml;;", 0, 
+  string scene =
+    QFileDialog::getOpenFileName(this, tr("Charger une scene"),
+				 "", "*.xml;;", 0,
 				 QFileDialog::DontUseNativeDialog).toStdString();
   if (scene != "")
-    _scene->loadFromFile(scene);
+    _scene->loadFromFile(scene, this);
 }
 
 void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
@@ -168,7 +168,7 @@ void    RaytracerGUI::startRender()
     }
   catch(int error)
     {
-      std::cout << "ERREUR" << error << std::endl;
+      std::cerr << "ERREUR" << error << std::endl;
     }
 }
 

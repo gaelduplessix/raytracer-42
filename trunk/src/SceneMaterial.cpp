@@ -5,36 +5,67 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Thu May 12 17:07:16 2011 gael jochaud-du-plessix
+// Last update Sun May 15 00:45:10 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
 
-void			Scene::_failIfMaterialNameExists(QString	name,
+void			Scene::_parseNormalDef(QDomNode	n,
+					       Material	*mat)
+{
+  QString		value;
+  QString		attrValue;
+
+  if (n.hasAttributes() == false || n.attributes().contains("type") == false)
+  {
+     this->_putError("normalDeformation type not specified", n);
+     return ;
+  }
+  else if (this->_checkContentIsSingleText(n, "normalDeformation"))
+  {
+    attrValue = n.attributes().namedItem("type").nodeValue();
+    value = n.toElement().text();
+    if (this->_isInt(value) == false)
+    {
+      this->_putError("normalDeformation value must be an integer", n);
+      return ;
+    }
+    if (this->_isInt(attrValue) == false)
+    {
+      this->_putError("normalDeformation type must be an integer", n);
+      return ;
+    }
+    mat->setNormalDeformation(attrValue.toInt(NULL, 10),
+			      value.toInt(NULL, 10));
+  }
+}
+
+bool			Scene::_materialExists(QString	name)
+{
+  int		nbMat = this->_materials.size();
+  string	toFind = name.toStdString();
+
+  for (int i = 0; i < nbMat; i++)
+    if (this->_materials[i]->getName() == toFind)
+      return true;
+  return false;
+}
+
+/*bool			Scene::_failIfMaterialNameExists(QString	name,
 							 QDomNode	n)
 {
-  int		nbMat = this->_materials.size();
-  string	toFind = name.toStdString();
+  this->_putError("The material " + toFind + " already exists", n);
+}*/
 
-  for (int i = 0; i < nbMat; i++)
-    if (this->_materials[i]->getName() == toFind)
-      this->_putError("The material " + toFind + " already exists", n);
-}
 
-void			Scene::_failIfMaterialNameDoesntExists(QString	name,
+/*void			Scene::_failIfMaterialNameDoesntExists(QString	name,
 							       QDomNode	n)
 {
-  int		nbMat = this->_materials.size();
-  string	toFind = name.toStdString();
 
-  for (int i = 0; i < nbMat; i++)
-  {
-    if (this->_materials[i]->getName() == toFind)
-      return ;
-  }
-  this->_putError("The material " + toFind + " doesnt exists"
+this->_putError("The material " + toFind + " doesnt exists"
 		  " (you must define a material before use it)", n);
-}
+
+}*/
 
 
 Material		Scene::_getMaterialByName(QString	name)
@@ -64,10 +95,13 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
   bool		normalDef = false;
   bool		diffusedRef = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every material children must be an element", n);
+      return ;
+    }
     if (n.nodeName() == "color")
     {
       if (color)
@@ -207,7 +241,8 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 		      n);
     n = n.nextSibling();
   }
-  this->_materials.push_back(mat);
+  if (this->_hasError == false)
+    this->_materials.push_back(mat);
 }
 
 void			Scene::_parseMaterial(QDomNode n)
@@ -215,17 +250,31 @@ void			Scene::_parseMaterial(QDomNode n)
   QDomNamedNodeMap	nodeMap;
   QString		name;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.nodeName() != "material" || n.isElement() == false)
+    {
       this->_putError("A materials child cannot be empty and must be a "
 			"material element", n);
+      return ;
+    }
     if (n.hasChildNodes() == false)
+    {
       this->_putError("A material element cannot be empty", n);
+      return ;
+    }
     if (n.hasAttributes() == false|| n.attributes().contains("name") == false)
+    {
       this->_putError("The material attributes are missing", n);
+      return ;
+    }
     name = n.attributes().namedItem("name").nodeValue();
-    this->_failIfMaterialNameExists(name, n);
+    if (this->_materialExists(name))
+    {
+      this->_putError("The material " + name.toStdString()+ " already exists",
+		      n);
+      return ;
+    }
     this->_parseMaterialOptions(n.firstChild(), name);
     n = n.nextSibling();
   }
@@ -234,8 +283,11 @@ void			Scene::_parseMaterial(QDomNode n)
 void			Scene::_parseMaterials(QDomNode n)
 {
   if (n.hasChildNodes() == false)
+  {
     this->_putError("A materials element cannot be empty", n);
-  this->_parseMaterial(n.firstChild());
+    return ;
+  }
+ this->_parseMaterial(n.firstChild());
 }
 
 
@@ -247,8 +299,12 @@ Texture*			Scene::_parseTexture(QDomNode	n,
   QString		attrValue;
 
   if (n.hasAttributes() == false || n.attributes().contains("type") == false)
+  {
     this->_putError(obj_name + " type not specified", n);
-  this->_checkContentIsSingleText(n, obj_name);
+    return perlin;
+  }
+  if (this->_checkContentIsSingleText(n, obj_name))
+    return perlin;
   attrValue = n.attributes().namedItem("type").nodeValue();
   value = n.toElement().text();
   if (attrValue == "procedural")
@@ -264,5 +320,5 @@ Texture*			Scene::_parseTexture(QDomNode	n,
   else if (attrValue == "file")
     return new Texture(this->_parseFile(n, obj_name));
   this->_putError("normalDeformation type must be an integer", n);
-  return (NULL);
+  return (perlin);
 }

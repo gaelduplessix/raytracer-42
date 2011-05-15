@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:42 2011 melvin laplanche
-// Last update Thu May 12 00:37:26 2011 melvin laplanche
+// Last update Sun May 15 02:21:20 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -18,10 +18,13 @@ Spot*			Scene::_parseSpotLight(QDomNode	n)
   bool			intensity = false;
   bool			directLight = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every light children must be an element", n);
+      return NULL;
+    }
     if (n.nodeName() == "position")
     {
       if (position)
@@ -67,13 +70,19 @@ Spot*			Scene::_parseSpotLight(QDomNode	n)
       }
     }
     else
+    {
       this->_putError(n.nodeName().toStdString() + " is not a valid element",
 		      n);
-    n = n.nextSibling();
+      return NULL;
+    }
+   n = n.nextSibling();
   }
   if (!position || !color || !intensity)
+  {
     this->_putError("A spot must have a position, a color, "
 		    "and an intensity", n);
+    return NULL;
+  }
   return light;
 }
 
@@ -84,10 +93,13 @@ ParallelLight*			Scene::_parseParallelLight(QDomNode	n)
   bool			color = false;
   bool			intensity = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every light children must be an element", n);
+      return NULL;
+    }
     if (n.nodeName() == "direction")
     {
       if (direction)
@@ -127,8 +139,11 @@ ParallelLight*			Scene::_parseParallelLight(QDomNode	n)
     n = n.nextSibling();
   }
   if (!direction || !color || !intensity)
+  {
     this->_putError("A parallel light must have a direction, color, "
 		    "and an intensity", n);
+    return NULL;
+  }
   return light;
 }
 
@@ -141,10 +156,13 @@ SphericalLight*			Scene::_parseSphericalLight(QDomNode	n)
   bool			size = false;
   bool			directLight = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every light children must be an element", n);
+      return NULL;
+    }
     if (n.nodeName() == "position")
     {
       if (position)
@@ -201,13 +219,19 @@ SphericalLight*			Scene::_parseSphericalLight(QDomNode	n)
       }
     }
     else
+    {
       this->_putError(n.nodeName().toStdString() + " is not a valid element",
 		      n);
+      return NULL;
+    }
     n = n.nextSibling();
   }
   if (!position || !color || !intensity || !size)
+  {
     this->_putError("A spherical light must have a position, a color, a size, "
 		    "and an intensity", n);
+    return NULL;
+  }
   return light;
 }
 
@@ -221,10 +245,13 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
   bool			intensity = false;
   bool			directLight = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every light children must be an element", n);
+      return NULL;
+    }
     if (n.nodeName() == "point1")
     {
       if (p1)
@@ -292,13 +319,19 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
       }
     }
     else
+    {
       this->_putError(n.nodeName().toStdString() + " is not a valid element",
 		      n);
+      return NULL;
+    }
     n = n.nextSibling();
   }
   if (!p1 || !p2 || !p3 || !color || !intensity)
+  {
     this->_putError("A parallelogram light must have a point1, a point2, "
 		    "a point3, a color, and an intensity", n);
+    return NULL;
+  }
   return light;
 }
 
@@ -307,18 +340,27 @@ void			Scene::_parseLight(QDomNode n)
   QDomNamedNodeMap	nodeMap;
   QString		type;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.nodeName() != "light" || n.isElement() == false)
+    {
       this->_putError("A lights child cannot be empty and must be a "
 		      "light element", n);
+      return ;
+    }
     if (n.hasChildNodes() == false)
+    {
       this->_putError("A light element cannot be empty", n);
+      return ;
+    }
     if (n.hasAttributes() != false && n.attributes().contains("type"))
       type = n.attributes().namedItem("type").nodeValue();
     if ((n.hasAttributes() == false
 	 || n.attributes().contains("type") == false))
+    {
       this->_putError(type.toStdString() + " is not a valide light type", n);
+      return ;
+    }
     else if (type == "spot")
       this->_lights.push_back(this->_parseSpotLight(n.firstChild()));
     else if (type == "parallel")
@@ -328,7 +370,10 @@ void			Scene::_parseLight(QDomNode n)
     else if (type == "parallelogram")
       this->_lights.push_back(this->_parseParallelogramLight(n.firstChild()));
     else
+    {
       this->_putError(type.toStdString() + " is not a valide light type", n);
+      return ;
+    }
     n = n.nextSibling();
   }
 }
@@ -337,5 +382,6 @@ void			Scene::_parseLights(QDomNode n)
 {
   if (n.hasChildNodes() == false)
     this->_putError("A lights element cannot be empty", n);
-  this->_parseLight(n.firstChild());
+  else
+    this->_parseLight(n.firstChild());
 }
