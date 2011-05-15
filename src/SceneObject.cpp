@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu May 12 17:10:30 2011 gael jochaud-du-plessix
+// Last update Sun May 15 01:57:31 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -37,14 +37,14 @@ bool			Scene::_parseCommonElement(QDomNode	    n,
       rotation = true;
     }
   }
-  return (false);
+  return false;
 }
 
 EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 						      QString  material,
 						      Object*  obj)
 {
-  Material			mat;
+  Material			mat = this->_getMaterialByName(material);
   bool				position = false;
   Point				positionValue;
   bool				rotation = false;
@@ -52,10 +52,13 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
   string			equationValue;
   bool				equation = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (n.nodeName() == "position")
     {
       if (position)
@@ -85,8 +88,8 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 			  "the first defined will be used", n);
       else
       {
-	this->_checkContentIsSingleText(n, "equation");
-	equationValue = n.toElement().text().toStdString();
+	if (this->_checkContentIsSingleText(n, "equation"))
+	  equationValue = n.toElement().text().toStdString();
 	equation = true;
       }
     }
@@ -95,27 +98,31 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
     n = n.nextSibling();
   }
   if (!equation || !position || !rotation)
+  {
     this->_putError("A equation must have a position, a rotation "
 		    "and an equation", n);
+    return NULL;
+  }
   return new EquationPrimitive(equationValue, obj,
 			       positionValue, rotationValue, mat);
-  (void)material;
 }
 
 Sphere*			Scene::_parseSphere(QDomNode	n,
 					    QString	material,
 					    Object*	obj)
 {
-  Material			mat;
   bool				position = false;
   bool				rotation = false;
   bool				radius = false;
   Sphere			*sphere = new Sphere();
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (this->_parseCommonElement(n, sphere, position, rotation) == false)
     {
       if (n.nodeName() == "radius")
@@ -135,7 +142,10 @@ Sphere*			Scene::_parseSphere(QDomNode	n,
     n = n.nextSibling();
   }
   if (!radius || !position || !rotation)
+  {
     this->_putError("A sphere must have a position, rotation and a radius", n);
+    return NULL;
+  }
   sphere->setMaterial(_getMaterialByName(material));
   sphere->setObject(obj);
   return sphere;
@@ -145,16 +155,18 @@ CubeTroue*			Scene::_parseCubeTroue(QDomNode	n,
 						       QString	material,
 						       Object*	obj)
 {
-  Material			mat;
   bool				position = false;
   bool				rotation = false;
   bool				coeff = false;
   CubeTroue			*cube = new CubeTroue();
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (this->_parseCommonElement(n, cube, position, rotation) == false)
     {
       if (n.nodeName() == "coeff")
@@ -174,7 +186,10 @@ CubeTroue*			Scene::_parseCubeTroue(QDomNode	n,
     n = n.nextSibling();
   }
   if (!position || !rotation || !coeff)
+  {
     this->_putError("A cube must have a position, rotation and a coeff", n);
+    return NULL;
+  }
   cube->setMaterial(_getMaterialByName(material));
   cube->setObject(obj);
   return cube;
@@ -184,17 +199,19 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
 						      QString	material,
 						      Object*	obj)
 {
-  Material			mat;
   bool				position = false;
   bool				rotation = false;
   bool				vert1 = false;
   bool				vert2 = false;
   Triangle			*triangle = new Triangle();
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (this->_parseCommonElement(n, triangle, position, rotation) == false)
     {
       if (n.nodeName() == "vertex1")
@@ -225,8 +242,11 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
     n = n.nextSibling();
   }
   if (!position || !rotation || !vert1 || !vert2)
+  {
     this->_putError("A triangle must have a position, a rotation, a vertex1 "
 		    "and a vertext2", n);
+    return NULL;
+  }
   triangle->setMaterial(_getMaterialByName(material));
   triangle->setObject(obj);
   return triangle;
@@ -236,7 +256,6 @@ Cone*			Scene::_parseCone(QDomNode	n,
 					  QString	material,
 					  Object*	obj)
 {
-  Material			mat;
   bool				position = false;
   bool				rotation = false;
   bool				min = false;
@@ -244,10 +263,13 @@ Cone*			Scene::_parseCone(QDomNode	n,
   bool				radius = false;
   Cone				*cone = new Cone();
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (this->_parseCommonElement(n, cone, position, rotation) == false)
     {
       if (n.nodeName() == "radius")
@@ -289,8 +311,11 @@ Cone*			Scene::_parseCone(QDomNode	n,
     n = n.nextSibling();
   }
   if (!position || !rotation || !radius)
+  {
     this->_putError("A cone must have a position, a rotation, and a radius",
 		    n);
+    return NULL;
+  }
   cone->setMaterial(_getMaterialByName(material));
   cone->setObject(obj);
   return cone;
@@ -300,7 +325,6 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
 						      QString	material,
 						      Object*	obj)
 {
-  Material			mat;
   bool				position = false;
   bool				rotation = false;
   bool				min = false;
@@ -308,10 +332,13 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
   bool				radius = false;
   Cylinder			*cylinder = new Cylinder();
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (this->_parseCommonElement(n, cylinder, position, rotation) == false)
     {
       if (n.nodeName() == "radius")
@@ -353,8 +380,11 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
     n = n.nextSibling();
   }
   if (!position || !rotation || !radius)
+  {
     this->_putError("A cylinder must have a position, a rotation, "
 		    "and a radius", n);
+    return NULL;
+  }
   cylinder->setMaterial(_getMaterialByName(material));
   cylinder->setObject(obj);
   return cylinder;
@@ -364,7 +394,6 @@ Plane*			Scene::_parsePlane(QDomNode	n,
 					   QString	material,
 					   Object*	obj)
 {
-  Material			mat;
   bool				position = false;
   bool				rotation = false;
   bool				x = false;
@@ -374,7 +403,10 @@ Plane*			Scene::_parsePlane(QDomNode	n,
   while (n.isNull() == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (this->_parseCommonElement(n, plane, position, rotation) == false)
     {
       if (n.nodeName() == "limitX")
@@ -405,7 +437,10 @@ Plane*			Scene::_parsePlane(QDomNode	n,
     n = n.nextSibling();
   }
   if (!position || !rotation)
+  {
     this->_putError("A sphere must have a position and a rotation", n);
+    return NULL;
+  }
   plane->setMaterial(_getMaterialByName(material));
   plane->setObject(obj);
   return plane;
@@ -415,17 +450,19 @@ Torus*			Scene::_parseTorus(QDomNode	n,
 					   QString	material,
 					   Object*	obj)
 {
-  Material			mat;
   bool				position = false;
   bool				rotation = false;
   bool				minor = false;
   bool				major = false;
   Torus				*torus = new Torus();
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
     if (this->_parseCommonElement(n, torus, position, rotation) == false)
     {
       if (n.nodeName() == "minor")
@@ -456,7 +493,10 @@ Torus*			Scene::_parseTorus(QDomNode	n,
     n = n.nextSibling();
   }
   if (!minor || !major || !position || !rotation)
+  {
     this->_putError("A torus must have a position, rotation and a radius", n);
+    return NULL;
+  }
   torus->setMaterial(_getMaterialByName(material));
   torus->setObject(obj);
   return torus;
@@ -468,20 +508,35 @@ void			Scene::_parsePrimitive(QDomNode n,
   QString			type;
   QString			material;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.nodeName() != "primitive" || n.isElement() == false)
+    {
       this->_putError("A primitives child cannot be empty and must be a "
 		      "primitive element", n);
+      return ;
+    }
     if (n.hasChildNodes() == false)
+    {
       this->_putError("A primitive element cannot be empty", n);
+      return ;
+    }
     if (n.hasAttributes() == false
 	|| n.attributes().contains("type") == false
 	|| n.attributes().contains("material") == false)
+    {
       this->_putError("The primitive attributes are missing", n);
+      return ;
+    }
     material = n.attributes().namedItem("material").nodeValue();
     type = n.attributes().namedItem("type").nodeValue();
-    this->_failIfMaterialNameDoesntExists(material, n);
+    if (this->_materialExists(material) == false)
+    {
+      this->_putError("The material " + material.toStdString() +
+		      " doesnt exists" + " (you must define a material " +
+		      "before use it)", n);
+      return ;
+    }
     if (type == "sphere")
       obj->addPrimitive(this->_parseSphere(n.firstChild(), material, obj));
     else if (type == "torus")
@@ -499,8 +554,11 @@ void			Scene::_parsePrimitive(QDomNode n,
     else if (type == "equation")
       obj->addPrimitive(this->_parseEquation(n.firstChild(), material, obj));
     else
+    {
       this->_putError(type.toStdString() + " is not a valid primitive type",
 		      n);
+      return ;
+    }
     n = n.nextSibling();
   }
 }
@@ -510,7 +568,8 @@ void			Scene::_parsePrimitives(QDomNode n,
 {
   if (n.hasChildNodes() == false)
     this->_putError("A primitives element cannot be empty", n);
-  this->_parsePrimitive(n.firstChild(), obj);
+  else
+    this->_parsePrimitive(n.firstChild(), obj);
 }
 
 void			Scene::_parseObjectOptions(QDomNode	n)
@@ -521,10 +580,13 @@ void			Scene::_parseObjectOptions(QDomNode	n)
   bool				solid = false;
   bool				primitive = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every object children must be an element", n);
+      return ;
+    }
     if (n.nodeName() == "position")
     {
       if (position)
@@ -571,7 +633,8 @@ void			Scene::_parseObjectOptions(QDomNode	n)
   if (!primitive || !solid || !position || !rotation)
     this->_putError("An object must have a position, rotation, solid, "
 		    "and a leat one primitive", n);
-  this->_objects.push_back(obj);
+  else
+    this->_objects.push_back(obj);
 }
 
 void			Scene::_parseObject(QDomNode n)
@@ -579,13 +642,19 @@ void			Scene::_parseObject(QDomNode n)
   QDomNamedNodeMap	nodeMap;
   QString		name;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.nodeName() != "object" || n.isElement() == false)
+    {
       this->_putError("An objects child cannot be empty and must be an "
 			"object element", n);
+      return ;
+    }
     if (n.hasChildNodes() == false)
+    {
       this->_putError("An object element cannot be empty", n);
+      return;
+    }
     this->_parseObjectOptions(n.firstChild());
     n = n.nextSibling();
   }
@@ -595,5 +664,6 @@ void			Scene::_parseObjects(QDomNode n)
 {
   if (n.hasChildNodes() == false)
     this->_putError("An objects element cannot be empty", n);
-  this->_parseObject(n.firstChild());
+  else
+    this->_parseObject(n.firstChild());
 }

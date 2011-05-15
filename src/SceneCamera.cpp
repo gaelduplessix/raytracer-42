@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 18:56:38 2011 melvin laplanche
-// Last update Thu May 12 00:06:50 2011 melvin laplanche
+// Last update Sat May 14 18:06:52 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -17,10 +17,13 @@ void			Scene::_parseCameraCinema(QDomNode n)
   bool		position = false;
   bool		rotation = false;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
+    {
       this->_putError("Every cinema camera children must be an element", n);
+      return ;
+    }
     if (n.nodeName() == "position")
     {
       if (position)
@@ -48,9 +51,12 @@ void			Scene::_parseCameraCinema(QDomNode n)
 		      n);
     n = n.nextSibling();
   }
-  if (position == false)
+  if (this->_hasError == false && position == false)
+  {
     this->_putError("A camera must have at least a position",
 		    firstChild.parentNode());
+    return ;
+  }
   this->_cameras.push_back(cam);
 }
 
@@ -58,20 +64,32 @@ void			Scene::_parseCamera(QDomNode n)
 {
   QDomNamedNodeMap	nodeMap;
 
-  while (n.isNull() == false)
+  while (n.isNull() == false && this->_hasError == false)
   {
     if (n.nodeName() != "camera" || n.isElement() == false)
+    {
       this->_putError("A cameras child cannot be empty and must be a "
-			"camera element", n);
+		      "camera element", n);
+      return ;
+    }
     if (n.hasChildNodes() == false)
+    {
       this->_putError("A camera element cannot be empty", n);
+      return ;
+    }
     if (n.hasAttributes() == false|| n.attributes().contains("type") == false)
+    {
       this->_putError("The camera attributes are missing", n);
+      return ;
+    }
     if (n.attributes().namedItem("type").nodeValue() == "cinema")
       this->_parseCameraCinema(n.firstChild());
     else
+    {
       this->_putError(n.attributes().namedItem("type").nodeValue()
 		      .toStdString() + "is not a valid camera type", n);
+      return ;
+    }
     n = n.nextSibling();
   }
 }
@@ -79,6 +97,9 @@ void			Scene::_parseCamera(QDomNode n)
 void			Scene::_parseCameras(QDomNode n)
 {
   if (n.hasChildNodes() == false)
+  {
     this->_putError("A cameras element cannot be empty", n);
+    return ;
+  }
   this->_parseCamera(n.firstChild());
 }
