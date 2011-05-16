@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Mon May 16 15:14:18 2011 melvin laplanche
+// Last update Mon May 16 22:30:57 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -18,6 +18,7 @@
 #include <iostream>
 #include <QString>
 #include <QColor>
+#include <QObject>
 #include <QtXml>
 #include <sstream>
 
@@ -103,10 +104,15 @@ private:
   Rotation		_parseRotation(QDomNode);
   bool			_checkContentIsSingleText(QDomNode, string);
   void			_putWarning(string, QDomNode);
+  void			_putWarning(QString, QDomNode);
   void			_putError(string, QDomNode);
+  void			_putError(QString, QDomNode);
   void			_putError(string);
+  void			_putError(QString);
   void			_putSuccess(string);
+  void			_putSuccess(QString);
   void			_putInfo(string);
+  void			_putInfo(QString);
   void			_parseMaterialOptions(QDomNode, QString);
   QRgb			_parseColor(QDomNode);
   bool			_isDouble(QString);

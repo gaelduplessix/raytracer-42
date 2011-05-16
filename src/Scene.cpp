@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sun May 15 17:05:31 2011 melvin laplanche
+// Last update Mon May 16 23:08:19 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -110,7 +110,8 @@ void			Scene::_putError(string		msg,
   stringstream	ss;
 
   if (n.lineNumber() != -1)
-    ss << msg << " at line " << n.lineNumber() << endl;
+    ss << msg << QObject::tr(" at line ").toStdString() << n.lineNumber()
+       << endl;
   else
     ss << msg << endl;
   if (this->_interface != NULL)
@@ -120,13 +121,24 @@ void			Scene::_putError(string		msg,
   this->_hasError = true;
 }
 
+void			Scene::_putError(QString	msg,
+					 QDomNode	n)
+{
+  this->_putError(msg.toStdString(), n);
+}
+
 void			Scene::_putError(string		msg)
 {
   if (this->_interface != NULL)
     this->_interface->sendErrorMessage(msg + "\n");
   else
-    cerr << "Parse error: " << msg << endl;
+    cerr << QObject::tr("Parse error: ").toStdString() << msg << endl;
   this->_hasError = true;
+}
+
+void			Scene::_putError(QString	msg)
+{
+  this->_putError(msg.toStdString());
 }
 
 void			Scene::_putSuccess(string		msg)
@@ -134,7 +146,12 @@ void			Scene::_putSuccess(string		msg)
   if (this->_interface != NULL)
     this->_interface->sendSuccessMessage(msg + "\n");
   else
-    cerr << "Success: " << msg << endl;
+    cerr << QObject::tr("Success: ").toStdString() << msg << endl;
+}
+
+void			Scene::_putSuccess(QString		msg)
+{
+  this->_putSuccess(msg.toStdString());
 }
 
 void			Scene::_putInfo(string		msg)
@@ -142,7 +159,12 @@ void			Scene::_putInfo(string		msg)
   if (this->_interface != NULL)
     this->_interface->sendMessage(msg + "\n");
   else
-    cout << "Info: " << msg << endl;
+    cout << QObject::tr("Info: ").toStdString() << msg << endl;
+}
+
+void			Scene::_putInfo(QString		msg)
+{
+  this->_putInfo(msg.toStdString());
 }
 
 void			Scene::_putWarning(string	msg,
@@ -151,13 +173,20 @@ void			Scene::_putWarning(string	msg,
   stringstream	ss;
 
   if (n.lineNumber() != -1)
-    ss << msg << " at line " << n.lineNumber() << endl;
+    ss << msg << QObject::tr(" at line ").toStdString()
+       << n.lineNumber() << endl;
   else
     ss << msg << endl;
   if (this->_interface != NULL)
     this->_interface->sendWarningMessage(ss.str());
   else
-    cerr << "Warning: " << ss.str();
+    cerr << QObject::tr("Warning: ").toStdString() << ss.str();
+}
+
+void			Scene::_putWarning(QString	msg,
+					   QDomNode	n)
+{
+  this->_putWarning(msg.toStdString(), n);
 }
 
 bool			Scene::_checkContentIsSingleText(QDomNode	n,
@@ -166,7 +195,8 @@ bool			Scene::_checkContentIsSingleText(QDomNode	n,
   if (n.isElement() == false || n.hasChildNodes() == false
       || n.childNodes().count() != 1 || n.firstChild().isText() == false)
   {
-    this->_putError("A " + obj + " must be an element with a text value", n);
+    this->_putError(QObject::tr("A %1 must be an element with a text value")
+		    .arg(obj.c_str()), n);
     return false;
   }
   return true;
@@ -187,8 +217,8 @@ Point			Scene::_parsePosition(QDomNode	n,
 		values[1].toDouble(&test[1]),
 		values[2].toDouble(&test[2]));
     if (!test[0] || !test[1] || !test[2])
-      this->_putError("A " + name + " must have 3 integers values separated "
-		      "with comma", n);
+      this->_putError(QObject::tr("A %1 must have 3 integers values separated "
+				  "with comma").arg(name.c_str()), n);
   }
   else
     p = Point(0, 0, 0);
@@ -205,7 +235,8 @@ Rotation		Scene::_parseRotation(QDomNode	n)
   if (this->_checkContentIsSingleText(n, "rotation"))
   {
     if (n.hasAttributes() == false || n.attributes().contains("type") == false)
-      this->_putWarning("Rotation type not specified, assuming radian", n);
+      this->_putWarning(QObject::tr("Rotation type not specified, "
+				    "assuming radian"), n);
     else
     {
       QString	AttrValue = n.attributes().namedItem("type").nodeValue();
@@ -214,8 +245,8 @@ Rotation		Scene::_parseRotation(QDomNode	n)
       else if (AttrValue != "radian")
       {
 	r = Rotation(0, 0, 0);
-	this->_putError("Rotation type " + AttrValue.toStdString() +
-			" does not exists", n);
+	this->_putError(QObject::tr("Rotation type %1 does not exists")
+			.arg(AttrValue), n);
       }
     }
     if (this->_hasError == false)
@@ -229,8 +260,8 @@ Rotation		Scene::_parseRotation(QDomNode	n)
 		     values[2].toDouble(&test[2]) * ((radian) ? (1)
 						     : (M_PI / 180)));
       if (!test[0] || !test[1] || !test[2])
-	this->_putError("A rotation must have 3 integers values "
-			"separated with comma", n);
+	this->_putError(QObject::tr("A rotation must have 3 integers values "
+				    "separated with comma"), n);
     }
   }
   else
@@ -275,12 +306,13 @@ double			Scene::_parseDouble(QDomNode	n,
   {
     value = n.toElement().text().toDouble(&test);
     if (test == false)
-      this->_putError(name + " must be a double", n);
+      this->_putError(QObject::tr("%1 must be a double").arg(name.c_str()), n);
     if (min != max)
     {
       if (value < min || value > max)
       {
-	ss << name << " range is " << min << " <= x <= " << max;
+	ss << QObject::tr("%1 range is ").arg(name.c_str()).toStdString()
+	   << min << " <= x <= " << max;
 	this->_putError(ss.str(), n);
       }
     }
@@ -300,7 +332,7 @@ bool			Scene::_parseBoolean(QDomNode	n,
       return false;
     else if (value == "true")
       return true;
-    this->_putError(name + " must be a boolean", n);
+    this->_putError(QObject::tr("%1 must be a boolean").arg(name.c_str()), n);
   }
   return false;
 }
@@ -318,12 +350,14 @@ int			Scene::_parseInt(QDomNode	n,
   {
     value = n.toElement().text().toInt(&test);
     if (test == false)
-      this->_putError(name + " must be an integer", n);
+      this->_putError(QObject::tr("%1 must be an integer").arg(name.c_str()),
+		      n);
     if (min != max)
     {
       if (value < min || value > max)
       {
-	ss << name << " range is " << min << " <= x <= " << max;
+	ss << QObject::tr("%1 range is ").arg(name.c_str()).toStdString()
+	   << min << " <= x <= " << max;
 	this->_putError(ss.str(), n);
       }
     }
@@ -349,7 +383,7 @@ QRgb			Scene::_parseColor(QDomNode	n)
 	  || this->_isHexa(value.mid(2, 2)) == false
 	  || this->_isHexa(value.mid(4, 2)) == false)
       {
-	this->_putError("Wrong color value", n);
+	this->_putError(QObject::tr("Wrong color value"), n);
 	r = g = b = 0;
       }
       else
@@ -367,7 +401,7 @@ QRgb			Scene::_parseColor(QDomNode	n)
 	  || this->_isHexa(value.mid(6, 2)) == false)
       {
 	r = g = b = 0;
-	this->_putError("Wrong color value", n);
+	this->_putError(QObject::tr("Wrong color value"), n);
       }
       else
       {
@@ -388,7 +422,7 @@ QRgb			Scene::_parseColor(QDomNode	n)
 	    || (values.count() != 3 && this->_isInt(values[3]) == false))
 	{
 	  r = g = b = 0;
-	  this->_putError("Wrong color value", n);
+	  this->_putError(QObject::tr("Wrong color value"), n);
 	}
 	r = values[0].toInt(NULL, 10);
 	g = values[1].toInt(NULL, 10);
@@ -399,13 +433,13 @@ QRgb			Scene::_parseColor(QDomNode	n)
       else
       {
 	r = g = b = 0;
-	this->_putError("Wrong color value", n);
+	this->_putError(QObject::tr("Wrong color value"), n);
       }
     }
     else
     {
       r = g = b = 0;
-      this->_putError("Wrong color value", n);
+      this->_putError(QObject::tr("Wrong color value"), n);
     }
   }
   else
@@ -413,7 +447,7 @@ QRgb			Scene::_parseColor(QDomNode	n)
   if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255
       || a < 0 || a > 255)
   {
-    this->_putError("Wrong color range (0 <= x <= 255 (FF))", n);
+    this->_putError(QObject::tr("Wrong color range (0 <= x <= 255 (FF))"), n);
     r = g = b = a = -1;
   }
   color.setRgb(r, g, b, a);
@@ -429,7 +463,7 @@ string			Scene::_parseFile(QDomNode	n,
   {
     value = n.toElement().text();
     if (QFileInfo(value).exists() == false)
-      this->_putError("The file " + value.toStdString() + " does not exists",
+      this->_putError(QObject::tr("The file %1 does not exists").arg(value),
 		      n);
   }
   else
@@ -480,7 +514,8 @@ void		Scene::loadFromFile(string		filename,
 
   this->_clearOldScene();
   this->_interface = interface;
-  this->_interface->sendMessage("Start parsing " + filename);
+  this->_interface->sendMessage(QObject::tr("Start parsing %1")
+				.arg(filename.c_str()).toStdString());
   document = this->_loadFromFile_checkAndGetFile(filename);
   if (this->_hasError == false)
   {
@@ -497,14 +532,14 @@ void		Scene::loadFromFile(string		filename,
     if (this->_hasError == false)
     {
       if (has_cameras == false)
-	this->_putError("A scene must have a camera.");
+	this->_putError(QObject::tr("A scene must have a camera."));
     }
   }
   this->_parsingDone = true;
   if (this->isValid())
-    this->_putSuccess("Parsing finished");
+    this->_putSuccess(QObject::tr("Parsing finished"));
   else
-    this->_putError("Parsing exited abnormally");
+    this->_putError(QObject::tr("Parsing exited abnormally"));
 }
 
 void			Scene::_dispatcher(QDomNode	node,
@@ -516,32 +551,32 @@ void			Scene::_dispatcher(QDomNode	node,
   if (node.nodeName() == "cameras")
   {
     if (has_cameras)
-      this->_putWarning("Several cameras elements found. Dude, that's dirty!",
-			node);
+      this->_putWarning(QObject::tr("Several cameras elements found. "
+				    "Dude, that's dirty!"), node);
     this->_parseCameras(node);
     has_cameras = true;
   }
   else if (node.nodeName() == "materials")
   {
     if (has_materials)
-      this->_putWarning("Several materials elements found."
-			"Dude, that's dirty!", node);
+      this->_putWarning(QObject::tr("Several materials elements found. "
+				    "Dude, that's dirty!"), node);
     this->_parseMaterials(node);
     has_materials = true;
   }
   else if (node.nodeName() == "objects")
   {
     if (has_objects)
-      this->_putWarning("Several objects elements found."
-			"Dude, that's dirty!", node);
+      this->_putWarning(QObject::tr("Several objects elements found. "
+				    "Dude, that's dirty!"), node);
     this->_parseObjects(node);
     has_objects = true;
   }
   else if (node.nodeName() == "lights")
   {
     if (has_lights)
-      this->_putWarning("Several lights elements found."
-			"Dude, that's dirty!", node);
+      this->_putWarning(QObject::tr("Several lights elements found. "
+				    "Dude, that's dirty!"), node);
     this->_parseLights(node);
     has_lights = true;
   }
@@ -553,9 +588,9 @@ bool			Scene::_loadFromFile_validFirstDepth(QDomNode n)
       && n.nodeName() != "materials"
       && n.nodeName() != "lights"
       && n.nodeName() != "objects")
-    this->_putError(n.nodeName().toStdString() + " isn't a valid name.", n);
+    this->_putError(QObject::tr("%1 isn't a valid name").arg(n.nodeName()), n);
   if (n.hasChildNodes() == false)
-    this->_putError(n.nodeName().toStdString() + " has no childs.", n);
+    this->_putError(QObject::tr("%1 has no childs").arg(n.nodeName()), n);
   return (this->_hasError == false);
 }
 
@@ -572,13 +607,14 @@ QDomDocument		Scene::_loadFromFile_checkAndGetFile(string filename)
   {
     if (document.setContent(&file, &errorMsg, &errorLine, &errorCol) == false)
     {
-      ss << errorMsg.toStdString() << " at line " << errorLine << ".";
+      ss << errorMsg.toStdString() << QObject::tr(" at line ").toStdString()
+	 << errorLine << ".";
       this->_putError(ss.str());
     }
     file.close();
   }
   else
-    this->_putError("The file \"" + filename + "\" doesn't exists or " +
-		    "is not readable.");
+    this->_putError(QObject::tr("The file \"%1\" doesn't exists or "
+				"is not readable.").arg(filename.c_str()));
   return document;
 }
