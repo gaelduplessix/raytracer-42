@@ -23,8 +23,8 @@
 	<primitives>
 	  <primitive type="sphere" material="sol">
 	    <position>20, 0, 0</position>
-	    <rotation type="radian">0, 0, 0</rotation>
-	    <radius>3</radius>
+	    <rotation>0, 0, 0</rotation>
+	    <radius>2</radius>
 	  </primitive>
 	</primitives>
     </object>

@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 16 12:30:01 2011 melvin laplanche
+// Last update Mon May 16 14:20:01 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -251,7 +251,8 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
   }
   triangle->setMaterial(_getMaterialByName(material));
   triangle->setObject(obj);
-  return triangle;
+  triangle->setCachedValues();
+  return (triangle);
 }
 
 Cone*			Scene::_parseCone(QDomNode	n,
