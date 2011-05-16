@@ -15,16 +15,18 @@
       <reflection>0</reflection>
     </material>
   </materials>
+
   <objects>
     <object>
       <position>0, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
       <solid>true</solid>
 	<primitives>
-	  <primitive type="sphere" material="sol">
+	  <primitive type="parallelogram" material="sol">
 	    <position>20, 0, 0</position>
+	    <vertex1>25, 0, 5</vertex1>
+	    <vertex2>20, 5, 0</vertex2>
 	    <rotation>0, 0, 0</rotation>
-	    <radius>2</radius>
 	  </primitive>
 	</primitives>
     </object>

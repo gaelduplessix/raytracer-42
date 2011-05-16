@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Sun May 15 03:01:39 2011 melvin laplanche
+// Last update Mon May 16 17:14:10 2011 samuel olivier
 //
 
 #include <QMessageBox>
@@ -132,7 +132,11 @@ void    RaytracerGUI::loadScene(void)
 				 "", "*.xml;;", 0,
 				 QFileDialog::DontUseNativeDialog).toStdString();
   if (scene != "")
-    _scene->loadFromFile(scene, this);
+    {
+      _scene->loadFromFile(scene, this);
+      _ui->_console->setHtml(_message.c_str());
+      _ui->_console->moveCursor(QTextCursor::End);
+    }
 }
 
 void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)

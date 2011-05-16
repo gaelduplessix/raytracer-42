@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 16 16:44:16 2011 melvin laplanche
+// Last update Mon May 16 16:54:11 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -412,7 +412,7 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
   }
   para->setMaterial(_getMaterialByName(material));
   para->setObject(obj);
-  //triangle->setcatchValue();
+  para->setCachedValues();
   return para;
 }
 
