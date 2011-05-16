@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sun May 15 16:32:59 2011 melvin laplanche
+// Last update Mon May 16 15:14:18 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -28,6 +28,7 @@
 #include "Vector.hpp"
 #include "Object.hpp"
 #include "Light.hpp"
+#include "Sett.hpp"
 #include "Plane.hpp"
 #include "Torus.hpp"
 #include "Triangle.hpp"
@@ -40,6 +41,7 @@
 #include "Spot.hpp"
 #include "Sphere.hpp"
 #include "EquationPrimitive.hpp"
+#include "Parallelogram.hpp"
 
 using namespace std;
 
@@ -126,6 +128,8 @@ private:
   CubeTroue*		_parseCubeTroue(QDomNode, QString, Object*);
   Triangle*		_parseTriangle(QDomNode, QString, Object*);
   EquationPrimitive*	_parseEquation(QDomNode, QString, Object*);
+  Parallelogram*	_parseParallelogram(QDomNode, QString, Object*);
+  void			_parseSett(QDomNode, QString);
   Material		_getMaterialByName(QString);
   void			_parseLight(QDomNode);
   void			_parseLights(QDomNode);

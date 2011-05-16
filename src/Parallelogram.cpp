@@ -1,11 +1,11 @@
 //
 // Parallelogram.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Thu May 12 16:46:56 2011 gael jochaud-du-plessix
+// Last update Mon May 16 15:00:01 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -14,6 +14,8 @@
 #include "Parallelogram.hpp"
 #include "EquationSolver.hpp"
 
+Parallelogram::Parallelogram(void)
+{}
 Parallelogram::Parallelogram(Object*object,
 			     const Point& absolutePosition,
 			     const Point& vertex1,
@@ -55,7 +57,7 @@ Parallelogram::addIntersectionWithRay(const Ray& ray,
   double	D = -v1._z * ray._vector._y * v2._x + v1._y * ray._vector._z *
     v2._x + ray._vector._x * v1._z * v2._y + ray._vector._y * v1._x * v2._z
     - ray._vector._z * v1._x * v2._y-ray._vector._x * v1._y * v2._z;
-  double	u = -(-ray._vector._y * v2._x * _absolutePosition._z - 
+  double	u = -(-ray._vector._y * v2._x * _absolutePosition._z -
 		      ray._vector._y * ray._point._x * v2._z + ray._vector._y *
 		      v2._x * ray._point._z + ray._vector._y *
 		      _absolutePosition._x * v2._z + ray._vector._x * v2._y *
@@ -92,7 +94,7 @@ Parallelogram::addIntersectionWithRay(const Ray& ray,
     return ;
   vector<double>       k;
   k.push_back(t);
-  intersection.push_back((t_intersected_object){this, k});  
+  intersection.push_back((t_intersected_object){this, k});
 }
 
 void	Parallelogram::intersectWithRay(const Ray& ray,
@@ -104,7 +106,7 @@ void	Parallelogram::intersectWithRay(const Ray& ray,
   double	D = -v1._z * ray._vector._y * v2._x + v1._y * ray._vector._z *
     v2._x + ray._vector._x * v1._z * v2._y + ray._vector._y * v1._x * v2._z
     - ray._vector._z * v1._x * v2._y-ray._vector._x * v1._y * v2._z;
-  double	u = -(-ray._vector._y * v2._x * _absolutePosition._z - 
+  double	u = -(-ray._vector._y * v2._x * _absolutePosition._z -
 		      ray._vector._y * ray._point._x * v2._z + ray._vector._y *
 		      v2._x * ray._point._z + ray._vector._y *
 		      _absolutePosition._x * v2._z + ray._vector._x * v2._y *

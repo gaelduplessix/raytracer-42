@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 16 14:20:01 2011 gael jochaud-du-plessix
+// Last update Mon May 16 16:44:16 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -107,6 +107,109 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
   }
   return new EquationPrimitive(equationValue, obj,
 			       positionValue, rotationValue, mat);
+}
+
+void			Scene::_parseSett(QDomNode n,
+					  QString  material)
+{
+  Material			mat = this->_getMaterialByName(material);
+  bool				position = false;
+  Point				positionValue;
+  bool				rotation = false;
+  Rotation			rotationValue;
+  bool				solidValue;
+  bool				solid = false;
+  Point				widthValue;
+  bool				width = false;
+  Point				heightValue;
+  bool				height = false;
+  Point				depthValue;
+  bool				depth = false;
+
+  while (n.isNull() == false && this->_hasError == false)
+  {
+    if (n.hasChildNodes() == false || n.isElement() == false)
+    {
+      this->_putError("Every primitive children must be an element", n);
+      return ;
+    }
+    if (n.nodeName() == "position")
+    {
+      if (position)
+	this->_putWarning("An parallelepipede has several position, "
+			  "the first defined will be used", n);
+      else
+      {
+	positionValue = _parsePosition(n, "position");
+	position = true;
+      }
+    }
+    else if (n.nodeName() == "width")
+    {
+      if (width)
+	this->_putWarning("An parallelepipede has several width, "
+			  "the first defined will be used", n);
+      else
+      {
+	widthValue = _parsePosition(n, "width");
+	width = true;
+      }
+    }
+    else if (n.nodeName() == "depth")
+    {
+      if (depth)
+	this->_putWarning("An parallelepipede has several depth, "
+			  "the first defined will be used", n);
+      else
+      {
+	depthValue = _parsePosition(n, "depth");
+	depth = true;
+      }
+    }
+    else if (n.nodeName() == "height")
+    {
+      if (height)
+	this->_putWarning("An parallelepipede has several height, "
+			  "the first defined will be used", n);
+      else
+      {
+	heightValue = _parsePosition(n, "height");
+	height = true;
+      }
+    }
+    else if (n.nodeName() == "rotation")
+    {
+      if (rotation)
+	this->_putWarning("An parallelepipede has several rotation, "
+			  "the first defined will be used", n);
+      else
+      {
+	rotationValue = _parseRotation(n);
+	rotation = true;
+      }
+    }
+    else if (n.nodeName() == "solid")
+    {
+      if (solid)
+	this->_putWarning("An parallelepipede has several equation, "
+			  "the first defined will be used", n);
+      else
+      {
+	solidValue = this->_parseBoolean(n, "solid");
+	solid = true;
+      }
+    }
+    else
+      this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+    n = n.nextSibling();
+  }
+  if (!position || !solid || !rotation || !width || !height || !depth)
+    this->_putError("A parallelepipede must have a position, a rotation, "
+		    " a width, a height, a depth, and an solid value", n);
+ else
+   this->_objects.push_back(new Sett(rotationValue, positionValue,
+				     solidValue, widthValue, heightValue,
+				     depthValue, mat));
 }
 
 Sphere*			Scene::_parseSphere(QDomNode	n,
@@ -252,7 +355,65 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
   triangle->setMaterial(_getMaterialByName(material));
   triangle->setObject(obj);
   triangle->setCachedValues();
-  return (triangle);
+  return triangle;
+}
+
+Parallelogram*			Scene::_parseParallelogram(QDomNode n,
+							   QString  material,
+							   Object*  obj)
+{
+  bool				position = false;
+  bool				rotation = false;
+  bool				vert1 = false;
+  bool				vert2 = false;
+  Parallelogram			*para = new Parallelogram();
+
+  while (n.isNull() == false && this->_hasError == false)
+  {
+    if (n.hasChildNodes() == false || n.isElement() == false)
+    {
+      this->_putError("Every primitive children must be an element", n);
+      return NULL;
+    }
+    if (this->_parseCommonElement(n, para, position, rotation) == false)
+    {
+      if (n.nodeName() == "vertex1")
+      {
+	if (vert1)
+	  this->_putWarning("A parallelogram has several vertex1, "
+			    "the first defined will be used", n);
+	else
+	{
+	  para->setVertex1(_parsePosition(n, "vertex1"));
+	  vert1 = true;
+	}
+      }
+      else if (n.nodeName() == "vertex2")
+      {
+	if (vert2)
+	  this->_putWarning("A parallelogram has several vertex2, "
+			    "the first defined will be used", n);
+	else
+	{
+	  para->setVertex2(_parsePosition(n, "vertex2"));
+	  vert2 = true;
+	}
+      }
+      else
+	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+    }
+    n = n.nextSibling();
+  }
+  if (!position || !rotation || !vert1 || !vert2)
+  {
+    this->_putError("A parallelogram must have a position, a rotation, "
+		    "a vertex1 and a vertext2", n);
+    return NULL;
+  }
+  para->setMaterial(_getMaterialByName(material));
+  para->setObject(obj);
+  //triangle->setcatchValue();
+  return para;
 }
 
 Cone*			Scene::_parseCone(QDomNode	n,
@@ -556,6 +717,9 @@ void			Scene::_parsePrimitive(QDomNode n,
       obj->addPrimitive(this->_parseTriangle(n.firstChild(), material, obj));
     else if (type == "equation")
       obj->addPrimitive(this->_parseEquation(n.firstChild(), material, obj));
+    else if (type == "parallelogram")
+      obj->addPrimitive(this->_parseParallelogram(n.firstChild(),
+						  material, obj));
     else
     {
       this->_putError(type.toStdString() + " is not a valid primitive type",
@@ -644,10 +808,12 @@ void			Scene::_parseObject(QDomNode n)
 {
   QDomNamedNodeMap	nodeMap;
   QString		name;
+  QString		material;
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.nodeName() != "object" || n.isElement() == false)
+    if ((n.nodeName() != "object" && n.nodeName() != "parallelepipede")
+	|| n.isElement() == false)
     {
       this->_putError("An objects child cannot be empty and must be an "
 			"object element", n);
@@ -658,7 +824,26 @@ void			Scene::_parseObject(QDomNode n)
       this->_putError("An object element cannot be empty", n);
       return;
     }
-    this->_parseObjectOptions(n.firstChild());
+    if (n.nodeName() == "parallelepipede")
+    {
+      if (n.hasAttributes() == false
+	  || n.attributes().contains("material") == false)
+      {
+	this->_putError("The parallelepipede attributes are missing", n);
+	return ;
+      }
+      material = n.attributes().namedItem("material").nodeValue();
+      if (this->_materialExists(material) == false)
+      {
+	this->_putError("The material " + material.toStdString() +
+			" doesnt exists" + " (you must define a material " +
+			"before use it)", n);
+	return ;
+      }
+      this->_parseSett(n.firstChild(), material);
+    }
+    else
+      this->_parseObjectOptions(n.firstChild());
     n = n.nextSibling();
   }
 }
