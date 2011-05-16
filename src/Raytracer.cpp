@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May 12 17:23:21 2011 gael jochaud-du-plessix
+// Last update Mon May 16 12:43:32 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -411,8 +411,8 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 				       Ray& ray)
 {
   if (_config->isTransparencyEnabled() &&
-      nearestObject->getMaterial().getTransmissionCoeff() > 0
-      && ray._refractionLevel <
+      nearestObject->getMaterial().getTransmissionCoeff() >
+      Raytracer::EPSILON_REFRACTION && ray._refractionLevel <
       _config->getTransparencyMaxDepth())
     {
       if (_refractivePath.size() > 0)
@@ -432,15 +432,13 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 	  Object*		tmpObject;
 
 	  tmpObject = nearestObject->getObject();
-	  if (tmpObject && tmpObject->isSolid() == false)
+	  if (tmpObject != NULL && tmpObject->isSolid() == true)
+	    tmpObject->intersectWithRay(refractedRay,
+					tmp, useless);
+	  else
 	    nearestObject->intersectWithRay(refractedRay, tmp, useless);
-	  else if (tmpObject)
-	    nearestObject->getObject()->intersectWithRay(refractedRay,
-							 tmp, useless);
-	  if (tmp != NULL && useless > 0)
-	    {
-	      _refractivePath.push(tmp);
-	    }
+	  if (tmp != NULL)
+	    _refractivePath.push(tmp);
 	  else
 	    {
 	      refractedRay._vector = ray._vector;
