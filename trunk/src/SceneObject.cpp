@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sun May 15 17:09:49 2011 melvin laplanche
+// Last update Mon May 16 12:30:01 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -440,7 +440,7 @@ Plane*			Scene::_parsePlane(QDomNode	n,
   }
   if (!position || !rotation)
   {
-    this->_putError("A sphere must have a position and a rotation", n);
+    this->_putError("A plane must have a position and a rotation", n);
     return NULL;
   }
   plane->setMaterial(_getMaterialByName(material));
@@ -543,7 +543,7 @@ void			Scene::_parsePrimitive(QDomNode n,
       obj->addPrimitive(this->_parseSphere(n.firstChild(), material, obj));
     else if (type == "torus")
       obj->addPrimitive(this->_parseTorus(n.firstChild(), material, obj));
-    else if (type == "Plane")
+    else if (type == "plane")
       obj->addPrimitive(this->_parsePlane(n.firstChild(), material, obj));
     else if (type == "cone")
       obj->addPrimitive(this->_parseCone(n.firstChild(), material, obj));
