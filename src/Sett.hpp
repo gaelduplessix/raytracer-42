@@ -1,11 +1,11 @@
 //
 // Cube.hpp for raytracer in /home/olivie_a//rendu/cpp/raytracer-42/src
-//
+// 
 // Made by samuel olivier
 // Login   <olivie_a@epitech.net>
-//
+// 
 // Started on  Tue May 10 13:39:45 2011 samuel olivier
-// Last update Mon May 16 14:02:28 2011 melvin laplanche
+// Last update Mon May 16 16:16:26 2011 samuel olivier
 //
 
 #ifndef _SETT_HPP_
