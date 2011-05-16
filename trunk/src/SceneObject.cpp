@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 16 16:54:11 2011 samuel olivier
+// Last update Tue May 17 00:04:54 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -18,8 +18,8 @@ bool			Scene::_parseCommonElement(QDomNode	    n,
   if (n.nodeName() == "position")
   {
     if (position)
-      this->_putWarning("An element has several position, "
-			"the first defined will be used", n);
+      this->_putWarning(QObject::tr("An element has several position, "
+				    "the first defined will be used"), n);
     else
     {
       prime->setPosition(_parsePosition(n, "position"));
@@ -29,8 +29,8 @@ bool			Scene::_parseCommonElement(QDomNode	    n,
   else if (n.nodeName() == "rotation")
   {
     if (rotation)
-      this->_putWarning("An element has several rotation, "
-			"the first defined will be used", n);
+      this->_putWarning(QObject::tr("An element has several rotation, "
+				    "the first defined will be used"), n);
     else
     {
       prime->setRotation(_parseRotation(n));
@@ -58,14 +58,15 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be "
+				  "an element"), n);
       return NULL;
     }
     if (n.nodeName() == "position")
     {
       if (position)
-	this->_putWarning("An equation has several position, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An equation has several position, "
+				      "the first defined will be used"), n);
       else
       {
 	positionValue = _parsePosition(n, "position");
@@ -75,8 +76,8 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
     else if (n.nodeName() == "rotation")
     {
       if (rotation)
-	this->_putWarning("An equation has several rotation, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An equation has several rotation, "
+				      "the first defined will be used"), n);
       else
       {
 	rotationValue = _parseRotation(n);
@@ -86,8 +87,8 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
     else if (n.nodeName() == "equation")
     {
       if (equation)
-	this->_putWarning("An equation has several equation, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An equation has several equation, "
+				      "the first defined will be used"), n);
       else
       {
 	if (this->_checkContentIsSingleText(n, "equation"))
@@ -96,13 +97,14 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
       }
     }
     else
-      this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+      this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			n);
     n = n.nextSibling();
   }
   if (!equation || !position || !rotation)
   {
-    this->_putError("A equation must have a position, a rotation "
-		    "and an equation", n);
+    this->_putError(QObject::tr("A equation must have a position, a rotation "
+				"and an equation"), n);
     return NULL;
   }
   return new EquationPrimitive(equationValue, obj,
@@ -130,14 +132,16 @@ void			Scene::_parseSett(QDomNode n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be an "
+				  "element"), n);
       return ;
     }
     if (n.nodeName() == "position")
     {
       if (position)
-	this->_putWarning("An parallelepipede has several position, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An parallelepipede has several"
+				      " position, the first defined will "
+				      "be used"), n);
       else
       {
 	positionValue = _parsePosition(n, "position");
@@ -147,8 +151,8 @@ void			Scene::_parseSett(QDomNode n,
     else if (n.nodeName() == "width")
     {
       if (width)
-	this->_putWarning("An parallelepipede has several width, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An parallelepipede has several width, "
+				      "the first defined will be used"), n);
       else
       {
 	widthValue = _parsePosition(n, "width");
@@ -158,8 +162,8 @@ void			Scene::_parseSett(QDomNode n,
     else if (n.nodeName() == "depth")
     {
       if (depth)
-	this->_putWarning("An parallelepipede has several depth, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An parallelepipede has several depth, "
+				      "the first defined will be used"), n);
       else
       {
 	depthValue = _parsePosition(n, "depth");
@@ -169,8 +173,8 @@ void			Scene::_parseSett(QDomNode n,
     else if (n.nodeName() == "height")
     {
       if (height)
-	this->_putWarning("An parallelepipede has several height, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An parallelepipede has several height, "
+				      "the first defined will be used"), n);
       else
       {
 	heightValue = _parsePosition(n, "height");
@@ -180,8 +184,9 @@ void			Scene::_parseSett(QDomNode n,
     else if (n.nodeName() == "rotation")
     {
       if (rotation)
-	this->_putWarning("An parallelepipede has several rotation, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An parallelepipede has several "
+				      "rotation, "
+				      "the first defined will be used"), n);
       else
       {
 	rotationValue = _parseRotation(n);
@@ -191,8 +196,9 @@ void			Scene::_parseSett(QDomNode n,
     else if (n.nodeName() == "solid")
     {
       if (solid)
-	this->_putWarning("An parallelepipede has several equation, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An parallelepipede has several "
+				      "equation, "
+				      "the first defined will be used"), n);
       else
       {
 	solidValue = this->_parseBoolean(n, "solid");
@@ -200,12 +206,14 @@ void			Scene::_parseSett(QDomNode n,
       }
     }
     else
-      this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+      this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			n);
     n = n.nextSibling();
   }
   if (!position || !solid || !rotation || !width || !height || !depth)
-    this->_putError("A parallelepipede must have a position, a rotation, "
-		    " a width, a height, a depth, and an solid value", n);
+    this->_putError(QObject::tr("A parallelepipede must have a position, a "
+				"rotation, a width, a height, a depth, "
+				"and an solid value"), n);
  else
    this->_objects.push_back(new Sett(rotationValue, positionValue,
 				     solidValue, widthValue, heightValue,
@@ -225,7 +233,8 @@ Sphere*			Scene::_parseSphere(QDomNode	n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be an "
+				  "element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, sphere, position, rotation) == false)
@@ -233,8 +242,8 @@ Sphere*			Scene::_parseSphere(QDomNode	n,
       if (n.nodeName() == "radius")
       {
 	if (radius)
-	  this->_putWarning("A sphere has several radius, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A sphere has several radius, "
+					"the first defined will be used"), n);
 	else
 	{
 	  sphere->setRadius(_parseDouble(n, 0, 0, "radius"));
@@ -242,13 +251,15 @@ Sphere*			Scene::_parseSphere(QDomNode	n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!radius || !position || !rotation)
   {
-    this->_putError("A sphere must have a position, rotation and a radius", n);
+    this->_putError(QObject::tr("A sphere must have a position, "
+				"rotation and a radius"), n);
     return NULL;
   }
   sphere->setMaterial(_getMaterialByName(material));
@@ -269,7 +280,8 @@ CubeTroue*			Scene::_parseCubeTroue(QDomNode	n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be "
+				  "an element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, cube, position, rotation) == false)
@@ -277,8 +289,8 @@ CubeTroue*			Scene::_parseCubeTroue(QDomNode	n,
       if (n.nodeName() == "coeff")
       {
 	if (coeff)
-	  this->_putWarning("A cube has several coeff, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A cube has several coeff, "
+					"the first defined will be used"), n);
 	else
 	{
 	  cube->setCoeff(_parseDouble(n, 0, 0, "coeff"));
@@ -286,13 +298,15 @@ CubeTroue*			Scene::_parseCubeTroue(QDomNode	n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!position || !rotation || !coeff)
   {
-    this->_putError("A cube must have a position, rotation and a coeff", n);
+    this->_putError(QObject::tr("A cube must have a position, rotation "
+				"and a coeff"), n);
     return NULL;
   }
   cube->setMaterial(_getMaterialByName(material));
@@ -314,7 +328,8 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be "
+				  "an element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, triangle, position, rotation) == false)
@@ -322,8 +337,8 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
       if (n.nodeName() == "vertex1")
       {
 	if (vert1)
-	  this->_putWarning("A triangle has several vertex1, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A triangle has several vertex1, "
+					"the first defined will be used"), n);
 	else
 	{
 	  triangle->setVertex1(_parsePosition(n, "vertex1"));
@@ -333,8 +348,8 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
       else if (n.nodeName() == "vertex2")
       {
 	if (vert2)
-	  this->_putWarning("A triangle has several vertex2, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A triangle has several vertex2, "
+					"the first defined will be used"), n);
 	else
 	{
 	  triangle->setVertex2(_parsePosition(n, "vertex2"));
@@ -342,14 +357,15 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!position || !rotation || !vert1 || !vert2)
   {
-    this->_putError("A triangle must have a position, a rotation, a vertex1 "
-		    "and a vertext2", n);
+    this->_putError(QObject::tr("A triangle must have a position, a "
+				"rotation, a vertex1 and a vertext2"), n);
     return NULL;
   }
   triangle->setMaterial(_getMaterialByName(material));
@@ -372,7 +388,8 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be "
+				  "an element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, para, position, rotation) == false)
@@ -380,8 +397,8 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
       if (n.nodeName() == "vertex1")
       {
 	if (vert1)
-	  this->_putWarning("A parallelogram has several vertex1, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A parallelogram has several vertex1, "
+					"the first defined will be used"), n);
 	else
 	{
 	  para->setVertex1(_parsePosition(n, "vertex1"));
@@ -391,8 +408,8 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
       else if (n.nodeName() == "vertex2")
       {
 	if (vert2)
-	  this->_putWarning("A parallelogram has several vertex2, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A parallelogram has several vertex2, "
+					"the first defined will be used"), n);
 	else
 	{
 	  para->setVertex2(_parsePosition(n, "vertex2"));
@@ -400,14 +417,15 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!position || !rotation || !vert1 || !vert2)
   {
-    this->_putError("A parallelogram must have a position, a rotation, "
-		    "a vertex1 and a vertext2", n);
+    this->_putError(QObject::tr("A parallelogram must have a position, "
+				"a rotation, a vertex1 and a vertext2"), n);
     return NULL;
   }
   para->setMaterial(_getMaterialByName(material));
@@ -431,7 +449,8 @@ Cone*			Scene::_parseCone(QDomNode	n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be an "
+				  "element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, cone, position, rotation) == false)
@@ -439,8 +458,8 @@ Cone*			Scene::_parseCone(QDomNode	n,
       if (n.nodeName() == "radius")
       {
 	if (radius)
-	  this->_putWarning("A cone has several radius, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A cone has several radius, "
+					"the first defined will be used"), n);
 	else
 	{
 	  cone->setAngle(_parseDouble(n, 0, 0, "angle"));
@@ -450,8 +469,8 @@ Cone*			Scene::_parseCone(QDomNode	n,
       else if (n.nodeName() == "limitMin")
       {
 	if (min)
-	  this->_putWarning("A cone has several limitMin, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A cone has several limitMin, "
+					"the first defined will be used"), n);
 	else
 	{
 	  cone->setLimitMin(_parseDouble(n, 0, 0, "limitMin"));
@@ -461,8 +480,8 @@ Cone*			Scene::_parseCone(QDomNode	n,
       else if (n.nodeName() == "limitMax")
       {
 	if (max)
-	  this->_putWarning("A cone has several limitMax, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A cone has several limitMax, "
+					"the first defined will be used"), n);
 	else
 	{
 	  cone->setLimitMax(_parseDouble(n, 0, 0, "limitMax"));
@@ -470,14 +489,15 @@ Cone*			Scene::_parseCone(QDomNode	n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!position || !rotation || !radius)
   {
-    this->_putError("A cone must have a position, a rotation, and a radius",
-		    n);
+    this->_putError(QObject::tr("A cone must have a position, a rotation, "
+				"and a radius"), n);
     return NULL;
   }
   cone->setMaterial(_getMaterialByName(material));
@@ -500,7 +520,8 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be an "
+				  "element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, cylinder, position, rotation) == false)
@@ -508,8 +529,8 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
       if (n.nodeName() == "radius")
       {
 	if (radius)
-	  this->_putWarning("A cylinder has several radius, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A cylinder has several radius, "
+					"the first defined will be used"), n);
 	else
 	{
 	  cylinder->setRadius(_parseDouble(n, 0, 0, "radius"));
@@ -519,8 +540,8 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
       else if (n.nodeName() == "limitMin")
       {
 	if (min)
-	  this->_putWarning("A cylinder has several limitMin, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A cylinder has several limitMin, "
+					"the first defined will be used"), n);
 	else
 	{
 	  cylinder->setLimitMin(_parseDouble(n, 0, 0, "limitMin"));
@@ -530,8 +551,8 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
       else if (n.nodeName() == "limitMax")
       {
 	if (max)
-	  this->_putWarning("A cylinder has several limitMax, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A cylinder has several limitMax, "
+					"the first defined will be used"), n);
 	else
 	{
 	  cylinder->setLimitMax(_parseDouble(n, 0, 0, "limitMax"));
@@ -539,14 +560,15 @@ Cylinder*			Scene::_parseCylinder(QDomNode	n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!position || !rotation || !radius)
   {
-    this->_putError("A cylinder must have a position, a rotation, "
-		    "and a radius", n);
+    this->_putError(QObject::tr("A cylinder must have a position, a rotation, "
+				"and a radius"), n);
     return NULL;
   }
   cylinder->setMaterial(_getMaterialByName(material));
@@ -568,7 +590,8 @@ Plane*			Scene::_parsePlane(QDomNode	n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be "
+				  "an element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, plane, position, rotation) == false)
@@ -576,8 +599,8 @@ Plane*			Scene::_parsePlane(QDomNode	n,
       if (n.nodeName() == "limitX")
       {
 	if (x)
-	  this->_putWarning("A plane has several limitX, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A plane has several limitX, "
+					"the first defined will be used"), n);
 	else
 	{
 	  plane->setLimitX(_parseDouble(n, 0, 0, "limitX"));
@@ -587,8 +610,8 @@ Plane*			Scene::_parsePlane(QDomNode	n,
       else if (n.nodeName() == "limitY")
       {
 	if (y)
-	  this->_putWarning("A plane has several limitY, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A plane has several limitY, "
+					"the first defined will be used"), n);
 	else
 	{
 	  plane->setLimitY(_parseDouble(n, 0, 0, "limitY"));
@@ -596,13 +619,15 @@ Plane*			Scene::_parsePlane(QDomNode	n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!position || !rotation)
   {
-    this->_putError("A plane must have a position and a rotation", n);
+    this->_putError(QObject::tr("A plane must have a position and a rotation"),
+		    n);
     return NULL;
   }
   plane->setMaterial(_getMaterialByName(material));
@@ -624,7 +649,8 @@ Torus*			Scene::_parseTorus(QDomNode	n,
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every primitive children must be an element", n);
+      this->_putError(QObject::tr("Every primitive children must be "
+				  "an element"), n);
       return NULL;
     }
     if (this->_parseCommonElement(n, torus, position, rotation) == false)
@@ -632,8 +658,8 @@ Torus*			Scene::_parseTorus(QDomNode	n,
       if (n.nodeName() == "minor")
       {
 	if (minor)
-	  this->_putWarning("A torus has several minor, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A torus has several minor, "
+					"the first defined will be used"), n);
 	else
 	{
 	  torus->setr(_parseDouble(n, 0, 0, "minor"));
@@ -643,8 +669,8 @@ Torus*			Scene::_parseTorus(QDomNode	n,
       else if (n.nodeName() == "major")
       {
 	if (major)
-	  this->_putWarning("A torus has several major, "
-			    "the first defined will be used", n);
+	  this->_putWarning(QObject::tr("A torus has several major, "
+					"the first defined will be used"), n);
 	else
 	{
 	  torus->setR(_parseDouble(n, 0, 0, "major"));
@@ -652,13 +678,15 @@ Torus*			Scene::_parseTorus(QDomNode	n,
 	}
       }
       else
-	this->_putWarning("Unknown element " + n.nodeName().toStdString(), n);
+	this->_putWarning(QObject::tr("Unknown element %1").arg(n.nodeName()),
+			  n);
     }
     n = n.nextSibling();
   }
   if (!minor || !major || !position || !rotation)
   {
-    this->_putError("A torus must have a position, rotation and a radius", n);
+    this->_putError(QObject::tr("A torus must have a position, rotation "
+				"and a radius"), n);
     return NULL;
   }
   torus->setMaterial(_getMaterialByName(material));
@@ -676,29 +704,31 @@ void			Scene::_parsePrimitive(QDomNode n,
   {
     if (n.nodeName() != "primitive" || n.isElement() == false)
     {
-      this->_putError("A primitives child cannot be empty and must be a "
-		      "primitive element", n);
+      this->_putError(QObject::tr("A primitives child cannot be "
+				  "empty and must be a "
+				  "primitive element"), n);
       return ;
     }
     if (n.hasChildNodes() == false)
     {
-      this->_putError("A primitive element cannot be empty", n);
+      this->_putError(QObject::tr("A primitive element cannot be empty"), n);
       return ;
     }
     if (n.hasAttributes() == false
 	|| n.attributes().contains("type") == false
 	|| n.attributes().contains("material") == false)
     {
-      this->_putError("The primitive attributes are missing", n);
+      this->_putError(QObject::tr("At least one of the primitive attributes "
+				  "is missing"), n);
       return ;
     }
     material = n.attributes().namedItem("material").nodeValue();
     type = n.attributes().namedItem("type").nodeValue();
     if (this->_materialExists(material) == false)
     {
-      this->_putError("The material " + material.toStdString() +
-		      " doesnt exists" + " (you must define a material " +
-		      "before use it)", n);
+      this->_putError(QObject::tr("The material %1 doesnt exists  (you must "
+				  "define a material before using it)")
+		      .arg(material), n);
       return ;
     }
     if (type == "sphere")
@@ -722,8 +752,8 @@ void			Scene::_parsePrimitive(QDomNode n,
 						  material, obj));
     else
     {
-      this->_putError(type.toStdString() + " is not a valid primitive type",
-		      n);
+      this->_putError(QObject::tr("%1 is not a valid primitive type")
+		      .arg(type), n);
       return ;
     }
     n = n.nextSibling();
@@ -734,7 +764,7 @@ void			Scene::_parsePrimitives(QDomNode n,
 						Object	*obj)
 {
   if (n.hasChildNodes() == false)
-    this->_putError("A primitives element cannot be empty", n);
+    this->_putError(QObject::tr("A primitives element cannot be empty"), n);
   else
     this->_parsePrimitive(n.firstChild(), obj);
 }
@@ -751,14 +781,15 @@ void			Scene::_parseObjectOptions(QDomNode	n)
   {
     if (n.hasChildNodes() == false || n.isElement() == false)
     {
-      this->_putError("Every object children must be an element", n);
+      this->_putError(QObject::tr("Every object children must be an element"),
+		      n);
       return ;
     }
     if (n.nodeName() == "position")
     {
       if (position)
-	this->_putWarning("An object has several position, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An object has several position, "
+				      "the first defined will be used"), n);
       else
       {
 	obj->setPosition(_parsePosition(n, "position"));
@@ -768,8 +799,8 @@ void			Scene::_parseObjectOptions(QDomNode	n)
     else if (n.nodeName() == "solid")
     {
       if (solid)
-	this->_putWarning("An object has several solid value, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An object has several solid value, "
+				      "the first defined will be used"), n);
       else
       {
 	obj->setSolid(_parseBoolean(n, "solid"));
@@ -779,8 +810,8 @@ void			Scene::_parseObjectOptions(QDomNode	n)
     else if (n.nodeName() == "rotation")
     {
       if (rotation)
-	this->_putWarning("An object has several rotations, "
-			  "the first defined will be used", n);
+	this->_putWarning(QObject::tr("An object has several rotations, "
+				      "the first defined will be used"), n);
       else
       {
 	obj->setRotation(_parseRotation(n));
@@ -793,13 +824,13 @@ void			Scene::_parseObjectOptions(QDomNode	n)
       primitive = true;
     }
     else
-      this->_putError(n.nodeName().toStdString() + " is not a valid element",
-		      n);
+      this->_putError(QObject::tr("%1 is not a valid element")
+		      .arg(n.nodeName()), n);
     n = n.nextSibling();
   }
   if (!primitive || !solid || !position || !rotation)
-    this->_putError("An object must have a position, rotation, solid, "
-		    "and a leat one primitive", n);
+    this->_putError(QObject::tr("An object must have a position, rotation, "
+				"solid, and a leat one primitive"), n);
   else
     this->_objects.push_back(obj);
 }
@@ -815,13 +846,13 @@ void			Scene::_parseObject(QDomNode n)
     if ((n.nodeName() != "object" && n.nodeName() != "parallelepipede")
 	|| n.isElement() == false)
     {
-      this->_putError("An objects child cannot be empty and must be an "
-			"object element", n);
+      this->_putError(QObject::tr("An objects child cannot be empty and "
+				  "must be an object element"), n);
       return ;
     }
     if (n.hasChildNodes() == false)
     {
-      this->_putError("An object element cannot be empty", n);
+      this->_putError(QObject::tr("An object element cannot be empty"), n);
       return;
     }
     if (n.nodeName() == "parallelepipede")
@@ -829,15 +860,16 @@ void			Scene::_parseObject(QDomNode n)
       if (n.hasAttributes() == false
 	  || n.attributes().contains("material") == false)
       {
-	this->_putError("The parallelepipede attributes are missing", n);
+	this->_putError(QObject::tr("The parallelepipede attributes "
+				    "are missing"), n);
 	return ;
       }
       material = n.attributes().namedItem("material").nodeValue();
       if (this->_materialExists(material) == false)
       {
-	this->_putError("The material " + material.toStdString() +
-			" doesnt exists" + " (you must define a material " +
-			"before use it)", n);
+	this->_putError(QObject::tr("The material %1 doesnt exists (you "
+				    "must define a material before use it)")
+			.arg(material), n);
 	return ;
       }
       this->_parseSett(n.firstChild(), material);
@@ -851,7 +883,7 @@ void			Scene::_parseObject(QDomNode n)
 void			Scene::_parseObjects(QDomNode n)
 {
   if (n.hasChildNodes() == false)
-    this->_putError("An objects element cannot be empty", n);
+    this->_putError(QObject::tr("An objects element cannot be empty"), n);
   else
     this->_parseObject(n.firstChild());
 }
