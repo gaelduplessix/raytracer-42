@@ -1,11 +1,11 @@
 //
 // Parallelogram.hpp for ratracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Tue May 10 13:55:29 2011 samuel olivier
+// Last update Mon May 16 14:56:59 2011 melvin laplanche
 //
 
 #ifndef _PARALLELOGRAM_HPP_
@@ -16,6 +16,8 @@
 class Parallelogram : public ObjectPrimitive
 {
 public:
+  Parallelogram(void);
+
   Parallelogram(Object* object,
 		const Point& absolutePosition,
 		const Point& vertex1,
