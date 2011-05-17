@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May 16 12:43:32 2011 samuel olivier
+// Last update Tue May 17 18:08:07 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -30,8 +30,9 @@ Raytracer::~Raytracer()
 
 Raytracer::Raytracer(Scene* scene,
                      RenderingConfiguration* config,
-                     RenderingInterface* interface) :
-  _scene(scene), _config(config), _interface(interface)
+                     RenderingInterface* interface,
+		     PhotonMap* photonMap) :
+  _scene(scene), _config(config), _interface(interface), _photonMap(photonMap)
 {
 
 }
@@ -40,6 +41,12 @@ void
 Raytracer::setScene(Scene& scene)
 {
   _scene = &scene;
+}
+
+void
+Raytracer::setPhotonMap(PhotonMap& photonMap)
+{
+  _photonMap = &photonMap;
 }
 
 void
@@ -59,6 +66,13 @@ Raytracer::getScene(void) const
 {
   return (_scene);
 }
+
+const PhotonMap*
+Raytracer::getPhotonMap(void) const
+{
+  return (_photonMap);
+}
+
 
 const RenderingConfiguration*
 Raytracer::getRenderingConfiguration(void) const

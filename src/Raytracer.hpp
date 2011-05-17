@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Wed May 11 11:23:24 2011 samuel olivier
+// Last update Tue May 17 17:57:03 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -19,6 +19,7 @@
 #include "RenderingConfiguration.hpp"
 #include "RenderingInterface.hpp"
 #include "RaytracerThread.hpp"
+#include "PhotonMap.hpp"
 
 typedef struct			s_intersected_object
 {
@@ -40,14 +41,16 @@ public:
   Raytracer();
   Raytracer(Scene* scene,
 	    RenderingConfiguration* config,
-	    RenderingInterface* interface);
+	    RenderingInterface* interface, PhotonMap* photonMap);
   ~Raytracer();
 
   void setScene(Scene& scene);
+  void setPhotonMap(PhotonMap& photonMap);
   void setRenderingConfiguration(RenderingConfiguration* config);
   void setRenderingInterface(RenderingInterface* interface);
 
   const Scene*			getScene(void) const;
+  const PhotonMap*		getPhotonMap(void) const;
   const RenderingConfiguration*	getRenderingConfiguration(void) const;
   RenderingInterface*		getRenderingInterface(void) const;
 
@@ -92,6 +95,7 @@ private:
   RenderingInterface*		_interface;
   RaytracerThread*		_thread;
   stack<ObjectPrimitive*>	_refractivePath;
+  PhotonMap*			_photonMap;
 };
 
 #endif
