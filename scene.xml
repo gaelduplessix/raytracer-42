@@ -23,9 +23,9 @@
       <solid>true</solid>
 	<primitives>
 	  <primitive type="parallelogram" material="sol">
-	    <position>20, 0, 0</position>
-	    <vertex1>25, 0, 5</vertex1>
-	    <vertex2>20, 5, 0</vertex2>
+	    <position>20, -2.5, 0</position>
+	    <vertex1>25, -2.5, 5</vertex1>
+	    <vertex2>20, 2.5, 0</vertex2>
 	    <rotation>0, 0, 0</rotation>
 	  </primitive>
 	</primitives>
