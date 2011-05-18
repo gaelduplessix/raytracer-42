@@ -318,7 +318,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/Scene.cpp" line="135"/>
         <source>Parse error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Parse error : </translation>
     </message>
     <message>
         <location filename="src/Scene.cpp" line="149"/>
@@ -328,7 +328,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/Scene.cpp" line="162"/>
         <source>Info: </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/Scene.cpp" line="183"/>
@@ -338,11 +338,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="src/Scene.cpp" line="198"/>
         <source>A %1 must be an element with a text value</source>
-        <translation type="unfinished"></translation>
+        <translation>Un(e) %1 doit être un élément possédant une valeur textuelle</translation>
     </message>
     <message>
         <location filename="src/Scene.cpp" line="220"/>
-        <source>A %1 must have 3 integers values separated with comma</source>
+        <source>A %1 must have 3 integers separated with comma as value</source>
+        <oldsource>A %1 must have 3 integers values separated with comma</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -357,7 +358,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="src/Scene.cpp" line="263"/>
-        <source>A rotation must have 3 integers values separated with comma</source>
+        <source>A rotation must have 3 integers separated with comma as alues</source>
+        <oldsource>A rotation must have 3 integers values separated with comma</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1053,12 +1055,12 @@ Etes-vous sur de vouloir fermer la fenetre ?</translation>
         <translation>Charger une scene</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="168"/>
+        <location filename="src/gui/guiInterface.cpp" line="169"/>
         <source>Reprise du rendu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="170"/>
+        <location filename="src/gui/guiInterface.cpp" line="171"/>
         <source>Depart du rendu</source>
         <translation type="unfinished"></translation>
     </message>

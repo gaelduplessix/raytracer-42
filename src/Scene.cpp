@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Mon May 16 23:08:19 2011 melvin laplanche
+// Last update Wed May 18 14:00:07 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -217,8 +217,8 @@ Point			Scene::_parsePosition(QDomNode	n,
 		values[1].toDouble(&test[1]),
 		values[2].toDouble(&test[2]));
     if (!test[0] || !test[1] || !test[2])
-      this->_putError(QObject::tr("A %1 must have 3 integers values separated "
-				  "with comma").arg(name.c_str()), n);
+      this->_putError(QObject::tr("A %1 must have 3 integers separated "
+				  "with comma as value").arg(name.c_str()), n);
   }
   else
     p = Point(0, 0, 0);
@@ -260,8 +260,8 @@ Rotation		Scene::_parseRotation(QDomNode	n)
 		     values[2].toDouble(&test[2]) * ((radian) ? (1)
 						     : (M_PI / 180)));
       if (!test[0] || !test[1] || !test[2])
-	this->_putError(QObject::tr("A rotation must have 3 integers values "
-				    "separated with comma"), n);
+	this->_putError(QObject::tr("A rotation must have 3 integers "
+				    "separated with comma as alues"), n);
     }
   }
   else
