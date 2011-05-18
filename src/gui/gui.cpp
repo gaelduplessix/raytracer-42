@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 12 21:56:31 2011 loick michard
+// Last update Wed May 18 09:31:19 2011 loick michard
 //
 
 #include <QApplication>
@@ -92,7 +92,7 @@ void RaytracerGUI::setConfiguration()
     _config->setRenderingSamplingMethod(RSM_RANDOM_PIXEL);
   _config->setWidth(_ui->_width->value());
   _config->setHeight(_ui->_height->value());
-  _config->setCurrentCamera(0);
+  _config->setCurrentCamera(_ui->_camera->currentIndex());
   _config->setAntialiasing(_ui->_antialiasing->value());
   _config->setFieldDepthSampling(_ui->_depthFieldSampling->value());
   _config->setFieldDepthEnabled(_ui->_depthField->isChecked());
@@ -195,6 +195,22 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
     }
 }
 
+void RaytracerGUI::setCameras()
+{
+  vector<Camera*> cameras =_scene->getCameras();
+  for (unsigned int i = 0; i < cameras.size(); i++)
+    {
+      if (cameras[i]->getName() != "")
+	_ui->_camera->addItem(cameras[i]->getName().c_str());
+      else
+	{
+	  char name[50];
+	  snprintf(name, 50, "Camera %d", i + 1);
+	  _ui->_camera->addItem(name);
+	}
+    }
+}
+
 void RaytracerGUI::drawWindow()
 {
   if (_isRendering)
@@ -232,6 +248,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);
+  this->setCameras();
   _timer = new QTimer();
   _timer->setInterval(50);
   _timer->start();

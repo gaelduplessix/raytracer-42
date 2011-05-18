@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 16 17:14:10 2011 samuel olivier
+// Last update Wed May 18 09:29:17 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -136,6 +136,7 @@ void    RaytracerGUI::loadScene(void)
       _scene->loadFromFile(scene, this);
       _ui->_console->setHtml(_message.c_str());
       _ui->_console->moveCursor(QTextCursor::End);
+      this->setCameras();
     }
 }
 
