@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Mon May  9 00:06:36 2011 gael jochaud-du-plessix
+// Last update Wed May 18 11:23:32 2011 samuel olivier
 //
 
 #ifndef _LIGHT_HPP_
@@ -58,6 +58,7 @@ public:
 
   virtual Color	getDirectLighting(const Raytracer& raytracer,
 				  Ray& ray) const = 0;
+  virtual void	getRandomRay(Ray& ray) const = 0;
 
 protected:
   Point		_position;
