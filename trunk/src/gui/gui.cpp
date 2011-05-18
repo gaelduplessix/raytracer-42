@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 18 21:56:08 2011 melvin laplanche
+// Last update Wed May 18 22:56:25 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -13,24 +13,24 @@
 #include <sstream>
 #include "gui.hpp"
 
-#include "../RenderingConfiguration.hpp"
-#include "../Color.hpp"
-#include "../Raytracer.hpp"
-#include "../CinemaCamera.hpp"
-#include "../Point.hpp"
-#include "../Vector.hpp"
-#include "../Rotation.hpp"
-#include "../ObjectPrimitive.hpp"
-#include "../Sphere.hpp"
-#include "../Spot.hpp"
-#include "../Plane.hpp"
-#include "../Triangle.hpp"
-#include "../Parallelogram.hpp"
-#include "../Torus.hpp"
-#include "../CubeTroue.hpp"
-#include "../PerlinNoise.hpp"
-#include "../CubeMap.hpp"
-#include "../Sett.hpp"
+#include "RenderingConfiguration.hpp"
+#include "Color.hpp"
+#include "Raytracer.hpp"
+#include "CinemaCamera.hpp"
+#include "Point.hpp"
+#include "Vector.hpp"
+#include "Rotation.hpp"
+#include "ObjectPrimitive.hpp"
+#include "Sphere.hpp"
+#include "Spot.hpp"
+#include "Plane.hpp"
+#include "Triangle.hpp"
+#include "Parallelogram.hpp"
+#include "Torus.hpp"
+#include "CubeTroue.hpp"
+#include "PerlinNoise.hpp"
+#include "CubeMap.hpp"
+#include "Sett.hpp"
 
 Scene           *createScene()
 {
@@ -190,8 +190,47 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
 {
   if (_image)
     {
-      *_pixmap = _pixmap->fromImage(*_image);
-      _ui->_image->setPixmap(*_pixmap);
+      if (_config->getRenderingSamplingMethod() == RSM_UNPIXELISING)
+	{
+	  int	width = _image->width();
+	  int	height = _image->height();
+	  QImage *pixelisedImage = new QImage(width, height,
+					      QImage::Format_ARGB32);
+	  for (int i = 0; i < width; i++)
+	    {
+	      for (int j = 0; j < height; j++)
+		{
+		  int	pixelIndex = i + j * width;
+		  if (_raytracer->isPixelRaytraced(i, j))
+		    pixelisedImage->setPixel(i, j, _image->pixel(i, j));
+		  else
+		    {
+		      int diff = 0;
+		      while (pixelIndex - diff > 0
+			     && diff < 10
+		      	     && !(_raytracer
+		      		  ->isPixelRaytraced((pixelIndex - diff)
+						     % width,
+		      				     (pixelIndex - diff)
+						     / width)))
+		      	diff++;
+		      pixelIndex -= diff;
+		      pixelisedImage
+		  	->setPixel(i, j,
+		  		   _image->pixel(pixelIndex % width,
+		  				 pixelIndex / width));
+		    }
+		}
+	    }
+	  *_pixmap = _pixmap->fromImage(*pixelisedImage);
+	  _ui->_image->setPixmap(*_pixmap);
+	  delete pixelisedImage;
+	}
+      else
+	{
+	  *_pixmap = _pixmap->fromImage(*_image);
+	  _ui->_image->setPixmap(*_pixmap);
+	}
     }
 }
 
@@ -223,12 +262,12 @@ void RaytracerGUI::drawWindow()
 }
 
 RaytracerGUI::RaytracerGUI(QWidget *parent)
-  : QMainWindow(parent), _ui(new Ui::MainWindow),
-    _config(new RenderingConfiguration()), _raytracer(new Raytracer()),
-    _backgroundColor(new QColor(0, 0, 0)),
-    _ambiantColor(new QColor(255, 255, 255)), _cubeMap(NULL),
-    _scene(NULL), _image(NULL), _pixmap(new QPixmap()),
-    _isRendering(false), _pause(false)
+<<<<<<< .mine
+  : QMainWindow(parent), _config(new RenderingConfiguration()),
+    _raytracer(new Raytracer()), _backgroundColor(new QColor(0, 0, 0)), 
+    _ambiantColor(new QColor(255, 255, 255)), _image(NULL),
+    _cubeMap(NULL), _scene(NULL), _pixmap(new QPixmap()),
+    _ui(new Ui::MainWindow), _isRendering(false), _pause(false)
 {
   _ui->setupUi(this);
   _ui->_progressBar->setHidden(true);

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Wed May 18 13:12:39 2011 samuel olivier
+// Last update Wed May 18 19:15:13 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -68,6 +68,8 @@ void	RaytracerThread::initBeforeLaunching(void)
     }
   _progress = 0.f;
   _currentPixel = 0;
+  _currentLine = -1;
+  _currentPixelInLine = -1;
   if (_raytracer->getRenderingConfiguration()->isPhotonMappingEnabled())
     {
       _raytracer->_photonMap = new PhotonMap;

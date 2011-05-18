@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 11 23:32:44 2011 melvin laplanche
+// Last update Mon May 16 15:30:46 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -173,6 +173,6 @@ Vector		Cylinder::getNormalVector(const Point& intersectPoint,
 
 bool		Cylinder::isInBoundingBox(BoundingBox& box) const
 {
-  box = box;
   return (true);
+  (void)box;
 }

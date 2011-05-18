@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:03:41 2011 gael jochaud-du-plessix
-// Last update Thu May 12 16:57:40 2011 gael jochaud-du-plessix
+// Last update Wed May 18 19:15:16 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACERTHREAD_HPP_
@@ -46,6 +46,8 @@ public:
   vector< vector <bool> >	_raytracedPixels;
   double			_progress;
   int				_currentPixel;
+  int				_currentLine;
+  int				_currentPixelInLine;
 };
 
 #endif

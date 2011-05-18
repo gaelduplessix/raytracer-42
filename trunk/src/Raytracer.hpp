@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Wed May 18 13:12:06 2011 samuel olivier
+// Last update Wed May 18 16:31:31 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -53,6 +53,8 @@ public:
   const PhotonMap*		getPhotonMap(void) const;
   const RenderingConfiguration*	getRenderingConfiguration(void) const;
   RenderingInterface*		getRenderingInterface(void) const;
+
+  bool	isPixelRaytraced(int x, int y);
 
   void launchRendering();
   void stopRendering();
