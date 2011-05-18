@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Mon May 16 23:36:13 2011 melvin laplanche
+// Last update Wed May 18 23:06:28 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -82,153 +82,158 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.hasChildNodes() == false || n.isElement() == false)
+    if (n.isComment() == false)
     {
-      this->_putError(QObject::tr("Every material children must be an element")
-		      , n);
-      return ;
-    }
-    if (n.nodeName() == "color")
-    {
-      if (color)
-	this->_putWarning(QObject::tr("A material has several colors, "
-				      "the first defined will be used"), n);
-      else
+      if (n.hasChildNodes() == false || n.isElement() == false)
       {
-	mat->setColor(this->_parseColor(n));
-	color = true;
+	this->_putError(QObject::tr("Every material children must "
+				    "be an element"), n);
+	return ;
       }
-    }
-    else if (n.nodeName() == "heightmap")
-    {
-      if (heightmap)
-	this->_putWarning(QObject::tr("A material has several heightmaps, "
-				      "the first defined will be used"), n);
-      else
+      if (n.nodeName() == "color")
       {
-	mat->setHeightmap(this->_parseTexture(n, "heightmap"));
-	heightmap = true;
+	if (color)
+	  this->_putWarning(QObject::tr("A material has several colors, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setColor(this->_parseColor(n));
+	  color = true;
+	}
       }
-    }
-    else if (n.nodeName() == "texture")
-    {
-      if (texture)
-	this->_putWarning(QObject::tr("A material has several textures, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "heightmap")
       {
-	mat->setTexture(this->_parseTexture(n, "texture"));
-	texture = true;
+	if (heightmap)
+	  this->_putWarning(QObject::tr("A material has several heightmaps, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setHeightmap(this->_parseTexture(n, "heightmap"));
+	  heightmap = true;
+	}
       }
-    }
-    else if (n.nodeName() == "limitTexture")
-    {
-      if (limitTexture)
-	this->_putWarning(QObject::tr("A material has several limitTextures, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "texture")
       {
-	mat->setLimitTexture(this->_parseTexture(n, "limitTexture"));
-	limitTexture = true;
+	if (texture)
+	  this->_putWarning(QObject::tr("A material has several textures, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setTexture(this->_parseTexture(n, "texture"));
+	  texture = true;
+	}
       }
-    }
-    else if (n.nodeName() == "specular")
-    {
-      if (specular)
-	this->_putWarning(QObject::tr("A material has several speculars, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "limitTexture")
       {
-	mat->setSpecularCoeff(this->_parseDouble(n, 0, 0, "specular"));
-	specular = true;
+	if (limitTexture)
+	  this->_putWarning(QObject::tr("A material has several "
+					"limitTextures, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setLimitTexture(this->_parseTexture(n, "limitTexture"));
+	  limitTexture = true;
+	}
       }
-    }
-    else if (n.nodeName() == "specularPow")
-    {
-      if (specularPow)
-	this->_putWarning(QObject::tr("A material has several specularPows, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "specular")
       {
-	mat->setSpecularPow(this->_parseDouble(n, 0, 0, "specularPow"));
-	specularPow = true;
+	if (specular)
+	  this->_putWarning(QObject::tr("A material has several speculars, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setSpecularCoeff(this->_parseDouble(n, 0, 0, "specular"));
+	  specular = true;
+	}
       }
-    }
-    else if (n.nodeName() == "reflection")
-    {
-      if (reflection)
-	this->_putWarning(QObject::tr("A material has several reflections, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "specularPow")
       {
-	mat->setReflectionCoeff(this->_parseDouble(n, 0, 0, "reflection"));
-	reflection = true;
+	if (specularPow)
+	  this->_putWarning(QObject::tr("A material has several specularPows, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setSpecularPow(this->_parseDouble(n, 0, 0, "specularPow"));
+	  specularPow = true;
+	}
       }
-    }
-    else if (n.nodeName() == "transmission")
-    {
-      if (transmission)
-	this->_putWarning(QObject::tr("A material has several transmissions, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "reflection")
       {
-	mat->setTransmissionCoeff(_parseDouble(n, 0, 0, "transmission"));
-	transmission = true;
+	if (reflection)
+	  this->_putWarning(QObject::tr("A material has several reflections, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setReflectionCoeff(this->_parseDouble(n, 0, 0, "reflection"));
+	  reflection = true;
+	}
       }
-    }
-    else if (n.nodeName() == "refractionIndex")
-    {
-      if (refractionIndex)
-	this->_putWarning(QObject::tr("A material has several "
-				      "refractionIndexs, the first defined "
-				      "will be used"), n);
-      else
+      else if (n.nodeName() == "transmission")
       {
-	mat->setRefractionIndex(_parseDouble(n, 0, 0, "refractionIndex"));
-	refractionIndex = true;
+	if (transmission)
+	  this->_putWarning(QObject::tr("A material has several "
+					"transmissions, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setTransmissionCoeff(_parseDouble(n, 0, 0, "transmission"));
+	  transmission = true;
+	}
       }
-    }
-    else if (n.nodeName() == "diffusedReflection")
-    {
-      if (diffusedRef)
-	this->_putWarning(QObject::tr("A material has several "
-				      "diffusedReflections, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "refractionIndex")
       {
-	mat->setDiffusedReflectionCoeff(this->_parseInt(n, 0, 0,
-						  "diffusedReflection"));
-	diffusedRef = true;
+	if (refractionIndex)
+	  this->_putWarning(QObject::tr("A material has several "
+					"refractionIndexs, the first defined "
+					"will be used"), n);
+	else
+	{
+	  mat->setRefractionIndex(_parseDouble(n, 0, 0, "refractionIndex"));
+	  refractionIndex = true;
+	}
       }
-    }
-    else if (n.nodeName() == "diffusedReflection")
-    {
-      if (diffusedRef)
-	this->_putWarning(QObject::tr("A material has several "
-				      "diffusedReflections, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "diffusedReflection")
       {
-	mat->setDiffusedReflectionCoeff(this->_parseInt(n, 0, 0,
-							"diffusedReflection"));
-	diffusedRef = true;
+	if (diffusedRef)
+	  this->_putWarning(QObject::tr("A material has several "
+					"diffusedReflections, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setDiffusedReflectionCoeff(
+	    this->_parseInt(n, 0, 0, "diffusedReflection"));
+	  diffusedRef = true;
+	}
       }
-    }
-    else if (n.nodeName() == "normalDeformation")
-    {
-      if (normalDef)
-	this->_putWarning(QObject::tr("A material has several "
-				      "normalDeformations, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "diffusedReflection")
       {
-	this->_parseNormalDef(n, mat);
-	normalDef = true;
+	if (diffusedRef)
+	  this->_putWarning(QObject::tr("A material has several "
+					"diffusedReflections, "
+					"the first defined will be used"), n);
+	else
+	{
+	  mat->setDiffusedReflectionCoeff(
+	    this->_parseInt(n, 0, 0, "diffusedReflection"));
+	  diffusedRef = true;
+	}
       }
+      else if (n.nodeName() == "normalDeformation")
+      {
+	if (normalDef)
+	  this->_putWarning(QObject::tr("A material has several "
+					"normalDeformations, "
+					"the first defined will be used"), n);
+	else
+	{
+	  this->_parseNormalDef(n, mat);
+	  normalDef = true;
+	}
+      }
+      else
+	this->_putError(QObject::tr("%s is not a valid element")
+			.arg(n.nodeName()), n);
     }
-    else
-      this->_putError(QObject::tr("%s is not a valid element")
-		      .arg(n.nodeName()), n);
     n = n.nextSibling();
   }
   if (this->_hasError == false)
@@ -242,30 +247,35 @@ void			Scene::_parseMaterial(QDomNode n)
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.nodeName() != "material" || n.isElement() == false)
+    if (n.isComment() == false)
     {
-      this->_putError(QObject::tr("A materials child cannot be empty "
-				  "and must be a material element"), n);
-      return ;
+      if (n.nodeName() != "material" || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("A materials child cannot be empty "
+				    "and must be a material element"), n);
+	return ;
+      }
+      if (n.hasChildNodes() == false)
+      {
+	this->_putError(QObject::tr("A material element cannot be empty"), n);
+	return ;
+      }
+      if (n.hasAttributes() == false
+	  || n.attributes().contains("name") == false)
+      {
+	this->_putError(QObject::tr("The material attributes are missing"), n);
+	return ;
+      }
+      name = n.attributes().namedItem("name").nodeValue();
+      if (this->_materialExists(name))
+      {
+	this->_putError(QObject::tr("The material %1 already exists")
+			.arg(name),
+			n);
+	return ;
+      }
+      this->_parseMaterialOptions(n.firstChild(), name);
     }
-    if (n.hasChildNodes() == false)
-    {
-      this->_putError(QObject::tr("A material element cannot be empty"), n);
-      return ;
-    }
-    if (n.hasAttributes() == false|| n.attributes().contains("name") == false)
-    {
-      this->_putError(QObject::tr("The material attributes are missing"), n);
-      return ;
-    }
-    name = n.attributes().namedItem("name").nodeValue();
-    if (this->_materialExists(name))
-    {
-      this->_putError(QObject::tr("The material %1 already exists").arg(name),
-		      n);
-      return ;
-    }
-    this->_parseMaterialOptions(n.firstChild(), name);
     n = n.nextSibling();
   }
 }

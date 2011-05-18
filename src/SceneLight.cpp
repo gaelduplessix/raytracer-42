@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:42 2011 melvin laplanche
-// Last update Mon May 16 23:28:17 2011 melvin laplanche
+// Last update Wed May 18 23:03:20 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -20,63 +20,66 @@ Spot*			Scene::_parseSpotLight(QDomNode	n)
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.hasChildNodes() == false || n.isElement() == false)
+    if (n.isComment() == false)
     {
-      this->_putError(QObject::tr("Every light children must be an element"),
-		      n);
-      return NULL;
-    }
-    if (n.nodeName() == "position")
-    {
-      if (position)
-	this->_putWarning(QObject::tr("A light has several position, "
-				      "the first defined will be used"), n);
+      if (n.hasChildNodes() == false || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("Every light children must be an element"),
+			n);
+	return NULL;
+      }
+      if (n.nodeName() == "position")
+      {
+	if (position)
+	  this->_putWarning(QObject::tr("A light has several position, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setPosition(_parsePosition(n, "position"));
+	  position = true;
+	}
+      }
+      else if (n.nodeName() == "color")
+      {
+	if (color)
+	  this->_putWarning(QObject::tr("A light has several color, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setColor(_parseColor(n));
+	  color = true;
+	}
+      }
+      else if (n.nodeName() == "intensity")
+      {
+	if (intensity)
+	  this->_putWarning(QObject::tr("A light has several intensity, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
+	  intensity = true;
+	}
+      }
+      else if (n.nodeName() == "directLight")
+      {
+	if (directLight)
+	  this->_putWarning(QObject::tr("A light has several directLight, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setDirectLightPow(_parseDouble(n, 0, 0, "directLight"));
+	  directLight = true;
+	}
+      }
       else
       {
-	light->setPosition(_parsePosition(n, "position"));
-	position = true;
+	this->_putError(QObject::tr("%1 is not a valid element")
+			.arg(n.nodeName()), n);
+	return NULL;
       }
     }
-    else if (n.nodeName() == "color")
-    {
-      if (color)
-	this->_putWarning(QObject::tr("A light has several color, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setColor(_parseColor(n));
-	color = true;
-      }
-    }
-    else if (n.nodeName() == "intensity")
-    {
-      if (intensity)
-	this->_putWarning(QObject::tr("A light has several intensity, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
-	intensity = true;
-      }
-    }
-    else if (n.nodeName() == "directLight")
-    {
-      if (directLight)
-	this->_putWarning(QObject::tr("A light has several directLight, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setDirectLightPow(_parseDouble(n, 0, 0, "directLight"));
-	directLight = true;
-      }
-    }
-    else
-    {
-      this->_putError(QObject::tr("%1 is not a valid element")
-		      .arg(n.nodeName()), n);
-      return NULL;
-    }
-   n = n.nextSibling();
+    n = n.nextSibling();
   }
   if (!position || !color || !intensity)
   {
@@ -96,48 +99,51 @@ ParallelLight*			Scene::_parseParallelLight(QDomNode	n)
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.hasChildNodes() == false || n.isElement() == false)
+    if (n.isComment() == false)
     {
-      this->_putError(QObject::tr("Every light children must be an element"),
-		      n);
-      return NULL;
-    }
-    if (n.nodeName() == "direction")
-    {
-      if (direction)
-	this->_putWarning(QObject::tr("A light has several direction, "
-				      "the first defined will be used"), n);
-      else
+      if (n.hasChildNodes() == false || n.isElement() == false)
       {
-	light->setPosition(_parsePosition(n, "direction"));
-	direction = true;
+	this->_putError(QObject::tr("Every light children must be an element"),
+			n);
+	return NULL;
       }
-    }
-    else if (n.nodeName() == "color")
-    {
-      if (color)
-	this->_putWarning(QObject::tr("A light has several colors, "
-				      "the first defined will be used"), n);
-      else
+      if (n.nodeName() == "direction")
       {
-	light->setColor(_parseColor(n));
-	color = true;
+	if (direction)
+	  this->_putWarning(QObject::tr("A light has several direction, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setPosition(_parsePosition(n, "direction"));
+	  direction = true;
+	}
       }
-    }
-    else if (n.nodeName() == "intensity")
-    {
-      if (intensity)
-	this->_putWarning(QObject::tr("A light has several intensity, "
-				      "the first defined will be used"), n);
-      else
+      else if (n.nodeName() == "color")
       {
-	light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
-	intensity = true;
+	if (color)
+	  this->_putWarning(QObject::tr("A light has several colors, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setColor(_parseColor(n));
+	  color = true;
+	}
       }
+      else if (n.nodeName() == "intensity")
+      {
+	if (intensity)
+	  this->_putWarning(QObject::tr("A light has several intensity, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
+	  intensity = true;
+	}
+      }
+      else
+	this->_putError(QObject::tr("%1 is not a valid element")
+			.arg(n.nodeName()), n);
     }
-    else
-      this->_putError(QObject::tr("%1 is not a valid element")
-		      .arg(n.nodeName()), n);
     n = n.nextSibling();
   }
   if (!direction || !color || !intensity)
@@ -160,72 +166,75 @@ SphericalLight*			Scene::_parseSphericalLight(QDomNode	n)
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.hasChildNodes() == false || n.isElement() == false)
+    if (n.isComment() == false)
     {
-      this->_putError(QObject::tr("Every light children must be an element"),
-		      n);
-      return NULL;
-    }
-    if (n.nodeName() == "position")
-    {
-      if (position)
-	this->_putWarning(QObject::tr("A light has several position, "
+      if (n.hasChildNodes() == false || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("Every light children must be an element"),
+			n);
+	return NULL;
+      }
+      if (n.nodeName() == "position")
+      {
+	if (position)
+	  this->_putWarning(QObject::tr("A light has several position, "
 				      "the first defined will be used"), n);
+	else
+	{
+	  light->setPosition(_parsePosition(n, "position"));
+	  position = true;
+	}
+      }
+      else if (n.nodeName() == "color")
+      {
+	if (color)
+	  this->_putWarning(QObject::tr("A light has several colors, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setColor(_parseColor(n));
+	  color = true;
+	}
+      }
+      else if (n.nodeName() == "intensity")
+      {
+	if (intensity)
+	  this->_putWarning(QObject::tr("A light has several intensity, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
+	  intensity = true;
+	}
+      }
+      else if (n.nodeName() == "size")
+      {
+	if (size)
+	  this->_putWarning(QObject::tr("A light has several size, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setSize(_parseDouble(n, 0, 0, "size"));
+	  size = true;
+	}
+      }
+      else if (n.nodeName() == "directLight")
+      {
+	if (directLight)
+	  this->_putWarning(QObject::tr("A light has several directLight, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setDirectLightPow(_parseDouble(n, 0, 0, "directLight"));
+	  directLight = true;
+	}
+      }
       else
       {
-	light->setPosition(_parsePosition(n, "position"));
-	position = true;
+	this->_putError(QObject::tr("%1 is not a valid element")
+			.arg(n.nodeName()), n);
+	return NULL;
       }
-    }
-    else if (n.nodeName() == "color")
-    {
-      if (color)
-	this->_putWarning(QObject::tr("A light has several colors, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setColor(_parseColor(n));
-	color = true;
-      }
-    }
-    else if (n.nodeName() == "intensity")
-    {
-      if (intensity)
-	this->_putWarning(QObject::tr("A light has several intensity, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
-	intensity = true;
-      }
-    }
-    else if (n.nodeName() == "size")
-    {
-      if (size)
-	this->_putWarning(QObject::tr("A light has several size, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setSize(_parseDouble(n, 0, 0, "size"));
-	size = true;
-      }
-    }
-    else if (n.nodeName() == "directLight")
-    {
-      if (directLight)
-	this->_putWarning(QObject::tr("A light has several directLight, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setDirectLightPow(_parseDouble(n, 0, 0, "directLight"));
-	directLight = true;
-      }
-    }
-    else
-    {
-      this->_putError(QObject::tr("%1 is not a valid element")
-		      .arg(n.nodeName()), n);
-      return NULL;
     }
     n = n.nextSibling();
   }
@@ -250,83 +259,86 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.hasChildNodes() == false || n.isElement() == false)
+    if (n.isComment() == false)
     {
-      this->_putError(QObject::tr("Every light children must be an element"),
-		      n);
-      return NULL;
-    }
-    if (n.nodeName() == "point1")
-    {
-      if (p1)
-	this->_putWarning(QObject::tr("A light has several point1, "
-				      "the first defined will be used"), n);
+      if (n.hasChildNodes() == false || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("Every light children must be an element"),
+			n);
+	return NULL;
+      }
+      if (n.nodeName() == "point1")
+      {
+	if (p1)
+	  this->_putWarning(QObject::tr("A light has several point1, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setPosition(_parsePosition(n, "point1"));
+	  p1 = true;
+	}
+      }
+      else if (n.nodeName() == "point2")
+      {
+	if (p2)
+	  this->_putWarning(QObject::tr("A light has several point2, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setPosition(_parsePosition(n, "point2"));
+	  p2 = true;
+	}
+      }
+      else if (n.nodeName() == "point3")
+      {
+	if (p3)
+	  this->_putWarning(QObject::tr("A light has several point3, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setPosition(_parsePosition(n, "point3"));
+	  p3 = true;
+	}
+      }
+      else if (n.nodeName() == "color")
+      {
+	if (color)
+	  this->_putWarning(QObject::tr("A light has several colors, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setColor(_parseColor(n));
+	  color = true;
+	}
+      }
+      else if (n.nodeName() == "intensity")
+      {
+	if (intensity)
+	  this->_putWarning(QObject::tr("A light has several intensity, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
+	  intensity = true;
+	}
+      }
+      else if (n.nodeName() == "directLight")
+      {
+	if (directLight)
+	  this->_putWarning(QObject::tr("A light has several directLight, "
+					"the first defined will be used"), n);
+	else
+	{
+	  light->setDirectLightPow(_parseDouble(n, 0, 0, "directLight"));
+	  directLight = true;
+	}
+      }
       else
       {
-	light->setPosition(_parsePosition(n, "point1"));
-	p1 = true;
+	this->_putError(QObject::tr("%1 is not a valid element")
+			.arg(n.nodeName()), n);
+	return NULL;
       }
-    }
-    else if (n.nodeName() == "point2")
-    {
-      if (p2)
-	this->_putWarning(QObject::tr("A light has several point2, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setPosition(_parsePosition(n, "point2"));
-	p2 = true;
-      }
-    }
-    else if (n.nodeName() == "point3")
-    {
-      if (p3)
-	this->_putWarning(QObject::tr("A light has several point3, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setPosition(_parsePosition(n, "point3"));
-	p3 = true;
-      }
-    }
-    else if (n.nodeName() == "color")
-    {
-      if (color)
-	this->_putWarning(QObject::tr("A light has several colors, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setColor(_parseColor(n));
-	color = true;
-      }
-    }
-    else if (n.nodeName() == "intensity")
-    {
-      if (intensity)
-	this->_putWarning(QObject::tr("A light has several intensity, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setIntensity(_parseDouble(n, 0, 0, "intensity"));
-	intensity = true;
-      }
-    }
-    else if (n.nodeName() == "directLight")
-    {
-      if (directLight)
-	this->_putWarning(QObject::tr("A light has several directLight, "
-				      "the first defined will be used"), n);
-      else
-      {
-	light->setDirectLightPow(_parseDouble(n, 0, 0, "directLight"));
-	directLight = true;
-      }
-    }
-    else
-    {
-      this->_putError(QObject::tr("%1 is not a valid element")
-		      .arg(n.nodeName()), n);
-      return NULL;
     }
     n = n.nextSibling();
   }
@@ -347,39 +359,42 @@ void			Scene::_parseLight(QDomNode n)
 
   while (n.isNull() == false && this->_hasError == false)
   {
-    if (n.nodeName() != "light" || n.isElement() == false)
+    if (n.isComment() == false)
     {
-      this->_putError(QObject::tr("A lights child cannot be empty and must "
-				  "be a light element"), n);
-      return ;
-    }
-    if (n.hasChildNodes() == false)
-    {
-      this->_putError(QObject::tr("A light element cannot be empty"), n);
-      return ;
-    }
-    if (n.hasAttributes() != false && n.attributes().contains("type"))
-      type = n.attributes().namedItem("type").nodeValue();
-    if ((n.hasAttributes() == false
-	 || n.attributes().contains("type") == false))
-    {
-      this->_putError(QObject::tr("%1 is not a valide light type").arg(type)
-		      , n);
-      return ;
-    }
-    else if (type == "spot")
-      this->_lights.push_back(this->_parseSpotLight(n.firstChild()));
-    else if (type == "parallel")
-      this->_lights.push_back(this->_parseParallelLight(n.firstChild()));
-    else if (type == "spherical")
-      this->_lights.push_back(this->_parseSphericalLight(n.firstChild()));
-    else if (type == "parallelogram")
-      this->_lights.push_back(this->_parseParallelogramLight(n.firstChild()));
-    else
-    {
-      this->_putError(QObject::tr("%1 is not a valide light type").arg(type),
-		      n);
-      return ;
+      if (n.nodeName() != "light" || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("A lights child cannot be empty and must "
+				    "be a light element"), n);
+	return ;
+      }
+      if (n.hasChildNodes() == false)
+      {
+	this->_putError(QObject::tr("A light element cannot be empty"), n);
+	return ;
+      }
+      if (n.hasAttributes() != false && n.attributes().contains("type"))
+	type = n.attributes().namedItem("type").nodeValue();
+      if ((n.hasAttributes() == false
+	   || n.attributes().contains("type") == false))
+      {
+	this->_putError(QObject::tr("%1 is not a valide light type").arg(type)
+			, n);
+	return ;
+      }
+      else if (type == "spot")
+	this->_lights.push_back(this->_parseSpotLight(n.firstChild()));
+      else if (type == "parallel")
+	this->_lights.push_back(this->_parseParallelLight(n.firstChild()));
+      else if (type == "spherical")
+	this->_lights.push_back(this->_parseSphericalLight(n.firstChild()));
+      else if (type == "parallelogram")
+	this->_lights.push_back(this->_parseParallelogramLight(n.firstChild()));
+      else
+      {
+	this->_putError(QObject::tr("%1 is not a valide light type").arg(type),
+			n);
+	return ;
+      }
     }
     n = n.nextSibling();
   }

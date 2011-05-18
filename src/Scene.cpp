@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Wed May 18 14:00:07 2011 melvin laplanche
+// Last update Wed May 18 22:43:07 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -524,9 +524,12 @@ void		Scene::loadFromFile(string		filename,
 
     while (node.isNull() == false && this->_hasError == false)
     {
-      if (this->_loadFromFile_validFirstDepth(node))
-	this->_dispatcher(node, has_cameras, has_materials,
-			  has_objects, has_lights);
+      if (node.isComment() == false)
+      {
+	if (this->_loadFromFile_validFirstDepth(node))
+	  this->_dispatcher(node, has_cameras, has_materials,
+			    has_objects, has_lights);
+      }
       node = node.nextSibling();
     }
     if (this->_hasError == false)
