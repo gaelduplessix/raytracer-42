@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 18 09:31:19 2011 loick michard
+// Last update Wed May 18 11:49:20 2011 loick michard
 //
 
 #include <QApplication>
@@ -197,6 +197,8 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
 
 void RaytracerGUI::setCameras()
 {
+  while (_ui->_camera->currentIndex() != -1)
+    _ui->_camera->removeItem(_ui->_camera->currentIndex());
   vector<Camera*> cameras =_scene->getCameras();
   for (unsigned int i = 0; i < cameras.size(); i++)
     {
