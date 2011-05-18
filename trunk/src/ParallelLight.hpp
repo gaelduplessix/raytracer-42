@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 16:48:11 2011 loick michard
-// Last update Wed May 11 18:51:35 2011 melvin laplanche
+// Last update Wed May 18 11:24:06 2011 samuel olivier
 //
 
 #ifndef _PARALLELLIGHT_HPP_
@@ -29,6 +29,7 @@ public :
 
   Color getDirectLighting(const Raytracer& raytracer,
                           Ray& ray) const;
+  void	getRandomRay(Ray& ray) const;
 };
 
 #endif

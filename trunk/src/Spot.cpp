@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Thu May 12 00:34:51 2011 melvin laplanche
+// Last update Wed May 18 11:23:40 2011 samuel olivier
 //
 
 #include <cmath>
@@ -74,4 +74,12 @@ Color	Spot::getDirectLighting(const Raytracer& raytracer,
   if (scalar > 0)
     return (lightColor * scalar * pow(scalar, _directLightPow));
   return (Color());
+}
+
+void	Spot::getRandomRay(Ray& ray) const
+{
+  ray.setPoint(_position);
+  ray._vector.setVector(2 * ((double)rand() / RAND_MAX) - 1,
+			2 * ((double)rand() / RAND_MAX) - 1,
+			2 * ((double)rand() / RAND_MAX) - 1);
 }

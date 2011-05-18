@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Thu May 12 00:36:30 2011 melvin laplanche
+// Last update Wed May 18 11:29:57 2011 samuel olivier
 //
 
 #include <cmath>
@@ -103,4 +103,12 @@ Color	ParallelogramLight::getDirectLighting(const Raytracer& raytracer,
       return (lightColor);
     }
   return (Color(0, 0, 0));
+}
+
+void    ParallelogramLight::getRandomRay(Ray& ray) const
+{
+  ray.setPoint(_position);
+  ray._vector.setVector(2 * ((double)rand() / RAND_MAX) - 1,
+                        2 * ((double)rand() / RAND_MAX) - 1,
+                        2 * ((double)rand() / RAND_MAX) - 1);
 }

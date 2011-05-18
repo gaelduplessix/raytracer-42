@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Thu May  5 10:39:44 2011 samuel olivier
-// Last update Thu May 12 16:40:31 2011 gael jochaud-du-plessix
+// Last update Wed May 18 11:25:10 2011 samuel olivier
 //
 
 #include "Raytracer.hpp"
@@ -55,4 +55,12 @@ void    ParallelLight::getLighting(const ObjectPrimitive& primitive,
       * scalar;
   return ;
   (void)specularLighting;
+}
+
+void    ParallelLight::getRandomRay(Ray& ray) const
+{
+  ray.setPoint(_position);
+  ray._vector.setVector(2 * ((double)rand() / RAND_MAX) - 1,
+                        2 * ((double)rand() / RAND_MAX) - 1,
+                        2 * ((double)rand() / RAND_MAX) - 1);
 }

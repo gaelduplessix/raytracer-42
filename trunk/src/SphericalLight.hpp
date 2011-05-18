@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Sun May  8 22:43:24 2011 gael jochaud-du-plessix
-// Last update Wed May 11 18:59:05 2011 melvin laplanche
+// Last update Wed May 18 11:25:41 2011 samuel olivier
 //
 
 #ifndef _SPHERICAL_LIGHT_HPP_
@@ -35,6 +35,7 @@ public :
 
   Color getDirectLighting(const Raytracer& raytracer,
 			  Ray& ray) const;
+  void	getRandomRay(Ray& ray) const;
 
 private:
   double	_directLightPow;
