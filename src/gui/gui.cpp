@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 18 14:29:53 2011 melvin laplanche
+// Last update Wed May 18 21:56:08 2011 melvin laplanche
 //
 
 #include <QApplication>
@@ -280,7 +280,7 @@ void		gui(int ac, char **av)
   QString	locale = QLocale::system().name().section('_', 0, 0);
   RaytracerGUI	gui;
 
-  cerr << locale.toStdString() << endl;
+  cout << "locale used: " << locale.toStdString() << endl;
   translator.load("raytracer-42_" + locale);
   app.installTranslator(&translator);
   gui.show();
