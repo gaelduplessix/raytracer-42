@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 14:33:18 2011 samuel olivier
-// Last update Wed May 18 14:11:18 2011 samuel olivier
+// Last update Wed May 18 22:43:55 2011 samuel olivier
 //
 
 #include "PhotonMap.hpp"
@@ -30,16 +30,22 @@ void			PhotonMap::fillPhotonMap(Raytracer *rt)
   Ray			tmpRay;
 
   for (int i = 0 ; i < nbLight ; i++)
-    for (int j = 0 ; j < sampling ; j++)
-      {
-	lights[i]->getRandomRay(tmpRay);
-	throwRay(rt, tmpRay, lights[i]->getColor());
-      }
+    {
+      int j = 0;
+
+      while (j < sampling)
+	{
+	  lights[i]->getRandomRay(tmpRay);
+	  if (throwRay(rt, tmpRay, lights[i]->getColor()))
+	    j++;
+	}
+    }
   for (int pathSize = rt->_refractivePath.size() ; pathSize > 0 ; pathSize--)
     rt->_refractivePath.pop();
+  printf("%d\n", _map.size());
 }
 
-void		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
+bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
 				    const Color& currentColor)
 {
   ObjectPrimitive*	nearestObject = NULL;
@@ -48,39 +54,40 @@ void		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
   if ((nearestObject = rt->getNearestObject(ray, k)) != NULL)
     {
       Photon		photon;
-      bool		reflect = true;
-      bool		refract = true;
+      bool		reflect = false;
+      bool		refract = false;
       int		nbPossibilities = 2;
       int		randomValue;
+
       photon._position = ray._point + k * ray._vector;
       photon._vector = ray._vector;
       photon._color = (currentColor *
-		       nearestObject->getColor(photon._position)) / 255;
+      		       nearestObject->getColor(photon._position)) / 255;
       _map.push_back(photon);
-      if (rt->getRenderingConfiguration()->isReflectionEnabled() == false
-	  && nearestObject->getMaterial().getReflectionCoeff() == 0)
-	{
-	  reflect = false;
-	  nbPossibilities++;
-	}
-      if (rt->getRenderingConfiguration()->isTransparencyEnabled() == false
-	  && nearestObject->getMaterial().getTransmissionCoeff() == 0)
-	{
-	  refract = false;
-	  nbPossibilities++;
-	}
+      if (rt->getRenderingConfiguration()->isReflectionEnabled() == true
+      	  && nearestObject->getMaterial().getReflectionCoeff() > 0)
+      	{
+      	  reflect = true;
+      	  nbPossibilities++;
+      	}
+      if (rt->getRenderingConfiguration()->isTransparencyEnabled() == true
+      	  && nearestObject->getMaterial().getTransmissionCoeff() > 0)
+      	{
+      	  refract = true;
+      	  nbPossibilities++;
+      	}
       randomValue = rand() % nbPossibilities;
       if (randomValue == 0)
-	return ;
-      else if (randomValue == 1 || (randomValue == 2 && reflect == true))
-	{
-	  Ray	newRay(photon._position,
-		       nearestObject->getReflectedVector(photon._position,
-							 photon._vector));
-	  throwRay(rt, newRay, photon._color);
-	}
-      else if ((reflect == false && randomValue == 2) ||
-	       (reflect == true && randomValue == 3))
+      	return (true);
+      else if (randomValue == 1 || (randomValue == 2 && reflect))
+      	{
+      	  Ray	newRay(photon._position,
+      		       nearestObject->getReflectedVector(photon._position,
+      							 photon._vector));
+      	  throwRay(rt, newRay, photon._color);
+      	}
+      if (rt->getRenderingConfiguration()->isTransparencyEnabled() == true
+      	  && nearestObject->getMaterial().getTransmissionCoeff() > 0)
 	{
 	  if (rt->_refractivePath.size() > 0)
 	    ray._refractiveIndex =
@@ -108,5 +115,7 @@ void		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
             }
 	  throwRay(rt, newRay, photon._color);
 	}
+      return (true);
     }
+  return (false);
 }

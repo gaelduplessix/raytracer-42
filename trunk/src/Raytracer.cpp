@@ -5,13 +5,14 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May 18 19:17:26 2011 gael jochaud-du-plessix
+// Last update Wed May 18 23:13:13 2011 samuel olivier
 //
 
 #include <stdio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <cmath>
 
 #include "Raytracer.hpp"
 
@@ -293,6 +294,7 @@ Color			Raytracer::throwRay(Ray& ray)
       mixedColor += calcDirectLight(ray);
       mixedColor = (ambientOcclusion * mixedColor) / 255;
       mixedColor *= (1 - ambientOcclusionCoeff);
+      mixedColor += calcAmbiantLight(intersectPoint);
       if (_config->isAdditiveAmbiantLighting())
 	mixedColor += _config->getAdditiveAmbiantLighting();
       return (mixedColor);
@@ -361,8 +363,6 @@ void		Raytracer::calcLightForObject(const ObjectPrimitive& object,
       specularLight += specularLighting;
     }
 }
-
-#include <stdio.h>
 
 Color	Raytracer::calcAmbiantOcclusion(const ObjectPrimitive* object,
 					const Point& intersectPoint,
@@ -538,3 +538,91 @@ Color		Raytracer::calcDirectLight(Ray& ray)
     }
   return (directLight);
 }
+
+void		Raytracer::getNearestPhoton(vector<Photon*>& nearest, int size,
+					    const Point& intersectPoint, int n)
+{
+  double	dist;
+  Vector	vector;
+  int		newSize = 0;
+  int		i = -1;
+
+  while (++i < size)
+    {
+      vector = intersectPoint - _photonMap->_map[i]._position;
+      dist = vector.getNorm();
+      int j = 0;
+      while (j < newSize && dist > nearest[j]->_dist)
+	j++;
+      if (j < n)
+	{
+	  _photonMap->_map[i]._dist = dist;
+	  nearest.insert(nearest.begin() + j, &_photonMap->_map[i]);
+	  if (newSize < n)
+	    newSize++;
+	  else
+	    nearest.pop_back();
+	}
+    }
+  // printf("%d / %d\n", nearest.size(), i);
+}
+
+Color		Raytracer::calcAmbiantLight(const Point& intersectPoint)
+{
+  if (!_config->isPhotonMappingEnabled())
+    return (Color(0, 0, 0));
+  int			mapSize = _photonMap->_map.size();
+  Color			res(0, 0, 0);
+  vector<Photon*>	nearest;
+  double		maxDist = 0;;
+  double		aire ;
+  int			newSize;
+
+  getNearestPhoton(nearest, mapSize, intersectPoint, 30);
+  newSize = nearest.size();
+  for (int i = 0 ; i < newSize ; i++)
+    {
+      if (nearest[i]->_dist > maxDist)
+	maxDist = nearest[i]->_dist;
+      // printf("%d => %d %d %d\n", i, res._r, res._g, res._b);
+      res += nearest[i]->_color;
+    }
+  if (newSize > 0)
+    {
+      aire = M_PI * maxDist * maxDist;
+      res /= aire * mapSize;
+    }
+  // printf("\n");
+  // printf("%d %d %d : %f %f\n", res._r, res._g, res._b, aire, maxDist);
+  return (res);
+}
+
+// Color		Raytracer::calcAmbiantLight(const Point& intersectPoint)
+// {
+//   if (!_config->isPhotonMappingEnabled())
+//     return (Color(0, 0, 0));
+//   int			mapSize = _photonMap->_map.size();
+//   Color			res(0, 0, 0);
+//   double		dist;
+//   Vector		vector;
+//   double		nbPhoton = 0;
+//   double maxDist = 0.00001;
+
+//   for (int i = 0 ; i < mapSize ; i++)
+//     {
+//       vector = intersectPoint - _photonMap->_map[i]._position;
+//       dist = vector.getNorm();
+//       if (dist < 0.2)
+// 	{
+// 	  if (dist > maxDist)
+// 	    maxDist = dist;
+// 	  nbPhoton++;
+// 	  res += _photonMap->_map[i]._color * (1.0 - ((1.0 / 0.2) * dist));
+// 	}
+//     }
+//   //  if (nbPhoton > 1.0)
+//   //  res /= nbPhoton;
+//   // res *= 1.0 - (((double)mapSize - nbPhoton) / (double)mapSize);
+//   res /= (3.14 * 4) * 5;
+//   return (res);
+// }

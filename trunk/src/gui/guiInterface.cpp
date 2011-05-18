@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed May 18 13:42:24 2011 samuel olivier
+// Last update Wed May 18 17:57:59 2011 samuel olivier
 //
 
 #include <QMessageBox>
@@ -119,7 +119,7 @@ void    RaytracerGUI::renderingHasBegun(void)
 
 void    RaytracerGUI::photonMappingHasBegun(void)
 {
-  sendSuccessMessage(tr("Debut de la generation de la carte de Photon")
+  sendMessage(tr("Debut de la generation de la carte de Photon")
 		     .toStdString());
 }
 
@@ -183,9 +183,9 @@ void    RaytracerGUI::startRender()
     {
       _ui->_progressBar->setHidden(false);
       if (_pause)
-	sendSuccessMessage(tr("Reprise du rendu").toStdString());
+	sendMessage(tr("Reprise du rendu").toStdString());
       else
-	sendSuccessMessage(tr("D&eacute;part du rendu").toStdString());
+	sendMessage(tr("D&eacute;part du rendu").toStdString());
       _pause = false;
       _raytracer->launchRendering();
       _isRendering = true;

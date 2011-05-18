@@ -12,11 +12,17 @@
 
   <materials>
     <material name="sol">
-      <color>255, 255, 255</color>
-      <color>255, 255, 255</color>
+     <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
       <reflection>0</reflection>
+    </material>
+    <material name="refraction">
+      <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <transmission>1</transmission>
+      <refractionIndex>1.33</refractionIndex>
     </material>
   </materials>
 
@@ -24,13 +30,18 @@
     <object>
       <position>0, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
-      <solid>true</solid>
+      <solid>false</solid>
 	<primitives>
-	  <primitive type="parallelogram" material="sol">
-	    <position>20, -2.5, 0</position>
-	    <vertex1>25, -2.5, 5</vertex1>
-	    <vertex2>20, 2.5, 0</vertex2>
-	    <rotation>0, 0, 0</rotation>
+	  <primitive type="plane" material="sol">
+	    <position>16, -3, -3</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <limitX>6</limitX>
+	    <limitY>6</limitY>
+	  </primitive>
+	  <primitive type="sphere" material="refraction">
+	    <position>20, 0, -2</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <radius>1</radius>
 	  </primitive>
 	</primitives>
     </object>
@@ -38,17 +49,11 @@
 
   <lights>
     <light type="spot">
-      <position>0,0,5</position>
-      <color>FF0000</color>
+      <position>30,0,5</position>
+      <color>FFFFFF</color>
       <intensity>1</intensity>
-      <directLight>1</directLight>
-    </light>
-    <light type="spot">
-      <position>0,0,-5</position>
-      <color>00FF00</color>
-      <intensity>1</intensity>
-      <directLight>1</directLight>
+      <directLight>3000</directLight>
     </light>
   </lights>
-  </scene>
+</scene>
 
