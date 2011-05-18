@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Wed May 11 18:15:18 2011 samuel olivier
+// Last update Wed May 18 23:14:11 2011 samuel olivier
 //
 
 #include <cmath>
@@ -109,7 +109,8 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 
   Color		lightColor = _color;
   double	absorptionCoeff = 0;
-  if (!renderConf->isTransparencyEnabled())
+  if (!renderConf->isTransparencyEnabled()
+      || renderConf->isPhotonMappingEnabled())
     {
       double                k = -1;
       ObjectPrimitive*      nearestObject = NULL;

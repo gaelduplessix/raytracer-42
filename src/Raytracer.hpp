@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Wed May 18 16:31:31 2011 gael jochaud-du-plessix
+// Last update Wed May 18 21:57:43 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -14,6 +14,7 @@
 #define EPSILON 1e-5
 
 #include <stack>
+#include <vector>
 
 #include "Scene.hpp"
 #include "RenderingConfiguration.hpp"
@@ -90,6 +91,10 @@ public:
 			    Ray& ray);
 
   Color	calcDirectLight(Ray& ray);
+
+  void	getNearestPhoton(vector<Photon*>& nearest, int size,
+			 const Point& intersectPoint, int n);
+  Color	calcAmbiantLight(const Point& intersectPoint);
 
   stack<ObjectPrimitive*>	_refractivePath;
   PhotonMap*			_photonMap;

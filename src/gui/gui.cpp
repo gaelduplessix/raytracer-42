@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 18 22:56:25 2011 gael jochaud-du-plessix
+// Last update Wed May 18 23:08:00 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -262,7 +262,6 @@ void RaytracerGUI::drawWindow()
 }
 
 RaytracerGUI::RaytracerGUI(QWidget *parent)
-<<<<<<< .mine
   : QMainWindow(parent), _config(new RenderingConfiguration()),
     _raytracer(new Raytracer()), _backgroundColor(new QColor(0, 0, 0)), 
     _ambiantColor(new QColor(255, 255, 255)), _image(NULL),
