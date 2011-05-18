@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Thu May 12 21:53:34 2011 loick michard
+// Last update Wed May 18 09:27:24 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -63,6 +63,7 @@ public slots:
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
+  void		setCameras();
 
 private:
   RenderingConfiguration	*_config;
