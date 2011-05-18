@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May  4 17:40:55 2011 loick michard
-// Last update Thu May 12 16:37:25 2011 gael jochaud-du-plessix
+// Last update Wed May 18 12:20:06 2011 samuel olivier
 //
 
 #ifndef _MATERIAL_HPP_
@@ -52,7 +52,6 @@ public:
   double	getSpecularPow(void) const;
   double	getReflectionCoeff(void) const;
   double	getDiffusedReflectionCoeff(void) const;
-  double	getDiffusedTransmissionCoeff(void) const;
   double	getTransmissionCoeff(void) const;
   double	getRefractionIndex(void) const;
 
@@ -71,7 +70,6 @@ private:
   double	_transmissionCoeff;
   double	_refractionIndex;
   double	_diffusedReflectionCoeff;
-  double	_diffusedTransmissionCoeff;
 
 public:
   Texture*	_heightmap;

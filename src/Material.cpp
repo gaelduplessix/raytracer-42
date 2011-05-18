@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Thu May 12 16:38:06 2011 gael jochaud-du-plessix
+// Last update Wed May 18 12:20:55 2011 samuel olivier
 //
 
 #include "Material.hpp"
@@ -14,9 +14,8 @@ Material::Material():
   _name(""), _color(Color(0, 0, 0)), _texture(NULL), _limitTexture(NULL),
   _isTextured(false), _specularCoeff(0),  _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
-  _diffusedReflectionCoeff(0.1), _diffusedTransmissionCoeff(0.1),
-  _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1), _deformationCoeff(10)
+  _diffusedReflectionCoeff(0.1), _heightmap(NULL), _hasBumpMap(false),
+  _hasNormalDeformation(false), _deformationType(-1), _deformationCoeff(10)
 {
 
 }
@@ -25,9 +24,8 @@ Material::Material(const string& name):
   _name(name), _color(Color(0, 0, 0)), _texture(NULL), _limitTexture(NULL),
   _isTextured(false), _specularCoeff(0),  _specularPow(50),
   _reflectionCoeff(0), _transmissionCoeff(0), _refractionIndex(1),
-  _diffusedReflectionCoeff(0.1), _diffusedTransmissionCoeff(0.1),
-  _heightmap(NULL), _hasBumpMap(false), _hasNormalDeformation(false),
-  _deformationType(-1), _deformationCoeff(10)
+  _diffusedReflectionCoeff(0.1), _heightmap(NULL), _hasBumpMap(false),
+  _hasNormalDeformation(false), _deformationType(-1), _deformationCoeff(10)
 {
 
 }
@@ -76,11 +74,6 @@ double	Material::getReflectionCoeff(void) const
 double	Material::getDiffusedReflectionCoeff(void) const
 {
   return (_diffusedReflectionCoeff);
-}
-
-double	Material::getDiffusedTransmissionCoeff(void) const
-{
-  return (_diffusedTransmissionCoeff);
 }
 
 double	Material::getTransmissionCoeff(void) const
@@ -132,11 +125,6 @@ void	Material::setReflectionCoeff(double reflectionCoeff)
 void	Material::setDiffusedReflectionCoeff(double diffusedReflectionCoeff)
 {
   _diffusedReflectionCoeff = diffusedReflectionCoeff;
-}
-
-void	Material::setDiffusedTransmissionCoeff(double diffusedTransmissionCoeff)
-{
-  _diffusedTransmissionCoeff = diffusedTransmissionCoeff;
 }
 
 void	Material::setTransmissionCoeff(double transmissionCoeff)
