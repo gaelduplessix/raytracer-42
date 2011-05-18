@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed May 18 09:29:17 2011 loick michard
+// Last update Wed May 18 13:42:24 2011 samuel olivier
 //
 
 #include <QMessageBox>
@@ -19,8 +19,9 @@ void RaytracerGUI::closeEvent(QCloseEvent *event)
   else
     {
       QMessageBox msgBox;
-      msgBox.setText("Un rendu est en cours.");
-      msgBox.setInformativeText("Etes-vous sur de vouloir fermer la fenetre?");
+      msgBox.setText(tr("Un rendu est en cours."));
+      msgBox.setInformativeText(tr("Etes-vous sur de vouloir fermer la \
+fenetre?"));
       msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
       msgBox.setDefaultButton(QMessageBox::Cancel);
       int ret =
@@ -47,7 +48,8 @@ void RaytracerGUI::sendWarningMessage(string message)
     _message += "<br/>";
   _message += "<span style=\"color:blue;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Warning: </b>";
+  _message += tr("Attention").toStdString();
+  _message += ": </b>";
   _message += message;
   _message += "</span>";
 }
@@ -59,7 +61,8 @@ void RaytracerGUI::sendErrorMessage(string message)
     _message += "<br/>";
   _message += "<span style=\"color:red;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Error: </b>";
+  _message += tr("Error").toStdString();
+  _message += ": </b>";
   _message += message;
   _message += "</span>";
 }
@@ -71,7 +74,8 @@ void RaytracerGUI::sendSuccessMessage(string message)
     _message += "<br/>";
   _message += "<span style=\"color:green;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Success: </b>";
+  _message += tr("Success").toStdString();
+  _message += ": </b>";
   _message += message;
   _message += "</span>";
 }
@@ -83,14 +87,15 @@ void RaytracerGUI::sendMessage(string message)
     _message += "<br/>";
   _message += "<span>";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
-  _message += "Info: </b>";
+  _message += tr("Info").toStdString();
+  _message += ": </b>";
   _message += message;
   _message += "</span>";
 }
 
 void    RaytracerGUI::pauseRendering(void)
 {
-  sendMessage("Rendu mis en pause");
+  sendMessage(tr("Rendu mis en pause").toStdString());
   _timer->setSingleShot(true);
   _raytracer->pauseRendering();
   _pause = true;
@@ -110,6 +115,18 @@ void    RaytracerGUI::renderingHasFinished(void)
 void    RaytracerGUI::renderingHasBegun(void)
 {
 
+}
+
+void    RaytracerGUI::photonMappingHasBegun(void)
+{
+  sendSuccessMessage(tr("Debut de la generation de la carte de Photon")
+		     .toStdString());
+}
+
+void    RaytracerGUI::photonMappingHasFinished(void)
+{
+  sendSuccessMessage(tr("G&eacute;neration de la carte de Photon terminee")
+		     .toStdString());
 }
 
 void    RaytracerGUI::renderingHasProgressed(double progress)
@@ -168,7 +185,7 @@ void    RaytracerGUI::startRender()
       if (_pause)
 	sendSuccessMessage(tr("Reprise du rendu").toStdString());
       else
-	sendSuccessMessage(tr("Depart du rendu").toStdString());
+	sendSuccessMessage(tr("D&eacute;part du rendu").toStdString());
       _pause = false;
       _raytracer->launchRendering();
       _isRendering = true;
@@ -179,7 +196,7 @@ void    RaytracerGUI::startRender()
     }
   }
   else
-    sendErrorMessage("You must load a scene before trying to make a render.");
+    sendErrorMessage(tr("Vous devez charger une sc&egrave;ne avant de faire un rendu").toStdString());
 }
 
 void		RaytracerGUI::saveImage()
@@ -191,8 +208,10 @@ void		RaytracerGUI::saveImage()
   validFormat[2] = "bmp";
   validFormat[3] = "jpeg";
   string format;
-
-  QString file = QFileDialog::getSaveFileName(this, "Enregistrer une scene", QString(), "*.png;;*.gif;;*.jpeg;;*.bmp", 0, QFileDialog::DontUseNativeDialog);
+  QString file =
+    QFileDialog::getSaveFileName(this, tr("Enregistrer une sc&egrave;ne"), QString(),
+				 "*.png;;*.gif;;*.jpeg;;*.bmp", 0,
+				 QFileDialog::DontUseNativeDialog);
   if (file != "")
     {
       format = file.toStdString();

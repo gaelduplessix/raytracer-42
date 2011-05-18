@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Wed May 18 09:27:24 2011 loick michard
+// Last update Wed May 18 13:26:14 2011 samuel olivier
 //
 
 #ifndef _GUI_HPP_
@@ -38,17 +38,19 @@ class RaytracerGUI : public QMainWindow, public RenderingInterface
   RaytracerGUI(QWidget *parent = 0);
   virtual ~RaytracerGUI();
   
-  void setConfiguration();
-  void renderingHasFinished(void);
-  void renderingHasBegun(void);
-  void pixelHasBeenRendered(int x, int y, Color color);
-  void renderingHasProgressed(double progress);
+  void	setConfiguration();
+  void	renderingHasFinished(void);
+  void	renderingHasBegun(void);
+  void	pixelHasBeenRendered(int x, int y, Color color);
+  void	renderingHasProgressed(double progress);
 
-  void sendWarningMessage(string message);
-  void sendErrorMessage(string message);
-  void sendSuccessMessage(string message);
-  void sendMessage(string message);
-  void closeEvent(QCloseEvent *event);
+  void	sendWarningMessage(string message);
+  void	sendErrorMessage(string message);
+  void	sendSuccessMessage(string message);
+  void	sendMessage(string message);
+  void	closeEvent(QCloseEvent *event);
+  void	photonMappingHasBegun(void);
+  void	photonMappingHasFinished(void);
 
 public slots:
   void  pauseRendering(void);

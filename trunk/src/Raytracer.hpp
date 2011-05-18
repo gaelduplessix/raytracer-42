@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Tue May 17 17:57:03 2011 samuel olivier
+// Last update Wed May 18 13:12:06 2011 samuel olivier
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -89,13 +89,14 @@ public:
 
   Color	calcDirectLight(Ray& ray);
 
+  stack<ObjectPrimitive*>	_refractivePath;
+  PhotonMap*			_photonMap;
+
 private:
   Scene*			_scene;
   RenderingConfiguration*	_config;
   RenderingInterface*		_interface;
   RaytracerThread*		_thread;
-  stack<ObjectPrimitive*>	_refractivePath;
-  PhotonMap*			_photonMap;
 };
 
 #endif

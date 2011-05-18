@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Thu May 12 16:39:14 2011 gael jochaud-du-plessix
+// Last update Wed May 18 12:33:59 2011 samuel olivier
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -59,11 +59,11 @@ public:
 				  const Vector& viewVector) const;
   virtual Vector	getNormalVector(const Point& intersectPoint,
 					const Vector& viewVector) const = 0;
-  virtual bool	isInBoundingBox(BoundingBox& box) const = 0;
+  virtual bool		isInBoundingBox(BoundingBox& box) const = 0;
 
-  Vector	getReflectedVector(const Point& intersectPoint,
-				   const Vector& vector,
-				   bool doNormalize=false) const;
+  Vector		getReflectedVector(const Point& intersectPoint,
+					   const Vector& vector,
+					   bool doNormalize=false) const;
   Ray		getRefractedRay(const Point& intersectPoint,
 				const Ray& ray,
 				stack<ObjectPrimitive*>& refractivePath) const;

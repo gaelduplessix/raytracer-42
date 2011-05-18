@@ -4,6 +4,10 @@
       <position>0, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
     </camera>
+    <camera type="cinema">
+      <position>0, 5, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
   </cameras>
 
   <materials>
