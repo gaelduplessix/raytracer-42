@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri May  6 15:54:06 2011 loick michard
-// Last update Thu May 12 16:17:04 2011 gael jochaud-du-plessix
+// Last update Mon May 16 15:32:18 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -145,6 +145,6 @@ Vector          CubeTroue::getNormalVector(const Point& intersectPoint,
 
 bool            CubeTroue::isInBoundingBox(BoundingBox& box) const
 {
-  box = box;
   return (true);
+  (void)box;
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Thu May 12 16:50:06 2011 gael jochaud-du-plessix
+// Last update Mon May 16 15:30:08 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -141,6 +141,6 @@ Vector		Plane::getNormalVector(const Point& intersectPoint,
 
 bool		Plane::isInBoundingBox(BoundingBox& box) const
 {
-  box = box;
   return (true);
+  (void)box;
 }

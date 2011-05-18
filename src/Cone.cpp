@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 11 23:22:47 2011 melvin laplanche
+// Last update Mon May 16 15:31:16 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -184,6 +184,6 @@ Vector		Cone::getNormalVector(const Point& intersectPoint,
 
 bool		Cone::isInBoundingBox(BoundingBox& box) const
 {
-  box = box;
   return (true);
+  (void)box;
 }
