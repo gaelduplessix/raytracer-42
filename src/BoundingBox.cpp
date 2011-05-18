@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu Apr 28 15:45:41 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 13:43:43 2011 gael jochaud-du-plessix
+// Last update Wed May 18 10:19:41 2011 loick michard
 //
 
 #include "BoundingBox.hpp"
@@ -24,6 +24,26 @@ BoundingBox::BoundingBox(const Point& vertex1, const Point& vertex2):
 BoundingBox::~BoundingBox()
 {
 
+}
+
+Point		BoundingBox::getMaxPoint() const
+{
+  return (Point((_vertex1._x > _vertex2._x) ? _vertex1._x 
+		: _vertex2._x,
+		(_vertex1._y > _vertex2._y) ? _vertex1._y
+		: _vertex2._y,
+		(_vertex1._z > _vertex2._z) ? _vertex1._z
+		: _vertex2._z));
+}
+
+Point           BoundingBox::getMinPoint() const
+{
+  return (Point((_vertex1._x < _vertex2._x) ? _vertex1._x
+		: _vertex2._x,
+                (_vertex1._y < _vertex2._y) ? _vertex1._y
+                : _vertex2._y,
+		(_vertex1._z < _vertex2._z) ? _vertex1._z
+                : _vertex2._z));
 }
 
 void		BoundingBox::setVertices(const Point& vertex1,

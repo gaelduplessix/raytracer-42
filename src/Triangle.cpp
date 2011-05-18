@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May 16 14:41:37 2011 gael jochaud-du-plessix
+// Last update Wed May 18 10:25:48 2011 loick michard
 //
 
 #include <cmath>
@@ -179,9 +179,30 @@ Vector		Triangle::getNormalVector(const Point& intersectPoint,
   return (_normal);
   (void)intersectPoint;
 }
-
+#define MAX(x, y) ((x) > (y)) ? (x) : (y)
+#define MIN(x, y) ((x) < (y)) ? (x) : (y)
 bool		Triangle::isInBoundingBox(BoundingBox& box) const
 {
-  box = box;
+  Point		maxBox = box.getMaxPoint();
+  Point		minBox = box.getMinPoint();
+  double	maxX = MAX(MAX(_vertex1._x, _vertex2._x),
+			   _absolutePosition._x);
+  double        maxY = MAX(MAX(_vertex1._y, _vertex2._y),
+                           _absolutePosition._y);
+  double        maxZ = MAX(MAX(_vertex1._z, _vertex2._z),
+                           _absolutePosition._z);
+  double        minX = MIN(MIN(_vertex1._x, _vertex2._x),
+                           _absolutePosition._x);
+  double        minY = MIN(MIN(_vertex1._y, _vertex2._y),
+                           _absolutePosition._y);
+  double        minZ = MIN(MIN(_vertex1._z, _vertex2._z),
+                           _absolutePosition._z);
+  if ((maxX > maxBox._x && minX > maxBox._x) ||
+      (maxX < minBox._x && minX < minBox._x) ||
+      (maxY > maxBox._y && minY > maxBox._y) ||
+      (maxY < minBox._y && minY < minBox._y) ||
+      (maxZ > maxBox._z && minZ > maxBox._z) ||
+      (maxZ < minBox._z && minZ < minBox._z))
+    return (false);
   return (true);
 }
