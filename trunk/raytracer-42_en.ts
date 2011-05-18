@@ -25,7 +25,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="142"/>
         <source>Avancement %p%</source>
-        <translation type="unfinished"></translation>
+        <translation>Parsing %p%</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="162"/>
@@ -196,7 +196,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="839"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>…</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="865"/>
@@ -246,7 +246,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="1110"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Toolbar</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1130"/>
@@ -1045,7 +1045,7 @@ Are you sure you want to close the window?</translation>
     <message>
         <location filename="src/gui/guiInterface.cpp" line="103"/>
         <source>Rendu termine</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendering finished</translation>
     </message>
     <message>
         <location filename="src/gui/guiInterface.cpp" line="131"/>

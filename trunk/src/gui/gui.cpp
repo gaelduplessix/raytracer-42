@@ -1,11 +1,11 @@
 //
 // gui.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42-gui
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 18 11:49:20 2011 loick michard
+// Last update Wed May 18 14:29:53 2011 melvin laplanche
 //
 
 #include <QApplication>
@@ -69,8 +69,8 @@ Scene           *createScene()
 			   true));
 
   vector<Light*> light;
-  //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));       
-  //light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));      
+  //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
+  //light.push_back(new Spot(Point(20, 10, 0), Color(255, 255, 255)));
 
   Scene         *res = new Scene(cam, obj, light);
   return (res);
@@ -109,7 +109,7 @@ void RaytracerGUI::setConfiguration()
 			 _ui->_diffuseReflectionSampling->value());
   _config->setTransparencyMaxDepth(_ui->_transparencyLimit->value());
   _config->setTransparency(_ui->_transparency->isChecked());
-  
+
   if (_ui->_cubeMap->isChecked())
     {
       if (_cubeMap)
@@ -137,8 +137,8 @@ void RaytracerGUI::setConfiguration()
 
 void	RaytracerGUI::selectCubeMap()
 {
-  QString file = 
-    QFileDialog::getExistingDirectory(this, 
+  QString file =
+    QFileDialog::getExistingDirectory(this,
 				      "Selectioner une CubeMap",
 				      QString(),
 				      QFileDialog::DontUseNativeDialog);
@@ -149,17 +149,17 @@ void	RaytracerGUI::selectBackgroundColor()
 {
   QColor color = QColorDialog::getColor(*_backgroundColor, this,
 					"Selectionner la couleur de fond",
-					QColorDialog::ShowAlphaChannel | 
+					QColorDialog::ShowAlphaChannel |
 					QColorDialog::DontUseNativeDialog);
   if (color.isValid())
     {
       *_backgroundColor = color;
       ostringstream oss;
-      
+
       oss << "background-color: rgb(" << _backgroundColor->red() <<
 	"," << _backgroundColor->green() << "," <<
 	_backgroundColor->blue() << ");";
-      
+
       string style = oss.str();
       _ui->_backgroundColor->setStyleSheet(style.c_str());
     }
@@ -175,11 +175,11 @@ void    RaytracerGUI::selectAmbiantColor()
     {
       *_ambiantColor = color;
       ostringstream oss;
-      
+
       oss << "background-color: rgb(" << _ambiantColor->red() <<
 	"," << _ambiantColor->green() << "," <<
 	_ambiantColor->blue() << ");";
-      
+
       string style = oss.str();
       _ui->_ambiantColorButton->setStyleSheet(style.c_str());
       _ui->_ambiantColor->setChecked(true);
@@ -223,9 +223,9 @@ void RaytracerGUI::drawWindow()
 }
 
 RaytracerGUI::RaytracerGUI(QWidget *parent)
-  : QMainWindow(parent), _ui(new Ui::MainWindow), 
+  : QMainWindow(parent), _ui(new Ui::MainWindow),
     _config(new RenderingConfiguration()), _raytracer(new Raytracer()),
-    _backgroundColor(new QColor(0, 0, 0)), 
+    _backgroundColor(new QColor(0, 0, 0)),
     _ambiantColor(new QColor(255, 255, 255)), _cubeMap(NULL),
     _scene(NULL), _image(NULL), _pixmap(new QPixmap()),
     _isRendering(false), _pause(false)
@@ -275,9 +275,14 @@ RaytracerGUI::~RaytracerGUI()
 
 void		gui(int ac, char **av)
 {
-  QApplication app(ac, av);
+  QApplication	app(ac, av);
+  QTranslator	translator;
+  QString	locale = QLocale::system().name().section('_', 0, 0);
+  RaytracerGUI	gui;
 
-  RaytracerGUI gui;
+  cerr << locale.toStdString() << endl;
+  translator.load("raytracer-42_" + locale);
+  app.installTranslator(&translator);
   gui.show();
   app.exec();
 }
