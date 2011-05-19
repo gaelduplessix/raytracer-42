@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat Apr 30 19:19:48 2011 loick michard
+// Last update Thu May 19 16:37:38 2011 loick michard
 //
 
 #ifndef _CAMERA_H_
@@ -25,6 +25,9 @@ public:
   Camera(const Point& position, const Rotation& rotation,
 		 const double focalLenght, const bool hasDepthOfField,
 		 const double apertureSize, const double focus);
+  Camera(const Point& position, const Point& target,
+	 const double focalLenght, const bool hasDepthOfField,
+	 const double apertureSize, const double focus, bool hasTarget);
   ~Camera();
 
   const Point&		getPosition(void) const;
@@ -40,6 +43,7 @@ public:
   void			setFocalLength(double focalLength);  
   void			setApertureSize(double apertureSize);
   void			setFocus(double focus);
+  void			setTarget(const Point &taget);
   void			setName(const string& name);
 
   virtual Ray			getRay(double x, double y) const = 0;
@@ -57,6 +61,8 @@ protected:
   bool		_hasDepthOfField;
   double	_apertureSize;
   double	_focus;
+  bool		_hasTarget;
+  Vector	_target;
 };
 
 #endif
