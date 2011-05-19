@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 19 16:18:35 2011 gael jochaud-du-plessix
+// Last update Thu May 19 16:20:10 2011 loick michard
 //
 
 #include <QApplication>
@@ -92,6 +92,7 @@ void RaytracerGUI::setConfiguration()
     _config->setRenderingSamplingMethod(RSM_RANDOM_PIXEL);
   _config->setWidth(_ui->_width->value());
   _config->setHeight(_ui->_height->value());
+  _config->setNbThreads(_ui->_threads->value());
   _config->setCurrentCamera(_ui->_camera->currentIndex());
   _config->setAntialiasing(_ui->_antialiasing->value());
   _config->setFieldDepthSampling(_ui->_depthFieldSampling->value());
