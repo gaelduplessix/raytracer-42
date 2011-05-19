@@ -5,14 +5,16 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Wed May 18 19:15:13 2011 gael jochaud-du-plessix
+// Last update Thu May 19 16:16:53 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
 #include "RaytracerThread.hpp"
+#include "RaytracerSubThread.hpp"
 
 RaytracerThread::RaytracerThread(Raytracer* raytracer):
-  _raytracer(raytracer), _launched(false), _isInit(false), _progress(0)
+  _raytracer(raytracer), _subThreads(), _launched(false), _isInit(false),
+  _progress(0)
 {
 }
 
@@ -76,6 +78,19 @@ void	RaytracerThread::initBeforeLaunching(void)
       _raytracer->getRenderingInterface()->photonMappingHasBegun();
       _raytracer->_photonMap->fillPhotonMap(_raytracer);
       _raytracer->getRenderingInterface()->photonMappingHasFinished();
+    }
+  for (unsigned int i = 0; i < _subThreads.size(); i++)
+    {
+      if (_subThreads[i])
+	delete _subThreads[i];
+    }
+  int nbThreads = _raytracer->getRenderingConfiguration()->getNbThreads();
+  _subThreads.resize(nbThreads);
+  for (int i = 0; i < nbThreads; i++)
+    {
+      _subThreads[i] = new RaytracerSubThread(this,
+					      i * 1.0 / nbThreads,
+					      (i + 1) * 1.0 / nbThreads);
     }
 }
 

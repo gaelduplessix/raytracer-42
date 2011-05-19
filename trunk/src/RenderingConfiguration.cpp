@@ -1,7 +1,7 @@
 #include "RenderingConfiguration.hpp"
 
 RenderingConfiguration::RenderingConfiguration():
-  _width(0), _height(0), _currentCamera(0), _antialiasing(0),
+  _nbThreads(2), _width(0), _height(0), _currentCamera(0), _antialiasing(0),
   _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
@@ -15,6 +15,16 @@ RenderingConfiguration::RenderingConfiguration():
 {
   _transparency.enabled = false;
   _reflection.enabled = false;
+}
+
+int	RenderingConfiguration::getNbThreads(void) const
+{
+  return (_nbThreads);
+}
+
+void	RenderingConfiguration::setNbThreads(int nbThreads)
+{
+  _nbThreads = nbThreads;
 }
 
 int	RenderingConfiguration::getWidth(void) const
