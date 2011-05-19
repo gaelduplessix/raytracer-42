@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Wed May 18 13:23:45 2011 gael jochaud-du-plessix
+// Last update Thu May 19 16:02:22 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -41,6 +41,8 @@ class RenderingConfiguration
 public:
   RenderingConfiguration();
   
+  int	getNbThreads(void) const;
+  void	setNbThreads(int nbThreads);
   int	getWidth(void) const;
   void	setWidth(int width);
   int   getHeight(void) const;
@@ -120,6 +122,7 @@ public:
   void setRenderingSamplingMethod(renderingSamplingMethod rsm);
 
 private:
+  int			_nbThreads;
   int			_width;
   int			_height;
   int			_currentCamera;

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May 18 23:13:13 2011 samuel olivier
+// Last update Thu May 19 16:18:44 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -73,7 +73,6 @@ Raytracer::getPhotonMap(void) const
 {
   return (_photonMap);
 }
-
 
 const RenderingConfiguration*
 Raytracer::getRenderingConfiguration(void) const
@@ -143,7 +142,7 @@ void		Raytracer::renderingLoop(double& progress)
   Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
 
   progress = (double)++_thread->_currentPixel
-	/ (_config->getWidth() * _config->getHeight());
+    / (_config->getWidth() * _config->getHeight());
   _thread->_raytracedPixels[pixelToRender._x][pixelToRender._y] = true;
   _interface->pixelHasBeenRendered(pixelToRender._x, pixelToRender._y,
 				   pixelColor);
