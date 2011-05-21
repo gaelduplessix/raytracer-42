@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Thu May 19 16:16:53 2011 gael jochaud-du-plessix
+// Last update Thu May 19 17:07:51 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -13,8 +13,8 @@
 #include "RaytracerSubThread.hpp"
 
 RaytracerThread::RaytracerThread(Raytracer* raytracer):
-  _raytracer(raytracer), _subThreads(), _launched(false), _isInit(false),
-  _progress(0)
+  _subThreads(), _launched(false), _isInit(false),
+  _raytracer(raytracer)
 {
 }
 
@@ -32,19 +32,28 @@ void		RaytracerThread::run(void)
 {
   if (!_isInit)
     initBeforeLaunching();
-  _launched = true;  
-  while (_launched && _progress < 1)
-    _raytracer->renderingLoop(_progress);
-  if (_progress >= 1 && _raytracer->getRenderingInterface())
-    {
-      _raytracer->getRenderingInterface()->renderingHasFinished();
-      _isInit = false;
-    }
+  _launched = true;
+  cout << "launching\n";
+  for (unsigned int i = 0; i < _subThreads.size(); i++)
+    _subThreads[i]->start();
+  cout << "launched\n";
+  for (unsigned int i = 0; i < _subThreads.size(); i++)
+    _subThreads[i]->wait();
+  cout << "ended\n";
+  // if (_progress >= 1 && _raytracer->getRenderingInterface())
+  //   {
+  //     _raytracer->getRenderingInterface()->renderingHasFinished();
+  //     _isInit = false;
+  //   }
   _launched = false;
 }
 
 void	RaytracerThread::stop(void)
 {
+  cout << "stoping\n";
+  for (unsigned int i = 0; i < _subThreads.size(); i++)
+    _subThreads[i]->stop();
+  cout << "stoped\n";
   _launched = false;
   _isInit = false;
   _raytracer->getRenderingInterface()->renderingHasFinished();
@@ -53,6 +62,10 @@ void	RaytracerThread::stop(void)
 void	RaytracerThread::pause(void)
 {
   _launched = false;
+  cout << "stoping\n";
+  for (unsigned int i = 0; i < _subThreads.size(); i++)
+    _subThreads[i]->stop();
+  cout << "stoped\n";
 }
 
 void	RaytracerThread::initBeforeLaunching(void)
@@ -68,10 +81,6 @@ void	RaytracerThread::initBeforeLaunching(void)
       for (int j = 0; j < height; j++)
 	_raytracedPixels[i][j] = false;
     }
-  _progress = 0.f;
-  _currentPixel = 0;
-  _currentLine = -1;
-  _currentPixelInLine = -1;
   if (_raytracer->getRenderingConfiguration()->isPhotonMappingEnabled())
     {
       _raytracer->_photonMap = new PhotonMap;

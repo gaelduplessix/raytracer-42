@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed May 18 17:57:59 2011 samuel olivier
+// Last update Thu May 19 19:58:33 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -160,8 +160,10 @@ void    RaytracerGUI::loadScene(void)
 void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
 {
   if (_image)
-    _image->setPixel(x, y, QColor(color._r, color._g,
-                                  color._b, color._a).rgba());
+    {      
+      _image->setPixel(x, y, QColor(color._r, color._g,
+				    color._b, color._a).rgba());
+    }
 }
 
 void    RaytracerGUI::startRender()

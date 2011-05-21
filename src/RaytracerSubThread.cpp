@@ -5,22 +5,39 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 19 15:41:28 2011 gael jochaud-du-plessix
-// Last update Thu May 19 16:21:09 2011 gael jochaud-du-plessix
+// Last update Thu May 19 19:49:05 2011 gael jochaud-du-plessix
 //
 
+#include "Raytracer.hpp"
+#include "RaytracerThread.hpp"
 #include "RaytracerSubThread.hpp"
-
-#include <iostream>
 
 RaytracerSubThread::RaytracerSubThread(RaytracerThread* mainThread,
 				       double startProgress,
 				       double endProgress):
+  _currentPixel(0), _currentPixelInLine(-1), _currentLine(-1),
   _mainThread(mainThread), _startProgress(startProgress),
-  _endProgress(endProgress), _currentProgress(0.0)
+  _endProgress(endProgress), _currentProgress(startProgress), _launched(false)
 {
-  //cout << _startProgress << " - " << _endProgress << endl;
+  _currentPixel = _startProgress
+    * (mainThread->_raytracer->getRenderingConfiguration()->getWidth()
+       * mainThread->_raytracer->getRenderingConfiguration()->getHeight());
 }
+
+#include <stdio.h>
 
 void		RaytracerSubThread::run(void)
 {
+  _launched = true;
+  while (_launched && _currentProgress < _endProgress)
+    {
+      printf("a: %f : %f\n", _startProgress, _currentProgress);
+      _mainThread->_raytracer->renderingLoop(_currentProgress, this);
+      printf("b: %f : %f\n", _startProgress, _currentProgress);
+    }
+}
+
+void		RaytracerSubThread::stop(void)
+{
+  _launched = false;
 }

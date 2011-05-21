@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Wed May 18 21:57:43 2011 samuel olivier
+// Last update Thu May 19 17:05:33 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
@@ -63,9 +63,9 @@ public:
 
   Color		throwRay(Ray& ray);
   Color		renderPixel(double x, double y);
-  void		renderingLoop(double& progress);
+  void		renderingLoop(double& progress, RaytracerSubThread* thread);
   const Camera&	getCurrentCamera(void);
-  Point		getPixelToRender(void) const;
+  Point		getPixelToRender(RaytracerSubThread* thread) const;
 
   void	getIntersectingObjects(Ray ray, vector<t_intersected_object>&
 			       intersection) const;
