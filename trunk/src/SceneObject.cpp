@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Wed May 18 22:57:58 2011 melvin laplanche
+// Last update Sat May 21 18:33:57 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -53,6 +53,8 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
   Rotation			rotationValue;
   string			equationValue;
   bool				equation = false;
+  EquationPrimitive		*ret;
+  QDomNode			equationNode;
 
   while (n.isNull() == false && this->_hasError == false)
   {
@@ -93,6 +95,7 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 					"the first defined will be used"), n);
 	else
 	{
+	  equationNode = n;
 	  if (this->_checkContentIsSingleText(n, "equation"))
 	    equationValue = n.toElement().text().toStdString();
 	  equation = true;
@@ -110,8 +113,17 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 				"and an equation"), n);
     return NULL;
   }
-  return new EquationPrimitive(equationValue, obj,
-			       positionValue, rotationValue, mat);
+  try
+  {
+    ret =  new EquationPrimitive(equationValue, obj,
+				 positionValue, rotationValue, mat);
+  }
+  catch (int error)
+  {
+    this->_putError(QObject::tr("The equation is not valid"), equationNode);
+    ret = NULL;
+  }
+  return ret;
 }
 
 void			Scene::_parseSett(QDomNode n,
