@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Mon May 16 22:30:57 2011 melvin laplanche
+// Last update Sat May 21 17:41:56 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -94,7 +94,8 @@ private:
 				    bool&	has_lights);
   void			_parseCameras(QDomNode);
   void			_parseCamera(QDomNode);
-  void			_parseCameraCinema(QDomNode);
+  void			_parseCameraCinema(QDomNode, QString);
+  bool			_cameraExists(string);
   void			_parseMaterials(QDomNode);
   void			_parseMaterial(QDomNode);
   void			_parseObjects(QDomNode);
