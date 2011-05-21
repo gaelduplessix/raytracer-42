@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May 19 16:18:44 2011 gael jochaud-du-plessix
+// Last update Thu May 19 19:57:07 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -135,38 +135,39 @@ const Camera&		Raytracer::getCurrentCamera(void)
   return (_scene->getCamera(_config->getCurrentCamera()));
 }
 
-void		Raytracer::renderingLoop(double& progress)
+void		Raytracer::renderingLoop(double& progress,
+					 RaytracerSubThread* thread)
 {
-  Point		pixelToRender = getPixelToRender();
+  Point		pixelToRender = getPixelToRender(thread);
   _interface->pixelHasStartedRendering(pixelToRender._x, pixelToRender._y);
   Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
 
-  progress = (double)++_thread->_currentPixel
+  progress = (double)(++thread->_currentPixel)
     / (_config->getWidth() * _config->getHeight());
   _thread->_raytracedPixels[pixelToRender._x][pixelToRender._y] = true;
   _interface->pixelHasBeenRendered(pixelToRender._x, pixelToRender._y,
-				   pixelColor);
+  				   pixelColor);
   _interface->renderingHasProgressed(progress);
 }
 
-Point			Raytracer::getPixelToRender(void) const
+Point	Raytracer::getPixelToRender(RaytracerSubThread* thread) const
 {
   int			width = _config->getWidth();
   int			height = _config->getHeight();
 
   if (_config->getRenderingSamplingMethod() == RSM_LINEAR_HORIZONTAL)
     {
-      return (Point(_thread->_currentPixel % width,
-		    _thread->_currentPixel / width, 0));
+      return (Point(thread->_currentPixel % width,
+		    thread->_currentPixel / width, 0));
     }
   else if (_config->getRenderingSamplingMethod() == RSM_LINEAR_VERTICAL)
     {
-      return (Point(_thread->_currentPixel / height,
-		    _thread->_currentPixel % height, 0));
+      return (Point(thread->_currentPixel / height,
+		    thread->_currentPixel % height, 0));
     }
   else if (_config->getRenderingSamplingMethod() == RSM_UNPIXELISING)
     {
-      int pixel = _thread->_currentPixel;
+      int pixel = thread->_currentPixel;
       int plus = (10 * pixel) / (width * height);
       pixel = (10 * pixel + plus) % (width * height);
       return (Point(pixel % width,
@@ -174,29 +175,29 @@ Point			Raytracer::getPixelToRender(void) const
     }
   else if (_config->getRenderingSamplingMethod() == RSM_RANDOM_HORIZONTAL)
     {
-      if (_thread->_currentLine == -1
-	  || (_thread->_currentPixelInLine % width) == width - 1)
+      if (thread->_currentLine == -1
+	  || (thread->_currentPixelInLine % width) == width - 1)
 	{
 	  do
-	    _thread->_currentLine = rand() % height;
-	  while (_thread->_raytracedPixels[0][_thread->_currentLine]);
-	  _thread->_currentPixelInLine = -1;
+	    thread->_currentLine = rand() % height;
+	  while (_thread->_raytracedPixels[0][thread->_currentLine]);
+	  thread->_currentPixelInLine = -1;
 	}
-      _thread->_currentPixelInLine++;
-      return (Point(_thread->_currentPixelInLine, _thread->_currentLine));
+      thread->_currentPixelInLine++;
+      return (Point(thread->_currentPixelInLine, thread->_currentLine));
     }
   else if (_config->getRenderingSamplingMethod() == RSM_RANDOM_VERTICAL)
     {
-      if (_thread->_currentLine == -1
-	  || (_thread->_currentPixelInLine % height) == height - 1)
+      if (thread->_currentLine == -1
+	  || (thread->_currentPixelInLine % height) == height - 1)
 	{
 	  do
-	    _thread->_currentLine = rand() % width;
-	  while (_thread->_raytracedPixels[_thread->_currentLine][0]);
-	  _thread->_currentPixelInLine = -1;
+	    thread->_currentLine = rand() % width;
+	  while (_thread->_raytracedPixels[thread->_currentLine][0]);
+	  thread->_currentPixelInLine = -1;
 	}
-      _thread->_currentPixelInLine++;
-      return (Point(_thread->_currentLine, _thread->_currentPixelInLine));
+      thread->_currentPixelInLine++;
+      return (Point(thread->_currentLine, thread->_currentPixelInLine));
     }
   else if (_config->getRenderingSamplingMethod() == RSM_RANDOM_PIXEL)
     {
