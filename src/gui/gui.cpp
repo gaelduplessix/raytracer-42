@@ -5,11 +5,12 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 19 18:27:27 2011 loick michard
+   Last update Sun May 22 14:22:17 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
 #include <QtGui>
+#include <QMutexLocker>
 #include <sstream>
 #include "gui.hpp"
 
@@ -192,6 +193,7 @@ void    RaytracerGUI::selectAmbiantColor()
 
 void RaytracerGUI::paintEvent(QPaintEvent*)
 {
+  QMutexLocker	locker(&_mutex);
   if (_image)
     {
       if (_config->getRenderingSamplingMethod() == RSM_UNPIXELISING)

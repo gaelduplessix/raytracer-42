@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May 19 19:57:07 2011 gael jochaud-du-plessix
+// Last update Sat May 21 16:53:26 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -138,16 +138,16 @@ const Camera&		Raytracer::getCurrentCamera(void)
 void		Raytracer::renderingLoop(double& progress,
 					 RaytracerSubThread* thread)
 {
-  Point		pixelToRender = getPixelToRender(thread);
+  Point			pixelToRender = getPixelToRender(thread);
+  _thread->setRaytracedPixel(pixelToRender._x, pixelToRender._y, true);
   _interface->pixelHasStartedRendering(pixelToRender._x, pixelToRender._y);
   Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
 
   progress = (double)(++thread->_currentPixel)
     / (_config->getWidth() * _config->getHeight());
-  _thread->_raytracedPixels[pixelToRender._x][pixelToRender._y] = true;
   _interface->pixelHasBeenRendered(pixelToRender._x, pixelToRender._y,
   				   pixelColor);
-  _interface->renderingHasProgressed(progress);
+  _interface->renderingHasProgressed(_thread->getProgress());
 }
 
 Point	Raytracer::getPixelToRender(RaytracerSubThread* thread) const
@@ -180,7 +180,7 @@ Point	Raytracer::getPixelToRender(RaytracerSubThread* thread) const
 	{
 	  do
 	    thread->_currentLine = rand() % height;
-	  while (_thread->_raytracedPixels[0][thread->_currentLine]);
+	  while (_thread->isRaytracedPixel(0, thread->_currentLine));
 	  thread->_currentPixelInLine = -1;
 	}
       thread->_currentPixelInLine++;
@@ -193,7 +193,7 @@ Point	Raytracer::getPixelToRender(RaytracerSubThread* thread) const
 	{
 	  do
 	    thread->_currentLine = rand() % width;
-	  while (_thread->_raytracedPixels[thread->_currentLine][0]);
+	  while (_thread->isRaytracedPixel(thread->_currentLine, 0));
 	  thread->_currentPixelInLine = -1;
 	}
       thread->_currentPixelInLine++;
@@ -204,7 +204,7 @@ Point	Raytracer::getPixelToRender(RaytracerSubThread* thread) const
       int pixel;
       do
 	pixel = rand() % (width * height);
-      while (_thread->_raytracedPixels[pixel % width][pixel / width]);
+      while (_thread->isRaytracedPixel(pixel % width, pixel / width));
       return (Point(pixel % width,
 		    pixel / width, 0));
     }
