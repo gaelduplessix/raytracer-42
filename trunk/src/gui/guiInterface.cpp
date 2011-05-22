@@ -5,11 +5,12 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Thu May 19 19:58:33 2011 gael jochaud-du-plessix
+// Last update Sat May 21 16:21:56 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QMutexLocker>
 #include "gui.hpp"
 
 void RaytracerGUI::closeEvent(QCloseEvent *event)
@@ -159,6 +160,7 @@ void    RaytracerGUI::loadScene(void)
 
 void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
 {
+  QMutexLocker  locker(&_mutex);
   if (_image)
     {      
       _image->setPixel(x, y, QColor(color._r, color._g,

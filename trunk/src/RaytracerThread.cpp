@@ -5,8 +5,10 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Thu May 19 17:07:51 2011 gael jochaud-du-plessix
+// Last update Sat May 21 16:56:52 2011 gael jochaud-du-plessix
 //
+
+#include <QMutexLocker>
 
 #include "Raytracer.hpp"
 #include "RaytracerThread.hpp"
@@ -33,27 +35,22 @@ void		RaytracerThread::run(void)
   if (!_isInit)
     initBeforeLaunching();
   _launched = true;
-  cout << "launching\n";
   for (unsigned int i = 0; i < _subThreads.size(); i++)
     _subThreads[i]->start();
-  cout << "launched\n";
   for (unsigned int i = 0; i < _subThreads.size(); i++)
-    _subThreads[i]->wait();
-  cout << "ended\n";
-  // if (_progress >= 1 && _raytracer->getRenderingInterface())
-  //   {
-  //     _raytracer->getRenderingInterface()->renderingHasFinished();
-  //     _isInit = false;
-  //   }
+    _subThreads[i]->wait();  
+  if (getProgress() >= 1 && _raytracer->getRenderingInterface())
+    {
+      _raytracer->getRenderingInterface()->renderingHasFinished();
+      _isInit = false;
+    }
   _launched = false;
 }
 
 void	RaytracerThread::stop(void)
 {
-  cout << "stoping\n";
   for (unsigned int i = 0; i < _subThreads.size(); i++)
     _subThreads[i]->stop();
-  cout << "stoped\n";
   _launched = false;
   _isInit = false;
   _raytracer->getRenderingInterface()->renderingHasFinished();
@@ -62,10 +59,17 @@ void	RaytracerThread::stop(void)
 void	RaytracerThread::pause(void)
 {
   _launched = false;
-  cout << "stoping\n";
   for (unsigned int i = 0; i < _subThreads.size(); i++)
     _subThreads[i]->stop();
-  cout << "stoped\n";
+}
+
+double		RaytracerThread::getProgress(void) const
+{
+  double	progress = 0;
+
+  for (unsigned int i = 0, l = _subThreads.size(); i < l; i++)
+    progress += (1.0 / l) * _subThreads[i]->getProgress();
+  return (progress);
 }
 
 void	RaytracerThread::initBeforeLaunching(void)
@@ -104,6 +108,14 @@ void	RaytracerThread::initBeforeLaunching(void)
 }
 
 void	RaytracerThread::setRaytracedPixel(int x, int y, bool value)
+
 {
+  QMutexLocker	lock(&_mutex);
   _raytracedPixels[x][y] = value;
+}
+
+bool	RaytracerThread::isRaytracedPixel(int x, int y)
+{
+  QMutexLocker	lock(&_mutex);
+  return (_raytracedPixels[x][y]);
 }

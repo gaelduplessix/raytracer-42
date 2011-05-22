@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Wed May 18 13:26:14 2011 samuel olivier
+// Last update Sat May 21 16:20:35 2011 gael jochaud-du-plessix
 //
 
 #ifndef _GUI_HPP_
@@ -73,6 +73,7 @@ private:
   QColor			*_backgroundColor;
   QColor			*_ambiantColor;
   QImage			*_image;
+  QMutex			_mutex;
   CubeMap			*_cubeMap;
   Scene				*_scene;
   QTimer			*_timer;

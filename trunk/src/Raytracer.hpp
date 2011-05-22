@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Thu May 19 17:05:33 2011 gael jochaud-du-plessix
+// Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACER_HPP_
