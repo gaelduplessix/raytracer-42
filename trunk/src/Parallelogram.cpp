@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May 16 16:49:04 2011 samuel olivier
+// Last update Sun May 22 12:28:54 2011 loick michard
 //
 
 #include <cmath>
@@ -78,11 +78,13 @@ void            Parallelogram::setCachedValues(void)
 void		Parallelogram::setVertex1(const Point& vertex1)
 {
   _vertex1 = vertex1;
+  this->setCachedValues();
 }
 
 void		Parallelogram::setVertex2(const Point& vertex2)
 {
   _vertex2 = vertex2;
+  this->setCachedValues();
 }
 
 void		Parallelogram::getMappedCoords(const Point& intersectPoint,

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Mon May 16 14:37:45 2011 gael jochaud-du-plessix
+// Last update Sat May 21 11:35:57 2011 loick michard
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -42,6 +42,9 @@ public:
   Vector	getRefractedVector(const Point& intersectPoint,
 				   const Ray& ray) const;
   bool		isInBoundingBox(BoundingBox& box) const;
+
+  Point		getMax(void) const;
+  Point		getMin(void) const;
 
 private:
   Vector	_normal;

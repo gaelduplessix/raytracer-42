@@ -1,6 +1,6 @@
 <scene>
   <cameras>
-    <camera type="cinema">
+    <camera type="cinema" name="Camera">
       <position>0, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
     </camera>
@@ -38,12 +38,15 @@
       <rotation type="radian">0, 0, 0</rotation>
       <solid>true</solid>
 	<primitives>
-   <?php define('NB_TRIANGLES', 120); ?>
+   <?php define('NB_TRIANGLES', 5000); ?>
    <?php for ($i = 1; $i <= NB_TRIANGLES; $i++): ?>
 	  <primitive type="triangle" material="sol<?= rand(0, 3) ?>">
-	     <position><?= rand(15, 30) ?>, <?= rand(-10, 10) ?>, <?= rand(-10, 10) ?></position>
-	    <vertex1><?= rand(15, 30) ?>, <?= rand(-10, 10) ?>, <?= rand(-10, 10) ?></vertex1>
-	    <vertex2><?= rand(15, 30) ?>, <?= rand(-10, 10) ?>, <?= rand(-10, 10) ?></vertex2>
+	     <?php $x = rand(5, 30); ?>
+	     <?php $y = rand(-10, 10); ?>
+	     <?php $z = rand(-10, 10); ?>
+	     <position><?= $x ?>, <?= $y ?>, <?= $z ?></position>
+	    <vertex1><?= $x+0.05 ?>, <?= $y+0.05 ?>, <?= $z+0.05 ?></vertex1>
+	    <vertex2><?= $x ?>, <?= $y+0.05 ?>, <?= $z ?></vertex2>
 	    <rotation>0, 0, 0</rotation>
 	     </primitive>
 	     <?php endfor; ?>

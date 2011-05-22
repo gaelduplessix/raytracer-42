@@ -32,16 +32,11 @@
       <rotation type="radian">0, 0, 0</rotation>
       <solid>false</solid>
 	<primitives>
-	  <primitive type="plane" material="sol">
+	  <primitive type="parallelogram" material="sol">
 	    <position>16, -3, -3</position>
 	    <rotation type="radian">0, 0, 0</rotation>
-	    <limitX>6</limitX>
-	    <limitY>6</limitY>
-	  </primitive>
-	  <primitive type="sphere" material="refraction">
-	    <position>20, 0, -2</position>
-	    <rotation type="radian">0, 0, 0</rotation>
-	    <radius>1</radius>
+	    <vertex1>16, -3, 0</vertex1>
+	    <vertex2>16, 3, -3</vertex2>
 	  </primitive>
 	</primitives>
     </object>

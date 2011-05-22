@@ -11,7 +11,8 @@ RenderingConfiguration::RenderingConfiguration():
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
   _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
   _additiveAmbiantLighting(Color(0, 0, 0)),
-  _minimalAmbiantLightingEnabled(false), _minimalAmbiantLighting(0)
+  _minimalAmbiantLightingEnabled(false), _minimalAmbiantLighting(0),
+  _kdTreeEnabled(false), _kdTreeDepth(10)
 {
   _transparency.enabled = false;
   _reflection.enabled = false;
@@ -343,4 +344,24 @@ void	RenderingConfiguration::
 setRenderingSamplingMethod(renderingSamplingMethod rsm)
 {
   _renderingSamplingMethod = rsm;
+}
+
+bool	RenderingConfiguration::isKdTreeEnabled() const
+{
+  return (_kdTreeEnabled);
+}
+
+void	RenderingConfiguration::setKdTreeEnabled(bool enabled)
+{
+  _kdTreeEnabled = enabled;
+}
+
+int    RenderingConfiguration::getKdTreeDepth() const
+{
+  return (_kdTreeDepth);
+}
+
+void	RenderingConfiguration::setKdTreeDepth(int depth)
+{
+  _kdTreeDepth = depth;
 }

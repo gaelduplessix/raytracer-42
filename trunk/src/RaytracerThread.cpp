@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Sat May 21 16:56:52 2011 gael jochaud-du-plessix
+// Last update Sun May 22 14:28:51 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -92,6 +92,10 @@ void	RaytracerThread::initBeforeLaunching(void)
       _raytracer->_photonMap->fillPhotonMap(_raytracer);
       _raytracer->getRenderingInterface()->photonMappingHasFinished();
     }
+  if (_raytracer->getRenderingConfiguration()->isKdTreeEnabled())
+    _raytracer->_kdTree = new KdTree(_raytracer->_scene->getObjects(),
+				     _raytracer->getRenderingConfiguration()->
+				     getKdTreeDepth());
   for (unsigned int i = 0; i < _subThreads.size(); i++)
     {
       if (_subThreads[i])

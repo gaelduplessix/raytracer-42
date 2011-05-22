@@ -5,6 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
+// Last update Sun May 22 15:23:43 2011 loick michard
 // Last update Sat May 21 16:53:26 2011 gael jochaud-du-plessix
 //
 
@@ -307,9 +308,11 @@ Color			Raytracer::throwRay(Ray& ray)
 }
 
 void
-Raytracer::getIntersectingObjects(const Ray ray, vector<t_intersected_object>&
+Raytracer::getIntersectingObjects(const Ray& ray, vector<t_intersected_object>&
 				  intersection) const
 {
+  if (_config->isKdTreeEnabled())
+    return (_kdTree->getIntersectingObjects(ray, intersection));
   const vector<Object*>&		objects(_scene->getObjects());
   int					nbObject(objects.size());
 
@@ -325,6 +328,8 @@ Raytracer::getIntersectingObjects(const Ray ray, vector<t_intersected_object>&
 ObjectPrimitive*		Raytracer::getNearestObject(Ray& ray,
 							    double& res) const
 {
+  if (_config->isKdTreeEnabled())
+    return (_kdTree->getNearestObject(ray, res));
   const vector<Object*>&		objects(_scene->getObjects());
   int					nbObject(objects.size());
   ObjectPrimitive*			primitive = NULL;

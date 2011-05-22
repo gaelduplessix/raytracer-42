@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Wed May 11 21:45:12 2011 melvin laplanche
+// Last update Sat May 21 10:42:27 2011 loick michard
 //
 
 #ifndef _OBJECT_HPP_
@@ -47,8 +47,8 @@ public:
 						 ObjectPrimitive*& primitive,
 						 double& k) const;
 
-protected:
   vector<ObjectPrimitive*>	_primitives;
+protected:
   Rotation			_rotation;
   Point				_position;
   bool				_isSolid;

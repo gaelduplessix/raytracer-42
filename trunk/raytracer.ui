@@ -49,12 +49,12 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>748</width>
+         <width>758</width>
          <height>522</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QLabel" name="_image">
           <property name="enabled">
            <bool>true</bool>
@@ -227,7 +227,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>315</width>
-          <height>549</height>
+          <height>534</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -293,28 +293,28 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="5" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
                <string>Caméra</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="5" column="1">
              <widget class="QComboBox" name="_camera">
               <property name="editable">
                <bool>false</bool>
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
+            <item row="7" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
                <string>Antialiasing</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="7" column="1">
              <widget class="QSpinBox" name="_antialiasing">
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -333,7 +333,7 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="0">
+            <item row="11" column="0">
              <spacer name="verticalSpacer_2">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -346,7 +346,7 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </spacer>
             </item>
-            <item row="8" column="0" colspan="2">
+            <item row="10" column="0" colspan="2">
              <widget class="QGroupBox" name="_depthField">
               <property name="title">
                <string>Profondeur de champ</string>
@@ -460,6 +460,50 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
+            <item row="8" column="0" colspan="2">
+             <widget class="QGroupBox" name="_kdTree">
+              <property name="title">
+               <string>KdTree</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_22">
+               <property name="leftMargin">
+                <number>15</number>
+               </property>
+               <property name="topMargin">
+                <number>15</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="1">
+                <widget class="QSpinBox" name="_kdTreeDepth">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::PlusMinus</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                 <property name="value">
+                  <number>10</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_18">
+                 <property name="text">
+                  <string>Prodondeur</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -470,7 +514,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>315</width>
+          <width>305</width>
           <height>549</height>
          </rect>
         </property>
@@ -649,7 +693,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>315</width>
+          <width>305</width>
           <height>549</height>
          </rect>
         </property>
@@ -827,7 +871,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>315</width>
+          <width>305</width>
           <height>549</height>
          </rect>
         </property>
@@ -1000,7 +1044,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>315</width>
+          <width>305</width>
           <height>549</height>
          </rect>
         </property>

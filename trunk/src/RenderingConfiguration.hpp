@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Thu May 19 16:02:22 2011 gael jochaud-du-plessix
+// Last update Sun May 22 14:14:19 2011 loick michard
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -121,6 +121,11 @@ public:
   renderingSamplingMethod getRenderingSamplingMethod(void) const;
   void setRenderingSamplingMethod(renderingSamplingMethod rsm);
 
+  bool		isKdTreeEnabled() const;
+  void		setKdTreeEnabled(bool enabled = true);
+  int		getKdTreeDepth() const;
+  void		setKdTreeDepth(int depth);
+
 private:
   int			_nbThreads;
   int			_width;
@@ -149,6 +154,8 @@ private:
   Color			_additiveAmbiantLighting;
   bool			_minimalAmbiantLightingEnabled;
   double		_minimalAmbiantLighting;
+  bool			_kdTreeEnabled;
+  int			_kdTreeDepth;
 };
 
 #endif
