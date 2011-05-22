@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-   Last update Sun May 22 14:22:17 2011 gael jochaud-du-plessix
+// Last update Sun May 22 14:29:12 2011 loick michard
 //
 
 #include <QApplication>
@@ -101,6 +101,8 @@ void RaytracerGUI::setConfiguration()
   _config->setAntialiasing(_ui->_antialiasing->value());
   _config->setFieldDepthSampling(_ui->_depthFieldSampling->value());
   _config->setFieldDepthEnabled(_ui->_depthField->isChecked());
+  _config->setKdTreeDepth(_ui->_kdTreeDepth->value());
+  _config->setKdTreeEnabled(_ui->_kdTree->isChecked());
   _config->setExposure(_ui->_exposure->value());
   _config->setDirectLightingCoeff(_ui->_directLightingIntensity->value());
   _config->setDirectLighting(_ui->_directLighting->isChecked());

@@ -5,6 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
+// Last update Sun May 22 15:10:53 2011 loick michard
 // Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
@@ -21,6 +22,7 @@
 #include "RenderingInterface.hpp"
 #include "RaytracerThread.hpp"
 #include "PhotonMap.hpp"
+#include "KdTree.hpp"
 
 typedef struct			s_intersected_object
 {
@@ -67,7 +69,8 @@ public:
   const Camera&	getCurrentCamera(void);
   Point		getPixelToRender(RaytracerSubThread* thread) const;
 
-  void	getIntersectingObjects(Ray ray, vector<t_intersected_object>&
+  void	getIntersectingObjects(const Ray& ray,
+			       vector<t_intersected_object>&
 			       intersection) const;
   ObjectPrimitive*
   getNearestObject(Ray& ray, double& res) const;
@@ -98,9 +101,10 @@ public:
 
   stack<ObjectPrimitive*>	_refractivePath;
   PhotonMap*			_photonMap;
+  KdTree*			_kdTree;
+  Scene*			_scene;
 
 private:
-  Scene*			_scene;
   RenderingConfiguration*	_config;
   RenderingInterface*		_interface;
   RaytracerThread*		_thread;

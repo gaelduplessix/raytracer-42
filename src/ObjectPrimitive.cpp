@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Wed May 11 21:44:35 2011 melvin laplanche
+// Last update Sat May 21 11:31:19 2011 loick michard
 //
 
 #include <cmath>
@@ -13,7 +13,8 @@
 #include "ObjectPrimitive.hpp"
 #include "Object.hpp"
 
-ObjectPrimitive::ObjectPrimitive(void)
+ObjectPrimitive::ObjectPrimitive(void):
+  _isLimited(false)
 {
 
 }
@@ -23,7 +24,7 @@ ObjectPrimitive::ObjectPrimitive(Object *object,
 				 const Rotation& rotation,
 				 const Material& material):
   _absolutePosition(absolutePosition), _rotation(rotation),
-  _material(material), _object(object)
+  _material(material), _object(object), _isLimited(false)
 {
 
 }
@@ -46,6 +47,11 @@ const Rotation&	ObjectPrimitive::getRotation(void) const
 const Material&	ObjectPrimitive::getMaterial(void) const
 {
   return (_material);
+}
+
+bool		ObjectPrimitive::isLimited(void)
+{
+  return (_isLimited);
 }
 
 void		ObjectPrimitive::setObject(Object *object)
@@ -200,4 +206,14 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
   res.setPoint(intersectPoint);
   res.setVector((res._vector * n) + normal * ((n * cos1) + cos2));
   return (res);
+}
+
+Point		ObjectPrimitive::getMax(void) const
+{
+  return (Point(0, 0, 0));
+}
+
+Point           ObjectPrimitive::getMin(void) const
+{
+  return (Point(0, 0, 0));
 }

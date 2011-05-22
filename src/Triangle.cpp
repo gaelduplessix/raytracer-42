@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 18 10:25:48 2011 loick michard
+// Last update Sat May 21 16:38:44 2011 loick michard
 //
 
 #include <cmath>
@@ -25,13 +25,14 @@ Triangle::Triangle(Object*object,
 					   _vertex1(vertex1), _vertex2(vertex2)
 {
   setCachedValues();
+  _isLimited = true;
 }
 
 Triangle::Triangle(void):
   ObjectPrimitive(NULL, Point(0, 0, 0), Rotation(0, 0, 0), Material()),
   _vertex1(Point(0, 0, 0)), _vertex2(Point(0, 0, 0))  
 {
-
+  _isLimited = true;
 }
 
 void		Triangle::setCachedValues(void)
@@ -183,6 +184,7 @@ Vector		Triangle::getNormalVector(const Point& intersectPoint,
 #define MIN(x, y) ((x) < (y)) ? (x) : (y)
 bool		Triangle::isInBoundingBox(BoundingBox& box) const
 {
+  //  std::cout<<"Triangle:"<<_absolutePosition._x<<" "<<_absolutePosition._y<<" "<<_absolutePosition._z<<std::endl;
   Point		maxBox = box.getMaxPoint();
   Point		minBox = box.getMinPoint();
   double	maxX = MAX(MAX(_vertex1._x, _vertex2._x),
@@ -206,3 +208,24 @@ bool		Triangle::isInBoundingBox(BoundingBox& box) const
     return (false);
   return (true);
 }
+
+Point		Triangle::getMax(void) const
+{
+  return (Point(MAX(MAX(_vertex1._x, _vertex2._x),
+		    _absolutePosition._x),
+		MAX(MAX(_vertex1._y, _vertex2._y),
+		    _absolutePosition._y),
+		MAX(MAX(_vertex1._z, _vertex2._z),
+		    _absolutePosition._z)));
+}
+
+Point           Triangle::getMin(void) const
+{
+  return (Point(MIN(MIN(_vertex1._x, _vertex2._x),
+                    _absolutePosition._x),
+                MIN(MIN(_vertex1._y, _vertex2._y),
+                    _absolutePosition._y),
+                MIN(MIN(_vertex1._z, _vertex2._z),
+                    _absolutePosition._z)));
+}
+
