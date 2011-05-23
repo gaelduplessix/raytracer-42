@@ -5,13 +5,14 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon May 23 14:31:13 2011 gael jochaud-du-plessix
+// Last update Mon May 23 15:04:38 2011 loick michard
 //
 
 #include <QApplication>
 #include <QtGui>
 #include <QMutexLocker>
 #include <sstream>
+#include <QSystemTrayIcon>
 #include "gui.hpp"
 
 #include "RenderingConfiguration.hpp"
@@ -247,6 +248,11 @@ void RaytracerGUI::setCameras()
 
 void RaytracerGUI::drawWindow()
 {
+  if (_endOfRendering)
+    {
+      _endOfRendering = false;
+      _sticon->showMessage(tr("Rendu"), tr("Le rendu est terminé"));
+    }
   if (_isRendering)
     _ui->_progressBar->setValue(_progress);
   _ui->_console->setHtml(_message.c_str());
@@ -259,10 +265,21 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _raytracer(new Raytracer()), _backgroundColor(new QColor(0, 0, 0)), 
     _ambiantColor(new QColor(255, 255, 255)), _image(NULL),
     _cubeMap(NULL), _scene(NULL), _pixmap(new QPixmap()),
-    _ui(new Ui::MainWindow), _isRendering(false), _pause(false)
+    _ui(new Ui::MainWindow), _isRendering(false), _pause(false),
+    _sticon(new QSystemTrayIcon(QIcon("images/image.png"))),
+    _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this))
 {
   _ui->setupUi(this);
   _ui->_progressBar->setHidden(true);
+  _menuSticon = new QMenu();
+  _menuSticon->addAction(_ui->action_Play);
+  _menuSticon->addAction(_ui->action_Pause);
+  _menuSticon->addAction(_ui->action_Stop);
+  _menuSticon->addAction(_actionRealQuit);
+  _sticon->setContextMenu(_menuSticon);
+  connect(_sticon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+	  this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+  _sticon->show();
   QObject::connect(_ui->_cubeMapButton, SIGNAL(clicked()),
   		   this, SLOT(selectCubeMap()));
   QObject::connect(_ui->_backgroundColor, SIGNAL(clicked()),
@@ -279,6 +296,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(saveImage()));
   QObject::connect(_ui->actionEffacer_la_console, SIGNAL(triggered()),
                    this, SLOT(clearConsole()));
+  QObject::connect(_actionRealQuit, SIGNAL(triggered()),
+                   this, SLOT(realQuit()));
   _scene = createScene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
@@ -303,6 +322,8 @@ RaytracerGUI::~RaytracerGUI()
   if (_image)
     delete _image;
   delete _pixmap;
+  delete _sticon;
+  delete _menuSticon;
 }
 
 void		gui(int ac, char **av)
@@ -312,6 +333,7 @@ void		gui(int ac, char **av)
   QString	locale = QLocale::system().name().section('_', 0, 0);
   RaytracerGUI	gui;
 
+  app.setQuitOnLastWindowClosed(false);
   cout << "locale used: " << locale.toStdString() << endl;
   translator.load("raytracer-42_" + locale);
   app.installTranslator(&translator);

@@ -5,40 +5,51 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 23 11:26:05 2011 loick michard
+// Last update Mon May 23 15:01:17 2011 loick michard
 //
 
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QMutexLocker>
+#include <QSystemTrayIcon>
 #include "gui.hpp"
+
+void 
+RaytracerGUI::iconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+  if (reason == QSystemTrayIcon::Trigger)
+    show();
+}
 
 void RaytracerGUI::closeEvent(QCloseEvent *event)
 {
+  (void)event;
+  hide();
+}
+
+void RaytracerGUI::realQuit()
+{
   if (!_isRendering)
-    event->accept();
+    qApp->quit();
   else
     {
       QMessageBox msgBox;
       msgBox.setText(tr("Un rendu est en cours."));
-      msgBox.setInformativeText(tr("Etes-vous sur de vouloir fermer la \
-fenetre?"));
+      msgBox.setInformativeText(tr("Etes-vous sur de vouloir fermer la fenetre?"));
       msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
       msgBox.setDefaultButton(QMessageBox::Cancel);
       int ret =
-	QMessageBox::warning(this, tr("Raytracer"),
-			     tr("Un rendu est en cours.\n"
-				"Etes-vous sur de vouloir fermer la fenetre?"),
-			     QMessageBox::Yes
-			     | QMessageBox::Cancel,
-			     QMessageBox::Cancel);
+        QMessageBox::warning(this, tr("Raytracer"),
+                             tr("Un rendu est en cours.\n"
+                                "Etes-vous sur de vouloir fermer la fenetre?"),
+                             QMessageBox::Yes
+                             | QMessageBox::Cancel,
+                             QMessageBox::Cancel);
       if (ret == QMessageBox::Yes)
 	{
-	  event->accept();
-	  _raytracer->stopRendering();
-	}
-      else
-	event->ignore();
+          _raytracer->stopRendering();
+	  qApp->quit();
+        }
     }
 }
 
@@ -106,6 +117,7 @@ void    RaytracerGUI::renderingHasFinished(void)
 {
   if (_isRendering)
     {
+      _endOfRendering = true;
       sendSuccessMessage(tr("Rendu termine").toStdString());
       _isRendering = false;
       _timer->setSingleShot(true);
