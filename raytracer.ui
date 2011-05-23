@@ -49,7 +49,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>758</width>
+         <width>748</width>
          <height>522</height>
         </rect>
        </property>
@@ -84,7 +84,7 @@
      </widget>
     </item>
     <item row="1" column="0" rowspan="2">
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="_consoleGroup">
       <property name="maximumSize">
        <size>
         <width>16777215</width>
@@ -173,7 +173,15 @@ p, li { white-space: pre-wrap; }
     <addaction name="action_Pause"/>
     <addaction name="action_Stop"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edition</string>
+    </property>
+    <addaction name="actionEffacer_la_console"/>
+    <addaction name="actionActiver_la_console"/>
+   </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuEdit"/>
    <addaction name="menu_Rendu"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget_2">
@@ -227,7 +235,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>315</width>
-          <height>534</height>
+          <height>549</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -514,7 +522,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>305</width>
+          <width>315</width>
           <height>549</height>
          </rect>
         </property>
@@ -693,7 +701,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>305</width>
+          <width>315</width>
           <height>549</height>
          </rect>
         </property>
@@ -871,7 +879,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>305</width>
+          <width>315</width>
           <height>549</height>
          </rect>
         </property>
@@ -1044,7 +1052,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>305</width>
+          <width>315</width>
           <height>549</height>
          </rect>
         </property>
@@ -1278,6 +1286,28 @@ border-color: rgb(108, 108, 108);</string>
     <bool>true</bool>
    </property>
   </action>
+  <action name="actionEffacer_la_console">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Effacer &amp;la console</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionActiver_la_console">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Activer la console</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="ressources.qrc"/>
@@ -1296,6 +1326,38 @@ border-color: rgb(108, 108, 108);</string>
     <hint type="destinationlabel">
      <x>549</x>
      <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionEffacer_la_console</sender>
+   <signal>triggered()</signal>
+   <receiver>_console</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>67</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>726</x>
+     <y>692</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionActiver_la_console</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>_consoleGroup</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>722</x>
+     <y>681</y>
     </hint>
    </hints>
   </connection>
