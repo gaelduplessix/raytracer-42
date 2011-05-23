@@ -1202,6 +1202,8 @@ border-color: rgb(108, 108, 108);</string>
    <addaction name="action_Pause"/>
    <addaction name="action_Stop"/>
    <addaction name="separator"/>
+   <addaction name="actionLancer_un_serveur"/>
+   <addaction name="actionSe_connecter_un_serveur"/>
   </widget>
   <action name="actionQuitter">
    <property name="enabled">
@@ -1324,16 +1326,30 @@ border-color: rgb(108, 108, 108);</string>
    </property>
   </action>
   <action name="actionLancer_un_serveur">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/images/network-server.png</normaloff>:/images/network-server.png</iconset>
+   </property>
    <property name="text">
     <string>Lancer un &amp;serveur</string>
+   </property>
+   <property name="iconText">
+    <string>Mode serveur</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+L, S</string>
    </property>
   </action>
   <action name="actionSe_connecter_un_serveur">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/images/network-workgroup.png</normaloff>:/images/network-workgroup.png</iconset>
+   </property>
    <property name="text">
-    <string>Se &amp;connecter à un serveur</string>
+    <string>Se &amp;connecter à un cluster</string>
+   </property>
+   <property name="iconText">
+    <string>Clustering</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>

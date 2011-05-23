@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon May 23 15:04:38 2011 loick michard
+// Last update Mon May 23 17:59:52 2011 loick michard
 //
 
 #include <QApplication>
@@ -269,6 +269,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _sticon(new QSystemTrayIcon(QIcon("images/image.png"))),
     _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this))
 {
+  _initDialogCluster();
   _ui->setupUi(this);
   _ui->_progressBar->setHidden(true);
   _menuSticon = new QMenu();
@@ -298,6 +299,9 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(clearConsole()));
   QObject::connect(_actionRealQuit, SIGNAL(triggered()),
                    this, SLOT(realQuit()));
+  QObject::connect(_ui->actionLancer_un_serveur, SIGNAL(triggered()),
+                   this, SLOT(launchServer()));
+ 
   _scene = createScene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
@@ -324,6 +328,10 @@ RaytracerGUI::~RaytracerGUI()
   delete _pixmap;
   delete _sticon;
   delete _menuSticon;
+  delete _clusterDialog;
+  delete _clusterDialogUi;
+  delete _launchServerDialog;
+  delete _launchServerDialogUi;
 }
 
 void		gui(int ac, char **av)

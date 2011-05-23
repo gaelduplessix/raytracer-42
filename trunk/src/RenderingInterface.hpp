@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 15:20:09 2011 loick michard
-// Last update Thu May 12 16:57:23 2011 loick michard
+// Last update Mon May 23 18:14:22 2011 loick michard
 //
 
 #ifndef _RENDERINGINTERFACE_HPP_
@@ -34,6 +34,7 @@ public:
   virtual void sendErrorMessage(string message);
   virtual void sendSuccessMessage(string message);
   virtual void sendMessage(string message);
+  virtual void logServerConsoleMessage(string message);
 };
 
 #endif
