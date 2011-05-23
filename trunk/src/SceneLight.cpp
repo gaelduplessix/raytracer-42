@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:42 2011 melvin laplanche
-// Last update Mon May 23 13:10:31 2011 melvin laplanche
+// Last update Mon May 23 21:14:33 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -267,25 +267,40 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
 			n);
 	return NULL;
       }
-      if (n.nodeName() == "point1")
+      if (n.nodeName() == "point1" || n.nodeName() == "point")
       {
 	if (p1)
 	  this->_putWarning(QObject::tr("A light has several point/point1, "
 					"the first defined will be used"), n);
 	else
 	{
-	  light->setPosition(_parsePosition(n, "point1"));
+	  light->setPosition(_parsePosition(n, "point1/point"));
 	  p1 = true;
 	}
       }
       else if (n.nodeName() == "point2")
       {
 	if (p2)
-	  this->_putWarning(QObject::tr("A light has several point2, "
+	  this->_putWarning(QObject::tr("A light has several point2/vector1, "
 					"the first defined will be used"), n);
 	else
 	{
 	  light->setPoint2(_parsePosition(n, "point2"));
+	  p2 = true;
+	}
+      }
+      else if (n.nodeName() == "vector1")
+      {
+	if (p2)
+	  this->_putWarning(QObject::tr("A light has several vector1/point2, "
+					"the first defined will be used"), n);
+	else if (p1 == false)
+	  this->_putError(QObject::tr("To define a vector1, you must define, "
+				      "a point before"), n);
+	else
+	{
+	  light->setPoint2(_parsePosition(n, "vector1")
+			   + light->getPosition());
 	  p2 = true;
 	}
       }
@@ -297,6 +312,21 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
 	else
 	{
 	  light->setPoint3(_parsePosition(n, "point3"));
+	  p3 = true;
+	}
+      }
+      else if (n.nodeName() == "vector2")
+      {
+	if (p3)
+	  this->_putWarning(QObject::tr("A light has several vector2/point3, "
+					"the first defined will be used"), n);
+	else if (p1 == false)
+	  this->_putError(QObject::tr("To define a vector2, you must define, "
+				      "a point before"), n);
+	else
+	{
+	  light->setPoint3(_parsePosition(n, "vector2")
+			   + light->getPosition());
 	  p3 = true;
 	}
       }
