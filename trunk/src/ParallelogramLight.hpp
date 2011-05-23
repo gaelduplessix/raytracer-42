@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Sun May  8 22:43:24 2011 gael jochaud-du-plessix
-// Last update Wed May 18 11:29:12 2011 samuel olivier
+// Last update Mon May 23 13:07:54 2011 samuel olivier
 //
 
 #ifndef _PARALLELOGRAM_LIGHT_HPP_
@@ -36,6 +36,8 @@ public :
   Color getDirectLighting(const Raytracer& raytracer,
 			  Ray& ray) const;
   void	getRandomRay(Ray& ray) const;
+  void	setPoint2(const Point& point2);
+  void	setPoint3(const Point& point3);
 
 private:
   double	_directLightPow;

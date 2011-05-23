@@ -15,7 +15,7 @@
      <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <reflection>0.9</reflection>
+      <reflection>0</reflection>
     </material>
     <material name="refraction">
       <color>255, 255, 255</color>
@@ -32,12 +32,10 @@
       <rotation type="radian">0, 0, 0</rotation>
       <solid>false</solid>
 	<primitives>
-	<!--   <primitive type="plane" material="sol"> -->
-	<!--     <position>16, -3, -3</position> -->
-	<!--     <rotation type="radian">0, 0, 0</rotation> -->
-	<!--     <limitX>6</limitX> -->
-	<!--     <limitY>6</limitY> -->
-	<!--   </primitive> -->
+	  <primitive type="plane" material="sol">
+	    <position>16, -3, -5</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	  </primitive>
 	  <primitive type="sphere" material="sol">
 	    <position>20, 0, -2</position>
 	    <rotation type="radian">0, 0, 0</rotation>
@@ -48,8 +46,10 @@
   </objects>
 
   <lights>
-    <light type="spot">
-      <position>30,0,5</position>
+    <light type="parallelogram">
+      <point1>23,-3,4</point1>
+      <point2>23,3,4</point2>
+      <point3>17,-3,4</point3>
       <color>FFFFFF</color>
       <intensity>1</intensity>
       <directLight>3000</directLight>
