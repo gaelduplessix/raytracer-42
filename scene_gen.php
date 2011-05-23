@@ -47,7 +47,7 @@
 	     <position><?= $x ?>, <?= $y ?>, <?= $z ?></position>
 	    <vertex1><?= $x+0.05 ?>, <?= $y+0.05 ?>, <?= $z+0.05 ?></vertex1>
 	    <vertex2><?= $x ?>, <?= $y+0.05 ?>, <?= $z ?></vertex2>
-	    <rotation>0, 0, 0</rotation>
+	    <rotation type="radian">0, 0, 0</rotation>
 	     </primitive>
 	     <?php endfor; ?>
 	</primitives>
