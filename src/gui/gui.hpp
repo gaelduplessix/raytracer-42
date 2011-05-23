@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Mon May 23 14:53:58 2011 loick michard
+// Last update Mon May 23 18:25:19 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -21,6 +21,8 @@ void	gui(int ac, char **av);
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
 #include "ui_raytracer.h"
+#include "ui_clusterDialog.h"
+#include "ui_launchServerDialog.h"
 #include "RenderingConfiguration.hpp"
 #include "Raytracer.hpp"
 #include "CubeMap.hpp"
@@ -29,6 +31,8 @@ using namespace std;
 
 namespace Ui {
   class MainWindow;
+  class ClusterDialog;
+  class LaunchServerDialog;
 }
 
 class RaytracerGUI : public QMainWindow, public RenderingInterface
@@ -44,6 +48,8 @@ class RaytracerGUI : public QMainWindow, public RenderingInterface
   void	renderingHasBegun(void);
   void	pixelHasBeenRendered(int x, int y, Color color);
   void	renderingHasProgressed(double progress);
+
+  void	logServerConsoleMessage(string message);
 
   void	sendWarningMessage(string message);
   void	sendErrorMessage(string message);
@@ -68,6 +74,8 @@ public slots:
   void	clearConsole();
   void	iconActivated(QSystemTrayIcon::ActivationReason reason);
   void	realQuit();
+  void	launchServer();
+  void	updateServerConsole();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
@@ -93,6 +101,13 @@ private:
   bool				_endOfRendering;
   QMenu				*_menuSticon;
   QAction			*_actionRealQuit;
+  
+  void				_initDialogCluster();
+  Ui::ClusterDialog*		_clusterDialogUi;
+  QDialog*			_clusterDialog;
+  Ui::LaunchServerDialog*	_launchServerDialogUi;
+  QDialog*                      _launchServerDialog;
+  string			_consoleLog;
 };
 
 #endif

@@ -9,5 +9,7 @@
         <file>images/title_background.png</file>
         <file>images/background.png</file>
         <file>images/image.png</file>
+        <file>images/network-server.png</file>
+        <file>images/network-workgroup.png</file>
     </qresource>
 </RCC>
