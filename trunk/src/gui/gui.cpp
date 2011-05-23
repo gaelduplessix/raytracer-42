@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon May 23 10:04:15 2011 loick michard
+// Last update Mon May 23 11:26:01 2011 loick michard
 //
 
 #include <QApplication>
@@ -251,6 +251,13 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
 	  *_pixmap = _pixmap->fromImage(*_image);
 	  _ui->_image->setPixmap(*_pixmap);
 	}
+    }
+  if (!_isRendering)
+    {
+      _ui->_mode->setEnabled(true);
+      _ui->_width->setEnabled(true);
+      _ui->_height->setEnabled(true);
+      _ui->_threads->setEnabled(true);
     }
 }
 

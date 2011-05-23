@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 23 11:11:25 2011 samuel olivier
+// Last update Mon May 23 11:26:05 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -189,6 +189,10 @@ void    RaytracerGUI::startRender()
 	_ui->_console->moveCursor(QTextCursor::End);
 	return ;
       }
+    _ui->_mode->setEnabled(false);
+    _ui->_width->setEnabled(false);
+    _ui->_height->setEnabled(false);
+    _ui->_threads->setEnabled(false);
     _timer->setSingleShot(false);
     _timer->start();
     if (!_isRendering)
