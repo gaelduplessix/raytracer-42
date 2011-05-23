@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Wed May 18 11:29:57 2011 samuel olivier
+// Last update Mon May 23 13:07:39 2011 samuel olivier
 //
 
 #include <cmath>
@@ -27,6 +27,16 @@ ParallelogramLight::ParallelogramLight(const Point &position,
   _point2(position2), _point3(position3)
 {
 
+}
+
+void	ParallelogramLight::setPoint2(const Point& point2)
+{
+  _point2 = point2;
+}
+
+void	ParallelogramLight::setPoint3(const Point& point3)
+{
+  _point3 = point3;
 }
 
 void	ParallelogramLight::setDirectLightPow(double value)
@@ -107,7 +117,12 @@ Color	ParallelogramLight::getDirectLighting(const Raytracer& raytracer,
 
 void    ParallelogramLight::getRandomRay(Ray& ray) const
 {
-  ray.setPoint(_position);
+  Vector	vector1 = _point2 - _position;
+  Vector	vector2 = _point3 - _position;
+  Point		lightPoint = _position + ((double)rand() / RAND_MAX) * vector1
+    + ((double)rand() / RAND_MAX) * vector2;
+
+  ray.setPoint(lightPoint);
   ray._vector.setVector(2 * ((double)rand() / RAND_MAX) - 1,
                         2 * ((double)rand() / RAND_MAX) - 1,
                         2 * ((double)rand() / RAND_MAX) - 1);
