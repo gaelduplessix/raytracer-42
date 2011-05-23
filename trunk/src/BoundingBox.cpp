@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu Apr 28 15:45:41 2011 gael jochaud-du-plessix
-// Last update Sun May 22 11:39:36 2011 loick michard
+// Last update Mon May 23 09:26:58 2011 loick michard
 //
 
 #include "BoundingBox.hpp"
@@ -148,4 +148,11 @@ const Point&	BoundingBox::getVertex2() const
 Point	BoundingBox::getCenterPosition() const
 {
   return ((_vertex1 + _vertex2) / 2);
+}
+
+double	BoundingBox::size() const
+{
+  Point size = _vertex1 - _vertex2;
+
+  return (size.getNorm());
 }
