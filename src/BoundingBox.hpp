@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:49:27 2011 gael jochaud-du-plessix
-// Last update Sat May 21 22:17:26 2011 loick michard
+// Last update Mon May 23 09:24:51 2011 loick michard
 //
 
 #ifndef _BOUNDINGBOX_H_
@@ -34,6 +34,8 @@ public:
 
   Point		getMaxPoint() const;
   Point		getMinPoint() const;
+
+  double	size() const;
 
 private:
   void          setParallelogram();

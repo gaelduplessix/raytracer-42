@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 18 10:28:17 2011 loick michard
-// Last update Sun May 22 15:24:58 2011 loick michard
+// Last update Mon May 23 09:31:03 2011 loick michard
 //
 
 #include <algorithm>
@@ -110,6 +110,7 @@ KdTree::addAllIntersect(const Ray &ray,
     return (this->addAllIntersect(ray, intersection, node->rightChild));
   this->addAllIntersect(ray, intersection, node->rightChild);
   this->addAllIntersect(ray, intersection, node->leftChild);
+  return (true);
 }
 
 void                
@@ -160,7 +161,8 @@ void	KdTree::buildKdTree(void)
 void	KdTree::subdivideKdTree(KdTreeNode *node, int depth, int plane)
 {
   plane %= 3;
-  if (depth > _maxDepth || node->primitives.size() <= 3)
+  if (depth > _maxDepth || node->primitives.size() <= 3 ||
+      node->box->size() < 0.05)
     {
       node->leftChild = NULL;
       node->rightChild = NULL;

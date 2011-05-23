@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 23 09:19:16 2011 samuel olivier
+// Last update Mon May 23 09:41:39 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -193,6 +193,7 @@ void    RaytracerGUI::startRender()
       _image = new QImage(_ui->_width->value(),
                           _ui->_height->value(),
                           QImage::Format_ARGB32);
+      _image->fill(0);
     }
     try
     {
