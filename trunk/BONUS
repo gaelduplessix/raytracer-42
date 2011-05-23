@@ -1,6 +1,8 @@
 Lumiere ambiante
 Lumiere parrallele
 Lumiere Direct
+Tore
+Cube troue
 Reflection
 Reflection diffuse
 Transparence avec Refraction (Plusieurs objets imbriques ;))
@@ -16,3 +18,8 @@ Ambient Occlusion
 Flou de profondeur
 Ombres diffuses
 Resolveur d'equation
+GUI de gros malade
+Export d'image (jpg, png, gif, bmp)
+Chargement d'une scene au format Xml
+PhotonMapping
+Methode de sampling

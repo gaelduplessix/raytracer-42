@@ -120,7 +120,7 @@ bool RaytracerGUI::setConfiguration()
   if (_ui->_cubeMap->isChecked())
     {
       if (_cubeMap)
-	delete _cubeMap;
+      	delete _cubeMap;
       _cubeMap = NULL;
       try
 	{

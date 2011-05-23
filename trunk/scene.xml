@@ -15,14 +15,14 @@
      <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <reflection>0</reflection>
+      <reflection>0.9</reflection>
     </material>
     <material name="refraction">
       <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
       <transmission>1</transmission>
-      <refractionIndex>1.33</refractionIndex>
+      <refractionIndex>1</refractionIndex>
     </material>
   </materials>
 
@@ -32,11 +32,16 @@
       <rotation type="radian">0, 0, 0</rotation>
       <solid>false</solid>
 	<primitives>
-	  <primitive type="parallelogram" material="sol">
-	    <position>16, -3, -3</position>
+	<!--   <primitive type="plane" material="sol"> -->
+	<!--     <position>16, -3, -3</position> -->
+	<!--     <rotation type="radian">0, 0, 0</rotation> -->
+	<!--     <limitX>6</limitX> -->
+	<!--     <limitY>6</limitY> -->
+	<!--   </primitive> -->
+	  <primitive type="sphere" material="sol">
+	    <position>20, 0, -2</position>
 	    <rotation type="radian">0, 0, 0</rotation>
-	    <vertex1>16, -3, 0</vertex1>
-	    <vertex2>16, 3, -3</vertex2>
+	    <radius>3</radius>
 	  </primitive>
 	</primitives>
     </object>
