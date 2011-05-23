@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon May 23 12:59:25 2011 loick michard
+// Last update Mon May 23 14:31:13 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -215,47 +215,8 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
   QMutexLocker	locker(&_mutex);
   if (_image)
     {
-      if (_config->getRenderingSamplingMethod() == RSM_UNPIXELISING)
-	{
-	  int	width = _image->width();
-	  int	height = _image->height();
-	  QImage *pixelisedImage = new QImage(width, height,
-					      QImage::Format_ARGB32);
-	  for (int i = 0; i < width; i++)
-	    {
-	      for (int j = 0; j < height; j++)
-		{
-		  int	pixelIndex = i + j * width;
-		  if (_raytracer->isPixelRaytraced(i, j))
-		    pixelisedImage->setPixel(i, j, _image->pixel(i, j));
-		  else
-		    {
-		      int diff = 0;
-		      while (pixelIndex - diff > 0
-			     && diff < 10
-		      	     && !(_raytracer
-		      		  ->isPixelRaytraced((pixelIndex - diff)
-						     % width,
-		      				     (pixelIndex - diff)
-						     / width)))
-		      	diff++;
-		      pixelIndex -= diff;
-		      pixelisedImage
-		  	->setPixel(i, j,
-		  		   _image->pixel(pixelIndex % width,
-		  				 pixelIndex / width));
-		    }
-		}
-	    }
-	  *_pixmap = _pixmap->fromImage(*pixelisedImage);
-	  _ui->_image->setPixmap(*_pixmap);
-	  delete pixelisedImage;
-	}
-      else
-	{
-	  *_pixmap = _pixmap->fromImage(*_image);
-	  _ui->_image->setPixmap(*_pixmap);
-	}
+      *_pixmap = _pixmap->fromImage(*_image);
+      _ui->_image->setPixmap(*_pixmap);
     }
   if (!_isRendering)
     {
