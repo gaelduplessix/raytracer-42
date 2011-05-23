@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sat May 21 18:33:57 2011 melvin laplanche
+// Last update Mon May 23 21:39:48 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -97,7 +97,7 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 	{
 	  equationNode = n;
 	  if (this->_checkContentIsSingleText(n, "equation"))
-	    equationValue = n.toElement().text().toStdString();
+	    equationValue = "x^2+y^2+z^2-3+";//n.toElement().text().toStdString();
 	  equation = true;
 	}
       }
@@ -134,7 +134,7 @@ void			Scene::_parseSett(QDomNode n,
   Point				positionValue;
   bool				rotation = false;
   Rotation			rotationValue;
-  bool				solidValue;
+  bool				solidValue = false;
   bool				solid = false;
   Point				widthValue;
   bool				width = false;
@@ -415,10 +415,10 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
 							   QString  material,
 							   Object*  obj)
 {
-  bool				position = false;
+  bool				p1 = false;
   bool				rotation = false;
-  bool				vert1 = false;
-  bool				vert2 = false;
+  bool				p2 = false;
+  bool				p3 = false;
   Parallelogram			*para = new Parallelogram();
 
   while (n.isNull() == false && this->_hasError == false)
@@ -431,32 +431,46 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
 				    "an element"), n);
 	return NULL;
       }
-      if (this->_parseCommonElement(n, para, position, rotation) == false)
+      if (this->_parseCommonElement(n, para, p1, rotation) == false)
       {
-	if (n.nodeName() == "vertex1")
+	if (n.nodeName() == "point2" || n.nodeName() == "vector1")
 	{
-	  if (vert1)
+	  if (p2)
 	    this->_putWarning(QObject::tr("A parallelogram has several "
-					  "vertex1, "
+					  "point2/vertor1, "
 					  "the first defined will be used"),
 			      n);
+	  else if (n.nodeName() == "vector1" && p1 == false)
+	    this->_putError(QObject::tr("Before defining a vector1, you must "
+					"define a position"), n);
 	  else
 	  {
-	    para->setVertex1(_parsePosition(n, "vertex1"));
-	    vert1 = true;
+	    if (n.nodeName() == "point2")
+	      para->setVertex2(_parsePosition(n, "point2"));
+	    else
+	      para->setVertex2(_parsePosition(n, "vector1")
+			       + para->getPosition());
+	    p2 = true;
 	  }
 	}
-	else if (n.nodeName() == "vertex2")
+	else if (n.nodeName() == "point3" || n.nodeName() == "vector2")
 	{
-	  if (vert2)
+	  if (p3)
 	    this->_putWarning(QObject::tr("A parallelogram has several "
-					  "vertex2, "
+					  "point3/vertor2, "
 					  "the first defined will be used"),
 			      n);
+	  else if (n.nodeName() == "vector2" && p1 == false)
+	    this->_putError(QObject::tr("Before defining a vector2, you must "
+					"define a position"), n);
 	  else
 	  {
-	    para->setVertex2(_parsePosition(n, "vertex2"));
-	    vert2 = true;
+	    if (n.nodeName() == "point3")
+	      para->setVertex2(_parsePosition(n, "point3"));
+	    else
+	      para->setVertex2(_parsePosition(n, "vector2")
+			       + para->getPosition());
+	    p3 = true;
 	  }
 	}
 	else
@@ -467,7 +481,7 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
     }
     n = n.nextSibling();
   }
-  if (!position || !rotation || !vert1 || !vert2)
+  if (!p1 || !rotation || !p2 || !p3)
   {
     this->_putError(QObject::tr("A parallelogram must have a position, "
 				"a rotation, a vertex1 and a vertext2"), n);

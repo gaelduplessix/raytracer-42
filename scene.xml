@@ -54,6 +54,16 @@
       <intensity>1</intensity>
       <directLight>3000</directLight>
     </light>
+    <!--
+	<light type="parallelogram">
+	  <point>23,-3,4</point>
+	  <vector1>0,6,0</vector1>
+	  <vector2>-6,0,0</vector2>
+	  <color>FFFFFF</color>
+	  <intensity>1</intensity>
+	  <directLight>3000</directLight>
+	</light>
+	-->
   </lights>
 </scene>
 
