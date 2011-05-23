@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Sat May 21 16:20:35 2011 gael jochaud-du-plessix
+// Last update Mon May 23 09:20:09 2011 samuel olivier
 //
 
 #ifndef _GUI_HPP_
@@ -51,6 +51,8 @@ class RaytracerGUI : public QMainWindow, public RenderingInterface
   void	closeEvent(QCloseEvent *event);
   void	photonMappingHasBegun(void);
   void	photonMappingHasFinished(void);
+  void	kdtreeGenerationHasBegun(void);
+  void	kdtreeGenerationHasFinished(void);
 
 public slots:
   void  pauseRendering(void);

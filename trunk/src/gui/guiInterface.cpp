@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Sat May 21 16:21:56 2011 gael jochaud-du-plessix
+// Last update Mon May 23 09:19:16 2011 samuel olivier
 //
 
 #include <QMessageBox>
@@ -120,13 +120,24 @@ void    RaytracerGUI::renderingHasBegun(void)
 
 void    RaytracerGUI::photonMappingHasBegun(void)
 {
-  sendMessage(tr("Debut de la generation de la carte de Photon")
-		     .toStdString());
+  sendMessage(tr("D&eacute;but de la g&eacute;n&eacute;ration de la carte de \
+Photon").toStdString());
 }
 
 void    RaytracerGUI::photonMappingHasFinished(void)
 {
-  sendSuccessMessage(tr("G&eacute;neration de la carte de Photon terminee")
+  sendSuccessMessage(tr("G&eacute;n&eacute;ration de la carte de Photon \
+termin&eacute;e").toStdString());
+}
+
+void    RaytracerGUI::kdtreeGenerationHasBegun(void)
+{
+  sendMessage(tr("D&eacute;but de la g&eacute;n&eacute;ration du Kdtree").toStdString());
+}
+
+void    RaytracerGUI::kdtreeGenerationHasFinished(void)
+{
+  sendSuccessMessage(tr("G&eacute;n&eacute;ration du KdTree termin&eacute;e")
 		     .toStdString());
 }
 
