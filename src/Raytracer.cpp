@@ -5,8 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May 22 15:23:43 2011 loick michard
-// Last update Sat May 21 16:53:26 2011 gael jochaud-du-plessix
+// Last update Sun May 22 17:49:53 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -583,7 +582,7 @@ Color		Raytracer::calcAmbiantLight(const Point& intersectPoint)
   double		aire ;
   int			newSize;
 
-  getNearestPhoton(nearest, mapSize, intersectPoint, 30);
+  getNearestPhoton(nearest, mapSize, intersectPoint, mapSize / 50);
   newSize = nearest.size();
   for (int i = 0 ; i < newSize ; i++)
     {
