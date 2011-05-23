@@ -180,9 +180,17 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionEffacer_la_console"/>
     <addaction name="actionActiver_la_console"/>
    </widget>
+   <widget class="QMenu" name="menuCluster">
+    <property name="title">
+     <string>&amp;Cluster</string>
+    </property>
+    <addaction name="actionLancer_un_serveur"/>
+    <addaction name="actionSe_connecter_un_serveur"/>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEdit"/>
    <addaction name="menu_Rendu"/>
+   <addaction name="menuCluster"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget_2">
    <property name="minimumSize">
@@ -278,14 +286,14 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
+            <item row="3" column="0">
              <widget class="QLabel" name="label_3">
               <property name="text">
                <string>Hauteur</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="3" column="1">
              <widget class="QSpinBox" name="_height">
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -301,28 +309,28 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
+            <item row="7" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
                <string>Caméra</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="7" column="1">
              <widget class="QComboBox" name="_camera">
               <property name="editable">
                <bool>false</bool>
               </property>
              </widget>
             </item>
-            <item row="7" column="0">
+            <item row="9" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
                <string>Antialiasing</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="1">
+            <item row="9" column="1">
              <widget class="QSpinBox" name="_antialiasing">
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -341,7 +349,7 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="11" column="0">
+            <item row="13" column="0">
              <spacer name="verticalSpacer_2">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -354,7 +362,7 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </spacer>
             </item>
-            <item row="10" column="0" colspan="2">
+            <item row="12" column="0" colspan="2">
              <widget class="QGroupBox" name="_depthField">
               <property name="title">
                <string>Profondeur de champ</string>
@@ -448,27 +456,7 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
-             <widget class="QSpinBox" name="_threads">
-              <property name="buttonSymbols">
-               <enum>QAbstractSpinBox::PlusMinus</enum>
-              </property>
-              <property name="minimum">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_17">
-              <property name="text">
-               <string>Threads</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="0" colspan="2">
+            <item row="10" column="0" colspan="2">
              <widget class="QGroupBox" name="_kdTree">
               <property name="title">
                <string>KdTree</string>
@@ -510,6 +498,26 @@ border-color: rgb(108, 108, 108);</string>
                 </widget>
                </item>
               </layout>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>Threads</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QSpinBox" name="_threads">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::PlusMinus</enum>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
              </widget>
             </item>
            </layout>
@@ -1193,6 +1201,7 @@ border-color: rgb(108, 108, 108);</string>
    <addaction name="action_Play"/>
    <addaction name="action_Pause"/>
    <addaction name="action_Stop"/>
+   <addaction name="separator"/>
   </widget>
   <action name="actionQuitter">
    <property name="enabled">
@@ -1225,6 +1234,9 @@ border-color: rgb(108, 108, 108);</string>
    <property name="text">
     <string>&amp;Charger une scène</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
    </property>
@@ -1236,6 +1248,9 @@ border-color: rgb(108, 108, 108);</string>
    </property>
    <property name="text">
     <string>&amp;Enregistrer l'image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -1250,7 +1265,7 @@ border-color: rgb(108, 108, 108);</string>
     <string>&amp;Lancer</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+P</string>
+    <string>Ctrl+R</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -1265,7 +1280,7 @@ border-color: rgb(108, 108, 108);</string>
     <string>Pa&amp;use</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+U</string>
+    <string>Ctrl+P</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -1280,7 +1295,7 @@ border-color: rgb(108, 108, 108);</string>
     <string>S&amp;top</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string>Ctrl+T</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -1306,6 +1321,22 @@ border-color: rgb(108, 108, 108);</string>
    </property>
    <property name="text">
     <string>Activer la console</string>
+   </property>
+  </action>
+  <action name="actionLancer_un_serveur">
+   <property name="text">
+    <string>Lancer un &amp;serveur</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L, S</string>
+   </property>
+  </action>
+  <action name="actionSe_connecter_un_serveur">
+   <property name="text">
+    <string>Se &amp;connecter à un serveur</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
  </widget>

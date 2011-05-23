@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Mon May 23 12:59:04 2011 loick michard
+// Last update Mon May 23 14:53:58 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -19,6 +19,7 @@ void	gui(int ac, char **av);
 #include <QPixmap>
 #include <string>
 #include <QCloseEvent>
+#include <QSystemTrayIcon>
 #include "ui_raytracer.h"
 #include "RenderingConfiguration.hpp"
 #include "Raytracer.hpp"
@@ -65,6 +66,8 @@ public slots:
   void	drawWindow();
   void	saveImage();
   void	clearConsole();
+  void	iconActivated(QSystemTrayIcon::ActivationReason reason);
+  void	realQuit();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
@@ -86,6 +89,10 @@ private:
   string			_message;
   bool				_isRendering;
   bool				_pause;
+  QSystemTrayIcon*		_sticon;
+  bool				_endOfRendering;
+  QMenu				*_menuSticon;
+  QAction			*_actionRealQuit;
 };
 
 #endif
