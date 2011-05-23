@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:42 2011 melvin laplanche
-// Last update Wed May 18 23:03:20 2011 melvin laplanche
+// Last update Mon May 23 13:10:31 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -270,7 +270,7 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
       if (n.nodeName() == "point1")
       {
 	if (p1)
-	  this->_putWarning(QObject::tr("A light has several point1, "
+	  this->_putWarning(QObject::tr("A light has several point/point1, "
 					"the first defined will be used"), n);
 	else
 	{
@@ -285,7 +285,7 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
 					"the first defined will be used"), n);
 	else
 	{
-	  light->setPosition(_parsePosition(n, "point2"));
+	  light->setPoint2(_parsePosition(n, "point2"));
 	  p2 = true;
 	}
       }
@@ -296,7 +296,7 @@ ParallelogramLight*		Scene::_parseParallelogramLight(QDomNode n)
 					"the first defined will be used"), n);
 	else
 	{
-	  light->setPosition(_parsePosition(n, "point3"));
+	  light->setPoint3(_parsePosition(n, "point3"));
 	  p3 = true;
 	}
       }
