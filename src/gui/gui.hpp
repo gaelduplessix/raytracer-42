@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Mon May 23 09:20:09 2011 samuel olivier
+// Last update Mon May 23 09:54:56 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -38,7 +38,7 @@ class RaytracerGUI : public QMainWindow, public RenderingInterface
   RaytracerGUI(QWidget *parent = 0);
   virtual ~RaytracerGUI();
   
-  void	setConfiguration();
+  bool	setConfiguration();
   void	renderingHasFinished(void);
   void	renderingHasBegun(void);
   void	pixelHasBeenRendered(int x, int y, Color color);

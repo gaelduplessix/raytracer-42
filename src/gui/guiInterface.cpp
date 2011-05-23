@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 23 09:41:39 2011 loick michard
+// Last update Mon May 23 09:55:27 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -183,7 +183,8 @@ void    RaytracerGUI::startRender()
 {
   if (_scene != NULL && _scene->isValid())
   {
-    setConfiguration();
+    if (!setConfiguration())
+      return ;
     _timer->setSingleShot(false);
     _timer->start();
     if (!_isRendering)

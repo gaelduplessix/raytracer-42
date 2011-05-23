@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sun May 22 14:29:12 2011 loick michard
+// Last update Mon May 23 10:04:15 2011 loick michard
 //
 
 #include <QApplication>
@@ -80,7 +80,7 @@ Scene           *createScene()
   return (res);
 }
 
-void RaytracerGUI::setConfiguration()
+bool RaytracerGUI::setConfiguration()
 {
   if (_ui->_mode->currentIndex() == 0)
     _config->setRenderingSamplingMethod(RSM_LINEAR_HORIZONTAL);
@@ -121,7 +121,18 @@ void RaytracerGUI::setConfiguration()
     {
       if (_cubeMap)
 	delete _cubeMap;
-      _cubeMap = new CubeMap(_ui->_cubeMapRepertory->text().toStdString());
+      _cubeMap = NULL;
+      try
+	{
+	  _cubeMap = new CubeMap(_ui->_cubeMapRepertory->text().toStdString());
+	}
+      catch (int error)
+	{
+	  if (error == CubeMap::ERROR_INVALID_FILE)
+	    this->sendErrorMessage(tr("Cube Map: dossier invalide").
+				   toStdString());
+	  return (false);
+	}
       _config->setCubeMap(_cubeMap);
     }
   else
@@ -140,6 +151,7 @@ void RaytracerGUI::setConfiguration()
   _config->setPhotonMappingSampling(_ui->
 				    _photonMappingValue->value());
   _config->setPhotonMappingEnabled(_ui->_photonMapping->isChecked());
+  return (true);
 }
 
 void	RaytracerGUI::selectCubeMap()
@@ -149,7 +161,7 @@ void	RaytracerGUI::selectCubeMap()
 				      "Selectioner une CubeMap",
 				      QString(),
 				      QFileDialog::DontUseNativeDialog);
-  _ui->_cubeMapRepertory->insert(file);
+  _ui->_cubeMapRepertory->setText(file);
 }
 
 void	RaytracerGUI::selectBackgroundColor()
@@ -299,7 +311,6 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
   this->setCameras();
   _timer = new QTimer();
   _timer->setInterval(50);
-  _timer->start();
   QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(drawWindow()));
   QObject::connect(_ui->action_Charger, SIGNAL(triggered()),
                    this, SLOT(loadScene()));
