@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Mon May 23 09:54:56 2011 loick michard
+// Last update Mon May 23 12:59:04 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -64,6 +64,7 @@ public slots:
   void	loadScene();
   void	drawWindow();
   void	saveImage();
+  void	clearConsole();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon May 23 11:26:01 2011 loick michard
+// Last update Mon May 23 12:59:25 2011 loick michard
 //
 
 #include <QApplication>
@@ -205,6 +205,11 @@ void    RaytracerGUI::selectAmbiantColor()
     }
 }
 
+void RaytracerGUI::clearConsole()
+{
+  _message = "";
+}
+
 void RaytracerGUI::paintEvent(QPaintEvent*)
 {
   QMutexLocker	locker(&_mutex);
@@ -311,6 +316,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(stopRendering()));
   QObject::connect(_ui->action_SaveImage, SIGNAL(triggered()),
                    this, SLOT(saveImage()));
+  QObject::connect(_ui->actionEffacer_la_console, SIGNAL(triggered()),
+                   this, SLOT(clearConsole()));
   _scene = createScene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
