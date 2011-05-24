@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sat May 21 16:38:44 2011 loick michard
+// Last update Tue May 24 13:19:31 2011 samuel olivier
 //
 
 #include <cmath>
@@ -16,12 +16,12 @@
 
 Triangle::Triangle(Object*object,
 		   const Point& absolutePosition,
-		   const Rotation& rotation,
 		   const Material& material,
 		   const Point& vertex1,
 		   const Point& vertex2) : ObjectPrimitive(object,
 							   absolutePosition,
-							   rotation, material),
+							   Rotation(0, 0, 0),
+							   material),
 					   _vertex1(vertex1), _vertex2(vertex2)
 {
   setCachedValues();

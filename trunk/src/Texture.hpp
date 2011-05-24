@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Mon May  9 17:09:34 2011 gael jochaud-du-plessix
+// Last update Mon May 23 17:21:31 2011 samuel olivier
 //
 
 #ifndef _TEXTURE_HPP_
@@ -13,11 +13,13 @@
 
 #include <string>
 #include <QImage>
+
 #include "Color.hpp"
+#include "Ressource.hpp"
 
 using namespace std;
 
-class Texture
+class Texture : public Ressource
 {
 public:
   Texture();

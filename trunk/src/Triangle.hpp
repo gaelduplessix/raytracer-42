@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Sat May 21 11:35:57 2011 loick michard
+// Last update Tue May 24 13:19:12 2011 samuel olivier
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -18,7 +18,6 @@ class Triangle : public ObjectPrimitive
 public:
   Triangle(Object*object,
 	 const Point& absolutePosition,
-	 const Rotation& rotation,
 	 const Material& material,
 	 const Point& vertex1,
 	 const Point& vertex2);
@@ -31,12 +30,12 @@ public:
   void		setVertex2(const Point& vertex2);
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;
-  void        addIntersectionWithRay(const Ray& ray,
-				     vector<struct s_intersected_object>&
-				     intersection) const;
-  void                  intersectWithRay(const Ray& ray,
-					 ObjectPrimitive*& primitive,
-					 double &res) const;
+  void		addIntersectionWithRay(const Ray& ray,
+				       vector<struct s_intersected_object>&
+				       intersection) const;
+  void		intersectWithRay(const Ray& ray,
+				 ObjectPrimitive*& primitive,
+				 double &res) const;
   Vector	getNormalVector(const Point& intersectPoint,
 				const Vector& viewVector) const;
   Vector	getRefractedVector(const Point& intersectPoint,
