@@ -24,7 +24,10 @@
 	  <primitive type="equation" material="sol">
 	    <position>16, -3, -3</position>
 	    <rotation type="radian">0, 0, 0</rotation>
-	    <equation>x^2 + y ^ 2 + z^2 - </equation>
+	    <equation>FAIL</equation>
+	    <!--
+		<equation>x^2 + y ^ 2 + z^2 - 3</equation>
+		-->
 	  </primitive>
 	</primitives>
     </object>
