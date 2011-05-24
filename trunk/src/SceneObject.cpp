@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 24 13:46:47 2011 samuel olivier
+// Last update Tue May 24 13:48:39 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -448,9 +448,9 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
 	  else
 	  {
 	    if (n.nodeName() == "point2")
-	      para->setVertex2(_parsePosition(n, "point2"));
+	      para->setVertex1(_parsePosition(n, "point2"));
 	    else
-	      para->setVertex2(_parsePosition(n, "vector1")
+	      para->setVertex1(_parsePosition(n, "vector1")
 			       + para->getPosition());
 	    p2 = true;
 	  }
