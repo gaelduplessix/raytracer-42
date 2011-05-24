@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 24 13:05:33 2011 melvin laplanche
+// Last update Tue May 24 13:09:35 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -234,9 +234,9 @@ void			Scene::_parseSett(QDomNode n,
     }
     n = n.nextSibling();
   }
-  if (!position || !solid || !rotation || !width || !height || !depth)
+  if (!position || !solid || !width || !height || !depth)
     this->_putError(QObject::tr("A parallelepipede must have a position, a "
-				"rotation, a width, a height, a depth, "
+				"width, a height, a depth, "
 				"and an solid value"), n);
   else
     this->_objects.push_back(new Sett(rotationValue, positionValue,
