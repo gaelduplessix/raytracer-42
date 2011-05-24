@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 24 13:48:39 2011 melvin laplanche
+// Last update Tue May 24 18:25:59 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -369,28 +369,46 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
       }
       if (this->_parseCommonElement(n, triangle, position, rotation) == false)
       {
-	if (n.nodeName() == "vertex1")
+	if (n.nodeName() == "vector1" || n.nodeName() == "point2")
 	{
 	  if (vert1)
-	    this->_putWarning(QObject::tr("A triangle has several vertex1, "
+	    this->_putWarning(QObject::tr("A triangle has several "
+					  "vector1/point2, "
 					  "the first defined will be used"),
+			      n);
+	  else if (n.nodeName() == "vector1" && position == false)
+	    this->_putWarning(QObject::tr("A position must be defined before"
+					  "you can define a vector1"),
 			      n);
 	  else
 	  {
-	    triangle->setVertex1(_parsePosition(n, "vertex1"));
+	    if (n.nodeName() == "vector1")
+	      triangle->setVertex1(_parsePosition(n, "vector1") +
+				   triangle->getPosition());
+	    else
+	      triangle->setVertex1(_parsePosition(n, "point2"));
 	    vert1 = true;
 	  }
 	}
-	else if (n.nodeName() == "vertex2")
+	else if (n.nodeName() == "vector2" || n.nodeName() == "point3")
 	{
 	  if (vert2)
-	    this->_putWarning(QObject::tr("A triangle has several vertex2, "
+	    this->_putWarning(QObject::tr("A triangle has several "
+					  "vector2/point3, "
 					  "the first defined will be used"),
+			      n);
+	  else if (n.nodeName() == "vector2" && position == false)
+	    this->_putWarning(QObject::tr("A position must be defined before"
+					  "you can define a vector2"),
 			      n);
 	  else
 	  {
-	    triangle->setVertex2(_parsePosition(n, "vertex2"));
-	    vert2 = true;
+	    if (n.nodeName() == "vector2")
+	      triangle->setVertex2(_parsePosition(n, "vector2") +
+				   triangle->getPosition());
+	    else
+	      triangle->setVertex2(_parsePosition(n, "point3"));
+	    vert1 = true;
 	  }
 	}
 	else
