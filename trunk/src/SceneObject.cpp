@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 23 21:39:48 2011 melvin laplanche
+// Last update Tue May 24 13:05:33 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -97,7 +97,7 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 	{
 	  equationNode = n;
 	  if (this->_checkContentIsSingleText(n, "equation"))
-	    equationValue = "x^2+y^2+z^2-3+";//n.toElement().text().toStdString();
+	    equationValue = n.toElement().text().toStdString();
 	  equation = true;
 	}
       }
@@ -115,11 +115,14 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
   }
   try
   {
+    cerr << "equation try" << endl;
     ret =  new EquationPrimitive(equationValue, obj,
 				 positionValue, rotationValue, mat);
+    cerr << "equation try over" << endl;
   }
   catch (int error)
   {
+    cerr << "equation catch" << endl;
     this->_putError(QObject::tr("The equation is not valid"), equationNode);
     ret = NULL;
   }
@@ -399,10 +402,10 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
     }
     n = n.nextSibling();
   }
-  if (!position || !rotation || !vert1 || !vert2)
+  if (!position || !vert1 || !vert2)
   {
     this->_putError(QObject::tr("A triangle must have a position, a "
-				"rotation, a vertex1 and a vertext2"), n);
+				"a vertex1 and a vertext2"), n);
     return NULL;
   }
   triangle->setMaterial(_getMaterialByName(material));
@@ -481,10 +484,10 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
     }
     n = n.nextSibling();
   }
-  if (!p1 || !rotation || !p2 || !p3)
+  if (!p1 || !p2 || !p3)
   {
     this->_putError(QObject::tr("A parallelogram must have a position, "
-				"a rotation, a vertex1 and a vertext2"), n);
+				"a vertex1 and a vertext2"), n);
     return NULL;
   }
   para->setMaterial(_getMaterialByName(material));
