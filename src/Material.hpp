@@ -5,13 +5,14 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May  4 17:40:55 2011 loick michard
-// Last update Wed May 18 12:20:06 2011 samuel olivier
+// Last update Mon May 23 17:21:02 2011 samuel olivier
 //
 
 #ifndef _MATERIAL_HPP_
 #define _MATERIAL_HPP_
 
 #include <string>
+
 #include "Texture.hpp"
 #include "Vector.hpp"
 
@@ -61,8 +62,6 @@ public:
 private:
   string	_name;
   Color		_color;
-  Texture*	_texture;
-  Texture*	_limitTexture;
   bool		_isTextured;
   double	_specularCoeff;
   double	_specularPow;
@@ -72,6 +71,8 @@ private:
   double	_diffusedReflectionCoeff;
 
 public:
+  Texture*	_texture;
+  Texture*	_limitTexture;
   Texture*	_heightmap;
   bool		_hasBumpMap;
   bool		_hasNormalDeformation;

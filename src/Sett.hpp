@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 10 13:39:45 2011 samuel olivier
-// Last update Mon May 16 16:16:26 2011 samuel olivier
+// Last update Tue May 24 13:08:48 2011 samuel olivier
 //
 
 #ifndef _SETT_HPP_
@@ -17,9 +17,8 @@ class Sett : public Object
 {
 public:
   Sett(void);
-  Sett(const Rotation& rotation, const Point& position, bool isSolid,
-       const Vector& width, const Vector& height, const Vector& depth,
-       const Material& material);
+  Sett(const Point& position, bool isSolid, const Vector& width,
+       const Vector& height, const Vector& depth, const Material& material);
 };
 
 #endif

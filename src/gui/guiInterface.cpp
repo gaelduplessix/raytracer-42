@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 23 15:01:17 2011 loick michard
+// Last update Mon May 23 19:34:07 2011 samuel olivier
 //
 
 #include <QMessageBox>
@@ -194,46 +194,47 @@ void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
 void    RaytracerGUI::startRender()
 {
   if (_scene != NULL && _scene->isValid())
-  {
-    if (!setConfiguration())
-      {
-	_ui->_console->setHtml(_message.c_str());
-	_ui->_console->moveCursor(QTextCursor::End);
-	return ;
-      }
-    _ui->_mode->setEnabled(false);
-    _ui->_width->setEnabled(false);
-    _ui->_height->setEnabled(false);
-    _ui->_threads->setEnabled(false);
-    _timer->setSingleShot(false);
-    _timer->start();
-    if (!_isRendering)
     {
-      if (_image)
-	delete _image;
-      _image = new QImage(_ui->_width->value(),
-                          _ui->_height->value(),
-                          QImage::Format_ARGB32);
-      _image->fill(0);
+      if (!setConfiguration())
+	{
+	  _ui->_console->setHtml(_message.c_str());
+	  _ui->_console->moveCursor(QTextCursor::End);
+	  return ;
+	}
+      _ui->_mode->setEnabled(false);
+      _ui->_width->setEnabled(false);
+      _ui->_height->setEnabled(false);
+      _ui->_threads->setEnabled(false);
+      _timer->setSingleShot(false);
+      _timer->start();
+      if (!_isRendering)
+	{
+	  if (_image)
+	    delete _image;
+	  _image = new QImage(_ui->_width->value(),
+			      _ui->_height->value(),
+			      QImage::Format_ARGB32);
+	  _image->fill(0);
+	}
+      try
+	{
+	  _ui->_progressBar->setHidden(false);
+	  if (_pause)
+	    sendMessage(tr("Reprise du rendu").toStdString());
+	  else
+	    sendMessage(tr("D&eacute;part du rendu").toStdString());
+	  _pause = false;
+	  _raytracer->launchRendering();
+	  _isRendering = true;
+	}
+      catch(int error)
+	{
+	  std::cerr << "ERREUR" << error << std::endl;
+	}
     }
-    try
-    {
-      _ui->_progressBar->setHidden(false);
-      if (_pause)
-	sendMessage(tr("Reprise du rendu").toStdString());
-      else
-	sendMessage(tr("D&eacute;part du rendu").toStdString());
-      _pause = false;
-      _raytracer->launchRendering();
-      _isRendering = true;
-    }
-    catch(int error)
-    {
-      std::cerr << "ERREUR" << error << std::endl;
-    }
-  }
   else
-    sendErrorMessage(tr("Vous devez charger une sc&egrave;ne avant de faire un rendu").toStdString());
+    sendErrorMessage(tr("Vous devez charger une sc&egrave;ne avant de faire un"
+			"rendu").toStdString());
 }
 
 void		RaytracerGUI::saveImage()

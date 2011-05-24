@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Mon May 23 09:14:46 2011 samuel olivier
+// Last update Mon May 23 19:30:52 2011 samuel olivier
 //
 
 #include <QMutexLocker>

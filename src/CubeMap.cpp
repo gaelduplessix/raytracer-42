@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue May  3 16:29:38 2011 gael jochaud-du-plessix
-// Last update Tue May  3 21:54:56 2011 gael jochaud-du-plessix
+// Last update Mon May 23 18:11:31 2011 samuel olivier
 //
 
 #include "CubeMap.hpp"
@@ -26,12 +26,7 @@ CubeMap::CubeMap(const string& path)
     if (_facesFiles[i]->isNull())
       throw CubeMap::ERROR_INVALID_FILE;
   _facesWidth = _facesFiles[CubeMap::Top]->width();
-}
-
-CubeMap::CubeMap(vector<QImage*>& facesFiles):
-  _facesFiles(facesFiles)
-{
-  _facesWidth = _facesFiles[CubeMap::Top]->width();
+  _name = path;
 }
 
 CubeMap::~CubeMap()

@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 24 13:09:35 2011 melvin laplanche
+// Last update Tue May 24 13:46:47 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -239,9 +239,8 @@ void			Scene::_parseSett(QDomNode n,
 				"width, a height, a depth, "
 				"and an solid value"), n);
   else
-    this->_objects.push_back(new Sett(rotationValue, positionValue,
-				      solidValue, widthValue, heightValue,
-				      depthValue, mat));
+    this->_objects.push_back(new Sett(positionValue, solidValue, widthValue,
+				      heightValue, depthValue, mat));
 }
 
 Sphere*			Scene::_parseSphere(QDomNode	n,

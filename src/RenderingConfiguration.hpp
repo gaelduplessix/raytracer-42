@@ -5,11 +5,15 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Sun May 22 14:14:19 2011 loick michard
+// Last update Mon May 23 19:24:37 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
 #define _RENDERINGCONFIGURATION_HPP_
+
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 #include "CubeMap.hpp"
 
@@ -40,16 +44,16 @@ class RenderingConfiguration
 {
 public:
   RenderingConfiguration();
-  
-  int	getNbThreads(void) const;
-  void	setNbThreads(int nbThreads);
-  int	getWidth(void) const;
-  void	setWidth(int width);
-  int   getHeight(void) const;
-  void	setHeight(int width);
 
-  int	getCurrentCamera(void) const;
-  void	setCurrentCamera(int id);
+  int		getNbThreads(void) const;
+  void		setNbThreads(int nbThreads);
+  int		getWidth(void) const;
+  void		setWidth(int width);
+  int		getHeight(void) const;
+  void		setHeight(int width);
+
+  int		getCurrentCamera(void) const;
+  void		setCurrentCamera(int id);
 
   int		getAntialiasing(void) const;
   void		setAntialiasing(int antialiasing);  
@@ -125,6 +129,10 @@ public:
   void		setKdTreeEnabled(bool enabled = true);
   int		getKdTreeDepth() const;
   void		setKdTreeDepth(int depth);
+
+  friend class		boost::serialization::access;
+  template<class Archive>
+  void			serialize(Archive& ar, const unsigned int version);
 
 private:
   int			_nbThreads;

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue May  3 16:30:47 2011 gael jochaud-du-plessix
-// Last update Tue May  3 20:46:56 2011 gael jochaud-du-plessix
+// Last update Mon May 23 18:11:37 2011 samuel olivier
 //
 
 #ifndef _CUBEMAP_HPP_
@@ -17,10 +17,11 @@
 
 #include "Color.hpp"
 #include "Point.hpp"
+#include "Ressource.hpp"
 
 using namespace std;
 
-class CubeMap
+class CubeMap : public Ressource
 {
 public:
   static const int Top	  = 0;
@@ -33,7 +34,6 @@ public:
   static const int ERROR_INVALID_FILE = 0;
 
   CubeMap(const string& path);
-  CubeMap(vector<QImage*>& facesFiles);
   ~CubeMap();
 
   Color getMapColor(Vector viewVector);
@@ -42,8 +42,6 @@ protected:
   Color	_readFace(int face, double x, double y);
 
 private:
-  int			_mapType;
-  QImage*		_image;
   double		_facesWidth;
   vector<QImage*>	_facesFiles;
 };

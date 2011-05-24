@@ -18,6 +18,40 @@ RenderingConfiguration::RenderingConfiguration():
   _reflection.enabled = false;
 }
 
+template<class Archive>
+void	RenderingConfiguration::serialize(Archive& ar,
+					  const unsigned int version)
+{
+  ar & _nbThreads;
+  ar & _width;
+  ar & _height;
+  ar & _currentCamera;
+  ar & _antialiasing;
+  ar & _renderingSamplingMethod;
+  ar & _exposure;
+  ar & _directLighting;
+  ar & _directLightingCoeff;
+  ar & _diffuseLighting;
+  ar & _specularLighting;
+  ar & _reflection;
+  ar & _transparency;
+  ar & _backgroundColor;
+  ar & _ambientOcclusionEnabled;
+  ar & _ambientOcclusionSampling;
+  ar & _photonMappingEnabled;
+  ar & _photonMappingSampling;
+  ar & _diffuseShadingEnabled;
+  ar & _diffuseShadingSampling;
+  ar & _fieldDepthEnabled;
+  ar & _fieldDepthSampling;
+  ar & _additiveAmbiantLightingEnabled;
+  ar & _additiveAmbiantLighting;
+  ar & _minimalAmbiantLightingEnabled;
+  ar & _minimalAmbiantLighting;
+  ar & _kdTreeEnabled;
+  ar & _kdTreeDepth;
+}
+
 int	RenderingConfiguration::getNbThreads(void) const
 {
   return (_nbThreads);

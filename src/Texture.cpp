@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Mon May  9 14:35:24 2011 gael jochaud-du-plessix
+// Last update Mon May 23 17:36:39 2011 samuel olivier
 //
 
 #include <QString>
@@ -20,6 +20,7 @@ Texture::Texture()
 Texture::Texture(const string& path, 
 		 double repeatWidth, double repeatHeight)
 {
+  _name = path;
   _image = new QImage(QString(path.c_str()));
   _repeatWidth = repeatWidth;
   _repeatHeight = repeatHeight;
@@ -28,7 +29,7 @@ Texture::Texture(const string& path,
 Texture::Texture(double repeatWidth, double repeatHeight):
   _repeatWidth(repeatWidth), _repeatHeight(repeatHeight)
 {
-
+  _name = "";
 }
 
 Texture::~Texture()
