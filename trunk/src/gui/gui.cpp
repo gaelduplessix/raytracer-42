@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon May 23 17:59:52 2011 loick michard
+// Last update Tue May 24 18:10:34 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -13,6 +13,10 @@
 #include <QMutexLocker>
 #include <sstream>
 #include <QSystemTrayIcon>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <fstream>
+
 #include "gui.hpp"
 
 #include "RenderingConfiguration.hpp"
@@ -144,7 +148,6 @@ bool RaytracerGUI::setConfiguration()
   _config->setMinimalAmbiantLighting(_ui->_ambiantLightingCoeff->value());
   _config->setAdditiveAmbiantLighting((*_ambiantColor).rgba());
   _config->setAdditiveAmbiantLightingEnabled(_ui->_ambiantColor->isChecked());
-
   _config->setAmbientOcclusionSampling(_ui->
 				       _ambientOcclusionSampling->value());
   _config->setAmbientOcclusionEnabled(_ui->_ambientOcclusion->isChecked());
@@ -152,6 +155,17 @@ bool RaytracerGUI::setConfiguration()
   _config->setPhotonMappingSampling(_ui->
 				    _photonMappingValue->value());
   _config->setPhotonMappingEnabled(_ui->_photonMapping->isChecked());
+
+  // {
+  //   std::ofstream ofs("fichierDeSerialisation");
+  //   boost::archive::text_oarchive oa(ofs);
+  //   oa << *_config;
+
+  //   RenderingConfiguration newConf;
+  //   std::ifstream ifs("fichierDeSerialisation");
+  //   boost::archive::text_iarchive ia(ifs);
+  //   ia >> newConf;
+  // }
   return (true);
 }
 

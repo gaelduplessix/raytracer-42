@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Tue May 24 13:41:43 2011 samuel olivier
+// Last update Tue May 24 13:54:32 2011 samuel olivier
 //
 
 #include <cmath>
@@ -72,9 +72,9 @@ void            Parallelogram::setCachedValues(void)
                    _v1._z * _v2._x + _v2._z * - _v1._x,
                    _v1._x * _v2._y + _v2._x * - _v1._y);
   _normal.normalize();
-  printf("%f %f %f\n%f %f %f\n%f %f %f\n\n", _absolutePosition._x,
-	 _absolutePosition._y, _absolutePosition._z, _vertex1._x, _vertex1._y,
-	 _vertex1._z, _vertex2._x, _vertex2._y, _vertex2._z);
+  // printf("=> %p\n%f %f %f\n%f %f %f\n%f %f %f\n\n", this, _absolutePosition._x,
+  // 	 _absolutePosition._y, _absolutePosition._z, _vertex1._x, _vertex1._y,
+  // 	 _vertex1._z, _vertex2._x, _vertex2._y, _vertex2._z);
 }
 
 void		Parallelogram::setVertex1(const Point& vertex1)
