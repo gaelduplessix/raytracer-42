@@ -20,7 +20,7 @@ RenderingConfiguration::RenderingConfiguration():
 
 template<class Archive>
 void	RenderingConfiguration::serialize(Archive& ar,
-					  const unsigned int version)
+					  unsigned int version)
 {
   ar & _nbThreads;
   ar & _width;

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Mon May 23 19:24:37 2011 samuel olivier
+// Last update Tue May 24 17:46:09 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -132,7 +132,7 @@ public:
 
   friend class		boost::serialization::access;
   template<class Archive>
-  void			serialize(Archive& ar, const unsigned int version);
+  void			serialize(Archive& ar, unsigned int version);
 
 private:
   int			_nbThreads;

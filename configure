@@ -10,9 +10,9 @@ else
     make -C configure_options
     if ./configure_options/endian
     then
-	$exec QT+=xml OBJECTS_DIR=./objects LIBS="-lSDL" DEFINES=IS_BIG_ENDIAN
+	$exec QT+=xml OBJECTS_DIR=./objects LIBS="-lboost_date_time -lboost_date_time-mt -lboost_filesystem -lboost_filesystem-mt -lboost_iostreams -lboost_iostreams-mt -lboost_prg_exec_monitor -lboost_prg_exec_monitor-mt -lboost_program_options -lboost_program_options-mt -lboost_python -lboost_python-mt -lboost_serialization -lboost_serialization-mt -lboost_signals -lboost_signals-mt -lboost_system -lboost_system-mt -lboost_test_exec_monitor -lboost_test_exec_monitor-mt -lboost_thread-mt -lboost_unit_test_framework -lboost_unit_test_framework-mt -lboost_wave-mt -lboost_wserialization -lboost_wserialization-mt" DEFINES=IS_BIG_ENDIAN
     else
-	$exec QT+=xml OBJECTS_DIR=./objects LIBS="-lSDL"
+	$exec QT+=xml OBJECTS_DIR=./objects LIBS="-lboost_date_time -lboost_date_time-mt -lboost_filesystem -lboost_filesystem-mt -lboost_iostreams -lboost_iostreams-mt -lboost_prg_exec_monitor -lboost_prg_exec_monitor-mt -lboost_program_options -lboost_program_options-mt -lboost_python -lboost_python-mt -lboost_serialization -lboost_serialization-mt -lboost_signals -lboost_signals-mt -lboost_system -lboost_system-mt -lboost_test_exec_monitor -lboost_test_exec_monitor-mt -lboost_thread-mt -lboost_unit_test_framework -lboost_unit_test_framework-mt -lboost_wave-mt -lboost_wserialization -lboost_wserialization-mt"
 
     fi
     echo "re:	clean all" >> Makefile
