@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 25 14:23:16 2011 loick michard
+// Last update Wed May 25 17:28:08 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -49,6 +49,7 @@ Scene           *createScene()
   reflection->setReflectionCoeff(0);
   reflection->setTransmissionCoeff(0);
   reflection->setRefractionIndex(1.33);
+  reflection->setTexture(new Texture("terre.jpg"));  
   Material      refraction = mat;
   refraction.setTransmissionCoeff(0);
   refraction.setRefractionIndex(1.33);
@@ -65,8 +66,8 @@ Scene           *createScene()
   cam.push_back(camera);
   
   vector<ObjectPrimitive*> primitives;
-  primitives.push_back(new Sphere(NULL, Point(30, 0, 0),
-				  Rotation(0, 0, 0), reflection, 3.0));
+  primitives.push_back(new Triangle(NULL, Point(27, -10, -5), reflection,
+				    Point(27, 2, 8.5), Point(27, 13, -5)));
   Material special = refraction;
   PerlinNoise *perlin = new PerlinNoise();
   special.setTransmissionCoeff(0);
