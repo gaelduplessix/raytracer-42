@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May 25 10:57:50 2011 loick michard
+// Last update Wed May 25 17:35:19 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -419,6 +419,8 @@ Color	Raytracer::calcDiffusedReflection(Ray& ray,
     return (throwRay(ray));
   double	diffCoeff
     = nearestObject->getMaterial()->getDiffusedReflectionCoeff();
+  if (diffCoeff <= 0)
+    return (throwRay(ray));
   Vector	newV1(ray._vector._z, ray._vector._y, -ray._vector._x);
   Vector	newV2 = newV1;
   newV2 *= ray._vector;
