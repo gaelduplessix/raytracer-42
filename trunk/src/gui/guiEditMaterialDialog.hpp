@@ -5,11 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:21:30 2011 loick michard
-// Last update Wed May 25 10:38:37 2011 loick michard
+// Last update Wed May 25 14:17:40 2011 loick michard
 //
 
 #include <QWidget>
 #include <QDialog>
+#include <QImage>
+#include <QTimer>
 #include "ui_editMaterialDialog.h"
 #include "Material.hpp"
 
@@ -25,6 +27,7 @@ class GuiEditMaterialDialog : public QDialog
   GuiEditMaterialDialog();
   ~GuiEditMaterialDialog();
 
+  void paintEvent(QPaintEvent*);
   void fillColor();
   void setMaterials(const vector<Material*>& materials);
 
@@ -37,4 +40,8 @@ private:
   Ui::editMaterialDialog*	_dialog;
   const vector<Material*>	*_materials;
   QColor       			*_color;
+  bool				_isSet;
+  QImage			*_image;
+  QPixmap			*_pixmap;
+  QTimer			*_timer;
 };
