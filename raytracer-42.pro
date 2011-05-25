@@ -5,6 +5,7 @@
 FORMS=raytracer.ui clusterDialog.ui launchServerDialog.ui editMaterialDialog.ui
 RESOURCES=ressources.qrc
 QT+=xml
+QT+=network
 OBJECTS_DIR=./objects
 LIBS=-lboost_serialization
 TEMPLATE = app
@@ -19,6 +20,7 @@ HEADERS += src/BoundingBox.hpp \
            src/CinemaCamera.hpp \
            src/ClusterClient.hpp \
            src/ClusterServer.hpp \
+           src/ClusterServerThread.hpp \
            src/Color.hpp \
            src/Cone.hpp \
            src/CubeMap.hpp \
@@ -70,6 +72,7 @@ SOURCES += src/BoundingBox.cpp \
            src/CinemaCamera.cpp \
            src/ClusterClient.cpp \
            src/ClusterServer.cpp \
+           src/ClusterServerThread.cpp \
            src/Color.cpp \
            src/Cone.cpp \
            src/CubeMap.cpp \
