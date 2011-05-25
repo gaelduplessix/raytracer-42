@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 19:02:17 2011 gael jochaud-du-plessix
-// Last update Wed May 25 15:59:08 2011 gael jochaud-du-plessix
+// Last update Wed May 25 17:03:14 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServerThread.hpp"
@@ -56,12 +56,13 @@ void		ClusterServerThread::registerToCentralServer(void)
   connect(_networkManager, SIGNAL(finished(QNetworkReply*)), this,
 	  SLOT(readCentralServerResponse(QNetworkReply*)));
   QUrl		postVars;
-
+  ostringstream	value;
   postVars.addQueryItem("action", "logServer");
-  postVars.addQueryItem("serverPort", "4242");
-  ostringstream	status;
-  status << ClusterServer::FREE;
-  postVars.addQueryItem("serverStatus", status.str().c_str());
+  value << _clusterServer->getPort();
+  postVars.addQueryItem("serverPort", value.str().c_str());
+  value.str("");
+  value << ClusterServer::FREE;
+  postVars.addQueryItem("serverStatus", value.str().c_str());
   QByteArray	postData(postVars.encodedQuery());
   _networkManager->post(QNetworkRequest(_clusterServer->getCentralServerUrl()),
 			postData);

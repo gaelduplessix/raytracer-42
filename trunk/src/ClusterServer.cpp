@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed May 25 14:24:27 2011 gael jochaud-du-plessix
+// Last update Wed May 25 16:50:47 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -18,8 +18,8 @@
 #include <stdio.h>
 #endif
 
-ClusterServer::ClusterServer(string url):
-  _centralServerUrl(url.c_str())
+ClusterServer::ClusterServer(string url, int port):
+  _port(port), _centralServerUrl(url.c_str())
 {
   _registerServerThread =
     new ClusterServerThread(this, ClusterServerThread::CENTRAL_REGISTER);
@@ -35,6 +35,11 @@ ClusterServer::~ClusterServer()
     delete _registerServerThread;
   if (_clientListenerThread)
     delete _clientListenerThread;
+}
+
+int        ClusterServer::getPort(void)
+{
+  return (_port);
 }
 
 QUrl        ClusterServer::getCentralServerUrl(void)
