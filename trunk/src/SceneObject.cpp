@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Wed May 25 13:45:00 2011 loick michard
+// Last update Wed May 25 16:08:44 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -408,7 +408,7 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
 				   triangle->getPosition());
 	    else
 	      triangle->setVertex2(_parsePosition(n, "point3"));
-	    vert1 = true;
+	    vert2 = true;
 	  }
 	}
 	else
@@ -421,8 +421,8 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
   }
   if (!position || !vert1 || !vert2)
   {
-    this->_putError(QObject::tr("A triangle must have a position, a "
-				"a vertex1 and a vertext2"), n);
+    this->_putError(QObject::tr("A triangle must have a position,"
+				" a vertex1 and a vertext2"), n);
     return NULL;
   }
   triangle->setMaterial(_getMaterialByName(material));

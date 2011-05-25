@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 11:21:26 2011 samuel olivier
+// Last update Wed May 25 17:24:40 2011 samuel olivier
 //
 
 #include <cmath>
@@ -32,7 +32,9 @@ Triangle::Triangle(Object*object,
 
 Triangle::Triangle(void):
   ObjectPrimitive(NULL, Point(0, 0, 0), Rotation(0, 0, 0), NULL),
-  _vertex1(Point(0, 0, 0)), _vertex2(Point(0, 0, 0))  
+  _vertex1(Point(0, 0, 0)), _vertex2(Point(0, 0, 0)),
+  _textureVertex1(Point(0, 0)), _textureVertex2(Point(0.5, 1)),
+  _textureVertex3(Point(1, 0))
 {
   _isLimited = true;
 }
@@ -75,6 +77,8 @@ void		Triangle::setCachedValues(void)
 		   _v1._z * _v2._x + _v2._z * - _v1._x,
 		   _v1._x * _v2._y + _v2._x * - _v1._y);
   _normal.normalize();
+  _textureV1 = _textureVertex2 - _textureVertex1;
+  _textureV2 = _textureVertex3 - _textureVertex1;
 }
 
 void		Triangle::setVertex1(const Point& vertex1)
@@ -117,13 +121,34 @@ const Point& 	Triangle::getTextureVertex3(void)
   return (_textureVertex3);
 }
 
+double		Triangle::calcArea(const Point& vertex1,
+				   const Point& vertex2,
+				   const Point& vertex3) const
+{
+  Vector	a = vertex1 - vertex2;
+  Vector	b = vertex1 - vertex3;
+  double	na = a.getNorm();
+  double	nb = b.getNorm();
+  double	cosA = (a * b) / (na * nb);
+  cosA = acos(cosA);
+  return (0.5 * na * nb * sin(cosA));
+}
+
 void		Triangle::getMappedCoords(const Point& intersectPoint,
 					  double& x, double &y) const
 {
-  x = 0;
-  y = 0;
-  return ;
-  (void)intersectPoint;
+  double	areaC = calcArea(_absolutePosition, _vertex1, intersectPoint);
+  double	areaB = calcArea(_vertex1, _vertex2, intersectPoint);
+  double	areaA = calcArea(_vertex2, _absolutePosition, intersectPoint);
+  double	sum = areaA + areaB + areaC;
+  double	a = areaC / sum;
+  double	b = areaA / sum;
+  double	c = areaB / sum;
+  Point		texturePoint = _textureVertex1 +
+    (b * (_textureVertex2 - _textureVertex1) +
+     c * (_textureVertex3 - _textureVertex1)) / (a + b + c);
+  x = -texturePoint._x;
+  y = -texturePoint._y;
 }
 
 void

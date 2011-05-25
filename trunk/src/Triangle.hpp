@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 25 11:19:53 2011 samuel olivier
+// Last update Wed May 25 17:04:35 2011 samuel olivier
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -21,9 +21,9 @@ public:
 	   Material* material,
 	   const Point& vertex1,
 	   const Point& vertex2,
-	   const Point& textureVertex1 = Point(0, 0, 0),
-	   const Point& textureVertex2 = Point(0.5, 1, 0),
-	   const Point& textureVertex3 = Point(1, 0, 0));
+	   const Point& textureVertex1 = Point(0, 0),
+	   const Point& textureVertex2 = Point(0.5, 1),
+	   const Point& textureVertex3 = Point(1, 0));
   Triangle(void);
 
   void		setCachedValues(void);
@@ -39,6 +39,9 @@ public:
 
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;
+  double	calcArea(const Point& vertex1,
+			 const Point& vertex2,
+			 const Point& vertex3) const;
   void		addIntersectionWithRay(const Ray& ray,
 				       vector<struct s_intersected_object>&
 				       intersection) const;
@@ -63,6 +66,8 @@ private:
   Point		_textureVertex3;
   Vector	_v1;
   Vector	_v2;
+  Vector	_textureV1;
+  Vector	_textureV2;
   double	_var1;
   double	_var2;
   double	_var3;
