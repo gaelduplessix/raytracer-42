@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 18 10:28:17 2011 loick michard
-// Last update Mon May 23 09:31:03 2011 loick michard
+// Last update Tue May 24 13:48:20 2011 loick michard
 //
 
 #include <algorithm>
@@ -29,7 +29,18 @@ KdTree::KdTree(const vector<Object*>& objects, int depth)
 
 KdTree::~KdTree()
 {
+  _deleteNode(_root);
+}
 
+void KdTree::_deleteNode(KdTreeNode *node)
+{
+  if (node)
+    {
+      _deleteNode(node->leftChild);
+      _deleteNode(node->rightChild);
+      delete node->box;
+      delete node;
+    }
 }
 
 bool

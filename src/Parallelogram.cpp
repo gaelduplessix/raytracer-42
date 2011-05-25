@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Tue May 24 13:54:32 2011 samuel olivier
+// Last update Wed May 25 10:53:25 2011 loick michard
 //
 
 #include <cmath>
@@ -16,7 +16,7 @@
 
 Parallelogram::Parallelogram(void) : ObjectPrimitive(NULL, Point(0, 0, 0),
 						     Rotation(0, 0, 0),
-						     Material()),
+						     NULL),
 				     _vertex1(Point(0, 0, 0)),
 				     _vertex2(Point(0, 0, 0))
 {
@@ -27,7 +27,7 @@ Parallelogram::Parallelogram(Object*object,
 			     const Point& absolutePosition,
 			     const Point& vertex1,
 			     const Point& vertex2,
-			     const Material& material):
+			     Material* material):
   ObjectPrimitive(object, absolutePosition, Rotation(0, 0, 0), material),
   _vertex1(vertex1), _vertex2(vertex2)
 {

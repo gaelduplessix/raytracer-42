@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Mon May 23 18:04:49 2011 samuel olivier
+// Last update Wed May 25 10:59:33 2011 loick michard
 //
 
 #include "Ressources.hpp"
@@ -26,17 +26,17 @@ Ressources::Ressources(const Scene* scene, const RenderingConfiguration* conf)
       int			nbPrimitive = objects[i]->_primitives.size();
       for (int j = 0 ; j < nbPrimitive ; j++)
 	{
-	  const Material&	mat =
+	  Material*	mat =
 	    objects[i]->_primitives[j]->getMaterial();
-	  if (mat._texture)
-	    _ressources.push_back(make_pair(mat._texture->getName(),
-					    *mat._texture));
-	  if (mat._limitTexture)
-	    _ressources.push_back(make_pair(mat._limitTexture->getName(),
-					    *mat._limitTexture));
-	  if (mat._heightmap)
-	    _ressources.push_back(make_pair(mat._heightmap->getName(),
-					    *mat._heightmap));
+	  if (mat->_texture)
+	    _ressources.push_back(make_pair(mat->_texture->getName(),
+					    *mat->_texture));
+	  if (mat->_limitTexture)
+	    _ressources.push_back(make_pair(mat->_limitTexture->getName(),
+					    *mat->_limitTexture));
+	  if (mat->_heightmap)
+	    _ressources.push_back(make_pair(mat->_heightmap->getName(),
+					    *mat->_heightmap));
 	}
     }
   if (cubeMap)

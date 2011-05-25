@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May 16 15:31:16 2011 gael jochaud-du-plessix
+// Last update Wed May 25 10:48:52 2011 loick michard
 //
 
 #include <cmath>
@@ -17,7 +17,7 @@
 Cone::Cone(Object*object,
 		   const Point& absolutePosition,
 		   const Rotation& rotation,
-		   const Material& material,
+		   Material* material,
 		   double angle) : ObjectPrimitive(object,absolutePosition,
 						    rotation, material),
 				   _angle(angle), _limitMin(-1), _limitMax(-1)
@@ -109,7 +109,7 @@ Cone::addIntersectionWithRay(const Ray& ray,
         intersectPoint = ray._point + ray._vector * solutions[i];
         double x, y;
         getMappedCoords(intersectPoint, x, y);
-        if (!limited && !_material.isLimitedAtPoint(x, y))
+        if (!limited && !_material->isLimitedAtPoint(x, y))
           validSolutions.push_back(solutions[i]);
       }
   if (validSolutions.size() > 0)
@@ -156,7 +156,7 @@ void                  Cone::intersectWithRay(const Ray& ray,
           intersectPoint = ray._point + ray._vector * solutions[i];
           double x, y;
           getMappedCoords(intersectPoint, x, y);
-          if (!limited && !_material.isLimitedAtPoint(x, y))
+          if (!limited && !_material->isLimitedAtPoint(x, y))
             {
               primitive = (ObjectPrimitive*)this;
               res = solutions[i];

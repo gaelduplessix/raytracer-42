@@ -49,7 +49,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>635</width>
+         <width>816</width>
          <height>462</height>
         </rect>
        </property>
@@ -179,7 +179,7 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionEffacer_la_console"/>
     <addaction name="actionActiver_la_console"/>
-    <addaction name="actionEditer_les_mat_riaux"/>
+    <addaction name="actionEditMaterial"/>
    </widget>
    <widget class="QMenu" name="menuCluster">
     <property name="title">
@@ -1206,18 +1206,6 @@ border-color: rgb(108, 108, 108);</string>
    <addaction name="actionLancer_un_serveur"/>
    <addaction name="actionSe_connecter_un_serveur"/>
   </widget>
-  <widget class="QDockWidget" name="_materialDock">
-   <property name="features">
-    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
-   </property>
-   <property name="allowedAreas">
-    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents_3"/>
-  </widget>
   <action name="actionQuitter">
    <property name="enabled">
     <bool>true</bool>
@@ -1318,10 +1306,10 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="actionEffacer_la_console">
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Effacer &amp;la console</string>
@@ -1371,7 +1359,13 @@ border-color: rgb(108, 108, 108);</string>
     <string>Ctrl+C</string>
    </property>
   </action>
-  <action name="actionEditer_les_mat_riaux">
+  <action name="actionEditMaterial">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Editer les matériaux</string>
    </property>
@@ -1413,6 +1407,22 @@ border-color: rgb(108, 108, 108);</string>
     <hint type="destinationlabel">
      <x>726</x>
      <y>692</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionActiver_la_console</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>_consoleGroup</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>756</x>
+     <y>621</y>
     </hint>
    </hints>
   </connection>

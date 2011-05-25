@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 23 19:34:07 2011 samuel olivier
+// Last update Wed May 25 10:26:03 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -13,6 +13,12 @@
 #include <QMutexLocker>
 #include <QSystemTrayIcon>
 #include "gui.hpp"
+
+void	RaytracerGUI::openEditMaterialDialog()
+{
+  _editMaterialDialog.setMaterials(_scene->getMaterials());
+  _editMaterialDialog.show();
+}
 
 void 
 RaytracerGUI::iconActivated(QSystemTrayIcon::ActivationReason reason)
@@ -174,6 +180,7 @@ void    RaytracerGUI::loadScene(void)
 				 QFileDialog::DontUseNativeDialog).toStdString();
   if (scene != "")
     {
+      _raytracer->stopRendering();
       _scene->loadFromFile(scene, this);
       _ui->_console->setHtml(_message.c_str());
       _ui->_console->moveCursor(QTextCursor::End);

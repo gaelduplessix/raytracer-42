@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 24 18:25:59 2011 melvin laplanche
+// Last update Wed May 25 11:14:46 2011 loick michard
 //
 
 #include "Scene.hpp"
@@ -46,7 +46,7 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 						      QString  material,
 						      Object*  obj)
 {
-  Material			mat = this->_getMaterialByName(material);
+  Material*			mat = this->_getMaterialByName(material);
   bool				position = false;
   Point				positionValue;
   bool				rotation = false;
@@ -132,7 +132,7 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
 void			Scene::_parseSett(QDomNode n,
 					  QString  material)
 {
-  Material			mat = this->_getMaterialByName(material);
+  Material*			mat = this->_getMaterialByName(material);
   bool				position = false;
   Point				positionValue;
   bool				rotation = false;

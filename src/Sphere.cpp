@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 11 19:17:16 2011 melvin laplanche
+// Last update Wed May 25 11:06:56 2011 loick michard
 //
 
 #include <cmath>
@@ -17,7 +17,7 @@
 Sphere::Sphere(Object*object,
 	       const Point& absolutePosition,
 	       const Rotation& rotation,
-	       const Material& material,
+	       Material* material,
 	       double radius) : ObjectPrimitive(object, absolutePosition,
 						rotation, material),
 				_radius(radius)
@@ -84,7 +84,7 @@ void        Sphere::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
 	Point	intersectPoint = ray._point + ray._vector * solutions[i];
 	double x, y;
 	getMappedCoords(intersectPoint, x, y);
-	if (!_material.isLimitedAtPoint(x, y))
+	if (!_material->isLimitedAtPoint(x, y))
 	  validSolutions.push_back(solutions[i]);
       }
   if (validSolutions.size() > 0)
@@ -120,7 +120,7 @@ void                  Sphere::intersectWithRay(const Ray& ray,
 	  Point	intersectPoint = ray._point + ray._vector * solutions[i];
 	  double x, y;
 	  getMappedCoords(intersectPoint, x, y);
-	  if (!_material.isLimitedAtPoint(x, y))
+	  if (!_material->isLimitedAtPoint(x, y))
 	    {
 	      primitive = (ObjectPrimitive*)this;
 	      res = solutions[i];

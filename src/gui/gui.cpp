@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Tue May 24 18:10:34 2011 samuel olivier
+// Last update Wed May 25 11:12:01 2011 loick michard
 //
 
 #include <QApplication>
@@ -44,10 +44,11 @@ Scene           *createScene()
   mat.setColor(Color(255, 0, 0, 0));
   mat.setSpecularCoeff(0.2);
   mat.setSpecularPow(50);
-  Material      reflection = mat;
-  reflection.setReflectionCoeff(0);
-  reflection.setTransmissionCoeff(0);
-  reflection.setRefractionIndex(1.33);
+  Material      *reflection = new Material();
+  *reflection = mat;
+  reflection->setReflectionCoeff(0);
+  reflection->setTransmissionCoeff(0);
+  reflection->setRefractionIndex(1.33);
   Material      refraction = mat;
   refraction.setTransmissionCoeff(0);
   refraction.setRefractionIndex(1.33);
@@ -315,7 +316,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(realQuit()));
   QObject::connect(_ui->actionLancer_un_serveur, SIGNAL(triggered()),
                    this, SLOT(launchServer()));
- 
+  QObject::connect(_ui->actionEditMaterial, SIGNAL(triggered()),
+                   this, SLOT(openEditMaterialDialog())); 
   _scene = createScene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);

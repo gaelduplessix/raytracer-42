@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sat May 21 11:31:19 2011 loick michard
+// Last update Wed May 25 10:52:35 2011 loick michard
 //
 
 #include <cmath>
@@ -22,7 +22,7 @@ ObjectPrimitive::ObjectPrimitive(void):
 ObjectPrimitive::ObjectPrimitive(Object *object,
 				 const Point& absolutePosition,
 				 const Rotation& rotation,
-				 const Material& material):
+				 Material* material):
   _absolutePosition(absolutePosition), _rotation(rotation),
   _material(material), _object(object), _isLimited(false)
 {
@@ -44,7 +44,7 @@ const Rotation&	ObjectPrimitive::getRotation(void) const
   return (_rotation);
 }
 
-const Material&	ObjectPrimitive::getMaterial(void) const
+Material*	ObjectPrimitive::getMaterial(void) const
 {
   return (_material);
 }
@@ -69,7 +69,7 @@ void		ObjectPrimitive::setRotation(const Rotation& rotation)
   _rotation = rotation;
 }
 
-void		ObjectPrimitive::setMaterial(const Material& material)
+void		ObjectPrimitive::setMaterial(Material* material)
 {
   _material = material;
 }
@@ -81,29 +81,29 @@ ObjectPrimitive::getColor(const Point& intersectPoint) const
   double      y;
 
   getMappedCoords(intersectPoint, x, y);
-  return (_material.getColor(x, y));
+  return (_material->getColor(x, y));
 }
 #include <iostream>
 Vector
 ObjectPrimitive::getNormal(const Point& intersectPoint,
 			   const Vector& viewVector) const
 {
-  if (_material._hasNormalDeformation)
+  if (_material->_hasNormalDeformation)
     {
       Vector normal = this->getNormalVector(intersectPoint, viewVector);
 
-      if (_material._hasBumpMap)
+      if (_material->_hasBumpMap)
 	{
 	  double x, y;
 	  getMappedCoords(intersectPoint, x, y);
-	  double p = 5.0 * _material._heightmap->_repeatWidth
-	    / _material._heightmap->getWidth();
+	  double p = 5.0 * _material->_heightmap->_repeatWidth
+	    / _material->_heightmap->getWidth();
 
 	  double normX, normY;
-	  normX = (double)_material.getHeightmapColor(x - p, y)._r / 255.0
-	    - (double)_material.getHeightmapColor(x + p, y)._r / 255.0;
-	  normY = (double)_material.getHeightmapColor(x, y - p)._r / 255.0
-	    - (double)_material.getHeightmapColor(x, y + p)._r / 255.0;
+	  normX = (double)_material->getHeightmapColor(x - p, y)._r / 255.0
+	    - (double)_material->getHeightmapColor(x + p, y)._r / 255.0;
+	  normY = (double)_material->getHeightmapColor(x, y - p)._r / 255.0
+	    - (double)_material->getHeightmapColor(x, y + p)._r / 255.0;
 
 	  Vector        newV1(normal._z, normal._y, -normal._x);
 	  Vector        newV2 = newV1;
@@ -114,24 +114,24 @@ ObjectPrimitive::getNormal(const Point& intersectPoint,
 	  normal = normal + newV1 * normX + newV2 * normY;
 	  normal.normalize();
 	}
-      if (_material._deformationType == Material::WAVES_X)
+      if (_material->_deformationType == Material::WAVES_X)
 	{
 	  normal._x += cos((intersectPoint._x - _absolutePosition._x) *
-			   _material._deformationCoeff) *
+			   _material->_deformationCoeff) *
 	    (normal.getNorm() / 2);
 	  normal.normalize();
 	}
-      if (_material._deformationType == Material::WAVES_Y)
+      if (_material->_deformationType == Material::WAVES_Y)
 	{
           normal._y += cos((intersectPoint._y - _absolutePosition._y) *
-			    _material._deformationCoeff) *
+			    _material->_deformationCoeff) *
             (normal.getNorm() / 2);
           normal.normalize();
         }
-      if (_material._deformationType == Material::WAVES_Z)
+      if (_material->_deformationType == Material::WAVES_Z)
 	{
           normal._z += cos((intersectPoint._z - _absolutePosition._z) *
-			    _material._deformationCoeff) *
+			    _material->_deformationCoeff) *
             (normal.getNorm() / 2);
           normal.normalize();
         }
@@ -191,10 +191,10 @@ Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
     {
       refractivePath.pop();
       n2 = (refractivePath.size() > 0) ?
-  	refractivePath.top()->getMaterial().getRefractionIndex() : 1;
+  	refractivePath.top()->getMaterial()->getRefractionIndex() : 1;
     }
   else
-    n2 = _material.getRefractionIndex();
+    n2 = _material->getRefractionIndex();
   double	n = ray._refractiveIndex / n2;
   Vector	normal = getNormal(intersectPoint,
 				   ray._vector);

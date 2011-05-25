@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 14:33:18 2011 samuel olivier
-// Last update Wed May 18 22:43:55 2011 samuel olivier
+// Last update Wed May 25 10:54:52 2011 loick michard
 //
 
 #include "PhotonMap.hpp"
@@ -65,13 +65,13 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       		       nearestObject->getColor(photon._position)) / 255;
       _map.push_back(photon);
       if (rt->getRenderingConfiguration()->isReflectionEnabled() == true
-      	  && nearestObject->getMaterial().getReflectionCoeff() > 0)
+      	  && nearestObject->getMaterial()->getReflectionCoeff() > 0)
       	{
       	  reflect = true;
       	  nbPossibilities++;
       	}
       if (rt->getRenderingConfiguration()->isTransparencyEnabled() == true
-      	  && nearestObject->getMaterial().getTransmissionCoeff() > 0)
+      	  && nearestObject->getMaterial()->getTransmissionCoeff() > 0)
       	{
       	  refract = true;
       	  nbPossibilities++;
@@ -87,11 +87,11 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       	  throwRay(rt, newRay, photon._color);
       	}
       if (rt->getRenderingConfiguration()->isTransparencyEnabled() == true
-      	  && nearestObject->getMaterial().getTransmissionCoeff() > 0)
+      	  && nearestObject->getMaterial()->getTransmissionCoeff() > 0)
 	{
 	  if (rt->_refractivePath.size() > 0)
 	    ray._refractiveIndex =
-	      rt->_refractivePath.top()->getMaterial().getRefractionIndex();
+	      rt->_refractivePath.top()->getMaterial()->getRefractionIndex();
 	  else
 	    ray._refractiveIndex = 1;
 	  Ray	newRay= nearestObject->getRefractedRay(photon._position, ray,

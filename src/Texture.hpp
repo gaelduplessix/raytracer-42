@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Mon May 23 17:21:31 2011 samuel olivier
+// Last update Wed May 25 10:14:59 2011 loick michard
 //
 
 #ifndef _TEXTURE_HPP_
@@ -35,8 +35,7 @@ public:
 
   double	_repeatWidth;
   double	_repeatHeight;
-
-private:
+  int		_type;
   QImage        *_image;
 };
 

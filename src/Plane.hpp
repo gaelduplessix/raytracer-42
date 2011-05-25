@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Sat Apr 30 10:17:13 2011 loick michard
-// Last update Wed May 11 22:13:41 2011 melvin laplanche
+// Last update Wed May 25 10:55:06 2011 loick michard
 //
 
 #ifndef _PLAN_HPP_
@@ -19,7 +19,7 @@ public:
   Plane(Object*object,
 	 const Point& absolutePosition,
 	 const Rotation& rotation,
-	 const Material& material);
+	 Material* material);
 
   Plane(void);
 

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Tue May 10 23:53:32 2011 gael jochaud-du-plessix
+// Last update Wed May 25 10:50:29 2011 loick michard
 //
 
 #ifndef _EQUATIONPRIMITIVE_HPP_
@@ -21,7 +21,7 @@ public:
 		    Object*object,
 		    const Point& absolutePosition,
 		    const Rotation& rotation,
-		    const Material& material);
+		    Material* material);
 
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;

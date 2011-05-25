@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May 16 15:30:46 2011 gael jochaud-du-plessix
+// Last update Wed May 25 10:50:06 2011 loick michard
 //
 
 #include <cmath>
@@ -17,7 +17,7 @@
 Cylinder::Cylinder(Object*object,
 		   const Point& absolutePosition,
 		   const Rotation& rotation,
-		   const Material& material,
+		   Material* material,
 		   double radius) : ObjectPrimitive(object,absolutePosition,
 						    rotation, material),
 				    _radius(radius), _limitMin(-1),
@@ -103,7 +103,7 @@ Cylinder::addIntersectionWithRay(const Ray& ray,
         intersectPoint = ray._point + ray._vector * solutions[i];
         double x, y;
         getMappedCoords(intersectPoint, x, y);
-        if (!limited && !_material.isLimitedAtPoint(x, y))
+        if (!limited && !_material->isLimitedAtPoint(x, y))
           validSolutions.push_back(solutions[i]);
       }
   if (validSolutions.size() > 0)
@@ -146,7 +146,7 @@ void                  Cylinder::intersectWithRay(const Ray& ray,
           intersectPoint = ray._point + ray._vector * solutions[i];
           double x, y;
           getMappedCoords(intersectPoint, x, y);
-          if (!limited && !_material.isLimitedAtPoint(x, y))
+          if (!limited && !_material->isLimitedAtPoint(x, y))
             {
               primitive = (ObjectPrimitive*)this;
               res = solutions[i];

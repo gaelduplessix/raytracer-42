@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Sat Apr 30 10:19:08 2011 loick michard
-// Last update Mon May 16 15:30:08 2011 gael jochaud-du-plessix
+// Last update Wed May 25 10:55:55 2011 loick michard
 //
 
 #include <vector>
@@ -21,7 +21,7 @@ Plane::Plane(void):
 Plane::Plane(Object*object,
 	     const Point& absolutePosition,
 	     const Rotation& rotation,
-	     const Material& material):
+	     Material* material):
   ObjectPrimitive(object, absolutePosition, rotation, material),
   _limitX(-1), _limitY(-1)
 {
@@ -83,7 +83,7 @@ void		       Plane::addIntersectionWithRay(const Ray& ray, vector<struct s_inter
   intersectPoint = ray._point + ray._vector * result;
   double x, y;
   getMappedCoords(intersectPoint, x, y);
-  if (!_material.isLimitedAtPoint(x, y))
+  if (!_material->isLimitedAtPoint(x, y))
     {
       k.push_back(result);
       intersection.push_back((t_intersected_object){this, k});
@@ -118,7 +118,7 @@ void                  Plane::intersectWithRay(const Ray& ray,
       intersectPoint = ray._point + ray._vector * result;
       double x, y;
       getMappedCoords(intersectPoint, x, y);
-      if (!_material.isLimitedAtPoint(x, y))
+      if (!_material->isLimitedAtPoint(x, y))
 	{
 	  primitive = (ObjectPrimitive*)this;
 	  res = result;

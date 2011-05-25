@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri May  6 15:54:06 2011 loick michard
-// Last update Mon May 16 15:32:18 2011 gael jochaud-du-plessix
+// Last update Wed May 25 10:49:41 2011 loick michard
 //
 
 #include <cmath>
@@ -21,7 +21,7 @@ CubeTroue::CubeTroue(void) : _coeff(11.8)
 CubeTroue::CubeTroue(Object*object,
 		     const Point& absolutePosition,
 		     const Rotation& rotation,
-		     const Material& material,
+		     Material* material,
 		     double coeff) : ObjectPrimitive(object,
 						     absolutePosition,
 						     rotation, material),

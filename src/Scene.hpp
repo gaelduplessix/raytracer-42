@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sat May 21 17:41:56 2011 melvin laplanche
+// Last update Wed May 25 11:02:38 2011 loick michard
 //
 
 #ifndef _SCENE_HPP_
@@ -137,7 +137,7 @@ private:
   EquationPrimitive*	_parseEquation(QDomNode, QString, Object*);
   Parallelogram*	_parseParallelogram(QDomNode, QString, Object*);
   void			_parseSett(QDomNode, QString);
-  Material		_getMaterialByName(QString);
+  Material*		_getMaterialByName(QString);
   void			_parseLight(QDomNode);
   void			_parseLights(QDomNode);
   Spot*			_parseSpotLight(QDomNode);

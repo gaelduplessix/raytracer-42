@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Wed May 18 23:14:11 2011 samuel olivier
+// Last update Wed May 25 10:46:39 2011 loick michard
 //
 
 #include <cmath>
@@ -83,7 +83,7 @@ Light::getAbsorptionCoeff(vector<t_intersected_object>& intersections,
 	      lightColor &= objectColor;
 	      coeff += 1 -
 	      	intersections[i].primitive->getMaterial()
-	      	.getTransmissionCoeff();
+	      	->getTransmissionCoeff();
 	    }
 	}
     }
@@ -143,7 +143,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
 	(reflectedVector.getNorm() * viewRay.getNorm());
       if (scalar > 0)
 	specularLighting =
-	  lightColor * pow(scalar, primitive.getMaterial().getSpecularPow())
+	  lightColor * pow(scalar, primitive.getMaterial()->getSpecularPow())
 	  * (1 - absorptionCoeff);
     }
 }

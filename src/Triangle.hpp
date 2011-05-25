@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Tue May 24 13:19:12 2011 samuel olivier
+// Last update Wed May 25 11:07:35 2011 loick michard
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -18,7 +18,7 @@ class Triangle : public ObjectPrimitive
 public:
   Triangle(Object*object,
 	 const Point& absolutePosition,
-	 const Material& material,
+	 Material* material,
 	 const Point& vertex1,
 	 const Point& vertex2);
 
