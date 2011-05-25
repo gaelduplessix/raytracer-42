@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 25 17:04:35 2011 samuel olivier
+// Last update Wed May 25 18:13:37 2011 samuel olivier
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -39,9 +39,9 @@ public:
 
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;
-  double	calcArea(const Point& vertex1,
+  static double	calcArea(const Point& vertex1,
 			 const Point& vertex2,
-			 const Point& vertex3) const;
+			 const Point& vertex3);
   void		addIntersectionWithRay(const Ray& ray,
 				       vector<struct s_intersected_object>&
 				       intersection) const;

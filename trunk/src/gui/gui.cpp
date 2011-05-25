@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 25 17:28:08 2011 samuel olivier
+// Last update Wed May 25 19:02:01 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -41,47 +41,52 @@
 Scene           *createScene()
 {
   Material      mat("base");
-  mat.setColor(Color(255, 0, 0, 0));
-  mat.setSpecularCoeff(0.2);
+  mat.setColor(Color(2550, 0, 0));
+  mat.setSpecularCoeff(0.5);
   mat.setSpecularPow(50);
   Material      *reflection = new Material();
   *reflection = mat;
-  reflection->setReflectionCoeff(0);
-  reflection->setTransmissionCoeff(0);
-  reflection->setRefractionIndex(1.33);
-  reflection->setTexture(new Texture("terre.jpg"));  
-  Material      refraction = mat;
-  refraction.setTransmissionCoeff(0);
-  refraction.setRefractionIndex(1.33);
-  Material      matFloor("sol");
-  matFloor.setReflectionCoeff(0);
-  matFloor.setColor(Color(255, 255, 255));
-  matFloor.setSpecularCoeff(0.5);
-  matFloor.setSpecularPow(50);
+  // reflection->setReflectionCoeff(0);
+  // reflection->setTransmissionCoeff(0);
+  // reflection->setRefractionIndex(1.33);
+  reflection->setTexture(new Texture("stripes.png"));  
+  // Material      refraction = mat;
+  // refraction.setTransmissionCoeff(0);
+  // refraction.setRefractionIndex(1.33);
+  // Material      matFloor("sol");
+  // matFloor.setReflectionCoeff(0);
+  // matFloor.setColor(Color(255, 255, 255));
+  // matFloor.setSpecularCoeff(0.5);
+  // matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  Camera* camera = new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0));
+  Camera* camera = new CinemaCamera(Point(-5, 0, 0), Rotation(0, 0, 0));
   camera->setFocus(30);
   camera->setTarget(Point(30, 0, 0));
   cam.push_back(camera);
   
   vector<ObjectPrimitive*> primitives;
-  primitives.push_back(new Triangle(NULL, Point(27, -10, -5), reflection,
-				    Point(27, 2, 8.5), Point(27, 13, -5)));
-  Material special = refraction;
-  PerlinNoise *perlin = new PerlinNoise();
-  special.setTransmissionCoeff(0);
-  special.setTexture(perlin);
+  primitives.push_back(new Sphere(NULL, Point(17, -3, -3), Rotation(0, 0, 0),
+				  reflection, 2));
 
-  refraction.setTransmissionCoeff(0.9);
-  refraction.setRefractionIndex(1.5);
+  // primitives.push_back(new Parallelogram(NULL, Point(17, -3, -5),
+  // 					 Point(17, -3, -1), Point(17, 3, -5),
+  // 					 reflection));
+
+  // Material special = refraction;
+  // PerlinNoise *perlin = new PerlinNoise();
+  // special.setTransmissionCoeff(0);
+  // special.setTexture(perlin);
+
+  // refraction.setTransmissionCoeff(0.9);
+  // refraction.setRefractionIndex(1.5);
   vector<Object*> obj;
   obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
-			   true));
+			   false));
 
   vector<Light*> light;
   //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(30, 10, 0), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(10, 0, 4), Color(255, 255, 255)));
 
   Scene         *res = new Scene(cam, obj, light);
   return (res);
