@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 11:09:54 2011 loick michard
+// Last update Wed May 25 11:21:26 2011 samuel olivier
 //
 
 #include <cmath>
@@ -18,11 +18,13 @@ Triangle::Triangle(Object*object,
 		   const Point& absolutePosition,
 		   Material* material,
 		   const Point& vertex1,
-		   const Point& vertex2) : ObjectPrimitive(object,
-							   absolutePosition,
-							   Rotation(0, 0, 0),
-							   material),
-					   _vertex1(vertex1), _vertex2(vertex2)
+		   const Point& vertex2,
+		   const Point& textureVertex1,
+		   const Point& textureVertex2,
+		   const Point& textureVertex3)
+  : ObjectPrimitive(object, absolutePosition, Rotation(0, 0, 0), material),
+    _vertex1(vertex1), _vertex2(vertex2), _textureVertex1(textureVertex1),
+    _textureVertex2(textureVertex2), _textureVertex3(textureVertex3)
 {
   setCachedValues();
   _isLimited = true;
@@ -83,6 +85,36 @@ void		Triangle::setVertex1(const Point& vertex1)
 void		Triangle::setVertex2(const Point& vertex2)
 {
   _vertex2 = vertex2;
+}
+
+void		Triangle::setTextureVertex1(const Point& textureVertex1)
+{
+  _textureVertex1 = textureVertex1;
+}
+
+void		Triangle::setTextureVertex2(const Point& textureVertex2)
+{
+  _textureVertex2 = textureVertex2;
+}
+
+void		Triangle::setTextureVertex3(const Point& textureVertex3)
+{
+  _textureVertex3 = textureVertex3;
+}
+
+const Point& 	Triangle::getTextureVertex1(void)
+{
+  return (_textureVertex1);
+}
+
+const Point& 	Triangle::getTextureVertex2(void)
+{
+  return (_textureVertex1);
+}
+
+const Point& 	Triangle::getTextureVertex3(void)
+{
+  return (_textureVertex3);
 }
 
 void		Triangle::getMappedCoords(const Point& intersectPoint,

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 25 11:07:35 2011 loick michard
+// Last update Wed May 25 11:19:53 2011 samuel olivier
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -17,17 +17,26 @@ class Triangle : public ObjectPrimitive
 {
 public:
   Triangle(Object*object,
-	 const Point& absolutePosition,
-	 Material* material,
-	 const Point& vertex1,
-	 const Point& vertex2);
-
+	   const Point& absolutePosition,
+	   Material* material,
+	   const Point& vertex1,
+	   const Point& vertex2,
+	   const Point& textureVertex1 = Point(0, 0, 0),
+	   const Point& textureVertex2 = Point(0.5, 1, 0),
+	   const Point& textureVertex3 = Point(1, 0, 0));
   Triangle(void);
 
   void		setCachedValues(void);
 
   void		setVertex1(const Point& vertex1);
   void		setVertex2(const Point& vertex2);
+  void		setTextureVertex1(const Point& textureVertex1);
+  void		setTextureVertex2(const Point& textureVertex2);
+  void		setTextureVertex3(const Point& textureVertex3);
+  const Point&	getTextureVertex1(void);
+  const Point&	getTextureVertex2(void);
+  const Point&	getTextureVertex3(void);
+
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;
   void		addIntersectionWithRay(const Ray& ray,
@@ -49,6 +58,9 @@ private:
   Vector	_normal;
   Point		_vertex1;
   Point		_vertex2;
+  Point		_textureVertex1;
+  Point		_textureVertex2;
+  Point		_textureVertex3;
   Vector	_v1;
   Vector	_v2;
   double	_var1;

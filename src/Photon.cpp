@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 13:47:28 2011 samuel olivier
-// Last update Wed May 18 20:42:56 2011 samuel olivier
+// Last update Wed May 25 10:40:51 2011 samuel olivier
 //
 
 #include "Photon.hpp"
