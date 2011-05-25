@@ -12,4 +12,12 @@
         <file>images/network-server.png</file>
         <file>images/network-workgroup.png</file>
     </qresource>
+    <qresource prefix="/cubemap">
+	<file>cubemaps/Maskonaive3/negx.jpg</file>
+	<file>cubemaps/Maskonaive3/negy.jpg</file>
+	<file>cubemaps/Maskonaive3/negz.jpg</file>
+	<file>cubemaps/Maskonaive3/posx.jpg</file>
+	<file>cubemaps/Maskonaive3/posy.jpg</file>
+	<file>cubemaps/Maskonaive3/posz.jpg</file>
+    </qresource>
 </RCC>
