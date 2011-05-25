@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Thu May 19 16:37:38 2011 loick michard
+// Last update Wed May 25 16:31:37 2011 loick michard
 //
 
 #ifndef _CAMERA_H_
@@ -51,10 +51,10 @@ public:
   getRayWithSampling(double x, double y,
 		     double samplingPos) const = 0;
 
+  double        _width;
+  double        _height;
 protected:
   string	_name;
-  double	_width;
-  double	_height;
   Point		_position;
   Rotation	_rotation;
   double	_focalLength;

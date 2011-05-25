@@ -5,13 +5,15 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:21:30 2011 loick michard
-// Last update Wed May 25 14:17:40 2011 loick michard
+// Last update Wed May 25 16:52:51 2011 loick michard
 //
 
+#include <QMutex>
 #include <QWidget>
 #include <QDialog>
 #include <QImage>
 #include <QTimer>
+#include "Raytracer.hpp"
 #include "ui_editMaterialDialog.h"
 #include "Material.hpp"
 
@@ -19,7 +21,7 @@ namespace Ui {
   class editMaterialDialog;
 };
 
-class GuiEditMaterialDialog : public QDialog
+class GuiEditMaterialDialog : public QDialog, public RenderingInterface
 {
   Q_OBJECT
 
@@ -29,14 +31,21 @@ class GuiEditMaterialDialog : public QDialog
 
   void paintEvent(QPaintEvent*);
   void fillColor();
+  void setConfiguration();
+  Scene* createScene();
+  void pixelHasBeenRendered(int x, int y, Color color);
   void setMaterials(const vector<Material*>& materials);
 
 public slots:
+  void closeDialog();
   void updateMaterial();
   void fillFields();
   void selectColor();
 
 private:
+  RenderingConfiguration        *_config;
+  Scene                         *_scene;
+  Raytracer                     *_raytracer;
   Ui::editMaterialDialog*	_dialog;
   const vector<Material*>	*_materials;
   QColor       			*_color;
@@ -44,4 +53,6 @@ private:
   QImage			*_image;
   QPixmap			*_pixmap;
   QTimer			*_timer;
+  Material			*_currentMat;
+  QMutex			_mutex;
 };

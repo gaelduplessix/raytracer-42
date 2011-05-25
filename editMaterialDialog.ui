@@ -554,7 +554,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="_ok">
         <property name="text">
          <string>Ok</string>
         </property>
@@ -568,7 +568,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton_2</sender>
+   <sender>_ok</sender>
    <signal>clicked()</signal>
    <receiver>editMaterialDialog</receiver>
    <slot>close()</slot>
