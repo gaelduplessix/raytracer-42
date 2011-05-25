@@ -5,12 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Tue May 24 17:46:09 2011 samuel olivier
+// Last update Wed May 25 10:41:34 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
 #define _RENDERINGCONFIGURATION_HPP_
-
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -165,5 +164,40 @@ private:
   bool			_kdTreeEnabled;
   int			_kdTreeDepth;
 };
+
+template<class Archive>
+void			RenderingConfiguration::serialize(Archive& ar,
+							  unsigned int version)
+  {
+    version = version;
+    ar & _nbThreads;
+    ar & _width;
+    ar & _height;
+    ar & _currentCamera;
+    ar & _antialiasing;
+    ar & _renderingSamplingMethod;
+    ar & _exposure;
+    ar & _directLighting;
+    ar & _directLightingCoeff;
+    ar & _diffuseLighting;
+    ar & _specularLighting;
+    // ar & _reflection;
+    // ar & _transparency;
+    // ar & _backgroundColor;
+    ar & _ambientOcclusionEnabled;
+    ar & _ambientOcclusionSampling;
+    ar & _photonMappingEnabled;
+    ar & _photonMappingSampling;
+    ar & _diffuseShadingEnabled;
+    ar & _diffuseShadingSampling;
+    ar & _fieldDepthEnabled;
+    ar & _fieldDepthSampling;
+    ar & _additiveAmbiantLightingEnabled;
+    // ar & _additiveAmbiantLighting;
+    ar & _minimalAmbiantLightingEnabled;
+    ar & _minimalAmbiantLighting;
+    ar & _kdTreeEnabled;
+    ar & _kdTreeDepth;
+  }
 
 #endif

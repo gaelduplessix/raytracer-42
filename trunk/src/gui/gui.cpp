@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 25 11:12:01 2011 loick michard
+// Last update Wed May 25 11:20:34 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -164,9 +164,10 @@ bool RaytracerGUI::setConfiguration()
 
   //   RenderingConfiguration newConf;
   //   std::ifstream ifs("fichierDeSerialisation");
-  //   boost::archive::text_iarchive ia(ifs);
-  //   ia >> newConf;
+  // boost::archive::text_iarchive ia(ifs);
+  // ia >> newConf;
   // }
+
   return (true);
 }
 
