@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May 25 14:41:53 2011 gael jochaud-du-plessix
+// Last update Wed May 25 16:19:06 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
@@ -67,12 +67,9 @@ class SDLInterface : public RenderingInterface
     SDL_Flip(screen);
   }
 };
-#include <iostream>
-#include "ClusterServer.hpp"
+
 int main(int ac, char **av)
 {
-  ClusterServer	ClusterServer("http://perso.epitech.eu/~jochau_g/raytracer/");
-  (void)ac;
   gui(ac, av);
   return (0);
 }

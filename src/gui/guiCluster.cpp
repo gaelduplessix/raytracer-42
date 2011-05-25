@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Mon May 23 18:26:23 2011 loick michard
+// Last update Wed May 25 17:19:24 2011 gael jochaud-du-plessix
 //
 
 #include <QInputDialog>
@@ -42,7 +42,8 @@ void		RaytracerGUI::launchServer()
     {
       this->setEnabled(false);
       ClusterServer
-	server(_launchServerDialogUi->_adress->text().toStdString());
+	server(_launchServerDialogUi->_adress->text().toStdString(),
+	       _launchServerDialogUi->_port->value());
       QTimer *timer = new QTimer();
       timer->start(200);
       QObject::connect(timer, SIGNAL(timeout()),
