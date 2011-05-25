@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:00:06 2011 loick michard
-// Last update Thu May 12 22:17:03 2011 loick michard
+// Last update Wed May 25 16:42:24 2011 loick michard
 //
 
 #include "Color.hpp"
