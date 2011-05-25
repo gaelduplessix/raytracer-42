@@ -5,20 +5,39 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Mon May 23 13:15:25 2011 gael jochaud-du-plessix
+// Last update Wed May 25 14:43:35 2011 gael jochaud-du-plessix
 //
-
-#include <string>
-
-using namespace std;
 
 #ifndef _CLUSTERSERVER_HPP_
 #define _CLUSTERSERVER_HPP_
 
-class ClusterServer
+#include <QObject>
+#include <QUrl>
+#include <QNetworkAccessManager>
+#include <string>
+
+#include "ClusterServerThread.hpp"
+
+using namespace std;
+
+class ClusterServer : public QObject
 {
-public:
+  Q_OBJECT
+  
+  public:
+  static const int	FREE = 0;
+  static const int	BUSY = 1;
+  
   ClusterServer(string url);
+  ~ClusterServer();
+
+public:
+  QUrl		getCentralServerUrl(void);
+  
+private:
+  QUrl			_centralServerUrl;
+  ClusterServerThread*	_registerServerThread;
+  ClusterServerThread*	_clientListenerThread;
 };
 
 #endif

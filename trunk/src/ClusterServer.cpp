@@ -5,12 +5,39 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Mon May 23 13:14:12 2011 gael jochaud-du-plessix
+// Last update Wed May 25 14:24:27 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
 
-ClusterServer::ClusterServer(string url)
+#include <QUrl>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+
+#ifdef Q_OS_UNIX
+#include <stdio.h>
+#endif
+
+ClusterServer::ClusterServer(string url):
+  _centralServerUrl(url.c_str())
 {
-  
+  _registerServerThread =
+    new ClusterServerThread(this, ClusterServerThread::CENTRAL_REGISTER);
+  _clientListenerThread =
+    new ClusterServerThread(this, ClusterServerThread::CLIENT_LISTENER);
+  _registerServerThread->start();
+  _clientListenerThread->start();
+}
+
+ClusterServer::~ClusterServer()
+{
+  if (_registerServerThread)
+    delete _registerServerThread;
+  if (_clientListenerThread)
+    delete _clientListenerThread;
+}
+
+QUrl        ClusterServer::getCentralServerUrl(void)
+{
+  return (_centralServerUrl);
 }

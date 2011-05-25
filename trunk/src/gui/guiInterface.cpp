@@ -254,7 +254,8 @@ void		RaytracerGUI::saveImage()
   validFormat[3] = "jpeg";
   string format;
   QString file =
-    QFileDialog::getSaveFileName(this, tr("Enregistrer une sc&egrave;ne"), QString(),
+    QFileDialog::getSaveFileName(this, tr("Enregistrer une sc&egrave;ne"),
+				 QString(),
 				 "*.png;;*.gif;;*.jpeg;;*.bmp", 0,
 				 QFileDialog::DontUseNativeDialog);
   if (file != "")
