@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 17:24:40 2011 samuel olivier
+// Last update Wed May 25 18:18:32 2011 samuel olivier
 //
 
 #include <cmath>
@@ -123,7 +123,7 @@ const Point& 	Triangle::getTextureVertex3(void)
 
 double		Triangle::calcArea(const Point& vertex1,
 				   const Point& vertex2,
-				   const Point& vertex3) const
+				   const Point& vertex3)
 {
   Vector	a = vertex1 - vertex2;
   Vector	b = vertex1 - vertex3;
@@ -144,9 +144,8 @@ void		Triangle::getMappedCoords(const Point& intersectPoint,
   double	a = areaC / sum;
   double	b = areaA / sum;
   double	c = areaB / sum;
-  Point		texturePoint = _textureVertex1 +
-    (b * (_textureVertex2 - _textureVertex1) +
-     c * (_textureVertex3 - _textureVertex1)) / (a + b + c);
+  Point		texturePoint = _textureVertex1
+    + (b * _textureV1 + c * _textureV2) / (a + b + c);
   x = -texturePoint._x;
   y = -texturePoint._y;
 }

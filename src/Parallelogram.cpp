@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 10:53:25 2011 loick michard
+// Last update Wed May 25 18:55:37 2011 samuel olivier
 //
 
 #include <cmath>
@@ -18,20 +18,31 @@ Parallelogram::Parallelogram(void) : ObjectPrimitive(NULL, Point(0, 0, 0),
 						     Rotation(0, 0, 0),
 						     NULL),
 				     _vertex1(Point(0, 0, 0)),
-				     _vertex2(Point(0, 0, 0))
+				     _vertex2(Point(0, 0, 0)),
+				     _textureVertex1(Point(0, 0)),
+				     _textureVertex2(Point(0, 1)),
+				     _textureVertex3(Point(1, 1)),
+				     _textureVertex4(Point(0, 1))
 {
-  
+  _isLimited = true;  
 }
 
 Parallelogram::Parallelogram(Object*object,
 			     const Point& absolutePosition,
 			     const Point& vertex1,
 			     const Point& vertex2,
-			     Material* material):
+			     Material* material,
+			     const Point& textureVertex1,
+			     const Point& textureVertex2,
+			     const Point& textureVertex3,
+			     const Point& textureVertex4):
   ObjectPrimitive(object, absolutePosition, Rotation(0, 0, 0), material),
-  _vertex1(vertex1), _vertex2(vertex2)
+  _vertex1(vertex1), _vertex2(vertex2), _textureVertex1(textureVertex1),
+  _textureVertex2(textureVertex2), _textureVertex3(textureVertex3),
+  _textureVertex4(textureVertex4)
 {
-
+  setCachedValues();
+  _isLimited = true;
 }
 
 void            Parallelogram::setCachedValues(void)
@@ -72,9 +83,10 @@ void            Parallelogram::setCachedValues(void)
                    _v1._z * _v2._x + _v2._z * - _v1._x,
                    _v1._x * _v2._y + _v2._x * - _v1._y);
   _normal.normalize();
-  // printf("=> %p\n%f %f %f\n%f %f %f\n%f %f %f\n\n", this, _absolutePosition._x,
-  // 	 _absolutePosition._y, _absolutePosition._z, _vertex1._x, _vertex1._y,
-  // 	 _vertex1._z, _vertex2._x, _vertex2._y, _vertex2._z);
+  _textureV1 = _textureVertex2 - _textureVertex1;
+  _textureV2 = _textureVertex3 - _textureVertex1;
+  _textureV3 = _textureVertex4 - _textureVertex1;
+  _vertex3 = _absolutePosition + _v1 + _v2;
 }
 
 void		Parallelogram::setVertex1(const Point& vertex1)
@@ -89,13 +101,66 @@ void		Parallelogram::setVertex2(const Point& vertex2)
   this->setCachedValues();
 }
 
-void		Parallelogram::getMappedCoords(const Point& intersectPoint,
-					  double& x, double &y) const
+void		Parallelogram::setTextureVertex1(const Point& textureVertex1)
 {
-  x = 0;
-  y = 0;
-  return ;
-  (void)intersectPoint;
+  _textureVertex1 = textureVertex1;
+}
+
+void		Parallelogram::setTextureVertex2(const Point& textureVertex2)
+{
+  _textureVertex2 = textureVertex2;
+}
+
+void		Parallelogram::setTextureVertex3(const Point& textureVertex3)
+{
+  _textureVertex3 = textureVertex3;
+}
+
+void		Parallelogram::setTextureVertex4(const Point& textureVertex4)
+{
+  _textureVertex4 = textureVertex4;
+}
+
+const Point&	Parallelogram::getTextureVertex1(void)
+{
+  return (_textureVertex1);
+}
+
+const Point&	Parallelogram::getTextureVertex2(void)
+{
+  return (_textureVertex1);
+}
+
+const Point&	Parallelogram::getTextureVertex3(void)
+{
+  return (_textureVertex3);
+}
+
+const Point&	Parallelogram::getTextureVertex4(void)
+{
+  return (_textureVertex4);
+}
+
+void            Parallelogram::getMappedCoords(const Point& intersectPoint,
+					       double& x, double &y) const
+{
+  double        areaA =
+    Triangle::calcArea(_absolutePosition, _vertex1, intersectPoint);
+  double        areaB =
+    Triangle::calcArea(_vertex1, _vertex2, intersectPoint);
+  double        areaC =
+    Triangle::calcArea(_vertex2, _vertex3, intersectPoint);
+  double        areaD =
+    Triangle::calcArea(_vertex3, _absolutePosition, intersectPoint);
+  double        sum = areaA + areaB + areaC + areaD;
+  double        a = areaB / sum;
+  double        b = areaC / sum;
+  double        c = areaD / sum;
+  double        d = areaA / sum;
+  Point         texturePoint = _textureVertex1
+    + (b * _textureV1 + c * _textureV2 + d * _textureV3) / (a + b + c + d);
+  x = -texturePoint._x;
+  y = -texturePoint._y;
 }
 
 void
