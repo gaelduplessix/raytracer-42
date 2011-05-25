@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed May 25 13:49:16 2011 loick michard
+// Last update Wed May 25 17:25:49 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -246,31 +246,34 @@ void    RaytracerGUI::startRender()
 
 void		RaytracerGUI::saveImage()
 {
-  int   found;
-  vector<string> validFormat(4);
-  validFormat[0] = "png";
-  validFormat[1] = "gif";
-  validFormat[2] = "bmp";
-  validFormat[3] = "jpeg";
-  string format;
-  QString file =
-    QFileDialog::getSaveFileName(this, tr("Enregistrer une sc&egrave;ne"),
-				 QString(),
-				 "*.png;;*.gif;;*.jpeg;;*.bmp", 0,
-				 QFileDialog::DontUseNativeDialog);
-  if (file != "")
+  if (_image)
     {
-      format = file.toStdString();
-      found = format.find(".");
-      format = format.substr(found + 1);
-      if (format.compare(validFormat[0]) != 0 &&
-          format.compare(validFormat[1]) != 0 &&
-          format.compare(validFormat[2]) != 0 &&
-          format.compare(validFormat[3]) != 0)
-        {
-          format = "png";
-          file += ".png";
-        }
-      _image->save(file);
+      int   found;
+      vector<string> validFormat(4);
+      validFormat[0] = "png";
+      validFormat[1] = "gif";
+      validFormat[2] = "bmp";
+      validFormat[3] = "jpeg";
+      string format;
+      QString file =
+	QFileDialog::getSaveFileName(this, tr("Enregistrer une sc&egrave;ne"),
+				     QString(),
+				     "*.png;;*.gif;;*.jpeg;;*.bmp", 0,
+				     QFileDialog::DontUseNativeDialog);
+      if (file != "")
+	{
+	  format = file.toStdString();
+	  found = format.find(".");
+	  format = format.substr(found + 1);
+	  if (format.compare(validFormat[0]) != 0 &&
+	      format.compare(validFormat[1]) != 0 &&
+	      format.compare(validFormat[2]) != 0 &&
+	      format.compare(validFormat[3]) != 0)
+	    {
+	      format = "png";
+	      file += ".png";
+	    }
+	  _image->save(file);
+	}
     }
 }
