@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Wed May 25 11:22:00 2011 loick michard
+// Last update Wed May 25 14:18:28 2011 loick michard
 //
 
 #include <sstream>
@@ -15,6 +15,7 @@
 
 GuiEditMaterialDialog::GuiEditMaterialDialog()
 {
+  _isSet = false;
   _dialog = new Ui::editMaterialDialog;
   _dialog->setupUi(this);
   _color = new QColor(0, 0, 0);
@@ -22,6 +23,29 @@ GuiEditMaterialDialog::GuiEditMaterialDialog()
                    this, SLOT(selectColor()));
   QObject::connect(_dialog->_materials, SIGNAL(currentIndexChanged(int)),
                    this, SLOT(fillFields()));
+  QObject::connect(_dialog->_specular, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_specularPow, SIGNAL(valueChanged(int)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_reflection, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_transmission, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_refraction, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_diffuseReflection, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+
+  _image = new QImage(150, 150, QImage::Format_ARGB32);
+  _pixmap = new QPixmap();
+  _timer = new QTimer();
+  _timer->setInterval(50);
+}
+
+void GuiEditMaterialDialog::paintEvent(QPaintEvent*)
+{
+  *_pixmap = _pixmap->fromImage(*_image);
+  _dialog->_image->setPixmap(*_pixmap);
 }
 
 GuiEditMaterialDialog::~GuiEditMaterialDialog()
@@ -60,10 +84,10 @@ void GuiEditMaterialDialog::updateMaterial()
 {
   int   index = _dialog->_materials->currentIndex();
 
-  if (index >= 0)
+  if (index >= 0 && _isSet)
     {
       _materials->at(index)->setColor(_color->rgba());
-      _dialog->_texture->setChecked(_materials->at(index)->_isTextured);
+      /*_dialog->_texture->setChecked(_materials->at(index)->_isTextured);
       if (_materials->at(index)->_isTextured)
         {
           _dialog->_textureX->setValue(_materials->
@@ -79,17 +103,16 @@ void GuiEditMaterialDialog::updateMaterial()
                                            _texture->getName().c_str());
             }
         }
+    }*/
+      _materials->at(index)->_specularCoeff = _dialog->_specular->value();
+      _materials->at(index)->_specularPow = _dialog->_specularPow->value();
+      _materials->at(index)->_reflectionCoeff = _dialog->_reflection->value();
+      _materials->at(index)->_transmissionCoeff =
+	_dialog->_transmission->value();
+      _materials->at(index)->_refractionIndex = _dialog->_refraction->value();
+      _materials->at(index)->_diffusedReflectionCoeff = 
+	_dialog->_diffuseReflection->value();
     }
-  _materials->at(index)->_specularCoeff = _dialog->_specular->value();
-  _materials->at(index)->_specularPow = _dialog->_specularPow->value();
-  _materials->at(index)->_reflectionCoeff = _dialog->_reflection->value();
-  _materials->at(index)->_transmissionCoeff = _dialog->_transmission->value();
-  _dialog->_transmission->setValue(_materials->
-				   at(index)->_transmissionCoeff);
-  _dialog->_refraction->setValue(_materials->at(index)->_refractionIndex);
-  _dialog->_diffuseReflection->setValue(_materials->
-					at(index)->
-					_diffusedReflectionCoeff);  
 }
 
 void GuiEditMaterialDialog::fillFields()
@@ -109,7 +132,7 @@ void GuiEditMaterialDialog::fillFields()
 	  _dialog->_textureX->setValue(_materials->
 				       at(index)->_texture->_repeatWidth);
 	  _dialog->_textureY->setValue(_materials->
-				       at(index)->_texture->_repeatWidth);
+				       at(index)->_texture->_repeatHeight);
 	  _dialog->_textureType->setCurrentIndex(_materials->
 						 at(index)->_texture->_type);
 	  if (_materials->at(index)->_texture->_type == 0 &&
@@ -134,10 +157,12 @@ void GuiEditMaterialDialog::fillFields()
 void 
 GuiEditMaterialDialog::setMaterials(const vector<Material*>& materials)
 {
+  _isSet = false;
   _materials = &materials;
   _dialog->_materials->clear();
   for (unsigned int i = 0; i < _materials->size(); i++)
     _dialog->_materials->addItem(_materials->at(i)->getName().c_str());
   _dialog->_materials->setCurrentIndex(0);
   this->fillFields();
+  _isSet = true;
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed May 25 10:26:03 2011 loick michard
+// Last update Wed May 25 13:49:16 2011 loick michard
 //
 
 #include <QMessageBox>
