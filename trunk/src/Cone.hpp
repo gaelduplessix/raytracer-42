@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 11 23:22:23 2011 melvin laplanche
+// Last update Wed May 25 10:48:59 2011 loick michard
 //
 
 #ifndef _CONE_HPP_
@@ -19,7 +19,7 @@ public:
   Cone(Object *object,
 	   const Point& absolutePosition,
 	   const Rotation& rotation,
-	   const Material& material,
+	   Material* material,
 	   double angle);
 
   Cone(void);

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri May  6 15:49:30 2011 loick michard
-// Last update Thu May 12 00:01:20 2011 melvin laplanche
+// Last update Wed May 25 10:49:30 2011 loick michard
 //
 
 #ifndef _CUBE_TROUE_HPP_
@@ -21,7 +21,7 @@ public:
   CubeTroue(Object*object,
 	    const Point& absolutePosition,
 	    const Rotation& rotation,
-	    const Material& material,
+	    Material* material,
 	    double coeff = 11.8);
 
   void	setCoeff(double coeff);

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Tue May 24 13:05:28 2011 samuel olivier
+// Last update Wed May 25 10:52:59 2011 loick michard
 //
 
 #ifndef _PARALLELOGRAM_HPP_
@@ -20,7 +20,7 @@ public:
 		const Point& absolutePosition,
 		const Point& vertex1,
 		const Point& vertex2,
-		const Material& material);
+		Material* material);
   Parallelogram(void);
 
   void		setCachedValues(void);

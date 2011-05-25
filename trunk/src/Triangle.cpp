@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Tue May 24 13:19:31 2011 samuel olivier
+// Last update Wed May 25 11:09:54 2011 loick michard
 //
 
 #include <cmath>
@@ -16,7 +16,7 @@
 
 Triangle::Triangle(Object*object,
 		   const Point& absolutePosition,
-		   const Material& material,
+		   Material* material,
 		   const Point& vertex1,
 		   const Point& vertex2) : ObjectPrimitive(object,
 							   absolutePosition,
@@ -29,7 +29,7 @@ Triangle::Triangle(Object*object,
 }
 
 Triangle::Triangle(void):
-  ObjectPrimitive(NULL, Point(0, 0, 0), Rotation(0, 0, 0), Material()),
+  ObjectPrimitive(NULL, Point(0, 0, 0), Rotation(0, 0, 0), NULL),
   _vertex1(Point(0, 0, 0)), _vertex2(Point(0, 0, 0))  
 {
   _isLimited = true;

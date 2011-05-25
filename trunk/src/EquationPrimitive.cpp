@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Thu May 12 16:20:14 2011 gael jochaud-du-plessix
+// Last update Wed May 25 10:50:38 2011 loick michard
 //
 
 #include <cmath>
@@ -18,7 +18,7 @@ EquationPrimitive::EquationPrimitive(string equation,
 				     Object* object,
 				     const Point& absolutePosition,
 				     const Rotation& rotation,
-				     const Material& material) :
+				     Material* material) :
   ObjectPrimitive(object, absolutePosition, rotation, material),
   _equation_intersect(), _equation_normal_x(), _equation_normal_y(),
   _equation_normal_z()

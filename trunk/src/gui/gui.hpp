@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Mon May 23 18:25:19 2011 loick michard
+// Last update Tue May 24 19:27:25 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -26,6 +26,7 @@ void	gui(int ac, char **av);
 #include "RenderingConfiguration.hpp"
 #include "Raytracer.hpp"
 #include "CubeMap.hpp"
+#include "guiEditMaterialDialog.hpp"
 
 using namespace std;
 
@@ -76,6 +77,7 @@ public slots:
   void	realQuit();
   void	launchServer();
   void	updateServerConsole();
+  void	openEditMaterialDialog();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
@@ -108,6 +110,8 @@ private:
   Ui::LaunchServerDialog*	_launchServerDialogUi;
   QDialog*                      _launchServerDialog;
   string			_consoleLog;
+
+  GuiEditMaterialDialog		_editMaterialDialog;
 };
 
 #endif

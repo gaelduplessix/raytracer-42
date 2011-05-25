@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:14:13 2011 loick michard
-// Last update Mon May  9 14:52:07 2011 gael jochaud-du-plessix
+// Last update Wed May 25 09:52:34 2011 loick michard
 //
 
 #include <cmath>
@@ -17,6 +17,7 @@ PerlinNoise::PerlinNoise(double repeatWidth, double repeatHeight,
   _octaves(5), _step(40), _persistance(0.6), _woodEffect(false),
   _marbleEffect(false), _color1(0, 0, 0), _color2(255, 255, 255)
 {
+  _type = 1;
   this->_initPerlinNoise();
 }
 
@@ -33,6 +34,7 @@ void	PerlinNoise::setWoodProperties()
   _woodEffect = true;
   _color1 = Color(184, 133, 39);
   _color2 = Color(110, 54, 19);
+  _type = 2;
 }
 
 void    PerlinNoise::setMarbleProperties()
@@ -43,6 +45,7 @@ void    PerlinNoise::setMarbleProperties()
   _marbleEffect = true;
   _color1 = Color(240, 233, 234);
   _color2 = Color(7, 94, 34);
+  _type = 3;
 }
 
 void	PerlinNoise::setColor1(const Color& color1)

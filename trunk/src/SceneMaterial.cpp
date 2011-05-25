@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Wed May 18 23:06:28 2011 melvin laplanche
+// Last update Wed May 25 11:01:56 2011 loick michard
 //
 
 #include "Scene.hpp"
@@ -53,15 +53,15 @@ bool			Scene::_materialExists(QString	name)
   return false;
 }
 
-Material		Scene::_getMaterialByName(QString	name)
+Material*		Scene::_getMaterialByName(QString	name)
 {
   int		nbMat = this->_materials.size();
   string	toFind = name.toStdString();
 
   for (int i = 0; i < nbMat; i++)
     if (this->_materials[i]->getName() == toFind)
-      return *_materials[i];
-  return (Material());
+      return _materials[i];
+  return (NULL);
 }
 
 void			Scene::_parseMaterialOptions(QDomNode	n,

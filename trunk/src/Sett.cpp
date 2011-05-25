@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 10 13:49:47 2011 samuel olivier
-// Last update Tue May 24 13:08:29 2011 samuel olivier
+// Last update Wed May 25 11:04:55 2011 loick michard
 //
 
 #include "Sett.hpp"
@@ -16,7 +16,7 @@ Sett::Sett(void)
 }
 
 Sett::Sett(const Point& position, bool isSolid, const Vector& width,
-	   const Vector& height, const Vector& depth, const Material& material)
+	   const Vector& height, const Vector& depth, Material* material)
 {
   _rotation = Rotation(0, 0, 0);
   _position = position;

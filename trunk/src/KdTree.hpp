@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 18 10:27:25 2011 loick michard
-// Last update Sun May 22 15:24:43 2011 loick michard
+// Last update Tue May 24 13:46:24 2011 loick michard
 //
 
 #ifndef _KD_TREE_HPP_
@@ -49,6 +49,8 @@ public:
   void
   getIntersectingObjects(const Ray& ray, vector<t_intersected_object>&
 			 intersection);
+
+  void	_deleteNode(KdTreeNode *node);
 
 protected:
   void		buildKdTree(void);

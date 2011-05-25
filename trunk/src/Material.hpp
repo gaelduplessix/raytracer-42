@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May  4 17:40:55 2011 loick michard
-// Last update Mon May 23 17:21:02 2011 samuel olivier
+// Last update Tue May 24 22:20:32 2011 loick michard
 //
 
 #ifndef _MATERIAL_HPP_
@@ -59,7 +59,6 @@ public:
   Vector&	getDeformatedNormal(double x, double y,
 				    const Vector& normal) const;
 
-private:
   string	_name;
   Color		_color;
   bool		_isTextured;
@@ -70,7 +69,6 @@ private:
   double	_refractionIndex;
   double	_diffusedReflectionCoeff;
 
-public:
   Texture*	_texture;
   Texture*	_limitTexture;
   Texture*	_heightmap;

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May  5 18:26:31 2011 loick michard
-// Last update Wed May 11 19:24:35 2011 melvin laplanche
+// Last update Wed May 25 11:07:13 2011 loick michard
 //
 
 #ifndef _TORUS_HPP_
@@ -20,7 +20,7 @@ public:
   Torus(Object*object,
 	const Point& absolutePosition,
 	const Rotation& rotation,
-	const Material& material,
+	Material* material,
 	double R, double r);
 
   void                  setr(double r);

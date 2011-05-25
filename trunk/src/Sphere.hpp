@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 11 19:16:57 2011 melvin laplanche
+// Last update Wed May 25 11:05:54 2011 loick michard
 //
 
 #ifndef _SPHERE_HPP_
@@ -19,7 +19,7 @@ public:
   Sphere(Object*object,
 	 const Point& absolutePosition,
 	 const Rotation& rotation,
-	 const Material& material,
+	 Material* material,
 	 double	radius);
 
   Sphere(void);

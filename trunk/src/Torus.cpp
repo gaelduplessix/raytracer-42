@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May  5 18:31:12 2011 loick michard
-// Last update Thu May 12 17:10:57 2011 gael jochaud-du-plessix
+// Last update Wed May 25 11:09:38 2011 loick michard
 //
 
 #include "Torus.hpp"
@@ -15,7 +15,7 @@
 Torus::Torus(Object*object,
 	     const Point& absolutePosition,
 	     const Rotation& rotation,
-	     const Material& material,
+	     Material* material,
 	     double R, double r) : ObjectPrimitive(object,
 						   absolutePosition,
 						   rotation, material),
@@ -141,7 +141,7 @@ Vector		Torus::getNormalVector(const Point& intersectPoint,
   normal._z = intersection._z * k;
   double cosA = viewVector * normal;
   cosA = cosA / (viewVector.getNorm() * normal.getNorm());
-  if (_material.getReflectionCoeff() > 0)
+  if (_material->getReflectionCoeff() > 0)
     {
       if (cosA < 0)
 	return (normal.normalize() * -1);

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Tue Apr 26 17:15:41 2011 gael jochaud-du-plessix
-// Last update Sat May 21 19:29:53 2011 loick michard
+// Last update Wed May 25 10:47:23 2011 loick michard
 //
 
 #ifndef _OBJECTPRIMITIVE_HPP_
@@ -32,17 +32,17 @@ public:
   ObjectPrimitive(Object *object,
 		  const Point& absolutePosition,
 		  const Rotation& rotation,
-		  const Material& material);
+		  Material* material);
 
   Object*		getObject(void) const;
   const Point&		getPosition(void) const;
   const Rotation&	getRotation(void) const;
-  const Material&	getMaterial(void) const;
+  Material*		getMaterial(void) const;
 
   void		setObject(Object *object);
   void		setPosition(const Point& position);
   void		setRotation(const Rotation& rotation);
-  void		setMaterial(const Material& material);
+  void		setMaterial(Material* material);
 
   bool		isLimited(void);
   Color		getColor(const Point& intersectPoint) const;
@@ -76,7 +76,7 @@ protected:
   virtual Ray			getRayAtSimplePosition(const Ray& ray) const;
   Point		_absolutePosition;
   Rotation	_rotation;
-  Material	_material;
+  Material	*_material;
   Object*	_object;
   bool		_isLimited;
 };

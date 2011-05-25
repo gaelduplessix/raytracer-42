@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Sun May 22 17:49:53 2011 samuel olivier
+// Last update Wed May 25 10:57:50 2011 loick michard
 //
 
 #include <stdio.h>
@@ -282,15 +282,15 @@ Color			Raytracer::throwRay(Ray& ray)
 
       Color	mixedColor =
 	(((((diffuseLight
-	     * (1.0 - nearestObject->getMaterial().getSpecularCoeff()))
+	     * (1.0 - nearestObject->getMaterial()->getSpecularCoeff()))
 	    + (specularLight
-	       * nearestObject->getMaterial().getSpecularCoeff()))
-	   * (1.0 - nearestObject->getMaterial().getReflectionCoeff()))
+	       * nearestObject->getMaterial()->getSpecularCoeff()))
+	   * (1.0 - nearestObject->getMaterial()->getReflectionCoeff()))
 	  + (reflectedLight
-	     * nearestObject->getMaterial().getReflectionCoeff()))
-	 * (1.0 - nearestObject->getMaterial().getTransmissionCoeff()))
+	     * nearestObject->getMaterial()->getReflectionCoeff()))
+	 * (1.0 - nearestObject->getMaterial()->getTransmissionCoeff()))
 	+ refractedLight
-	* nearestObject->getMaterial().getTransmissionCoeff();
+	* nearestObject->getMaterial()->getTransmissionCoeff();
       mixedColor += calcDirectLight(ray);
       mixedColor = (ambientOcclusion * mixedColor) / 255;
       mixedColor *= (1 - ambientOcclusionCoeff);
@@ -418,7 +418,7 @@ Color	Raytracer::calcDiffusedReflection(Ray& ray,
   if (!_config->isReflectionDiffused())
     return (throwRay(ray));
   double	diffCoeff
-    = nearestObject->getMaterial().getDiffusedReflectionCoeff();
+    = nearestObject->getMaterial()->getDiffusedReflectionCoeff();
   Vector	newV1(ray._vector._z, ray._vector._y, -ray._vector._x);
   Vector	newV2 = newV1;
   newV2 *= ray._vector;
@@ -456,12 +456,12 @@ Color	Raytracer::calcReflectedLight(const ObjectPrimitive* nearestObject,
 				      Ray& ray)
 {
   if (_config->isReflectionEnabled() &&
-      nearestObject->getMaterial().getReflectionCoeff() > 0
+      nearestObject->getMaterial()->getReflectionCoeff() > 0
       && ray._reflectionLevel <
       _config->getReflectionMaxDepth())
     {
       ray._reflectionIntensity *= 
-	nearestObject->getMaterial().getReflectionCoeff();
+	nearestObject->getMaterial()->getReflectionCoeff();
       if (ray._reflectionIntensity > EPSILON_REFLECTION)
 	{
 	  Ray	reflectedRay(intersectPoint,
@@ -484,17 +484,17 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 				       Ray& ray)
 {
   if (_config->isTransparencyEnabled() &&
-      nearestObject->getMaterial().getTransmissionCoeff() >
+      nearestObject->getMaterial()->getTransmissionCoeff() >
       Raytracer::EPSILON_REFRACTION && ray._refractionLevel <
       _config->getTransparencyMaxDepth())
     {
       if (_refractivePath.size() > 0)
 	ray._refractiveIndex =
-	  _refractivePath.top()->getMaterial().getRefractionIndex();
+	  _refractivePath.top()->getMaterial()->getRefractionIndex();
       else
 	ray._refractiveIndex = 1;
       ray._refractionIntensity *=
-	nearestObject->getMaterial().getTransmissionCoeff();
+	nearestObject->getMaterial()->getTransmissionCoeff();
       if (ray._refractionIntensity > Raytracer::EPSILON_REFRACTION)
 	{
 	  Ray	refractedRay =
@@ -599,6 +599,11 @@ Color		Raytracer::calcAmbiantLight(const Point& intersectPoint)
   // printf("\n");
   // printf("%d %d %d : %f %f\n", res._r, res._g, res._b, aire, maxDist);
   return (res);
+}
+
+void	Raytracer::deleteKdTree()
+{
+  delete _kdTree;
 }
 
 // Color		Raytracer::calcAmbiantLight(const Point& intersectPoint)

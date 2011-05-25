@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Sun May 22 15:10:53 2011 loick michard
+// Last update Tue May 24 13:54:50 2011 loick michard
 // Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
@@ -98,6 +98,8 @@ public:
   void	getNearestPhoton(vector<Photon*>& nearest, int size,
 			 const Point& intersectPoint, int n);
   Color	calcAmbiantLight(const Point& intersectPoint);
+
+  void	deleteKdTree();
 
   stack<ObjectPrimitive*>	_refractivePath;
   PhotonMap*			_photonMap;
