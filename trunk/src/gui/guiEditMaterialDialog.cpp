@@ -5,13 +5,14 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Wed May 25 17:17:38 2011 loick michard
+// Last update Wed May 25 19:44:28 2011 loick michard
 //
 
 #include <QMutexLocker>
 #include <sstream>
 #include <iostream>
 #include <QColorDialog>
+#include <QFileDialog>
 #include "CubeMap.hpp"
 #include "guiEditMaterialDialog.hpp"
 
@@ -39,7 +40,10 @@ GuiEditMaterialDialog::GuiEditMaterialDialog()
                    this, SLOT(updateMaterial()));
   QObject::connect(_dialog->_diffuseReflection, SIGNAL(valueChanged(double)),
                    this, SLOT(updateMaterial()));
-
+  QObject::connect(_dialog->_find, SIGNAL(clicked()),
+                   this, SLOT(getImage()));
+  QObject::connect(_dialog->_textureType, SIGNAL(currentIndexChanged(int)),
+                   this, SLOT(updateTextureImage(int)));
   _image = new QImage(150, 150, QImage::Format_ARGB32);
   _pixmap = new QPixmap();
   _timer = new QTimer();
@@ -51,6 +55,15 @@ GuiEditMaterialDialog::GuiEditMaterialDialog()
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);
+}
+
+void	GuiEditMaterialDialog::updateTextureImage(int i)
+{
+  if (i == 0)
+    _dialog->_imageGroup->setEnabled(true);
+  else
+    _dialog->_imageGroup->setEnabled(false);
+  updateMaterial();
 }
 
 Scene* GuiEditMaterialDialog::createScene()
@@ -119,7 +132,7 @@ GuiEditMaterialDialog::~GuiEditMaterialDialog()
 void    GuiEditMaterialDialog::selectColor()
 {
   QColor color = QColorDialog::getColor(*_color, this,
-                                        "Selectionner la couleur de fond",
+                                        "Selectionner la couleur",
                                         QColorDialog::ShowAlphaChannel |
 					QColorDialog::DontUseNativeDialog\
 					);
@@ -143,6 +156,20 @@ void GuiEditMaterialDialog::fillColor()
   _dialog->_color->setStyleSheet(style.c_str());
 }
 
+void GuiEditMaterialDialog::getImage()
+{
+  QString image = 
+    QFileDialog::getOpenFileName(this,
+				 tr("Selectionez une image"),
+				 QString(),
+				 "*.png *.gif *.jpeg *.bmp *.jpg",
+				 0,
+				 QFileDialog::DontUseNativeDialog);
+  if (image != "")
+    _dialog->_imagePath->setText(image);
+  updateMaterial();
+}
+
 void GuiEditMaterialDialog::updateMaterial()
 {
   int   index = _dialog->_materials->currentIndex();
@@ -151,23 +178,38 @@ void GuiEditMaterialDialog::updateMaterial()
     {
       _currentMat = _materials->at(index);
       _materials->at(index)->setColor(_color->rgba());
-      /*_dialog->_texture->setChecked(_materials->at(index)->_isTextured);
-      if (_materials->at(index)->_isTextured)
-        {
-          _dialog->_textureX->setValue(_materials->
-                                       at(index)->_texture->_repeatWidth);
-          _dialog->_textureY->setValue(_materials->
-                                       at(index)->_texture->_repeatWidth);
-          _dialog->_textureType->setCurrentIndex(_materials->
-                                                 at(index)->_texture->_type);
-          if (_materials->at(index)->_texture->_type == 0 &&
-              _materials->at(index)->_texture->_image)
-            {
-              _dialog->_imagePath->setText(_materials->at(index)->
-                                           _texture->getName().c_str());
-            }
-        }
-    }*/
+
+      if (_dialog->_texture->isChecked())
+	{
+	  if (_dialog->_textureType->currentIndex() == 0)
+	    {
+	      if (_dialog->_imagePath->text() != "" &&
+		  (!_materials->at(index)->_texture ||
+		   _dialog->_imagePath->text().toStdString() != 
+		   _materials->at(index)->_texture->getName()))
+		{
+		  _materials->at(index)->
+		    setTexture(new Texture(_dialog->
+					   _imagePath->text().toStdString(),
+					   _dialog->_textureX->value(),
+					   _dialog->_textureY->value()));
+		}
+	    }
+	  else
+	    {
+	      _materials->at(index)->_isTextured = true;
+	      PerlinNoise *texture =
+		new PerlinNoise(_dialog->_textureX->value(),
+				_dialog->_textureY->value());
+	      if (_dialog->_textureType->currentIndex() == 2)
+		texture->setMarbleProperties();
+	      else if (_dialog->_textureType->currentIndex() == 3)
+		texture->setWoodProperties();
+	      _materials->at(index)->setTexture(texture);
+	    }
+	}
+      else
+	_materials->at(index)->_isTextured = false;
       _materials->at(index)->_specularCoeff = _dialog->_specular->value();
       _materials->at(index)->_specularPow = _dialog->_specularPow->value();
       _materials->at(index)->_reflectionCoeff = _dialog->_reflection->value();

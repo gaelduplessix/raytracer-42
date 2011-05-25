@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 11:06:56 2011 loick michard
+// Last update Wed May 25 19:29:08 2011 loick michard
 //
 
 #include <cmath>
@@ -46,7 +46,12 @@ void		Sphere::getMappedCoords(const Point& intersectPoint,
   newPoint.normalize();
   double phi = acos(- (vn * newPoint));
   double x2 = phi / M_PI;
-  double theta = (acos((newPoint * ve) / sin(phi))) / (2 * M_PI);
+  double angle = (newPoint * ve) / sin(phi);
+  if (angle < -1)
+    angle = -1;
+  else if (angle > 1)
+    angle = 1;
+  double theta = (acos(angle)) / (2 * M_PI);
   vn *= ve;
   double y2;
   if (vn * newPoint > 0)
