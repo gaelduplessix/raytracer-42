@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Mon May 23 17:26:31 2011 samuel olivier
+// Last update Wed May 25 18:09:11 2011 loick michard
 //
 
 #include "Material.hpp"
@@ -98,6 +98,8 @@ void	Material::setColor(const Color& color)
 
 void	Material::setTexture(Texture* texture)
 {
+  if (_texture)
+    delete _texture;
   _texture = texture;
   _isTextured = true;
 }

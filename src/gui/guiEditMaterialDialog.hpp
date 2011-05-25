@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:21:30 2011 loick michard
-// Last update Wed May 25 16:52:51 2011 loick michard
+// Last update Wed May 25 18:12:38 2011 loick michard
 //
 
 #include <QMutex>
@@ -37,6 +37,8 @@ class GuiEditMaterialDialog : public QDialog, public RenderingInterface
   void setMaterials(const vector<Material*>& materials);
 
 public slots:
+  void updateTextureImage(int i);
+  void getImage();
   void closeDialog();
   void updateMaterial();
   void fillFields();

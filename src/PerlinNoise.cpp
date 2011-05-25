@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May  3 17:14:13 2011 loick michard
-// Last update Wed May 25 09:52:34 2011 loick michard
+// Last update Wed May 25 18:31:55 2011 loick michard
 //
 
 #include <cmath>
@@ -40,7 +40,7 @@ void	PerlinNoise::setWoodProperties()
 void    PerlinNoise::setMarbleProperties()
 {
   _octaves = 5;
-  _step = 10;
+  _step = 60;
   _persistance = 0.9;
   _marbleEffect = true;
   _color1 = Color(240, 233, 234);
