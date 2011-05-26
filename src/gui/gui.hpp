@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Wed May 25 22:28:36 2011 gael jochaud-du-plessix
+// Last update Thu May 26 16:41:44 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -23,6 +23,7 @@ void	gui(int ac, char **av);
 #include "ui_raytracer.h"
 #include "ui_clusterDialog.h"
 #include "ui_launchServerDialog.h"
+#include "ui_connectToServer.h"
 #include "RenderingConfiguration.hpp"
 #include "Raytracer.hpp"
 #include "CubeMap.hpp"
@@ -34,6 +35,7 @@ namespace Ui {
   class MainWindow;
   class ClusterDialog;
   class LaunchServerDialog;
+  class ConnectToServer;
 }
 
 class RaytracerGUI : public QMainWindow, public RenderingInterface
@@ -110,6 +112,8 @@ private:
   QDialog*			_clusterDialog;
   Ui::LaunchServerDialog*	_launchServerDialogUi;
   QDialog*                      _launchServerDialog;
+  Ui::ConnectToServer*		_connectToServerDialogUi;
+  QDialog*                      _connectToServerDialog;
   string			_consoleLog;
 
   GuiEditMaterialDialog		_editMaterialDialog;

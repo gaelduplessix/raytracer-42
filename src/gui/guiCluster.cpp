@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Wed May 25 22:50:18 2011 gael jochaud-du-plessix
+// Last update Thu May 26 16:47:43 2011 loick michard
 //
 
 #include <QInputDialog>
@@ -27,6 +27,9 @@ void		RaytracerGUI::_initDialogCluster()
   _launchServerDialog = new QDialog();
   _launchServerDialogUi = new Ui::LaunchServerDialog();
   _launchServerDialogUi->setupUi(_launchServerDialog);
+  _connectToServerDialog = new QDialog();
+  _connectToServerDialogUi = new Ui::ConnectToServer();
+  _connectToServerDialogUi->setupUi(_connectToServerDialog);
 }
 
 void		RaytracerGUI::updateServerConsole()
@@ -60,7 +63,10 @@ void		RaytracerGUI::launchServer()
 
 void		RaytracerGUI::connectToCluster()
 {
-  QTcpSocket	serverConnection;
+  int ok = _connectToServerDialog->exec();  
 
-  //serverConnection.connectToHost(QHostAddress("10.17.72.67"), 4242);
+  if (ok)
+    {
+      
+    }
 }
