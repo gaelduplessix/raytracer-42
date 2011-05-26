@@ -32,18 +32,18 @@
       <position>0, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
       <solid>false</solid>
-	<primitives>
-	  <primitive type="parallelogram" material="sol">
-	    <position>17, -3, -5</position>
-	    <vector1>6, 0, 0</vector1>
-	    <vector2>0, 6, 0</vector2>
-	  </primitive>
-	  <!-- <primitive type="sphere" material="refraction"> -->
-	  <!--   <position>20, 0, -2</position> -->
-	  <!--   <rotation type="radian">0, 0, 0</rotation> -->
-	  <!--   <radius>2</radius> -->
-	  <!-- </primitive> -->
-	</primitives>
+      <primitives>
+	<primitive type="parallelogram" material="sol">
+	  <position>17, -3, -5</position>
+	  <vector1>6, 0, 0</vector1>
+	  <vector2>0, 6, 0</vector2>
+	</primitive>
+	<primitive type="sphere" material="refraction">
+	  <position>20, 0, -2</position>
+	  <rotation type="radian">0, 0, 0</rotation>
+	  <radius>2</radius>
+	</primitive>
+      </primitives>
     </object>
   </objects>
 

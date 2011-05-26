@@ -1,8 +1,13 @@
-Lumiere ambiante
 Lumiere parrallele
 Lumiere Direct
+Lumiere Spherique           }
+			    } Ombres diffuses (sampling)
+Lumiere Parrallelogrammique }
+Exposition
+
 Tore
 Cube troue
+
 Reflection
 Reflection diffuse
 Transparence avec Refraction (Plusieurs objets imbriques ;))
@@ -12,16 +17,23 @@ Textures avec images
 Decoupage Texturel
 Deformation de la Normale (Vague + Bruit de Perlin + Bump Mapping)
 Objets Limites
+
+Lumiere d'ambiance + couleur d'ambiance
 HDR Map (environnement)
+Couleur de Fond
+
 Antialiasing
-Ambient Occlusion
-Flou de profondeur
-Ombres diffuses
-Resolveur d'equation
-GUI de gros malade
-Export d'image (jpg, png, gif, bmp)
-Chargement d'une scene au format Xml
-PhotonMapping
+MultiThreading
 Methode de sampling
 Kdtree
-MultiThreading
+Profondeur de champ
+Gestion de plusieurs camera
+
+Ambient Occlusion
+PhotonMapping
+
+Resolveur d'equation (creer objet a partir de son equation)
+GUI de gros ouf
+Export d'image (jpg, png, gif, bmp)
+Chargement d'une scene au format Xml
+Editeur de Materiaux
