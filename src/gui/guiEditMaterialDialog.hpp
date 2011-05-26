@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:21:30 2011 loick michard
-// Last update Thu May 26 11:38:01 2011 loick michard
+// Last update Thu May 26 14:07:24 2011 loick michard
 //
 
 #include <QMutex>
@@ -38,6 +38,7 @@ class GuiEditMaterialDialog : public QDialog, public RenderingInterface
 
 public slots:
   void getHeightmap();
+  void getLimitTexture();
   void updateTextureImage(int i);
   void updateHeightmap(int i);
   void getImage();

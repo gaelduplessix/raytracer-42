@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Thu May 26 13:06:38 2011 loick michard
+// Last update Thu May 26 14:22:54 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -69,6 +69,15 @@ GuiEditMaterialDialog::GuiEditMaterialDialog()
                    this, SLOT(updateMaterial()));
   QObject::connect(_dialog->_bumpmapping, SIGNAL(clicked(bool)),
                    this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_findLimited, SIGNAL(clicked()),
+                   this, SLOT(getLimitTexture()));
+  QObject::connect(_dialog->_limitedX, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_limitedY, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_limitedTexture, SIGNAL(clicked(bool)),
+                   this, SLOT(updateMaterial()));
+
   _image = new QImage(150, 150, QImage::Format_ARGB32);
   _image->fill(0);
   _pixmap = new QPixmap();
@@ -203,6 +212,20 @@ void GuiEditMaterialDialog::getImage()
   updateMaterial();
 }
 
+void GuiEditMaterialDialog::getLimitTexture()
+{
+  QString image =
+    QFileDialog::getOpenFileName(this,
+                                 tr("Selectionez une Texture limitante"),
+                                 QString(),
+                                 "*.png *.gif *.jpeg *.bmp *.jpg",
+                                 0,
+                                 QFileDialog::DontUseNativeDialog);
+  if (image != "")
+    _dialog->_limitedImage->setText(image);
+  updateMaterial();
+}
+
 void GuiEditMaterialDialog::getHeightmap()
 {
   QString image =
@@ -239,6 +262,13 @@ void GuiEditMaterialDialog::updateMaterial()
 					   _imagePath->text().toStdString(),
 					   _dialog->_textureX->value(),
 					   _dialog->_textureY->value()));
+		}
+	      else if (_dialog->_imagePath->text() != "")
+		{
+		  _materials->at(index)->_texture->_repeatWidth =
+		    _dialog->_textureX->value();
+		  _materials->at(index)->_texture->_repeatHeight =
+                    _dialog->_textureY->value();
 		}
 	    }
 	  else if (!_materials->at(index)->_isTextured ||
@@ -286,6 +316,13 @@ void GuiEditMaterialDialog::updateMaterial()
 					     _dialog->_bumpmapX->value(),
 					     _dialog->_bumpmapY->value()));
 		}
+	      else if (_dialog->_bumpmapHeightmap->text() != "")
+		{
+		  _materials->at(index)->_heightmap->_repeatWidth =
+		    _dialog->_bumpmapX->value();
+		  _materials->at(index)->_heightmap->_repeatHeight =
+                    _dialog->_bumpmapY->value();
+		}
 	    }
 	  else if (!_materials->at(index)->_heightmap ||
                    _materials->at(index)->_heightmap->_type !=
@@ -306,6 +343,34 @@ void GuiEditMaterialDialog::updateMaterial()
 	  _dialog->_deformationType->currentIndex();
       _materials->at(index)->_deformationCoeff =
         _dialog->_deformationCoeff->value();
+
+      if (_dialog->_limitedTexture->isChecked())
+	{
+	  if (_dialog->_limitedImage->text() != "" &&
+	      (!_materials->at(index)->_limitTexture ||
+	       _dialog->_limitedImage->text().toStdString() !=
+	       _materials->at(index)->_limitTexture->getName()))
+	    {
+	      _materials->at(index)->
+		_limitTexture = new Texture(_dialog->
+					    _limitedImage
+					    ->text().toStdString(),
+					    _dialog->_limitedX->value(),
+					    _dialog->_limitedY->value());
+	    }
+	  else if (_dialog->_limitedImage->text() != "")
+	    {
+	      _materials->at(index)->_limitTexture->_repeatWidth =
+		_dialog->_limitedX->value();
+	      _materials->at(index)->_limitTexture->_repeatHeight =
+		_dialog->_limitedY->value();
+	    }
+        }
+      else
+	{
+	  delete _materials->at(index)->_limitTexture;
+	  _materials->at(index)->_limitTexture = NULL;
+	}
 
       _raytracer->stopRendering();
       _scene = createScene();
@@ -403,6 +468,20 @@ void GuiEditMaterialDialog::fillFields()
 	}
       else
 	_dialog->_bumpmapType->setCurrentIndex(1);
+
+      if (_materials->at(index)->_limitTexture)
+	{
+	  _dialog->_limitedTexture->setChecked(true);
+	  _dialog->_limitedX->setValue(_materials->
+				       at(index)->_limitTexture->_repeatWidth);
+	  _dialog->_limitedY->
+	    setValue(_materials->at(index)->_limitTexture->_repeatHeight);
+	  _dialog->_limitedImage->setText(_materials->
+					  at(index)->_limitTexture->
+					  getName().c_str());
+	}
+      else
+	_dialog->_limitedTexture->setChecked(false);
     }
   _isSet = true;
   updateMaterial();
