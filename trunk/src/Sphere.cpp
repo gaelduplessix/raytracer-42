@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Thu May 26 12:35:23 2011 samuel olivier
+// Last update Thu May 26 14:30:56 2011 samuel olivier
 //
 
 #include <cmath>
@@ -22,10 +22,12 @@ Sphere::Sphere(Object*object,
 						rotation, material),
 				_radius(radius)
 {
-
+  
 }
 
-Sphere::Sphere(void)
+Sphere::Sphere(void) : ObjectPrimitive(NULL, Point(0, 0, 0),
+				       Rotation(0, 0, 0), NULL),
+		       _radius(1)
 {
 
 }
