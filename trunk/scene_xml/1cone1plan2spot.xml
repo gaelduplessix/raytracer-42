@@ -1,0 +1,57 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+  
+  <materials>
+    <material name="materialPlane">
+      <color>180,150,110</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="materialCone">
+      <color>90,150,200</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+  </materials>
+  
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+      <primitives>
+	<primitive type="cone" material="materialCone">
+	  <position>15, 2, 1</position>
+	  <rotation type="radian">60, 0, 0</rotation>
+	  <radius>2</radius>
+	</primitive>
+	<primitive type="plane" material="materialPlane">
+	  <position>0, 0, -2</position>
+	  <rotation type="degree">0, 0, 0</rotation>
+	</primitive>
+      </primitives>
+    </object>
+  </objects>
+  
+  <lights>
+    <light type="spot">
+      <position>0,1,0</position>
+      <color>100,180,110</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>5, 2, 2</position>
+      <color>160,120,155</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>

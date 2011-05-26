@@ -1,0 +1,75 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+    <camera type="cinema" name="cam2">
+      <position>0, 5, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+
+  <materials>
+    <material name="sol">
+     <color>120, 220,55</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>1</reflection>
+    </material>
+    <material name="solcone">
+      <color>60, 180, 180</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="refraction">
+      <color>40, 255, 100</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <transmission>1</transmission>
+      <refractionIndex>1</refractionIndex>
+    </material>
+  </materials>
+
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+	<primitives>
+	  <primitive type="sphere" material="sol">
+	    <position>40, 5, 0</position>
+	    <rotation type="radian">0, 0, 1</rotation>
+	    <radius>3</radius>	 
+	  </primitive>
+	  <primitive type="cone" material="solcone">
+	    <position>40, 5, 0</position>
+	    <rotation type="radian">-45, 0, 0</rotation>
+	    <radius>1</radius>
+	  </primitive>
+	</primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>-0, 1, 0</position>
+      <color>255,0,0</color>
+      <intensity>6</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>-5, -3, 0</position>
+      <color>100, 170, 0</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>10, 0, 0</position>
+      <color>0,0,190</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>

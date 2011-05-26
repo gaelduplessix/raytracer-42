@@ -1,0 +1,72 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+    <camera type="cinema" name="cam2">
+      <position>0, 5, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+
+  <materials>
+    <material name="sol">
+     <color>200, 200, 200</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="refraction">
+      <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <transmission>1</transmission>
+      <refractionIndex>1</refractionIndex>
+    </material>
+  </materials>
+
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+	<primitives>
+	  <primitive type="plane" material="sol">
+	    <position>0, 0, -2</position>
+	    <rotation type="radian">0, 0, 50</rotation>
+	  </primitive>
+	  <primitive type="sphere" material="sol">
+	    <position>30, 0, -1</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <radius>2</radius>	 
+	  </primitive>
+	  <primitive type="sphere" material="sol">
+	    <position>20, 3, -1</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <radius>1</radius>	 
+	  </primitive>
+	  <primitive type="sphere" material="sol">
+	    <position>40, -2, -1</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <radius>3</radius>	 
+	  </primitive>
+	</primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>20, -3, 2</position>
+      <color>80,240,100</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>40,5,2</position>
+      <color>180,100,30</color>
+      <intensity>2</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>

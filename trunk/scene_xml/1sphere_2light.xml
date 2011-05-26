@@ -1,0 +1,58 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+    <camera type="cinema" name="cam2">
+      <position>0, 5, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+
+  <materials>
+    <material name="sol">
+     <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="refraction">
+      <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <transmission>1</transmission>
+      <refractionIndex>1</refractionIndex>
+    </material>
+  </materials>
+
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+	<primitives>
+	  <primitive type="sphere" material="sol">
+	    <position>10, 0, 0</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <radius>2</radius>	 
+	  </primitive>
+	</primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>-25, 0, 0</position>
+      <color>C8143C</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>-10, 10, 5</position>
+      <color>1EC828</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>
