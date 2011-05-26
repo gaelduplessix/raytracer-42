@@ -1,0 +1,131 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0 ,0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+    <camera type="cinema" name="cam2">
+      <position>0, 5, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+
+  <materials>
+    <material name="sol">
+     <color>120, 220,55</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>1</reflection>
+      <diffusedReflection>2</diffusedReflection>
+    </material>
+    <material name="solcone">
+      <color>60, 180, 180</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="solcylinder">
+      <color>120,100,90</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="sphere1">
+      <color>80,200,120</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>1</reflection>
+    </material>
+    <material name="solp1">
+      <color>100,90,200</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="solp2">
+      <color>80,200,120</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="solp3">
+      <color>140,100,220</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <refractionIndex>0</refractionIndex>
+      <reflection>0</reflection>
+    </material>
+    <material name="tore">
+      <color>200,180,255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <diffusedReflection>0</diffusedReflection>
+    </material>
+    <material name="refraction">
+      <color>40, 255, 100</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <transmission>1</transmission>
+      <refractionIndex>1</refractionIndex>
+    </material>
+  </materials>
+
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+	<primitives>
+	  <primitive type="torus" material="tore">
+	    <position>20,4,2</position>
+	    <rotation type="radian">-180,10,0</rotation>
+	    <minor>1</minor>
+	    <major>2</major>
+	  </primitive>
+	  <primitive type="plane" material="solp1">
+	    <position>0,10,-1</position>
+	    <rotation type="radian">180,0,180</rotation>
+	  </primitive>
+	  <primitive type="plane" material="solp2">
+	    <position>0,-10,-1</position>
+	    <rotation type="radian">180,0,100</rotation>
+	  </primitive>
+	  <primitive type="plane" material="solp3">
+	    <position>0,0,-3</position>
+	    <rotation type="radian">0,0,0</rotation>
+	  </primitive> 
+	  <primitive type="sphere" material="sphere1">
+	    <position>20, 0, 0</position>
+	    <rotation type="radian">0, 13 , 0</rotation>
+	    <radius>2</radius>
+	  </primitive>
+	  <primitive type="cylinder" material="solcone">
+	    <position>20,0,0</position>
+	    <rotation type="radian">0,0,0</rotation>
+	    <radius>0.9 </radius>
+	  </primitive>
+	  <primitive type="cylinder" material="solcylinder">
+	    <position>20,0,0</position>
+	    <rotation type="radian">90,0,0</rotation>
+	    <radius>1</radius>
+	  </primitive>
+	</primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>3, 1, 2</position>
+      <color>150,100,120</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>5, 0, 0</position>
+      <color>FFFFFF</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>

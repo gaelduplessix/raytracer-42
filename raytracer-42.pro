@@ -126,3 +126,6 @@ SOURCES += src/BoundingBox.cpp \
            src/gui/guiCluster.cpp \
            src/gui/guiEditMaterialDialog.cpp \
            src/gui/guiInterface.cpp
+
+TRANSLATIONS = raytracer-42_en.ts \
+               raytracer-42_fr.ts

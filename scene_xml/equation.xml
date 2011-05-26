@@ -1,0 +1,41 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+
+  <materials>
+    <material name="sol">
+     <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+  </materials>
+
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+	<primitives>
+	  <primitive type="equation" material="sol">
+	    <position>16, -3, -3</position>
+	    <rotation type="radian">0, 0, 0</rotation>
+	    <equation>x^2 + y ^ 2 + z^2 - </equation>
+	  </primitive>
+	</primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>30,0,5</position>
+      <color>FFFFFF</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>
