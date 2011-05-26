@@ -21,7 +21,6 @@
       <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <limitTexture type="file">stripes.png</limitTexture>
       <transmission>0</transmission>
       <refractionIndex>1</refractionIndex>
       <reflection>0</reflection>

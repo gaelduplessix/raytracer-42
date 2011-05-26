@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 26 14:56:05 2011 gael jochaud-du-plessix
+// Last update Thu May 26 15:07:17 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -49,7 +49,7 @@ Scene           *createScene()
   // reflection->setReflectionCoeff(0);
   // reflection->setTransmissionCoeff(0);
   // reflection->setRefractionIndex(1.33);
-  reflection->setTexture(new Texture("terre.jpg"));  
+  reflection->setLimitTexture(new Texture("stripes.png"));  
   // Material      refraction = mat;
   // refraction.setTransmissionCoeff(0);
   // refraction.setRefractionIndex(1.33);
@@ -65,14 +65,13 @@ Scene           *createScene()
   camera->setTarget(Point(30, 0, 0));
   cam.push_back(camera);
 
-  reflection->setTexture(new Texture("terre.jpg"));
+  // reflection->setTexture(new Texture("terre.jpg"));
   vector<ObjectPrimitive*> primitives;
   // primitives.push_back(new Pa(NULL, Point(30, 0, -3), Rotation(0, 0, 0),
   // 				  reflection, 3));
 
-  primitives.push_back(new Parallelogram(NULL, Point(17, -3, -5),
-  					 Point(17, -3, -1), Point(17, 3, -5),
-  					 reflection));
+  primitives.push_back(new Sphere(NULL, Point(20, 0, -1),
+				  Rotation(0, 0, 0), reflection, 2));
 
   // Material special = refraction;
   // PerlinNoise *perlin = new PerlinNoise();
@@ -87,7 +86,7 @@ Scene           *createScene()
 
   vector<Light*> light;
   //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(30, 10, 0), Color(255, 255, 255)));
+  light.push_back(new Spot(Point(10, 10, 0), Color(255, 255, 255)));
 
   Scene         *res = new Scene(cam, obj, light);
   return (res);

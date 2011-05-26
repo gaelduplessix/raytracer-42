@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Wed May 25 18:53:48 2011 loick michard
+// Last update Thu May 26 15:14:12 2011 samuel olivier
 //
 
 #include <QString>
@@ -44,9 +44,9 @@ Color Texture::getColor(double x, double y) const
 {
   x /= _repeatWidth;
   y /= _repeatHeight;
-  if (x > 1)
+  if (x >= 1)
     x = x - (int)x;
-  if (y > 1)
+  if (y >= 1)
     y = y - (int)y;
   if (x < 0)
     x = 1 + (x + (int)(-x));
