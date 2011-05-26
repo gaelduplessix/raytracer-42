@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Thu May 26 14:22:54 2011 loick michard
+// Last update Thu May 26 14:51:55 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -48,7 +48,7 @@ GuiEditMaterialDialog::GuiEditMaterialDialog()
                    this, SLOT(updateMaterial()));
   QObject::connect(_dialog->_textureY, SIGNAL(valueChanged(double)),
                    this, SLOT(updateMaterial()));
-  QObject::connect(_dialog->_imagePath, 
+  QObject::connect(_dialog->_imagePath,
 		   SIGNAL(textChanged(QString)),
                    this, SLOT(updateMaterial()));
   QObject::connect(_dialog->_texture, SIGNAL(clicked(bool)),

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed May 25 17:25:49 2011 loick michard
+// Last update Thu May 26 15:11:11 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -115,6 +115,7 @@ void    RaytracerGUI::pauseRendering(void)
 {
   sendMessage(tr("Rendu mis en pause").toStdString());
   _timer->setSingleShot(true);
+  _ui->action_Play->setEnabled(true);
   _raytracer->pauseRendering();
   _pause = true;
 }
@@ -212,6 +213,7 @@ void    RaytracerGUI::startRender()
       _ui->_width->setEnabled(false);
       _ui->_height->setEnabled(false);
       _ui->_threads->setEnabled(false);
+      _ui->action_Play->setEnabled(false);
       _timer->setSingleShot(false);
       _timer->start();
       if (!_isRendering)
