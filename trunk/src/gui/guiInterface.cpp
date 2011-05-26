@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Thu May 26 15:11:11 2011 loick michard
+// Last update Thu May 26 19:52:31 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -39,11 +39,6 @@ void RaytracerGUI::realQuit()
     qApp->quit();
   else
     {
-      QMessageBox msgBox;
-      msgBox.setText(tr("Un rendu est en cours."));
-      msgBox.setInformativeText(tr("Etes-vous sur de vouloir fermer la fenetre?"));
-      msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
-      msgBox.setDefaultButton(QMessageBox::Cancel);
       int ret =
         QMessageBox::warning(this, tr("Raytracer"),
                              tr("Un rendu est en cours.\n"
@@ -113,11 +108,18 @@ void RaytracerGUI::sendMessage(string message)
 
 void    RaytracerGUI::pauseRendering(void)
 {
-  sendMessage(tr("Rendu mis en pause").toStdString());
-  _timer->setSingleShot(true);
-  _ui->action_Play->setEnabled(true);
-  _raytracer->pauseRendering();
-  _pause = true;
+  if (!_isConnected)
+    {
+      sendMessage(tr("Rendu mis en pause").toStdString());
+      _timer->setSingleShot(true);
+      _ui->action_Play->setEnabled(true);
+      _raytracer->pauseRendering();
+      _pause = true;
+    }
+  else
+    {
+      //PAUSE RENDERING CLUSTER
+    }
 }
 
 void    RaytracerGUI::renderingHasFinished(void)
@@ -169,7 +171,14 @@ void    RaytracerGUI::renderingHasProgressed(double progress)
 
 void    RaytracerGUI::stopRendering(void)
 {
-  _raytracer->stopRendering();
+  if (!_isConnected)
+    {
+      _raytracer->stopRendering();
+    }
+  else
+    {
+      // STOP CLUSTER RENDERING
+    }
   _pause = false;
 }
 
@@ -209,36 +218,43 @@ void    RaytracerGUI::startRender()
 	  _ui->_console->moveCursor(QTextCursor::End);
 	  return ;
 	}
-      _ui->_mode->setEnabled(false);
-      _ui->_width->setEnabled(false);
-      _ui->_height->setEnabled(false);
-      _ui->_threads->setEnabled(false);
-      _ui->action_Play->setEnabled(false);
-      _timer->setSingleShot(false);
-      _timer->start();
-      if (!_isRendering)
+      if (!_isConnected)
 	{
-	  if (_image)
-	    delete _image;
-	  _image = new QImage(_ui->_width->value(),
-			      _ui->_height->value(),
-			      QImage::Format_ARGB32);
-	  _image->fill(0);
+	  _ui->_mode->setEnabled(false);
+	  _ui->_width->setEnabled(false);
+	  _ui->_height->setEnabled(false);
+	  _ui->_threads->setEnabled(false);
+	  _ui->action_Play->setEnabled(false);
+	  _timer->setSingleShot(false);
+	  _timer->start();
+	  if (!_isRendering)
+	    {
+	      if (_image)
+		delete _image;
+	      _image = new QImage(_ui->_width->value(),
+				  _ui->_height->value(),
+				  QImage::Format_ARGB32);
+	      _image->fill(0);
+	    }
+	  try
+	    {
+	      _ui->_progressBar->setHidden(false);
+	      if (_pause)
+		sendMessage(tr("Reprise du rendu").toStdString());
+	      else
+		sendMessage(tr("D&eacute;part du rendu").toStdString());
+	      _pause = false;
+	      _raytracer->launchRendering();
+	      _isRendering = true;
+	    }
+	  catch(int error)
+	    {
+	      std::cerr << "ERREUR" << error << std::endl;
+	    }
 	}
-      try
+      else
 	{
-	  _ui->_progressBar->setHidden(false);
-	  if (_pause)
-	    sendMessage(tr("Reprise du rendu").toStdString());
-	  else
-	    sendMessage(tr("D&eacute;part du rendu").toStdString());
-	  _pause = false;
-	  _raytracer->launchRendering();
-	  _isRendering = true;
-	}
-      catch(int error)
-	{
-	  std::cerr << "ERREUR" << error << std::endl;
+	  //LANCER RENDU CLUSTER
 	}
     }
   else

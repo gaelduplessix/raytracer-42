@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Thu May 26 16:41:44 2011 loick michard
+// Last update Thu May 26 19:27:02 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -81,6 +81,7 @@ public slots:
   void	connectToCluster();
   void	updateServerConsole();
   void	openEditMaterialDialog();
+  void	disconnect();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
@@ -117,6 +118,8 @@ private:
   string			_consoleLog;
 
   GuiEditMaterialDialog		_editMaterialDialog;
+
+  bool				_isConnected;
 };
 
 #endif

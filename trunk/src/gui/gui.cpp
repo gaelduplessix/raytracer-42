@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 26 16:35:11 2011 loick michard
+// Last update Thu May 26 19:27:31 2011 loick michard
 //
 
 #include <QApplication>
@@ -290,7 +290,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _cubeMap(NULL), _scene(NULL), _pixmap(new QPixmap()),
     _ui(new Ui::MainWindow), _isRendering(false), _pause(false),
     _sticon(new QSystemTrayIcon(QIcon("images/image.png"))),
-    _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this))
+    _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this)),
+    _isConnected(false)
 {
   _actionRealQuit->setShortcut(tr("Ctrl+Q"));
   _initDialogCluster();
@@ -306,6 +307,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
   connect(_sticon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
 	  this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
   _sticon->show();
+  _ui->_clusterDock->hide();
+  _ui->actionDeconnexion->setVisible(false);
   QObject::connect(_ui->_cubeMapButton, SIGNAL(clicked()),
   		   this, SLOT(selectCubeMap()));
   QObject::connect(_ui->_backgroundColor, SIGNAL(clicked()),
@@ -330,6 +333,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(connectToCluster()));
   QObject::connect(_ui->actionEditMaterial, SIGNAL(triggered()),
                    this, SLOT(openEditMaterialDialog())); 
+  QObject::connect(_ui->actionDeconnexion, SIGNAL(triggered()),
+                   this, SLOT(disconnect()));
   _scene = createScene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
