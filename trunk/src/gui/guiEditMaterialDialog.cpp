@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Thu May 26 11:59:07 2011 loick michard
+// Last update Thu May 26 13:06:38 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -70,6 +70,7 @@ GuiEditMaterialDialog::GuiEditMaterialDialog()
   QObject::connect(_dialog->_bumpmapping, SIGNAL(clicked(bool)),
                    this, SLOT(updateMaterial()));
   _image = new QImage(150, 150, QImage::Format_ARGB32);
+  _image->fill(0);
   _pixmap = new QPixmap();
   _scene = createScene();
   _raytracer = new Raytracer();
