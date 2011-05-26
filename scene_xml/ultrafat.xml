@@ -17,13 +17,19 @@
       <specular>0.5</specular>
       <specularPow>50</specularPow>
       <reflection>0</reflection>
-      <color>120,100,210</color>
+      <color>140,160,230</color>
     </material>
     <material name="mcylinder">
       <specular>0.5</specular>
       <specularPow>50</specularPow>
       <reflection>0</reflection>
-      <color>190,200,130</color>
+      <color>210,180,130</color>
+    </material>
+    <material name="mcone">
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <color>230,160,60</color>
     </material>
   </materials>
   
@@ -123,7 +129,11 @@
 	  <rotation type="degree">45, 0, 0</rotation>
 	  <radius>1</radius>
 	</primitive>
-
+	<primitive type="cone" material="mcone">
+	  <position>23,5,0</position>
+	  <rotation type="degree">-10, 0, 0</rotation>
+	  <radius>1</radius>
+	</primitive>
 	<primitive type="plane" material="materialPlane2">
 	  <position>0, 0, -5</position>
 	  <rotation type="degree">0, 0, 0</rotation>

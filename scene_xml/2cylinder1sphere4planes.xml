@@ -1,0 +1,109 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+  
+  <materials>
+    <material name="materialPlane2">
+      <color>255,255,255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+    <material name="msphere">
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>1</reflection>
+      <transmission>1</transmission>
+      <refractionIndex>1.33</refractionIndex>
+      <color>140,160,230</color>
+    </material>
+    <material name="mcylinder">
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <color>150,50,130</color>
+    </material>
+    <material name="mtorus">
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <color>0,200,200</color>
+    </material>
+    <material name="mcone">
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <color>230,160,60</color>
+    </material>
+  </materials>
+  
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+      <primitives>
+	<primitive type="cylinder" material="mcylinder">
+	  <position>15,-4,8</position>
+	  <rotation type="degree">30,0,0</rotation>
+	  <radius>0.8</radius>
+	</primitive>
+	<primitive type="cylinder" material="mcylinder">
+	  <position>14,4,8</position>
+	  <rotation type="degree">-30,0,0</rotation>
+	  <radius>0.8</radius>
+	</primitive>
+	<primitive type="torus" material="mtorus">
+	  <position>15,0,0</position>
+	  <minor>0.5</minor>
+	  <major>3</major>
+	  <rotation type="degree">0,45,0</rotation>
+	</primitive>
+	<primitive type="sphere" material="msphere">
+	  <position>15,0,-3</position>
+	  <rotation type="degree">0,0,0</rotation>
+	  <radius>1</radius>
+	</primitive>
+	<primitive type="plane" material="materialPlane2">
+	  <position>0, 0, -5</position>
+	  <rotation type="degree">0, 0, 0</rotation>
+	</primitive>
+	<primitive type="plane" material="materialPlane2">
+	  <position>0, 0, 5</position>
+	  <rotation type="degree">0, 0, 0</rotation>
+	</primitive>
+	<primitive type="plane" material="materialPlane2">
+	  <position>0, 9, -2</position>
+	  <rotation type="degree">90, 180, 40</rotation>
+	</primitive>
+	<primitive type="plane" material="materialPlane2">
+	  <position>0, -9, -2</position>
+	  <rotation type="degree">90, 0, 40</rotation>
+	</primitive>
+	<primitive type="plane" material="materialPlane2">
+	  <position>30,0,-2</position>
+	  <rotation type="degree">0, 90, 0</rotation>
+	</primitive>
+	<primitive type="plane" material="materialPlane2">
+	  <position>-70,0,-2</position>
+	  <rotation type="degree">0, 90, 0</rotation>
+	</primitive>
+      </primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="parallelogram">
+      <point>10,-4,0</point>
+      <point2>10,-4,1</point2>
+      <point3>10,4,1</point3>
+      <color>255,255,255</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>
