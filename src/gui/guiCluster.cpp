@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Wed May 25 17:19:24 2011 gael jochaud-du-plessix
+// Last update Wed May 25 22:50:18 2011 gael jochaud-du-plessix
 //
 
 #include <QInputDialog>
@@ -31,18 +31,21 @@ void		RaytracerGUI::_initDialogCluster()
 
 void		RaytracerGUI::updateServerConsole()
 {
-  _clusterDialogUi->_clusterConsole->setText(_consoleLog.c_str());
+  _clusterDialogUi->_clusterConsole->setHtml(_consoleLog.c_str());
+  _clusterDialogUi->_clusterConsole->moveCursor(QTextCursor::End);
 }
 
 void		RaytracerGUI::launchServer()
 {
+  _consoleLog = "";
+  _clusterDialogUi->_clusterConsole->setText("");
   int ok = _launchServerDialog->exec();
 
   if (ok)
     {
       this->setEnabled(false);
       ClusterServer
-	server(_launchServerDialogUi->_adress->text().toStdString(),
+	server(this, _launchServerDialogUi->_adress->text().toStdString(),
 	       _launchServerDialogUi->_port->value());
       QTimer *timer = new QTimer();
       timer->start(200);
@@ -53,4 +56,11 @@ void		RaytracerGUI::launchServer()
       delete timer;
       this->setEnabled(true);
     }
+}
+
+void		RaytracerGUI::connectToCluster()
+{
+  QTcpSocket	serverConnection;
+
+  //serverConnection.connectToHost(QHostAddress("10.17.72.67"), 4242);
 }

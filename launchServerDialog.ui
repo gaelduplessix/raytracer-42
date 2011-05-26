@@ -36,6 +36,9 @@
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
+        <property name="toolTip">
+         <string/>
+        </property>
         <property name="text">
          <string>Port</string>
         </property>
@@ -43,6 +46,15 @@
       </item>
       <item row="1" column="1">
        <widget class="QSpinBox" name="_port">
+        <property name="toolTip">
+         <string>0: sélectionne un port automatiquement</string>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="whatsThis">
+         <string/>
+        </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
@@ -50,7 +62,7 @@
          <number>100000</number>
         </property>
         <property name="value">
-         <number>80</number>
+         <number>0</number>
         </property>
        </widget>
       </item>

@@ -5,11 +5,10 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 19:02:17 2011 gael jochaud-du-plessix
-// Last update Wed May 25 17:03:14 2011 gael jochaud-du-plessix
+// Last update Wed May 25 22:11:43 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServerThread.hpp"
-
 #include "ClusterServer.hpp"
 
 #include <sstream>
@@ -17,27 +16,29 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
-
 ClusterServerThread::ClusterServerThread(ClusterServer* clusterServer,
 					 int type):
   _type(type),_clusterServer(clusterServer), _networkManager(0),
-  _timer(NULL)
+  _timer(NULL), _tcpServer(NULL), _stopReportConnectionError(false)
 {
 }
-#include <iostream>
+
 ClusterServerThread::~ClusterServerThread()
 {
   exit();
   wait();
   if (_timer)
-    delete (_timer);
+    delete _timer;
+  if (_tcpServer)
+    delete _tcpServer;
+  _clusterServer->unlockCentralServerConnection();
 }
 
 void	ClusterServerThread::run(void)
 {
-  _timer = new QTimer();
   if (_type == ClusterServerThread::CENTRAL_REGISTER)
     {
+      _timer = new QTimer();
       connect(_timer, SIGNAL(timeout()), this,
   	      SLOT(registerToCentralServer()));
       _timer->setInterval(1000);
@@ -45,7 +46,26 @@ void	ClusterServerThread::run(void)
     }
   else if (_type == ClusterServerThread::CLIENT_LISTENER)
     {
-      
+      _tcpServer = new QTcpServer();
+      connect(_tcpServer, SIGNAL(newConnection()), this,
+	      SLOT(newConnection()));
+      if (_tcpServer->listen(QHostAddress::Any, _clusterServer->getPort()))
+	{
+	  _clusterServer->setPort(_tcpServer->serverPort());
+	  _clusterServer->waitCentralServerConnection();
+	  if (!_clusterServer->getCentralServerConnectionState())
+	    return ;
+	  _clusterServer->getInterface()
+	    ->logServerConsoleMessage("<span style=\"color:green\">Success: "
+				      "server ready, waiting for connection."
+				      "</span>");
+	}
+      else
+	{
+	  _clusterServer->getInterface()
+	    ->logServerConsoleMessage("<span style=\"color:red\">Error: "
+				      "cannot create tcp server.</span>");
+	}
     }
   exec();
 }
@@ -70,9 +90,36 @@ void		ClusterServerThread::registerToCentralServer(void)
 
 void	ClusterServerThread::readCentralServerResponse(QNetworkReply* reply)
 {
+  bool	stat = false;
+
   if (reply->error() != QNetworkReply::NoError)
+    stat = false;
+  else
     {
-      cout << "Error\n";
+      QString	response(reply->readAll());
+      if (response == "0")
+	stat = true;
+      else
+	stat = false;
     }
+  _clusterServer->setCentralServerConnectionState(stat);
+  if (!stat && !_stopReportConnectionError)
+    {
+      _clusterServer->getInterface()
+	->logServerConsoleMessage("<span style=\"color:red\">Error: "
+				  "central server connection failed</span>");
+      _stopReportConnectionError = true;
+    }
+  _clusterServer->unlockCentralServerConnection();
   sender()->deleteLater();
+}
+
+void	ClusterServerThread::newConnection()
+{
+  _currentClientSocket = _tcpServer->nextPendingConnection();
+  _clusterServer->getInterface()
+    ->logServerConsoleMessage("<span>Info: "
+			      "Connection etablished with client </span>"
+			      + _currentClientSocket->peerAddress().toString().toStdString());
+  
 }

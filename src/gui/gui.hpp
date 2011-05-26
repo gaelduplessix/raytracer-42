@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Tue May 24 19:27:25 2011 loick michard
+// Last update Wed May 25 22:28:36 2011 gael jochaud-du-plessix
 //
 
 #ifndef _GUI_HPP_
@@ -76,6 +76,7 @@ public slots:
   void	iconActivated(QSystemTrayIcon::ActivationReason reason);
   void	realQuit();
   void	launchServer();
+  void	connectToCluster();
   void	updateServerConsole();
   void	openEditMaterialDialog();
 
