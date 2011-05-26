@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 26 15:07:17 2011 samuel olivier
+// Last update Thu May 26 15:18:02 2011 loick michard
 //
 
 #include <QApplication>
@@ -247,6 +247,7 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
       _ui->_width->setEnabled(true);
       _ui->_height->setEnabled(true);
       _ui->_threads->setEnabled(true);
+      _ui->action_Play->setEnabled(true);
     }
 }
 

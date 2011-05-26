@@ -180,7 +180,7 @@
              <widget class="QComboBox" name="_textureType">
               <item>
                <property name="text">
-                <string>Normal</string>
+                <string>Image</string>
                </property>
               </item>
               <item>
