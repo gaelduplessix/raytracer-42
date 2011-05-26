@@ -39,7 +39,7 @@
       </primitives>
     </object>
   </objects>
-  
+
   <lights>
     <light type="spot">
       <position>0,1,0</position>
