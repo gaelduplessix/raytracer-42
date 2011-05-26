@@ -11,6 +11,7 @@
         <file>images/image.png</file>
         <file>images/network-server.png</file>
         <file>images/network-workgroup.png</file>
+        <file>images/disconnect.png</file>
     </qresource>
     <qresource prefix="/cubemap">
 	<file>cubemaps/Maskonaive3/negx.jpg</file>

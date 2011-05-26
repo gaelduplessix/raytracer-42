@@ -5,9 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
+// Last update Thu May 26 19:53:53 2011 loick michard
 // Last update Thu May 26 17:45:53 2011 gael jochaud-du-plessix
 //
 
+#include <QMessageBox>
 #include <QInputDialog>
 #include "ClusterServer.hpp"
 #include "ClusterClient.hpp"
@@ -62,12 +64,34 @@ void		RaytracerGUI::launchServer()
     }
 }
 
+void		RaytracerGUI::disconnect()
+{
+  int ret =
+    QMessageBox::warning(this, tr("Raytracer"),
+			 tr("Etes-vous sur de vouloir \
+vous deconnecter du cluster?"),
+			 QMessageBox::Yes
+			 | QMessageBox::Cancel,
+			 QMessageBox::Cancel);
+  if (ret == QMessageBox::Yes)
+    {
+      _ui->_clusterDock->hide();
+      _ui->actionDeconnexion->setVisible(false);
+      _ui->actionSe_connecter_un_serveur->setVisible(true);
+      _isConnected = false;
+    }
+}
+
 void		RaytracerGUI::connectToCluster()
 {
   int returnCode = _connectToServerDialog->exec();  
 
   if (returnCode == QDialog::Accepted)
     {
+      _ui->_clusterDock->show();
+      _ui->actionDeconnexion->setVisible(true);
+      _ui->actionSe_connecter_un_serveur->setVisible(false);
+      _isConnected = true;
       ClusterClient
       	client(this, _connectToServerDialogUi->_addres->text().toStdString(),
 	       _connectToServerDialogUi->_subdivisions->value());
