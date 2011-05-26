@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Wed May 25 19:44:28 2011 loick michard
+// Last update Thu May 26 11:59:07 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -44,10 +44,33 @@ GuiEditMaterialDialog::GuiEditMaterialDialog()
                    this, SLOT(getImage()));
   QObject::connect(_dialog->_textureType, SIGNAL(currentIndexChanged(int)),
                    this, SLOT(updateTextureImage(int)));
+  QObject::connect(_dialog->_textureX, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_textureY, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_imagePath, 
+		   SIGNAL(textChanged(QString)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_texture, SIGNAL(clicked(bool)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_proceduralDeformation, SIGNAL(clicked(bool)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_deformationType, SIGNAL(currentIndexChanged(int)),
+                   this, SLOT(updateTextureImage(int)));
+  QObject::connect(_dialog->_deformationCoeff, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_findHeightmap, SIGNAL(clicked()),
+                   this, SLOT(getHeightmap()));
+  QObject::connect(_dialog->_bumpmapType, SIGNAL(currentIndexChanged(int)),
+                   this, SLOT(updateHeightmap(int)));
+  QObject::connect(_dialog->_bumpmapX, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_bumpmapY, SIGNAL(valueChanged(double)),
+                   this, SLOT(updateMaterial()));
+  QObject::connect(_dialog->_bumpmapping, SIGNAL(clicked(bool)),
+                   this, SLOT(updateMaterial()));
   _image = new QImage(150, 150, QImage::Format_ARGB32);
   _pixmap = new QPixmap();
-  _timer = new QTimer();
-  _timer->setInterval(50);
   _scene = createScene();
   _raytracer = new Raytracer();
   _config = new RenderingConfiguration();
@@ -63,6 +86,15 @@ void	GuiEditMaterialDialog::updateTextureImage(int i)
     _dialog->_imageGroup->setEnabled(true);
   else
     _dialog->_imageGroup->setEnabled(false);
+  updateMaterial();
+}
+
+void    GuiEditMaterialDialog::updateHeightmap(int i)
+{
+  if (i == 0)
+    _dialog->_heightmap->setEnabled(true);
+  else
+    _dialog->_heightmap->setEnabled(false);
   updateMaterial();
 }
 
@@ -160,13 +192,27 @@ void GuiEditMaterialDialog::getImage()
 {
   QString image = 
     QFileDialog::getOpenFileName(this,
-				 tr("Selectionez une image"),
+				 tr("Selectionez une Texture"),
 				 QString(),
 				 "*.png *.gif *.jpeg *.bmp *.jpg",
 				 0,
 				 QFileDialog::DontUseNativeDialog);
   if (image != "")
     _dialog->_imagePath->setText(image);
+  updateMaterial();
+}
+
+void GuiEditMaterialDialog::getHeightmap()
+{
+  QString image =
+    QFileDialog::getOpenFileName(this,
+                                 tr("Selectionez une heightmap"),
+                                 QString(),
+                                 "*.png *.gif *.jpeg *.bmp *.jpg",
+                                 0,
+                                 QFileDialog::DontUseNativeDialog);
+  if (image != "")
+    _dialog->_bumpmapHeightmap->setText(image);
   updateMaterial();
 }
 
@@ -178,7 +224,6 @@ void GuiEditMaterialDialog::updateMaterial()
     {
       _currentMat = _materials->at(index);
       _materials->at(index)->setColor(_color->rgba());
-
       if (_dialog->_texture->isChecked())
 	{
 	  if (_dialog->_textureType->currentIndex() == 0)
@@ -195,7 +240,9 @@ void GuiEditMaterialDialog::updateMaterial()
 					   _dialog->_textureY->value()));
 		}
 	    }
-	  else
+	  else if (!_materials->at(index)->_isTextured ||
+		   _materials->at(index)->_texture->_type !=
+		   _dialog->_textureType->currentIndex())
 	    {
 	      _materials->at(index)->_isTextured = true;
 	      PerlinNoise *texture =
@@ -204,8 +251,10 @@ void GuiEditMaterialDialog::updateMaterial()
 	      if (_dialog->_textureType->currentIndex() == 2)
 		texture->setMarbleProperties();
 	      else if (_dialog->_textureType->currentIndex() == 3)
-		texture->setWoodProperties();
+		texture->setWoodProperties(); 
 	      _materials->at(index)->setTexture(texture);
+	      _materials->at(index)->_texture->_type =
+		_dialog->_textureType->currentIndex();
 	    }
 	}
       else
@@ -218,6 +267,45 @@ void GuiEditMaterialDialog::updateMaterial()
       _materials->at(index)->_refractionIndex = _dialog->_refraction->value();
       _materials->at(index)->_diffusedReflectionCoeff = 
 	_dialog->_diffuseReflection->value();
+
+      _materials->at(index)->_hasBumpMap = _dialog->_bumpmapping->isChecked();
+      if (_materials->at(index)->_hasBumpMap)
+        {
+	  if (_dialog->_bumpmapType->currentIndex() == 0)
+            {
+              if (_dialog->_bumpmapHeightmap->text() != "" &&
+                  (!_materials->at(index)->_heightmap ||
+                   _dialog->_bumpmapHeightmap->text().toStdString() !=
+                   _materials->at(index)->_heightmap->getName()))
+                {
+		  _materials->at(index)->
+                    setHeightmap(new Texture(_dialog->
+					     _bumpmapHeightmap
+					     ->text().toStdString(),
+					     _dialog->_bumpmapX->value(),
+					     _dialog->_bumpmapY->value()));
+		}
+	    }
+	  else if (!_materials->at(index)->_heightmap ||
+                   _materials->at(index)->_heightmap->_type !=
+                   _dialog->_bumpmapType->currentIndex())
+	    {
+	      _materials->at(index)->
+		setHeightmap(new PerlinNoise(_dialog->_bumpmapX->value(),
+					     _dialog->_bumpmapY->value()));
+	    }
+	}
+
+      _materials->at(index)->_hasNormalDeformation |=
+        _dialog->_proceduralDeformation->isChecked();
+      if (!_dialog->_proceduralDeformation->isChecked())
+	_materials->at(index)->_deformationType = -1;
+      else
+	_materials->at(index)->_deformationType =
+	  _dialog->_deformationType->currentIndex();
+      _materials->at(index)->_deformationCoeff =
+        _dialog->_deformationCoeff->value();
+
       _raytracer->stopRendering();
       _scene = createScene();
       _raytracer->setScene(*_scene);
@@ -243,6 +331,7 @@ void GuiEditMaterialDialog::pixelHasBeenRendered(int x, int y,
 
 void GuiEditMaterialDialog::fillFields()
 {
+  _isSet = false;
   int	index = _dialog->_materials->currentIndex();
 
   if (index >= 0)
@@ -269,6 +358,8 @@ void GuiEditMaterialDialog::fillFields()
 					   _texture->getName().c_str());
 	    }
 	}
+      else
+	_dialog->_textureType->setCurrentIndex(3);
       _dialog->_specular->setValue(_materials->at(index)->_specularCoeff);
       _dialog->_specularPow->setValue(_materials->at(index)->_specularPow);
       _dialog->_reflection->setValue(_materials->at(index)->_reflectionCoeff);
@@ -278,7 +369,42 @@ void GuiEditMaterialDialog::fillFields()
       _dialog->_diffuseReflection->setValue(_materials->
 					    at(index)->
 					    _diffusedReflectionCoeff);
+      _dialog->_proceduralDeformation
+	->setChecked((_materials->at(index)->_hasNormalDeformation &&
+		      _materials->at(index)->_deformationType != -1));
+      if (_materials->at(index)->_hasNormalDeformation &&
+	  _materials->at(index)->_deformationType != -1)
+	_dialog->_deformationType->setCurrentIndex(_materials->at(index)->
+						   _deformationType);
+      else
+	_dialog->_deformationType->setCurrentIndex(0);
+      _dialog->_deformationCoeff->setValue(_materials->at(index)->
+					   _deformationCoeff);
+
+      _dialog->_bumpmapping->setChecked(_materials->at(index)->
+					_hasBumpMap);
+      if (_materials->at(index)->_hasBumpMap && _materials->
+	  at(index)->_heightmap)
+	{
+	  _dialog->_bumpmapX->setValue(_materials->
+				       at(index)->_heightmap->_repeatWidth);
+	  _dialog->_bumpmapY->setValue(_materials->
+				       at(index)->_heightmap->_repeatHeight);
+	  if (_materials->at(index)->_heightmap->_type == 0 &&
+              _materials->at(index)->_heightmap->_image)
+	    {
+	      _dialog->_bumpmapType->setCurrentIndex(0);
+	      _dialog->_bumpmapHeightmap->
+		setText(_materials->at(index)->_heightmap->getName().c_str());
+	    }
+	  else
+	    _dialog->_bumpmapType->setCurrentIndex(1);
+	}
+      else
+	_dialog->_bumpmapType->setCurrentIndex(1);
     }
+  _isSet = true;
+  updateMaterial();
 }
 
 void 
