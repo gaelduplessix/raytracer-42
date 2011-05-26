@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Tue May 24 13:54:50 2011 loick michard
+// Last update Thu May 26 15:58:50 2011 gael jochaud-du-plessix
 // Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
@@ -13,6 +13,9 @@
 #define _RAYTRACER_HPP_
 
 #define EPSILON 1e-5
+
+#include <QMutex>
+#include <QMutexLocker>
 
 #include <stack>
 #include <vector>
@@ -110,6 +113,7 @@ private:
   RenderingConfiguration*	_config;
   RenderingInterface*		_interface;
   RaytracerThread*		_thread;
+  mutable QMutex		_mutex;
 };
 
 #endif

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Mon May 23 19:30:52 2011 samuel olivier
+// Last update Thu May 26 17:09:09 2011 gael jochaud-du-plessix
 //
 
 #include <QMutexLocker>
@@ -39,7 +39,7 @@ void		RaytracerThread::run(void)
     _subThreads[i]->start();
   for (unsigned int i = 0; i < _subThreads.size(); i++)
     _subThreads[i]->wait();  
-  if (getProgress() >= 1 && _raytracer->getRenderingInterface())
+  if (getProgress() + EPSILON >= 1 && _raytracer->getRenderingInterface())
     {
       _raytracer->getRenderingInterface()->renderingHasFinished();
       _isInit = false;
