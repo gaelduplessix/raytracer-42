@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May  5 18:31:12 2011 loick michard
-// Last update Wed May 25 11:09:38 2011 loick michard
+// Last update Thu May 26 12:42:05 2011 samuel olivier
 //
 
 #include "Torus.hpp"

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 18:18:32 2011 samuel olivier
+// Last update Thu May 26 12:37:42 2011 samuel olivier
 //
 
 #include <cmath>
@@ -236,11 +236,12 @@ Vector		Triangle::getNormalVector(const Point& intersectPoint,
   return (_normal);
   (void)intersectPoint;
 }
+
 #define MAX(x, y) ((x) > (y)) ? (x) : (y)
 #define MIN(x, y) ((x) < (y)) ? (x) : (y)
+
 bool		Triangle::isInBoundingBox(BoundingBox& box) const
 {
-  //  std::cout<<"Triangle:"<<_absolutePosition._x<<" "<<_absolutePosition._y<<" "<<_absolutePosition._z<<std::endl;
   Point		maxBox = box.getMaxPoint();
   Point		minBox = box.getMinPoint();
   double	maxX = MAX(MAX(_vertex1._x, _vertex2._x),

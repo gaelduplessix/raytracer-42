@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 19:29:08 2011 loick michard
+// Last update Thu May 26 12:35:23 2011 samuel olivier
 //
 
 #include <cmath>
@@ -137,7 +137,10 @@ void                  Sphere::intersectWithRay(const Ray& ray,
 Vector		Sphere::getNormalVector(const Point& intersectPoint,
 					const Vector& viewVector) const
 {
-  Vector	normal = intersectPoint - _absolutePosition;
+  Point		intersect = intersectPoint - _absolutePosition;
+  intersect.rotate(_rotation, true);
+  intersect += _absolutePosition;
+  Vector	normal = intersect - _absolutePosition;
   double	cosA = viewVector * normal;
 
   cosA = cosA / (viewVector.getNorm() * normal.getNorm());

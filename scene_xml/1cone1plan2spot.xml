@@ -29,7 +29,7 @@
       <primitives>
 	<primitive type="cone" material="materialCone">
 	  <position>15, 2, 1</position>
-	  <rotation type="radian">60, 0, 0</rotation>
+	  <rotation type="degree">20, 0, 0</rotation>
 	  <radius>2</radius>
 	</primitive>
 	<primitive type="plane" material="materialPlane">

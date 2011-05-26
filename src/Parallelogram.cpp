@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 18:55:37 2011 samuel olivier
+// Last update Wed May 25 23:03:19 2011 samuel olivier
 //
 
 #include <cmath>
@@ -159,6 +159,7 @@ void            Parallelogram::getMappedCoords(const Point& intersectPoint,
   double        d = areaA / sum;
   Point         texturePoint = _textureVertex1
     + (b * _textureV1 + c * _textureV2 + d * _textureV3) / (a + b + c + d);
+
   x = -texturePoint._x;
   y = -texturePoint._y;
 }
@@ -192,7 +193,6 @@ Parallelogram::addIntersectionWithRay(const Ray& ray,
 		     + _var21 + _var22 * ray._point._z - ray._point._y
 		     * _var23 + _var24 - _var25 * ray._point._z + _var26
 		     * ray._point._y + _var27) / D;
-
   if (u < 0 || t <= EPSILON || v < 0 || u > 1 || v > 1 || D == 0)
     return ;
   vector<double>       k;
@@ -228,7 +228,6 @@ void	Parallelogram::intersectWithRay(const Ray& ray,
 		     + _var21 + _var22 * ray._point._z - ray._point._y
 		     * _var23 + _var24 - _var25 * ray._point._z + _var26
 		     * ray._point._y + _var27) / D;
-
   if (u < 0 || t <= EPSILON || v < 0 || u > 1 || v > 1 || D == 0)
     return ;
   if (t < res || res < 0)
