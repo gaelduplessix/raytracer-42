@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Sun May  8 13:11:11 2011 samuel olivier
+// Last update Thu May 26 12:16:44 2011 samuel olivier
 //
 
 #include <cmath>

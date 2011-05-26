@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 10:48:52 2011 loick michard
+// Last update Thu May 26 12:26:16 2011 samuel olivier
 //
 
 #include <cmath>
@@ -144,7 +144,7 @@ void                  Cone::intersectWithRay(const Ray& ray,
       if (solutions[i] > EPSILON && (solutions[i] < res ||  res < 0))
         {
 	  Point intersectPoint;
-	  bool  limited = false;
+	  bool	limited = false;
           if (_limitMin > 0 || _limitMax > 0)
             {
               intersectPoint = newRay._point + newRay._vector * solutions[i];
@@ -168,12 +168,13 @@ void                  Cone::intersectWithRay(const Ray& ray,
 Vector		Cone::getNormalVector(const Point& intersectPoint,
 				      const Vector& viewVector) const
 {
-  Point		intersect = intersectPoint;
+  Point		intersect = intersectPoint - _absolutePosition;
   intersect.rotate(_rotation, true);
+  intersect += _absolutePosition;
   Vector	normal(intersect._x - _absolutePosition._x,
 		       intersect._y - _absolutePosition._y,
-		       -1 * (intersect._z - _absolutePosition._z)
-		       * _angle);
+		       (intersect._z - _absolutePosition._z)
+		       * _angle * -1);
   double	cosA = viewVector * normal
     / (viewVector.getNorm() * normal.getNorm());
 

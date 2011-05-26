@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 10:50:06 2011 loick michard
+// Last update Thu May 26 12:47:04 2011 samuel olivier
 //
 
 #include <cmath>
@@ -158,8 +158,9 @@ void                  Cylinder::intersectWithRay(const Ray& ray,
 Vector		Cylinder::getNormalVector(const Point& intersectPoint,
 					  const Vector& viewVector) const
 {
-  Point		pos = intersectPoint;
+  Point		pos = intersectPoint - _absolutePosition;
   pos.rotate(_rotation, true);
+  pos += _absolutePosition;
   Vector	normal = pos - _absolutePosition;
   normal._z = 0;
   normal.rotate(_rotation);
