@@ -21,7 +21,7 @@
       <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <transmission>0.6</transmission>
+      <transmission>0</transmission>
       <refractionIndex>1</refractionIndex>
       <reflection>1</reflection>
     </material>

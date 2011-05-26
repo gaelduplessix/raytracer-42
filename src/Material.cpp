@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Wed May 25 18:09:11 2011 loick michard
+// Last update Thu May 26 10:33:04 2011 loick michard
 //
 
 #include "Material.hpp"
