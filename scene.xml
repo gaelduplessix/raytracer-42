@@ -21,9 +21,10 @@
       <color>255, 255, 255</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
+      <limitTexture type="file">stripes.png</limitTexture>
       <transmission>0</transmission>
       <refractionIndex>1</refractionIndex>
-      <reflection>1</reflection>
+      <reflection>0</reflection>
     </material>
   </materials>
 
@@ -41,7 +42,7 @@
 	<primitive type="sphere" material="refraction">
 	  <position>20, 0, -2</position>
 	  <rotation type="radian">0, 0, 0</rotation>
-	  <radius>2</radius>
+	  <radius>3</radius>
 	</primitive>
       </primitives>
     </object>
