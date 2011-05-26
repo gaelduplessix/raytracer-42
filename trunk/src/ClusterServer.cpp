@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed May 25 16:50:47 2011 gael jochaud-du-plessix
+// Last update Wed May 25 21:31:48 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -14,13 +14,14 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
-#ifdef Q_OS_UNIX
-#include <stdio.h>
-#endif
-
-ClusterServer::ClusterServer(string url, int port):
-  _port(port), _centralServerUrl(url.c_str())
+ClusterServer::ClusterServer(RenderingInterface* interface, string url,
+			     int port):
+  _interface(interface), _port(port), _centralServerUrl(url.c_str()),
+  _centralServerConnectionState(false)
 {
+  getInterface()
+    ->logServerConsoleMessage("<span>Info: "
+			      "connecting to central server...</span>");
   _registerServerThread =
     new ClusterServerThread(this, ClusterServerThread::CENTRAL_REGISTER);
   _clientListenerThread =
@@ -39,10 +40,46 @@ ClusterServer::~ClusterServer()
 
 int        ClusterServer::getPort(void)
 {
+  QMutexLocker	lock(&_mutex);
   return (_port);
 }
+
+void        ClusterServer::setPort(int port)
+{
+  QMutexLocker	lock(&_mutex);
+  _port = port;
+}
+
 
 QUrl        ClusterServer::getCentralServerUrl(void)
 {
   return (_centralServerUrl);
+}
+
+RenderingInterface*	ClusterServer::getInterface(void)
+{
+  return (_interface);
+}
+
+bool	ClusterServer::getCentralServerConnectionState(void)
+
+{ 
+  QMutexLocker	lock(&_mutex);
+  return (_centralServerConnectionState);
+}
+
+void	ClusterServer::setCentralServerConnectionState(bool state)
+{
+  QMutexLocker	lock(&_mutex);
+  _centralServerConnectionState = state;
+}
+
+void	ClusterServer::waitCentralServerConnection(void)
+{
+  _centralServerConnectionLock.wait(&_mutex);
+}
+
+void	ClusterServer::unlockCentralServerConnection(void)
+{
+  _centralServerConnectionLock.wakeAll();
 }

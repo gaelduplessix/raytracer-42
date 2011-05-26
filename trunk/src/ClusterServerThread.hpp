@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 18:54:45 2011 gael jochaud-du-plessix
-// Last update Wed May 25 14:36:59 2011 gael jochaud-du-plessix
+// Last update Wed May 25 22:09:15 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERSERVERTHREAD_HPP_
@@ -16,6 +16,9 @@
 #include <QUrl>
 #include <QNetworkAccessManager>
 #include <QTimer>
+#include <QTcpServer>
+#include <QTcpSocket>
+
 #include <string>
 
 using namespace std;
@@ -38,12 +41,16 @@ public:
 public slots:
   void		readCentralServerResponse(QNetworkReply* reply);
   void		registerToCentralServer(void);
+  void		newConnection(void);
 
 private:
   int				_type;
   ClusterServer*		_clusterServer;
   QNetworkAccessManager*	_networkManager;
   QTimer*			_timer;
+  QTcpServer*			_tcpServer;
+  bool				_stopReportConnectionError;
+  QTcpSocket*			_currentClientSocket;
 };
 
 #endif

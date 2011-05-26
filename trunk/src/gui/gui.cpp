@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed May 25 19:11:33 2011 samuel olivier
+// Last update Thu May 26 14:56:05 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -326,6 +326,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(realQuit()));
   QObject::connect(_ui->actionLancer_un_serveur, SIGNAL(triggered()),
                    this, SLOT(launchServer()));
+  QObject::connect(_ui->actionSe_connecter_un_serveur, SIGNAL(triggered()),
+                   this, SLOT(connectToCluster()));
   QObject::connect(_ui->actionEditMaterial, SIGNAL(triggered()),
                    this, SLOT(openEditMaterialDialog())); 
   _scene = createScene();
