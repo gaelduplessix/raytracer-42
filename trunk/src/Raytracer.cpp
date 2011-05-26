@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed May 25 17:35:19 2011 samuel olivier
+// Last update Thu May 26 16:58:42 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -88,6 +88,7 @@ Raytracer::getRenderingInterface(void) const
 
 bool Raytracer::isPixelRaytraced(int x, int y)
 {
+  QMutexLocker	lock(&_mutex);
   if (_thread->_raytracedPixels.size() > 0 &&
       _thread->_raytracedPixels[0].size() > 0)
     {
@@ -152,6 +153,7 @@ void		Raytracer::renderingLoop(double& progress,
 
 Point	Raytracer::getPixelToRender(RaytracerSubThread* thread) const
 {
+  QMutexLocker		lock(&_mutex);
   int			width = _config->getWidth();
   int			height = _config->getHeight();
 

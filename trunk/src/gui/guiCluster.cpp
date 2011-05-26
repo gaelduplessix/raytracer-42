@@ -5,11 +5,12 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Thu May 26 16:47:43 2011 loick michard
+// Last update Thu May 26 17:45:53 2011 gael jochaud-du-plessix
 //
 
 #include <QInputDialog>
 #include "ClusterServer.hpp"
+#include "ClusterClient.hpp"
 #include "gui.hpp"
 
 void		RaytracerGUI::logServerConsoleMessage(string message)
@@ -42,9 +43,9 @@ void		RaytracerGUI::launchServer()
 {
   _consoleLog = "";
   _clusterDialogUi->_clusterConsole->setText("");
-  int ok = _launchServerDialog->exec();
+  int returnCode = _launchServerDialog->exec();
 
-  if (ok)
+  if (returnCode == QDialog::Accepted)
     {
       this->setEnabled(false);
       ClusterServer
@@ -63,10 +64,12 @@ void		RaytracerGUI::launchServer()
 
 void		RaytracerGUI::connectToCluster()
 {
-  int ok = _connectToServerDialog->exec();  
+  int returnCode = _connectToServerDialog->exec();  
 
-  if (ok)
+  if (returnCode == QDialog::Accepted)
     {
-      
+      ClusterClient
+      	client(this, _connectToServerDialogUi->_addres->text().toStdString(),
+	       _connectToServerDialogUi->_subdivisions->value());
     }
 }
