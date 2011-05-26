@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Thu May 26 16:11:52 2011 loick michard
+// Last update Thu May 26 16:16:58 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -13,6 +13,7 @@
 #include <iostream>
 #include <QColorDialog>
 #include <QFileDialog>
+#include "CheckerBoard.hpp"
 #include "CubeMap.hpp"
 #include "guiEditMaterialDialog.hpp"
 
@@ -268,17 +269,26 @@ void GuiEditMaterialDialog::updateMaterial()
 		   _materials->at(index)->_texture->_type !=
 		   _dialog->_textureType->currentIndex())
 	    {
-	      _materials->at(index)->_isTextured = true;
-	      PerlinNoise *texture =
-		new PerlinNoise(_dialog->_textureX->value(),
-				_dialog->_textureY->value());
-	      if (_dialog->_textureType->currentIndex() == 2)
-		texture->setMarbleProperties();
-	      else if (_dialog->_textureType->currentIndex() == 3)
-		texture->setWoodProperties(); 
-	      _materials->at(index)->setTexture(texture);
-	      _materials->at(index)->_texture->_type =
-		_dialog->_textureType->currentIndex();
+	      if (_dialog->_textureType->currentIndex() == 4)
+		{
+		  _materials->at(index)->
+                    setTexture(new CheckerBoard(_dialog->_textureX->value(),
+						_dialog->_textureY->value()));
+		}
+	      else
+		{
+		  _materials->at(index)->_isTextured = true;
+		  PerlinNoise *texture =
+		    new PerlinNoise(_dialog->_textureX->value(),
+				    _dialog->_textureY->value());
+		  if (_dialog->_textureType->currentIndex() == 2)
+		    texture->setMarbleProperties();
+		  else if (_dialog->_textureType->currentIndex() == 3)
+		    texture->setWoodProperties(); 
+		  _materials->at(index)->setTexture(texture);
+		  _materials->at(index)->_texture->_type =
+		    _dialog->_textureType->currentIndex();
+		}
 	    }
 	}
       else

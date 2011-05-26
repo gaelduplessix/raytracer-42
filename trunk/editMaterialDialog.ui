@@ -116,6 +116,9 @@
               <property name="maximum">
                <double>1000.000000000000000</double>
               </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
               <property name="value">
                <double>1.000000000000000</double>
               </property>
@@ -138,6 +141,9 @@
               </property>
               <property name="maximum">
                <double>1000.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
               <property name="value">
                <double>1.000000000000000</double>
@@ -196,6 +202,11 @@
               <item>
                <property name="text">
                 <string>Effet Bois</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Damier</string>
                </property>
               </item>
              </widget>
@@ -370,6 +381,9 @@
            <property name="maximum">
             <double>200.000000000000000</double>
            </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
            <property name="value">
             <double>1.000000000000000</double>
            </property>
@@ -392,6 +406,9 @@
            </property>
            <property name="maximum">
             <double>200.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
            </property>
            <property name="value">
             <double>1.000000000000000</double>
