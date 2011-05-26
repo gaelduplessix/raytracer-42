@@ -39,15 +39,15 @@
 	</primitive>
       </primitives>
     </object>
-    <object type="parallelepipede" material="sp">
+
+    <parallelepipede material="sp">
+      <rotation type="degree">0,0,0</rotation>
       <position>10,0,0</position>
-      <solid>0</solid>
+      <solid>false</solid>
       <width>1,3,1</width>
       <height>3,2,1</height>
-      <depth>1</depth>
-      <rotation type="degree">0,0,0</rotation
->
-    </object>
+      <depth>1,0,0</depth>
+    </parallelepipede>
   </objects>
 
   <lights>
