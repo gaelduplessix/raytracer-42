@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Thu May 26 14:51:55 2011 loick michard
+// Last update Thu May 26 16:11:52 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -263,13 +263,6 @@ void GuiEditMaterialDialog::updateMaterial()
 					   _dialog->_textureX->value(),
 					   _dialog->_textureY->value()));
 		}
-	      else if (_dialog->_imagePath->text() != "")
-		{
-		  _materials->at(index)->_texture->_repeatWidth =
-		    _dialog->_textureX->value();
-		  _materials->at(index)->_texture->_repeatHeight =
-                    _dialog->_textureY->value();
-		}
 	    }
 	  else if (!_materials->at(index)->_isTextured ||
 		   _materials->at(index)->_texture->_type !=
@@ -290,6 +283,13 @@ void GuiEditMaterialDialog::updateMaterial()
 	}
       else
 	_materials->at(index)->_isTextured = false;
+      if (_materials->at(index)->_texture)
+	{
+	  _materials->at(index)->_texture->_repeatWidth =
+	    _dialog->_textureX->value();
+	  _materials->at(index)->_texture->_repeatHeight =
+	    _dialog->_textureY->value();
+	}
       _materials->at(index)->_specularCoeff = _dialog->_specular->value();
       _materials->at(index)->_specularPow = _dialog->_specularPow->value();
       _materials->at(index)->_reflectionCoeff = _dialog->_reflection->value();
@@ -316,13 +316,6 @@ void GuiEditMaterialDialog::updateMaterial()
 					     _dialog->_bumpmapX->value(),
 					     _dialog->_bumpmapY->value()));
 		}
-	      else if (_dialog->_bumpmapHeightmap->text() != "")
-		{
-		  _materials->at(index)->_heightmap->_repeatWidth =
-		    _dialog->_bumpmapX->value();
-		  _materials->at(index)->_heightmap->_repeatHeight =
-                    _dialog->_bumpmapY->value();
-		}
 	    }
 	  else if (!_materials->at(index)->_heightmap ||
                    _materials->at(index)->_heightmap->_type !=
@@ -331,6 +324,13 @@ void GuiEditMaterialDialog::updateMaterial()
 	      _materials->at(index)->
 		setHeightmap(new PerlinNoise(_dialog->_bumpmapX->value(),
 					     _dialog->_bumpmapY->value()));
+	    }
+	  if (_materials->at(index)->_heightmap)
+	    {
+	      _materials->at(index)->_heightmap->_repeatWidth =
+		_dialog->_bumpmapX->value();
+	      _materials->at(index)->_heightmap->_repeatHeight =
+		_dialog->_bumpmapY->value();
 	    }
 	}
 
