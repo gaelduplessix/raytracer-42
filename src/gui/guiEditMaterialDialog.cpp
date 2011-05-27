@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Thu May 26 16:16:58 2011 loick michard
+// Last update Fri May 27 13:55:26 2011 samuel olivier
 //
 
 #include <QMutexLocker>
@@ -204,10 +204,8 @@ void GuiEditMaterialDialog::getImage()
   QString image = 
     QFileDialog::getOpenFileName(this,
 				 tr("Selectionez une Texture"),
-				 QString(),
-				 "*.png *.gif *.jpeg *.bmp *.jpg",
-				 0,
-				 QFileDialog::DontUseNativeDialog);
+				 QString(), "*.png *.gif *.jpeg *.bmp *.jpg",
+				 0, QFileDialog::DontUseNativeDialog);
   if (image != "")
     _dialog->_imagePath->setText(image);
   updateMaterial();

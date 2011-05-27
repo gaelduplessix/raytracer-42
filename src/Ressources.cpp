@@ -5,12 +5,15 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Wed May 25 10:59:33 2011 loick michard
+// Last update Fri May 27 20:56:26 2011 samuel olivier
 //
 
+#include <QDir>
+#include <fstream>
+#include <sstream>
 #include "Ressources.hpp"
 
-Ressources::Ressources(const vector<pair<string, Ressource> >& ressources)
+Ressources::Ressources(const vector<Ressource>& ressources)
 {
   _ressources = ressources;
 }
@@ -19,38 +22,135 @@ Ressources::Ressources(const Scene* scene, const RenderingConfiguration* conf)
 {
   const vector<Object*>&	objects = scene->getObjects();
   int				nbObject = objects.size();
-  CubeMap*			cubeMap = conf->getCubeMap();
+  string			cubeMapPath = conf->getCubeMap()->getName();
 
   for (int i = 0 ; i < nbObject ; i++)
     {
       int			nbPrimitive = objects[i]->_primitives.size();
       for (int j = 0 ; j < nbPrimitive ; j++)
-	{
-	  Material*	mat =
-	    objects[i]->_primitives[j]->getMaterial();
-	  if (mat->_texture)
-	    _ressources.push_back(make_pair(mat->_texture->getName(),
-					    *mat->_texture));
-	  if (mat->_limitTexture)
-	    _ressources.push_back(make_pair(mat->_limitTexture->getName(),
-					    *mat->_limitTexture));
-	  if (mat->_heightmap)
-	    _ressources.push_back(make_pair(mat->_heightmap->getName(),
-					    *mat->_heightmap));
-	}
+  	{
+  	  Material*	mat =
+  	    objects[i]->_primitives[j]->getMaterial();
+  	  if (mat->_texture)
+  	    _ressources.push_back(Ressource(mat->_texture->getName()));
+  	  if (mat->_limitTexture)
+  	    _ressources.push_back(Ressource(mat->_limitTexture->getName()));
+  	  if (mat->_heightmap)
+  	    _ressources.push_back(Ressource(mat->_heightmap->getName()));
+  	}
     }
-  if (cubeMap)
-    _ressources.push_back(make_pair(cubeMap->getName(),
-				    *cubeMap));    
+  _ressources.push_back(Ressource(cubeMapPath + "/posy.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/posx.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/posz.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/negy.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/negx.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/negz.jpg"));
 }
 
-void	Ressources::addRessource(const string& name,
-				 const Ressource& ressource)
+Ressources::Ressources(const string stringClass)
 {
-  _ressources.push_back(make_pair(name, ressource));
+  istringstream	ifs;
+
+  ifs.str(stringClass);
+  boost::archive::text_iarchive ia(ifs);
+  ia >> *this;
 }
 
-const vector<pair<string, Ressource> >&	Ressources::getRessources(void)
+void	Ressources::addRessource(const Ressource& ressource)
+{
+  _ressources.push_back(ressource);
+}
+
+const vector<Ressource>&	Ressources::getRessources(void)
 {
   return (_ressources);
+}
+
+void	Ressources::createRessources(const Scene* scene,
+				     const RenderingConfiguration* conf)
+{
+  const vector<Object*>&	objects = scene->getObjects();
+  int				nbObject = objects.size();
+  string			cubeMapPath = conf->getCubeMap()->getName();
+
+  for (int i = 0 ; i < nbObject ; i++)
+    {
+      int			nbPrimitive = objects[i]->_primitives.size();
+      for (int j = 0 ; j < nbPrimitive ; j++)
+  	{
+  	  Material*	mat =
+  	    objects[i]->_primitives[j]->getMaterial();
+  	  if (mat->_texture)
+  	    _ressources.push_back(Ressource(mat->_texture->getName()));
+  	  if (mat->_limitTexture)
+  	    _ressources.push_back(Ressource(mat->_limitTexture->getName()));
+  	  if (mat->_heightmap)
+  	    _ressources.push_back(Ressource(mat->_heightmap->getName()));
+  	}
+    }
+  _ressources.push_back(Ressource(cubeMapPath + "/posy.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/posx.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/posz.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/negy.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/negx.jpg"));
+  _ressources.push_back(Ressource(cubeMapPath + "/negz.jpg"));
+}
+
+const string&	Ressources::getTmpRessourceDir(void)
+{
+  if (_tmpRessourceDir.size() == 0)
+    _tmpRessourceDir = QDir::tempPath().toStdString();
+  return (_tmpRessourceDir);
+}
+
+string		Ressources::toStr(void)
+{
+  std::ostringstream ofs;
+  boost::archive::text_oarchive oa(ofs);
+
+  oa << *this;
+  return (ofs.str());
+  
+}
+
+const string&	Ressources::getNewPathName(const string& previous)
+{
+  if (!_inCluster)
+    return (previous);
+
+  int		j = _ressources.size();
+
+  for (int i = 0 ; i < j ; i++)
+    if (_ressources[i].getPathName() == previous)
+      return (_ressources[i].getNewPathName());
+  return (previous);
+}
+
+void		Ressources::createRessourcesInTemporaryDir(void)
+{
+  string	newName;
+  ofstream	file;
+  int		j = _ressources.size();
+
+  getTmpRessourceDir();
+  for (int i = 0 ; i < j ; i++)
+    {
+      ostringstream	tmpRand;
+      tmpRand << rand();
+      newName = tmpRand.str();
+      file.open((_tmpRessourceDir + "/" + newName).c_str());
+      file << _ressources[i].getFileContent();
+      file.close();
+      _ressources[i].setNewPathName(newName);
+    }
+}
+
+bool		Ressources::isInCluster(void)
+{
+  return (_inCluster);
+}
+
+void		Ressources::isInCluster(bool value)
+{
+  _inCluster = value;
 }

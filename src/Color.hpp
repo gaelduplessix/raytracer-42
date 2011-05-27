@@ -5,13 +5,15 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Thu May 12 16:29:10 2011 gael jochaud-du-plessix
+// Last update Thu May 26 16:04:33 2011 samuel olivier
 //
 
 #ifndef _COLOR_HPP_
 #define _COLOR_HPP_
 
 #include <QColor>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 class Color
 {
@@ -57,11 +59,25 @@ public:
   Color&	operator*=(double value);
   Color		operator*(double value);
 
+  friend class          boost::serialization::access;
+  template<class Archive>
+  void                  serialize(Archive& ar, unsigned int version);
+
   int	_r;
   int	_g;
   int	_b;
   int	_a;
 };
+
+template<class Archive>
+void			Color::serialize(Archive& ar, unsigned int version)
+{
+  version = version;
+  ar & _r;
+  ar & _g;
+  ar & _b;
+  ar & _a;
+}
 
 Color	operator+(const Color& color1, const Color& color2);
 Color	operator-(const Color& color1, const Color& color2);

@@ -5,8 +5,10 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Wed May 25 10:55:48 2011 samuel olivier
+// Last update Fri May 27 15:35:29 2011 samuel olivier
 //
+
+#include <sstream>
 
 #include "RenderingConfiguration.hpp"
 
@@ -26,6 +28,24 @@ RenderingConfiguration::RenderingConfiguration():
 {
   _transparency.enabled = false;
   _reflection.enabled = false;
+}
+
+RenderingConfiguration::RenderingConfiguration(const string& stringClass)
+{
+  std::istringstream	ifs;
+
+  ifs.str(stringClass);
+  boost::archive::text_iarchive ia(ifs);
+  ia >> *this;
+}
+
+string	RenderingConfiguration::toStr(void)
+{
+  std::ostringstream ofs;
+  boost::archive::text_oarchive oa(ofs);
+
+  oa << *this;
+  return (ofs.str());
 }
 
 int	RenderingConfiguration::getNbThreads(void) const

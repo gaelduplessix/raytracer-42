@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Wed May 25 10:41:34 2011 samuel olivier
+// Last update Fri May 27 15:35:17 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -43,7 +43,9 @@ class RenderingConfiguration
 {
 public:
   RenderingConfiguration();
+  RenderingConfiguration(const string& stringClass);
 
+  string	toStr(void);
   int		getNbThreads(void) const;
   void		setNbThreads(int nbThreads);
   int		getWidth(void) const;
@@ -170,6 +172,12 @@ void			RenderingConfiguration::serialize(Archive& ar,
 							  unsigned int version)
   {
     version = version;
+    ar & _reflection.enabled;
+    ar & _reflection.maxDepth;
+    ar & _reflection.diffused;
+    ar & _reflection.diffusedSampling;
+    ar & _transparency.enabled;
+    ar & _transparency.maxDepth;
     ar & _nbThreads;
     ar & _width;
     ar & _height;
@@ -181,9 +189,7 @@ void			RenderingConfiguration::serialize(Archive& ar,
     ar & _directLightingCoeff;
     ar & _diffuseLighting;
     ar & _specularLighting;
-    // ar & _reflection;
-    // ar & _transparency;
-    // ar & _backgroundColor;
+    ar & _backgroundColor;
     ar & _ambientOcclusionEnabled;
     ar & _ambientOcclusionSampling;
     ar & _photonMappingEnabled;
@@ -193,7 +199,7 @@ void			RenderingConfiguration::serialize(Archive& ar,
     ar & _fieldDepthEnabled;
     ar & _fieldDepthSampling;
     ar & _additiveAmbiantLightingEnabled;
-    // ar & _additiveAmbiantLighting;
+    ar & _additiveAmbiantLighting;
     ar & _minimalAmbiantLightingEnabled;
     ar & _minimalAmbiantLighting;
     ar & _kdTreeEnabled;

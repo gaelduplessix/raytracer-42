@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Thu May 26 19:27:31 2011 loick michard
+// Last update Fri May 27 18:47:18 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -13,9 +13,6 @@
 #include <QMutexLocker>
 #include <sstream>
 #include <QSystemTrayIcon>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <fstream>
 
 #include "gui.hpp"
 
@@ -162,18 +159,6 @@ bool RaytracerGUI::setConfiguration()
   _config->setPhotonMappingSampling(_ui->
 				    _photonMappingValue->value());
   _config->setPhotonMappingEnabled(_ui->_photonMapping->isChecked());
-
-  // {
-  //   std::ofstream ofs("fichierDeSerialisation");
-  //   boost::archive::text_oarchive oa(ofs);
-  //   oa << *_config;
-
-  //   RenderingConfiguration newConf;
-  //   std::ifstream ifs("fichierDeSerialisation");
-  // boost::archive::text_iarchive ia(ifs);
-  // ia >> newConf;
-  // }
-
   return (true);
 }
 
