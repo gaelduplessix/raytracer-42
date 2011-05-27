@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 17:29:38 2011 loick michard
-// Last update Wed May 25 10:14:59 2011 loick michard
+// Last update Fri May 27 14:25:42 2011 samuel olivier
 //
 
 #ifndef _TEXTURE_HPP_
@@ -15,11 +15,10 @@
 #include <QImage>
 
 #include "Color.hpp"
-#include "Ressource.hpp"
 
 using namespace std;
 
-class Texture : public Ressource
+class Texture
 {
 public:
   Texture();
@@ -33,10 +32,14 @@ public:
   virtual int	getWidth() const;
   virtual int	getHeight() const;
 
+  const string& getName(void);
+  void  setName(const string& name);
+
   double	_repeatWidth;
   double	_repeatHeight;
   int		_type;
-  QImage        *_image;
+  QImage*	_image;
+  string	_name;
 };
 
 #endif

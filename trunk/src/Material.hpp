@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May  4 17:40:55 2011 loick michard
-// Last update Tue May 24 22:20:32 2011 loick michard
+// Last update Thu May 26 22:47:56 2011 samuel olivier
 //
 
 #ifndef _MATERIAL_HPP_
@@ -17,8 +17,6 @@
 #include "Vector.hpp"
 
 using namespace std;
-
-class QImage;
 
 class Material
 {
