@@ -1,8 +1,8 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>0, 0, 0</position>
-      <rotation type="radian">0, 0, 0</rotation>
+      <position>0, 0, 3</position>
+      <rotation type="degree">0, 15, 0</rotation>
     </camera>
   </cameras>
 
@@ -37,16 +37,20 @@
 	  <position>0,0,-5</position>
 	  <rotation type="degree">0, 0, 0</rotation>
 	</primitive>
+	<primitive type="sphere" material="cy">
+	  <position>24,0,-1.9</position>
+	  <rotation type="degree">0,0,0</rotation>
+	  <radius>1.30</radius>
+	</primitive>
       </primitives>
     </object>
-
-    <parallelepipede material="sp">
+    <parallelepipede material="cy">
+      <position>23,-1.5,-5</position>
+      <solid>true</solid>
+      <width>3,0,0</width>
+      <height>0,3,0</height>
+      <depth>0,0,2</depth>
       <rotation type="degree">0,0,0</rotation>
-      <position>10,0,0</position>
-      <solid>false</solid>
-      <width>1,3,1</width>
-      <height>3,2,1</height>
-      <depth>1,0,0</depth>
     </parallelepipede>
   </objects>
 
