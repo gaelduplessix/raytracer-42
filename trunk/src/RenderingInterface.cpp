@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:28:09 2011 loick michard
-// Last update Mon May 23 18:15:39 2011 loick michard
+// Last update Sat May 28 14:58:14 2011 samuel olivier
 //
 
 #include "RenderingInterface.hpp"
@@ -81,5 +81,5 @@ void RenderingInterface::sendMessage(string message)
 
 void RenderingInterface::logServerConsoleMessage(string message)
 {
-  
+  message = message;
 }
