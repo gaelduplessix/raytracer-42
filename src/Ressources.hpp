@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:03:25 2011 samuel olivier
-// Last update Sat May 28 12:30:32 2011 samuel olivier
+// Last update Sat May 28 21:13:30 2011 samuel olivier
 //
 
 #ifndef _RESSOURCES_
@@ -26,46 +26,24 @@ using namespace std;
 class Ressources
 {
 private:
-  Ressources(const vector<Ressource>& ressources, bool inCluster);
-  Ressources(const Scene* scene, const RenderingConfiguration* conf,
-	     bool inCluster);
-  Ressources(const string stringClass, bool inCluster);
+  Ressources(void);
 
 public:
-  static Ressources*	getInstance(const Scene* scene,
-				    const RenderingConfiguration* conf,
-				    bool inCluster = false)
-  {
-    if (!_instance)
-      _instance = new Ressources(scene, conf, inCluster);
-    return (_instance);
-  }
-  static Ressources*	getInstance(const vector<Ressource>& ressources,
-				    bool inCluster = false)
-  {
-    if (!_instance)
-      _instance = new Ressources(ressources, inCluster);
-    return (_instance);
-  }
-  static Ressources*	getInstance(const string& stringClass,
-				    bool inCluster = false)
-  {
-    if (!_instance)
-      {
-	_instance = new Ressources(stringClass, inCluster);
-      }
-    return (_instance);
-  }
   static Ressources*	getInstance(void)
   {
+    if (!_instance)
+      return (new Ressources);
     return (_instance);
   }
+
   string	toStr(void);
-  void		addRessource(const Ressource& ressource);
+
   const vector<Ressource>&	getRessources(void);
+  void		setRessources(const vector<Ressource>& ressources);
 
   void		createRessources(const Scene* scene,
 				 const RenderingConfiguration* conf);
+  void		createRessources(const string stringClass);
 
   const string&	getTmpRessourceDir(void);
 
@@ -79,8 +57,8 @@ public:
   template	<class Archive>
   void		serialize(Archive& ar, unsigned int version);
 
-  static Ressources*	_instance;
 private:
+  static Ressources*	_instance;
   vector<Ressource>	_ressources;
   string		_tmpRessourceDir;
   bool			_inCluster;
