@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sat May 28 17:26:29 2011 melvin laplanche
+// Last update Sun May 29 00:44:34 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1044,6 +1044,59 @@ void			Scene::_parseObjectOptions(QDomNode	n)
     this->_objects.push_back(obj);
 }
 
+void			Scene::_parse3dsFile(QDomNode n)
+{
+  string		filename;
+  bool			hasFilename = false;
+  string		textDir;
+  bool			hasTextDir = false;
+
+  while (n.isNull() == false && this->_hasError == false)
+  {
+    if (n.isComment() == false)
+    {
+      if (n.hasChildNodes() == false || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("Every 3dsfile children must "
+				    "be an element"), n);
+	return ;
+      }
+      if (n.nodeName() == "filename")
+      {
+	if (hasFilename)
+	  this->_putWarning(QObject::tr("A 3dsfile has several filename, "
+					"the first defined will be used"), n);
+	else
+	{
+	  filename = _parseFile(n, "filename");
+	  hasFilename = true;
+	}
+      }
+      else if (n.nodeName() == "TextureDir")
+      {
+	if (hasTextDir)
+	  this->_putWarning(QObject::tr("A 3dsfile has several TextureDir, "
+					"the first defined will be used"), n);
+	else
+	{
+	  textDir = _parseDir(n, "TextureDir");
+	  hasTextDir = true;
+	}
+      }
+      else
+	this->_putError(QObject::tr("%1 is not a valid element")
+			.arg(n.nodeName()), n);
+    }
+    n = n.nextSibling();
+  }
+  if (!hasFilename)
+    this->_putError(QObject::tr("An 3dsfile must have at leat a filename"), n);
+  else
+  {
+    A3DSParser	a3ds(filename, this->_interface);
+  }
+}
+
 void			Scene::_parseObject(QDomNode n)
 {
   QDomNamedNodeMap	nodeMap;
@@ -1054,7 +1107,9 @@ void			Scene::_parseObject(QDomNode n)
   {
     if (n.isComment() == false)
     {
-      if ((n.nodeName() != "object" && n.nodeName() != "parallelepipede")
+      if ((n.nodeName() != "object"
+	   && n.nodeName() != "parallelepipede"
+	   && n.nodeName() != "3dsfile")
 	  || n.isElement() == false)
       {
 	this->_putError(QObject::tr("An objects child cannot be empty and "
@@ -1066,7 +1121,9 @@ void			Scene::_parseObject(QDomNode n)
 	this->_putError(QObject::tr("An object element cannot be empty"), n);
 	return;
       }
-      if (n.nodeName() == "parallelepipede")
+      if (n.nodeName() == "3dsfile")
+	this->_parse3dsFile(n.firstChild());
+      else if (n.nodeName() == "parallelepipede")
       {
 	if (n.hasAttributes() == false
 	    || n.attributes().contains("material") == false)

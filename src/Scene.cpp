@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sat May 28 17:12:16 2011 melvin laplanche
+// Last update Sun May 29 00:52:25 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -488,6 +488,23 @@ string			Scene::_parseFile(QDomNode	n,
     if (QFileInfo(value).exists() == false)
       this->_putError(QObject::tr("The file %1 does not exists").arg(value),
 		      n);
+  }
+  else
+    value = "empty";
+  return (value.toStdString());
+}
+
+string			Scene::_parseDir(QDomNode	n,
+					 string		obj)
+{
+  QString		value;
+
+  if (this->_checkContentIsSingleText(n, obj))
+  {
+    value = n.toElement().text();
+    if (QDir(value).exists() == false)
+      this->_putError(QObject::tr("The directory %1 does not exists")
+		      .arg(value), n);
   }
   else
     value = "empty";

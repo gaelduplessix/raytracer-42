@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sat May 28 17:12:10 2011 melvin laplanche
+// Last update Sun May 29 00:10:01 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -43,6 +43,7 @@
 #include "Sphere.hpp"
 #include "EquationPrimitive.hpp"
 #include "Parallelogram.hpp"
+#include "A3DSParser.hpp"
 
 using namespace std;
 
@@ -124,6 +125,7 @@ private:
   int			_parseInt(QDomNode, int, int, string);
   void			_parseNormalDef(QDomNode, Material*);
   string		_parseFile(QDomNode, string);
+  string		_parseDir(QDomNode, string);
   Texture*		_parseTexture(QDomNode, string);
   bool			_parseBoolean(QDomNode, string);
   void			_parsePrimitives(QDomNode, Object*);
@@ -137,6 +139,7 @@ private:
   Triangle*		_parseTriangle(QDomNode, QString, Object*);
   EquationPrimitive*	_parseEquation(QDomNode, QString, Object*);
   Parallelogram*	_parseParallelogram(QDomNode, QString, Object*);
+  void			_parse3dsFile(QDomNode);
   void			_parseSett(QDomNode, QString);
   Material*		_getMaterialByName(QString);
   void			_parseLight(QDomNode);
