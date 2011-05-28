@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Wed May 18 22:43:07 2011 melvin laplanche
+// Last update Sat May 28 17:12:16 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -218,6 +218,29 @@ Point			Scene::_parsePosition(QDomNode	n,
 		values[2].toDouble(&test[2]));
     if (!test[0] || !test[1] || !test[2])
       this->_putError(QObject::tr("A %1 must have 3 integers separated "
+				  "with comma as value").arg(name.c_str()), n);
+  }
+  else
+    p = Point(0, 0, 0);
+  return p;
+}
+
+Point			Scene::_parse2DPosition(QDomNode	n,
+						string		name)
+{
+  QStringList	values;
+  bool		test[2] = {false, false};
+  Point		p;
+
+  if (this->_checkContentIsSingleText(n, name))
+  {
+    values = n.toElement().text().remove(QChar(' ')).split(",");
+    if (values.count() == 2)
+      p = Point(values[0].toDouble(&test[0]),
+		values[1].toDouble(&test[1]),
+		0);
+    if (!test[0] || !test[1])
+      this->_putError(QObject::tr("A %1 must have 2 integers separated "
 				  "with comma as value").arg(name.c_str()), n);
   }
   else
