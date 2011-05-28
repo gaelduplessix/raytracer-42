@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Sat May 28 12:51:09 2011 samuel olivier
+// Last update Sat May 28 21:17:55 2011 samuel olivier
 //
 
 #include <QDir>
@@ -13,19 +13,37 @@
 #include <sstream>
 #include "Ressources.hpp"
 
-Ressources::Ressources(const vector<Ressource>& ressources, bool inCluster) :
-  _ressources(ressources), _inCluster(inCluster)
+Ressources::Ressources(void) : _ressources(), _tmpRessourceDir(""),
+			       _inCluster(false)
 {
 
 }
 
-Ressources::Ressources(const Scene* scene, const RenderingConfiguration* conf,
-		       bool inCluster)
+const vector<Ressource>&	Ressources::getRessources(void)
+{
+  return (_ressources);
+}
+
+void		Ressources::setRessources(const vector<Ressource>& ressources)
+{
+  _ressources = ressources;
+}
+
+void		Ressources::createRessources(const string stringClass)
+{
+  istringstream	ifs;
+
+  ifs.str(stringClass);
+  boost::archive::text_iarchive ia(ifs);
+  ia >> *this;
+}
+
+void	Ressources::createRessources(const Scene* scene,
+				     const RenderingConfiguration* conf)
 {
   const vector<Object*>&	objects = scene->getObjects();
   int				nbObject = objects.size();
 
-  _inCluster = inCluster;
   for (int i = 0 ; i < nbObject ; i++)
     {
       int			nbPrimitive = objects[i]->_primitives.size();
@@ -51,56 +69,6 @@ Ressources::Ressources(const Scene* scene, const RenderingConfiguration* conf,
       _ressources.push_back(Ressource(cubeMapPath + "/negx.jpg"));
       _ressources.push_back(Ressource(cubeMapPath + "/negz.jpg"));
     }
-}
-
-Ressources::Ressources(const string stringClass, bool inCluster)
-{
-  istringstream	ifs;
-
-  _inCluster = inCluster;
-  ifs.str(stringClass);
-  boost::archive::text_iarchive ia(ifs);
-  ia >> *this;
-}
-
-void	Ressources::addRessource(const Ressource& ressource)
-{
-  _ressources.push_back(ressource);
-}
-
-const vector<Ressource>&	Ressources::getRessources(void)
-{
-  return (_ressources);
-}
-
-void	Ressources::createRessources(const Scene* scene,
-				     const RenderingConfiguration* conf)
-{
-  const vector<Object*>&	objects = scene->getObjects();
-  int				nbObject = objects.size();
-  string			cubeMapPath = conf->getCubeMap()->getName();
-
-  for (int i = 0 ; i < nbObject ; i++)
-    {
-      int			nbPrimitive = objects[i]->_primitives.size();
-      for (int j = 0 ; j < nbPrimitive ; j++)
-  	{
-  	  Material*	mat =
-  	    objects[i]->_primitives[j]->getMaterial();
-  	  if (mat->_texture)
-  	    _ressources.push_back(Ressource(mat->_texture->getName()));
-  	  if (mat->_limitTexture)
-  	    _ressources.push_back(Ressource(mat->_limitTexture->getName()));
-  	  if (mat->_heightmap)
-  	    _ressources.push_back(Ressource(mat->_heightmap->getName()));
-  	}
-    }
-  _ressources.push_back(Ressource(cubeMapPath + "/posy.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/posx.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/posz.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/negy.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/negx.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/negz.jpg"));
 }
 
 const string&	Ressources::getTmpRessourceDir(void)
