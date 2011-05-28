@@ -5,11 +5,12 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 19:02:17 2011 gael jochaud-du-plessix
-// Last update Wed May 25 22:11:43 2011 gael jochaud-du-plessix
+// Last update Sat May 28 21:37:43 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServerThread.hpp"
 #include "ClusterServer.hpp"
+#include "ServerEntry.hpp"
 
 #include <sstream>
 #include <QUrl>
@@ -81,8 +82,11 @@ void		ClusterServerThread::registerToCentralServer(void)
   value << _clusterServer->getPort();
   postVars.addQueryItem("serverPort", value.str().c_str());
   value.str("");
-  value << ClusterServer::FREE;
+  value << ServerEntry::FREE;
   postVars.addQueryItem("serverStatus", value.str().c_str());
+  value.str("");
+  value << _clusterServer->getProgress();
+  postVars.addQueryItem("serverProgress", value.str().c_str());
   QByteArray	postData(postVars.encodedQuery());
   _networkManager->post(QNetworkRequest(_clusterServer->getCentralServerUrl()),
 			postData);
@@ -98,7 +102,10 @@ void	ClusterServerThread::readCentralServerResponse(QNetworkReply* reply)
     {
       QString	response(reply->readAll());
       if (response == "0")
-	stat = true;
+	{
+	  _stopReportConnectionError = false;
+	  stat = true;
+	}
       else
 	stat = false;
     }
@@ -120,6 +127,6 @@ void	ClusterServerThread::newConnection()
   _clusterServer->getInterface()
     ->logServerConsoleMessage("<span>Info: "
 			      "Connection etablished with client </span>"
-			      + _currentClientSocket->peerAddress().toString().toStdString());
-  
+			      + _currentClientSocket
+			      ->peerAddress().toString().toStdString());
 }
