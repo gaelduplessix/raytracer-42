@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Thu May 26 19:52:31 2011 loick michard
+// Last update Fri May 27 12:32:36 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -225,8 +225,11 @@ void    RaytracerGUI::startRender()
 	  _ui->_height->setEnabled(false);
 	  _ui->_threads->setEnabled(false);
 	  _ui->action_Play->setEnabled(false);
-	  _timer->setSingleShot(false);
-	  _timer->start();
+	  if (!_timer->isActive())
+	    {
+	      _timer->setSingleShot(false);
+	      _timer->start();
+	    }
 	  if (!_isRendering)
 	    {
 	      if (_image)

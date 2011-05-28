@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed May 25 21:30:09 2011 gael jochaud-du-plessix
+// Last update Sat May 28 21:42:01 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERSERVER_HPP_
@@ -21,6 +21,7 @@
 
 #include "RenderingInterface.hpp"
 #include "ClusterServerThread.hpp"
+#include "ServerEntry.hpp"
 
 using namespace std;
 
@@ -28,17 +29,18 @@ class ClusterServer : public QObject
 {
   Q_OBJECT
   
-  public:
-  static const int	FREE = 0;
-  static const int	BUSY = 1;
-  
+  public:  
   ClusterServer(RenderingInterface* interface, string url, int port);
   ~ClusterServer();
 
 public:
-  QUrl			getCentralServerUrl(void);
+  QUrl&			getCentralServerUrl(void);
   int			getPort(void);
   void			setPort(int port);
+  int			getStatus(void);
+  void			setStatus(int status);
+  int			getProgress(void);
+  void			setProgress(int progress);
   RenderingInterface*	getInterface(void);
   bool			getCentralServerConnectionState(void);
   void			setCentralServerConnectionState(bool state);
@@ -55,6 +57,8 @@ private:
   bool			_centralServerConnectionState;
   QMutex		_mutex;
   QWaitCondition	_centralServerConnectionLock;
+  int			_status;
+  int			_progress;
 };
 
 #endif

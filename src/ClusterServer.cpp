@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed May 25 21:31:48 2011 gael jochaud-du-plessix
+// Last update Sat May 28 21:47:10 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -17,7 +17,8 @@
 ClusterServer::ClusterServer(RenderingInterface* interface, string url,
 			     int port):
   _interface(interface), _port(port), _centralServerUrl(url.c_str()),
-  _centralServerConnectionState(false)
+  _centralServerConnectionState(false), _status(ServerEntry::FREE),
+  _progress(0)
 {
   getInterface()
     ->logServerConsoleMessage("<span>Info: "
@@ -50,8 +51,27 @@ void        ClusterServer::setPort(int port)
   _port = port;
 }
 
+int	ClusterServer::getStatus(void)
+{
+  return (_status);
+}
 
-QUrl        ClusterServer::getCentralServerUrl(void)
+void	ClusterServer::setStatus(int status)
+{
+  _status = status;
+}
+
+int	ClusterServer::getProgress(void)
+{
+  return (_progress);
+}
+
+void	ClusterServer::setProgress(int progress)
+{
+  _progress = progress;
+}
+
+QUrl&        ClusterServer::getCentralServerUrl(void)
 {
   return (_centralServerUrl);
 }

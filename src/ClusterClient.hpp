@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Thu May 26 18:18:35 2011 gael jochaud-du-plessix
+// Last update Sat May 28 21:49:17 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERCLIENT_HPP_
@@ -14,8 +14,10 @@
 #include <string>
 #include <vector>
 #include <QUrl>
+#include <QMutexLocker>
 
 #include "RenderingInterface.hpp"
+#include "ServersListManager.hpp"
 #include "ServerEntry.hpp"
 
 using namespace std;
@@ -24,12 +26,24 @@ class ClusterClient
 {
 public:
   ClusterClient(RenderingInterface* interface, string url, int nbSubdibisions);
+  ~ClusterClient();
+
+  RenderingInterface*	getInterface();
+  QUrl&			getCentralServerUrl();
+
+  ServerEntry*	getServer(QString ip, int port);
+  void		addServer(QString ip, int port, int status, int progress);
+  void		updateServersList(QString ip, int port, int status,
+				  int progress);
 
 protected:
   RenderingInterface*	_interface;
   QUrl			_centralServerUrl;
   int			_nbSubdivisions;
+  ServersListManager*	_serversListManager;
   vector <ServerEntry*>	_servers;
+  int			_sessionId;
+  QMutex		_mutex;
 };
 
 #endif

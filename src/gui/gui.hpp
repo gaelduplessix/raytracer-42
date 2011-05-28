@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Sat May 28 16:31:08 2011 loick michard
+// Last update Sat May 28 21:52:36 2011 gael jochaud-du-plessix
 //
 
 #ifndef _GUI_HPP_
@@ -28,6 +28,7 @@ void	gui(int ac, char **av);
 #include "Raytracer.hpp"
 #include "CubeMap.hpp"
 #include "guiEditMaterialDialog.hpp"
+#include "ClusterClient.hpp"
 
 using namespace std;
 
@@ -120,6 +121,7 @@ private:
 
   GuiEditMaterialDialog		_editMaterialDialog;
 
+  ClusterClient*		_clusterClient;
   bool				_isConnected;
   bool				_isMultiThreading;
 };

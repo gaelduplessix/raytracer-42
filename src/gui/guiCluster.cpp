@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Thu May 26 19:53:53 2011 loick michard
+// Last update Fri May 27 12:33:55 2011 gael jochaud-du-plessix
 // Last update Thu May 26 17:45:53 2011 gael jochaud-du-plessix
 //
 
@@ -78,13 +78,14 @@ vous deconnecter du cluster?"),
       _ui->_clusterDock->hide();
       _ui->actionDeconnexion->setVisible(false);
       _ui->actionSe_connecter_un_serveur->setVisible(true);
+      delete _clusterClient;
       _isConnected = false;
     }
 }
 
 void		RaytracerGUI::connectToCluster()
 {
-  int returnCode = _connectToServerDialog->exec();  
+  int returnCode = _connectToServerDialog->exec();
 
   if (returnCode == QDialog::Accepted)
     {
@@ -92,8 +93,11 @@ void		RaytracerGUI::connectToCluster()
       _ui->actionDeconnexion->setVisible(true);
       _ui->actionSe_connecter_un_serveur->setVisible(false);
       _isConnected = true;
-      ClusterClient
-      	client(this, _connectToServerDialogUi->_addres->text().toStdString(),
-	       _connectToServerDialogUi->_subdivisions->value());
+      if (!_timer->isActive())
+	_timer->start();
+      _clusterClient =
+	new ClusterClient(this, _connectToServerDialogUi
+			  ->_addres->text().toStdString(),
+			  _connectToServerDialogUi->_subdivisions->value());
     }
 }
