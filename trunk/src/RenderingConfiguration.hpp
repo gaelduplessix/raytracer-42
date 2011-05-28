@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Sat May 28 10:21:40 2011 loick michard
+// Last update Sat May 28 15:39:03 2011 samuel olivier
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -176,6 +176,7 @@ void			RenderingConfiguration::serialize(Archive& ar,
 							  unsigned int version)
   {
     version = version;
+    ar & _3DMode & _3DEnabled & _eyesSpace;
     ar & _reflection.enabled;
     ar & _reflection.maxDepth;
     ar & _reflection.diffused;
