@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Sat May 28 10:21:35 2011 loick michard
+// Last update Sat May 28 14:55:37 2011 samuel olivier
 //
 
 #include <sstream>
@@ -13,7 +13,8 @@
 #include "RenderingConfiguration.hpp"
 
 RenderingConfiguration::RenderingConfiguration():
-  _nbThreads(2), _width(0), _height(0), _currentCamera(0), _antialiasing(0),
+  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(0),
+  _height(0), _currentCamera(0), _antialiasing(0),
   _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
@@ -24,8 +25,7 @@ RenderingConfiguration::RenderingConfiguration():
   _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
   _additiveAmbiantLighting(Color(0, 0, 0)),
   _minimalAmbiantLightingEnabled(false), _minimalAmbiantLighting(0),
-  _kdTreeEnabled(false), _kdTreeDepth(10), _3DEnabled(false),
-  _3DMode(-1), _eyesSpace(1)
+  _kdTreeEnabled(false), _kdTreeDepth(10)
 {
   _transparency.enabled = false;
   _reflection.enabled = false;
