@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Wed May 25 16:08:44 2011 samuel olivier
+// Last update Sat May 28 17:26:29 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -355,6 +355,9 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
   bool				rotation = false;
   bool				vert1 = false;
   bool				vert2 = false;
+  bool				textVert1 = false;
+  bool				textVert2 = false;
+  bool				textVert3 = false;
   Triangle			*triangle = new Triangle();
 
   while (n.isNull() == false && this->_hasError == false)
@@ -411,6 +414,45 @@ Triangle*			Scene::_parseTriangle(QDomNode	n,
 	    vert2 = true;
 	  }
 	}
+	else if (n.nodeName() == "textureVertex1")
+	{
+	  if (textVert1)
+	    this->_putWarning(QObject::tr("An element has several "
+					  "textureVertex1, "
+					  "the first defined will be used"),
+			      n);
+	  else
+	  {
+	    triangle->setTextureVertex1(_parsePosition(n, "textureVertex1"));
+	    textVert1 = true;
+	  }
+	}
+	else if (n.nodeName() == "textureVertex2")
+	{
+	  if (textVert2)
+	    this->_putWarning(QObject::tr("An element has several "
+					  "textureVertex2, "
+					  "the first defined will be used"),
+			      n);
+	  else
+	  {
+	    triangle->setTextureVertex2(_parsePosition(n, "textureVertex2"));
+	    textVert2 = true;
+	  }
+	}
+	else if (n.nodeName() == "textureVertex3")
+	{
+	  if (textVert3)
+	    this->_putWarning(QObject::tr("An element has several "
+					  "textureVertex3, "
+					  "the first defined will be used"),
+			      n);
+	  else
+	  {
+	    triangle->setTextureVertex3(_parsePosition(n, "textureVertex3"));
+	    textVert3 = true;
+	  }
+	}
 	else
 	  this->_putWarning(QObject::tr("Unknown element %1").
 			    arg(n.nodeName()),
@@ -439,6 +481,10 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
   bool				rotation = false;
   bool				p2 = false;
   bool				p3 = false;
+  bool				textVert1 = false;
+  bool				textVert2 = false;
+  bool				textVert3 = false;
+  bool				textVert4 = false;
   Parallelogram			*para = new Parallelogram();
 
   while (n.isNull() == false && this->_hasError == false)
@@ -491,6 +537,58 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
 	      para->setVertex2(_parsePosition(n, "vector2")
 			       + para->getPosition());
 	    p3 = true;
+	  }
+	}
+	else if (n.nodeName() == "textureVertex1")
+	{
+	  if (textVert1)
+	    this->_putWarning(QObject::tr("An element has several "
+					  "textureVertex1, "
+					  "the first defined will be used"),
+			      n);
+	  else
+	  {
+	    para->setTextureVertex1(_parsePosition(n, "textureVertex1"));
+	    textVert1 = true;
+	  }
+	}
+	else if (n.nodeName() == "textureVertex2")
+	{
+	  if (textVert2)
+	    this->_putWarning(QObject::tr("An element has several "
+					  "textureVertex2, "
+					  "the first defined will be used"),
+			      n);
+	  else
+	  {
+	    para->setTextureVertex2(_parsePosition(n, "textureVertex2"));
+	    textVert2 = true;
+	  }
+	}
+	else if (n.nodeName() == "textureVertex3")
+	{
+	  if (textVert3)
+	    this->_putWarning(QObject::tr("An element has several "
+					  "textureVertex3, "
+					  "the first defined will be used"),
+			      n);
+	  else
+	  {
+	    para->setTextureVertex3(_parsePosition(n, "textureVertex3"));
+	    textVert3 = true;
+	  }
+	}
+	else if (n.nodeName() == "textureVertex4")
+	{
+	  if (textVert4)
+	    this->_putWarning(QObject::tr("An element has several "
+					  "textureVertex4, "
+					  "the first defined will be used"),
+			      n);
+	  else
+	  {
+	    para->setTextureVertex4(_parsePosition(n, "textureVertex4"));
+	    textVert4 = true;
 	  }
 	}
 	else

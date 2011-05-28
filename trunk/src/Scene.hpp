@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Wed May 25 11:02:38 2011 loick michard
+// Last update Sat May 28 17:12:10 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -102,6 +102,7 @@ private:
   void			_parseObject(QDomNode);
   void			_parseObjectOptions(QDomNode);
   Point			_parsePosition(QDomNode, string);
+  Point			_parse2DPosition(QDomNode, string);
   Rotation		_parseRotation(QDomNode);
   bool			_checkContentIsSingleText(QDomNode, string);
   void			_putWarning(string, QDomNode);

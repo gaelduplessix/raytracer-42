@@ -1,5 +1,4 @@
 Makefile
 raytracer-42
-raytracer-42.pro
 qrc_ressources.cpp
 ui_raytracer.h
