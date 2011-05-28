@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Thu May 26 15:58:50 2011 gael jochaud-du-plessix
+// Last update Fri May 27 00:43:11 2011 loick michard
 // Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
@@ -114,6 +114,7 @@ private:
   RenderingInterface*		_interface;
   RaytracerThread*		_thread;
   mutable QMutex		_mutex;
+  bool				_otherEyes;
 };
 
 #endif
