@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Fri May 27 20:56:26 2011 samuel olivier
+// Last update Sat May 28 10:51:19 2011 samuel olivier
 //
 
 #include <QDir>

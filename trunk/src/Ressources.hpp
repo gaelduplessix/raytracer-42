@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:03:25 2011 samuel olivier
-// Last update Fri May 27 20:55:25 2011 samuel olivier
+// Last update Sat May 28 10:53:12 2011 samuel olivier
 //
 
 #ifndef _RESSOURCES_
