@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:03:25 2011 samuel olivier
-// Last update Sat May 28 10:53:12 2011 samuel olivier
+// Last update Sat May 28 12:30:32 2011 samuel olivier
 //
 
 #ifndef _RESSOURCES_
@@ -26,29 +26,33 @@ using namespace std;
 class Ressources
 {
 private:
-  Ressources(const vector<Ressource>& ressources);
-  Ressources(const Scene* scene, const RenderingConfiguration* conf);
-  Ressources(const string stringClass);
+  Ressources(const vector<Ressource>& ressources, bool inCluster);
+  Ressources(const Scene* scene, const RenderingConfiguration* conf,
+	     bool inCluster);
+  Ressources(const string stringClass, bool inCluster);
 
 public:
   static Ressources*	getInstance(const Scene* scene,
-				    const RenderingConfiguration* conf)
+				    const RenderingConfiguration* conf,
+				    bool inCluster = false)
   {
     if (!_instance)
-      _instance = new Ressources(scene, conf);
+      _instance = new Ressources(scene, conf, inCluster);
     return (_instance);
   }
-  static Ressources*	getInstance(const vector<Ressource>& ressources)
+  static Ressources*	getInstance(const vector<Ressource>& ressources,
+				    bool inCluster = false)
   {
     if (!_instance)
-      _instance = new Ressources(ressources);
+      _instance = new Ressources(ressources, inCluster);
     return (_instance);
   }
-  static Ressources*	getInstance(const string& stringClass)
+  static Ressources*	getInstance(const string& stringClass,
+				    bool inCluster = false)
   {
     if (!_instance)
       {
-	_instance = new Ressources(stringClass);
+	_instance = new Ressources(stringClass, inCluster);
       }
     return (_instance);
   }
@@ -66,7 +70,7 @@ public:
   const string&	getTmpRessourceDir(void);
 
   void		createRessourcesInTemporaryDir(void);
-  const string&	getNewPathName(const string& previous);
+  static const string&	getNewPathName(const string& previous);
 
   bool		isInCluster(void);
   void		isInCluster(bool value);
@@ -75,10 +79,10 @@ public:
   template	<class Archive>
   void		serialize(Archive& ar, unsigned int version);
 
+  static Ressources*	_instance;
 private:
   vector<Ressource>	_ressources;
   string		_tmpRessourceDir;
-  static Ressources*	_instance;
   bool			_inCluster;
 };
 

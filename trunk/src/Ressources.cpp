@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Sat May 28 10:51:19 2011 samuel olivier
+// Last update Sat May 28 12:51:09 2011 samuel olivier
 //
 
 #include <QDir>
@@ -13,17 +13,19 @@
 #include <sstream>
 #include "Ressources.hpp"
 
-Ressources::Ressources(const vector<Ressource>& ressources)
+Ressources::Ressources(const vector<Ressource>& ressources, bool inCluster) :
+  _ressources(ressources), _inCluster(inCluster)
 {
-  _ressources = ressources;
+
 }
 
-Ressources::Ressources(const Scene* scene, const RenderingConfiguration* conf)
+Ressources::Ressources(const Scene* scene, const RenderingConfiguration* conf,
+		       bool inCluster)
 {
   const vector<Object*>&	objects = scene->getObjects();
   int				nbObject = objects.size();
-  string			cubeMapPath = conf->getCubeMap()->getName();
 
+  _inCluster = inCluster;
   for (int i = 0 ; i < nbObject ; i++)
     {
       int			nbPrimitive = objects[i]->_primitives.size();
@@ -39,18 +41,23 @@ Ressources::Ressources(const Scene* scene, const RenderingConfiguration* conf)
   	    _ressources.push_back(Ressource(mat->_heightmap->getName()));
   	}
     }
-  _ressources.push_back(Ressource(cubeMapPath + "/posy.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/posx.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/posz.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/negy.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/negx.jpg"));
-  _ressources.push_back(Ressource(cubeMapPath + "/negz.jpg"));
+  if (conf->getCubeMap())
+    {
+      string			cubeMapPath = conf->getCubeMap()->getName();
+      _ressources.push_back(Ressource(cubeMapPath + "/posy.jpg"));
+      _ressources.push_back(Ressource(cubeMapPath + "/posx.jpg"));
+      _ressources.push_back(Ressource(cubeMapPath + "/posz.jpg"));
+      _ressources.push_back(Ressource(cubeMapPath + "/negy.jpg"));
+      _ressources.push_back(Ressource(cubeMapPath + "/negx.jpg"));
+      _ressources.push_back(Ressource(cubeMapPath + "/negz.jpg"));
+    }
 }
 
-Ressources::Ressources(const string stringClass)
+Ressources::Ressources(const string stringClass, bool inCluster)
 {
   istringstream	ifs;
 
+  _inCluster = inCluster;
   ifs.str(stringClass);
   boost::archive::text_iarchive ia(ifs);
   ia >> *this;
@@ -115,14 +122,14 @@ string		Ressources::toStr(void)
 
 const string&	Ressources::getNewPathName(const string& previous)
 {
-  if (!_inCluster)
+  if (!_instance || _instance->isInCluster())
     return (previous);
-
-  int		j = _ressources.size();
+  vector<Ressource>	ressources = _instance->getRessources();
+  int				j = ressources.size();
 
   for (int i = 0 ; i < j ; i++)
-    if (_ressources[i].getPathName() == previous)
-      return (_ressources[i].getNewPathName());
+    if (ressources[i].getPathName() == previous)
+      return (ressources[i].getNewPathName());
   return (previous);
 }
 
