@@ -3,10 +3,12 @@
     <camera type="cinema" name="main">
       <position>0, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
+      <focus>10</focus>
     </camera>
     <camera type="cinema" name="cam2">
       <position>0, 5, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
+      <target>10, 0, 0</target>
     </camera>
   </cameras>
 

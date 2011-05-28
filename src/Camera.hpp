@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Wed May 25 16:31:37 2011 loick michard
+// Last update Sat May 28 10:01:03 2011 loick michard
 //
 
 #ifndef _CAMERA_H_
@@ -46,10 +46,13 @@ public:
   void			setTarget(const Point &taget);
   void			setName(const string& name);
 
-  virtual Ray			getRay(double x, double y) const = 0;
+  void			updateTarget();
+  virtual Ray			getRay(double x, double y,
+				       bool other, double space) const = 0;
   virtual Ray			
   getRayWithSampling(double x, double y,
-		     double samplingPos) const = 0;
+		     double samplingPos, 
+		     bool other, double space) const = 0;
 
   double        _width;
   double        _height;
@@ -63,6 +66,8 @@ protected:
   double	_focus;
   bool		_hasTarget;
   Vector	_target;
+  Vector	_realTarget;
+  Vector	_vectorSpace;
 };
 
 #endif

@@ -5,14 +5,14 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Thu May 19 16:59:57 2011 loick michard
+// Last update Sat May 28 10:00:42 2011 loick michard
 //
 
 #include "Camera.hpp"
 
 Camera::Camera()
 {
-
+  _focus = 30;
 }
 
 Camera::Camera(const Point& position, const Rotation& rotation,
@@ -20,9 +20,9 @@ Camera::Camera(const Point& position, const Rotation& rotation,
 	       const double apertureSize, const double focus):
   _position(position), _rotation(rotation), _focalLength(focalLenght),
   _hasDepthOfField(hasDepthOfField), _apertureSize(apertureSize),
-  _focus(focus), _hasTarget(false)
+  _focus(focus), _hasTarget(true)
 {
-
+  this->updateTarget();
 }
 
 Camera::Camera(const Point& position, const Point& target,
@@ -31,7 +31,8 @@ Camera::Camera(const Point& position, const Point& target,
 	       bool hasTarget):
   _position(position), _focalLength(focalLenght),
   _hasDepthOfField(hasDepthOfField), _apertureSize(apertureSize),
-  _focus(focus), _hasTarget(hasTarget), _target(target)
+  _focus(focus), _hasTarget(hasTarget), _target(target),
+  _realTarget(target)
 {
   _target -= _position;
   _target.normalize();
@@ -40,6 +41,28 @@ Camera::Camera(const Point& position, const Point& target,
 Camera::~Camera()
 {
   
+}
+
+void Camera::updateTarget()
+{
+  Vector    vector(_focalLength,
+                   0,
+                   0);
+  if (_rotation._x || _rotation._y || _rotation._z)
+    vector.rotate(_rotation);
+  vector.normalize();
+  vector *= _focus;
+  _realTarget = _position + vector;
+  vector.normalize();
+  _target = vector;
+  _hasDepthOfField = true;
+
+  Vector        newV1(_target._z, _target._y, -_target._x);
+  Vector        newV2 = newV1;
+  newV2 *= _target;
+  newV2.normalize();
+
+  _vectorSpace = newV2;
 }
 
 const Point&	Camera::getPosition(void) const
@@ -81,10 +104,11 @@ void		Camera::setPosition(const Point& position)
 {
   _position = position;
 }
-
+#include <iostream>
 void		Camera::setRotation(const Rotation& rotation)
 {
   _rotation = rotation;
+  this->updateTarget();
 }
 
 void		Camera::setFocalLength(double focalLength)
@@ -101,6 +125,7 @@ void		Camera::setFocus(double focus)
 {
   _hasDepthOfField = true;
   _focus = focus;
+  this->updateTarget();
 }
 
 void		Camera::setName(const string& name)
@@ -110,6 +135,7 @@ void		Camera::setName(const string& name)
 
 void		Camera::setTarget(const Point& target)
 {
+  _realTarget = target;
   _target = target - _position;
   _hasTarget = true;
   _target.normalize();

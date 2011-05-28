@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Thu May 26 16:58:42 2011 gael jochaud-du-plessix
+// Last update Fri May 27 01:18:27 2011 loick michard
 //
 
 #include <stdio.h>
@@ -142,8 +142,23 @@ void		Raytracer::renderingLoop(double& progress,
   Point			pixelToRender = getPixelToRender(thread);
   _thread->setRaytracedPixel(pixelToRender._x, pixelToRender._y, true);
   _interface->pixelHasStartedRendering(pixelToRender._x, pixelToRender._y);
-  Color		pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
 
+  _otherEyes = false;
+
+  if (_config->_3DEnabled && _config->_3DMode == 2)
+    _otherEyes = true;
+  Color pixelColor = renderPixel(pixelToRender._x, pixelToRender._y);
+  _otherEyes = false;
+
+  if (_config->_3DEnabled && _config->_3DMode == 0)
+    {
+      _otherEyes = true;
+      Color otherColor = renderPixel(pixelToRender._x, pixelToRender._y); 
+      _otherEyes = false;
+      pixelColor._g = otherColor._g;
+      pixelColor._b = otherColor._b;
+    }
+  
   progress = (double)(++thread->_currentPixel)
     / (_config->getWidth() * _config->getHeight());
   _interface->pixelHasBeenRendered(pixelToRender._x, pixelToRender._y,
@@ -239,14 +254,17 @@ Color			Raytracer::renderPixel(double x, double y)
 							 _config->getWidth(),
 							 suby / 
 							 _config->getHeight(),
-							 0);
+							 0,
+							 _otherEyes,
+							 _config->_eyesSpace);
 		  pixelColor += throwRay(ray);
 		}
 	    }
 	  else
 	    {
 	      ray = currentCamera.getRay(subx / _config->getWidth(),
-					 suby / _config->getHeight());
+					 suby / _config->getHeight(),
+					 _otherEyes, _config->_eyesSpace);
 	      pixelColor += throwRay(ray);
 	    }
 	}

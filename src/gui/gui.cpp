@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Fri May 27 18:47:18 2011 samuel olivier
+// Last update Sat May 28 10:18:06 2011 loick michard
 //
 
 #include <QApplication>
@@ -13,6 +13,9 @@
 #include <QMutexLocker>
 #include <sstream>
 #include <QSystemTrayIcon>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <fstream>
 
 #include "gui.hpp"
 
@@ -38,15 +41,15 @@
 Scene           *createScene()
 {
   Material      mat("base");
-  mat.setColor(Color(255, 0, 0));
+  mat.setColor(Color(255, 255, 255));
   mat.setSpecularCoeff(0.5);
   mat.setSpecularPow(50);
-  Material      *reflection = new Material();
+  Material      *reflection = new Material("Reflection");
   *reflection = mat;
-  // reflection->setReflectionCoeff(0);
+  reflection->setReflectionCoeff(1);
   // reflection->setTransmissionCoeff(0);
   // reflection->setRefractionIndex(1.33);
-  reflection->setLimitTexture(new Texture("stripes.png"));  
+  //reflection->setLimitTexture(new Texture("stripes.png"));  
   // Material      refraction = mat;
   // refraction.setTransmissionCoeff(0);
   // refraction.setRefractionIndex(1.33);
@@ -58,8 +61,8 @@ Scene           *createScene()
 
   vector<Camera*> cam;
   Camera* camera = new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0));
-  camera->setFocus(30);
-  camera->setTarget(Point(30, 0, 0));
+  camera->setFocus(40);
+  camera->setTarget(Point(20, 0, 0));
   cam.push_back(camera);
 
   // reflection->setTexture(new Texture("terre.jpg"));
@@ -69,7 +72,8 @@ Scene           *createScene()
 
   primitives.push_back(new Sphere(NULL, Point(20, 0, -1),
 				  Rotation(0, 0, 0), reflection, 2));
-
+  primitives.push_back(new Sphere(NULL, Point(40, -6, -1),
+                                  Rotation(0, 0, 0), reflection, 2));
   // Material special = refraction;
   // PerlinNoise *perlin = new PerlinNoise();
   // special.setTransmissionCoeff(0);
@@ -110,6 +114,11 @@ bool RaytracerGUI::setConfiguration()
   _config->setAntialiasing(_ui->_antialiasing->value());
   _config->setFieldDepthSampling(_ui->_depthFieldSampling->value());
   _config->setFieldDepthEnabled(_ui->_depthField->isChecked());
+
+  _config->_3DEnabled = _ui->_3d->isChecked();
+  _config->_3DMode = _ui->_3DMode->currentIndex();
+  _config->_eyesSpace = _ui->_3DSpace->value();
+
   _config->setKdTreeDepth(_ui->_kdTreeDepth->value());
   _config->setKdTreeEnabled(_ui->_kdTree->isChecked());
   _config->setExposure(_ui->_exposure->value());
@@ -159,6 +168,18 @@ bool RaytracerGUI::setConfiguration()
   _config->setPhotonMappingSampling(_ui->
 				    _photonMappingValue->value());
   _config->setPhotonMappingEnabled(_ui->_photonMapping->isChecked());
+
+  // {
+  //   std::ofstream ofs("fichierDeSerialisation");
+  //   boost::archive::text_oarchive oa(ofs);
+  //   oa << *_config;
+
+  //   RenderingConfiguration newConf;
+  //   std::ifstream ifs("fichierDeSerialisation");
+  // boost::archive::text_iarchive ia(ifs);
+  // ia >> newConf;
+  // }
+
   return (true);
 }
 

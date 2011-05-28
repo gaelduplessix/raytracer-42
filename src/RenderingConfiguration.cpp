@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Fri May 27 15:35:29 2011 samuel olivier
+// Last update Sat May 28 10:21:35 2011 loick michard
 //
 
 #include <sstream>
@@ -24,7 +24,8 @@ RenderingConfiguration::RenderingConfiguration():
   _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
   _additiveAmbiantLighting(Color(0, 0, 0)),
   _minimalAmbiantLightingEnabled(false), _minimalAmbiantLighting(0),
-  _kdTreeEnabled(false), _kdTreeDepth(10)
+  _kdTreeEnabled(false), _kdTreeDepth(10), _3DEnabled(false),
+  _3DMode(-1), _eyesSpace(1)
 {
   _transparency.enabled = false;
   _reflection.enabled = false;
