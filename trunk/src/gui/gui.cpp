@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sat May 28 10:18:06 2011 loick michard
+// Last update Sat May 28 16:31:47 2011 loick michard
 //
 
 #include <QApplication>
@@ -247,7 +247,7 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
       *_pixmap = _pixmap->fromImage(*_image);
       _ui->_image->setPixmap(*_pixmap);
     }
-  if (!_isRendering)
+  if (!_isRendering && !_isMultiThreading)
     {
       _ui->_mode->setEnabled(true);
       _ui->_width->setEnabled(true);
@@ -289,6 +289,21 @@ void RaytracerGUI::drawWindow()
   repaint();
 }
 
+void RaytracerGUI::threadsChange(int i)
+{
+  if (i > 1)
+    {
+      _isMultiThreading = true;
+      _ui->_mode->setEnabled(false);
+      _ui->_mode->setCurrentIndex(0);
+    }
+  else
+    {
+      _isMultiThreading = false;
+      _ui->_mode->setEnabled(true);
+    }
+}
+
 RaytracerGUI::RaytracerGUI(QWidget *parent)
   : QMainWindow(parent), _config(new RenderingConfiguration()),
     _raytracer(new Raytracer()), _backgroundColor(new QColor(0, 0, 0)), 
@@ -297,7 +312,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _ui(new Ui::MainWindow), _isRendering(false), _pause(false),
     _sticon(new QSystemTrayIcon(QIcon("images/image.png"))),
     _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this)),
-    _isConnected(false)
+    _isConnected(false), _isMultiThreading(false)
 {
   _actionRealQuit->setShortcut(tr("Ctrl+Q"));
   _initDialogCluster();
@@ -341,6 +356,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(openEditMaterialDialog())); 
   QObject::connect(_ui->actionDeconnexion, SIGNAL(triggered()),
                    this, SLOT(disconnect()));
+  QObject::connect(_ui->_threads, SIGNAL(valueChanged(int)),
+                   this, SLOT(threadsChange(int)));
   _scene = createScene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
