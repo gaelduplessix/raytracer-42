@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Sun May 29 12:48:51 2011 loick michard
+// Last update Sun May 29 16:07:58 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERCLIENT_HPP_
@@ -18,7 +18,8 @@
 
 #include "RenderingInterface.hpp"
 #include "ServersListManager.hpp"
-#include "ServerEntry.hpp"
+
+class ServerEntry;
 
 using namespace std;
 
@@ -31,17 +32,19 @@ public:
   RenderingInterface*	getInterface();
   QUrl&			getCentralServerUrl();
 
+  vector <ServerEntry*>	getServers(void);
   ServerEntry*	getServer(QString ip, int port);
   void		addServer(QString ip, int port, int status, int progress);
   void		updateServersList(QString ip, int port, int status,
 				  int progress);
+  void		removeFromServersList(ServerEntry* entry, bool destroy=false);
 
-  vector <ServerEntry*>	_servers;
 protected:
   RenderingInterface*	_interface;
   QUrl			_centralServerUrl;
   int			_nbSubdivisions;
   ServersListManager*	_serversListManager;
+  vector <ServerEntry*>	_servers;
   int			_sessionId;
   QMutex		_mutex;
 };

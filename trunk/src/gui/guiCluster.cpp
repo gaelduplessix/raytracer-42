@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Sun May 29 15:10:37 2011 loick michard
+// Last update Sun May 29 15:38:26 2011 gael jochaud-du-plessix
 // Last update Thu May 26 17:45:53 2011 gael jochaud-du-plessix
 //
 
@@ -36,15 +36,14 @@ void		RaytracerGUI::_initDialogCluster()
   if (_clusterTimer)
     delete _clusterTimer;
   _clusterTimer = new QTimer();
-  _clusterTimer->setInterval(200);
+  _clusterTimer->setInterval(1000);
   QObject::connect(_clusterTimer, SIGNAL(timeout()), 
 		   this, SLOT(updateServersTab()));
 }
 
 void		RaytracerGUI::updateServersTab()
 {
-  vector<ServerEntry*> list = _clusterClient->_servers;
-  list.push_back(new ServerEntry("127.0.0.1", 80));
+  vector<ServerEntry*> list = _clusterClient->getServers();
   _ui->_serversTab->setRowCount(list.size());
   for (unsigned int i = 0; i < list.size(); i++)
     {
@@ -66,14 +65,16 @@ void		RaytracerGUI::updateServersTab()
       QString state;
       if (list[i]->getStatus() == ServerEntry::FREE)
 	state = tr("Libre");
+      else if (list[i]->getStatus() == ServerEntry::WAITING_REQUEST)
+	state = tr("En attente");
       else if (list[i]->getStatus() == ServerEntry::DOWNLOADING_RESSOURCES)
-	state = tr("Telechargement ressources");
+	state = tr("Téléchargement ressources");
       else if (list[i]->getStatus() == ServerEntry::PROCESSING_RESSOURCES)
         state = tr("Traitement ressources");
       else if (list[i]->getStatus() == ServerEntry::RAYTRACING)
-	state =tr("Raytracing");
+	state = tr("Raytracing");
       else if (list[i]->getStatus() == ServerEntry::SENDING_RESPONSE)
-	state =tr("Envoi reponse");
+	state = tr("Envoi réponse");
       _ui->_serversTab
 	->setItem(i, 2,
 		  new QTableWidgetItem(state));
@@ -121,8 +122,8 @@ void		RaytracerGUI::disconnect()
 {
   int ret =
     QMessageBox::warning(this, tr("Raytracer"),
-			 tr("Etes-vous sur de vouloir \
-vous deconnecter du cluster?"),
+			 tr("Etes-vous sur de vouloir "
+			    "vous deconnecter du cluster?"),
 			 QMessageBox::Yes
 			 | QMessageBox::Cancel,
 			 QMessageBox::Cancel);
