@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Sat May 28 15:39:03 2011 samuel olivier
+// Last update Sun May 29 17:45:54 2011 loick michard
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -13,8 +13,10 @@
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-
+#include <string>
 #include "CubeMap.hpp"
+
+using namespace std;
 
 enum	renderingSamplingMethod{
   RSM_LINEAR_HORIZONTAL,
@@ -91,7 +93,7 @@ public:
   void		setBackgroundColor(const Color& color);
 
   CubeMap*	getCubeMap(void) const;
-  void		setCubeMap(CubeMap *map);
+  void		setCubeMap(CubeMap *map, const string& path);
 
   bool		isAmbientOcclusionEnabled(void) const;
   int		getAmbientOcclusionSampling(void) const;
@@ -154,6 +156,7 @@ private:
   t_reflection		_reflection;
   t_transparency	_transparency;
   CubeMap*		_cubeMap;
+  string		_cubeMapPath;
   Color			_backgroundColor;
   bool			_ambientOcclusionEnabled;
   int			_ambientOcclusionSampling;
@@ -183,6 +186,7 @@ void			RenderingConfiguration::serialize(Archive& ar,
     ar & _reflection.diffusedSampling;
     ar & _transparency.enabled;
     ar & _transparency.maxDepth;
+    ar & _cubeMapPath;
     ar & _nbThreads;
     ar & _width;
     ar & _height;

@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Sat May 28 14:55:37 2011 samuel olivier
+// Last update Sun May 29 17:44:19 2011 loick michard
 //
 
 #include <sstream>
@@ -300,8 +300,9 @@ void	RenderingConfiguration::setTransparencyMaxDepth(int maxDepth)
   _transparency.maxDepth = maxDepth;
 }
 
-void	RenderingConfiguration::setCubeMap(CubeMap* map)
+void	RenderingConfiguration::setCubeMap(CubeMap* map, const string& path)
 {
+  _cubeMapPath = path;
   _cubeMap = map;
 }
 
