@@ -5,19 +5,35 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:17:38 2011 gael jochaud-du-plessix
-// Last update Sat May 28 19:15:42 2011 gael jochaud-du-plessix
+// Last update Sun May 29 16:06:25 2011 gael jochaud-du-plessix
 //
 
+#include <sstream>
+#include <QHostAddress>
+
 #include "ServerEntry.hpp"
+#include "ClusterClient.hpp"
 
 ServerEntry::ServerEntry():
-  _ip(), _port(0), _status(0), _progress(0)
+  _clusterClient(NULL), _ip(), _port(0), _status(0), _progress(0),
+  _socket(NULL)
 {  
 }
 
-ServerEntry::ServerEntry(QString ip, int port, int status, int progress):
-  _ip(ip), _port(port), _status(status), _progress(0)
+ServerEntry::ServerEntry(ClusterClient* clusterClient, QString ip, int port,
+			 int status, int progress):
+  _clusterClient(clusterClient), _ip(ip), _port(port), _status(status),
+  _progress(progress), _socket(NULL)
 {  
+}
+
+ServerEntry::~ServerEntry()
+{
+  if (_socket)
+    {
+      _socket->close();
+      delete _socket;
+    }
 }
 
 QString&	ServerEntry::getIp(void)
@@ -58,4 +74,47 @@ int		ServerEntry::getProgress(void)
 void		ServerEntry::setProgress(int progress)
 {
   _progress = progress;
+}
+
+bool		ServerEntry::isConnectionOpened(void)
+{
+  return (!(!_socket || _socket->state() != QAbstractSocket::ConnectedState));
+}
+
+void		ServerEntry::openConnection(void)
+{
+  if (isConnectionOpened())
+    return ;
+  if (!_socket)
+    {      
+      _socket = new QTcpSocket();
+      connect(_socket, SIGNAL(connected()), this, SLOT(onConnectionOpened()));
+      connect(_socket, SIGNAL(disconnected()), this,
+	      SLOT(onConnectionClosed()));
+    }
+  _socket->abort();
+  _socket->connectToHost(QHostAddress(_ip), _port);
+}
+
+void		ServerEntry::onConnectionOpened(void)
+{
+  ostringstream	portStr;
+  portStr << _port;
+  _clusterClient->getInterface()
+    ->sendSuccessMessage(tr("Connection etablished to server "
+			    "<strong>%1:%2</strong>")
+			 .arg(_ip, QString(portStr.str().c_str()))
+			 .toStdString());
+}
+
+void		ServerEntry::onConnectionClosed(void)
+{
+  ostringstream	portStr;
+  portStr << _port;
+  _clusterClient->getInterface()
+    ->sendMessage(tr("Connection to server <strong>%1:%2</strong> "
+		     "closed").arg(_ip, QString(portStr.str().c_str()))
+		  .toStdString());
+  _clusterClient->removeFromServersList(this);
+  deleteLater();
 }

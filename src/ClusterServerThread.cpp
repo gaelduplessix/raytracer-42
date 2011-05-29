@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 19:02:17 2011 gael jochaud-du-plessix
-// Last update Sat May 28 21:37:43 2011 gael jochaud-du-plessix
+// Last update Sun May 29 16:02:24 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServerThread.hpp"
@@ -56,10 +56,15 @@ void	ClusterServerThread::run(void)
 	  _clusterServer->waitCentralServerConnection();
 	  if (!_clusterServer->getCentralServerConnectionState())
 	    return ;
+	  ostringstream portStr;
+	  portStr << _clusterServer->getPort();
 	  _clusterServer->getInterface()
-	    ->logServerConsoleMessage("<span style=\"color:green\">Success: "
-				      "server ready, waiting for connection."
-				      "</span>");
+	    ->logServerConsoleMessage(tr("<span style=\"color:green\">Success:"
+					 " server launched on port "
+					 "<strong>%1</strong>, "
+					 "waiting for connection.</span>")
+				      .arg(QString(portStr.str().c_str()))
+				      .toStdString());
 	}
       else
 	{
@@ -82,7 +87,7 @@ void		ClusterServerThread::registerToCentralServer(void)
   value << _clusterServer->getPort();
   postVars.addQueryItem("serverPort", value.str().c_str());
   value.str("");
-  value << ServerEntry::FREE;
+  value << _clusterServer->getStatus();
   postVars.addQueryItem("serverStatus", value.str().c_str());
   value.str("");
   value << _clusterServer->getProgress();
@@ -124,9 +129,20 @@ void	ClusterServerThread::readCentralServerResponse(QNetworkReply* reply)
 void	ClusterServerThread::newConnection()
 {
   _currentClientSocket = _tcpServer->nextPendingConnection();
+  connect(_currentClientSocket, SIGNAL(disconnected()), this,
+	  SLOT(clientDisconnect()));
   _clusterServer->getInterface()
-    ->logServerConsoleMessage("<span>Info: "
-			      "Connection etablished with client </span>"
-			      + _currentClientSocket
-			      ->peerAddress().toString().toStdString());
+    ->logServerConsoleMessage(tr("<span>Info: Connection etablished "
+				 "with client <strong>%1</strong></span>")
+			      .arg(_currentClientSocket
+				   ->peerAddress().toString()).toStdString());
+  _clusterServer->setStatus(ServerEntry::WAITING_REQUEST);
+}
+
+void	ClusterServerThread::clientDisconnect()
+{
+  _clusterServer->getInterface()
+    ->logServerConsoleMessage(tr("<span>Info: Client disconnected</span>")
+			      .toStdString());
+  _clusterServer->setStatus(ServerEntry::FREE);
 }

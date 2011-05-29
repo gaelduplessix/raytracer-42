@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri May 27 00:55:33 2011 gael jochaud-du-plessix
-// Last update Sat May 28 21:54:22 2011 gael jochaud-du-plessix
+// Last update Sun May 29 15:43:30 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -13,12 +13,12 @@
 
 #include "ServersListManager.hpp"
 #include "ClusterClient.hpp"
+#include "ServerEntry.hpp"
 
 ServersListManager::ServersListManager(ClusterClient* clusterClient):
   _clusterClient(clusterClient), _networkManager(NULL), _timer(NULL),
   _stopReportConnectionError(false)
-{
-  
+{  
 }
 
 ServersListManager::~ServersListManager()
@@ -73,7 +73,7 @@ void	ServersListManager::receiveServersList(QNetworkReply* reply)
       for (int i = 0, l = servers.size(); i < l; i++)
 	{
 	  QStringList	serverInfos = servers[i].split("---");
-	  if (serverInfos.size() == 3)
+	  if (serverInfos.size() >= 4)
 	    {
 	      _clusterClient->updateServersList(serverInfos[0],
 						atoi(serverInfos[1]

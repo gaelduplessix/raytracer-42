@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 18:54:45 2011 gael jochaud-du-plessix
-// Last update Wed May 25 22:09:15 2011 gael jochaud-du-plessix
+// Last update Sun May 29 15:11:37 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERSERVERTHREAD_HPP_
@@ -42,6 +42,7 @@ public slots:
   void		readCentralServerResponse(QNetworkReply* reply);
   void		registerToCentralServer(void);
   void		newConnection(void);
+  void		clientDisconnect(void);
 
 private:
   int				_type;
