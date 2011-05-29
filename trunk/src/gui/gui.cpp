@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sun May 29 13:04:15 2011 loick michard
+// Last update Sun May 29 16:00:53 2011 loick michard
 //
 
 #include <QApplication>
@@ -317,10 +317,10 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _isConnected(false), _isMultiThreading(false)
 {
   _actionRealQuit->setShortcut(tr("Ctrl+Q"));
-  _initDialogCluster();
   _ui->setupUi(this);
   _ui->_progressBar->setHidden(true);
   _ui->menuFichier->addAction(_actionRealQuit);
+  _initDialogCluster();
   _menuSticon = new QMenu();
   _menuSticon->addAction(_ui->action_Play);
   _menuSticon->addAction(_ui->action_Pause);
