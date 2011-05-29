@@ -607,8 +607,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>265</width>
-          <height>262</height>
+          <width>345</width>
+          <height>511</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -786,8 +786,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>231</width>
-          <height>243</height>
+          <width>345</width>
+          <height>511</height>
          </rect>
         </property>
         <attribute name="label">
@@ -964,8 +964,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>271</width>
-          <height>240</height>
+          <width>345</width>
+          <height>511</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1137,8 +1137,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>287</width>
-          <height>194</height>
+          <width>345</width>
+          <height>511</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1288,7 +1288,7 @@ border-color: rgb(108, 108, 108);</string>
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
    <property name="allowedAreas">
-    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+    <set>Qt::AllDockWidgetAreas</set>
    </property>
    <property name="windowTitle">
     <string/>
@@ -1299,7 +1299,31 @@ border-color: rgb(108, 108, 108);</string>
    <widget class="QWidget" name="dockWidgetContents_3">
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
-      <widget class="QTableWidget" name="tableWidget"/>
+      <widget class="QTableWidget" name="_serversTab">
+       <property name="columnCount">
+        <number>4</number>
+       </property>
+       <column>
+        <property name="text">
+         <string>Ip</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Statut</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Progression</string>
+        </property>
+       </column>
+      </widget>
      </item>
     </layout>
    </widget>
