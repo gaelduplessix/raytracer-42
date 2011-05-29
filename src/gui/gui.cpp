@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sun May 29 17:56:02 2011 loick michard
+// Last update Sun May 29 17:57:16 2011 loick michard
 //
 
 #include <QApplication>
@@ -250,8 +250,7 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
     }
   if (!_isRendering)
     {
-      if (!_isMultiThreading)
-	_ui->_mode->setEnabled(true);
+      _ui->_mode->setEnabled(true);
       _ui->_width->setEnabled(true);
       _ui->_height->setEnabled(true);
       _ui->_threads->setEnabled(true);
