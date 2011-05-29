@@ -5,8 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Sun May 29 15:38:26 2011 gael jochaud-du-plessix
-// Last update Thu May 26 17:45:53 2011 gael jochaud-du-plessix
+// Last update Sun May 29 16:27:43 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -39,11 +38,16 @@ void		RaytracerGUI::_initDialogCluster()
   _clusterTimer->setInterval(1000);
   QObject::connect(_clusterTimer, SIGNAL(timeout()), 
 		   this, SLOT(updateServersTab()));
+
+  _ui->_serversTab->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  _ui->_serversTab->
+    horizontalHeader()->setResizeMode(3, QHeaderView::Stretch);
 }
 
 void		RaytracerGUI::updateServersTab()
 {
   vector<ServerEntry*> list = _clusterClient->getServers();
+
   _ui->_serversTab->setRowCount(list.size());
   for (unsigned int i = 0; i < list.size(); i++)
     {
@@ -155,5 +159,7 @@ void		RaytracerGUI::connectToCluster()
 			  ->_addres->text().toStdString(),
 			  _connectToServerDialogUi->_subdivisions->value());
       _clusterTimer->start();
+      _ui->actionActiver_la_console->setChecked(false);
+      _ui->_consoleGroup->setVisible(false);
     }
 }

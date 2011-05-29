@@ -49,8 +49,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>758</width>
-         <height>484</height>
+         <width>1038</width>
+         <height>243</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
@@ -245,7 +245,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>345</width>
-          <height>511</height>
+          <height>489</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -608,7 +608,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>345</width>
-          <height>511</height>
+          <height>270</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -787,7 +787,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>345</width>
-          <height>511</height>
+          <height>270</height>
          </rect>
         </property>
         <attribute name="label">
@@ -965,7 +965,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>345</width>
-          <height>511</height>
+          <height>270</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1138,7 +1138,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>345</width>
-          <height>511</height>
+          <height>270</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1294,7 +1294,7 @@ border-color: rgb(108, 108, 108);</string>
     <string/>
    </property>
    <attribute name="dockWidgetArea">
-    <number>2</number>
+    <number>8</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_3">
     <layout class="QVBoxLayout" name="verticalLayout_4">
