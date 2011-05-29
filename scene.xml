@@ -3,6 +3,7 @@
     <camera type="cinema" name="main">
       <position>-5, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
+      <focus>20</focus>
     </camera>
     <camera type="cinema" name="cam2">
       <position>-6, 0, 0</position>

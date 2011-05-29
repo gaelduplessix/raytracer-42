@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sat May 28 16:31:47 2011 loick michard
+// Last update Sun May 29 11:53:50 2011 loick michard
 //
 
 #include <QApplication>
@@ -247,9 +247,10 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
       *_pixmap = _pixmap->fromImage(*_image);
       _ui->_image->setPixmap(*_pixmap);
     }
-  if (!_isRendering && !_isMultiThreading)
+  if (!_isRendering)
     {
-      _ui->_mode->setEnabled(true);
+      if (!_isMultiThreading)
+	_ui->_mode->setEnabled(true);
       _ui->_width->setEnabled(true);
       _ui->_height->setEnabled(true);
       _ui->_threads->setEnabled(true);
