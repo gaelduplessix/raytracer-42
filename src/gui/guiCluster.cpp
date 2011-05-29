@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Sun May 29 16:27:43 2011 loick michard
+// Last update Sun May 29 16:46:23 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -159,7 +159,5 @@ void		RaytracerGUI::connectToCluster()
 			  ->_addres->text().toStdString(),
 			  _connectToServerDialogUi->_subdivisions->value());
       _clusterTimer->start();
-      _ui->actionActiver_la_console->setChecked(false);
-      _ui->_consoleGroup->setVisible(false);
     }
 }
