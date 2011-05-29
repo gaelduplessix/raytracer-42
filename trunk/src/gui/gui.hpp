@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Sat May 28 21:52:36 2011 gael jochaud-du-plessix
+// Last update Sun May 29 13:06:30 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -84,6 +84,7 @@ public slots:
   void	openEditMaterialDialog();
   void	disconnect();
   void	threadsChange(int i);
+  void	updateServersTab();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
@@ -118,6 +119,7 @@ private:
   Ui::ConnectToServer*		_connectToServerDialogUi;
   QDialog*                      _connectToServerDialog;
   string			_consoleLog;
+  QTimer*			_clusterTimer;
 
   GuiEditMaterialDialog		_editMaterialDialog;
 

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Fri May 27 12:33:55 2011 gael jochaud-du-plessix
+// Last update Sun May 29 15:10:37 2011 loick michard
 // Last update Thu May 26 17:45:53 2011 gael jochaud-du-plessix
 //
 
@@ -33,6 +33,59 @@ void		RaytracerGUI::_initDialogCluster()
   _connectToServerDialog = new QDialog();
   _connectToServerDialogUi = new Ui::ConnectToServer();
   _connectToServerDialogUi->setupUi(_connectToServerDialog);
+  if (_clusterTimer)
+    delete _clusterTimer;
+  _clusterTimer = new QTimer();
+  _clusterTimer->setInterval(200);
+  QObject::connect(_clusterTimer, SIGNAL(timeout()), 
+		   this, SLOT(updateServersTab()));
+}
+
+void		RaytracerGUI::updateServersTab()
+{
+  vector<ServerEntry*> list = _clusterClient->_servers;
+  list.push_back(new ServerEntry("127.0.0.1", 80));
+  _ui->_serversTab->setRowCount(list.size());
+  for (unsigned int i = 0; i < list.size(); i++)
+    {
+      if (_ui->_serversTab->item(i, 0))
+	delete _ui->_serversTab->item(i, 0);
+      _ui->_serversTab
+	->setItem(i, 0,
+		  new QTableWidgetItem(list[i]->getIp()));
+      
+      if (_ui->_serversTab->item(i, 1))
+        delete _ui->_serversTab->item(i, 1);
+      _ui->_serversTab
+        ->setItem(i, 1,
+                  new QTableWidgetItem(QString::number(list[i]->getPort())));
+      
+
+      if (_ui->_serversTab->item(i, 2))
+        delete _ui->_serversTab->item(i, 2);
+      QString state;
+      if (list[i]->getStatus() == ServerEntry::FREE)
+	state = tr("Libre");
+      else if (list[i]->getStatus() == ServerEntry::DOWNLOADING_RESSOURCES)
+	state = tr("Telechargement ressources");
+      else if (list[i]->getStatus() == ServerEntry::PROCESSING_RESSOURCES)
+        state = tr("Traitement ressources");
+      else if (list[i]->getStatus() == ServerEntry::RAYTRACING)
+	state =tr("Raytracing");
+      else if (list[i]->getStatus() == ServerEntry::SENDING_RESPONSE)
+	state =tr("Envoi reponse");
+      _ui->_serversTab
+	->setItem(i, 2,
+		  new QTableWidgetItem(state));
+
+      if (_ui->_serversTab->cellWidget(i, 3))
+        delete _ui->_serversTab->cellWidget(i, 3);
+      QProgressBar *bar = new QProgressBar();
+      bar->setRange(0, 100);
+      bar->setValue(list[i]->getProgress());
+      _ui->_serversTab
+        ->setCellWidget(i, 3, bar);
+    }
 }
 
 void		RaytracerGUI::updateServerConsole()
@@ -80,6 +133,7 @@ vous deconnecter du cluster?"),
       _ui->actionSe_connecter_un_serveur->setVisible(true);
       delete _clusterClient;
       _isConnected = false;
+      _clusterTimer->stop();
     }
 }
 
@@ -99,5 +153,6 @@ void		RaytracerGUI::connectToCluster()
 	new ClusterClient(this, _connectToServerDialogUi
 			  ->_addres->text().toStdString(),
 			  _connectToServerDialogUi->_subdivisions->value());
+      _clusterTimer->start();
     }
 }

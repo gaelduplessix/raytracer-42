@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sun May 29 11:53:50 2011 loick michard
+// Last update Sun May 29 13:04:15 2011 loick michard
 //
 
 #include <QApplication>
@@ -313,6 +313,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _ui(new Ui::MainWindow), _isRendering(false), _pause(false),
     _sticon(new QSystemTrayIcon(QIcon("images/image.png"))),
     _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this)),
+    _clusterTimer(NULL),
     _isConnected(false), _isMultiThreading(false)
 {
   _actionRealQuit->setShortcut(tr("Ctrl+Q"));
