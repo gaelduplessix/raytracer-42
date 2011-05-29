@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sun May 29 16:00:53 2011 loick michard
+// Last update Sun May 29 17:56:02 2011 loick michard
 //
 
 #include <QApplication>
@@ -151,10 +151,11 @@ bool RaytracerGUI::setConfiguration()
 				   toStdString());
 	  return (false);
 	}
-      _config->setCubeMap(_cubeMap);
+      _config->setCubeMap(_cubeMap, _ui->
+			  _cubeMapRepertory->text().toStdString());
     }
   else
-    _config->setCubeMap(NULL);
+    _config->setCubeMap(NULL, "");
   _config->setBackgroundColor(Color((*_backgroundColor).rgba()));
   _config->setMinimalAmbiantLightingEnabled(_ui->
 					    _ambiantLighting->isChecked());
@@ -295,13 +296,16 @@ void RaytracerGUI::threadsChange(int i)
   if (i > 1)
     {
       _isMultiThreading = true;
-      _ui->_mode->setEnabled(false);
-      _ui->_mode->setCurrentIndex(0);
+      _ui->_mode->removeItem(5);
+      _ui->_mode->removeItem(4);
+      _ui->_mode->removeItem(3);
     }
   else
     {
       _isMultiThreading = false;
-      _ui->_mode->setEnabled(true);
+      _ui->_mode->addItem(tr("Aleatoire horizontal"));
+      _ui->_mode->addItem(tr("Aleatoire vertical"));
+      _ui->_mode->addItem(tr("Aleatoire"));
     }
 }
 
