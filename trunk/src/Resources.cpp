@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Tue May 31 00:23:27 2011 loick michard
+// Last update Tue May 31 01:26:55 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -19,7 +19,6 @@ Resources*     Resources::_instance = NULL;
 Resources::Resources(void) : _resources(), _tmpResourceDir(""),
 			       _inCluster(false)
 {
-
 }
 
 const vector<Resource>&	Resources::getResources(void)
@@ -32,13 +31,18 @@ void		Resources::setResources(const vector<Resource>& resources)
   _resources = resources;
 }
 
-void		Resources::createResources(const string stringClass)
+void		Resources::createResources(const string& stringClass)
 {
   istringstream	ifs;
 
   ifs.str(stringClass);
   boost::archive::text_iarchive ia(ifs);
   ia >> *this;
+}
+
+void		Resources::createResources(const QByteArray& bytes)
+{
+  createResources(string(bytes.data(), bytes.size()));
 }
 
 void	Resources::createResources(const Scene* scene,
@@ -95,6 +99,12 @@ string		Resources::toStr(void)
   oa << *this;
   return (ofs.str());
   
+}
+
+QByteArray	Resources::toByteArray(void)
+{
+  string	str = toStr();
+  return (QByteArray(str.c_str(), str.size()));
 }
 
 const string&	Resources::getNewPathName(const string& previous)

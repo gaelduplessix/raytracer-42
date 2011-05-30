@@ -5,16 +5,18 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Mon May 30 22:15:30 2011 samuel olivier
+// Last update Tue May 31 01:29:17 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
+#include "Resources.hpp"
 
 Scene::Scene(vector<Camera*> cameras,
 	     vector<Object*> objects,
 	     vector<Light*> lights):
   _hasError(false), _parsingDone(true), _interface(NULL),
-  _cameras(cameras), _objects(objects), _lights(lights), _sceneFilenames(0)
+  _cameras(cameras), _objects(objects), _lights(lights), _filename(""),
+  _sceneFilenames(0)
 {
 
 }
@@ -25,13 +27,13 @@ Scene::Scene(vector<Camera*> cameras,
 	     vector<Material*> materials):
   _hasError(false), _parsingDone(true), _interface(NULL),
   _cameras(cameras), _objects(objects), _lights(lights), _materials(materials),
-  _sceneFilenames(0)
+  _filename(""), _sceneFilenames(0)
 {
 
 }
 
 Scene::Scene(void): _hasError(false), _parsingDone(false), _interface(NULL),
-		    _sceneFilenames(0)
+		    _filename(""), _sceneFilenames(0)
 {
 
 }
@@ -104,6 +106,11 @@ int			Scene::getNbLights(void) const
 int			Scene::getNbMaterials(void) const
 {
   return(_materials.size());
+}
+
+const QString&		Scene::getFilename(void) const
+{
+  return (_filename);
 }
 
 const vector<QString>&	Scene::getSceneFilenames(void) const
@@ -564,7 +571,9 @@ void		Scene::loadFromFile(string		filename,
   this->_interface = interface;
   this->_interface->sendMessage(QObject::tr("Start parsing %1")
 				.arg(filename.c_str()).toStdString());
-  document = this->_loadFromFile_checkAndGetFile(filename);
+  document =
+    this->_loadFromFile_checkAndGetFile(Resources::getInstance()
+					->getNewPathName(filename));
   if (this->_hasError == false)
   {
     QDomElement	docElem = document.documentElement();
@@ -587,6 +596,7 @@ void		Scene::loadFromFile(string		filename,
     }
   }
   _sceneFilenames.push_back(QString(filename.c_str()));
+  _filename = QString(filename.c_str());
   this->_parsingDone = true;
   if (this->isValid())
     this->_putSuccess(QObject::tr("Parsing finished"));

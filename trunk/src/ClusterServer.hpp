@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Mon May 30 19:59:09 2011 gael jochaud-du-plessix
+// Last update Tue May 31 01:37:56 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERSERVER_HPP_
@@ -22,6 +22,8 @@
 #include "RenderingInterface.hpp"
 #include "RegisterServerThread.hpp"
 #include "ServerEntry.hpp"
+#include "Scene.hpp"
+#include "RenderingConfiguration.hpp"
 
 using namespace std;
 
@@ -72,6 +74,9 @@ private:
   int			_currentSessionId;
   QRect			_currentSection;
   int			_currentPacketSize;
+  Scene*		_scene;
+  RenderingConfiguration _renderingConf;
+  bool			_readyToRaytrace;
 };
 
 #endif

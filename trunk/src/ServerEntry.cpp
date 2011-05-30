@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:17:38 2011 gael jochaud-du-plessix
-// Last update Mon May 30 21:48:57 2011 gael jochaud-du-plessix
+// Last update Tue May 31 01:38:25 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -151,12 +151,9 @@ void		ServerEntry::onDataReceived(void)
       Resources::getInstance()
 	->createResources(_clusterClient->getScene(),
 			  &_clusterClient->getRenderingConfiguration());
-      string resourcesStr =  Resources::getInstance()->toStr();
-      string renderingConfStr =
-	_clusterClient->getRenderingConfiguration().toStr();
-      QByteArray resourcesBytes(resourcesStr.c_str(), resourcesStr.size());
-      QByteArray renderingConfBytes(renderingConfStr.c_str(),
-				    renderingConfStr.size());
+      QByteArray resourcesBytes = Resources::getInstance()->toByteArray();
+      QByteArray renderingConfBytes =
+	_clusterClient->getRenderingConfiguration().toByteArray();
       {
 	QByteArray  packet;
 	QDataStream stream(&packet, QIODevice::ReadWrite);
@@ -168,6 +165,8 @@ void		ServerEntry::onDataReceived(void)
 	QDataStream stream(&packet, QIODevice::ReadWrite);
 	stream << (int)0;
 	stream << resourcesBytes;
+	stream << renderingConfBytes;
+	stream << _clusterClient->getScene()->getFilename();
 	stream.device()->seek(0);
 	stream << (int)(packet.size() - sizeof(int));
 	_socket->write(packet);

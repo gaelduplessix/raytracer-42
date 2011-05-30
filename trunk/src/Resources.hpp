@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:03:25 2011 samuel olivier
-// Last update Mon May 30 21:41:06 2011 samuel olivier
+// Last update Tue May 31 01:12:53 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RESOURCES_
@@ -15,6 +15,7 @@
 #include <utility>
 #include <string>
 #include <QImage>
+#include <QByteArray>
 #include <boost/serialization/vector.hpp>
 
 #include "Scene.hpp"
@@ -30,13 +31,15 @@ private:
 
 public:
   string	toStr(void);
+  QByteArray	toByteArray(void);
 
   const vector<Resource>&	getResources(void);
   void		setResources(const vector<Resource>& resources);
 
   void		createResources(const Scene* scene,
 				 const RenderingConfiguration* conf);
-  void		createResources(const string stringClass);
+  void		createResources(const string& stringClass);
+  void		createResources(const QByteArray& stringClass);
 
   const string&	getTmpResourceDir(void);
 

@@ -5,12 +5,13 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Mon May 30 16:02:49 2011 loick michard
+// Last update Tue May 31 01:13:21 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
 #define _RENDERINGCONFIGURATION_HPP_
 
+#include <QByteArray>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <string>
@@ -46,8 +47,10 @@ class RenderingConfiguration
 public:
   RenderingConfiguration();
   RenderingConfiguration(const string& stringClass);
+  RenderingConfiguration(const QByteArray& bytes);
 
   string	toStr(void);
+  QByteArray	toByteArray(void);
   int		getNbThreads(void) const;
   void		setNbThreads(int nbThreads);
   int		getWidth(void) const;

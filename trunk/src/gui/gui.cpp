@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Tue May 31 00:18:23 2011 loick michard
+// Last update Tue May 31 01:23:06 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
