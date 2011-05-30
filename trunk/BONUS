@@ -2,7 +2,7 @@ Lumiere parrallele
 Lumiere Direct
 Lumiere Spherique           }
 			    } Ombres diffuses (sampling)
-Lumiere Parrallelogrammique }
+Lumiere Parrallelogramme    }
 Exposition
 
 Tore
@@ -37,3 +37,4 @@ GUI de gros ouf
 Export d'image (jpg, png, gif, bmp)
 Chargement d'une scene au format Xml
 Editeur de Materiaux
+Image 3D avec lunettes
