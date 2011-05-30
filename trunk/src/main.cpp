@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed May 25 16:19:06 2011 gael jochaud-du-plessix
+// Last update Mon May 30 15:01:54 2011 samuel olivier
 //
 
 #include <vector>
