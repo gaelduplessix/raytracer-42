@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 10 13:49:47 2011 samuel olivier
-// Last update Wed May 25 11:04:55 2011 loick michard
+// Last update Mon May 30 16:33:16 2011 samuel olivier
 //
 
 #include "Sett.hpp"
@@ -16,25 +16,33 @@ Sett::Sett(void)
 }
 
 Sett::Sett(const Point& position, bool isSolid, const Vector& width,
-	   const Vector& height, const Vector& depth, Material* material)
+	   const Vector& height, const Vector& depth, Material* material,
+	   const Rotation& rotation)
 {
-  _rotation = Rotation(0, 0, 0);
+  Vector	newWidth = width;
+  Vector	newHeight = height;
+  Vector	newDepth = depth;
+
+  newWidth.rotate(rotation);
+  newHeight.rotate(rotation);
+  newDepth.rotate(rotation);
+  _rotation = rotation;
   _position = position;
   _isSolid = isSolid;
   vector<ObjectPrimitive*>      primitives;
-  primitives.push_back(new Parallelogram(this, position, position + width,
-					 position + height, material));
-  primitives.push_back(new Parallelogram(this, position, position + width,
-  					 position + depth, material));
-  primitives.push_back(new Parallelogram(this, position, position + height,
-  					 position + depth, material));
+  primitives.push_back(new Parallelogram(this, position, position + newWidth,
+					 position + newHeight, material));
+  primitives.push_back(new Parallelogram(this, position, position + newWidth,
+  					 position + newDepth, material));
+  primitives.push_back(new Parallelogram(this, position, position + newHeight,
+  					 position + newDepth, material));
 
-  Point	newVertex = position + width + height + depth;
-  primitives.push_back(new Parallelogram(this, newVertex, newVertex - width,
-  					 newVertex - height, material));
-  primitives.push_back(new Parallelogram(this, newVertex, newVertex - width,
-  					 newVertex - depth, material));
-  primitives.push_back(new Parallelogram(this, newVertex, newVertex - height,
-  					 newVertex - depth, material));
+  Point	newVertex = position + newWidth + newHeight + newDepth;
+  primitives.push_back(new Parallelogram(this, newVertex, newVertex - newWidth,
+  					 newVertex - newHeight, material));
+  primitives.push_back(new Parallelogram(this, newVertex, newVertex - newWidth,
+  					 newVertex - newDepth, material));
+  primitives.push_back(new Parallelogram(this, newVertex, newVertex -newHeight,
+  					 newVertex - newDepth, material));
   _primitives = primitives;
 }

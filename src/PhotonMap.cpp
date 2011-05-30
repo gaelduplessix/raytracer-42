@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 14:33:18 2011 samuel olivier
-// Last update Wed May 25 10:54:52 2011 loick michard
+// Last update Mon May 30 17:37:35 2011 samuel olivier
 //
 
 #include "PhotonMap.hpp"
@@ -42,7 +42,6 @@ void			PhotonMap::fillPhotonMap(Raytracer *rt)
     }
   for (int pathSize = rt->_refractivePath.size() ; pathSize > 0 ; pathSize--)
     rt->_refractivePath.pop();
-  printf("%d\n", _map.size());
 }
 
 bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
@@ -56,7 +55,7 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       Photon		photon;
       bool		reflect = false;
       bool		refract = false;
-      int		nbPossibilities = 2;
+      int		nbPossibilities = 1;
       int		randomValue;
 
       photon._position = ray._point + k * ray._vector;
@@ -77,9 +76,7 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       	  nbPossibilities++;
       	}
       randomValue = rand() % nbPossibilities;
-      if (randomValue == 0)
-      	return (true);
-      else if (randomValue == 1 || (randomValue == 2 && reflect))
+      if (randomValue == 0 || (randomValue == 1 && reflect))
       	{
       	  Ray	newRay(photon._position,
       		       nearestObject->getReflectedVector(photon._position,
@@ -87,7 +84,7 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       	  throwRay(rt, newRay, photon._color);
       	}
       if (rt->getRenderingConfiguration()->isTransparencyEnabled() == true
-      	  && nearestObject->getMaterial()->getTransmissionCoeff() > 0)
+	  && nearestObject->getMaterial()->getTransmissionCoeff() > 0)
 	{
 	  if (rt->_refractivePath.size() > 0)
 	    ray._refractiveIndex =
@@ -96,23 +93,23 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
 	    ray._refractiveIndex = 1;
 	  Ray	newRay= nearestObject->getRefractedRay(photon._position, ray,
 						       rt->_refractivePath);
-          ObjectPrimitive*      tmp = NULL;
-          double                useless = -1;
-          Object*               tmpObject;
+	  ObjectPrimitive*      tmp = NULL;
+	  double                useless = -1;
+	  Object*               tmpObject;
 
-          tmpObject = nearestObject->getObject();
-          if (tmpObject != NULL && tmpObject->isSolid() == true)
-            tmpObject->intersectWithRay(newRay,
-                                        tmp, useless);
-          else
-            nearestObject->intersectWithRay(newRay, tmp, useless);
-          if (tmp != NULL)
-            rt->_refractivePath.push(tmp);
-          else
-            {
-              newRay._vector = ray._vector;
-              newRay._refractiveIndex = ray._refractiveIndex;
-            }
+	  tmpObject = nearestObject->getObject();
+	  if (tmpObject != NULL && tmpObject->isSolid() == true)
+	    tmpObject->intersectWithRay(newRay,
+					tmp, useless);
+	  else
+	    nearestObject->intersectWithRay(newRay, tmp, useless);
+	  if (tmp != NULL)
+	    rt->_refractivePath.push(tmp);
+	  else
+	    {
+	      newRay._vector = ray._vector;
+	      newRay._refractiveIndex = ray._refractiveIndex;
+	    }
 	  throwRay(rt, newRay, photon._color);
 	}
       return (true);
