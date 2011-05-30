@@ -49,7 +49,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>981</width>
+         <width>991</width>
          <height>484</height>
         </rect>
        </property>
@@ -182,6 +182,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionEffacer_la_console"/>
     <addaction name="actionActiver_la_console"/>
     <addaction name="actionEditMaterial"/>
+    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuCluster">
     <property name="title">
@@ -191,10 +192,18 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionSe_connecter_un_serveur"/>
     <addaction name="actionDeconnexion"/>
    </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Aide</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAboutQt"/>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEdit"/>
    <addaction name="menu_Rendu"/>
    <addaction name="menuCluster"/>
+   <addaction name="menu_Help"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget_2">
    <property name="minimumSize">
@@ -239,7 +248,7 @@ border-color: rgb(108, 108, 108);</string>
         <enum>QFrame::Plain</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <property name="tabSpacing">
         <number>0</number>
@@ -249,7 +258,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>387</width>
+          <width>377</width>
           <height>489</height>
          </rect>
         </property>
@@ -520,7 +529,7 @@ border-color: rgb(108, 108, 108);</string>
                <string> Rendu 3D</string>
               </property>
               <property name="icon">
-               <iconset resource="ressources.qrc">
+               <iconset resource="../ressources.qrc">
                 <normaloff>:/images/3d-glasses.png</normaloff>:/images/3d-glasses.png</iconset>
               </property>
              </widget>
@@ -612,7 +621,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>387</width>
+          <width>377</width>
           <height>262</height>
          </rect>
         </property>
@@ -791,7 +800,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>402</width>
+          <width>392</width>
           <height>245</height>
          </rect>
         </property>
@@ -969,7 +978,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>402</width>
+          <width>392</width>
           <height>245</height>
          </rect>
         </property>
@@ -1142,7 +1151,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>402</width>
+          <width>392</width>
           <height>245</height>
          </rect>
         </property>
@@ -1352,7 +1361,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="action">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/document-new.png</normaloff>:/images/document-new.png</iconset>
    </property>
    <property name="text">
@@ -1364,7 +1373,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="action_Charger">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/document-open.png</normaloff>:/images/document-open.png</iconset>
    </property>
    <property name="text">
@@ -1379,7 +1388,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="action_SaveImage">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/image.png</normaloff>:/images/image.png</iconset>
    </property>
    <property name="text">
@@ -1394,7 +1403,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="action_Play">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/play.png</normaloff>:/images/play.png</iconset>
    </property>
    <property name="text">
@@ -1409,7 +1418,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="action_Pause">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/pause.png</normaloff>:/images/pause.png</iconset>
    </property>
    <property name="text">
@@ -1424,7 +1433,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="action_Stop">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/stop.png</normaloff>:/images/stop.png</iconset>
    </property>
    <property name="text">
@@ -1464,7 +1473,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="actionLancer_un_serveur">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/network-server.png</normaloff>:/images/network-server.png</iconset>
    </property>
    <property name="text">
@@ -1479,7 +1488,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="actionSe_connecter_un_serveur">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/network-workgroup.png</normaloff>:/images/network-workgroup.png</iconset>
    </property>
    <property name="text">
@@ -1500,7 +1509,7 @@ border-color: rgb(108, 108, 108);</string>
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Editer les matériaux</string>
+    <string>&amp;Editer les matériaux</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
@@ -1513,7 +1522,7 @@ border-color: rgb(108, 108, 108);</string>
   </action>
   <action name="actionDeconnexion">
    <property name="icon">
-    <iconset resource="ressources.qrc">
+    <iconset resource="../ressources.qrc">
      <normaloff>:/images/disconnect.png</normaloff>:/images/disconnect.png</iconset>
    </property>
    <property name="text">
@@ -1530,9 +1539,27 @@ border-color: rgb(108, 108, 108);</string>
     <string>Reprendre un rendu</string>
    </property>
   </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Préfére&amp;nces</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>A propos</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>A propos de Qt</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="ressources.qrc"/>
+  <include location="../ressources.qrc"/>
  </resources>
  <connections>
   <connection>
