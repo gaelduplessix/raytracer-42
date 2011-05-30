@@ -188,7 +188,7 @@
       <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Melvin LaPlanche</string>
+         <string>Melvin Laplanche</string>
         </property>
        </widget>
       </item>

@@ -5,13 +5,15 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Mon May 30 18:29:39 2011 loick michard
+// Last update Mon May 30 23:10:27 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
 #define _GUI_HPP_
 
 void	gui(int ac, char **av);
+
+#include <sys/timeb.h>
 
 #include <QWidget>
 #include <QImage>
@@ -139,6 +141,10 @@ private:
   ClusterClient*		_clusterClient;
   bool				_isConnected;
   bool				_isMultiThreading;
+
+  struct timeb			_progressTime;
+  int				_nbProgress;
+  int				_nbRender;
 };
 
 #endif
