@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon May 30 17:06:27 2011 loick michard
+// Last update Tue May 31 00:18:23 2011 loick michard
 //
 
 #include <QApplication>
@@ -37,6 +37,7 @@
 #include "PerlinNoise.hpp"
 #include "CubeMap.hpp"
 #include "Sett.hpp"
+#include "Resources.hpp"
 
 Scene           *createScene()
 {
@@ -169,7 +170,6 @@ bool RaytracerGUI::setConfiguration()
   _config->setPhotonMappingSampling(_ui->
 				    _photonMappingValue->value());
   _config->setPhotonMappingEnabled(_ui->_photonMapping->isChecked());
-
   // {
   //   std::ofstream ofs("fichierDeSerialisation");
   //   boost::archive::text_oarchive oa(ofs);
@@ -180,6 +180,7 @@ bool RaytracerGUI::setConfiguration()
   // boost::archive::text_iarchive ia(ifs);
   // ia >> newConf;
   // }
+  Resources::getInstance()->createResources(_scene, _config);
   return (true);
 }
 
@@ -283,7 +284,36 @@ void RaytracerGUI::drawWindow()
       _sticon->showMessage(tr("Rendu"), tr("Le rendu est terminé"));
     }
   if (_isRendering)
-    _ui->_progressBar->setValue(_progress);
+    {
+      struct timeb interval;
+      ftime(&interval);
+      if (interval.millitm > _progressTime.millitm)
+	interval.millitm -= _progressTime.millitm;
+      else
+	{
+	  interval.millitm += 1000 - _progressTime.millitm;
+	  interval.time--;
+	}
+      interval.time -= _progressTime.time;
+      struct timeb remain;
+      double mult = (double)((_config->getWidth() *
+			      _config->getHeight()) - _nbRender) / 
+	((_nbProgress == 0) ? 1 : _nbProgress);
+      remain.millitm = interval.millitm * mult;
+      remain.time = interval.time * mult + 23 * 3600;
+      remain.time += interval.millitm / 1000;
+
+      QDateTime remainTime = QDateTime::fromTime_t(remain.time);
+      QString   remainString = tr("Temps restant: ");
+      remainString += remainTime.toString("hh");
+      remainString += tr("h ");
+      remainString += remainTime.toString("mm");
+      remainString += tr("m ");
+      remainString += remainTime.toString("ss");
+      remainString += tr("s");
+      _ui->_ellapse->setText(remainString);
+      _ui->_progressBar->setValue(_progress);
+    }
   _ui->_console->setHtml(_message.c_str());
   _ui->_console->moveCursor(QTextCursor::End);
   repaint();
@@ -320,7 +350,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
 {
   _actionRealQuit->setShortcut(tr("Ctrl+Q"));
   _ui->setupUi(this);
-  _ui->_progressBar->setHidden(true);
+  _ui->_progress->setHidden(true);
   _ui->menuFichier->addAction(_actionRealQuit);
   _initDialogCluster();
   _initPreferencesDialog();

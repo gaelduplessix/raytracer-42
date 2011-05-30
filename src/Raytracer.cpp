@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May 30 20:32:23 2011 gael jochaud-du-plessix
+// Last update Tue May 31 00:18:07 2011 loick michard
 //
 
 #include <stdio.h>
@@ -114,9 +114,6 @@ Raytracer::launchRendering(void)
     throw (Raytracer::NO_INTERFACE_SPECIFIED);
   _thread->start();
   _interface->renderingHasBegun();
-  Resources*	obj = Resources::getInstance();
-  obj->createResources(_scene, _config);
-  string	resources = obj->toStr();
 }
 
 void

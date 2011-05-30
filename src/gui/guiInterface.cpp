@@ -5,6 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
+// Last update Mon May 30 23:14:09 2011 loick michard
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -130,7 +131,7 @@ void    RaytracerGUI::renderingHasFinished(void)
       sendSuccessMessage(tr("Rendu termine").toStdString());
       _isRendering = false;
       _timer->setSingleShot(true);
-      _ui->_progressBar->setHidden(true);
+      _ui->_progress->setHidden(true);
     }
 }
 
@@ -202,6 +203,8 @@ void    RaytracerGUI::loadScene(void)
 void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
 {
   QMutexLocker  locker(&_mutex);
+  _nbProgress++;
+  _nbRender++;
   if (_image)
     {      
       _image->setPixel(x, y, QColor(color._r, color._g,
@@ -219,6 +222,10 @@ void    RaytracerGUI::startRender()
 	  _ui->_console->moveCursor(QTextCursor::End);
 	  return ;
 	}
+      ftime(&_progressTime);
+      _nbProgress = 0;
+      if (!_pause)
+	_nbRender = 0;
       if (!(_isConnected && _clusterClient))
 	{
 	  _ui->_mode->setEnabled(false);
@@ -243,7 +250,7 @@ void    RaytracerGUI::startRender()
 	    }
 	  try
 	    {
-	      _ui->_progressBar->setHidden(false);
+	      _ui->_progress->setHidden(false);
 	      if (_pause)
 		sendMessage(tr("Reprise du rendu").toStdString());
 	      else

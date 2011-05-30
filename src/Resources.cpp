@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Mon May 30 22:06:22 2011 samuel olivier
+// Last update Tue May 31 00:23:27 2011 loick michard
 //
 
 #include <QDir>
@@ -42,8 +42,10 @@ void		Resources::createResources(const string stringClass)
 }
 
 void	Resources::createResources(const Scene* scene,
-				     const RenderingConfiguration* conf)
+				   const RenderingConfiguration* conf)
 {
+  while (_resources.size() > 0)
+    _resources.pop_back();
   const vector<Object*>&	objects = scene->getObjects();
   int				nbObject = objects.size();
 
@@ -97,7 +99,7 @@ string		Resources::toStr(void)
 
 const string&	Resources::getNewPathName(const string& previous)
 {
-  if (!_instance || _instance->isInCluster())
+  if (!_instance || !_instance->isInCluster())
     return (previous);
   vector<Resource>	resources = _instance->getResources();
   int				j = resources.size();
