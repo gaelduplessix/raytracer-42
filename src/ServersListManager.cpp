@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri May 27 00:55:33 2011 gael jochaud-du-plessix
-// Last update Sun May 29 15:43:30 2011 gael jochaud-du-plessix
+// Last update Mon May 30 21:05:43 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -40,7 +40,7 @@ void	ServersListManager::run()
   _timer->start();
   exec();
 }
-#include <iostream>
+
 void	ServersListManager::updateServersListFromCentralServer()
 {
   _networkManager = new QNetworkAccessManager();

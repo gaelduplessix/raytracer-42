@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Mon May 30 21:42:26 2011 samuel olivier
+// Last update Mon May 30 21:54:40 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -115,7 +115,7 @@ void		Resources::createResourcesInTemporaryDir(void)
     {
       ostringstream	tmpRand;
       tmpRand << rand();
-      newName = tmpRand.str();
+      newName = "raytracer-42-resources_" + tmpRand.str();
       file.open((_tmpResourceDir + "/" + newName).c_str());
       file << _resources[i].getFileContent();
       file.close();

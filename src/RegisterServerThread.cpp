@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 30 17:45:20 2011 gael jochaud-du-plessix
-// Last update Mon May 30 17:46:31 2011 gael jochaud-du-plessix
+// Last update Mon May 30 21:02:52 2011 gael jochaud-du-plessix
 //
 
 #include "RegisterServerThread.hpp"
@@ -48,15 +48,20 @@ void		RegisterServerThread::registerToCentralServer(void)
 	  SLOT(readCentralServerResponse(QNetworkReply*)));
   QUrl		postVars;
   ostringstream	value;
-  postVars.addQueryItem("action", "logServer");
-  value << _clusterServer->getPort();
-  postVars.addQueryItem("serverPort", value.str().c_str());
-  value.str("");
-  value << _clusterServer->getStatus();
-  postVars.addQueryItem("serverStatus", value.str().c_str());
-  value.str("");
-  value << _clusterServer->getProgress();
-  postVars.addQueryItem("serverProgress", value.str().c_str());
+  if (_clusterServer->getPort() > 0)
+    {
+      postVars.addQueryItem("action", "logServer");
+      value << _clusterServer->getPort();
+      postVars.addQueryItem("serverPort", value.str().c_str());
+      value.str("");
+      value << _clusterServer->getStatus();
+      postVars.addQueryItem("serverStatus", value.str().c_str());
+      value.str("");
+      value << _clusterServer->getProgress();
+      postVars.addQueryItem("serverProgress", value.str().c_str());
+    }
+  else
+    postVars.addQueryItem("action", "serverLaunched");
   QByteArray	postData(postVars.encodedQuery());
   _networkManager->post(QNetworkRequest(_clusterServer->getCentralServerUrl()),
 			postData);

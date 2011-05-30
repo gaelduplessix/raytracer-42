@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sun May 29 00:52:25 2011 melvin laplanche
+// Last update Mon May 30 22:03:40 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -14,7 +14,7 @@ Scene::Scene(vector<Camera*> cameras,
 	     vector<Object*> objects,
 	     vector<Light*> lights):
   _hasError(false), _parsingDone(true), _interface(NULL),
-  _cameras(cameras), _objects(objects), _lights(lights)
+  _cameras(cameras), _objects(objects), _lights(lights), _sceneFilenames(0)
 {
 
 }
@@ -24,12 +24,14 @@ Scene::Scene(vector<Camera*> cameras,
 	     vector<Light*> lights,
 	     vector<Material*> materials):
   _hasError(false), _parsingDone(true), _interface(NULL),
-  _cameras(cameras), _objects(objects), _lights(lights), _materials(materials)
+  _cameras(cameras), _objects(objects), _lights(lights), _materials(materials),
+  _sceneFilenames(0)
 {
 
 }
 
-Scene::Scene(void): _hasError(false), _parsingDone(false), _interface(NULL)
+Scene::Scene(void): _hasError(false), _parsingDone(false), _interface(NULL),
+		    _sceneFilenames(0)
 {
 
 }
@@ -102,6 +104,11 @@ int			Scene::getNbLights(void) const
 int			Scene::getNbMaterials(void) const
 {
   return(_materials.size());
+}
+
+vector<QString>&	Scene::getSceneFilenames(void)
+{
+  return (_sceneFilenames);
 }
 
 void			Scene::_putError(string		msg,
@@ -578,6 +585,7 @@ void		Scene::loadFromFile(string		filename,
 	this->_putError(QObject::tr("A scene must have a camera."));
     }
   }
+  _sceneFilenames.push_back(QString(filename.c_str()));
   this->_parsingDone = true;
   if (this->isValid())
     this->_putSuccess(QObject::tr("Parsing finished"));
