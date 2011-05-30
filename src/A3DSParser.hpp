@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 17:29:44 2011 melvin laplanche
-// Last update Sun May 29 16:15:02 2011 melvin laplanche
+// Last update Mon May 30 14:38:41 2011 melvin laplanche
 //
 
 #ifndef A3DSPARSER_H_
@@ -37,18 +37,16 @@ public:
   A3DSParser(QString, RenderingInterface*);
   A3DSParser(const char*, RenderingInterface*);
 
-  bool	loadFile(std::string);
-  bool	loadFile(QString);
-  bool	loadFile(const char*);
-  void	parse(void);
+  void	loadFile(std::string);
+  void	loadFile(QString);
+  void	loadFile(const char*);
 
-  bool					getState(void) const;
+  bool					hasError(void) const;
   const std::vector<A3DSLight*>&	getLights(void) const;
   const std::vector<A3DSMaterial*>&	getMaterials(void) const;
   const std::vector<A3DSMesh*>&		getMeshes(void) const;
 
 private:
-  bool				_state;
   bool				_hasError;
   RenderingInterface*		_interface;
   std::ifstream			_file;
@@ -63,8 +61,9 @@ private:
   void	_parseObject(A3DSChunk);
   void	_parseMaterial(A3DSChunk);
   void	_parseLight(std::string, A3DSChunk);
-  bool	_checkFile(std::string);
+  void	_checkFile(std::string);
   void	_putError(QString);
+  void	_parse(void);
 };
 
 #endif /* !A3DSPARSER_H_ */

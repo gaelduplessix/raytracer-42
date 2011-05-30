@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Thu May 26 10:33:04 2011 loick michard
+// Last update Mon May 30 15:38:54 2011 melvin laplanche
 //
 
 #include "Material.hpp"
@@ -101,7 +101,8 @@ void	Material::setTexture(Texture* texture)
   if (_texture)
     delete _texture;
   _texture = texture;
-  _isTextured = true;
+  if (texture != NULL)
+    _isTextured = true;
 }
 
 void	Material::setLimitTexture(Texture* texture)

@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 18:30:51 2011 melvin laplanche
-// Last update Sun May 29 16:15:23 2011 melvin laplanche
+// Last update Mon May 30 21:46:31 2011 melvin laplanche
 
 #include "A3DSParser.hpp"
 
@@ -45,30 +45,28 @@ A3DSParser::~A3DSParser(void)
 
 A3DSParser::A3DSParser(string			filename,
 		       RenderingInterface*	interface)
-  : _state(false),
-    _hasError(false),
+  : _hasError(false),
     _interface(interface)
 {
-  this->_state = this->loadFile(filename);
+  this->loadFile(filename);
+  this->_parse();
 }
 
 
 A3DSParser::A3DSParser(QString			filename,
 		       RenderingInterface*	interface)
-  : _state(false),
-    _hasError(false),
+  : _hasError(false),
     _interface(interface)
 {
-  this->_state = this->loadFile(filename);
+  this->loadFile(filename);
 }
 
 A3DSParser::A3DSParser(const char*		filename,
 		       RenderingInterface*	interface)
-  : _state(false),
-    _hasError(false),
+  : _hasError(false),
     _interface(interface)
 {
-  this->_state = this->loadFile(filename);
+  this->loadFile(filename);
 }
 
 void	A3DSParser::_putError(QString	msg)
@@ -79,29 +77,29 @@ void	A3DSParser::_putError(QString	msg)
     cerr << "Parse error: " << msg.toStdString() << endl;
 }
 
-bool	A3DSParser::loadFile(string	filename)
+void	A3DSParser::loadFile(string	filename)
 {
   this->_clearObjects();
   this->_file.open(filename.c_str(), ios_base::out | ios_base::binary);
-  return (this->_checkFile(filename));
+  this->_checkFile(filename);
 }
 
-bool	A3DSParser::loadFile(QString	filename)
+void	A3DSParser::loadFile(QString	filename)
 {
   this->_clearObjects();
   this->_file.open(filename.toStdString().c_str(),
 		   ios_base::out | ios_base::binary);
-  return (this->_checkFile(filename.toStdString()));
+  this->_checkFile(filename.toStdString());
 }
 
-bool	A3DSParser::loadFile(const char*	filename)
+void	A3DSParser::loadFile(const char*	filename)
 {
   this->_clearObjects();
   this->_file.open(filename, ios_base::out | ios_base::binary);
-  return (this->_checkFile(filename));
+  this->_checkFile(filename);
 }
 
-bool	A3DSParser::_checkFile(string	filename)
+void	A3DSParser::_checkFile(string	filename)
 {
   t_A3DSHeader	header;
 
@@ -115,10 +113,9 @@ bool	A3DSParser::_checkFile(string	filename)
 		      .arg(filename.c_str()));
     this->_file.seekg(0, ios_base::beg);
   }
-  return (this->_hasError == false);
 }
 
-void		A3DSParser::parse(void)
+void		A3DSParser::_parse(void)
 {
   streampos	currPos = this->_file.tellg();
   streampos	end;
@@ -212,9 +209,9 @@ void	A3DSParser::_parseMesh(string		name,
   this->_meshes.push_back(new A3DSMesh(name, c.firstChild()));
 }
 
-bool	A3DSParser::getState(void) const
+bool	A3DSParser::hasError(void) const
 {
-  return this->_state;
+  return this->_hasError;
 }
 
 const std::vector<A3DSLight*>&		A3DSParser::getLights(void) const

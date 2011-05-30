@@ -1,0 +1,57 @@
+# Max2Mtl Version 4.0 Mar 10th, 2001
+#
+# Multi/Sub Material__149 (5) to come 
+#
+newmtl Material__51
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd 4.JPG
+bump 4.JPG
+#
+newmtl Material__26
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd 2.JPG
+bump 2.JPG
+#
+newmtl Material__27
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd 3.JPG
+bump 3.JPG
+#
+newmtl Material__28
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd 34.JPG
+bump 34.JPG
+#
+newmtl Material__25
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd 1.jpg
+bump 1.jpg
+#
+# Multi/Sub Material__149 done 
+#
+# EOF
