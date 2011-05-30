@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:03:25 2011 samuel olivier
-// Last update Mon May 30 19:31:25 2011 gael jochaud-du-plessix
+// Last update Mon May 30 21:41:06 2011 samuel olivier
 //
 
 #ifndef _RESOURCES_
@@ -41,6 +41,7 @@ public:
   const string&	getTmpResourceDir(void);
 
   void		createResourcesInTemporaryDir(void);
+  void		removeResourcesFiles(void);
   static const string&	getNewPathName(const string& previous);
 
   bool		isInCluster(void);
