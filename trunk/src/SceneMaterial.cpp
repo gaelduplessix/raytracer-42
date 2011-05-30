@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Wed May 25 11:01:56 2011 loick michard
+// Last update Sun May 29 18:32:45 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -201,7 +201,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 	else
 	{
 	  mat->setDiffusedReflectionCoeff(
-	    this->_parseInt(n, 0, 0, "diffusedReflection"));
+	    this->_parseDouble(n, 0, 0, "diffusedReflection"));
 	  diffusedRef = true;
 	}
       }

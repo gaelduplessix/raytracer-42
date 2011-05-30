@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sun May 29 00:44:34 2011 melvin laplanche
+// Last update Sun May 29 16:02:34 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -484,7 +484,6 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
   bool				textVert1 = false;
   bool				textVert2 = false;
   bool				textVert3 = false;
-  bool				textVert4 = false;
   Parallelogram			*para = new Parallelogram();
 
   while (n.isNull() == false && this->_hasError == false)
@@ -576,19 +575,6 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
 	  {
 	    para->setTextureVertex3(_parsePosition(n, "textureVertex3"));
 	    textVert3 = true;
-	  }
-	}
-	else if (n.nodeName() == "textureVertex4")
-	{
-	  if (textVert4)
-	    this->_putWarning(QObject::tr("An element has several "
-					  "textureVertex4, "
-					  "the first defined will be used"),
-			      n);
-	  else
-	  {
-	    para->setTextureVertex4(_parsePosition(n, "textureVertex4"));
-	    textVert4 = true;
 	  }
 	}
 	else

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 25 18:08:02 2011 samuel olivier
+// Last update Sun May 29 16:00:25 2011 samuel olivier
 //
 
 #ifndef _PARALLELOGRAM_HPP_
@@ -23,9 +23,7 @@ public:
 		Material* material,
 		const Point& _textureVertex1 = Point(0, 0),
 		const Point& _textureVertex2 = Point(0, 1),
-		const Point& _textureVertex3 = Point(1, 1),
-		const Point& _textureVertex4 = Point(1, 0));
-
+		const Point& _textureVertex3 = Point(1, 1));
   Parallelogram(void);
   void		setCachedValues(void);
   void		setVertex1(const Point& vertex1);
@@ -34,11 +32,9 @@ public:
   void		setTextureVertex1(const Point& textureVertex1);
   void		setTextureVertex2(const Point& textureVertex2);
   void		setTextureVertex3(const Point& textureVertex3);
-  void		setTextureVertex4(const Point& textureVertex4);
   const Point&	getTextureVertex1(void);
   const Point&	getTextureVertex2(void);
   const Point&	getTextureVertex3(void);
-  const Point&	getTextureVertex4(void);
 
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;
@@ -57,15 +53,12 @@ public:
 private:
   Point		_vertex1;
   Point		_vertex2;
-  Point		_vertex3;
   Vector        _normal;
   Point		_textureVertex1;
   Point		_textureVertex2;
   Point		_textureVertex3;
-  Point		_textureVertex4;
   Vector	_textureV1;
   Vector	_textureV2;
-  Vector	_textureV3;
   Vector        _v1;
   Vector        _v2;
   double        _var1;
