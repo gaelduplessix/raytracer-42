@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Mon May 30 21:40:06 2011 gael jochaud-du-plessix
+// Last update Tue May 31 01:39:18 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -21,7 +21,8 @@ ClusterServer::ClusterServer(RenderingInterface* interface, string url,
   _registerServerThread(NULL), _tcpServer(NULL), _currentClientSocket(NULL),
   _centralServerConnectionState(false), _status(ServerEntry::FREE),
   _progress(0), _currentRequest(-1), _currentSessionId(-1),
-  _currentSection(-1, -1, -1, -1), _currentPacketSize(0)
+  _currentSection(-1, -1, -1, -1), _currentPacketSize(0), _scene(NULL),
+  _renderingConf(), _readyToRaytrace(false)
 {
   getInterface()
     ->logServerConsoleMessage("<span>Info: "
@@ -30,6 +31,7 @@ ClusterServer::ClusterServer(RenderingInterface* interface, string url,
   connect(_registerServerThread, SIGNAL(launchServer()),
 	  this, SLOT(launchServer()));
   _registerServerThread->start();
+  _scene = new Scene();
 }
 
 ClusterServer::~ClusterServer()
@@ -41,6 +43,8 @@ ClusterServer::~ClusterServer()
       _tcpServer->close();
       delete _tcpServer;
     }
+  if (_scene)
+    delete _scene;
 }
 
 int        ClusterServer::getPort(void)
@@ -196,7 +200,7 @@ bool		ClusterServer::receiveSectionRequest(void)
   if (_currentClientSocket->bytesAvailable() < sizeof(QRect))
     return (false);
   stream >> _currentSection;
-  if (sessionId != _currentSessionId)
+  if (sessionId != _currentSessionId || !_readyToRaytrace)
     requestSessionData();
   return (true);
 }
@@ -224,9 +228,21 @@ bool		ClusterServer::receiveSessionDatas(void)
   if (_currentClientSocket->bytesAvailable() < _currentPacketSize)
     return (false);
   QByteArray	resourcesBytes;
+  QByteArray	renderingConfBytes;
+  QString	sceneFilename;
   stream >> resourcesBytes;
-  string	resourcesStr(resourcesBytes.data(), resourcesBytes.size());
-  Resources::getInstance()->createResources(resourcesStr);
-  Resources::getInstance()->createResourcesInTemporaryDir();  
-  return (false);
+  stream >> renderingConfBytes;
+  stream >> sceneFilename;
+  Resources::getInstance()->createResources(resourcesBytes);
+  Resources::getInstance()->createResourcesInTemporaryDir();
+  _renderingConf = RenderingConfiguration(renderingConfBytes);
+  if (_renderingConf._cubeMapPath != "")
+    {
+      _renderingConf.setCubeMap(new CubeMap(_renderingConf._cubeMapPath),
+				_renderingConf._cubeMapPath);
+    }
+  _scene->loadFromFile(sceneFilename.toStdString(), _interface);
+  cout << _scene->getObjects().size() << endl;
+  _readyToRaytrace = true;
+  return (true);
 }

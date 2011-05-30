@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Sun May 29 17:44:19 2011 loick michard
+// Last update Tue May 31 01:15:31 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -40,6 +40,16 @@ RenderingConfiguration::RenderingConfiguration(const string& stringClass)
   ia >> *this;
 }
 
+RenderingConfiguration::RenderingConfiguration(const QByteArray& bytes)
+{
+  string		stringClass(bytes.data(), bytes.size());
+  std::istringstream	ifs;
+
+  ifs.str(stringClass);
+  boost::archive::text_iarchive ia(ifs);
+  ia >> *this;
+}
+
 string	RenderingConfiguration::toStr(void)
 {
   std::ostringstream ofs;
@@ -47,6 +57,12 @@ string	RenderingConfiguration::toStr(void)
 
   oa << *this;
   return (ofs.str());
+}
+
+QByteArray	RenderingConfiguration::toByteArray(void)
+{
+  string	str = toStr();
+  return (QByteArray(str.c_str(), str.size()));
 }
 
 int	RenderingConfiguration::getNbThreads(void) const

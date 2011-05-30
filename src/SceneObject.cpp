@@ -5,10 +5,11 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 31 00:52:49 2011 melvin laplanche
+// Last update Tue May 31 01:04:45 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
+#include "Resources.hpp"
 
 bool			Scene::_parseCommonElement(QDomNode	    n,
 						   ObjectPrimitive* prime,
@@ -1080,7 +1081,8 @@ void			Scene::_parse3dsFile(QDomNode n)
     this->_putError(QObject::tr("An a3ds must have at leat a filename"), n);
   else if (this->_hasError == false)
   {
-    A3DSParser	a3ds(filename, this->_interface);
+    A3DSParser	a3ds(Resources::getInstance()
+		     ->getNewPathName(filename), this->_interface);
     if (a3ds.hasError() == false)
     {
       this->_sceneFilenames.push_back(QString(filename.c_str()));

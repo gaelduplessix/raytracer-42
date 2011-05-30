@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Mon May 30 19:33:14 2011 gael jochaud-du-plessix
+// Last update Mon May 30 22:23:03 2011 gael jochaud-du-plessix
 //
 
 #include <QString>
@@ -15,28 +15,21 @@
 #include "Resources.hpp"
 #include "Texture.hpp"
 
-Texture::Texture()
+Texture::Texture(): _type(0)
 {
-  _type = 0;
 }
 
 Texture::Texture(const string& path, 
-		 double repeatWidth, double repeatHeight)
+		 double repeatWidth, double repeatHeight):
+  _repeatWidth(repeatWidth), _repeatHeight(repeatHeight), _type(0), _name(path)
 {
-  _type = 0;
-  _name = path;
-  // _image = new QImage(QString(path.c_str()));
   _image = new QImage(QString(Resources::getNewPathName(path).c_str()));
-  _repeatWidth = repeatWidth;
-  _repeatHeight = repeatHeight;
 }
 
 Texture::Texture(double repeatWidth, double repeatHeight):
-  _repeatWidth(repeatWidth), _repeatHeight(repeatHeight)
+  _repeatWidth(repeatWidth), _repeatHeight(repeatHeight), _type(0),
+  _image(NULL), _name("")
 {
-  _image = NULL;
-  _type = 0;
-  _name = "";
 }
 
 Texture::~Texture()
