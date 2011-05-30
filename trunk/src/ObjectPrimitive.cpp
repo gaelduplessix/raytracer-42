@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Thu May 26 14:30:46 2011 samuel olivier
+// Last update Mon May 30 13:13:25 2011 loick michard
 //
 
 #include <cmath>
@@ -14,7 +14,7 @@
 #include "Object.hpp"
 
 ObjectPrimitive::ObjectPrimitive(void):
-  _isLimited(true)
+  _isLimited(false)
 {
 
 }
@@ -24,7 +24,7 @@ ObjectPrimitive::ObjectPrimitive(Object *object,
 				 const Rotation& rotation,
 				 Material* material):
   _absolutePosition(absolutePosition), _rotation(rotation),
-  _material(material), _object(object), _isLimited(true)
+  _material(material), _object(object), _isLimited(false)
 {
 
 }

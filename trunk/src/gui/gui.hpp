@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Sun May 29 13:06:30 2011 loick michard
+// Last update Sun May 29 19:45:11 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -85,6 +85,8 @@ public slots:
   void	disconnect();
   void	threadsChange(int i);
   void	updateServersTab();
+  void	saveRender();
+  void	openRender();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
