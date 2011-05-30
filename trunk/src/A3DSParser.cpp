@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 18:30:51 2011 melvin laplanche
-// Last update Mon May 30 21:46:31 2011 melvin laplanche
+// Last update Mon May 30 22:12:16 2011 melvin laplanche
 
 #include "A3DSParser.hpp"
 
@@ -49,7 +49,8 @@ A3DSParser::A3DSParser(string			filename,
     _interface(interface)
 {
   this->loadFile(filename);
-  this->_parse();
+  if (this->_hasError == false)
+    this->_parse();
 }
 
 
@@ -59,6 +60,8 @@ A3DSParser::A3DSParser(QString			filename,
     _interface(interface)
 {
   this->loadFile(filename);
+  if (this->_hasError == false)
+    this->_parse();
 }
 
 A3DSParser::A3DSParser(const char*		filename,
@@ -67,10 +70,13 @@ A3DSParser::A3DSParser(const char*		filename,
     _interface(interface)
 {
   this->loadFile(filename);
+  if (this->_hasError == false)
+    this->_parse();
 }
 
 void	A3DSParser::_putError(QString	msg)
 {
+  this->_hasError = true;
   if (this->_interface != NULL)
     this->_interface->sendErrorMessage(msg.toStdString());
   else
