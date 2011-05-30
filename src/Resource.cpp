@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Fri May 27 14:59:01 2011 samuel olivier
-// Last update Mon May 30 21:09:10 2011 samuel olivier
+// Last update Mon May 30 21:41:43 2011 samuel olivier
 //
 
 #include <iostream>
@@ -80,5 +80,3 @@ void	Resource::setFileContent(const string& fileContent)
 {
   _fileContent = fileContent;
 }
-
-

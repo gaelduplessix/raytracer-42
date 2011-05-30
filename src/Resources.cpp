@@ -5,10 +5,11 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Mon May 30 19:31:58 2011 gael jochaud-du-plessix
+// Last update Mon May 30 21:42:26 2011 samuel olivier
 //
 
 #include <QDir>
+#include <QFile>
 #include <fstream>
 #include <sstream>
 #include "Resources.hpp"
@@ -130,4 +131,14 @@ bool		Resources::isInCluster(void)
 void		Resources::isInCluster(bool value)
 {
   _inCluster = value;
+}
+
+void		Resources::removeResourcesFiles(void)
+{
+  int		l = _resources.size();
+
+  for (int i = 0 ; i < l ; i++)
+    if (!QFile::remove(QString(_resources[i].getNewPathName().c_str())))
+      cerr << "Could not remove temporary file '" <<
+	_resources[i].getNewPathName() << "'.\n";
 }
