@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 30 21:54:50 2011 melvin laplanche
+// Last update Mon May 30 22:10:58 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -1077,12 +1077,14 @@ void			Scene::_parse3dsFile(QDomNode n)
     n = n.nextSibling();
   }
   if (!hasFilename)
-    this->_putError(QObject::tr("An 3dsfile must have at leat a filename"), n);
+    this->_putError(QObject::tr("An 3dsfile must have at least a filename"),
+		    n);
   else
   {
     A3DSParser	a3ds(filename, this->_interface);
     if (a3ds.hasError() == false)
     {
+      _sceneFilenames.push_back(QString(filename.c_str()));
       const vector<A3DSLight*>		lights = a3ds.getLights();
       const vector<A3DSMaterial*>	materials = a3ds.getMaterials();
       const vector<A3DSMesh*>		meshes = a3ds.getMeshes();
