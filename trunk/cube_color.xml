@@ -42,7 +42,7 @@
   <color>50, 150, 50</color>
   <specular>0.5</specular>
   <specularPow>50</specularPow>
-  <reflection>1</reflection>
+  <reflection>0.5</reflection>
   </material>
   <material name="whiteLeftRight">
   <color>200, 200, 200</color>

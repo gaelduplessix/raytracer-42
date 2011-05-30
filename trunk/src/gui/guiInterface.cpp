@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Sun May 29 21:39:55 2011 loick michard
+// Last update Mon May 30 17:32:52 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -228,6 +228,7 @@ void    RaytracerGUI::startRender()
 	  if (!_timer->isActive())
 	    {
 	      _timer->setSingleShot(false);
+	      _timer->setInterval(_preferencesDialogUi->_timer->value());
 	      _timer->start();
 	    }
 	  if (!_isRendering)
@@ -327,6 +328,77 @@ void            RaytracerGUI::saveRender()
     }
 }
 
+void		RaytracerGUI::updateGUIConfig()
+{
+  _ui->_mode->setCurrentIndex(_config->getRenderingSamplingMethod());
+  _ui->_width->setValue(_config->getWidth());
+  _ui->_height->setValue(_config->getHeight());
+  _ui->_threads->setValue(_config->getNbThreads());
+  _ui->_camera->setCurrentIndex(_config->getCurrentCamera());
+  _ui->_antialiasing->setValue(_config->getAntialiasing());
+  _ui->_depthFieldSampling->setValue(_config->getFieldDepthSampling());
+  _ui->_depthField->setChecked(_config->isFieldDepthEnabled());
+
+  _ui->_3d->setChecked(_config->_3DEnabled);
+  _ui->_3DMode->setCurrentIndex(_config->_3DMode);
+  _ui->_3DSpace->setValue(_config->_eyesSpace);
+
+  _ui->_kdTreeDepth->setValue(_config->getKdTreeDepth());
+  _ui->_kdTree->setChecked(_config->isKdTreeEnabled());
+  _ui->_exposure->setValue(_config->getExposure());
+  _ui->_directLightingIntensity->setValue(_config->getDirectLightingCoeff());
+
+  _ui->_directLighting->setChecked(_config->isDirectLighting());
+  _ui->_diffuseLighting->setChecked(_config->isDiffuseLighting());
+  _ui->_specularLighting->setChecked(_config->isSpecularLighting());
+  _ui->_diffuseShadingSampling->setValue(_config->getDiffuseShadingSampling());
+
+  _ui->_diffuseShading->setChecked(_config->isDiffuseShadingEnabled());
+  _ui->_reflection->setChecked(_config->isReflectionEnabled());
+  _ui->_reflectionLimit->setValue(_config->getReflectionMaxDepth());
+  _ui->_diffuseReflection->setChecked(_config->isReflectionDiffused());
+  _ui->_diffuseReflectionSampling->setValue(_config->getReflectionDiffusedSampling());
+  _ui->_transparencyLimit->setValue(_config->getTransparencyMaxDepth());
+  _ui->_transparency->setChecked(_config->isTransparencyEnabled());
+
+  _ui->_cubeMap->setChecked((_config->getCubeMap() && _config->_cubeMapPath != ""));
+  _ui->_cubeMapRepertory->setText( _config->_cubeMapPath.c_str());
+
+  _backgroundColor->setRed(_config->getBackgroundColor()._r);
+  _backgroundColor->setGreen(_config->getBackgroundColor()._g);
+  _backgroundColor->setBlue(_config->getBackgroundColor()._b);
+  ostringstream oss;
+
+  oss << "background-color: rgb(" << _backgroundColor->red() <<
+    "," << _backgroundColor->green() << "," <<
+    _backgroundColor->blue() << ");";
+
+  string style = oss.str();
+  _ui->_backgroundColor->setStyleSheet(style.c_str());
+
+  _ui->_ambiantLighting->setChecked(_config->isMinimalAmbiantLighting());
+  _ui->_ambiantLightingCoeff->setValue(_config->getMinimalAmbiantLighting());
+
+  _ambiantColor->setRed(_config->getAdditiveAmbiantLighting()._r);
+  _ambiantColor->setGreen(_config->getAdditiveAmbiantLighting()._g);
+  _ambiantColor->setBlue(_config->getAdditiveAmbiantLighting()._b);
+
+  oss << "background-color: rgb(" << _ambiantColor->red() <<
+    "," << _ambiantColor->green() << "," <<
+    _ambiantColor->blue() << ");";
+
+  style = oss.str();
+  _ui->_ambiantColorButton->setStyleSheet(style.c_str());
+
+  _ui->_ambiantColor->setChecked(_config->isAdditiveAmbiantLighting());
+
+  _ui->_ambientOcclusionSampling->setValue(_config->getAmbientOcclusionSampling());
+  _ui->_ambientOcclusion->setChecked(_config->isAmbientOcclusionEnabled());
+
+  _ui->_photonMappingValue->setValue(_config->getPhotonMappingSampling());
+  _ui->_photonMapping->setChecked(_config->isPhotonMappingEnabled());
+}
+
 void            RaytracerGUI::openRender()
 {
   string render =
@@ -343,6 +415,10 @@ void            RaytracerGUI::openRender()
       while (getline(flux, object))
 	;
       flux.close();
-      cout<<object<<endl;
+      if (_config)
+	delete _config;
+      _config = new RenderingConfiguration(object);
+      _raytracer->setRenderingConfiguration(_config);
+      this->updateGUIConfig();
     }  
 }

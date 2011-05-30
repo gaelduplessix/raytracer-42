@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Sun May 29 19:45:11 2011 loick michard
+// Last update Mon May 30 18:29:39 2011 loick michard
 //
 
 #ifndef _GUI_HPP_
@@ -24,6 +24,8 @@ void	gui(int ac, char **av);
 #include "ui_clusterDialog.h"
 #include "ui_launchServerDialog.h"
 #include "ui_connectToServer.h"
+#include "ui_Preferences.h"
+#include "ui_About.h"
 #include "RenderingConfiguration.hpp"
 #include "Raytracer.hpp"
 #include "CubeMap.hpp"
@@ -37,6 +39,8 @@ namespace Ui {
   class ClusterDialog;
   class LaunchServerDialog;
   class ConnectToServer;
+  class Preferences;
+  class About;
 }
 
 class RaytracerGUI : public QMainWindow, public RenderingInterface
@@ -87,6 +91,8 @@ public slots:
   void	updateServersTab();
   void	saveRender();
   void	openRender();
+  void	updateGUIConfig();
+  void	updateEditConfig();
 
 protected:
   virtual void  paintEvent(QPaintEvent*);
@@ -120,6 +126,11 @@ private:
   QDialog*                      _launchServerDialog;
   Ui::ConnectToServer*		_connectToServerDialogUi;
   QDialog*                      _connectToServerDialog;
+  void				_initPreferencesDialog();
+  Ui::Preferences*		_preferencesDialogUi;
+  QDialog*                      _preferencesDialog;
+  Ui::About*			_aboutDialogUi;
+  QDialog*                      _aboutDialog;
   string			_consoleLog;
   QTimer*			_clusterTimer;
 

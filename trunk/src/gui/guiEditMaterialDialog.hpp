@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:21:30 2011 loick michard
-// Last update Thu May 26 14:07:24 2011 loick michard
+// Last update Mon May 30 18:00:35 2011 loick michard
 //
 
 #include <QMutex>
@@ -47,8 +47,9 @@ public slots:
   void fillFields();
   void selectColor();
 
-private:
+public:
   RenderingConfiguration        *_config;
+private:
   Scene                         *_scene;
   Raytracer                     *_raytracer;
   Ui::editMaterialDialog*	_dialog;

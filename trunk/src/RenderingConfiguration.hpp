@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Sun May 29 17:45:54 2011 loick michard
+// Last update Mon May 30 16:02:49 2011 loick michard
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -140,6 +140,7 @@ public:
   bool                  _3DEnabled;
   int                   _3DMode;
   double                _eyesSpace;
+  string		_cubeMapPath;
 
 private:
   int			_nbThreads;
@@ -156,7 +157,6 @@ private:
   t_reflection		_reflection;
   t_transparency	_transparency;
   CubeMap*		_cubeMap;
-  string		_cubeMapPath;
   Color			_backgroundColor;
   bool			_ambientOcclusionEnabled;
   int			_ambientOcclusionSampling;
