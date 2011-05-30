@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 17:29:44 2011 melvin laplanche
-// Last update Sun May 29 00:51:56 2011 melvin laplanche
+// Last update Sun May 29 16:15:02 2011 melvin laplanche
 //
 
 #ifndef A3DSPARSER_H_
@@ -41,7 +41,11 @@ public:
   bool	loadFile(QString);
   bool	loadFile(const char*);
   void	parse(void);
-  bool	getState(void) const;
+
+  bool					getState(void) const;
+  const std::vector<A3DSLight*>&	getLights(void) const;
+  const std::vector<A3DSMaterial*>&	getMaterials(void) const;
+  const std::vector<A3DSMesh*>&		getMeshes(void) const;
 
 private:
   bool				_state;
@@ -53,6 +57,7 @@ private:
   std::vector<A3DSMaterial*>	_materials;
   std::vector<A3DSMesh*>	_meshes;
 
+  void	_clearObjects(void);
   void	_parseEditor3D(A3DSChunk);
   void	_parseMesh(std::string, A3DSChunk);
   void	_parseObject(A3DSChunk);

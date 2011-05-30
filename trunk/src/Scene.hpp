@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sun May 29 00:10:01 2011 melvin laplanche
+// Last update Mon May 30 13:22:06 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -151,5 +151,6 @@ private:
   bool			_parseCommonElement(QDomNode,
 					    ObjectPrimitive*, bool&, bool&);
   bool			_materialExists(QString);
+  Material*		_3dsgetFaceMat(int, const map<string, vector<int> >&);
 };
 #endif

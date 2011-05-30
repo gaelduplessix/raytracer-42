@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 25 18:28:47 2011 melvin laplanche
-// Last update Sat May 28 16:15:08 2011 melvin laplanche
+// Last update Mon May 30 12:12:17 2011 melvin laplanche
 //
 
 #include "A3DSMesh.hpp"
@@ -48,7 +48,7 @@ void	A3DSMesh::_parseLocalCoordSystem(A3DSChunk	c)
 void	A3DSMesh::_parseTextCoord(A3DSChunk	c)
 {
   int		nbTexts = c.getShort();
-  Vector	v;
+  Point	v;
 
   for (int i=0; i<nbTexts; i++)
   {
@@ -60,7 +60,7 @@ void	A3DSMesh::_parseTextCoord(A3DSChunk	c)
 void	A3DSMesh::_parseVertices(A3DSChunk	c)
 {
   int		nb_vertices = c.getShort();
-  Vector	v;
+  Point	v;
 
   for (int i=0; i<nb_vertices; i++)
   {
@@ -72,7 +72,7 @@ void	A3DSMesh::_parseVertices(A3DSChunk	c)
 void	A3DSMesh::_parseFaces(A3DSChunk	c)
 {
   int		nb_faces = c.getShort();
-  Vector	v;
+  Point	v;
 
   for (int i=0; i<nb_faces; i++)
   {
@@ -80,10 +80,10 @@ void	A3DSMesh::_parseFaces(A3DSChunk	c)
     c.getShort();
     this->_faces.push_back(v);
   }
-  for (A3DSChunk child=c.firstChild(); c; c = c.nextSibling())
+  for (A3DSChunk child=c.firstChild(); child; child = child.nextSibling())
   {
     if (child.getId() == A3DSChunk::FACES_MATERIAL_ID)
-      this->_parseFacesMaterial(c);
+      this->_parseFacesMaterial(child);
   }
 }
 
@@ -96,4 +96,25 @@ void	A3DSMesh::_parseFacesMaterial(A3DSChunk	c)
   for (int i=0; i<nbFaces; i++)
     faceApplied.push_back(c.getShort());
   this->_materialFaces[matName] = faceApplied;
+}
+
+const std::vector<Point>&	A3DSMesh::getTextureCoord(void) const
+{
+  return this->_textureCoord;
+}
+
+const std::vector<Point>&	A3DSMesh::getVertices(void) const
+{
+  return this->_vertices;
+}
+
+const std::vector<Point>&	A3DSMesh::getFaces(void) const
+{
+  return this->_faces;
+}
+
+const std::map<std::string, std::vector<int> >&
+A3DSMesh::getMaterialFaces(void) const
+{
+  return this->_materialFaces;
 }

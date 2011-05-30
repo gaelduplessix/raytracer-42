@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 25 15:09:09 2011 melvin laplanche
-// Last update Thu May 26 21:07:30 2011 melvin laplanche
+// Last update Sun May 29 17:15:58 2011 melvin laplanche
 //
 
 #include "A3DSMaterial.hpp"
@@ -72,6 +72,11 @@ string	A3DSMaterial::_getTextureName(A3DSChunk	c)
   {
     if (c.getId() == A3DSChunk::TEXTURE_NAME_ID)
       return c.getName();
+    else
+    {
+      cerr << "Unsused texture name chunk :" << hex << c.getId();
+      cerr << " (" << dec << c.getId() << ")" << endl;
+    }
     c = c.nextSibling();
   }
   return name;
