@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Fri May 27 14:59:01 2011 samuel olivier
-// Last update Fri May 27 15:18:25 2011 samuel olivier
+// Last update Mon May 30 20:27:38 2011 samuel olivier
 //
 
 #include <iostream>
@@ -26,8 +26,15 @@ Ressource::Ressource(const string& pathName,
 		     const string& newPathName) : _pathName(pathName)
 {
   ifstream	file(pathName.c_str(), ios_base::binary);
-  file >> _fileContent;
+  file.seekg (0, ios::end);
+  int		length = file.tellg();
+  file.seekg (0, ios::beg);
+  char*		buffer = new char [length];
+
+  file.read(buffer, length);
   file.close();
+  _fileContent = string(buffer, length);
+  delete buffer;
   _newPathName = newPathName;
 }
 

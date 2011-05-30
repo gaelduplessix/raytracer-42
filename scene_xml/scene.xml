@@ -33,6 +33,10 @@
     	    <position>0, 0, -2</position>
     	    <rotation type="radian">0, 0, 0</rotation>
     	  </primitive>
+    	  <primitive type="plane" material="refraction">
+    	    <position>0, 0, -1.5</position>
+    	    <rotation type="radian">0, 0, 0</rotation>
+    	  </primitive>
 	  <!-- 	  <primitive type="sphere" material="sol"> -->
 	  <!-- 	    <position>20, 0, -2</position> -->
 	  <!-- 	    <rotation type="radian">0, 0, 0</rotation> -->
@@ -40,14 +44,6 @@
 	  <!-- 	  </primitive> -->
     	</primitives>
     </object>
-    <parallelepipede material="refraction">
-      <position>15, 4, -1.8</position>
-      <rotation type="degree">0, 45, 45</rotation>
-      <width>0, 1, 0</width>
-      <height>0, 0, 2</height>
-      <depth>1, 0, 0</depth>
-      <solid>true</solid>
-    </parallelepipede>
   </objects>
 
   <lights>
@@ -62,7 +58,7 @@
     <light type="spot">
       <position>10, 0, 4</position>
       <color>1EC828</color>
-      <intensity>1</intensity>
+      <intensity>2</intensity>
       <directLight>3000</directLight>
     </light>
   </lights>
