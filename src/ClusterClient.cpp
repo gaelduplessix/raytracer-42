@@ -5,8 +5,12 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Sun May 29 16:10:39 2011 gael jochaud-du-plessix
+// Last update Mon May 30 11:55:33 2011 gael jochaud-du-plessix
 //
+
+#include <unistd.h>
+#include <time.h>
+#include <cmath>
 
 #include "ClusterClient.hpp"
 
@@ -15,8 +19,10 @@
 ClusterClient::ClusterClient(RenderingInterface* interface,
 			     string url, int nbSubdibisions):
   _interface(interface), _centralServerUrl(url.c_str()),
-  _nbSubdivisions(nbSubdibisions), _servers(0), _sessionId(0)
+  _nbSubdivisions(nbSubdibisions), _servers(0), _sessionId(-1),
+  _imageSections(0), _renderingConfiguration(), _scene(NULL)
 {
+  srand(time(NULL));
   _serversListManager = new ServersListManager(this);
   _serversListManager->start();
 }
@@ -37,6 +43,21 @@ RenderingInterface*	ClusterClient::getInterface(void)
 QUrl&			ClusterClient::getCentralServerUrl(void)
 {
   return (_centralServerUrl);
+}
+
+int			ClusterClient::getSessionId()
+{
+  return (_sessionId);
+}
+
+RenderingConfiguration&		ClusterClient::getRenderingConfiguration()
+{
+  return (_renderingConfiguration);
+}
+
+Scene*	ClusterClient::getScene()
+{
+  return (_scene);
 }
 
 vector <ServerEntry*>	ClusterClient::getServers(void)
@@ -76,15 +97,13 @@ void		ClusterClient::updateServersList(QString ip, int port,
 	addServer(ip, port, status, progress);
     }
   else
-    {
-      server->setStatus(status);
-      server->setProgress(progress);
-    }
+    server->setProgress(progress);
 }
 
 void		ClusterClient::removeFromServersList(ServerEntry* entry,
 						     bool destroy)
 {
+  QMutexLocker	lock(&_mutex);
   for (int i = 0, l = _servers.size(); i < l; i++)
     {
       if (_servers[i] == entry)
@@ -94,4 +113,83 @@ void		ClusterClient::removeFromServersList(ServerEntry* entry,
 	  _servers.erase(_servers.begin() + i);
 	}
     }
+}
+
+ServerEntry*	ClusterClient::getFreeServer(void)
+{
+  QMutexLocker	lock(&_mutex);
+  for (int i = 0, l = _servers.size(); i < l; i++)
+    {
+      if (_servers[i]->getStatus() == ServerEntry::WAITING_REQUEST)
+	return (_servers[i]);
+    }
+  return (NULL);
+}
+
+void	ClusterClient::launchRendering(RenderingConfiguration* config,
+				       Scene* scene)
+{
+  if (_sessionId == -1)
+    launchNewSession(config, scene);
+  else
+    relaunchSession();
+}
+
+void	ClusterClient::launchNewSession(RenderingConfiguration* config,
+					Scene* scene)
+{
+  _sessionId = rand();
+  _renderingConfiguration = *config;
+  _scene = scene;
+  if (_nbSubdivisions <= 0)
+    _nbSubdivisions = (int) sqrt(_renderingConfiguration.getWidth());
+  if ((_nbSubdivisions * _nbSubdivisions)
+      > (_renderingConfiguration.getWidth()
+	 * _renderingConfiguration.getHeight()))
+    _nbSubdivisions = (int) sqrt(_renderingConfiguration.getWidth()
+				 * _renderingConfiguration.getHeight());
+  if (_nbSubdivisions <= 1)
+    _nbSubdivisions = 1;
+  _imageSections.resize(_nbSubdivisions);
+  for (int i = 0; i < _nbSubdivisions; i++)
+    {
+      _imageSections[i].resize(_nbSubdivisions);
+      for (int j = 0; j < _nbSubdivisions; j++)
+	_imageSections[i][j] = ClusterClient::NOT_RAYTRACED;
+    }
+  ostringstream idStr;
+  idStr << _sessionId;
+  _interface->sendMessage(QObject::tr("Début d'une nouvelle session "
+				      "de rendu (%1)")
+			  .arg(QString(idStr.str().c_str())).toStdString());
+  _renderingThread = new ClusterRenderingThread(this);
+  _renderingThread->start();
+}
+
+void	ClusterClient::relaunchSession(void)
+{  
+}
+
+bool	ClusterClient::getSectionToRaytrace(QRect& section)
+{
+  for (int i = 0; i < _nbSubdivisions; i++)
+    {
+      for (int j = 0; j < _nbSubdivisions; j++)
+	{
+	  if (_imageSections[i][j] == ClusterClient::NOT_RAYTRACED)
+	    {
+	      section.setX(_renderingConfiguration.getWidth()
+			   * ((double)i / _nbSubdivisions));
+	      section.setY(_renderingConfiguration.getHeight()
+			   * ((double)j / _nbSubdivisions));
+	      section.setWidth(_renderingConfiguration.getWidth()
+			       / _nbSubdivisions);
+	      section.setHeight(_renderingConfiguration.getHeight()
+				/ _nbSubdivisions);
+	      _imageSections[i][j] = ClusterClient::RAYTRACING;
+	      return (true);
+	    }
+	}
+    }
+  return (false);
 }

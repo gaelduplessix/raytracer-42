@@ -1,11 +1,11 @@
 //
-// ClusterServerThread.hpp for raytracer in /home/jochau_g//Desktop/raytracer-42/src
+// RegisterServerThread.hpp for raytracer in /home/jochau_g//Desktop/raytracer-42/src
 // 
 // Made by gael jochaud-du-plessix
 // Login   <jochau_g@epitech.net>
 // 
-// Started on  Mon May 23 18:54:45 2011 gael jochaud-du-plessix
-// Last update Sun May 29 15:11:37 2011 gael jochaud-du-plessix
+// Started on  Mon May 30 17:44:54 2011 gael jochaud-du-plessix
+// Last update Mon May 30 17:44:54 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERSERVERTHREAD_HPP_
@@ -18,6 +18,7 @@
 #include <QTimer>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QRect>
 
 #include <string>
 
@@ -25,33 +26,34 @@ using namespace std;
 
 class ClusterServer;
 
-class ClusterServerThread : public QThread
+class RegisterServerThread : public QThread
 {
 Q_OBJECT
 
 public:
-  static const int	CENTRAL_REGISTER = 0;
-  static const int	CLIENT_LISTENER = 1;
-
-  ClusterServerThread(ClusterServer* clusterServer, int type);
-  ~ClusterServerThread();
+  RegisterServerThread(ClusterServer* clusterServer);
+  ~RegisterServerThread();
 
   void		run(void);
+
+  bool		isConnectedToClient(void);
+
+  void		receiveSectionRequest(void);
+  void		requestSessionData(void);
+
+signals:
+  void		launchServer(void);
 
 public slots:
   void		readCentralServerResponse(QNetworkReply* reply);
   void		registerToCentralServer(void);
-  void		newConnection(void);
-  void		clientDisconnect(void);
 
 private:
-  int				_type;
   ClusterServer*		_clusterServer;
   QNetworkAccessManager*	_networkManager;
   QTimer*			_timer;
-  QTcpServer*			_tcpServer;
+  bool				_serverReady;
   bool				_stopReportConnectionError;
-  QTcpSocket*			_currentClientSocket;
 };
 
 #endif

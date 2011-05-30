@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Sun May 29 16:46:23 2011 loick michard
+// Last update Mon May 30 12:08:36 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -32,6 +32,8 @@ void		RaytracerGUI::_initDialogCluster()
   _connectToServerDialog = new QDialog();
   _connectToServerDialogUi = new Ui::ConnectToServer();
   _connectToServerDialogUi->setupUi(_connectToServerDialog);
+  _connectToServerDialogUi->buttonBox->button(QDialogButtonBox::Ok)
+    ->setFocus(Qt::OtherFocusReason);
   if (_clusterTimer)
     delete _clusterTimer;
   _clusterTimer = new QTimer();
@@ -62,7 +64,6 @@ void		RaytracerGUI::updateServersTab()
       _ui->_serversTab
         ->setItem(i, 1,
                   new QTableWidgetItem(QString::number(list[i]->getPort())));
-      
 
       if (_ui->_serversTab->item(i, 2))
         delete _ui->_serversTab->item(i, 2);
@@ -71,17 +72,17 @@ void		RaytracerGUI::updateServersTab()
 	state = tr("Libre");
       else if (list[i]->getStatus() == ServerEntry::WAITING_REQUEST)
 	state = tr("En attente");
+      else if (list[i]->getStatus() == ServerEntry::PROCESSING_REQUEST)
+	state = tr("Traitement requête");
       else if (list[i]->getStatus() == ServerEntry::DOWNLOADING_RESSOURCES)
-	state = tr("TÃ©lÃ©chargement ressources");
+	state = tr("Téléchargement ressources");
       else if (list[i]->getStatus() == ServerEntry::PROCESSING_RESSOURCES)
         state = tr("Traitement ressources");
       else if (list[i]->getStatus() == ServerEntry::RAYTRACING)
 	state = tr("Raytracing");
       else if (list[i]->getStatus() == ServerEntry::SENDING_RESPONSE)
-	state = tr("Envoi rÃ©ponse");
-      _ui->_serversTab
-	->setItem(i, 2,
-		  new QTableWidgetItem(state));
+	state = tr("Envoi réponse");
+      _ui->_serversTab->setItem(i, 2, new QTableWidgetItem(state));
 
       if (_ui->_serversTab->cellWidget(i, 3))
         delete _ui->_serversTab->cellWidget(i, 3);

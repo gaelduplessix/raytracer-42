@@ -5,17 +5,15 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Sat May 28 12:26:00 2011 samuel olivier
+// Last update Mon May 30 19:33:14 2011 gael jochaud-du-plessix
 //
 
 #include <QString>
 #include <QColor>
 #include <fstream>
 
-#include "Ressources.hpp"
+#include "Resources.hpp"
 #include "Texture.hpp"
-
-Ressources*	Ressources::_instance = NULL;
 
 Texture::Texture()
 {
@@ -28,7 +26,7 @@ Texture::Texture(const string& path,
   _type = 0;
   _name = path;
   // _image = new QImage(QString(path.c_str()));
-  _image = new QImage(QString(Ressources::getNewPathName(path).c_str()));
+  _image = new QImage(QString(Resources::getNewPathName(path).c_str()));
   _repeatWidth = repeatWidth;
   _repeatHeight = repeatHeight;
 }
