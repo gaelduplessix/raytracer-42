@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 18 10:28:17 2011 loick michard
-// Last update Tue May 24 13:48:20 2011 loick michard
+// Last update Mon May 30 13:14:18 2011 loick michard
 //
 
 #include <algorithm>

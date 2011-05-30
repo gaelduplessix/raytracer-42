@@ -163,6 +163,8 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="action_Charger"/>
     <addaction name="action_SaveImage"/>
+    <addaction name="actionSaveRender"/>
+    <addaction name="actionReRender"/>
     <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menu_Rendu">
@@ -610,7 +612,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>367</width>
+          <width>387</width>
           <height>262</height>
          </rect>
         </property>
@@ -789,7 +791,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>382</width>
+          <width>402</width>
           <height>245</height>
          </rect>
         </property>
@@ -967,7 +969,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>382</width>
+          <width>402</width>
           <height>245</height>
          </rect>
         </property>
@@ -1140,7 +1142,7 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>382</width>
+          <width>402</width>
           <height>245</height>
          </rect>
         </property>
@@ -1516,6 +1518,16 @@ border-color: rgb(108, 108, 108);</string>
    </property>
    <property name="text">
     <string>Déconnexion</string>
+   </property>
+  </action>
+  <action name="actionSaveRender">
+   <property name="text">
+    <string>Enregistrer un rendu</string>
+   </property>
+  </action>
+  <action name="actionReRender">
+   <property name="text">
+    <string>Reprendre un rendu</string>
    </property>
   </action>
  </widget>

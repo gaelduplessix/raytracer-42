@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Fri May 27 12:32:36 2011 gael jochaud-du-plessix
+// Last update Sun May 29 21:39:55 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -297,4 +297,52 @@ void		RaytracerGUI::saveImage()
 	  _image->save(file);
 	}
     }
+}
+
+void            RaytracerGUI::saveRender()
+{
+  if (_config)
+    {
+      QString file =
+        QFileDialog::getSaveFileName(this, tr("Enregistrer un rendu"),
+                                     QString(),
+                                     "*.rt", 0,
+                                     QFileDialog::DontUseNativeDialog);
+      if (file != "")
+        {
+	  string format;
+          format = file.toStdString();
+          format = format.substr(format.find(".") + 1);
+          if (format != "rt")
+            {
+              file += ".rt";
+            }
+	  string serial = _config->toStr();
+	  ofstream flux;
+
+	  flux.open(file.toStdString().c_str(), ios::out);
+	  flux << serial;
+	  flux.close();
+        }
+    }
+}
+
+void            RaytracerGUI::openRender()
+{
+  string render =
+    QFileDialog::getOpenFileName(this, tr("Charger un rendu"),
+				 "", "*.rt;;", 0,
+				 QFileDialog::DontUseNativeDialog).
+    toStdString();
+  if (render != "")
+    {
+      ifstream flux;
+      string object;
+
+      flux.open(render.c_str(), ios::in);
+      while (getline(flux, object))
+	;
+      flux.close();
+      cout<<object<<endl;
+    }  
 }
