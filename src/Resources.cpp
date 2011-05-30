@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Mon May 30 21:54:40 2011 gael jochaud-du-plessix
+// Last update Mon May 30 22:06:22 2011 samuel olivier
 //
 
 #include <QDir>
@@ -72,6 +72,10 @@ void	Resources::createResources(const Scene* scene,
       _resources.push_back(Resource(cubeMapPath + "/negx.jpg"));
       _resources.push_back(Resource(cubeMapPath + "/negz.jpg"));
     }
+  const vector<QString>&	filenames = scene->getSceneFilenames();
+  int				nbFile = filenames.size();
+  for (int i = 0 ; i < nbFile ; i++)
+    _resources.push_back(Resource(filenames[i].toStdString()));
 }
 
 const string&	Resources::getTmpResourceDir(void)
