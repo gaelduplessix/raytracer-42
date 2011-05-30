@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Thu May 26 15:13:20 2011 samuel olivier
+// Last update Sun May 29 16:04:26 2011 samuel olivier
 //
 
 #include <cmath>
@@ -141,11 +141,10 @@ void		Triangle::getMappedCoords(const Point& intersectPoint,
   double	areaB = calcArea(_vertex1, _vertex2, intersectPoint);
   double	areaA = calcArea(_vertex2, _absolutePosition, intersectPoint);
   double	sum = areaA + areaB + areaC;
-  double	a = areaC / sum;
   double	b = areaA / sum;
   double	c = areaB / sum;
   Point		texturePoint = _textureVertex1
-    + (b * _textureV1 + c * _textureV2) / (a + b + c);
+    + (b * _textureV1 + c * _textureV2);
   x = -texturePoint._x;
   y = -texturePoint._y;
 }

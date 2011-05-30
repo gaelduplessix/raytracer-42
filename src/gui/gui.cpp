@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sun May 29 17:57:16 2011 loick michard
+// Last update Sun May 29 19:43:01 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -46,7 +46,7 @@ Scene           *createScene()
   mat.setSpecularPow(50);
   Material      *reflection = new Material("Reflection");
   *reflection = mat;
-  reflection->setReflectionCoeff(1);
+  // reflection->setReflectionCoeff(1);
   // reflection->setTransmissionCoeff(0);
   // reflection->setRefractionIndex(1.33);
   //reflection->setLimitTexture(new Texture("stripes.png"));  
@@ -65,15 +65,16 @@ Scene           *createScene()
   camera->setTarget(Point(20, 0, 0));
   cam.push_back(camera);
 
-  // reflection->setTexture(new Texture("terre.jpg"));
+  reflection->setTexture(new Texture("terre.jpg"));
   vector<ObjectPrimitive*> primitives;
-  // primitives.push_back(new Pa(NULL, Point(30, 0, -3), Rotation(0, 0, 0),
-  // 				  reflection, 3));
+  primitives.push_back(new Parallelogram(NULL, Point(30, -4, -3),
+					 Point(30, -4, 3), Point(30, 4, -3),
+					 reflection));
 
-  primitives.push_back(new Sphere(NULL, Point(20, 0, -1),
-				  Rotation(0, 0, 0), reflection, 2));
-  primitives.push_back(new Sphere(NULL, Point(40, -6, -1),
-                                  Rotation(0, 0, 0), reflection, 2));
+  // primitives.push_back(new Sphere(NULL, Point(20, 0, -1),
+  // 				  Rotation(0, 0, 0), reflection, 2));
+  // primitives.push_back(new Sphere(NULL, Point(40, -6, -1),
+  //                                 Rotation(0, 0, 0), reflection, 2));
   // Material special = refraction;
   // PerlinNoise *perlin = new PerlinNoise();
   // special.setTransmissionCoeff(0);
