@@ -5,10 +5,11 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Mon May 30 20:28:16 2011 gael jochaud-du-plessix
+// Last update Mon May 30 21:40:06 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
+#include "Resources.hpp"
 
 #include <QUrl>
 #include <QNetworkRequest>
@@ -225,6 +226,7 @@ bool		ClusterServer::receiveSessionDatas(void)
   QByteArray	resourcesBytes;
   stream >> resourcesBytes;
   string	resourcesStr(resourcesBytes.data(), resourcesBytes.size());
-  cout << resourcesStr.size() << endl;
+  Resources::getInstance()->createResources(resourcesStr);
+  Resources::getInstance()->createResourcesInTemporaryDir();  
   return (false);
 }
