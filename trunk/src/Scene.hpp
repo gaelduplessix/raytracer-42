@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Mon May 30 21:59:37 2011 gael jochaud-du-plessix
+// Last update Mon May 30 22:11:42 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SCENE_HPP_
@@ -75,7 +75,7 @@ public:
   int					getNbLights(void) const;
   int					getNbMaterials(void) const;
   bool					isValid(void) const;
-  vector<QString>&			getSceneFilenames(void);
+  const vector<QString>&		getSceneFilenames(void) const;
 
 private:
   bool				_hasError;

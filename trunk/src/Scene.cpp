@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Mon May 30 22:03:40 2011 gael jochaud-du-plessix
+// Last update Mon May 30 22:11:45 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -106,7 +106,7 @@ int			Scene::getNbMaterials(void) const
   return(_materials.size());
 }
 
-vector<QString>&	Scene::getSceneFilenames(void)
+const vector<QString>&	Scene::getSceneFilenames(void) const
 {
   return (_sceneFilenames);
 }
@@ -559,6 +559,7 @@ void		Scene::loadFromFile(string		filename,
   bool		has_lights = false;
   QDomDocument	document;
 
+  _sceneFilenames.resize(0);
   this->_clearOldScene();
   this->_interface = interface;
   this->_interface->sendMessage(QObject::tr("Start parsing %1")
