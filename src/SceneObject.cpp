@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 30 22:47:37 2011 melvin laplanche
+// Last update Tue May 31 00:52:49 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1044,14 +1044,14 @@ void			Scene::_parse3dsFile(QDomNode n)
     {
       if (n.hasChildNodes() == false || n.isElement() == false)
       {
-	this->_putError(QObject::tr("Every 3dsfile children must "
+	this->_putError(QObject::tr("Every a3ds children must "
 				    "be an element"), n);
 	return ;
       }
       if (n.nodeName() == "filename")
       {
 	if (hasFilename)
-	  this->_putWarning(QObject::tr("A 3dsfile has several filename, "
+	  this->_putWarning(QObject::tr("A a3ds has several filename, "
 					"the first defined will be used"), n);
 	else
 	{
@@ -1062,7 +1062,7 @@ void			Scene::_parse3dsFile(QDomNode n)
       else if (n.nodeName() == "textureDir")
       {
 	if (hasTextDir)
-	  this->_putWarning(QObject::tr("A 3dsfile has several textureDir, "
+	  this->_putWarning(QObject::tr("A a3ds has several textureDir, "
 					"the first defined will be used"), n);
 	else
 	{
@@ -1077,7 +1077,7 @@ void			Scene::_parse3dsFile(QDomNode n)
     n = n.nextSibling();
   }
   if (!hasFilename)
-    this->_putError(QObject::tr("An 3dsfile must have at leat a filename"), n);
+    this->_putError(QObject::tr("An a3ds must have at leat a filename"), n);
   else if (this->_hasError == false)
   {
     A3DSParser	a3ds(filename, this->_interface);
@@ -1153,7 +1153,8 @@ Material*	Scene::_3dsgetFaceMat(int	j,
     for (unsigned int i=0; i<it->second.size(); i++)
     {
       if (it->second[i] == j)
-	return this->_getMaterialByName(it->first.c_str());
+	if (this->_materialExists(it->first.c_str()))
+	  return this->_getMaterialByName(it->first.c_str());
     }
   }
   return NULL;
