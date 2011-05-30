@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Sun May 22 15:53:04 2011 melvin laplanche
-// Last update Tue May 24 09:56:10 2011 melvin laplanche
+// Last update Sun May 29 16:27:19 2011 melvin laplanche
 //
 
 #ifndef A3DSLIGHT_H_

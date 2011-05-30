@@ -5,16 +5,42 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 18:30:51 2011 melvin laplanche
-// Last update Sun May 29 00:53:03 2011 melvin laplanche
+// Last update Sun May 29 16:15:23 2011 melvin laplanche
 
 #include "A3DSParser.hpp"
 
 using namespace std;
 
-A3DSParser::~A3DSParser(void)
+void	A3DSParser::_clearObjects(void)
 {
+  int size;
+
+  this->_hasError = false;
   if (this->_file.is_open())
     this->_file.close();
+  size = this->_lights.size();
+  for (int i = 0; i < size; i++)
+  {
+    delete this->_lights[0];
+    this->_lights.erase(this->_lights.begin());
+  }
+  size = this->_materials.size();
+  for (int i = 0; i < size; i++)
+  {
+    delete this->_materials[0];
+    this->_materials.erase(this->_materials.begin());
+  }
+  size = this->_meshes.size();
+  for (int i = 0; i < size; i++)
+  {
+    delete this->_meshes[0];
+    this->_meshes.erase(this->_meshes.begin());
+  }
+}
+
+A3DSParser::~A3DSParser(void)
+{
+  this->_clearObjects();
 }
 
 A3DSParser::A3DSParser(string			filename,
@@ -55,12 +81,14 @@ void	A3DSParser::_putError(QString	msg)
 
 bool	A3DSParser::loadFile(string	filename)
 {
+  this->_clearObjects();
   this->_file.open(filename.c_str(), ios_base::out | ios_base::binary);
   return (this->_checkFile(filename));
 }
 
 bool	A3DSParser::loadFile(QString	filename)
 {
+  this->_clearObjects();
   this->_file.open(filename.toStdString().c_str(),
 		   ios_base::out | ios_base::binary);
   return (this->_checkFile(filename.toStdString()));
@@ -68,6 +96,7 @@ bool	A3DSParser::loadFile(QString	filename)
 
 bool	A3DSParser::loadFile(const char*	filename)
 {
+  this->_clearObjects();
   this->_file.open(filename, ios_base::out | ios_base::binary);
   return (this->_checkFile(filename));
 }
@@ -165,11 +194,6 @@ void		A3DSParser::_parseObject(A3DSChunk	parent)
 	}
       }
     }
-    /*else
-    {
-      cerr << "Unsused object chunk :" << hex << c.getId();
-      cerr << " (" << dec << c.getId() << ")" << endl;
-      }*/
     c = c.nextSibling();
   }
 }
@@ -190,5 +214,20 @@ void	A3DSParser::_parseMesh(string		name,
 
 bool	A3DSParser::getState(void) const
 {
-  return (this->_state);
+  return this->_state;
+}
+
+const std::vector<A3DSLight*>&		A3DSParser::getLights(void) const
+{
+  return this->_lights;
+}
+
+const std::vector<A3DSMaterial*>&	A3DSParser::getMaterials(void) const
+{
+  return this->_materials;
+}
+
+const std::vector<A3DSMesh*>&		A3DSParser::getMeshes(void) const
+{
+  return this->_meshes;
 }

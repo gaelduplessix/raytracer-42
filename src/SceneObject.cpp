@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sun May 29 16:02:34 2011 samuel olivier
+// Last update Mon May 30 13:32:40 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1080,7 +1080,70 @@ void			Scene::_parse3dsFile(QDomNode n)
   else
   {
     A3DSParser	a3ds(filename, this->_interface);
+    if (a3ds.getState())
+    {
+      const vector<A3DSLight*>		lights = a3ds.getLights();
+      const vector<A3DSMaterial*>	materials = a3ds.getMaterials();
+      const vector<A3DSMesh*>		meshes = a3ds.getMeshes();
+      const char *color;
+
+      for (unsigned int i=0; i<materials.size(); i++)
+      {
+	Material *mat = new Material(materials[i]->getName());
+	string textureName;
+
+	color = materials[i]->getAmbientColor();
+	mat->setColor(Color(color[0], color[1], color[2], color[3]));
+	if (textDir.empty() == false)
+	  textureName = textDir + "/" + materials[i]->getTextureName();
+	else
+	  textureName = materials[i]->getTextureName();
+	if (QFileInfo(textureName.c_str()).exists() == false)
+	{
+	  this->_putError(QObject::tr("texture %1 (3dsfile) not found.")
+			  .arg(textureName.c_str()));
+	  delete mat;
+	  return ;
+	}
+	mat->setTexture(new Texture(textureName));
+	this->_materials.push_back(mat);
+      }
+      Object		*obj = new Object();
+      for (unsigned int i=0; i<meshes.size(); i++)
+      {
+	vector<Vector>	faces = meshes[i]->getFaces();
+	vector<Vector>	vertices = meshes[i]->getVertices();
+	map<string, vector<int> > matFaces = meshes[i]->getMaterialFaces();
+
+	for (unsigned int j=0; j<faces.size(); j++)
+	{
+	  Triangle *triangle = new Triangle(obj,
+					    vertices[faces[j].getX()],
+					    _3dsgetFaceMat(j, matFaces),
+					    vertices[faces[j].getY()],
+					    vertices[faces[j].getZ()]);
+	  obj->addPrimitive(triangle);
+	}
+      }
+      this->_objects.push_back(obj);
+    }
   }
+}
+
+Material*	Scene::_3dsgetFaceMat(int	j,
+				      const map<string, vector<int> > &mat)
+{
+  for (map<string, vector<int> >::const_iterator it(mat.begin());
+  it!=mat.end();
+  it++)
+  {
+    for (unsigned int i=0; i<it->second.size(); i++)
+    {
+      if (it->second[i] == j)
+	return this->_getMaterialByName(it->first.c_str());
+    }
+  }
+  return NULL;
 }
 
 void			Scene::_parseObject(QDomNode n)

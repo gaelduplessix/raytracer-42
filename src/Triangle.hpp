@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 25 18:13:37 2011 samuel olivier
+// Last update Sun May 29 22:01:45 2011 melvin laplanche
 //
 
 #ifndef _TRIANGLE_HPP_

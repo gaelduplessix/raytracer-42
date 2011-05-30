@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Sat May 21 23:19:04 2011 melvin laplanche
-// Last update Fri May 27 17:12:47 2011 melvin laplanche
+// Last update Sun May 29 15:55:10 2011 melvin laplanche
 //
 
 #ifndef CHUNK_H_
@@ -34,7 +34,7 @@ public:
   static const int MAT_REFLECTION_BLUR_ID	= 0xffffa053;
   static const int MAT_TEXTURE_MAP_1_ID		= 0xffffa200;
   static const int MAT_TEXTURE_MAP_2_ID		= 0xffffa33a;
-  static const int TEXTURE_NAME_ID		= 0xa300;
+  static const int TEXTURE_NAME_ID		= 0xffffa300;
   static const int LOCAL_COORD_SYSTEM_ID	= 0x4160;
   static const int VERTICES_ID			= 0x4110;
   static const int FACES_ID			= 0x4120;
