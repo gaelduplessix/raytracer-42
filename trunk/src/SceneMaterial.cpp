@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Sun May 29 18:32:45 2011 samuel olivier
+// Last update Tue May 31 00:30:31 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -48,8 +48,10 @@ bool			Scene::_materialExists(QString	name)
   string	toFind = name.toStdString();
 
   for (int i = 0; i < nbMat; i++)
+  {
     if (this->_materials[i]->getName() == toFind)
       return true;
+  }
   return false;
 }
 

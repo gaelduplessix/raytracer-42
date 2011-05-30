@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 23:48:38 2011 melvin laplanche
-// Last update Mon May 23 12:00:25 2011 melvin laplanche
+// Last update Tue May 31 00:21:44 2011 melvin laplanche
 //
 
 #include "A3DSChunk.hpp"
@@ -104,7 +104,8 @@ string		A3DSChunk::getName(void)
   do
   {
     this->_file.read(&c, 1);
-    str += c;
+    if (c != 0)
+      str += c;
   } while (c != 0);
   return str;
 }
