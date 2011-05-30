@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 30 13:32:40 2011 melvin laplanche
+// Last update Mon May 30 16:44:45 2011 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -136,7 +136,7 @@ void			Scene::_parseSett(QDomNode n,
   bool				position = false;
   Point				positionValue;
   bool				rotation = false;
-  Rotation			rotationValue;
+  Rotation			rotationValue(0, 0, 0);
   bool				solidValue = false;
   bool				solid = false;
   Point				widthValue;
@@ -240,7 +240,8 @@ void			Scene::_parseSett(QDomNode n,
 				"and an solid value"), n);
   else
     this->_objects.push_back(new Sett(positionValue, solidValue, widthValue,
-				      heightValue, depthValue, mat));
+				      heightValue, depthValue, mat,
+				      rotationValue));
 }
 
 Sphere*			Scene::_parseSphere(QDomNode	n,

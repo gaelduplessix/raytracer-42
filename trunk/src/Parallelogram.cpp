@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May 29 16:01:38 2011 samuel olivier
+// Last update Mon May 30 16:34:06 2011 samuel olivier
 //
 
 #include <cmath>
@@ -136,7 +136,6 @@ void            Parallelogram::getMappedCoords(const Point& intersectPoint,
   double        areaA =
     Triangle::calcArea(_vertex2, _absolutePosition, intersectPoint);
   double        sum = areaA + areaB + areaC;
-  double        a = areaC / sum;
   double        b = areaA / sum;
   double        c = areaB / sum;
   Point         texturePoint = _textureVertex1
