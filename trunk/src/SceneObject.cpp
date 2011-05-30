@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon May 30 16:44:45 2011 samuel olivier
+// Last update Mon May 30 21:54:50 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -136,7 +136,7 @@ void			Scene::_parseSett(QDomNode n,
   bool				position = false;
   Point				positionValue;
   bool				rotation = false;
-  Rotation			rotationValue(0, 0, 0);
+  Rotation			rotationValue(0,0,0);
   bool				solidValue = false;
   bool				solid = false;
   Point				widthValue;
@@ -1059,14 +1059,14 @@ void			Scene::_parse3dsFile(QDomNode n)
 	  hasFilename = true;
 	}
       }
-      else if (n.nodeName() == "TextureDir")
+      else if (n.nodeName() == "textureDir")
       {
 	if (hasTextDir)
-	  this->_putWarning(QObject::tr("A 3dsfile has several TextureDir, "
+	  this->_putWarning(QObject::tr("A 3dsfile has several textureDir, "
 					"the first defined will be used"), n);
 	else
 	{
-	  textDir = _parseDir(n, "TextureDir");
+	  textDir = _parseDir(n, "textureDir");
 	  hasTextDir = true;
 	}
       }
@@ -1081,52 +1081,63 @@ void			Scene::_parse3dsFile(QDomNode n)
   else
   {
     A3DSParser	a3ds(filename, this->_interface);
-    if (a3ds.getState())
+    if (a3ds.hasError() == false)
     {
       const vector<A3DSLight*>		lights = a3ds.getLights();
       const vector<A3DSMaterial*>	materials = a3ds.getMaterials();
       const vector<A3DSMesh*>		meshes = a3ds.getMeshes();
       const char *color;
 
-      for (unsigned int i=0; i<materials.size(); i++)
+      if (meshes.size() < 1)
+	this->_putError(QObject::tr("There is no meshes in %1")
+			.arg(filename.c_str()));
+      else
       {
-	Material *mat = new Material(materials[i]->getName());
-	string textureName;
-
-	color = materials[i]->getAmbientColor();
-	mat->setColor(Color(color[0], color[1], color[2], color[3]));
-	if (textDir.empty() == false)
-	  textureName = textDir + "/" + materials[i]->getTextureName();
-	else
-	  textureName = materials[i]->getTextureName();
-	if (QFileInfo(textureName.c_str()).exists() == false)
+	for (unsigned int i=0; i<materials.size(); i++)
 	{
-	  this->_putError(QObject::tr("texture %1 (3dsfile) not found.")
-			  .arg(textureName.c_str()));
-	  delete mat;
-	  return ;
-	}
-	mat->setTexture(new Texture(textureName));
-	this->_materials.push_back(mat);
-      }
-      Object		*obj = new Object();
-      for (unsigned int i=0; i<meshes.size(); i++)
-      {
-	vector<Vector>	faces = meshes[i]->getFaces();
-	vector<Vector>	vertices = meshes[i]->getVertices();
-	map<string, vector<int> > matFaces = meshes[i]->getMaterialFaces();
+	  Material *mat = new Material(materials[i]->getName());
+	  string textureName;
 
-	for (unsigned int j=0; j<faces.size(); j++)
-	{
-	  Triangle *triangle = new Triangle(obj,
-					    vertices[faces[j].getX()],
-					    _3dsgetFaceMat(j, matFaces),
-					    vertices[faces[j].getY()],
-					    vertices[faces[j].getZ()]);
-	  obj->addPrimitive(triangle);
+	  color = materials[i]->getAmbientColor();
+	  mat->setColor(Color(color[0], color[1], color[2], color[3]));
+	  if (materials[i]->getTextureName().empty() == false)
+	  {
+	    if (textDir.empty() == false)
+	      textureName = textDir + "/" + materials[i]->getTextureName();
+	    else
+	      textureName = materials[i]->getTextureName();
+	    if (QFileInfo(textureName.c_str()).exists() == false)
+	    {
+	      this->_putError(QObject::tr("texture %1 (a3ds) not found.")
+			      .arg(textureName.c_str()));
+	      delete mat;
+	      return ;
+	    }
+	    mat->setTexture(new Texture(textureName));
+	  }
+	  else
+	    mat->setTexture(NULL);
+	  this->_materials.push_back(mat);
 	}
+	Object		*obj = new Object();
+	for (unsigned int i=0; i<meshes.size(); i++)
+	{
+	  vector<Vector>	faces = meshes[i]->getFaces();
+	  vector<Vector>	vertices = meshes[i]->getVertices();
+	  map<string, vector<int> > matFaces = meshes[i]->getMaterialFaces();
+
+	  for (unsigned int j=0; j<faces.size(); j++)
+	  {
+	    Triangle *triangle = new Triangle(obj,
+					      vertices[faces[j].getX()],
+					      _3dsgetFaceMat(j, matFaces),
+					      vertices[faces[j].getY()],
+					      vertices[faces[j].getZ()]);
+	    obj->addPrimitive(triangle);
+	  }
+	}
+	this->_objects.push_back(obj);
       }
-      this->_objects.push_back(obj);
     }
   }
 }
@@ -1159,7 +1170,7 @@ void			Scene::_parseObject(QDomNode n)
     {
       if ((n.nodeName() != "object"
 	   && n.nodeName() != "parallelepipede"
-	   && n.nodeName() != "3dsfile")
+	   && n.nodeName() != "a3ds")
 	  || n.isElement() == false)
       {
 	this->_putError(QObject::tr("An objects child cannot be empty and "
@@ -1171,7 +1182,7 @@ void			Scene::_parseObject(QDomNode n)
 	this->_putError(QObject::tr("An object element cannot be empty"), n);
 	return;
       }
-      if (n.nodeName() == "3dsfile")
+      if (n.nodeName() == "a3ds")
 	this->_parse3dsFile(n.firstChild());
       else if (n.nodeName() == "parallelepipede")
       {
