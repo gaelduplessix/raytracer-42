@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Sun May 29 16:07:58 2011 gael jochaud-du-plessix
+// Last update Mon May 30 11:55:08 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERCLIENT_HPP_
@@ -15,9 +15,13 @@
 #include <vector>
 #include <QUrl>
 #include <QMutexLocker>
+#include <QRect>
 
 #include "RenderingInterface.hpp"
 #include "ServersListManager.hpp"
+#include "RenderingConfiguration.hpp"
+#include "Scene.hpp"
+#include "ClusterRenderingThread.hpp"
 
 class ServerEntry;
 
@@ -26,11 +30,21 @@ using namespace std;
 class ClusterClient
 {
 public:
+  enum ImageSection
+    {
+      NOT_RAYTRACED,
+      RAYTRACING,
+      RAYTRACED
+    };
+  
   ClusterClient(RenderingInterface* interface, string url, int nbSubdibisions);
   ~ClusterClient();
 
-  RenderingInterface*	getInterface();
-  QUrl&			getCentralServerUrl();
+  RenderingInterface*		getInterface();
+  QUrl&				getCentralServerUrl();
+  int				getSessionId();
+  RenderingConfiguration&	getRenderingConfiguration();
+  Scene*			getScene();
 
   vector <ServerEntry*>	getServers(void);
   ServerEntry*	getServer(QString ip, int port);
@@ -38,15 +52,26 @@ public:
   void		updateServersList(QString ip, int port, int status,
 				  int progress);
   void		removeFromServersList(ServerEntry* entry, bool destroy=false);
+  ServerEntry*	getFreeServer(void);
+
+  void		launchRendering(RenderingConfiguration* config, Scene* scene);
+  void		launchNewSession(RenderingConfiguration* config, Scene* scene);
+  void		relaunchSession(void);
+
+  bool		getSectionToRaytrace(QRect& section);
 
 protected:
-  RenderingInterface*	_interface;
-  QUrl			_centralServerUrl;
-  int			_nbSubdivisions;
-  ServersListManager*	_serversListManager;
-  vector <ServerEntry*>	_servers;
-  int			_sessionId;
-  QMutex		_mutex;
+  RenderingInterface*			_interface;
+  QUrl					_centralServerUrl;
+  int					_nbSubdivisions;
+  ServersListManager*			_serversListManager;
+  vector <ServerEntry*>			_servers;
+  int					_sessionId;
+  vector< vector <ImageSection> >	_imageSections;
+  RenderingConfiguration		_renderingConfiguration;
+  Scene*				_scene;
+  QMutex				_mutex;
+  ClusterRenderingThread*		_renderingThread;
 };
 
 #endif

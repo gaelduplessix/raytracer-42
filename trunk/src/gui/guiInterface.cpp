@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon May 30 17:32:52 2011 loick michard
+// Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -141,19 +141,20 @@ void    RaytracerGUI::renderingHasBegun(void)
 
 void    RaytracerGUI::photonMappingHasBegun(void)
 {
-  sendMessage(tr("D&eacute;but de la g&eacute;n&eacute;ration de la carte de \
-Photon").toStdString());
+  sendMessage(tr("D&eacute;but de la g&eacute;n&eacute;ration de la carte de"
+		 " Photon").toStdString());
 }
 
 void    RaytracerGUI::photonMappingHasFinished(void)
 {
-  sendSuccessMessage(tr("G&eacute;n&eacute;ration de la carte de Photon \
-termin&eacute;e").toStdString());
+  sendSuccessMessage(tr("G&eacute;n&eacute;ration de la carte de Photon "
+			"termin&eacute;e").toStdString());
 }
 
 void    RaytracerGUI::kdtreeGenerationHasBegun(void)
 {
-  sendMessage(tr("D&eacute;but de la g&eacute;n&eacute;ration du Kdtree").toStdString());
+  sendMessage(tr("D&eacute;but de la g&eacute;n&eacute;ration du Kdtree")
+	      .toStdString());
 }
 
 void    RaytracerGUI::kdtreeGenerationHasFinished(void)
@@ -218,7 +219,7 @@ void    RaytracerGUI::startRender()
 	  _ui->_console->moveCursor(QTextCursor::End);
 	  return ;
 	}
-      if (!_isConnected)
+      if (!(_isConnected && _clusterClient))
 	{
 	  _ui->_mode->setEnabled(false);
 	  _ui->_width->setEnabled(false);
@@ -258,7 +259,7 @@ void    RaytracerGUI::startRender()
 	}
       else
 	{
-	  //LANCER RENDU CLUSTER
+	  _clusterClient->launchRendering(_config, _scene);
 	}
     }
   else

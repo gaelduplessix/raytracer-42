@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Sun May 29 16:04:26 2011 samuel olivier
+// Last update Mon May 30 13:16:48 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -236,8 +236,12 @@ Vector		Triangle::getNormalVector(const Point& intersectPoint,
   (void)intersectPoint;
 }
 
+#ifndef MAX
 #define MAX(x, y) ((x) > (y)) ? (x) : (y)
+#endif
+#ifndef MIN
 #define MIN(x, y) ((x) < (y)) ? (x) : (y)
+#endif
 
 bool		Triangle::isInBoundingBox(BoundingBox& box) const
 {
@@ -284,4 +288,3 @@ Point           Triangle::getMin(void) const
                 MIN(MIN(_vertex1._z, _vertex2._z),
                     _absolutePosition._z)));
 }
-

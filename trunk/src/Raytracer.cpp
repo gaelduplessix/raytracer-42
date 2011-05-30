@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon May 30 20:26:47 2011 samuel olivier
+// Last update Mon May 30 20:32:23 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -15,7 +15,7 @@
 #include <cmath>
 
 #include "Raytracer.hpp"
-#include "Ressources.hpp"
+#include "Resources.hpp"
 
 Raytracer::Raytracer()
 {
@@ -114,9 +114,9 @@ Raytracer::launchRendering(void)
     throw (Raytracer::NO_INTERFACE_SPECIFIED);
   _thread->start();
   _interface->renderingHasBegun();
-  Ressources*	obj = Ressources::getInstance();
-  obj->createRessources(_scene, _config);
-  string	ressources = obj->toStr();
+  Resources*	obj = Resources::getInstance();
+  obj->createResources(_scene, _config);
+  string	resources = obj->toStr();
 }
 
 void
