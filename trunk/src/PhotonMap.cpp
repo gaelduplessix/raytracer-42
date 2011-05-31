@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 14:33:18 2011 samuel olivier
-// Last update Mon May 30 17:37:35 2011 samuel olivier
+// Last update Tue May 31 19:38:24 2011 samuel olivier
 //
 
 #include "PhotonMap.hpp"
@@ -36,7 +36,7 @@ void			PhotonMap::fillPhotonMap(Raytracer *rt)
       while (j < sampling)
 	{
 	  lights[i]->getRandomRay(tmpRay);
-	  if (throwRay(rt, tmpRay, lights[i]->getColor()))
+	  if (throwRay(rt, tmpRay, lights[i]->getColor(), false))
 	    j++;
 	}
     }
@@ -45,7 +45,7 @@ void			PhotonMap::fillPhotonMap(Raytracer *rt)
 }
 
 bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
-				    const Color& currentColor)
+				    const Color& currentColor, bool isAfter)
 {
   ObjectPrimitive*	nearestObject = NULL;
   double		k = -1;
@@ -55,14 +55,15 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       Photon		photon;
       bool		reflect = false;
       bool		refract = false;
-      int		nbPossibilities = 1;
+      int		nbPossibilities = 2;
       int		randomValue;
 
       photon._position = ray._point + k * ray._vector;
       photon._vector = ray._vector;
       photon._color = (currentColor *
       		       nearestObject->getColor(photon._position)) / 255;
-      _map.push_back(photon);
+      if (isAfter)
+	_map.push_back(photon);
       if (rt->getRenderingConfiguration()->isReflectionEnabled() == true
       	  && nearestObject->getMaterial()->getReflectionCoeff() > 0)
       	{
@@ -75,15 +76,19 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       	  refract = true;
       	  nbPossibilities++;
       	}
-      randomValue = rand() % nbPossibilities;
-      if (randomValue == 0 || (randomValue == 1 && reflect))
+      randomValue = rand() % (nbPossibilities + 5);
+      if (randomValue == 0)
+	return (false);
+      if (randomValue == 1 || (randomValue == 2 && reflect))
       	{
       	  Ray	newRay(photon._position,
       		       nearestObject->getReflectedVector(photon._position,
       							 photon._vector));
-      	  throwRay(rt, newRay, photon._color);
+      	  throwRay(rt, newRay, photon._color, (randomValue == 2 && reflect) ?
+		   true : false);
       	}
-      if (rt->getRenderingConfiguration()->isTransparencyEnabled() == true
+      if (refract && ((!reflect && randomValue >= 2) || randomValue >= 3) &&
+	  rt->getRenderingConfiguration()->isTransparencyEnabled() == true
 	  && nearestObject->getMaterial()->getTransmissionCoeff() > 0)
 	{
 	  if (rt->_refractivePath.size() > 0)
@@ -110,7 +115,7 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
 	      newRay._vector = ray._vector;
 	      newRay._refractiveIndex = ray._refractiveIndex;
 	    }
-	  throwRay(rt, newRay, photon._color);
+	  throwRay(rt, newRay, photon._color, true);
 	}
       return (true);
     }
