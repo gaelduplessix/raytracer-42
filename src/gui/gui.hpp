@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Tue May 31 01:23:15 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 00:26:38 2011 gael jochaud-du-plessix
 //
 
 #ifndef _GUI_HPP_
@@ -145,6 +145,8 @@ private:
   struct timeb			_progressTime;
   int				_nbProgress;
   int				_nbRender;
+
+  bool				_restored;
 };
 
 #endif

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Tue May 31 19:47:16 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 01:28:31 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERCLIENT_HPP_
@@ -38,6 +38,7 @@ public:
     };
   
   ClusterClient(RenderingInterface* interface, string url, int nbSubdibisions);
+  ClusterClient(RenderingInterface* interface, QByteArray& data);
   ~ClusterClient();
 
   RenderingInterface*		getInterface();
@@ -45,6 +46,8 @@ public:
   int				getSessionId();
   RenderingConfiguration&	getRenderingConfiguration();
   Scene*			getScene();
+
+  QByteArray			saveState(void);
 
   vector <ServerEntry*>	getServers(void);
   ServerEntry*	getServer(QString ip, int port);
@@ -76,6 +79,7 @@ protected:
   Scene*				_scene;
   QMutex				_mutex;
   ClusterRenderingThread*		_renderingThread;
+  bool					_restored;
 };
 
 #endif

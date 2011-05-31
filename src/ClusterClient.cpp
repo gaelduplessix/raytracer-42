@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Tue May 31 20:18:42 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 01:37:18 2011 gael jochaud-du-plessix
 //
 
 #include <unistd.h>
@@ -20,11 +20,49 @@ ClusterClient::ClusterClient(RenderingInterface* interface,
 			     string url, int nbSubdibisions):
   _interface(interface), _centralServerUrl(url.c_str()),
   _nbSubdivisions(nbSubdibisions), _servers(0), _sessionId(-1),
-  _imageSections(0), _renderingConfiguration(), _scene(NULL)
+  _imageSections(0), _renderingConfiguration(), _scene(NULL),
+  _restored(false)
 {
   srand(time(NULL));
   _serversListManager = new ServersListManager(this);
   _serversListManager->start();
+}
+
+ClusterClient::ClusterClient(RenderingInterface* interface, QByteArray& data):
+  _interface(interface), _centralServerUrl(),
+  _nbSubdivisions(0), _servers(0), _sessionId(-1),
+  _imageSections(0), _renderingConfiguration(), _scene(NULL),
+  _restored(true)
+{
+  QDataStream		stream(&data, QIODevice::ReadWrite);
+
+  stream >> _centralServerUrl;
+  stream >> (int&)_nbSubdivisions;
+  srand(time(NULL));
+  _serversListManager = new ServersListManager(this);
+  _serversListManager->start();
+  _imageSections.resize(_nbSubdivisions);
+  for (int i = 0; i < _nbSubdivisions; i++)
+    {
+      _imageSections[i].resize(_nbSubdivisions);
+      for (int j = 0; j < _nbSubdivisions; j++)
+	stream >> (int&)_imageSections[i][j];
+    }
+}
+
+QByteArray		ClusterClient::saveState(void)
+{
+  QByteArray		data;
+  QDataStream		stream(&data, QIODevice::ReadWrite);
+
+  stream << _centralServerUrl;
+  stream << (int)_nbSubdivisions;
+  for (int i = 0; i < _nbSubdivisions; i++)
+    {
+      for (int j = 0; j < _nbSubdivisions; j++)
+	stream << (int)_imageSections[i][j];
+    }
+  return (data);
 }
 
 ClusterClient::~ClusterClient()
@@ -144,21 +182,24 @@ void	ClusterClient::launchNewSession(RenderingConfiguration* config,
   _sessionId = rand();
   _renderingConfiguration = *config;
   _scene = scene;
-  if (_nbSubdivisions <= 0)
-    _nbSubdivisions = (int) sqrt(_renderingConfiguration.getWidth());
-  if ((_nbSubdivisions * _nbSubdivisions)
-      > (_renderingConfiguration.getWidth()
-	 * _renderingConfiguration.getHeight()))
-    _nbSubdivisions = (int) sqrt(_renderingConfiguration.getWidth()
-				 * _renderingConfiguration.getHeight());
-  if (_nbSubdivisions <= 1)
-    _nbSubdivisions = 1;
-  _imageSections.resize(_nbSubdivisions);
-  for (int i = 0; i < _nbSubdivisions; i++)
+  if (!_restored)
     {
-      _imageSections[i].resize(_nbSubdivisions);
-      for (int j = 0; j < _nbSubdivisions; j++)
-	_imageSections[i][j] = ClusterClient::NOT_RAYTRACED;
+      if (_nbSubdivisions <= 0)
+	_nbSubdivisions = (int) sqrt(_renderingConfiguration.getWidth());
+      if ((_nbSubdivisions * _nbSubdivisions)
+	  > (_renderingConfiguration.getWidth()
+	     * _renderingConfiguration.getHeight()))
+	_nbSubdivisions = (int) sqrt(_renderingConfiguration.getWidth()
+				     * _renderingConfiguration.getHeight());
+      if (_nbSubdivisions <= 1)
+	_nbSubdivisions = 1;
+      _imageSections.resize(_nbSubdivisions);
+      for (int i = 0; i < _nbSubdivisions; i++)
+	{
+	  _imageSections[i].resize(_nbSubdivisions);
+	  for (int j = 0; j < _nbSubdivisions; j++)
+	    _imageSections[i][j] = ClusterClient::NOT_RAYTRACED;
+	}
     }
   ostringstream idStr;
   idStr << _sessionId;

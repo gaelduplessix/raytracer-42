@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Tue May 31 16:56:14 2011 gael jochaud-du-plessix
+// Last update Tue May 31 23:48:34 2011 gael jochaud-du-plessix
 // Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
@@ -16,6 +16,7 @@
 
 #include <QMutex>
 #include <QMutexLocker>
+#include <QByteArray>
 
 #include <stack>
 #include <vector>
@@ -58,6 +59,9 @@ public:
   const PhotonMap*		getPhotonMap(void) const;
   const RenderingConfiguration*	getRenderingConfiguration(void) const;
   RenderingInterface*		getRenderingInterface(void) const;
+
+  QByteArray	saveState(void);
+  void		restoreState(QByteArray& data);
 
   bool	isPixelRaytraced(int x, int y);
 

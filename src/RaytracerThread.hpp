@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:03:41 2011 gael jochaud-du-plessix
-// Last update Thu May 26 17:07:11 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 00:29:47 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACERTHREAD_HPP_
@@ -43,14 +43,15 @@ public:
   bool	isRaytracedPixel(int x, int y);
 
 private:
-  vector<RaytracerSubThread*>	_subThreads;
   bool				_launched;
   bool				_isInit;
   QMutex			_mutex;
 
 public:
+  bool				_isRestored;
   Raytracer*			_raytracer;
   vector< vector <bool> >	_raytracedPixels;
+  vector<RaytracerSubThread*>	_subThreads;
 };
 
 #endif

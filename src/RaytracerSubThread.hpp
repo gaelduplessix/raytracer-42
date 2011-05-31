@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 19 15:21:07 2011 gael jochaud-du-plessix
-// Last update Sat May 21 16:33:12 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 00:35:24 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RAYTRACERSUBTHREAD_HPP_
@@ -30,12 +30,12 @@ public:
   int			_currentPixel;
   int			_currentPixelInLine;
   int			_currentLine;
+  double		_currentProgress;
 
 private:
   RaytracerThread*	_mainThread;
   double		_startProgress;
   double		_endProgress;
-  double		_currentProgress;
   bool			_launched;
 };
 

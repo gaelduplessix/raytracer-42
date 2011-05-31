@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Tue May 31 14:24:42 2011 gael jochaud-du-plessix
+// Last update Tue May 31 23:42:54 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -13,8 +13,8 @@
 #include "RenderingConfiguration.hpp"
 
 RenderingConfiguration::RenderingConfiguration():
-  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(0),
-  _height(0), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
+  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(1),
+  _height(1), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
   _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
@@ -32,8 +32,8 @@ RenderingConfiguration::RenderingConfiguration():
 }
 
 RenderingConfiguration::RenderingConfiguration(const string& stringClass):
-  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(0),
-  _height(0), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
+  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(1),
+  _height(1), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
   _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
@@ -54,8 +54,8 @@ RenderingConfiguration::RenderingConfiguration(const string& stringClass):
 }
 
 RenderingConfiguration::RenderingConfiguration(const QByteArray& bytes):
-  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(0),
-  _height(0), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
+  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(1),
+  _height(1), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
   _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
@@ -260,12 +260,16 @@ getRenderingSamplingMethod(void) const
 
 void	RenderingConfiguration::setWidth(int width)
 {
+  if (width < 1)
+    width = 1;
   _width = width;
   _section.setWidth(width);
 }
 
 void	RenderingConfiguration::setHeight(int height)
 {
+  if (height < 1)
+    height = 1;
   _height = height;
   _section.setHeight(height);
 }

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Tue May 31 15:35:06 2011 loick michard
+// Last update Tue May 31 23:19:12 2011 gael jochaud-du-plessix
 //
 
 #include <QMutexLocker>
@@ -138,8 +138,8 @@ void GuiEditMaterialDialog::setConfiguration()
   _config->setHeight(150);
   _config->setNbThreads(2);
   _config->setCurrentCamera(0);
-  _config->setCubeMap(new CubeMap(":cubemap/cubemaps/Maskonaive3"), 
-		      ":cubemap/cubemaps/Maskonaive3");
+  // _config->setCubeMap(new CubeMap(":cubemap/cubemaps/Maskonaive3"), 
+  // 		      ":cubemap/cubemaps/Maskonaive3");
   _config->setAntialiasing(2);
   _config->setFieldDepthEnabled(false);
   _config->setKdTreeEnabled(false);
