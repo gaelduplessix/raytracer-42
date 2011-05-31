@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Sun May 29 16:00:25 2011 samuel olivier
+// Last update Tue May 31 15:09:29 2011 loick michard
 //
 
 #ifndef _PARALLELOGRAM_HPP_
@@ -49,6 +49,8 @@ public:
   Vector	getRefractedVector(const Point& intersectPoint,
 				   const Ray& ray) const;
   bool		isInBoundingBox(BoundingBox& box) const;
+  Point		getMax(void) const;
+  Point		getMin(void) const;
 
 private:
   Point		_vertex1;

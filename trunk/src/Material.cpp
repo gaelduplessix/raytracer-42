@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Mon May 30 15:38:54 2011 melvin laplanche
+// Last update Tue May 31 15:32:34 2011 loick michard
 //
 
 #include "Material.hpp"
@@ -103,6 +103,8 @@ void	Material::setTexture(Texture* texture)
   _texture = texture;
   if (texture != NULL)
     _isTextured = true;
+  else
+    _isTextured = false;
 }
 
 void	Material::setLimitTexture(Texture* texture)
@@ -150,8 +152,20 @@ void	Material::setNormalDeformation(int deformation,
 
 void	Material::setHeightmap(Texture* image)
 {
-  _heightmap = image;
-  _hasBumpMap = true;
-  _hasNormalDeformation = true;
+  if (image)
+    {
+      if (_heightmap)
+	delete _heightmap;
+      _heightmap = image;
+      _hasBumpMap = true;
+      _hasNormalDeformation = true;
+    }
+  else
+    {
+      if (_heightmap)
+	delete _heightmap;
+      _heightmap = NULL;
+      _hasBumpMap = false;
+    }
 }
 

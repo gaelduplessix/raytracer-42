@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May 30 16:34:06 2011 samuel olivier
+// Last update Tue May 31 15:09:14 2011 loick michard
 //
 
 #include <cmath>
@@ -231,6 +231,46 @@ Vector		Parallelogram::getNormalVector(const Point& intersectPoint,
 
 bool		Parallelogram::isInBoundingBox(BoundingBox& box) const
 {
-  box = box;
+  Point         maxBox = box.getMaxPoint();
+  Point         minBox = box.getMinPoint();
+  Point max = getMax();
+  Point min = getMin();
+
+  if ((max._x > maxBox._x && min._x > maxBox._x) ||
+      (max._x < minBox._x && min._x < minBox._x) ||
+      (max._y > maxBox._y && min._y > maxBox._y) ||
+      (max._y < minBox._y && min._y < minBox._y) ||
+      (max._z > maxBox._z && min._z > maxBox._z) ||
+      (max._z < minBox._z && min._z < minBox._z))
+    return (false);
   return (true);
+}
+
+#ifndef MAX
+#define MAX(x, y) ((x) > (y)) ? (x) : (y)
+#endif
+#ifndef MIN
+#define MIN(x, y) ((x) < (y)) ? (x) : (y)
+#endif
+
+Point           Parallelogram::getMax(void) const
+{
+  Point		_vertex3 = _absolutePosition + _v1 + _v2;
+  return (Point(MAX(MAX(MAX(_vertex1._x, _vertex2._x),
+			_absolutePosition._x), _vertex3._x),
+		MAX(MAX(MAX(_vertex1._y, _vertex2._y),
+			_absolutePosition._y), _vertex3._y),
+		MAX(MAX(MAX(_vertex1._z, _vertex2._z),
+			_absolutePosition._z), _vertex3._z)));
+}
+
+Point           Parallelogram::getMin(void) const
+{
+  Point         _vertex3 = _absolutePosition + _v1 + _v2;
+  return (Point(MIN(MIN(MIN(_vertex1._x, _vertex2._x),
+                        _absolutePosition._x), _vertex3._x),
+                MIN(MIN(MIN(_vertex1._y, _vertex2._y),
+                        _absolutePosition._y), _vertex3._y),
+                MIN(MIN(MIN(_vertex1._z, _vertex2._z),
+                        _absolutePosition._z), _vertex3._z)));
 }
