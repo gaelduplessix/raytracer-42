@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Wed May 25 11:05:54 2011 loick michard
+// Last update Tue May 31 15:09:37 2011 loick michard
 //
 
 #ifndef _SPHERE_HPP_
@@ -35,7 +35,6 @@ public:
   Vector	getRefractedVector(const Point& intersectPoint,
 				   const Ray& ray) const;
   bool		isInBoundingBox(BoundingBox& box) const;
-
 
 private:
   double	_radius;

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Thu May 26 15:13:44 2011 samuel olivier
+// Last update Tue May 31 15:09:53 2011 loick michard
 //
 
 #include <cmath>
@@ -22,7 +22,7 @@ Sphere::Sphere(Object*object,
 						rotation, material),
 				_radius(radius)
 {
-  
+
 }
 
 Sphere::Sphere(void) : ObjectPrimitive(NULL, Point(0, 0, 0),
@@ -153,6 +153,6 @@ Vector		Sphere::getNormalVector(const Point& intersectPoint,
 
 bool		Sphere::isInBoundingBox(BoundingBox& box) const
 {
-  box = box;
+  (void)box;
   return (true);
 }

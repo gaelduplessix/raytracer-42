@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Sun May 29 17:48:39 2011 loick michard
+// Last update Tue May 31 15:35:06 2011 loick michard
 //
 
 #include <QMutexLocker>
@@ -263,6 +263,8 @@ void GuiEditMaterialDialog::updateMaterial()
 					   _dialog->_textureX->value(),
 					   _dialog->_textureY->value()));
 		}
+	      if (_dialog->_imagePath->text() == "")
+		_materials->at(index)->setTexture(NULL);
 	    }
 	  else if (!_materials->at(index)->_isTextured ||
 		   _materials->at(index)->_texture->_type !=
@@ -325,6 +327,8 @@ void GuiEditMaterialDialog::updateMaterial()
 					     _dialog->_bumpmapX->value(),
 					     _dialog->_bumpmapY->value()));
 		}
+	      if (_dialog->_bumpmapHeightmap->text() == "")
+		_materials->at(index)->setHeightmap(NULL);
 	    }
 	  else if (!_materials->at(index)->_heightmap ||
                    _materials->at(index)->_heightmap->_type !=
