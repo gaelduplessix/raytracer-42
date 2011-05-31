@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Tue May 31 19:59:55 2011 gael jochaud-du-plessix
+// Last update Tue May 31 20:18:42 2011 gael jochaud-du-plessix
 //
 
 #include <unistd.h>
@@ -34,6 +34,8 @@ ClusterClient::~ClusterClient()
     delete _serversListManager;
   for (int i = 0, l = _servers.size(); i < l; i++)
     delete _servers[i];
+  _interface->sendMessage(QObject::tr("Disconnected from cluster")
+			  .toStdString());
 }
 
 RenderingInterface*	ClusterClient::getInterface(void)
