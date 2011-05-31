@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:17:38 2011 gael jochaud-du-plessix
-// Last update Tue May 31 18:53:34 2011 gael jochaud-du-plessix
+// Last update Tue May 31 20:30:28 2011 samuel olivier
 //
 
 #include <sstream>
@@ -160,6 +160,7 @@ void		ServerEntry::onDataReceived(void)
 	->createResources(_clusterClient->getScene(),
 			  &_clusterClient->getRenderingConfiguration());
       QByteArray resourcesBytes = Resources::getInstance()->toByteArray();
+      // cout << resourcesBytes.size() << resourcesBytes.data() << endl;
       QByteArray renderingConfBytes =
 	_clusterClient->getRenderingConfiguration().toByteArray();
       {

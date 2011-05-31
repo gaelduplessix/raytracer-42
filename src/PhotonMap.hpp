@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 13:36:45 2011 samuel olivier
-// Last update Wed May 18 22:14:04 2011 samuel olivier
+// Last update Tue May 31 17:54:22 2011 samuel olivier
 //
 
 #ifndef _PHOTON_MAP_
@@ -29,7 +29,8 @@ public:
   vector<Photon>&	getMap(void);
   void			setMap(const vector<Photon>& map);
   bool			throwRay(Raytracer *rt, Ray& ray,
-				 const Color& currentColor);
+				 const Color& currentColor,
+				 bool isAfter);
   void			fillPhotonMap(Raytracer *rt);
 
   vector<Photon> _map;

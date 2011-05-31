@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Tue May 31 17:01:04 2011 loick michard
+// Last update Tue May 31 18:55:49 2011 samuel olivier
 //
 
 #include <QApplication>
@@ -46,10 +46,11 @@ Scene           *createScene()
   mat.setSpecularCoeff(0.5);
   mat.setSpecularPow(50);
   Material      *reflection = new Material("Reflection");
+  Material      *plan = new Material("plan");
+  *plan = mat;
   *reflection = mat;
-  reflection->setReflectionCoeff(1);
-  // reflection->setTransmissionCoeff(0);
-  // reflection->setRefractionIndex(1.33);
+  reflection->setTransmissionCoeff(1);
+  reflection->setRefractionIndex(1.4);
   //reflection->setLimitTexture(new Texture("stripes.png"));  
   // Material      refraction = mat;
   // refraction.setTransmissionCoeff(0);
@@ -61,20 +62,21 @@ Scene           *createScene()
   // matFloor.setSpecularPow(50);
 
   vector<Camera*> cam;
-  Camera* camera = new CinemaCamera(Point(0, 0, 0), Rotation(0, 0, 0));
-  camera->setFocus(40);
-  camera->setTarget(Point(20, 0, 0));
+  Camera* camera = new CinemaCamera(Point(-2, 0, 0), Rotation(0, 0, 0));
+  camera->setFocus(20);
+  // camera->setTarget(Point(20, 0, 0));
   cam.push_back(camera);
 
   // reflection->setTexture(new Texture("terre.jpg"));
   vector<ObjectPrimitive*> primitives;
-  // primitives.push_back(new Pa(NULL, Point(30, 0, -3), Rotation(0, 0, 0),
-  // 				  reflection, 3));
+  primitives.push_back(new Parallelogram(NULL, Point(16, -4, -5),
+					 Point(24, -4, -5), Point(16, 4, -5),
+					 plan));
 
-  primitives.push_back(new Sphere(NULL, Point(20, 0, -1),
+  primitives.push_back(new Sphere(NULL, Point(20, 0, -3),
 				  Rotation(0, 0, 0), reflection, 2));
-  primitives.push_back(new Sphere(NULL, Point(40, -6, -1),
-                                  Rotation(0, 0, 0), reflection, 2));
+  // primitives.push_back(new Sphere(NULL, Point(40, -6, -1),
+  //                                 Rotation(0, 0, 0), reflection, 2));
   // Material special = refraction;
   // PerlinNoise *perlin = new PerlinNoise();
   // special.setTransmissionCoeff(0);
@@ -88,7 +90,9 @@ Scene           *createScene()
 
   vector<Light*> light;
   //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  light.push_back(new Spot(Point(10, 10, 0), Color(255, 255, 255)));
+  light.push_back(new ParallelogramLight(Point(24, 8, 5), Point(16, 8, 5),
+					 Point(24, 11, 3),
+					 Color(255, 255, 255)));
 
   Scene         *res = new Scene(cam, obj, light);
   return (res);
