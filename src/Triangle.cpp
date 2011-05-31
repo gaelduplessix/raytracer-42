@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon May 30 13:16:48 2011 gael jochaud-du-plessix
+// Last update Tue May 31 15:07:17 2011 samuel olivier
 //
 
 #include <cmath>
@@ -26,6 +26,9 @@ Triangle::Triangle(Object*object,
     _vertex1(vertex1), _vertex2(vertex2), _textureVertex1(textureVertex1),
     _textureVertex2(textureVertex2), _textureVertex3(textureVertex3)
 {
+  _absolutePosition *= 10;
+  _vertex1 *= 10;
+  _vertex2 *= 10;
   setCachedValues();
   _isLimited = true;
 }
