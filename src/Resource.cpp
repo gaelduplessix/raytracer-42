@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Fri May 27 14:59:01 2011 samuel olivier
-// Last update Mon May 30 21:41:43 2011 samuel olivier
+// Last update Tue May 31 13:06:18 2011 samuel olivier
 //
 
 #include <iostream>
@@ -35,7 +35,7 @@ Resource::Resource(const string& pathName,
   file.read(buffer, length);
   _fileContent = string(buffer, length);
   file.close();
-  delete buffer;
+  delete[] buffer;
   _newPathName = newPathName;
 }
 
