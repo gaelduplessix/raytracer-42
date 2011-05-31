@@ -6,7 +6,7 @@ if [ $exec == "not found" ]; then
     echo "Qt not found"
     exit
 else
-    $exec -project -nopwd FORMS="forms/raytracer.ui forms/clusterDialog.ui forms/launchServerDialog.ui forms/editMaterialDialog.ui forms/connectToServer.ui forms/Preferences.ui forms/About.ui" RESOURCES="ressources.qrc" QT+=xml QT+=network OBJECTS_DIR=./objects src/ LIBS="-lboost_serialization"
+    $exec -project -nopwd FORMS="forms/raytracer.ui forms/clusterDialog.ui forms/launchServerDialog.ui forms/editMaterialDialog.ui forms/connectToServer.ui forms/Preferences.ui forms/About.ui" RESOURCES="ressources.qrc" QT+=xml QT+=network OBJECTS_DIR=./objects src/ LIBS="-lboost_serialization" MOC_DIR="moc" UI_HEADERS_DIR="uiHeaders"
     make -C configure_options
     if ./configure_options/endian
     then
