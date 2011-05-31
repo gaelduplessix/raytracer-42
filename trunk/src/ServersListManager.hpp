@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri May 27 00:50:20 2011 gael jochaud-du-plessix
-// Last update Fri May 27 12:15:22 2011 gael jochaud-du-plessix
+// Last update Tue May 31 20:15:53 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SERVERSLISTMANAGER_HPP_
@@ -43,6 +43,7 @@ private:
   QNetworkAccessManager*	_networkManager;
   QTimer*			_timer;
   bool				_stopReportConnectionError;
+  bool				_stopReportConnectionSuccess;
 };
 
 #endif

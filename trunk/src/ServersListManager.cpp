@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri May 27 00:55:33 2011 gael jochaud-du-plessix
-// Last update Tue May 31 17:36:55 2011 gael jochaud-du-plessix
+// Last update Tue May 31 20:16:52 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -17,7 +17,7 @@
 
 ServersListManager::ServersListManager(ClusterClient* clusterClient):
   _clusterClient(clusterClient), _networkManager(NULL), _timer(NULL),
-  _stopReportConnectionError(false)
+  _stopReportConnectionError(false), _stopReportConnectionSuccess(false)
 {  
 }
 
@@ -67,6 +67,10 @@ void	ServersListManager::receiveServersList(QNetworkReply* reply)
   else
     {
       _stopReportConnectionError = false;
+      if (!_stopReportConnectionSuccess)
+	_clusterClient->getInterface()
+	  ->sendSuccessMessage(tr("Connected to cluster").toStdString());
+      _stopReportConnectionSuccess = true;
       QString		response = reply->readAll();
       QStringList	servers = response.split("\n",
 						 QString::SkipEmptyParts);

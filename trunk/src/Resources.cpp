@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Tue May 31 15:37:35 2011 samuel olivier
+// Last update Tue May 31 20:39:39 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -18,7 +18,7 @@
 Resources*     Resources::_instance = NULL;
 
 Resources::Resources(void) : _resources(), _tmpResourceDir(""),
-			       _inCluster(false)
+			     _inCluster(false)
 {
 }
 
@@ -118,7 +118,7 @@ QByteArray	Resources::toByteArray(void)
   return (res);
 }
 
-const string&	Resources::getNewPathName(const string& previous)
+string	Resources::getNewPathName(const string& previous)
 {
   if (!_instance || !_instance->isInCluster())
     return (previous);
@@ -127,7 +127,8 @@ const string&	Resources::getNewPathName(const string& previous)
 
   for (int i = 0 ; i < j ; i++)
     if (resources[i].getPathName() == previous)
-      return (resources[i].getNewPathName());
+      return (_instance->getTmpResourceDir() + "/"
+	      + resources[i].getNewPathName());
   return (previous);
 }
 

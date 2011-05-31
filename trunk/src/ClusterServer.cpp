@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Tue May 31 19:34:25 2011 gael jochaud-du-plessix
+// Last update Tue May 31 20:41:38 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -35,6 +35,7 @@ ClusterServer::ClusterServer(RenderingInterface* interface, string url,
   _raytracer = new Raytracer();
   _raytracer->setRenderingInterface(this);
   _scene = new Scene();
+  Resources::getInstance()->isInCluster(true);
 }
 
 ClusterServer::~ClusterServer()
@@ -263,6 +264,8 @@ bool		ClusterServer::receiveSessionDatas(void)
     _renderingConf.setCubeMap(new CubeMap(_renderingConf._cubeMapPath),
 			      _renderingConf._cubeMapPath);
   _scene->loadFromFile(sceneFilename.toStdString(), _interface);
+  if (!_scene->isValid())
+    return (true);
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(&_renderingConf);
   _readyToRaytrace = true;
