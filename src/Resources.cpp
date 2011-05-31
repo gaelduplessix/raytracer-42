@@ -5,13 +5,14 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Tue May 31 01:26:55 2011 gael jochaud-du-plessix
+// Last update Tue May 31 12:47:39 2011 samuel olivier
 //
 
 #include <QDir>
 #include <QFile>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "Resources.hpp"
 
 Resources*     Resources::_instance = NULL;
@@ -98,13 +99,23 @@ string		Resources::toStr(void)
 
   oa << *this;
   return (ofs.str());
-  
 }
 
 QByteArray	Resources::toByteArray(void)
 {
-  string	str = toStr();
-  return (QByteArray(str.c_str(), str.size()));
+  std::stringstream		ofs;
+  boost::archive::text_oarchive oa(ofs);
+  oa << *this;
+  ofs.seekg (0, ios::end);
+  int           length = ofs.tellg();
+  ofs.seekg (0, ios::beg);
+  char*         buffer;
+
+  buffer = new char[length];
+  ofs.read(buffer, length);
+  QByteArray	res(buffer, length);
+  delete buffer;
+  return (res);
 }
 
 const string&	Resources::getNewPathName(const string& previous)
