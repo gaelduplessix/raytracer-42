@@ -5,9 +5,10 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 14:33:18 2011 samuel olivier
-// Last update Tue May 31 19:38:24 2011 samuel olivier
+// Last update Tue May 31 23:17:50 2011 loick michard
 //
 
+#include <algorithm>
 #include "PhotonMap.hpp"
 #include "Raytracer.hpp"
 
@@ -42,6 +43,7 @@ void			PhotonMap::fillPhotonMap(Raytracer *rt)
     }
   for (int pathSize = rt->_refractivePath.size() ; pathSize > 0 ; pathSize--)
     rt->_refractivePath.pop();
+  _root = generateKdTree(_map, xPlane);
 }
 
 bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
@@ -120,4 +122,103 @@ bool		PhotonMap::throwRay(Raytracer *rt, Ray& ray,
       return (true);
     }
   return (false);
+}
+
+bool		PhotonMap::comparePhotonX(Photon photon1, Photon photon2)
+{
+  return (photon1._position._x < photon2._position._x);
+}
+
+bool            PhotonMap::comparePhotonY(Photon photon1, Photon photon2)
+{
+  return (photon1._position._y < photon2._position._y);
+}
+
+bool            PhotonMap::comparePhotonZ(Photon photon1, Photon photon2)
+{
+  return (photon1._position._z < photon2._position._z);
+}
+
+PhotonMapNode*	PhotonMap::generateKdTree(vector<Photon> photons,
+					  int _separatePlane)
+{
+  if (!photons.size())
+    return (NULL);
+  _separatePlane %= 3;
+  if (_separatePlane == xPlane)
+    sort(photons.begin(), photons.end(), PhotonMap::comparePhotonX);
+  else if (_separatePlane == yPlane)
+    sort(photons.begin(), photons.end(), PhotonMap::comparePhotonY);
+ else if (_separatePlane == zPlane)
+    sort(photons.begin(), photons.end(), PhotonMap::comparePhotonZ);
+  
+  PhotonMapNode	*node = new PhotonMapNode();
+  node->plane = _separatePlane;
+  node->medianPhoton = photons[photons.size() / 2];
+
+  vector<Photon> left;
+  vector<Photon> right;
+  for (unsigned int i = 0; i < photons.size() / 2; i++)
+    left.push_back(photons[i]);
+  for (unsigned int i = photons.size() / 2 + 1; i < photons.size(); i++)
+    right.push_back(photons[i]);
+
+  node->leftChild = generateKdTree(left, _separatePlane + 1);
+  node->rightChild = generateKdTree(right, _separatePlane + 1);
+  return (node);
+}
+
+void    PhotonMap::getNodePhotons(vector<Photon*>& nearest,
+				  const Point& intersectPoint,
+				  double radius, PhotonMapNode *node)
+{
+  if (node)
+    {
+      node->medianPhoton._dist = 
+	(node->medianPhoton._position._x - intersectPoint._x) *
+	(node->medianPhoton._position._x - intersectPoint._x) +
+	(node->medianPhoton._position._y - intersectPoint._y) *
+	(node->medianPhoton._position._y - intersectPoint._y) +
+	(node->medianPhoton._position._z - intersectPoint._z) *
+	(node->medianPhoton._position._z - intersectPoint._z);
+      if (node->medianPhoton._dist < 
+	  radius * radius)
+	{
+	  nearest.push_back(&node->medianPhoton);
+	  getNodePhotons(nearest, intersectPoint, 
+			 radius, node->leftChild);
+	  getNodePhotons(nearest, intersectPoint, 
+			 radius, node->rightChild);
+	}
+      else
+	{
+	  if ((intersectPoint._x > node->medianPhoton._position._x
+	       && node->plane == xPlane) ||
+	      (intersectPoint._y > node->medianPhoton._position._y
+	       && node->plane == yPlane) ||
+	      (intersectPoint._z > node->medianPhoton._position._z
+	       && node->plane == zPlane))
+	    getNodePhotons(nearest, intersectPoint,
+			   radius, node->rightChild);
+	  else
+	    getNodePhotons(nearest, intersectPoint,
+			   radius, node->leftChild);
+	}
+      node->medianPhoton._dist = sqrt(node->medianPhoton._dist);
+    }
+}
+
+bool	sortPhoton(Photon* p1, Photon* p2)
+{
+  return (p1->_dist < p2->_dist);
+}
+
+void	PhotonMap::getNearestPhotons(vector<Photon*>& nearest,
+				     const Point& intersectPoint,
+				     int n, double radius)
+{
+  getNodePhotons(nearest, intersectPoint, radius, _root);
+  sort(nearest.begin(), nearest.end(), sortPhoton);
+  if ((int)nearest.size() > n)
+    nearest.resize(n);
 }
