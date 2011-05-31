@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Tue May 31 01:23:06 2011 gael jochaud-du-plessix
+// Last update Tue May 31 17:01:04 2011 loick michard
 //
 
 #include <QApplication>
@@ -312,7 +312,12 @@ void RaytracerGUI::drawWindow()
       remainString += remainTime.toString("ss");
       remainString += tr("s");
       _ui->_ellapse->setText(remainString);
-      _ui->_progressBar->setValue(_progress);
+      if (_isConnected)
+	_ui->_progressBar->setValue(((double)_nbProgress / 
+				    (_config->getWidth() *
+				     _config->getHeight())) * 100);
+      else
+	_ui->_progressBar->setValue(_progress);
     }
   _ui->_console->setHtml(_message.c_str());
   _ui->_console->moveCursor(QTextCursor::End);

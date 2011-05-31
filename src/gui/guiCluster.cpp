@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Mon May 30 12:08:36 2011 gael jochaud-du-plessix
+// Last update Tue May 31 17:01:31 2011 loick michard
 //
 
 #include <QMessageBox>
@@ -37,7 +37,7 @@ void		RaytracerGUI::_initDialogCluster()
   if (_clusterTimer)
     delete _clusterTimer;
   _clusterTimer = new QTimer();
-  _clusterTimer->setInterval(1000);
+  _clusterTimer->setInterval(100);
   QObject::connect(_clusterTimer, SIGNAL(timeout()), 
 		   this, SLOT(updateServersTab()));
 
