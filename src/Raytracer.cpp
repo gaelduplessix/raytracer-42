@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Tue May 31 15:22:54 2011 samuel olivier
+// Last update Tue May 31 17:06:05 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -28,15 +28,6 @@ Raytracer::~Raytracer()
 {
   if (_thread)
     delete _thread;
-}
-
-Raytracer::Raytracer(Scene* scene,
-                     RenderingConfiguration* config,
-                     RenderingInterface* interface,
-		     PhotonMap* photonMap) :
-  _photonMap(photonMap), _scene(scene), _config(config), _interface(interface)
-{
-
 }
 
 void
@@ -148,6 +139,11 @@ Raytracer::pauseRendering(void)
   _interface->renderingHasPaused();
 }
 
+double	Raytracer::getProgress(void) const
+{
+  return (_thread->getProgress());
+}
+
 const Camera&		Raytracer::getCurrentCamera(void)
 {
   return (_scene->getCamera(_config->getCurrentCamera()));
@@ -157,8 +153,11 @@ void		Raytracer::renderingLoop(double& progress,
 					 RaytracerSubThread* thread)
 {
   Point			pixelToRender = getPixelToRender(thread);
-  _thread->setRaytracedPixel(pixelToRender._x, pixelToRender._y, true);
+
   _interface->pixelHasStartedRendering(pixelToRender._x, pixelToRender._y);
+  _thread->setRaytracedPixel(pixelToRender._x, pixelToRender._y, true);
+  pixelToRender._x += _config->getSection().x();
+  pixelToRender._y += _config->getSection().y();
 
   _otherEyes = false;
 
@@ -176,17 +175,19 @@ void		Raytracer::renderingLoop(double& progress,
     }
   
   progress = (double)(++thread->_currentPixel)
-    / (_config->getWidth() * _config->getHeight());
-  _interface->pixelHasBeenRendered(pixelToRender._x, pixelToRender._y,
-  				   pixelColor);
+    / (_config->getSection().width() * _config->getSection().height());
+  _interface->pixelHasBeenRendered(pixelToRender._x
+				   - _config->getSection().x(),
+				   pixelToRender._y
+				   - _config->getSection().y(), pixelColor);
   _interface->renderingHasProgressed(_thread->getProgress());
 }
 
 Point	Raytracer::getPixelToRender(RaytracerSubThread* thread) const
 {
   QMutexLocker		lock(&_mutex);
-  int			width = _config->getWidth();
-  int			height = _config->getHeight();
+  int			width = _config->getSection().width();
+  int			height = _config->getSection().height();
 
   if (_config->getRenderingSamplingMethod() == RSM_LINEAR_HORIZONTAL)
     {
@@ -266,13 +267,13 @@ Color			Raytracer::renderPixel(double x, double y)
 	    {
 	      for (int k = 0; k < samplingDepth; k++)
 		{
-		  ray = currentCamera.getRayWithSampling(subx /
-							 _config->getWidth(),
-							 suby / 
-							 _config->getHeight(),
-							 0,
-							 _otherEyes,
-							 _config->_eyesSpace);
+		  ray =
+		    currentCamera.getRayWithSampling(subx /
+						     _config->getWidth(),
+						     suby /
+						     _config->getHeight(),
+						     0, _otherEyes,
+						     _config->_eyesSpace);
 		  pixelColor += throwRay(ray);
 		}
 	    }

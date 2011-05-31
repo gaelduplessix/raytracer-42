@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Mon May 30 20:59:21 2011 gael jochaud-du-plessix
+// Last update Tue May 31 19:59:55 2011 gael jochaud-du-plessix
 //
 
 #include <unistd.h>
@@ -29,6 +29,7 @@ ClusterClient::ClusterClient(RenderingInterface* interface,
 
 ClusterClient::~ClusterClient()
 {
+  stopRendering();
   if (_serversListManager)
     delete _serversListManager;
   for (int i = 0, l = _servers.size(); i < l; i++)
@@ -167,29 +168,99 @@ void	ClusterClient::launchNewSession(RenderingConfiguration* config,
 }
 
 void	ClusterClient::relaunchSession(void)
-{  
+{
+  if (_sessionId != -1)
+    _renderingThread->start();
 }
 
-bool	ClusterClient::getSectionToRaytrace(QRect& section)
+void	ClusterClient::pauseRendering(void)
+{
+  if (_sessionId == -1)
+    return ;
+  _renderingThread->stopRendering();
+  _renderingThread->wait();
+}
+
+void	ClusterClient::stopRendering(void)
+{
+  if (_sessionId == -1)
+    return ;
+  _interface->renderingHasFinished();
+  _renderingThread->stopRendering();
+  _renderingThread->wait();
+  _imageSections.resize(0);
+  for (int i = 0, l = _servers.size(); i < l; i++)
+    _servers[i]->setStatus(ServerEntry::WAITING_REQUEST);
+  _sessionId = -1;
+}
+
+bool	ClusterClient::isRenderingFinished(bool raytracing)
 {
   for (int i = 0; i < _nbSubdivisions; i++)
     {
       for (int j = 0; j < _nbSubdivisions; j++)
 	{
-	  if (_imageSections[i][j] == ClusterClient::NOT_RAYTRACED)
-	    {
-	      section.setX(_renderingConfiguration.getWidth()
-			   * ((double)i / _nbSubdivisions));
-	      section.setY(_renderingConfiguration.getHeight()
-			   * ((double)j / _nbSubdivisions));
-	      section.setWidth(_renderingConfiguration.getWidth()
-			       / _nbSubdivisions);
-	      section.setHeight(_renderingConfiguration.getHeight()
-				/ _nbSubdivisions);
-	      _imageSections[i][j] = ClusterClient::RAYTRACING;
-	      return (true);
-	    }
+	  if (_imageSections[i][j] == ClusterClient::NOT_RAYTRACED
+	      || (raytracing
+		  && _imageSections[i][j] == ClusterClient::RAYTRACING))
+	    return (false);
+	}
+    }
+  return (true);
+}
+
+bool	ClusterClient::getSectionToRaytrace(QRect& section, bool raytracing)
+{
+  if (isRenderingFinished(raytracing))
+    return (false);
+  forever
+    {
+      int i = rand() % _imageSections.size();
+      int j = rand() % _imageSections[i].size();
+      if (_imageSections[i][j] == ClusterClient::NOT_RAYTRACED
+	  || (raytracing
+	      && _imageSections[i][j] == ClusterClient::RAYTRACING))
+	{
+	  section.setX(_renderingConfiguration.getWidth()
+		       / _nbSubdivisions * i);
+	  section.setY(_renderingConfiguration.getHeight()
+		       / _nbSubdivisions * j);
+	  section.setWidth((double)_renderingConfiguration.getWidth()
+			   / _nbSubdivisions);
+	  section.setHeight((double)_renderingConfiguration.getHeight()
+			    / _nbSubdivisions);
+	  _imageSections[i][j] = ClusterClient::RAYTRACING;
+	  return (true);
 	}
     }
   return (false);
+}
+
+void	ClusterClient::processReceivedSection(QRect& section, QImage& image)
+{
+  uint	sectionX = section.x() / section.width();
+  uint	sectionY = section.y() / section.height();
+  if (sectionX < _imageSections.size()
+      && sectionY < _imageSections[sectionX].size())
+    _imageSections[sectionX][sectionY] = ClusterClient::RAYTRACED;
+  for (int i = 0, l = section.width(); i < l; i++)
+    {
+      for (int j = 0, m = section.height(); j < m; j++)
+	{
+	  _interface->pixelHasBeenRendered(section.x() + i,
+					   section.y() + j,
+					   Color(image.pixel(i, j)));
+	}
+    }
+
+  for (int i = 0; i < _nbSubdivisions; i++)
+    {
+      for (int j = 0; j < _nbSubdivisions; j++)
+	{
+	  if (_imageSections[i][j] != ClusterClient::RAYTRACED)
+	    return ;
+	}
+    }
+  // Rendering finished
+  stopRendering();
 }

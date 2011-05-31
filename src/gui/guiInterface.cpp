@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Tue May 31 01:23:01 2011 gael jochaud-du-plessix
+// Last update Tue May 31 19:17:08 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -109,18 +109,13 @@ void RaytracerGUI::sendMessage(string message)
 
 void    RaytracerGUI::pauseRendering(void)
 {
+  sendMessage(tr("Rendu mis en pause").toStdString());
+  _ui->action_Play->setEnabled(true);
+  _pause = true;  
   if (!_isConnected)
-    {
-      sendMessage(tr("Rendu mis en pause").toStdString());
-      _timer->setSingleShot(true);
-      _ui->action_Play->setEnabled(true);
-      _raytracer->pauseRendering();
-      _pause = true;
-    }
+    _raytracer->pauseRendering();
   else
-    {
-      //PAUSE RENDERING CLUSTER
-    }
+    _clusterClient->pauseRendering();
 }
 
 void    RaytracerGUI::renderingHasFinished(void)
@@ -174,13 +169,9 @@ void    RaytracerGUI::renderingHasProgressed(double progress)
 void    RaytracerGUI::stopRendering(void)
 {
   if (!_isConnected)
-    {
-      _raytracer->stopRendering();
-    }
+    _raytracer->stopRendering();
   else
-    {
-      // STOP CLUSTER RENDERING
-    }
+    _clusterClient->stopRendering();
   _pause = false;
 }
 
@@ -226,38 +217,39 @@ void    RaytracerGUI::startRender()
       _nbProgress = 0;
       if (!_pause)
 	_nbRender = 0;
+      _ui->_mode->setEnabled(false);
+      _ui->_width->setEnabled(false);
+      _ui->_height->setEnabled(false);
+      _ui->_threads->setEnabled(false);
+      _ui->action_Play->setEnabled(false);
+      if (!_timer->isActive())
+	{
+	  _timer->setSingleShot(false);
+	  _timer->setInterval(_preferencesDialogUi->_timer->value());
+	  _timer->start();
+	}
+      if (!_isRendering)
+	{
+	  if (_image)
+	    delete _image;
+	  _image = new QImage(_config->getSection().width(),
+			      _config->getSection().height(),
+			      QImage::Format_ARGB32);
+	  _image->fill(0);
+	  
+	}
+      _ui->_progress->setHidden(false);
+      if (_pause)
+	sendMessage(tr("Reprise du rendu").toStdString());
+      else
+	sendMessage(tr("D&eacute;part du rendu").toStdString());
+      _pause = false;
+      _isRendering = true;
       if (!(_isConnected && _clusterClient))
 	{
-	  _ui->_mode->setEnabled(false);
-	  _ui->_width->setEnabled(false);
-	  _ui->_height->setEnabled(false);
-	  _ui->_threads->setEnabled(false);
-	  _ui->action_Play->setEnabled(false);
-	  if (!_timer->isActive())
-	    {
-	      _timer->setSingleShot(false);
-	      _timer->setInterval(_preferencesDialogUi->_timer->value());
-	      _timer->start();
-	    }
-	  if (!_isRendering)
-	    {
-	      if (_image)
-		delete _image;
-	      _image = new QImage(_ui->_width->value(),
-				  _ui->_height->value(),
-				  QImage::Format_ARGB32);
-	      _image->fill(0);
-	    }
 	  try
 	    {
-	      _ui->_progress->setHidden(false);
-	      if (_pause)
-		sendMessage(tr("Reprise du rendu").toStdString());
-	      else
-		sendMessage(tr("D&eacute;part du rendu").toStdString());
-	      _pause = false;
 	      _raytracer->launchRendering();
-	      _isRendering = true;
 	    }
 	  catch(int error)
 	    {
@@ -265,9 +257,7 @@ void    RaytracerGUI::startRender()
 	    }
 	}
       else
-	{
-	  _clusterClient->launchRendering(_config, _scene);
-	}
+	_clusterClient->launchRendering(_config, _scene);
     }
   else
     sendErrorMessage(tr("Vous devez charger une sc&egrave;ne avant de faire un"

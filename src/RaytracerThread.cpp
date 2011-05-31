@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Thu May 26 17:09:09 2011 gael jochaud-du-plessix
+// Last update Tue May 31 13:38:39 2011 gael jochaud-du-plessix
 //
 
 #include <QMutexLocker>
@@ -87,7 +87,7 @@ void	RaytracerThread::initBeforeLaunching(void)
     }
   if (_raytracer->getRenderingConfiguration()->isPhotonMappingEnabled())
     {
-      _raytracer->_photonMap = new PhotonMap;
+      _raytracer->_photonMap = new PhotonMap();
       _raytracer->getRenderingInterface()->photonMappingHasBegun();
       _raytracer->_photonMap->fillPhotonMap(_raytracer);
       _raytracer->getRenderingInterface()->photonMappingHasFinished();

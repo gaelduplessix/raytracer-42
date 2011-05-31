@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Mon May 30 11:55:08 2011 gael jochaud-du-plessix
+// Last update Tue May 31 19:47:16 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERCLIENT_HPP_
@@ -57,8 +57,12 @@ public:
   void		launchRendering(RenderingConfiguration* config, Scene* scene);
   void		launchNewSession(RenderingConfiguration* config, Scene* scene);
   void		relaunchSession(void);
+  void		pauseRendering(void);
+  void		stopRendering(void);
 
-  bool		getSectionToRaytrace(QRect& section);
+  bool		isRenderingFinished(bool raytracing=false);
+  bool		getSectionToRaytrace(QRect& section, bool raytracing=false);
+  void		processReceivedSection(QRect& section, QImage& image);
 
 protected:
   RenderingInterface*			_interface;

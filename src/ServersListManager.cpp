@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri May 27 00:55:33 2011 gael jochaud-du-plessix
-// Last update Mon May 30 21:05:43 2011 gael jochaud-du-plessix
+// Last update Tue May 31 17:36:55 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -36,7 +36,7 @@ void	ServersListManager::run()
   _timer = new QTimer();
   connect(_timer, SIGNAL(timeout()), this,
 	  SLOT(updateServersListFromCentralServer()));
-  _timer->setInterval(1000);
+  _timer->setInterval(500);
   _timer->start();
   exec();
 }

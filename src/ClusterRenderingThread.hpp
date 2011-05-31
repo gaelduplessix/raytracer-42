@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Sun May 29 18:09:22 2011 gael jochaud-du-plessix
-// Last update Sun May 29 18:25:29 2011 gael jochaud-du-plessix
+// Last update Tue May 31 18:23:23 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERRENDERINGTHREAD_HPP_
@@ -21,6 +21,8 @@ public:
   ClusterRenderingThread(ClusterClient* clusterClient);
 
   void	run(void);
+  
+  void	stopRendering(void);
 
 protected:
   ClusterClient*	_clusterClient;

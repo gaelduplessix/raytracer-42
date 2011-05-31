@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Tue May 31 17:01:31 2011 loick michard
+// Last update Tue May 31 18:05:03 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -41,7 +41,8 @@ void		RaytracerGUI::_initDialogCluster()
   QObject::connect(_clusterTimer, SIGNAL(timeout()), 
 		   this, SLOT(updateServersTab()));
 
-  _ui->_serversTab->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+  _ui->_serversTab->horizontalHeader()
+    ->setResizeMode(QHeaderView::ResizeToContents);
   _ui->_serversTab->
     horizontalHeader()->setResizeMode(3, QHeaderView::Stretch);
 }
@@ -74,9 +75,9 @@ void		RaytracerGUI::updateServersTab()
 	state = tr("En attente");
       else if (list[i]->getStatus() == ServerEntry::PROCESSING_REQUEST)
 	state = tr("Traitement requête");
-      else if (list[i]->getStatus() == ServerEntry::DOWNLOADING_RESSOURCES)
+      else if (list[i]->getStatus() == ServerEntry::DOWNLOADING_RESOURCES)
 	state = tr("Téléchargement ressources");
-      else if (list[i]->getStatus() == ServerEntry::PROCESSING_RESSOURCES)
+      else if (list[i]->getStatus() == ServerEntry::PROCESSING_RESOURCES)
         state = tr("Traitement ressources");
       else if (list[i]->getStatus() == ServerEntry::RAYTRACING)
 	state = tr("Raytracing");

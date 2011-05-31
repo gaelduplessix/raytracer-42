@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Tue May 31 01:39:18 2011 gael jochaud-du-plessix
+// Last update Tue May 31 19:34:25 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -21,8 +21,9 @@ ClusterServer::ClusterServer(RenderingInterface* interface, string url,
   _registerServerThread(NULL), _tcpServer(NULL), _currentClientSocket(NULL),
   _centralServerConnectionState(false), _status(ServerEntry::FREE),
   _progress(0), _currentRequest(-1), _currentSessionId(-1),
-  _currentSection(-1, -1, -1, -1), _currentPacketSize(0), _scene(NULL),
-  _renderingConf(), _readyToRaytrace(false)
+  _currentSection(-1, -1, -1, -1), _currentPacketSize(0), _raytracer(),
+  _scene(NULL), _renderingConf(), _readyToRaytrace(false),
+  _raytracedImage(NULL)
 {
   getInterface()
     ->logServerConsoleMessage("<span>Info: "
@@ -31,6 +32,8 @@ ClusterServer::ClusterServer(RenderingInterface* interface, string url,
   connect(_registerServerThread, SIGNAL(launchServer()),
 	  this, SLOT(launchServer()));
   _registerServerThread->start();
+  _raytracer = new Raytracer();
+  _raytracer->setRenderingInterface(this);
   _scene = new Scene();
 }
 
@@ -43,8 +46,10 @@ ClusterServer::~ClusterServer()
       _tcpServer->close();
       delete _tcpServer;
     }
-  if (_scene)
-    delete _scene;
+  if (_raytracer)
+    delete _raytracer;
+  if (_raytracedImage)
+    delete _raytracedImage;
 }
 
 int        ClusterServer::getPort(void)
@@ -149,10 +154,13 @@ void	ClusterServer::newConnection()
 
 void	ClusterServer::clientDisconnect()
 {
+  if (getStatus() == ServerEntry::RAYTRACING && _raytracer)
+    _raytracer->stopRendering();
   _interface
     ->logServerConsoleMessage(tr("<span>Info: Client disconnected</span>")
 			      .toStdString());
   setStatus(ServerEntry::FREE);
+  setProgress(0);
   _currentRequest = -1;
   _currentSessionId = -1;
   _currentSection = QRect(-1, -1, -1, -1);
@@ -170,6 +178,7 @@ void	ClusterServer::dataReceived(void)
 {
   if (!isConnectedToClient())
     return ;
+  setStatus(ServerEntry::PROCESSING_REQUEST);
   QDataStream	stream(_currentClientSocket);
   if (_currentRequest == -1)
     {
@@ -181,12 +190,18 @@ void	ClusterServer::dataReceived(void)
   if (_currentRequest == ServerEntry::REQUEST_SECTION)
     {
       if (receiveSectionRequest())
-	_currentRequest = -1;
+	{
+	  _currentRequest = -1;
+	  _currentPacketSize = 0;
+	}
     }
   else if (_currentRequest == ServerEntry::SEND_SESSION_DATAS)
     {
       if (receiveSessionDatas())
-	_currentRequest = -1;
+	{
+	  _currentRequest = -1;
+	  _currentPacketSize = 0;
+	}
     }
 }
 
@@ -202,6 +217,8 @@ bool		ClusterServer::receiveSectionRequest(void)
   stream >> _currentSection;
   if (sessionId != _currentSessionId || !_readyToRaytrace)
     requestSessionData();
+  else
+    processSectionRequest();
   return (true);
 }
 
@@ -219,17 +236,23 @@ bool		ClusterServer::receiveSessionDatas(void)
 {
   QDataStream	stream(_currentClientSocket);
 
+  setStatus(ServerEntry::DOWNLOADING_RESOURCES);
   if (_currentPacketSize == 0)
     {
       if (_currentClientSocket->bytesAvailable() < sizeof(int))
 	return (false);
       stream >> _currentPacketSize;
+      setProgress(0);
     }
   if (_currentClientSocket->bytesAvailable() < _currentPacketSize)
-    return (false);
+    {
+      setProgress(_currentClientSocket->bytesAvailable() / _currentPacketSize);
+      return (false);
+    }
   QByteArray	resourcesBytes;
   QByteArray	renderingConfBytes;
   QString	sceneFilename;
+  stream >> _currentSessionId;
   stream >> resourcesBytes;
   stream >> renderingConfBytes;
   stream >> sceneFilename;
@@ -237,12 +260,60 @@ bool		ClusterServer::receiveSessionDatas(void)
   Resources::getInstance()->createResourcesInTemporaryDir();
   _renderingConf = RenderingConfiguration(renderingConfBytes);
   if (_renderingConf._cubeMapPath != "")
-    {
-      _renderingConf.setCubeMap(new CubeMap(_renderingConf._cubeMapPath),
-				_renderingConf._cubeMapPath);
-    }
+    _renderingConf.setCubeMap(new CubeMap(_renderingConf._cubeMapPath),
+			      _renderingConf._cubeMapPath);
   _scene->loadFromFile(sceneFilename.toStdString(), _interface);
-  cout << _scene->getObjects().size() << endl;
+  _raytracer->setScene(*_scene);
+  _raytracer->setRenderingConfiguration(&_renderingConf);
   _readyToRaytrace = true;
+  processSectionRequest();
   return (true);
+}
+
+void	ClusterServer::processSectionRequest(void)
+{
+  if (!_readyToRaytrace)
+    return ;
+  setStatus(ServerEntry::RAYTRACING);
+  if (_raytracedImage)
+    delete _raytracedImage;
+  _raytracedImage = new QImage(_currentSection.width(),
+			       _currentSection.height(),
+			       QImage::Format_ARGB32);
+  _renderingConf.setSection(_currentSection);
+  _raytracer->launchRendering();
+}
+
+void	ClusterServer::pixelHasBeenRendered(int x, int y, Color color)
+{
+  if (_raytracedImage)
+    {
+      _raytracedImage->setPixel(x, y, QColor(color._r, color._g, color._b,
+					     color._a).rgba());
+      setProgress(_raytracer->getProgress() * 100);
+    }
+}
+
+void	ClusterServer::renderingHasFinished(void)
+{
+  if (!isConnectedToClient())
+    return ;
+  setStatus(ServerEntry::SENDING_RESPONSE);
+  {
+    QByteArray	packet;
+    QDataStream	stream(&packet, QIODevice::WriteOnly);
+    stream << (int)ClusterServer::SEND_RAYTRACE_RESPONSE;
+    _currentClientSocket->write(packet);
+  }
+  {
+    QByteArray	packet;
+    QDataStream	stream(&packet, QIODevice::WriteOnly);
+    stream << (int)0;
+    stream << _currentSection;
+    stream << *_raytracedImage;
+    stream.device()->seek(0);
+    stream << (int)(packet.size() - sizeof(int));
+    _currentClientSocket->write(packet);
+    setStatus(ServerEntry::WAITING_REQUEST);
+  }
 }

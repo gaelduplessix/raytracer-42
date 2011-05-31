@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:14:23 2011 gael jochaud-du-plessix
-// Last update Mon May 30 15:23:23 2011 gael jochaud-du-plessix
+// Last update Tue May 31 14:41:13 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SERVERENTRY_HPP_
@@ -26,8 +26,8 @@ public:
   static const int      FREE = 0;
   static const int      WAITING_REQUEST = 1;
   static const int      PROCESSING_REQUEST = 2;
-  static const int      DOWNLOADING_RESSOURCES = 3;
-  static const int      PROCESSING_RESSOURCES = 4;
+  static const int      DOWNLOADING_RESOURCES = 3;
+  static const int      PROCESSING_RESOURCES = 4;
   static const int      RAYTRACING = 5;
   static const int      SENDING_RESPONSE = 6;
 
@@ -67,6 +67,7 @@ private:
   QTcpSocket*		_socket;
   Point			_currentSection;
   int			_currentRequest;
+  int			_currentPacketSize;
 };
 
 #endif

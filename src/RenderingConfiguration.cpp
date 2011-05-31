@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Tue May 31 01:15:31 2011 gael jochaud-du-plessix
+// Last update Tue May 31 14:24:42 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -14,7 +14,7 @@
 
 RenderingConfiguration::RenderingConfiguration():
   _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(0),
-  _height(0), _currentCamera(0), _antialiasing(0),
+  _height(0), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
   _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
@@ -31,7 +31,20 @@ RenderingConfiguration::RenderingConfiguration():
   _reflection.enabled = false;
 }
 
-RenderingConfiguration::RenderingConfiguration(const string& stringClass)
+RenderingConfiguration::RenderingConfiguration(const string& stringClass):
+  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(0),
+  _height(0), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
+  _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
+  _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
+  _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
+  _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),
+  _ambientOcclusionSampling(0), _photonMappingEnabled(false),
+  _photonMappingSampling(0), _diffuseShadingEnabled(false),
+  _diffuseShadingSampling(0), _fieldDepthEnabled(false),
+  _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
+  _additiveAmbiantLighting(Color(0, 0, 0)),
+  _minimalAmbiantLightingEnabled(false), _minimalAmbiantLighting(0),
+  _kdTreeEnabled(false), _kdTreeDepth(10)
 {
   std::istringstream	ifs;
 
@@ -40,7 +53,20 @@ RenderingConfiguration::RenderingConfiguration(const string& stringClass)
   ia >> *this;
 }
 
-RenderingConfiguration::RenderingConfiguration(const QByteArray& bytes)
+RenderingConfiguration::RenderingConfiguration(const QByteArray& bytes):
+  _3DEnabled(false), _3DMode(-1), _eyesSpace(1), _nbThreads(2), _width(0),
+  _height(0), _section(0, 0, 0, 0), _currentCamera(0), _antialiasing(0),
+  _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
+  _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
+  _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
+  _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),
+  _ambientOcclusionSampling(0), _photonMappingEnabled(false),
+  _photonMappingSampling(0), _diffuseShadingEnabled(false),
+  _diffuseShadingSampling(0), _fieldDepthEnabled(false),
+  _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
+  _additiveAmbiantLighting(Color(0, 0, 0)),
+  _minimalAmbiantLightingEnabled(false), _minimalAmbiantLighting(0),
+  _kdTreeEnabled(false), _kdTreeDepth(10)
 {
   string		stringClass(bytes.data(), bytes.size());
   std::istringstream	ifs;
@@ -83,6 +109,11 @@ int	RenderingConfiguration::getWidth(void) const
 int	RenderingConfiguration::getHeight(void) const
 {
   return (_height);
+}
+
+QRect	RenderingConfiguration::getSection(void) const
+{
+  return (_section);
 }
 
 int	RenderingConfiguration::getCurrentCamera(void) const
@@ -230,11 +261,18 @@ getRenderingSamplingMethod(void) const
 void	RenderingConfiguration::setWidth(int width)
 {
   _width = width;
+  _section.setWidth(width);
 }
 
-void	RenderingConfiguration::setHeight(int width)
+void	RenderingConfiguration::setHeight(int height)
 {
-  _height = width;
+  _height = height;
+  _section.setHeight(height);
+}
+
+void	RenderingConfiguration::setSection(const QRect& section)
+{
+  _section = section;
 }
 
 void	RenderingConfiguration::setCurrentCamera(int id)
