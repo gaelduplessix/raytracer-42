@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 31 01:04:45 2011 gael jochaud-du-plessix
+// Last update Tue May 31 13:50:31 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1122,13 +1122,17 @@ void			Scene::_parse3dsFile(QDomNode n)
 	    mat->setTexture(NULL);
 	  this->_materials.push_back(mat);
 	}
+
 	Object		*obj = new Object();
+	int		totalFaces = 0;
+
 	for (unsigned int i=0; i<meshes.size(); i++)
 	{
 	  vector<Vector>	faces = meshes[i]->getFaces();
 	  vector<Vector>	vertices = meshes[i]->getVertices();
 	  map<string, vector<int> > matFaces = meshes[i]->getMaterialFaces();
 
+	  totalFaces += faces.size();
 	  for (unsigned int j=0; j<faces.size(); j++)
 	  {
 	    Triangle *triangle = new Triangle(obj,
@@ -1140,6 +1144,7 @@ void			Scene::_parse3dsFile(QDomNode n)
 	  }
 	}
 	this->_objects.push_back(obj);
+	this->_putInfo(QObject::tr("%1 faces retreived").arg(totalFaces));
       }
     }
   }
