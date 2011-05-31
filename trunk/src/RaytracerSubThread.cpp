@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 19 15:41:28 2011 gael jochaud-du-plessix
-// Last update Tue May 31 12:50:42 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 00:36:26 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
@@ -17,8 +17,9 @@ RaytracerSubThread::RaytracerSubThread(RaytracerThread* mainThread,
 				       double startProgress,
 				       double endProgress):
   _currentPixel(0), _currentPixelInLine(-1), _currentLine(-1),
-  _mainThread(mainThread), _startProgress(startProgress),
-  _endProgress(endProgress), _currentProgress(startProgress), _launched(false)
+  _currentProgress(startProgress), _mainThread(mainThread),
+  _startProgress(startProgress), _endProgress(endProgress),
+  _launched(false)
 {
   _currentPixel = _startProgress
     * (mainThread->_raytracer->getRenderingConfiguration()

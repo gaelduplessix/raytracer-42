@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Tue May 31 23:21:05 2011 loick michard
+// Last update Wed Jun  1 01:45:06 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -78,6 +78,66 @@ Raytracer::getRenderingInterface(void) const
   return (_interface);
 }
 
+QByteArray    Raytracer::saveState(void)
+{
+  QByteArray	data;
+  QDataStream	stream(&data, QIODevice::ReadWrite);
+
+  stream << (int)_thread->_raytracedPixels.size();
+  for (uint i = 0, l = _thread->_raytracedPixels.size(); i < l; i++)
+    {
+      stream << (int)_thread->_raytracedPixels[0].size();
+      for (uint j = 0, m = _thread->_raytracedPixels[i].size(); j < m; j++)
+	stream << (bool)_thread->_raytracedPixels[i][j];
+    }
+  int size;
+  size = _thread->_subThreads.size();
+  stream << size;
+  for (int i = 0; i < size; i++)
+    {
+      stream << (double)_thread->_subThreads[i]->_currentProgress;
+      stream << (int)_thread->_subThreads[i]->_currentPixel;
+      stream << (int)_thread->_subThreads[i]->_currentPixelInLine;
+      stream << (int)_thread->_subThreads[i]->_currentLine;
+    }
+  return (data);
+}
+
+void  Raytracer::restoreState(QByteArray& data)
+{
+  QDataStream	stream(&data, QIODevice::ReadWrite);
+  int		size;
+
+  stream >> size;
+  _thread->_raytracedPixels.resize(size);
+  for (uint i = 0, l = _thread->_raytracedPixels.size(); i < l; i++)
+    {
+      stream >> size;
+      _thread->_raytracedPixels[i].resize(size);
+      for (int j = 0; j < size; j++)
+	{
+	  bool value;
+	  stream >> value;
+	  _thread->_raytracedPixels[i][j] = value;
+	}
+    }
+  int nbThreads;
+  stream >> nbThreads;
+  _thread->_subThreads.resize(nbThreads);
+  for (int i = 0; i < nbThreads; i++)
+    {
+      _thread->_subThreads[i] =
+	new RaytracerSubThread(_thread,
+			       i * 1.0 / nbThreads,
+			       (i + 1) * 1.0 / nbThreads);
+      stream >> (double&)_thread->_subThreads[i]->_currentProgress;
+      stream >> (int&)_thread->_subThreads[i]->_currentPixel;
+      stream >> (int&)_thread->_subThreads[i]->_currentPixelInLine;
+      stream >> (int&)_thread->_subThreads[i]->_currentLine;
+    }
+  _thread->_isRestored = true;
+}
+
 bool Raytracer::isPixelRaytraced(int x, int y)
 {
   QMutexLocker	lock(&_mutex);
@@ -91,9 +151,6 @@ bool Raytracer::isPixelRaytraced(int x, int y)
     }
   return (false);
 }
-
-#include "Object.hpp"
-#include "ObjectPrimitive.hpp"
 
 void
 Raytracer::launchRendering(void)

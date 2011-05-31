@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri Apr 29 12:07:49 2011 gael jochaud-du-plessix
-// Last update Tue May 31 13:38:39 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 00:53:20 2011 gael jochaud-du-plessix
 //
 
 #include <QMutexLocker>
@@ -15,8 +15,8 @@
 #include "RaytracerSubThread.hpp"
 
 RaytracerThread::RaytracerThread(Raytracer* raytracer):
-  _subThreads(), _launched(false), _isInit(false),
-  _raytracer(raytracer)
+  _launched(false), _isInit(false), _isRestored(false),
+  _raytracer(raytracer), _subThreads(0)
 {
 }
 
@@ -78,13 +78,30 @@ void	RaytracerThread::initBeforeLaunching(void)
   int	height = _raytracer->getRenderingConfiguration()->getHeight();
 
   _isInit = true;
-  _raytracedPixels.resize(width);
-  for (int i = 0; i < width; i++)
+  if (!_isRestored)
     {
-      _raytracedPixels[i].resize(height);
-      for (int j = 0; j < height; j++)
-	_raytracedPixels[i][j] = false;
+      _raytracedPixels.resize(width);
+      for (int i = 0; i < width; i++)
+	{
+	  _raytracedPixels[i].resize(height);
+	  for (int j = 0; j < height; j++)
+	    _raytracedPixels[i][j] = false;
+	}
+      for (unsigned int i = 0; i < _subThreads.size(); i++)
+	{
+	  if (_subThreads[i])
+	    delete _subThreads[i];
+	}
+      int nbThreads = _raytracer->getRenderingConfiguration()->getNbThreads();
+      _subThreads.resize(nbThreads);
+      for (int i = 0; i < nbThreads; i++)
+	{
+	  _subThreads[i] = new RaytracerSubThread(this,
+						  i * 1.0 / nbThreads,
+						  (i + 1) * 1.0 / nbThreads);
+	}
     }
+  _isRestored = false;
   if (_raytracer->getRenderingConfiguration()->isPhotonMappingEnabled())
     {
       _raytracer->_photonMap = new PhotonMap();
@@ -100,19 +117,6 @@ void	RaytracerThread::initBeforeLaunching(void)
 				       getRenderingConfiguration()->
 				       getKdTreeDepth());
       _raytracer->getRenderingInterface()->kdtreeGenerationHasFinished();
-    }
-  for (unsigned int i = 0; i < _subThreads.size(); i++)
-    {
-      if (_subThreads[i])
-	delete _subThreads[i];
-    }
-  int nbThreads = _raytracer->getRenderingConfiguration()->getNbThreads();
-  _subThreads.resize(nbThreads);
-  for (int i = 0; i < nbThreads; i++)
-    {
-      _subThreads[i] = new RaytracerSubThread(this,
-					      i * 1.0 / nbThreads,
-					      (i + 1) * 1.0 / nbThreads);
     }
 }
 

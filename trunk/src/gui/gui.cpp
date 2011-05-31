@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Tue May 31 18:55:49 2011 samuel olivier
+// Last update Wed Jun  1 01:09:53 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -354,8 +354,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
     _ui(new Ui::MainWindow), _isRendering(false), _pause(false),
     _sticon(new QSystemTrayIcon(QIcon("images/image.png"))),
     _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this)),
-    _clusterTimer(NULL),
-    _isConnected(false), _isMultiThreading(false)
+    _clusterTimer(NULL), _clusterClient(NULL), _isConnected(false),
+    _isMultiThreading(false), _restored(false)
 {
   _actionRealQuit->setShortcut(tr("Ctrl+Q"));
   _ui->setupUi(this);
@@ -406,13 +406,16 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(disconnect()));
   QObject::connect(_ui->_threads, SIGNAL(valueChanged(int)),
                    this, SLOT(threadsChange(int)));
-  _scene = createScene();
+  //_scene = createScene();
+  _scene = new Scene();
+  _scene->loadFromFile("scene_xml/default.xml", this);
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);
   this->setCameras();
   _timer = new QTimer();
   _timer->setInterval(50);
+  _timer->start();
   QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(drawWindow()));
   QObject::connect(_ui->action_Charger, SIGNAL(triggered()),
                    this, SLOT(loadScene()));

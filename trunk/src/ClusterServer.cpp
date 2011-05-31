@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Tue May 31 20:41:38 2011 gael jochaud-du-plessix
+// Last update Tue May 31 21:52:17 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -250,6 +250,7 @@ bool		ClusterServer::receiveSessionDatas(void)
       setProgress(_currentClientSocket->bytesAvailable() / _currentPacketSize);
       return (false);
     }
+  Resources::getInstance()->removeResourcesFiles();
   QByteArray	resourcesBytes;
   QByteArray	renderingConfBytes;
   QString	sceneFilename;

@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Tue May 31 20:39:39 2011 gael jochaud-du-plessix
+// Last update Tue May 31 22:43:14 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -17,7 +17,7 @@
 
 Resources*     Resources::_instance = NULL;
 
-Resources::Resources(void) : _resources(), _tmpResourceDir(""),
+Resources::Resources(void) : _resources(0), _tmpResourceDir(""),
 			     _inCluster(false)
 {
 }
@@ -166,7 +166,10 @@ void		Resources::removeResourcesFiles(void)
   int		l = _resources.size();
 
   for (int i = 0 ; i < l ; i++)
-    if (!QFile::remove(QString(_resources[i].getNewPathName().c_str())))
-      cerr << "Could not remove temporary file '" <<
-	_resources[i].getNewPathName() << "'.\n";
+    {
+      if (_resources[i].getNewPathName() != ""
+	  && !QFile::remove(QString(_resources[i].getNewPathName().c_str())))
+	cerr << "Could not remove temporary file '" <<
+	  _resources[i].getNewPathName() << "'.\n";
+    }
 }

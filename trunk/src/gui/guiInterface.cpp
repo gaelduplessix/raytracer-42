@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Tue May 31 19:17:08 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 01:38:46 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -13,7 +13,9 @@
 #include <QFileDialog>
 #include <QMutexLocker>
 #include <QSystemTrayIcon>
+
 #include "gui.hpp"
+#include "Resources.hpp"
 
 void	RaytracerGUI::openEditMaterialDialog()
 {
@@ -125,7 +127,7 @@ void    RaytracerGUI::renderingHasFinished(void)
       _endOfRendering = true;
       sendSuccessMessage(tr("Rendu termine").toStdString());
       _isRendering = false;
-      _timer->setSingleShot(true);
+      //_timer->setSingleShot(true);
       _ui->_progress->setHidden(true);
     }
 }
@@ -228,7 +230,7 @@ void    RaytracerGUI::startRender()
 	  _timer->setInterval(_preferencesDialogUi->_timer->value());
 	  _timer->start();
 	}
-      if (!_isRendering)
+      if (!_isRendering && !_restored)
 	{
 	  if (_image)
 	    delete _image;
@@ -245,6 +247,7 @@ void    RaytracerGUI::startRender()
 	sendMessage(tr("D&eacute;part du rendu").toStdString());
       _pause = false;
       _isRendering = true;
+      _restored = false;
       if (!(_isConnected && _clusterClient))
 	{
 	  try
@@ -298,34 +301,6 @@ void		RaytracerGUI::saveImage()
     }
 }
 
-void            RaytracerGUI::saveRender()
-{
-  if (_config)
-    {
-      QString file =
-        QFileDialog::getSaveFileName(this, tr("Enregistrer un rendu"),
-                                     QString(),
-                                     "*.rt", 0,
-                                     QFileDialog::DontUseNativeDialog);
-      if (file != "")
-        {
-	  string format;
-          format = file.toStdString();
-          format = format.substr(format.find(".") + 1);
-          if (format != "rt")
-            {
-              file += ".rt";
-            }
-	  string serial = _config->toStr();
-	  ofstream flux;
-
-	  flux.open(file.toStdString().c_str(), ios::out);
-	  flux << serial;
-	  flux.close();
-        }
-    }
-}
-
 void		RaytracerGUI::updateGUIConfig()
 {
   _ui->_mode->setCurrentIndex(_config->getRenderingSamplingMethod());
@@ -355,11 +330,13 @@ void		RaytracerGUI::updateGUIConfig()
   _ui->_reflection->setChecked(_config->isReflectionEnabled());
   _ui->_reflectionLimit->setValue(_config->getReflectionMaxDepth());
   _ui->_diffuseReflection->setChecked(_config->isReflectionDiffused());
-  _ui->_diffuseReflectionSampling->setValue(_config->getReflectionDiffusedSampling());
+  _ui->_diffuseReflectionSampling->setValue(_config
+					    ->getReflectionDiffusedSampling());
   _ui->_transparencyLimit->setValue(_config->getTransparencyMaxDepth());
   _ui->_transparency->setChecked(_config->isTransparencyEnabled());
 
-  _ui->_cubeMap->setChecked((_config->getCubeMap() && _config->_cubeMapPath != ""));
+  _ui->_cubeMap->setChecked((_config->getCubeMap()
+			     && _config->_cubeMapPath != ""));
   _ui->_cubeMapRepertory->setText( _config->_cubeMapPath.c_str());
 
   _backgroundColor->setRed(_config->getBackgroundColor()._r);
@@ -397,26 +374,139 @@ void		RaytracerGUI::updateGUIConfig()
   _ui->_photonMapping->setChecked(_config->isPhotonMappingEnabled());
 }
 
+void            RaytracerGUI::saveRender()
+{
+  if (!_config || !_scene || !_scene->isValid() || !setConfiguration())
+    {
+      QMessageBox error;
+      QMessageBox msgBox;
+      msgBox.setText(tr("Vous devez charger une scène et avoir une "
+			"configuration valide "
+			"pour pouvoir enregistrer un rendu"));
+      msgBox.setIcon(QMessageBox::Warning);
+      msgBox.setDefaultButton(QMessageBox::Ok);
+      msgBox.exec();
+      return ;
+    }
+  if (_config)
+    {
+      QString filename =
+        QFileDialog::getSaveFileName(this, tr("Enregistrer un rendu"),
+                                     QString(),
+                                     "*.rt", 0,
+                                     QFileDialog::DontUseNativeDialog);
+      if (filename != "")
+        {
+	  string format;
+          format = filename.toStdString();
+          format = format.substr(format.find(".") + 1);
+          if (format != "rt")
+	    filename += ".rt";	  
+	  QByteArray configBytes = _config->toByteArray();
+	  Resources::getInstance()->removeResourcesFiles();
+	  Resources::getInstance()->createResources(_scene, _config);
+	  QByteArray resourcesBytes = Resources::getInstance()->toByteArray();
+	  QFile	file(filename);
+	  file.open(QIODevice::ReadWrite);
+	  QDataStream	stream(&file);
+
+	  stream << (int)4242;
+	  stream << resourcesBytes;
+	  stream << configBytes;
+	  stream << _scene->getFilename();
+	  stream << *_image;
+	  if (!_clusterClient)
+	    {
+	      stream << (bool)false;
+	      QByteArray raytracerState = _raytracer->saveState();
+	      stream << raytracerState;
+	    }
+	  else
+	    {
+	      stream << (bool)true;
+	      QByteArray clusterState = _clusterClient->saveState();
+	      stream << clusterState;
+	    }
+	  file.close();
+	  sendSuccessMessage(tr("Rendu enregistré").toStdString());
+        }
+    }
+}
+
 void            RaytracerGUI::openRender()
 {
-  string render =
+  QString filename =
     QFileDialog::getOpenFileName(this, tr("Charger un rendu"),
 				 "", "*.rt;;", 0,
-				 QFileDialog::DontUseNativeDialog).
-    toStdString();
-  if (render != "")
+				 QFileDialog::DontUseNativeDialog);
+  if (filename != "")
     {
-      ifstream flux;
-      string object;
+      QFile	file(filename);
+      if (!file.open(QIODevice::ReadWrite))
+	{
+	  sendErrorMessage(tr("Impossible d'ouvrir le fichier de rendu")
+			   .toStdString());
+	  return ;
+	}
+      QDataStream	stream(&file);
 
-      flux.open(render.c_str(), ios::in);
-      while (getline(flux, object))
-	;
-      flux.close();
+      QByteArray resourcesBytes;
+      QByteArray configBytes;
+      QString sceneFilename;      
+      if (_image)
+	delete _image;
+      _image = new QImage();
+      int magic = 0;
+      stream >> magic;
+      if (magic != 4242)
+	{
+	  sendErrorMessage(tr("Fichier de rendu invalide").toStdString());
+	  file.close();
+	  return ;
+	}
+      stream >> resourcesBytes;
+      stream >> configBytes;
+      stream >> sceneFilename;
+      stream >> *_image;
+
       if (_config)
 	delete _config;
-      _config = new RenderingConfiguration(object);
+      _config = new RenderingConfiguration(configBytes);
+      Resources::getInstance()->isInCluster(true);
+      Resources::getInstance()->createResources(resourcesBytes);
+      Resources::getInstance()->createResourcesInTemporaryDir();
+      _scene->loadFromFile(sceneFilename.toStdString(), this);
+      if (_config->_cubeMapPath != "")
+	_config->setCubeMap(new CubeMap(_config->_cubeMapPath),
+			    _config->_cubeMapPath);
       _raytracer->setRenderingConfiguration(_config);
+
       this->updateGUIConfig();
-    }  
+      sendSuccessMessage(tr("Rendu restauré").toStdString());
+
+      bool cluster;
+      stream >> cluster;
+      if (!cluster)
+	{
+	  QByteArray raytracerState;
+	  stream >> raytracerState;
+	  _raytracer->restoreState(raytracerState);
+	}
+      else
+	{
+	  QByteArray clusterState;
+	  stream >> clusterState;
+	  _clusterClient = new ClusterClient(this, clusterState);
+	  _ui->_clusterDock->show();
+	  _ui->actionDeconnexion->setVisible(true);
+	  _ui->actionSe_connecter_un_serveur->setVisible(false);
+	  _isConnected = true;
+	  if (!_timer->isActive())
+	    _timer->start();
+	  _clusterTimer->start();
+	}
+
+      file.close();      
+      _restored = true;
+    }
 }
