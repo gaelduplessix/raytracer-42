@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Tue May 31 12:47:39 2011 samuel olivier
+// Last update Tue May 31 13:06:27 2011 samuel olivier
 //
 
 #include <QDir>
@@ -114,7 +114,7 @@ QByteArray	Resources::toByteArray(void)
   buffer = new char[length];
   ofs.read(buffer, length);
   QByteArray	res(buffer, length);
-  delete buffer;
+  delete[] buffer;
   return (res);
 }
 
