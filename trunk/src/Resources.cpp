@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Tue May 31 13:06:27 2011 samuel olivier
+// Last update Tue May 31 15:29:54 2011 samuel olivier
 //
 
 #include <QDir>
@@ -61,12 +61,12 @@ void	Resources::createResources(const Scene* scene,
   	{
   	  Material*	mat =
   	    objects[i]->_primitives[j]->getMaterial();
-  	  if (mat->_texture)
-  	    _resources.push_back(Resource(mat->_texture->getName()));
-  	  if (mat->_limitTexture)
-  	    _resources.push_back(Resource(mat->_limitTexture->getName()));
-  	  if (mat->_heightmap)
-  	    _resources.push_back(Resource(mat->_heightmap->getName()));
+  	  if (mat->_texture && mat->_texture->_type == 0)
+  	    _resources.push_back(Resource(mat->_texture->_name));
+  	  if (mat->_limitTexture && mat->_texture->_type == 0)
+  	    _resources.push_back(Resource(mat->_limitTexture->_name));
+  	  if (mat->_heightmap && mat->_texture->_type == 0)
+  	    _resources.push_back(Resource(mat->_heightmap->_name));
   	}
     }
   if (conf->getCubeMap())

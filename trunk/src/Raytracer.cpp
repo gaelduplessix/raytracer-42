@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Tue May 31 12:20:05 2011 loick michard
+// Last update Tue May 31 15:22:54 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -101,6 +101,9 @@ bool Raytracer::isPixelRaytraced(int x, int y)
   return (false);
 }
 
+#include "Object.hpp"
+#include "ObjectPrimitive.hpp"
+
 void
 Raytracer::launchRendering(void)
 {
@@ -114,6 +117,19 @@ Raytracer::launchRendering(void)
     throw (Raytracer::NO_INTERFACE_SPECIFIED);
   _thread->start();
   _interface->renderingHasBegun();
+  // vector<Object*>	objects = _scene->getObjects();
+  // int			nbObject = objects.size();
+
+  // for (int i = 0; i < nbObject ; i++)
+  //   {
+  //     vector<ObjectPrimitive*>	primitives = objects[i]->getPrimitives();
+  //     int			nbPrimitives = primitives.size();
+
+  //     for (int j = 0 ; j < 1 ; j++)
+  //     	cout << primitives[j]->getPosition().getX() << " "
+  //     	     << primitives[j]->getPosition().getY() << " "
+  //     	     << primitives[j]->getPosition().getZ() << "\n";
+  //   }
 }
 
 void
