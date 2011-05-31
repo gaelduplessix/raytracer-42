@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:17:38 2011 gael jochaud-du-plessix
-// Last update Tue May 31 01:38:25 2011 gael jochaud-du-plessix
+// Last update Tue May 31 18:53:34 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -18,14 +18,15 @@
 
 ServerEntry::ServerEntry():
   _clusterClient(NULL), _ip(), _port(0), _status(0), _progress(0),
-  _socket(NULL), _currentRequest(-1)
+  _socket(NULL), _currentRequest(-1), _currentPacketSize(0)
 {  
 }
 
 ServerEntry::ServerEntry(ClusterClient* clusterClient, QString ip, int port,
 			 int status, int progress):
   _clusterClient(clusterClient), _ip(ip), _port(port), _status(status),
-  _progress(progress), _socket(NULL), _currentRequest(-1)
+  _progress(progress), _socket(NULL), _currentRequest(-1),
+  _currentPacketSize(0)
 {  
 }
 
@@ -110,6 +111,8 @@ void		ServerEntry::onConnectionOpened(void)
 			    "<strong>%1:%2</strong>")
 			 .arg(_ip, QString(portStr.str().c_str()))
 			 .toStdString());
+  _currentRequest = -1;
+  _currentPacketSize = 0;
 }
 
 void		ServerEntry::onConnectionClosed(void)
@@ -121,6 +124,8 @@ void		ServerEntry::onConnectionClosed(void)
 		     "closed").arg(_ip, QString(portStr.str().c_str()))
 		  .toStdString());
   _clusterClient->removeFromServersList(this);
+  _currentRequest = -1;
+  _currentPacketSize = 0;
   deleteLater();
 }
 
@@ -134,6 +139,7 @@ bool		ServerEntry::requestSection(QRect section)
   stream << (int)_clusterClient->getSessionId();
   stream << section;
   _socket->write(packet);
+  setStatus(ServerEntry::RAYTRACING);
   return (true);
 }
 
@@ -148,6 +154,8 @@ void		ServerEntry::onDataReceived(void)
     }
   if (_currentRequest == ClusterServer::REQUEST_SESSION_DATA)
     {
+      _currentRequest = -1;
+      _currentPacketSize = 0;
       Resources::getInstance()
 	->createResources(_clusterClient->getScene(),
 			  &_clusterClient->getRenderingConfiguration());
@@ -164,12 +172,33 @@ void		ServerEntry::onDataReceived(void)
 	QByteArray  packet;
 	QDataStream stream(&packet, QIODevice::ReadWrite);
 	stream << (int)0;
+	stream << _clusterClient->getSessionId();
 	stream << resourcesBytes;
 	stream << renderingConfBytes;
 	stream << _clusterClient->getScene()->getFilename();
 	stream.device()->seek(0);
 	stream << (int)(packet.size() - sizeof(int));
 	_socket->write(packet);
+	setStatus(ServerEntry::DOWNLOADING_RESOURCES);
       }
+    }
+  else if (_currentRequest == ClusterServer::SEND_RAYTRACE_RESPONSE)
+    {
+      if (_currentPacketSize == 0)
+	{
+	  if (_socket->bytesAvailable() < sizeof(int))
+	    return ;
+	  stream >> _currentPacketSize;
+	}
+      if (_socket->bytesAvailable() < _currentPacketSize)
+	return ;
+      QRect	section;
+      QImage	image;
+      stream >> section;
+      stream >> image;
+      _clusterClient->processReceivedSection(section, image);
+      _currentRequest = -1;
+      _currentPacketSize = 0;
+      setStatus(ServerEntry::WAITING_REQUEST);
     }
 }

@@ -5,13 +5,14 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Tue May 31 01:13:21 2011 gael jochaud-du-plessix
+// Last update Tue May 31 12:42:15 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
 #define _RENDERINGCONFIGURATION_HPP_
 
 #include <QByteArray>
+#include <QRect>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <string>
@@ -57,6 +58,8 @@ public:
   void		setWidth(int width);
   int		getHeight(void) const;
   void		setHeight(int width);
+  QRect		getSection(void) const;
+  void		setSection(const QRect& section);
 
   int		getCurrentCamera(void) const;
   void		setCurrentCamera(int id);
@@ -149,6 +152,7 @@ private:
   int			_nbThreads;
   int			_width;
   int			_height;
+  QRect			_section;
   int			_currentCamera;
   int			_antialiasing;
   renderingSamplingMethod _renderingSamplingMethod;

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Fri May 27 00:43:11 2011 loick michard
+// Last update Tue May 31 16:56:14 2011 gael jochaud-du-plessix
 // Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
@@ -35,7 +35,6 @@ typedef struct			s_intersected_object
 
 class	Raytracer
 {
-
 public:
 
   const static int	NO_SCENE_SPECIFIED = 0;
@@ -65,6 +64,8 @@ public:
   void launchRendering();
   void stopRendering();
   void pauseRendering();
+
+  double	getProgress() const;
 
   Color		throwRay(Ray& ray);
   Color		renderPixel(double x, double y);

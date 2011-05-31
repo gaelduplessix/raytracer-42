@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Sun May 29 18:12:38 2011 gael jochaud-du-plessix
-// Last update Mon May 30 12:14:01 2011 gael jochaud-du-plessix
+// Last update Tue May 31 19:54:07 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterRenderingThread.hpp"
@@ -28,11 +28,15 @@ void	ClusterRenderingThread::run(void)
 	{
 	  QRect section;
 	  if (_clusterClient->getSectionToRaytrace(section))
-	    {
-	      if (server->requestSection(section))
-		server->setStatus(ServerEntry::PROCESSING_REQUEST);
-	    }
+	    server->requestSection(section);
+	  else if (_clusterClient->getSectionToRaytrace(section, true))
+	    server->requestSection(section);
 	}
       usleep(100);
     }
+}
+
+void	ClusterRenderingThread::stopRendering(void)
+{
+  _stopRendering = true;
 }

@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 30 17:45:20 2011 gael jochaud-du-plessix
-// Last update Mon May 30 21:02:52 2011 gael jochaud-du-plessix
+// Last update Tue May 31 17:36:52 2011 gael jochaud-du-plessix
 //
 
 #include "RegisterServerThread.hpp"
@@ -36,7 +36,7 @@ void	RegisterServerThread::run(void)
   _timer = new QTimer();
   connect(_timer, SIGNAL(timeout()), this,
 	  SLOT(registerToCentralServer()));
-  _timer->setInterval(1000);
+  _timer->setInterval(500);
   _timer->start();
   exec();
 }
