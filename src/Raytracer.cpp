@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Tue May 31 00:18:07 2011 loick michard
+// Last update Tue May 31 12:20:05 2011 loick michard
 //
 
 #include <stdio.h>
@@ -156,8 +156,7 @@ void		Raytracer::renderingLoop(double& progress,
       _otherEyes = true;
       Color otherColor = renderPixel(pixelToRender._x, pixelToRender._y); 
       _otherEyes = false;
-      pixelColor._g = otherColor._g;
-      pixelColor._b = otherColor._b;
+      pixelColor._r = otherColor._r;
     }
   
   progress = (double)(++thread->_currentPixel)
