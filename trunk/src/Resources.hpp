@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:03:25 2011 samuel olivier
-// Last update Tue May 31 01:12:53 2011 gael jochaud-du-plessix
+// Last update Tue May 31 12:38:19 2011 samuel olivier
 //
 
 #ifndef _RESOURCES_
