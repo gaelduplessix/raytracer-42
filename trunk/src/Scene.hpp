@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Wed Jun  1 16:55:40 2011 loick michard
+// Last update Wed Jun  1 22:14:16 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -21,6 +21,14 @@
 #include <QObject>
 #include <QtXml>
 #include <sstream>
+#include <lib3ds/file.h>
+#include <lib3ds/camera.h>
+#include <lib3ds/mesh.h>
+#include <lib3ds/node.h>
+#include <lib3ds/material.h>
+#include <lib3ds/matrix.h>
+#include <lib3ds/vector.h>
+#include <lib3ds/light.h>
 
 #include "CinemaCamera.hpp"
 #include "RenderingInterface.hpp"
@@ -143,7 +151,9 @@ private:
   Triangle*		_parseTriangle(QDomNode, QString, Object*);
   EquationPrimitive*	_parseEquation(QDomNode, QString, Object*);
   Parallelogram*	_parseParallelogram(QDomNode, QString, Object*);
-  void			_parse3dsFile(QDomNode);
+  void			_parse3dsFile(QDomNode, QString);
+  void			_parse3dsIntern(string, string);
+  void			_parse3dsLib3ds(string, string);
   void			_parseSett(QDomNode, QString);
   Material*		_getMaterialByName(QString);
   void			_parseLight(QDomNode);

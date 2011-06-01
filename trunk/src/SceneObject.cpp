@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue May 31 14:40:44 2011 melvin laplanche
+// Last update Wed Jun  1 23:21:21 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1032,7 +1032,8 @@ void			Scene::_parseObjectOptions(QDomNode	n)
     this->_objects.push_back(obj);
 }
 
-void			Scene::_parse3dsFile(QDomNode n)
+void			Scene::_parse3dsFile(QDomNode	n,
+					     QString	lib3ds)
 {
   string		filename;
   bool			hasFilename = false;
@@ -1064,7 +1065,8 @@ void			Scene::_parse3dsFile(QDomNode n)
       {
 	if (hasTextDir)
 	  this->_putWarning(QObject::tr("A a3ds has several textureDir, "
-					"the first defined will be used"), n);
+					"the first defined will be used"),
+			    n);
 	else
 	{
 	  textDir = _parseDir(n, "textureDir");
@@ -1081,71 +1083,200 @@ void			Scene::_parse3dsFile(QDomNode n)
     this->_putError(QObject::tr("An a3ds must have at leat a filename"), n);
   else if (this->_hasError == false)
   {
-    A3DSParser	a3ds(Resources::getInstance()
-		     ->getNewPathName(filename), this->_interface);
-    if (a3ds.hasError() == false)
+    if (lib3ds == "intern")
+      this->_parse3dsIntern(filename, textDir);
+    else
+      this->_parse3dsLib3ds(filename, textDir);
+  }
+}
+
+void		Scene::_parse3dsLib3ds(string	filename,
+				       string	textDir)
+{
+  Lib3dsFile	*file = lib3ds_file_load(filename.c_str());
+  int		nbFaces = 0;
+  Object	*obj = new Object();
+
+  if (file == NULL)
+  {
+    this->_putError(QObject::tr("Loading %1 failed.").arg(filename.c_str()));
+    return ;
+  }
+  for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
+    nbFaces += mesh->faces;
+  Lib3dsVector	*normals = new Lib3dsVector[nbFaces * 3];
+  int		finishedFaces = 0;
+  for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
+  {
+    lib3ds_mesh_calculate_normals(mesh, &normals[finishedFaces * 3]);
+    for (unsigned int currFace=0; currFace<mesh->faces; currFace++)
     {
-      this->_sceneFilenames.push_back(QString(filename.c_str()));
-      const vector<A3DSLight*>		lights = a3ds.getLights();
-      const vector<A3DSMaterial*>	materials = a3ds.getMaterials();
-      const vector<A3DSMesh*>		meshes = a3ds.getMeshes();
-      const char *color;
+      Lib3dsFace	*face = &mesh->faceL[currFace];
+      Point		x(mesh->pointL[face->points[0]].pos[0],
+			  mesh->pointL[face->points[0]].pos[1],
+			  mesh->pointL[face->points[0]].pos[2]);
+      Point		y(mesh->pointL[face->points[1]].pos[0],
+			  mesh->pointL[face->points[1]].pos[1],
+			  mesh->pointL[face->points[1]].pos[2]);
+      Point		z(mesh->pointL[face->points[2]].pos[0],
+			  mesh->pointL[face->points[2]].pos[1],
+			  mesh->pointL[face->points[2]].pos[2]);
+      Triangle *triangle = new Triangle(obj, x, NULL, y, z);
 
-      if (meshes.size() < 1)
-	this->_putError(QObject::tr("There is no meshes in %1")
-			.arg(filename.c_str()));
-      else
+      obj->addPrimitive(triangle);
+      ++finishedFaces;
+    }
+  }
+  this->_objects.push_back(obj);
+  lib3ds_file_free(file);
+}
+
+/*void		Scene::_parse3dsLib3ds(string	filename,
+				       string	textDir)
+{
+  Lib3dsFile	*file = NULL;
+
+  if ((file = lib3ds_file_load(filename.c_str())) == NULL)
+  {
+    this->_putError(QObject::tr("Loading %1 failed.").arg(filename.c_str()));
+    return ;
+  }
+  if (file->nodes == NULL)
+  {
+    Lib3dsNode	*node;
+
+    for (Lib3dsMesh *mesh = file->meshes; mesh != NULL; mesh = mesh->next)
+    {
+      node = lib3ds_node_new_object();
+      strcpy(node->name, mesh->name);
+      node->parent_id = LIB3DS_NO_PARENT;
+      lib3ds_file_insert_node(file, node);
+    }
+  }
+  lib3ds_file_eval(file, 1.0f);
+  lib3ds_file_eval(file, 0.);
+  for (Lib3dsNode *n = file->nodes; n!=NULL; n=n->next)
+  {
+    if (n->type == LIB3DS_OBJECT_NODE)
+    {
+      Lib3dsMesh	*mesh;
+      if (strcmp(n->name, "$$$DUMMY") == 0)
+	continue ;
+      mesh = lib3ds_file_mesh_by_name(file, n->data.object.morph);
+      if (mesh == NULL)
+	mesh = lib3ds_file_mesh_by_name(file, n->name);
+      if (!mesh->user.d)
       {
-	for (unsigned int i=0; i<materials.size(); i++)
 	{
-	  Material *mat = new Material(materials[i]->getName());
-	  string textureName;
+	  Lib3dsMaterial	*oldmat;
 
-	  color = materials[i]->getAmbientColor();
-	  mat->setColor(Color(color[0], color[1], color[2], color[3]));
-	  if (materials[i]->getTextureName().empty() == false)
+	  oldmat = (Lib3dsMaterial *)-1;
+
+	  lib3ds_mesh_calculate_normals(mesh, normalL);
+	  for (unsigned int p=0; p<mesh->faces; ++p)
 	  {
-	    if (textDir.empty() == false)
-	      textureName = textDir + "/" + materials[i]->getTextureName();
-	    else
-	      textureName = materials[i]->getTextureName();
-	    if (QFileInfo(textureName.c_str()).exists() == false)
+	    Lib3dsFace		*f = &mesh->faceL[p];
+	    Lib3dsMaterial	*mat = NULL;
+
+	    if (f->material[0])
+	      mat = lib3ds_file_material_by_name(file, f->material);
+	    if (mat != oldmat)
 	    {
-	      this->_putError(QObject::tr("texture %1 (a3ds) not found.")
-			      .arg(textureName.c_str()));
-	      delete mat;
-	      return ;
+	      if (mat)
+	      {
+		if (mat->texture1_map.name[0])
+		{
+		  Lib3dsTextureMap *tex = &mat->texture1_map;
+		  if (!tex->user.p)
+		  {
+		    char textname[1024];
+		    strcpy(textname, textDir.c_str());
+		    strcpy(textname, "/");
+		    strcpy(textname, tex->name);
+
+		    // create Material HERE
+		  }
+		}
+		oldmat = mat;
+	      }
 	    }
-	    mat->setTexture(new Texture(textureName));
 	  }
-	  else
-	    mat->setTexture(NULL);
-	  this->_materials.push_back(mat);
 	}
-
-	Object		*obj = new Object();
-	int		totalFaces = 0;
-
-	for (unsigned int i=0; i<meshes.size(); i++)
+	if (mesh->user.d)
 	{
-	  vector<Vector>	faces = meshes[i]->getFaces();
-	  vector<Vector>	vertices = meshes[i]->getVertices();
-	  map<string, vector<int> > matFaces = meshes[i]->getMaterialFaces();
-
-	  totalFaces += faces.size();
-	  for (unsigned int j=0; j<faces.size(); j++)
-	  {
-	    Triangle *triangle = new Triangle(obj,
-					      vertices[faces[j].getX()],
-					      _3dsgetFaceMat(j, matFaces),
-					      vertices[faces[j].getY()],
-					      vertices[faces[j].getZ()]);
-	    obj->addPrimitive(triangle);
-	  }
 	}
-	this->_objects.push_back(obj);
-	this->_putInfo(QObject::tr("%1 faces retreived").arg(totalFaces));
       }
+    }
+  }
+}*/
+
+void		Scene::_parse3dsIntern(string	filename,
+				       string	textDir)
+{
+  A3DSParser	a3ds(Resources::getInstance()
+		     ->getNewPathName(filename), this->_interface);
+  if (a3ds.hasError() == false)
+  {
+    this->_sceneFilenames.push_back(QString(filename.c_str()));
+    const vector<A3DSLight*>		lights = a3ds.getLights();
+    const vector<A3DSMaterial*>		materials = a3ds.getMaterials();
+    const vector<A3DSMesh*>		meshes = a3ds.getMeshes();
+    const char *color;
+
+    if (meshes.size() < 1)
+      this->_putError(QObject::tr("There is no meshes in %1")
+		      .arg(filename.c_str()));
+    else
+    {
+      for (unsigned int i=0; i<materials.size(); i++)
+      {
+	Material *mat = new Material(materials[i]->getName());
+	string textureName;
+
+	color = materials[i]->getAmbientColor();
+	mat->setColor(Color(color[0], color[1], color[2], color[3]));
+	if (materials[i]->getTextureName().empty() == false)
+	{
+	  if (textDir.empty() == false)
+	    textureName = textDir + "/" + materials[i]->getTextureName();
+	  else
+	    textureName = materials[i]->getTextureName();
+	  if (QFileInfo(textureName.c_str()).exists() == false)
+	  {
+	    this->_putError(QObject::tr("texture %1 (a3ds) not found.")
+			    .arg(textureName.c_str()));
+	    delete mat;
+	    return ;
+	  }
+	  mat->setTexture(new Texture(textureName));
+	}
+	else
+	  mat->setTexture(NULL);
+	this->_materials.push_back(mat);
+      }
+
+      Object		*obj = new Object();
+      int		totalFaces = 0;
+
+      for (unsigned int i=0; i<meshes.size(); i++)
+      {
+	vector<Vector>	faces = meshes[i]->getFaces();
+	vector<Vector>	vertices = meshes[i]->getVertices();
+	map<string, vector<int> > matFaces = meshes[i]->getMaterialFaces();
+
+	totalFaces += faces.size();
+	for (unsigned int j=0; j<faces.size(); j++)
+	{
+	  Triangle *triangle = new Triangle(obj,
+					    vertices[faces[j].getX()],
+					    _3dsgetFaceMat(j, matFaces),
+					    vertices[faces[j].getY()],
+					    vertices[faces[j].getZ()]);
+	  obj->addPrimitive(triangle);
+	}
+      }
+      this->_objects.push_back(obj);
+      this->_putInfo(QObject::tr("%1 faces retreived").arg(totalFaces));
     }
   }
 }
@@ -1172,6 +1303,7 @@ void			Scene::_parseObject(QDomNode n)
   QDomNamedNodeMap	nodeMap;
   QString		name;
   QString		material;
+  QString		lib3ds;
 
   while (n.isNull() == false && this->_hasError == false)
   {
@@ -1192,7 +1324,22 @@ void			Scene::_parseObject(QDomNode n)
 	return;
       }
       if (n.nodeName() == "a3ds")
-	this->_parse3dsFile(n.firstChild());
+      {
+	if (n.hasAttributes() == true
+	    && n.attributes().contains("lib") == true)
+	{
+	  lib3ds = n.attributes().namedItem("lib").nodeValue();
+	  if (lib3ds != "lib3ds" || lib3ds != "intern")
+	  {
+	    this->_putError(QObject::tr("The lib used for the a3ds element "
+					"is not supported"), n);
+	    return ;
+	  }
+	}
+	else
+	  lib3ds = "intern";
+	this->_parse3dsFile(n.firstChild(), lib3ds);
+      }
       else if (n.nodeName() == "parallelepipede")
       {
 	if (n.hasAttributes() == false

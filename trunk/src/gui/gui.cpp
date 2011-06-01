@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed Jun  1 18:30:15 2011 loick michard
+// Last update Wed Jun  1 23:22:51 2011 melvin laplanche
 //
 
 #include <QApplication>
@@ -51,7 +51,7 @@ Scene           *createScene()
   *reflection = mat;
   reflection->setTransmissionCoeff(1);
   reflection->setRefractionIndex(1.4);
-  //reflection->setLimitTexture(new Texture("stripes.png"));  
+  //reflection->setLimitTexture(new Texture("stripes.png"));
   // Material      refraction = mat;
   // refraction.setTransmissionCoeff(0);
   // refraction.setRefractionIndex(1.33);
@@ -302,7 +302,7 @@ void RaytracerGUI::drawWindow()
       interval.time -= _progressTime.time;
       struct timeb remain;
       double mult = (double)((_config->getWidth() *
-			      _config->getHeight()) - _nbRender) / 
+			      _config->getHeight()) - _nbRender) /
 	((_nbProgress == 0) ? 1 : _nbProgress);
       remain.millitm = interval.millitm * mult;
       remain.time = interval.time * mult + 23 * 3600;
@@ -318,7 +318,7 @@ void RaytracerGUI::drawWindow()
       remainString += tr("s");
       _ui->_ellapse->setText(remainString);
       if (_isConnected)
-	_ui->_progressBar->setValue(((double)_nbRender / 
+	_ui->_progressBar->setValue(((double)_nbRender /
 				    (_config->getWidth() *
 				     _config->getHeight())) * 100);
       else
@@ -349,7 +349,7 @@ void RaytracerGUI::threadsChange(int i)
 
 RaytracerGUI::RaytracerGUI(QWidget *parent)
   : QMainWindow(parent), _config(new RenderingConfiguration()),
-    _raytracer(new Raytracer()), _backgroundColor(new QColor(0, 0, 0)), 
+    _raytracer(new Raytracer()), _backgroundColor(new QColor(0, 0, 0)),
     _ambiantColor(new QColor(255, 255, 255)), _image(NULL),
     _cubeMap(NULL), _scene(NULL), _pixmap(new QPixmap()),
     _ui(new Ui::MainWindow), _isRendering(false), _pause(false),
@@ -402,7 +402,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
   QObject::connect(_ui->actionSe_connecter_un_serveur, SIGNAL(triggered()),
                    this, SLOT(connectToCluster()));
   QObject::connect(_ui->actionEditMaterial, SIGNAL(triggered()),
-                   this, SLOT(openEditMaterialDialog())); 
+                   this, SLOT(openEditMaterialDialog()));
   QObject::connect(_ui->actionDeconnexion, SIGNAL(triggered()),
                    this, SLOT(disconnect()));
   QObject::connect(_ui->_threads, SIGNAL(valueChanged(int)),
@@ -447,7 +447,7 @@ void		gui(int ac, char **av)
   QApplication	app(ac, av);
 
   QString	locale = QLocale::system().name().section('_', 0, 0);
- 
+
   QTranslator	translator;
   translator.load(QString("raytracer-42_") + locale);
   app.installTranslator(&translator);
