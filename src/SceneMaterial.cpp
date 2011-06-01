@@ -5,10 +5,11 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Wed Jun  1 18:51:19 2011 loick michard
+// Last update Wed Jun  1 19:57:22 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
+#include "CheckerBoard.hpp"
 
 void			Scene::_parseNormalDef(QDomNode	n,
 					       Material	*mat)
@@ -306,7 +307,7 @@ Texture*			Scene::_parseTexture(QDomNode	n,
 		    n);
     return perlin;
   }
-  if (this->_checkContentIsSingleText(n, obj_name))
+  if (!this->_checkContentIsSingleText(n, obj_name))
     return perlin;
   attrValue = n.attributes().namedItem("type").nodeValue();
   value = n.toElement().text();
@@ -316,6 +317,8 @@ Texture*			Scene::_parseTexture(QDomNode	n,
       perlin->setMarbleProperties();
     else if (value == "wood")
       perlin->setWoodProperties();
+    else if (value == "checkerboard")
+      return (new CheckerBoard());
     else if (value != "perlin")
       this->_putError(QObject::tr("%1 is not a valid texture").arg(value), n);
     return perlin;
