@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Wed Jun  1 01:45:06 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 13:39:34 2011 loick michard
 //
 
 #include <stdio.h>
@@ -135,7 +135,8 @@ void  Raytracer::restoreState(QByteArray& data)
       stream >> (int&)_thread->_subThreads[i]->_currentPixelInLine;
       stream >> (int&)_thread->_subThreads[i]->_currentLine;
     }
-  _thread->_isRestored = true;
+  if (nbThreads > 0)
+    _thread->_isRestored = true;
 }
 
 bool Raytracer::isPixelRaytraced(int x, int y)
@@ -672,11 +673,11 @@ Color		Raytracer::calcAmbiantLight(const Point& intersectPoint)
     return (Color(0, 0, 0));
   int			mapSize = _photonMap->_map.size();
   Color			res(0, 0, 0);
-  vector<Photon*>	nearest;
+  vector<Photon>	nearest;
   double		maxDist = 0;;
   double		aire;
   int			newSize;
-
+  
   _photonMap->getNearestPhotons(nearest,
   				intersectPoint,
   				0.001010101 * mapSize + 30, 2);
@@ -686,9 +687,9 @@ Color		Raytracer::calcAmbiantLight(const Point& intersectPoint)
   newSize = nearest.size();
   for (int i = 0 ; i < newSize ; i++)
     {
-      if (nearest[i]->_dist > maxDist)
-	maxDist = nearest[i]->_dist;
-      res += nearest[i]->_color;
+      if (nearest[i]._dist > maxDist)
+	maxDist = nearest[i]._dist;
+      res += nearest[i]._color;
     }
   if (newSize > 0)
     {

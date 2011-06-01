@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 14:33:18 2011 samuel olivier
-// Last update Tue May 31 23:17:50 2011 loick michard
+// Last update Wed Jun  1 11:10:46 2011 loick michard
 //
 
 #include <algorithm>
@@ -168,23 +168,23 @@ PhotonMapNode*	PhotonMap::generateKdTree(vector<Photon> photons,
   return (node);
 }
 
-void    PhotonMap::getNodePhotons(vector<Photon*>& nearest,
+void    PhotonMap::getNodePhotons(vector<Photon>& nearest,
 				  const Point& intersectPoint,
 				  double radius, PhotonMapNode *node)
 {
   if (node)
     {
-      node->medianPhoton._dist = 
+      double dist = 
 	(node->medianPhoton._position._x - intersectPoint._x) *
 	(node->medianPhoton._position._x - intersectPoint._x) +
 	(node->medianPhoton._position._y - intersectPoint._y) *
 	(node->medianPhoton._position._y - intersectPoint._y) +
 	(node->medianPhoton._position._z - intersectPoint._z) *
 	(node->medianPhoton._position._z - intersectPoint._z);
-      if (node->medianPhoton._dist < 
-	  radius * radius)
+      if (dist < radius * radius)
 	{
-	  nearest.push_back(&node->medianPhoton);
+	  nearest.push_back(node->medianPhoton);
+	  nearest.back()._dist = sqrt(dist);
 	  getNodePhotons(nearest, intersectPoint, 
 			 radius, node->leftChild);
 	  getNodePhotons(nearest, intersectPoint, 
@@ -204,16 +204,15 @@ void    PhotonMap::getNodePhotons(vector<Photon*>& nearest,
 	    getNodePhotons(nearest, intersectPoint,
 			   radius, node->leftChild);
 	}
-      node->medianPhoton._dist = sqrt(node->medianPhoton._dist);
     }
 }
 
-bool	sortPhoton(Photon* p1, Photon* p2)
+bool	sortPhoton(Photon p1, Photon p2)
 {
-  return (p1->_dist < p2->_dist);
+  return (p1._dist < p2._dist);
 }
 
-void	PhotonMap::getNearestPhotons(vector<Photon*>& nearest,
+void	PhotonMap::getNearestPhotons(vector<Photon>& nearest,
 				     const Point& intersectPoint,
 				     int n, double radius)
 {
