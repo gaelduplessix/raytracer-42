@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Tue May 31 23:42:54 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 18:26:23 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -19,7 +19,8 @@ RenderingConfiguration::RenderingConfiguration():
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
   _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),
-  _ambientOcclusionSampling(0), _photonMappingEnabled(false),
+  _ambientOcclusionSampling(0), _ambientOcclusionMaxDist(4),
+  _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseShadingEnabled(false),
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
   _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
@@ -37,8 +38,9 @@ RenderingConfiguration::RenderingConfiguration(const string& stringClass):
   _renderingSamplingMethod(RSM_LINEAR_HORIZONTAL),
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
-  _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),
-  _ambientOcclusionSampling(0), _photonMappingEnabled(false),
+  _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),  
+  _ambientOcclusionSampling(0), _ambientOcclusionMaxDist(4),
+  _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseShadingEnabled(false),
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
   _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
@@ -60,7 +62,8 @@ RenderingConfiguration::RenderingConfiguration(const QByteArray& bytes):
   _exposure(1.0), _directLighting(true), _directLightingCoeff(1),
   _diffuseLighting(true), _specularLighting(true), _cubeMap(NULL),
   _backgroundColor(Color(0, 0, 0)), _ambientOcclusionEnabled(false),
-  _ambientOcclusionSampling(0), _photonMappingEnabled(false),
+  _ambientOcclusionSampling(0), _ambientOcclusionMaxDist(4),
+  _photonMappingEnabled(false),
   _photonMappingSampling(0), _diffuseShadingEnabled(false),
   _diffuseShadingSampling(0), _fieldDepthEnabled(false),
   _fieldDepthSampling(0), _additiveAmbiantLightingEnabled(false),
@@ -200,6 +203,11 @@ bool	RenderingConfiguration::isAmbientOcclusionEnabled(void) const
 int	RenderingConfiguration::getAmbientOcclusionSampling(void) const
 {
   return (_ambientOcclusionSampling);
+}
+
+double	RenderingConfiguration::getAmbientOcclusionMaxDist(void) const
+{
+  return (_ambientOcclusionMaxDist);
 }
 
 bool	RenderingConfiguration::isPhotonMappingEnabled(void) const
@@ -372,6 +380,11 @@ void	RenderingConfiguration::setBackgroundColor(const Color& color)
 void	RenderingConfiguration::setAmbientOcclusionEnabled(bool enabled)
 {
   _ambientOcclusionEnabled = enabled;
+}
+
+void	RenderingConfiguration::setAmbientOcclusionMaxDist(double dist)
+{
+  _ambientOcclusionMaxDist = dist;
 }
 
 void	RenderingConfiguration::setAmbientOcclusionSampling(int sampling)

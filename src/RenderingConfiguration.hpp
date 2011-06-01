@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 13:51:17 2011 loick michard
-// Last update Tue May 31 12:42:15 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 18:22:58 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RENDERINGCONFIGURATION_HPP_
@@ -106,6 +106,9 @@ public:
   void		setAmbientOcclusionEnabled(bool enabled = 1);
   void		setAmbientOcclusionSampling(int sampling);
 
+  void		setAmbientOcclusionMaxDist(double dist);
+  double	getAmbientOcclusionMaxDist(void) const;
+
   bool		isPhotonMappingEnabled(void) const;
   int		getPhotonMappingSampling(void) const;
   void		setPhotonMappingEnabled(bool enabled= 1);
@@ -167,6 +170,7 @@ private:
   Color			_backgroundColor;
   bool			_ambientOcclusionEnabled;
   int			_ambientOcclusionSampling;
+  double		_ambientOcclusionMaxDist;
   bool                  _photonMappingEnabled;
   int                   _photonMappingSampling;
   bool                  _diffuseShadingEnabled;
@@ -208,6 +212,7 @@ void			RenderingConfiguration::serialize(Archive& ar,
     ar & _backgroundColor;
     ar & _ambientOcclusionEnabled;
     ar & _ambientOcclusionSampling;
+    ar & _ambientOcclusionMaxDist;
     ar & _photonMappingEnabled;
     ar & _photonMappingSampling;
     ar & _diffuseShadingEnabled;
