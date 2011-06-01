@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 18:30:51 2011 melvin laplanche
-// Last update Tue May 31 18:14:30 2011 melvin laplanche
+// Last update Wed Jun  1 15:51:31 2011 melvin laplanche
 
 #include "A3DSParser.hpp"
 
@@ -204,6 +204,7 @@ void		A3DSParser::_parseObject(A3DSChunk	parent)
 	{
 	  cerr << "Unsused unknown chunk :" << hex << cc.getId();
 	  cerr << " (" << dec << cc.getId() << ")" << endl;
+	  //this->_parseObject(c);
 	}
       }
     }

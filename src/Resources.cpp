@@ -1,11 +1,11 @@
 //
 // Resources.cpp for raytracer in /home/olivie_a//rendu/cpp/raytracer-42
-// 
+//
 // Made by samuel olivier
 // Login   <olivie_a@epitech.net>
-// 
+//
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Wed Jun  1 01:57:08 2011 samuel olivier
+// Last update Wed Jun  1 13:43:36 2011 melvin laplanche
 //
 
 #include <QDir>
@@ -35,7 +35,7 @@ void		Resources::setResources(const vector<Resource>& resources)
 void		Resources::createResources(const string& stringClass)
 {
   istringstream	ifs;
-
+  cout << stringClass << endl;
   ifs.str(stringClass);
   boost::archive::text_iarchive ia(ifs);
   ia >> *this;
@@ -115,6 +115,7 @@ QByteArray	Resources::toByteArray(void)
   ofs.read(buffer, length);
   QByteArray	res(buffer, length);
   delete[] buffer;
+  cout << string(res.data() , res.size()) << endl;
   return (res);
 }
 
