@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Tue May 31 22:43:14 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 01:57:08 2011 samuel olivier
 //
 
 #include <QDir>
@@ -168,7 +168,7 @@ void		Resources::removeResourcesFiles(void)
   for (int i = 0 ; i < l ; i++)
     {
       if (_resources[i].getNewPathName() != ""
-	  && !QFile::remove(QString(_resources[i].getNewPathName().c_str())))
+	  && !QFile::remove(QString((getTmpResourceDir() + "/" + _resources[i].getNewPathName()).c_str())))
 	cerr << "Could not remove temporary file '" <<
 	  _resources[i].getNewPathName() << "'.\n";
     }

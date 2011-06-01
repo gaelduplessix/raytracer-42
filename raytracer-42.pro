@@ -10,6 +10,7 @@ OBJECTS_DIR=./objects
 LIBS=-lboost_serialization
 MOC_DIR=moc
 UI_HEADERS_DIR=uiHeaders
+TRANSLATIONS=raytracer-42_en.ts raytracer-42_fr.ts
 TEMPLATE = app
 TARGET = 
 DEPENDPATH += src src/equation-solver src/gui

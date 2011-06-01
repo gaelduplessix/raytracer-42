@@ -1514,7 +1514,7 @@ border-color: rgb(108, 108, 108);</string>
      <normaloff>:/images/network-workgroup.png</normaloff>:/images/network-workgroup.png</iconset>
    </property>
    <property name="text">
-    <string>Se &amp;connecter à un cluster</string>
+    <string comment="test">Se &amp;connecter à un cluster</string>
    </property>
    <property name="iconText">
     <string>Clustering</string>
