@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 18:56:38 2011 melvin laplanche
-// Last update Fri May 27 22:42:35 2011 loick michard
+// Last update Wed Jun  1 19:03:25 2011 loick michard
 //
 
 #include "Scene.hpp"
@@ -172,7 +172,7 @@ void			Scene::_parseCamera(QDomNode n)
 	this->_parseCameraCinema(n.firstChild(), name);
       else
       {
-	this->_putError(QObject::tr("%s is not a valid camera type")
+	this->_putError(QObject::tr("%1 is not a valid camera type")
 			.arg(n.attributes().namedItem("type").nodeValue()), n);
 	return ;
       }
