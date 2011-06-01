@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 30 17:06:44 2011 loick michard
-// Last update Mon May 30 18:54:09 2011 loick michard
+// Last update Wed Jun  1 16:01:00 2011 loick michard
 //
 
 #include "gui.hpp"

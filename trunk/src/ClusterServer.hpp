@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 13:51:14 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 16:30:57 2011 loick michard
 //
 
 #ifndef _CLUSTERSERVER_HPP_
@@ -36,7 +36,8 @@ public:
   static const int	REQUEST_SESSION_DATA = 0;
   static const int	SEND_RAYTRACE_RESPONSE = 1;
 
-  ClusterServer(RenderingInterface* interface, string url, int port);
+  ClusterServer(RenderingInterface* interface, string url, int port,
+		int interval, int threads);
   ~ClusterServer();
 
   QUrl&			getCentralServerUrl(void);
@@ -87,6 +88,7 @@ private:
   RenderingConfiguration _renderingConf;
   bool			_readyToRaytrace;
   QImage*		_raytracedImage;
+  int			_threads;
 };
 
 #endif
