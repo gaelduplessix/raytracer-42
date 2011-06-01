@@ -264,7 +264,7 @@ border-color: rgb(108, 108, 108);</string>
         <enum>QFrame::Plain</enum>
        </property>
        <property name="currentIndex">
-        <number>4</number>
+        <number>0</number>
        </property>
        <property name="tabSpacing">
         <number>0</number>
