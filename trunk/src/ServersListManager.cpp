@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri May 27 00:55:33 2011 gael jochaud-du-plessix
-// Last update Tue May 31 20:16:52 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 17:07:24 2011 loick michard
 //
 
 #include <sstream>
@@ -15,9 +15,11 @@
 #include "ClusterClient.hpp"
 #include "ServerEntry.hpp"
 
-ServersListManager::ServersListManager(ClusterClient* clusterClient):
+ServersListManager::ServersListManager(ClusterClient* clusterClient,
+				       int interval):
   _clusterClient(clusterClient), _networkManager(NULL), _timer(NULL),
-  _stopReportConnectionError(false), _stopReportConnectionSuccess(false)
+  _stopReportConnectionError(false), _stopReportConnectionSuccess(false),
+  _interval(interval)
 {  
 }
 
@@ -36,7 +38,7 @@ void	ServersListManager::run()
   _timer = new QTimer();
   connect(_timer, SIGNAL(timeout()), this,
 	  SLOT(updateServersListFromCentralServer()));
-  _timer->setInterval(500);
+  _timer->setInterval(_interval);
   _timer->start();
   exec();
 }

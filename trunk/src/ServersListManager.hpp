@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Fri May 27 00:50:20 2011 gael jochaud-du-plessix
-// Last update Tue May 31 20:15:53 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 17:08:51 2011 loick michard
 //
 
 #ifndef _SERVERSLISTMANAGER_HPP_
@@ -29,7 +29,7 @@ class ServersListManager : public QThread
 Q_OBJECT
 
 public:
-  ServersListManager(ClusterClient* clusterServer);
+  ServersListManager(ClusterClient* clusterServer, int interval);
   ~ServersListManager();
 
   void		run(void);
@@ -44,6 +44,7 @@ private:
   QTimer*			_timer;
   bool				_stopReportConnectionError;
   bool				_stopReportConnectionSuccess;
+  int				_interval;
 };
 
 #endif
