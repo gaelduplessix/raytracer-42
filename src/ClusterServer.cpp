@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Tue May 31 21:52:17 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 14:03:50 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -145,6 +145,8 @@ void	ClusterServer::newConnection()
 	  SLOT(clientDisconnect()));
   connect(_currentClientSocket, SIGNAL(readyRead()), this,
 	  SLOT(dataReceived()));
+  connect(_currentClientSocket, SIGNAL(error(QAbstractSocket::SocketError)),
+	  this, SLOT(socketError(QAbstractSocket::SocketError)));
   _interface
     ->logServerConsoleMessage(tr("<span>Info: Connection etablished "
 				 "with client <strong>%1</strong></span>")
@@ -270,6 +272,10 @@ bool		ClusterServer::receiveSessionDatas(void)
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(&_renderingConf);
   _readyToRaytrace = true;
+  _interface
+    ->logServerConsoleMessage(tr("<span>Info: Session datas received,"
+				 " start raytracing...</span>")
+			      .toStdString());
   processSectionRequest();
   return (true);
 }
@@ -320,4 +326,16 @@ void	ClusterServer::renderingHasFinished(void)
     _currentClientSocket->write(packet);
     setStatus(ServerEntry::WAITING_REQUEST);
   }
+}
+
+void	ClusterServer::socketError(QAbstractSocket::SocketError socketError)
+{
+  QString errorCode;
+  errorCode.setNum((int)socketError, 10);
+  QString errorString = _currentClientSocket->errorString();
+  _interface
+    ->logServerConsoleMessage(tr("<span style=\"color:red\">Network error"
+				 "(%1): %2</span>").arg(errorCode,
+							errorString)
+			      .toStdString());
 }

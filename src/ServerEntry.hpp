@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:14:23 2011 gael jochaud-du-plessix
-// Last update Tue May 31 14:41:13 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 13:57:34 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SERVERENTRY_HPP_
@@ -57,6 +57,7 @@ public slots:
   void		onConnectionOpened(void);
   void		onConnectionClosed(void);
   void		onDataReceived(void);
+  void          socketError(QAbstractSocket::SocketError socketError);
 
 private:
   ClusterClient*	_clusterClient;
