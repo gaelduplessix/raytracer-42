@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 18:30:51 2011 melvin laplanche
-// Last update Mon May 30 22:12:16 2011 melvin laplanche
+// Last update Tue May 31 18:14:30 2011 melvin laplanche
 
 #include "A3DSParser.hpp"
 
@@ -83,6 +83,14 @@ void	A3DSParser::_putError(QString	msg)
     cerr << "Parse error: " << msg.toStdString() << endl;
 }
 
+void	A3DSParser::_putInfo(QString	msg)
+{
+  if (this->_interface != NULL)
+    this->_interface->sendMessage(msg.toStdString());
+  else
+    cerr << "Info: " << msg.toStdString() << endl;
+}
+
 void	A3DSParser::loadFile(string	filename)
 {
   this->_clearObjects();
@@ -134,7 +142,9 @@ void		A3DSParser::_parse(void)
   A3DSChunk	c = root.firstChild();
   while (c)
   {
-    if (c.getId() == A3DSChunk::EDITOR3D_ID)
+    if (c.getId() == A3DSChunk::A3DS_VERSION)
+      this->_putInfo(QObject::tr("3ds version: %1").arg(c.getInt()));
+    else if (c.getId() == A3DSChunk::EDITOR3D_ID)
       this->_parseEditor3D(c.firstChild());
     else
     {

@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 17:29:44 2011 melvin laplanche
-// Last update Mon May 30 14:38:41 2011 melvin laplanche
+// Last update Tue May 31 18:10:20 2011 melvin laplanche
 //
 
 #ifndef A3DSPARSER_H_
@@ -63,6 +63,7 @@ private:
   void	_parseLight(std::string, A3DSChunk);
   void	_checkFile(std::string);
   void	_putError(QString);
+  void	_putInfo(QString);
   void	_parse(void);
 };
 

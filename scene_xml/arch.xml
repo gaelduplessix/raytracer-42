@@ -1,0 +1,29 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>-10000, 10000, 5000</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <target>0, 0, 0</target>
+    </camera>
+  </cameras>
+  <objects>
+    <a3ds>
+      <filename>3ds_models/arch.3ds</filename>
+    </a3ds>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>-5000,1000,0</position>
+      <color>255,255,255</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>-5000, 2000, 2</position>
+      <color>255,255,255</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>
