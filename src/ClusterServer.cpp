@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 14:03:50 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 16:30:40 2011 loick michard
 //
 
 #include "ClusterServer.hpp"
@@ -16,19 +16,19 @@
 #include <QNetworkReply>
 
 ClusterServer::ClusterServer(RenderingInterface* interface, string url,
-			     int port):
+			     int port, int interval, int threads):
   _interface(interface), _port(port), _centralServerUrl(url.c_str()),
   _registerServerThread(NULL), _tcpServer(NULL), _currentClientSocket(NULL),
   _centralServerConnectionState(false), _status(ServerEntry::FREE),
   _progress(0), _currentRequest(-1), _currentSessionId(-1),
   _currentSection(-1, -1, -1, -1), _currentPacketSize(0), _raytracer(),
   _scene(NULL), _renderingConf(), _readyToRaytrace(false),
-  _raytracedImage(NULL)
+  _raytracedImage(NULL), _threads(threads)
 {
   getInterface()
     ->logServerConsoleMessage("<span>Info: "
 			      "connecting to central server...</span>");
-  _registerServerThread = new RegisterServerThread(this);
+  _registerServerThread = new RegisterServerThread(this, interval);
   connect(_registerServerThread, SIGNAL(launchServer()),
 	  this, SLOT(launchServer()));
   _registerServerThread->start();
@@ -266,6 +266,7 @@ bool		ClusterServer::receiveSessionDatas(void)
   if (_renderingConf._cubeMapPath != "")
     _renderingConf.setCubeMap(new CubeMap(_renderingConf._cubeMapPath),
 			      _renderingConf._cubeMapPath);
+  _renderingConf.setNbThreads(_threads);
   _scene->loadFromFile(sceneFilename.toStdString(), _interface);
   if (!_scene->isValid())
     return (true);

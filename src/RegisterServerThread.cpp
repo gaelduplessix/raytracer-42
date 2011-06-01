@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 30 17:45:20 2011 gael jochaud-du-plessix
-// Last update Tue May 31 17:36:52 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 16:09:32 2011 loick michard
 //
 
 #include "RegisterServerThread.hpp"
@@ -17,9 +17,11 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
-RegisterServerThread::RegisterServerThread(ClusterServer* clusterServer):
+RegisterServerThread::RegisterServerThread(ClusterServer* clusterServer,
+					   int interval):
   _clusterServer(clusterServer), _networkManager(0), _timer(NULL),
-  _serverReady(false), _stopReportConnectionError(false)
+  _serverReady(false), _stopReportConnectionError(false),
+  _interval(interval)
 {
 }
 
@@ -36,7 +38,7 @@ void	RegisterServerThread::run(void)
   _timer = new QTimer();
   connect(_timer, SIGNAL(timeout()), this,
 	  SLOT(registerToCentralServer()));
-  _timer->setInterval(500);
+  _timer->setInterval(_interval);
   _timer->start();
   exec();
 }

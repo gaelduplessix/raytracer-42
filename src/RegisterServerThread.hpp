@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 30 17:44:54 2011 gael jochaud-du-plessix
-// Last update Mon May 30 17:44:54 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 16:09:49 2011 loick michard
 //
 
 #ifndef _CLUSTERSERVERTHREAD_HPP_
@@ -31,7 +31,7 @@ class RegisterServerThread : public QThread
 Q_OBJECT
 
 public:
-  RegisterServerThread(ClusterServer* clusterServer);
+  RegisterServerThread(ClusterServer* clusterServer, int interval);
   ~RegisterServerThread();
 
   void		run(void);
@@ -54,6 +54,7 @@ private:
   QTimer*			_timer;
   bool				_serverReady;
   bool				_stopReportConnectionError;
+  int				_interval;
 };
 
 #endif
