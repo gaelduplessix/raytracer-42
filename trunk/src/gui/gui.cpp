@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed Jun  1 01:55:55 2011 samuel olivier
+// Last update Wed Jun  1 14:21:53 2011 loick michard
 //
 
 #include <QApplication>
@@ -317,7 +317,7 @@ void RaytracerGUI::drawWindow()
       remainString += tr("s");
       _ui->_ellapse->setText(remainString);
       if (_isConnected)
-	_ui->_progressBar->setValue(((double)_nbProgress / 
+	_ui->_progressBar->setValue(((double)_nbRender / 
 				    (_config->getWidth() *
 				     _config->getHeight())) * 100);
       else
@@ -406,9 +406,9 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
                    this, SLOT(disconnect()));
   QObject::connect(_ui->_threads, SIGNAL(valueChanged(int)),
                    this, SLOT(threadsChange(int)));
-  //_scene = createScene();
-  _scene = new Scene();
-  _scene->loadFromFile("scene_xml/default.xml", this);
+  _scene = createScene();
+  //_scene = new Scene();
+  //_scene->loadFromFile("scene_xml/default.xml", this);
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);

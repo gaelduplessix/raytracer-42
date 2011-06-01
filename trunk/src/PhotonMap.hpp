@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Tue May 17 13:36:45 2011 samuel olivier
-// Last update Tue May 31 23:01:46 2011 loick michard
+// Last update Wed Jun  1 11:11:02 2011 loick michard
 //
 
 #ifndef _PHOTON_MAP_
@@ -49,10 +49,11 @@ public:
   static bool		comparePhotonZ(Photon photon1, Photon photon2);
   PhotonMapNode*	generateKdTree(vector<Photon> photons,
 				       int _separatePlane);
-  void			getNodePhotons(vector<Photon*>& nearest,
+  void			getNodePhotons(vector<Photon>& nearest,
 				       const Point& intersectPoint,
-				       double radius, PhotonMapNode *node);
-  void			getNearestPhotons(vector<Photon*>& nearest,
+				       double radius, 
+				       PhotonMapNode *node);
+  void			getNearestPhotons(vector<Photon>& nearest,
 					  const Point& intersectPoint,
 					  int n, double radius = 3);
   vector<Photon>	_map;

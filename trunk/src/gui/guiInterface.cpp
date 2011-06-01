@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed Jun  1 01:38:46 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 14:42:30 2011 loick michard
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -175,6 +175,7 @@ void    RaytracerGUI::stopRendering(void)
   else
     _clusterClient->stopRendering();
   _pause = false;
+  _restored = false;
 }
 
 void    RaytracerGUI::loadScene(void)
@@ -414,7 +415,18 @@ void            RaytracerGUI::saveRender()
 	  stream << resourcesBytes;
 	  stream << configBytes;
 	  stream << _scene->getFilename();
+	  bool noImage = false;
+	  if (!_image)
+            {
+              _image = new QImage(_config->getSection().width(),
+                                  _config->getSection().height(),
+                                  QImage::Format_ARGB32);
+              _image->fill(0);
+	      noImage = true;
+            }
+	  stream << noImage;
 	  stream << *_image;
+	      
 	  if (!_clusterClient)
 	    {
 	      stream << (bool)false;
@@ -464,10 +476,29 @@ void            RaytracerGUI::openRender()
 	  file.close();
 	  return ;
 	}
+      bool noImage;
       stream >> resourcesBytes;
       stream >> configBytes;
       stream >> sceneFilename;
-      stream >> *_image;
+      stream >> noImage;
+
+      if (!noImage)
+	{
+	  stream >> *_image;
+	  _isRendering = true;
+	  _pause = true;
+	  _ui->_mode->setEnabled(false);
+	  _ui->_width->setEnabled(false);
+	  _ui->_height->setEnabled(false);
+	  _ui->_threads->setEnabled(false);
+	  _ui->action_Play->setEnabled(true);
+	}
+      else
+	{
+	  QImage buf;
+	  stream >> buf;
+	  _restored = false;
+	}
 
       if (_config)
 	delete _config;
@@ -507,6 +538,7 @@ void            RaytracerGUI::openRender()
 	}
 
       file.close();      
-      _restored = true;
+      if (!noImage)
+	_restored = true;
     }
 }
