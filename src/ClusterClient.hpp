@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 01:28:31 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 17:10:46 2011 loick michard
 //
 
 #ifndef _CLUSTERCLIENT_HPP_
@@ -37,8 +37,10 @@ public:
       RAYTRACED
     };
   
-  ClusterClient(RenderingInterface* interface, string url, int nbSubdibisions);
-  ClusterClient(RenderingInterface* interface, QByteArray& data);
+  ClusterClient(RenderingInterface* interface, string url, int nbSubdibisions,
+		int interval);
+  ClusterClient(RenderingInterface* interface, QByteArray& data,
+		int interval);
   ~ClusterClient();
 
   RenderingInterface*		getInterface();
