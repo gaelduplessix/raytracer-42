@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed Jun  1 17:17:24 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 17:39:32 2011 loick michard
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -239,7 +239,8 @@ void    RaytracerGUI::startRender()
 			      _config->getSection().height(),
 			      QImage::Format_ARGB32);
 	  _image->fill(0);
-	  if (_preferencesDialogUi->_reload->isChecked())
+	  if (_preferencesDialogUi->_reload->isChecked() && _scene &&
+	      _scene->getFilename() != "")
 	    {
 	      _scene->loadFromFile(_scene->getFilename().toStdString(), this);
 	      _ui->_console->setHtml(_message.c_str());
