@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Wed Jun  1 16:31:42 2011 loick michard
+// Last update Wed Jun  1 17:15:36 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -161,7 +161,8 @@ void		RaytracerGUI::connectToCluster()
       _clusterClient =
 	new ClusterClient(this, _connectToServerDialogUi
 			  ->_addres->text().toStdString(),
-			  _connectToServerDialogUi->_subdivisions->value());
+			  _connectToServerDialogUi->_subdivisions->value(),
+			  _preferencesDialogUi->_clientLogTime->value());
       _clusterTimer->start();
     }
 }
