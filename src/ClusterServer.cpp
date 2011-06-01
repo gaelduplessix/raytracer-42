@@ -1,11 +1,11 @@
 //
 // ClusterServer.cpp for raytracer in /home/jochau_g//Desktop/raytracer-42/src
-// 
+//
 // Made by gael jochaud-du-plessix
 // Login   <jochau_g@epitech.net>
-// 
+//
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 16:30:40 2011 loick michard
+// Last update Wed Jun  1 21:14:13 2011 melvin laplanche
 //
 
 #include "ClusterServer.hpp"
@@ -97,7 +97,7 @@ RenderingInterface*	ClusterServer::getInterface(void)
 
 bool	ClusterServer::getCentralServerConnectionState(void)
 
-{ 
+{
   QMutexLocker	lock(&_mutex);
   return (_centralServerConnectionState);
 }
@@ -135,7 +135,7 @@ void	ClusterServer::launchServer(void)
       _interface
 	->logServerConsoleMessage("<span style=\"color:red\">Error: "
 				  "cannot create tcp server.</span>");
-    }  
+    }
 }
 
 void	ClusterServer::newConnection()
@@ -185,7 +185,7 @@ void	ClusterServer::dataReceived(void)
   QDataStream	stream(_currentClientSocket);
   if (_currentRequest == -1)
     {
-      if (_currentClientSocket->bytesAvailable() < sizeof(int))
+      if ((size_t)_currentClientSocket->bytesAvailable() < sizeof(int))
 	return ;
       stream >> _currentRequest;
       setStatus(ServerEntry::PROCESSING_REQUEST);
@@ -212,10 +212,10 @@ bool		ClusterServer::receiveSectionRequest(void)
 {
   QDataStream	stream(_currentClientSocket);
   int		sessionId;
-  if (_currentClientSocket->bytesAvailable() < sizeof(int))
+  if ((size_t)_currentClientSocket->bytesAvailable() < sizeof(int))
     return (false);
   stream >> sessionId;
-  if (_currentClientSocket->bytesAvailable() < sizeof(QRect))
+  if ((size_t)_currentClientSocket->bytesAvailable() < sizeof(QRect))
     return (false);
   stream >> _currentSection;
   if (sessionId != _currentSessionId || !_readyToRaytrace)
@@ -242,7 +242,7 @@ bool		ClusterServer::receiveSessionDatas(void)
   setStatus(ServerEntry::DOWNLOADING_RESOURCES);
   if (_currentPacketSize == 0)
     {
-      if (_currentClientSocket->bytesAvailable() < sizeof(int))
+      if ((size_t)_currentClientSocket->bytesAvailable() < sizeof(int))
 	return (false);
       stream >> _currentPacketSize;
       setProgress(0);
