@@ -1,0 +1,83 @@
+\documentclass{report}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+
+\begin{document}
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\part{Configuration}
+\chapter{Configuration g\'en\'erale}
+Cet onglet vous permet de faire une configuration g\'en\'erale pour votre sc\`ene, on y retrouve les options principales : M\'ethode de rendu, antialiasing, rendu 3D, threads...
+\section{M\'ethode de rendu}
+\subsection{Rendu avec un seul thread}
+Le rendu avec un seul thread rend accessible tout type de rendu :
+  \begin{description}
+    \item[Lin\'eaire horizontal :] mode de rendu horizontal classique
+    \item[Lin\'eaire vertical :] mode de rendu vertical classique
+    \item[D\'epix\'elisation :] mode de rendu permettant d'avoir tr\`es t\^ot une id\'ee du rendu final
+    \item[Al\'eatoire horizontal / vertical :] m\^eme m\'ethode que les modes lin\'eaires sauf que les bandes sont choisies al\'eatoirement
+    \item[Al\'eatoire :] mode de rendu totalement al\'eatoire pour chaque pixel
+  \end{description}
+\subsection{Rendu avec du multithreading}
+Le rendu avec le multithreading ne pas permet d'utiliser de m\'ethode de rendu al\'eatoire.
+\section{Threads}
+Le multithreading permet de diminuer consid\'erablement le temps de rendu de vos images en utilisant tout les coeurs de votre processeur.
+\newline Mettre un nombre de thread trop \'elev\'e est inutile (ex: 5 threads pour un process quad core).
+\section{Antialiasing}
+Augmenter l'antialiasing am\'eliore grandement la qualit\'e de l'image en recalculant plusieurs fois chaque pixel.
+\newline ATTENTION: Cel\`a augmente consid\'erablement le temps de rendu !
+\section{Kdtree}
+Activer l'option kdtree permet d'augmenter la vitesse de rendu pour des sc\`enes compos\'es d'un grand nombre de triangles, cette option est inutile dans les autres cas.
+\section{Profondeur de champ}
+La profondeur de champ permet de rendre la sc\`ene nette en son centre et floue autour, ce qui donne un effet tr\'es r\'ealiste.
+\newline ATTENTION: Cel\`a augmente consid\'erablement le temps de rendu !
+\section{Rendu 3D}
+Ce mode permet de visualiser votre sc\`enes en 3D \`a l'aide d'une paire de lunette 3D, un \'ecartement de 0.05 est souvent l'id\'eal.
+\newline Il vaut mieux choisir des sc\`enes avec des objets ayant une position diff\'erente sur l'axe des abscisses les uns des autres.
+\newline Cel\`a ralentit un peu le rendu car il faut calculer deux fois l'image.
+\section{Autres options g\'en\'erale}
+Dans ce panel vous pouvez aussi choisir de quelle cam\'era vous souhaitez voir la sc\`ene (les cam\'eras \'etant \`a d\'efinir dans le fichier .xml).
+\newline Il est aussi possible de choisir la taille de l'image.
+\chapter{Lumi\`eres}
+L'onglet lumi\`ere propose des r\'eglages pour l'ensemble des lumi\`eres de la sc\`ene.
+\section{Exposition}
+Cette option permet de g\'erer l'exposition \`a la lumi\`ere, plus elle est faible plus la sc\`ene sera sombre.
+\newline Utile pour assombrir une sc\`ene un peu trop sombre.
+\section{Lumi\`ere directe}
+Cette option permet de r\'egler l'intensit\'e de la lumi\`ere.
+\section{Lumi\`ere diffuse}
+La lumi\`ere diffuse permet de donner un effet plus r\'ealiste \`a la lumi\`ere en flouttant les zones \'eclair\'ees.
+\newline ATTENTION: Cel\`a augmente consid\'erablement le temps de rendu.
+\section{Lumi\`ere sp\'eculaire}
+La lumi\`ere sp\'eculaire permet de d\'efinir la brillance, plus elle est \'elev\'ee et plus l'objet brille.
+\section{Ombres diffuses}
+Les ombres diffuses permettent de rendre les ombres plus r\'ealistes, le proc\'eder est le m\^eme que pour la lumi\`ere diffuse : floutter les zone d\'ombres.
+\chapter{Mat\'eriaux}
+L'onglet mat\'eriaux permet de r\'egler la r\'eflexion et la transparence.
+\section{R\'eflexion}
+Cette option permet de r\'egler la profondeur de la r\'eflexion, c\'est \`a dire combien de fois un objet peut r\'efl\'echir ce qui l'entoure (astuce: il est possible de faire r\'efl\'echir des objets entre eux en activant la r\'eflexion sur deux objets proches).
+\newline La r\'eflexion diffuse permet de floutter la r\'eflexion.
+\section{Transparence}
+Cette option permet de g\'erer la profondeur de la transparence, plus elle est \'elev\'ee plus l'objet est transparent.
+\chapter{Environnement}
+Cet onglet permet de configurer une image de fond ou encore une lumi\`ere / couleur d'ambiance.
+\section{Fonds}
+\subsection{Cubemap}
+Permet de charger une image en fond pour votre sc\`ene, \`a combiner avec la r\'eflexion.
+\subsection{Couleur de fond}
+Permet de choisir une couleur de fond pour votre sc\`ene.
+\section{Lumi\`ere et couleur d'ambiance}
+\subsection{Lumi\`ere d'ambiance}
+Permet d'augmenter la couleur de la lumi\`ere.
+\subsection{Couleur d'ambiance}
+Permet d'ajouter une couleur g\'en\'erale \`a l'ensemble de votre sc\`ene.
+\chapter{Illumination globale}
+\section{Ambient Occlusion}
+L'ambient occlusion est un proc\'ed\'e qui consiste \`a lancer un nombre de rayon \'egal \`a la valeur du sampling \`a partir du point d'intersection pour d\'efinir si le point est proche d'un objet ou non.
+\newline Cela permet un effet tr\'es r\'ealiste sur la lumi\`ere mais une sc\`ene avec l'occlusion ambiente est tr\`es longue \`a charger.
+\newline Un sampling de 50 minimum est conseill\'e.
+\section{Photon mapping}
+Cette option permet de g\'en\'erer une carte de photon qui permet d'obtenir un effet de lumi\`ere caustique et d'inter-re\'eflexion.
+\end{document}
