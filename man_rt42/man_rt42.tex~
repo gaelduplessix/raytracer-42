@@ -92,8 +92,8 @@ Le cadre propri\'et\'es vous permet de modifier des caracteristiques sur un type
  \item[Indice de r\'efraction :] Permet de r\'egler la r\'efraction, valeur comprise entre 0 et 5.
  \item[R\'eflection diffuse :] Permet de r\'egler la r\'eflection diffuse afin de rendre la r\'eflection plus r\'ealiste
 \end{description}
-\chapter{Textures}
-\section{Textures proc\'edurales}
+\section{Textures}
+\subsection{Textures proc\'edurales}
 Permet d'appliquer une texture d\'ej\`a d\'efinie par notre raytracer.
 \newline Sont disponibles :
 \begin{itemize}
@@ -102,7 +102,7 @@ Permet d'appliquer une texture d\'ej\`a d\'efinie par notre raytracer.
  \item Bruit de perlin
  \item Effet marbre
 \end{itemize}
-\section{Textures personnelles}
+\subsection{Textures personnelles}
 Il est choisit possible de choisir sa propre texture, pour cel\`a il faut s\'electionner image comme type.
 \newline Vous pouvez aussi personnaliser la r\'ep\'etition des textures suivant la taille de vos objets.
 \chapter{D\'eformation}
