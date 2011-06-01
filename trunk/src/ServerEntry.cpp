@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:17:38 2011 gael jochaud-du-plessix
-// Last update Tue May 31 20:30:28 2011 samuel olivier
+// Last update Wed Jun  1 14:03:39 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -97,6 +97,9 @@ void		ServerEntry::openConnection(void)
 	      SLOT(onConnectionClosed()));
       connect(_socket, SIGNAL(readyRead()), this,
 	      SLOT(onDataReceived()));
+      connect(_socket,
+	      SIGNAL(error(QAbstractSocket::SocketError)),
+	      this, SLOT(socketError(QAbstractSocket::SocketError)));
     }
   _socket->abort();
   _socket->connectToHost(QHostAddress(_ip), _port);
@@ -160,7 +163,6 @@ void		ServerEntry::onDataReceived(void)
 	->createResources(_clusterClient->getScene(),
 			  &_clusterClient->getRenderingConfiguration());
       QByteArray resourcesBytes = Resources::getInstance()->toByteArray();
-      // cout << resourcesBytes.size() << resourcesBytes.data() << endl;
       QByteArray renderingConfBytes =
 	_clusterClient->getRenderingConfiguration().toByteArray();
       {
@@ -202,4 +204,15 @@ void		ServerEntry::onDataReceived(void)
       _currentPacketSize = 0;
       setStatus(ServerEntry::WAITING_REQUEST);
     }
+}
+
+void    ServerEntry::socketError(QAbstractSocket::SocketError socketError)
+{
+  QString errorCode;
+  errorCode.setNum((int)socketError, 10);
+  QString errorString = _socket->errorString();
+  _clusterClient->getInterface()
+    ->sendErrorMessage(tr("Network error(%1): %2").arg(errorCode,
+						       errorString)
+		       .toStdString());
 }

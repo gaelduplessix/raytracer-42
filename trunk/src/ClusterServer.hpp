@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Tue May 31 14:19:33 2011 gael jochaud-du-plessix
+// Last update Wed Jun  1 13:51:14 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERSERVER_HPP_
@@ -65,6 +65,7 @@ public slots:
   void          newConnection(void);
   void          clientDisconnect(void);
   void          dataReceived(void);
+  void		socketError(QAbstractSocket::SocketError socketError);
   
 private:
   RenderingInterface*	_interface;
