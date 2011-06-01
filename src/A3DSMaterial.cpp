@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 25 15:09:09 2011 melvin laplanche
-// Last update Sun May 29 17:15:58 2011 melvin laplanche
+// Last update Wed Jun  1 13:05:35 2011 gael jochaud-du-plessix
 //
 
 #include "A3DSMaterial.hpp"
