@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Mon May 30 15:01:54 2011 samuel olivier
+// Last update Wed Jun  1 01:33:34 2011 samuel olivier
 //
 
 #include <vector>
@@ -67,6 +67,8 @@ class SDLInterface : public RenderingInterface
     SDL_Flip(screen);
   }
 };
+
+#include <QTranslator>
 
 int main(int ac, char **av)
 {

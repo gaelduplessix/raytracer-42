@@ -6,7 +6,7 @@
     <message>
         <location filename="clusterDialog.ui" line="14"/>
         <source>Serveur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Server</translation>
     </message>
     <message>
         <location filename="clusterDialog.ui" line="20"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="clusterDialog.ui" line="52"/>
         <source>Quitter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quit</translation>
     </message>
 </context>
 <context>
@@ -24,27 +24,27 @@
     <message>
         <location filename="launchServerDialog.ui" line="14"/>
         <source>Selectionnez un cluster</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Select a cluster</translation>
     </message>
     <message>
         <location filename="launchServerDialog.ui" line="20"/>
         <source>Informations Serveur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Server Informations</translation>
     </message>
     <message>
         <location filename="launchServerDialog.ui" line="26"/>
         <source>http://www.raytracer.aurao.com</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">http://www.raytracer.aurao.com</translation>
     </message>
     <message>
         <location filename="launchServerDialog.ui" line="33"/>
         <source>Adresse du serveur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Server Adress</translation>
     </message>
     <message>
         <location filename="launchServerDialog.ui" line="40"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Port</translation>
     </message>
 </context>
 <context>
@@ -57,7 +57,7 @@
     <message>
         <location filename="raytracer.ui" line="95"/>
         <source>Console</source>
-        <translation></translation>
+        <translation>Console</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="125"/>
@@ -86,12 +86,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="178"/>
         <source>&amp;Edition</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Edit</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="186"/>
         <source>&amp;Cluster</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cluster</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="258"/>
@@ -107,7 +107,7 @@ p, li { white-space: pre-wrap; }
         <location filename="raytracer.ui" line="280"/>
         <location filename="raytracer.ui" line="303"/>
         <source>px</source>
-        <translation></translation>
+        <translation>px</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="293"/>
@@ -128,12 +128,12 @@ p, li { white-space: pre-wrap; }
         <location filename="raytracer.ui" line="340"/>
         <location filename="raytracer.ui" line="400"/>
         <source>x</source>
-        <translation></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="369"/>
         <source>Profondeur de champ</source>
-        <translation type="unfinished"></translation>
+        <translation>Depth of Field</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="390"/>
@@ -141,12 +141,12 @@ p, li { white-space: pre-wrap; }
         <location filename="raytracer.ui" line="814"/>
         <location filename="raytracer.ui" line="1122"/>
         <source>Sampling</source>
-        <translation></translation>
+        <translation>Sampling</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="423"/>
         <source>Linéaire horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaly linear</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="428"/>
@@ -156,22 +156,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="433"/>
         <source>Depixelisation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Depixelizati
+on</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="438"/>
         <source>Aléatoire horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Horizontal random</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="443"/>
         <source>Aléatoire vertical</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vertical random</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="448"/>
         <source>Aléatoire</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Random</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="456"/>
@@ -181,7 +182,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="463"/>
         <source>KdTree</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">KdTree</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="497"/>
@@ -201,7 +202,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="556"/>
         <source>Exposition</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Exposition</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="579"/>
@@ -226,7 +227,7 @@ p, li { white-space: pre-wrap; }
     <message utf8="true">
         <location filename="raytracer.ui" line="696"/>
         <source>Intensité</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Intensity</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="718"/>
@@ -257,12 +258,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="896"/>
         <source>Environnement</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Environment</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="908"/>
         <source>Cube map</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cube Map</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="920"/>
@@ -272,7 +273,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="946"/>
         <source>Couleur de fond</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Background Color</translation>
     </message>
     <message utf8="true">
         <location filename="raytracer.ui" line="987"/>
@@ -282,22 +283,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="1021"/>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Coefficient</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1031"/>
         <source>Couleur d&apos;ambiance</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ambiant Color</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1069"/>
         <source>Illumination globale</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Global illumination</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1094"/>
         <source>Ambient Occlusion</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ambient Occlusion</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1132"/>
@@ -372,7 +373,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="1327"/>
         <source>Effacer &amp;la console</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">C&amp;lear Console</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1330"/>
@@ -382,12 +383,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="1341"/>
         <source>Activer la console</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Activate the console</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1350"/>
         <source>Lancer un &amp;serveur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Launch &amp;serveur</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1353"/>
@@ -407,7 +408,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="raytracer.ui" line="1368"/>
         <source>Clustering</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Clustering</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1371"/>
@@ -417,7 +418,7 @@ p, li { white-space: pre-wrap; }
     <message utf8="true">
         <location filename="raytracer.ui" line="1376"/>
         <source>Editer les matériaux</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Edit materials</translation>
     </message>
     <message>
         <location filename="raytracer.ui" line="1379"/>
