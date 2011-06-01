@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Tue May 31 00:30:31 2011 melvin laplanche
+// Last update Wed Jun  1 18:51:19 2011 loick michard
 //
 
 #include "Scene.hpp"
@@ -233,7 +233,7 @@ void			Scene::_parseMaterialOptions(QDomNode	n,
 	}
       }
       else
-	this->_putError(QObject::tr("%s is not a valid element")
+	this->_putError(QObject::tr("%1 is not a valid element")
 			.arg(n.nodeName()), n);
     }
     n = n.nextSibling();
