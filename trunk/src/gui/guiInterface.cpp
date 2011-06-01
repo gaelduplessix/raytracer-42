@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed Jun  1 16:57:18 2011 loick michard
+// Last update Wed Jun  1 17:17:24 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -241,7 +241,7 @@ void    RaytracerGUI::startRender()
 	  _image->fill(0);
 	  if (_preferencesDialogUi->_reload->isChecked())
 	    {
-	      _scene->loadFromFile(_scene->getFilename(), this);
+	      _scene->loadFromFile(_scene->getFilename().toStdString(), this);
 	      _ui->_console->setHtml(_message.c_str());
 	      _ui->_console->moveCursor(QTextCursor::End);
 	      this->setCameras();
@@ -533,7 +533,9 @@ void            RaytracerGUI::openRender()
 	{
 	  QByteArray clusterState;
 	  stream >> clusterState;
-	  _clusterClient = new ClusterClient(this, clusterState);
+	  _clusterClient =
+	    new ClusterClient(this, clusterState,
+			      _preferencesDialogUi->_clientLogTime->value());
 	  _ui->_clusterDock->show();
 	  _ui->actionDeconnexion->setVisible(true);
 	  _ui->actionSe_connecter_un_serveur->setVisible(false);
@@ -542,7 +544,7 @@ void            RaytracerGUI::openRender()
 	    _timer->start();
 	  _clusterTimer->start();
 	}
-
+      
       file.close();      
       if (!noImage)
 	_restored = true;
