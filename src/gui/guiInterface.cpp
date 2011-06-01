@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed Jun  1 17:58:08 2011 loick michard
+// Last update Wed Jun  1 18:33:11 2011 loick michard
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -377,6 +377,7 @@ void		RaytracerGUI::updateGUIConfig()
   _ui->_ambiantColor->setChecked(_config->isAdditiveAmbiantLighting());
 
   _ui->_ambientOcclusionSampling->setValue(_config->getAmbientOcclusionSampling());
+  _ui->_ambientOcclusionMax->setValue(_config->getAmbientOcclusionMaxDist());
   _ui->_ambientOcclusion->setChecked(_config->isAmbientOcclusionEnabled());
 
   _ui->_photonMappingValue->setValue(_config->getPhotonMappingSampling());
