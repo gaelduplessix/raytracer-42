@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Sat May 21 23:19:04 2011 melvin laplanche
-// Last update Sun May 29 15:55:10 2011 melvin laplanche
+// Last update Tue May 31 18:09:54 2011 melvin laplanche
 //
 
 #ifndef CHUNK_H_
@@ -15,6 +15,7 @@
 class A3DSChunk
 {
 public:
+  static const int A3DS_VERSION	= 0x0002;
   static const int FILE_ID	= 0x4d4d;
   static const int OBJECT_ID	= 0x4000;
   static const int EDITOR3D_ID	= 0x3d3d;
