@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu Jun  2 16:35:25 2011 melvin laplanche
+// Last update Thu Jun  2 22:26:37 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1093,7 +1093,9 @@ void			Scene::_parse3dsFile(QDomNode	n,
 void		Scene::_parse3dsLib3ds(string	filename,
 				       string	textDir)
 {
-  Lib3dsFile	*file = lib3ds_file_load(filename.c_str());
+  Lib3dsFile	*file = lib3ds_file_load(Resources::getInstance()
+					 ->getNewPathName(filename).c_str()
+					 /*filename.c_str()*/);
   int		nbFaces = 0;
   Object	*obj = new Object();
 
@@ -1102,6 +1104,7 @@ void		Scene::_parse3dsLib3ds(string	filename,
     this->_putError(QObject::tr("Loading %1 failed.").arg(filename.c_str()));
     return ;
   }
+  this->_sceneFilenames.push_back(QString(filename.c_str()));
   lib3ds_file_eval(file, 0);
   for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
     nbFaces += mesh->faces;
