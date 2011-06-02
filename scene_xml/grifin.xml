@@ -1,12 +1,12 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-50, 0, 0</position>
+      <position>-1550, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
     </camera>
   </cameras>
   <objects>
-    <a3ds>
+    <a3ds lib="lib3ds">
       <filename>3ds_models/grifin.3ds</filename>
     </a3ds>
   </objects>
