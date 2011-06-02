@@ -38,3 +38,10 @@
 \contentsline {section}{\numberline {8.1}Bumpgmapping}{13}
 \contentsline {section}{\numberline {8.2}D\'eformation proc\'edurale}{13}
 \contentsline {section}{\numberline {8.3}Texture limitante}{13}
+\contentsline {part}{III\hspace {1em}Gestion du rendu}{14}
+\contentsline {chapter}{\numberline {9}Charger et enregistrer une sc\`ene}{15}
+\contentsline {section}{\numberline {9.1}Charger un fichier .xml}{15}
+\contentsline {section}{\numberline {9.2}Enregistrer un rendu termin\'e}{15}
+\contentsline {section}{\numberline {9.3}Quitter et mettre la GUI en background}{15}
+\contentsline {chapter}{\numberline {10}G\'erer le d\'eroulement du rendu}{16}
+\contentsline {chapter}{\numberline {11}Cluster}{17}
