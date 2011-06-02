@@ -5,13 +5,14 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Tue May 31 15:32:34 2011 loick michard
+// Last update Thu Jun  2 11:57:38 2011 loick michard
 //
 
 #include "Material.hpp"
 
 Material::Material():
-  _name(""), _color(Color(0, 0, 0)), _isTextured(false), _specularCoeff(0),
+  _name(""), _color(Color(255, 255, 255)), _isTextured(false),
+  _specularCoeff(0),
   _specularPow(50), _reflectionCoeff(0), _transmissionCoeff(0),
   _refractionIndex(1), _diffusedReflectionCoeff(0.1), _texture(NULL),
   _limitTexture(NULL), _heightmap(NULL), _hasBumpMap(false),
@@ -21,7 +22,8 @@ Material::Material():
 }
 
 Material::Material(const string& name):
-  _name(name), _color(Color(0, 0, 0)), _isTextured(false), _specularCoeff(0),
+  _name(name), _color(Color(255, 255, 255)),
+  _isTextured(false), _specularCoeff(0),
   _specularPow(50), _reflectionCoeff(0), _transmissionCoeff(0),
   _refractionIndex(1), _diffusedReflectionCoeff(0.1), _texture(NULL),
   _limitTexture(NULL), _heightmap(NULL), _hasBumpMap(false),
