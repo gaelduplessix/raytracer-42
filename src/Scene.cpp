@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Thu Jun  2 11:18:28 2011 loick michard
+// Last update Thu Jun  2 12:18:38 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -601,7 +601,7 @@ void		Scene::loadFromFile(string		filename,
   if (this->isValid())
     this->_putSuccess(QObject::tr("Parsing finished"));
   else
-    this->_putError(QObject::tr("Parsing exited anormally"));
+    this->_putError(QObject::tr("Parsing exited abnormally"));
 }
 
 void			Scene::_dispatcher(QDomNode	node,
