@@ -6,7 +6,7 @@
     </camera>
   </cameras>
   <objects>
-    <a3ds>
+    <a3ds lib="lib3ds">
       <filename>3ds_models/koshimi-poser.3ds</filename>
     </a3ds>
   </objects>

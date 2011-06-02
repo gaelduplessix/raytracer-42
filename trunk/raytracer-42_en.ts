@@ -2,65 +2,191 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_US">
 <context>
-    <name>ClusterDialog</name>
+    <name>About</name>
     <message>
-        <location filename="clusterDialog.ui" line="14"/>
-        <source>Serveur</source>
-        <translation type="unfinished">Server</translation>
-    </message>
-    <message>
-        <location filename="clusterDialog.ui" line="20"/>
-        <source>Console</source>
+        <location filename="forms/About.ui" line="14"/>
+        <source>A propos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clusterDialog.ui" line="52"/>
+        <location filename="forms/About.ui" line="43"/>
+        <source>Raytracer 42</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/About.ui" line="101"/>
+        <source>Gael Du Plessix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/About.ui" line="146"/>
+        <source>Loick Michard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/About.ui" line="191"/>
+        <source>Melvin Laplanche</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/About.ui" line="236"/>
+        <source>Samuel Olivier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/About.ui" line="281"/>
+        <source>Franck Lavisse</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ClusterDialog</name>
+    <message>
+        <location filename="forms/clusterDialog.ui" line="14"/>
+        <source>Serveur</source>
+        <translation>Server</translation>
+    </message>
+    <message>
+        <location filename="forms/clusterDialog.ui" line="20"/>
+        <source>Console</source>
+        <translation>Console</translation>
+    </message>
+    <message>
+        <location filename="forms/clusterDialog.ui" line="52"/>
         <source>Quitter</source>
-        <translation type="unfinished">Quit</translation>
+        <translation>Quit</translation>
+    </message>
+</context>
+<context>
+    <name>ClusterServer</name>
+    <message>
+        <location filename="src/ClusterServer.cpp" line="126"/>
+        <source>&lt;span style=&quot;color:green&quot;&gt;Success: server launched on port &lt;strong&gt;%1&lt;/strong&gt;, waiting for connection.&lt;/span&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ClusterServer.cpp" line="151"/>
+        <source>&lt;span&gt;Info: Connection etablished with client &lt;strong&gt;%1&lt;/strong&gt;&lt;/span&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ClusterServer.cpp" line="163"/>
+        <source>&lt;span&gt;Info: Client disconnected&lt;/span&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ClusterServer.cpp" line="277"/>
+        <source>&lt;span&gt;Info: Session datas received, start raytracing...&lt;/span&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ClusterServer.cpp" line="338"/>
+        <source>&lt;span style=&quot;color:red&quot;&gt;Network error(%1): %2&lt;/span&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConnectToServer</name>
+    <message utf8="true">
+        <location filename="forms/connectToServer.ui" line="14"/>
+        <source>Se connecter à un cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/connectToServer.ui" line="30"/>
+        <source>Informations Cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/connectToServer.ui" line="36"/>
+        <source>http://perso.epitech.eu/~jochau_g/raytracer/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/connectToServer.ui" line="43"/>
+        <source>Adresse du cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/connectToServer.ui" line="50"/>
+        <source>Nombre de subdivisions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/connectToServer.ui" line="57"/>
+        <source>0: Sélection automatique</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiEditMaterialDialog</name>
+    <message>
+        <location filename="src/gui/guiEditMaterialDialog.cpp" line="207"/>
+        <source>Selectionez une Texture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiEditMaterialDialog.cpp" line="219"/>
+        <source>Selectionez une Texture limitante</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiEditMaterialDialog.cpp" line="233"/>
+        <source>Selectionez une heightmap</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LaunchServerDialog</name>
     <message>
-        <location filename="launchServerDialog.ui" line="14"/>
+        <location filename="forms/launchServerDialog.ui" line="14"/>
         <source>Selectionnez un cluster</source>
-        <translation type="unfinished">Select a cluster</translation>
+        <translation>Select a cluster</translation>
     </message>
     <message>
-        <location filename="launchServerDialog.ui" line="20"/>
+        <location filename="forms/launchServerDialog.ui" line="20"/>
         <source>Informations Serveur</source>
-        <translation type="unfinished">Server Informations</translation>
+        <translation>Server Informations</translation>
     </message>
     <message>
-        <location filename="launchServerDialog.ui" line="26"/>
+        <location filename="forms/launchServerDialog.ui" line="26"/>
+        <source>http://perso.epitech.eu/~jochau_g/raytracer/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/launchServerDialog.ui" line="50"/>
+        <source>0: sélectionne un port automatiquement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>http://www.raytracer.aurao.com</source>
-        <translation type="unfinished">http://www.raytracer.aurao.com</translation>
+        <translation type="obsolete">http://www.raytracer.aurao.com</translation>
     </message>
     <message>
-        <location filename="launchServerDialog.ui" line="33"/>
+        <location filename="forms/launchServerDialog.ui" line="33"/>
         <source>Adresse du serveur</source>
-        <translation type="unfinished">Server Adress</translation>
+        <translation>Server Adress</translation>
     </message>
     <message>
-        <location filename="launchServerDialog.ui" line="40"/>
+        <location filename="forms/launchServerDialog.ui" line="43"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="raytracer.ui" line="26"/>
+        <location filename="forms/raytracer.ui" line="26"/>
         <source>Raytracer 42</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="95"/>
+        <location filename="forms/raytracer.ui" line="95"/>
         <source>Console</source>
         <translation>Console</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="125"/>
+        <location filename="forms/raytracer.ui" line="125"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -69,526 +195,735 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="142"/>
+        <location filename="forms/raytracer.ui" line="145"/>
         <source>Avancement %p%</source>
         <translation>Parsing %p%</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="162"/>
+        <location filename="forms/raytracer.ui" line="152"/>
+        <source>Temps restant: 0h 0m 0s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="178"/>
         <source>&amp;Fichier</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="170"/>
+        <location filename="forms/raytracer.ui" line="188"/>
         <source>&amp;Rendu</source>
         <translation>&amp;Build</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="178"/>
+        <location filename="forms/raytracer.ui" line="196"/>
         <source>&amp;Edition</source>
         <translation>&amp;Edit</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="186"/>
+        <location filename="forms/raytracer.ui" line="205"/>
         <source>&amp;Cluster</source>
         <translation>&amp;Cluster</translation>
     </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="213"/>
+        <source>&amp;Aide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="241"/>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="258"/>
+        <location filename="forms/raytracer.ui" line="289"/>
         <source>Configuration générale</source>
         <translation>Global settings</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="270"/>
+        <location filename="forms/raytracer.ui" line="301"/>
         <source>Largueur</source>
         <translation>Width</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="280"/>
-        <location filename="raytracer.ui" line="303"/>
+        <location filename="forms/raytracer.ui" line="311"/>
+        <location filename="forms/raytracer.ui" line="337"/>
         <source>px</source>
         <translation>px</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="293"/>
+        <location filename="forms/raytracer.ui" line="327"/>
         <source>Hauteur</source>
         <translation>Height</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="316"/>
+        <location filename="forms/raytracer.ui" line="353"/>
         <source>Caméra</source>
         <translation>Camera</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="330"/>
+        <location filename="forms/raytracer.ui" line="367"/>
         <source>Antialiasing</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="340"/>
-        <location filename="raytracer.ui" line="400"/>
+        <location filename="forms/raytracer.ui" line="377"/>
+        <location filename="forms/raytracer.ui" line="424"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="369"/>
+        <location filename="forms/raytracer.ui" line="393"/>
         <source>Profondeur de champ</source>
         <translation>Depth of Field</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="390"/>
-        <location filename="raytracer.ui" line="639"/>
-        <location filename="raytracer.ui" line="814"/>
-        <location filename="raytracer.ui" line="1122"/>
+        <location filename="forms/raytracer.ui" line="414"/>
+        <location filename="forms/raytracer.ui" line="751"/>
+        <location filename="forms/raytracer.ui" line="926"/>
+        <location filename="forms/raytracer.ui" line="1234"/>
         <source>Sampling</source>
         <translation>Sampling</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="423"/>
+        <location filename="forms/raytracer.ui" line="447"/>
         <source>Linéaire horizontal</source>
         <translation>Horizontaly linear</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="428"/>
+        <location filename="forms/raytracer.ui" line="452"/>
         <source>Linéaire vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Verticaly linear</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="433"/>
+        <location filename="forms/raytracer.ui" line="457"/>
         <source>Depixelisation</source>
-        <translation type="unfinished">Depixelizati
-on</translation>
+        <translation>Depixelization</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="438"/>
+        <location filename="forms/raytracer.ui" line="462"/>
         <source>Aléatoire horizontal</source>
-        <translation type="unfinished">Horizontal random</translation>
+        <translation>Horizontal random</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="443"/>
+        <location filename="forms/raytracer.ui" line="467"/>
         <source>Aléatoire vertical</source>
-        <translation type="unfinished">Vertical random</translation>
+        <translation>Vertical random</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="448"/>
+        <location filename="forms/raytracer.ui" line="472"/>
         <source>Aléatoire</source>
-        <translation type="unfinished">Random</translation>
+        <translation>Random</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="456"/>
+        <location filename="forms/raytracer.ui" line="480"/>
+        <location filename="forms/raytracer.ui" line="584"/>
         <source>Mode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="463"/>
+        <location filename="forms/raytracer.ui" line="487"/>
         <source>KdTree</source>
-        <translation type="unfinished">KdTree</translation>
+        <translation>KdTree</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="497"/>
+        <location filename="forms/raytracer.ui" line="521"/>
         <source>Prodondeur</source>
+        <translation>Depth</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="531"/>
+        <source>Threads</source>
+        <translation>Threads</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="551"/>
+        <source> Rendu 3D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="507"/>
-        <source>Threads</source>
+        <location filename="forms/raytracer.ui" line="577"/>
+        <source>Ecartement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="592"/>
+        <source>Anaglyphe Bleu/Cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="597"/>
+        <source>Oeuil gauche</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="602"/>
+        <source>Oeuil droit</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="544"/>
+        <location filename="forms/raytracer.ui" line="656"/>
         <source>Lumières</source>
         <translation>Lights</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="556"/>
+        <location filename="forms/raytracer.ui" line="668"/>
         <source>Exposition</source>
-        <translation type="unfinished">Exposition</translation>
+        <translation>Exposition</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="579"/>
+        <location filename="forms/raytracer.ui" line="691"/>
         <source>Lumière spéculaire</source>
-        <translation type="unfinished"></translation>
+        <translation>Specular light</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="602"/>
+        <location filename="forms/raytracer.ui" line="714"/>
         <source>Ombres diffuses</source>
-        <translation type="unfinished"></translation>
+        <translation>Diffuse shadows</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="649"/>
+        <location filename="forms/raytracer.ui" line="761"/>
         <source>Lumière diffuse</source>
-        <translation type="unfinished"></translation>
+        <translation>Diffuse light</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="659"/>
+        <location filename="forms/raytracer.ui" line="771"/>
         <source>Lumière directe</source>
-        <translation type="unfinished"></translation>
+        <translation>Direct light</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="696"/>
+        <location filename="forms/raytracer.ui" line="808"/>
         <source>Intensité</source>
-        <translation type="unfinished">Intensity</translation>
+        <translation>Intensity</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="718"/>
+        <location filename="forms/raytracer.ui" line="830"/>
         <source>Matériaux</source>
         <translation>Materials</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="730"/>
+        <location filename="forms/raytracer.ui" line="842"/>
         <source>Réflexion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="764"/>
-        <location filename="raytracer.ui" line="861"/>
+        <location filename="forms/raytracer.ui" line="876"/>
+        <location filename="forms/raytracer.ui" line="973"/>
         <source>Profondeur</source>
         <translation>Depth</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="771"/>
+        <location filename="forms/raytracer.ui" line="883"/>
         <source>Réflexion diffuse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="827"/>
+        <location filename="forms/raytracer.ui" line="939"/>
         <source>Transparence</source>
         <translation>Transparency</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="896"/>
+        <location filename="forms/raytracer.ui" line="1008"/>
         <source>Environnement</source>
-        <translation type="unfinished">Environment</translation>
+        <translation>Environment</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="908"/>
+        <location filename="forms/raytracer.ui" line="1020"/>
         <source>Cube map</source>
-        <translation type="unfinished">Cube Map</translation>
+        <translation>Cube Map</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="920"/>
+        <location filename="forms/raytracer.ui" line="1032"/>
         <source>...</source>
         <translation>…</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="946"/>
+        <location filename="forms/raytracer.ui" line="1058"/>
         <source>Couleur de fond</source>
-        <translation type="unfinished">Background Color</translation>
+        <translation>Background Color</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="987"/>
+        <location filename="forms/raytracer.ui" line="1099"/>
         <source>Lumière d&apos;ambiance</source>
+        <translation>Ambient light</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1133"/>
+        <source>Coefficient</source>
+        <translation>Coefficient</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1143"/>
+        <source>Couleur d&apos;ambiance</source>
+        <translation>Ambient Color</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1181"/>
+        <source>Illumination globale</source>
+        <translation>Global illumination</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1206"/>
+        <source>Ambient Occlusion</source>
+        <translation>Ambient Occlusion</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1241"/>
+        <source>Distance Max</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1021"/>
-        <source>Coefficient</source>
-        <translation type="unfinished">Coefficient</translation>
-    </message>
-    <message>
-        <location filename="raytracer.ui" line="1031"/>
-        <source>Couleur d&apos;ambiance</source>
-        <translation type="unfinished">Ambiant Color</translation>
-    </message>
-    <message>
-        <location filename="raytracer.ui" line="1069"/>
-        <source>Illumination globale</source>
-        <translation type="unfinished">Global illumination</translation>
-    </message>
-    <message>
-        <location filename="raytracer.ui" line="1094"/>
-        <source>Ambient Occlusion</source>
-        <translation type="unfinished">Ambient Occlusion</translation>
-    </message>
-    <message>
-        <location filename="raytracer.ui" line="1132"/>
+        <location filename="forms/raytracer.ui" line="1267"/>
         <source>Photon mapping</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1156"/>
+        <location filename="forms/raytracer.ui" line="1291"/>
         <source> photons</source>
-        <translation type="unfinished"></translation>
+        <translation> photons</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="1172"/>
+        <location filename="forms/raytracer.ui" line="1307"/>
         <source>Photons par lumière:</source>
-        <translation type="unfinished"></translation>
+        <translation>Photon per light:</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1191"/>
+        <location filename="forms/raytracer.ui" line="1326"/>
         <source>toolBar</source>
         <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1226"/>
-        <source>&amp;Quitter</source>
-        <translation>&amp;Quit</translation>
-    </message>
-    <message>
-        <location filename="raytracer.ui" line="1229"/>
-        <source>Ctrl+Q</source>
+        <location filename="forms/raytracer.ui" line="1531"/>
+        <source>Ctrl+Alt+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="1238"/>
+        <location filename="forms/raytracer.ui" line="1540"/>
+        <source>Se &amp;connecter à un cluster</source>
+        <comment>test</comment>
+        <translation type="unfinished">&amp;Connect to a cluster</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1546"/>
+        <source>Ctrl+Alt+C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/raytracer.ui" line="1557"/>
+        <source>&amp;Editer les matériaux</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/raytracer.ui" line="1565"/>
+        <source>Se déconnecter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/raytracer.ui" line="1574"/>
+        <source>Déconnexion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1579"/>
+        <source>Enregistrer un rendu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1584"/>
+        <source>Reprendre un rendu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/raytracer.ui" line="1589"/>
+        <source>Préfére&amp;nces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1597"/>
+        <source>A propos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1602"/>
+        <source>A propos de Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quitter</source>
+        <translation type="obsolete">&amp;Quit</translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/raytracer.ui" line="1413"/>
         <source>&amp;Nouvelle scène</source>
         <translation>&amp;New scene</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="1250"/>
+        <location filename="forms/raytracer.ui" line="1425"/>
         <source>&amp;Charger une scène</source>
         <translation>&amp;Load a scene</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1253"/>
+        <location filename="forms/raytracer.ui" line="1428"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1265"/>
+        <location filename="forms/raytracer.ui" line="1440"/>
         <source>&amp;Enregistrer l&apos;image</source>
         <translation>&amp;Save image</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1280"/>
+        <location filename="forms/raytracer.ui" line="1455"/>
         <source>&amp;Lancer</source>
         <translation>&amp;Start</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1283"/>
+        <location filename="forms/raytracer.ui" line="1458"/>
         <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1298"/>
+        <location filename="forms/raytracer.ui" line="1473"/>
         <source>Ctrl+P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1313"/>
+        <location filename="forms/raytracer.ui" line="1488"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1327"/>
+        <location filename="forms/raytracer.ui" line="1502"/>
         <source>Effacer &amp;la console</source>
-        <translation type="unfinished">C&amp;lear Console</translation>
+        <translation>C&amp;lear Console</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1330"/>
+        <location filename="forms/raytracer.ui" line="1505"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1341"/>
+        <location filename="forms/raytracer.ui" line="1516"/>
         <source>Activer la console</source>
-        <translation type="unfinished">Activate the console</translation>
+        <translation>Activate the console</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1350"/>
+        <location filename="forms/raytracer.ui" line="1525"/>
         <source>Lancer un &amp;serveur</source>
-        <translation type="unfinished">Launch &amp;serveur</translation>
+        <translation>Launch &amp;serveur</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1353"/>
+        <location filename="forms/raytracer.ui" line="1528"/>
         <source>Mode serveur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="raytracer.ui" line="1356"/>
-        <source>Ctrl+L, S</source>
-        <translation type="unfinished"></translation>
+        <translation>Sever mode</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="1365"/>
         <source>Se &amp;connecter à un cluster</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">&amp;Connect to a cluster</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1368"/>
+        <location filename="forms/raytracer.ui" line="1543"/>
         <source>Clustering</source>
-        <translation type="unfinished">Clustering</translation>
-    </message>
-    <message>
-        <location filename="raytracer.ui" line="1371"/>
-        <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Clustering</translation>
     </message>
     <message utf8="true">
-        <location filename="raytracer.ui" line="1376"/>
         <source>Editer les matériaux</source>
-        <translation type="unfinished">Edit materials</translation>
+        <translation type="obsolete">Edit materials</translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1379"/>
+        <location filename="forms/raytracer.ui" line="1560"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1295"/>
+        <location filename="forms/raytracer.ui" line="1470"/>
         <source>Pa&amp;use</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1310"/>
+        <location filename="forms/raytracer.ui" line="1359"/>
+        <source>Cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1373"/>
+        <source>Ip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1378"/>
+        <source>Port</source>
+        <translation type="unfinished">Port</translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1383"/>
+        <source>Statut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1388"/>
+        <source>Progression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1401"/>
+        <source>&amp;Cacher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1404"/>
+        <source>Ctrl+H</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/raytracer.ui" line="1485"/>
         <source>S&amp;top</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="raytracer.ui" line="1268"/>
+        <location filename="forms/raytracer.ui" line="1443"/>
         <source>Ctrl+S</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Preferences</name>
+    <message>
+        <location filename="forms/Preferences.ui" line="14"/>
+        <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/Preferences.ui" line="24"/>
+        <source>Général</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="33"/>
+        <location filename="forms/Preferences.ui" line="169"/>
+        <location filename="forms/Preferences.ui" line="204"/>
+        <source>ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="59"/>
+        <source>Temps de rafraichissement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/Preferences.ui" line="66"/>
+        <source>Recharger la scène avant chaque rendu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/Preferences.ui" line="77"/>
+        <source>Editeur de matériaux</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="83"/>
+        <source>Antialiasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="90"/>
+        <source>CubeMap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="124"/>
+        <source>Cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="130"/>
+        <source>Serveur</source>
+        <translation type="unfinished">Server</translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="136"/>
+        <source>Nombre threads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="159"/>
+        <source>Intervalle de log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="188"/>
+        <source>Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="194"/>
+        <source>Intervalle rafraichissement des serveurs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/Preferences.ui" line="243"/>
+        <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/Scene.cpp" line="113"/>
-        <location filename="src/Scene.cpp" line="176"/>
-        <location filename="src/Scene.cpp" line="613"/>
+        <location filename="src/Scene.cpp" line="127"/>
+        <location filename="src/Scene.cpp" line="190"/>
+        <location filename="src/Scene.cpp" line="680"/>
         <source> at line </source>
         <translation> at line </translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="135"/>
+        <location filename="src/Scene.cpp" line="149"/>
         <source>Parse error: </source>
         <translation>Parse error: </translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="149"/>
+        <location filename="src/Scene.cpp" line="163"/>
         <source>Success: </source>
         <translation>Success: </translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="162"/>
+        <location filename="src/Scene.cpp" line="176"/>
         <source>Info: </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="183"/>
+        <location filename="src/Scene.cpp" line="197"/>
+        <location filename="src/Scene.cpp" line="211"/>
         <source>Warning: </source>
         <translation>Warning: </translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="198"/>
+        <location filename="src/Scene.cpp" line="225"/>
         <source>A %1 must be an element with a text value</source>
         <translation>A %1 must be an element with a text value</translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="220"/>
+        <location filename="src/Scene.cpp" line="247"/>
         <source>A %1 must have 3 integers separated with comma as value</source>
         <oldsource>A %1 must have 3 integers values separated with comma</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="238"/>
+        <location filename="src/Scene.cpp" line="270"/>
+        <source>A %1 must have 2 integers separated with comma as value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/Scene.cpp" line="288"/>
         <source>Rotation type not specified, assuming radian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="248"/>
+        <location filename="src/Scene.cpp" line="298"/>
         <source>Rotation type %1 does not exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="263"/>
+        <location filename="src/Scene.cpp" line="313"/>
         <source>A rotation must have 3 integers separated with comma as alues</source>
         <oldsource>A rotation must have 3 integers values separated with comma</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="309"/>
+        <location filename="src/Scene.cpp" line="359"/>
         <source>%1 must be a double</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="314"/>
-        <location filename="src/Scene.cpp" line="359"/>
+        <location filename="src/Scene.cpp" line="364"/>
+        <location filename="src/Scene.cpp" line="409"/>
         <source>%1 range is </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="335"/>
+        <location filename="src/Scene.cpp" line="385"/>
         <source>%1 must be a boolean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="353"/>
+        <location filename="src/Scene.cpp" line="403"/>
         <source>%1 must be an integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="386"/>
-        <location filename="src/Scene.cpp" line="404"/>
-        <location filename="src/Scene.cpp" line="425"/>
         <location filename="src/Scene.cpp" line="436"/>
-        <location filename="src/Scene.cpp" line="442"/>
+        <location filename="src/Scene.cpp" line="454"/>
+        <location filename="src/Scene.cpp" line="475"/>
+        <location filename="src/Scene.cpp" line="486"/>
+        <location filename="src/Scene.cpp" line="492"/>
         <source>Wrong color value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="450"/>
+        <location filename="src/Scene.cpp" line="500"/>
         <source>Wrong color range (0 &lt;= x &lt;= 255 (FF))</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="466"/>
+        <location filename="src/Scene.cpp" line="516"/>
         <source>The file %1 does not exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="517"/>
+        <location filename="src/Scene.cpp" line="533"/>
+        <source>The directory %1 does not exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/Scene.cpp" line="580"/>
         <source>Start parsing %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="538"/>
+        <location filename="src/Scene.cpp" line="603"/>
         <source>A scene must have a camera.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="543"/>
+        <location filename="src/Scene.cpp" line="610"/>
         <source>Parsing finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="545"/>
+        <location filename="src/Scene.cpp" line="612"/>
         <source>Parsing exited abnormally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="557"/>
+        <location filename="src/Scene.cpp" line="624"/>
         <source>Several cameras elements found. Dude, that&apos;s dirty!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="565"/>
+        <location filename="src/Scene.cpp" line="632"/>
         <source>Several materials elements found. Dude, that&apos;s dirty!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="573"/>
+        <location filename="src/Scene.cpp" line="640"/>
         <source>Several objects elements found. Dude, that&apos;s dirty!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="581"/>
+        <location filename="src/Scene.cpp" line="648"/>
         <source>Several lights elements found. Dude, that&apos;s dirty!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="594"/>
+        <location filename="src/Scene.cpp" line="661"/>
         <source>%1 isn&apos;t a valid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="596"/>
+        <location filename="src/Scene.cpp" line="663"/>
         <source>%1 has no childs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/Scene.cpp" line="620"/>
+        <location filename="src/Scene.cpp" line="687"/>
         <source>The file &quot;%1&quot; doesn&apos;t exists or is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -633,7 +968,9 @@ on</translation>
         <location filename="src/SceneLight.cpp" line="144"/>
         <location filename="src/SceneLight.cpp" line="234"/>
         <location filename="src/SceneLight.cpp" line="368"/>
-        <location filename="src/SceneObject.cpp" line="917"/>
+        <location filename="src/SceneMaterial.cpp" line="237"/>
+        <location filename="src/SceneObject.cpp" line="1023"/>
+        <location filename="src/SceneObject.cpp" line="1077"/>
         <source>%1 is not a valid element</source>
         <translation type="unfinished"></translation>
     </message>
@@ -659,7 +996,8 @@ on</translation>
     </message>
     <message>
         <location filename="src/SceneCamera.cpp" line="175"/>
-        <source>%s is not a valid camera type</source>
+        <source>%1 is not a valid camera type</source>
+        <oldsource>%s is not a valid camera type</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -740,6 +1078,16 @@ on</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="src/SceneLight.cpp" line="284"/>
+        <source>A light has several point2/vector1, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneLight.cpp" line="295"/>
+        <source>A light has several vector1/point2, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="src/SceneLight.cpp" line="298"/>
         <source>To define a vector1, you must define, a point before</source>
         <translation type="unfinished"></translation>
@@ -786,548 +1134,961 @@ on</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="21"/>
+        <location filename="src/SceneMaterial.cpp" line="22"/>
         <source>normalDeformation type not specified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="30"/>
+        <location filename="src/SceneMaterial.cpp" line="31"/>
         <source>normalDeformation value must be an integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="36"/>
-        <location filename="src/SceneMaterial.cpp" line="323"/>
+        <location filename="src/SceneMaterial.cpp" line="37"/>
+        <location filename="src/SceneMaterial.cpp" line="328"/>
         <source>normalDeformation type must be an integer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="89"/>
+        <location filename="src/SceneMaterial.cpp" line="92"/>
         <source>Every material children must be an element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="96"/>
+        <location filename="src/SceneMaterial.cpp" line="99"/>
         <source>A material has several colors, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="107"/>
+        <location filename="src/SceneMaterial.cpp" line="110"/>
         <source>A material has several heightmaps, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="118"/>
+        <location filename="src/SceneMaterial.cpp" line="121"/>
         <source>A material has several textures, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="129"/>
+        <location filename="src/SceneMaterial.cpp" line="132"/>
         <source>A material has several limitTextures, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="141"/>
+        <location filename="src/SceneMaterial.cpp" line="144"/>
         <source>A material has several speculars, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="152"/>
+        <location filename="src/SceneMaterial.cpp" line="155"/>
         <source>A material has several specularPows, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="163"/>
+        <location filename="src/SceneMaterial.cpp" line="166"/>
         <source>A material has several reflections, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="174"/>
+        <location filename="src/SceneMaterial.cpp" line="177"/>
         <source>A material has several transmissions, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="186"/>
+        <location filename="src/SceneMaterial.cpp" line="189"/>
         <source>A material has several refractionIndexs, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="198"/>
-        <location filename="src/SceneMaterial.cpp" line="211"/>
+        <location filename="src/SceneMaterial.cpp" line="201"/>
+        <location filename="src/SceneMaterial.cpp" line="214"/>
         <source>A material has several diffusedReflections, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="224"/>
+        <location filename="src/SceneMaterial.cpp" line="227"/>
         <source>A material has several normalDeformations, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="234"/>
-        <source>%s is not a valid element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="src/SceneMaterial.cpp" line="254"/>
+        <location filename="src/SceneMaterial.cpp" line="257"/>
         <source>A materials child cannot be empty and must be a material element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="260"/>
+        <location filename="src/SceneMaterial.cpp" line="263"/>
         <source>A material element cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="266"/>
+        <location filename="src/SceneMaterial.cpp" line="269"/>
         <source>The material attributes are missing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="272"/>
+        <location filename="src/SceneMaterial.cpp" line="275"/>
         <source>The material %1 already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="287"/>
+        <location filename="src/SceneMaterial.cpp" line="290"/>
         <source>A materials element cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="303"/>
+        <location filename="src/SceneMaterial.cpp" line="306"/>
         <source>%1 type not specified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneMaterial.cpp" line="318"/>
+        <location filename="src/SceneMaterial.cpp" line="323"/>
         <source>%1 is not a valid texture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="21"/>
+        <location filename="src/SceneObject.cpp" line="22"/>
         <source>An element has several position, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="32"/>
+        <location filename="src/SceneObject.cpp" line="33"/>
         <source>An element has several rotation, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="65"/>
-        <location filename="src/SceneObject.cpp" line="152"/>
-        <location filename="src/SceneObject.cpp" line="259"/>
-        <location filename="src/SceneObject.cpp" line="311"/>
-        <location filename="src/SceneObject.cpp" line="364"/>
-        <location filename="src/SceneObject.cpp" line="430"/>
-        <location filename="src/SceneObject.cpp" line="513"/>
-        <location filename="src/SceneObject.cpp" line="591"/>
-        <location filename="src/SceneObject.cpp" line="667"/>
-        <location filename="src/SceneObject.cpp" line="732"/>
+        <location filename="src/SceneObject.cpp" line="66"/>
+        <location filename="src/SceneObject.cpp" line="156"/>
+        <location filename="src/SceneObject.cpp" line="263"/>
+        <location filename="src/SceneObject.cpp" line="315"/>
+        <location filename="src/SceneObject.cpp" line="371"/>
+        <location filename="src/SceneObject.cpp" line="497"/>
+        <location filename="src/SceneObject.cpp" line="619"/>
+        <location filename="src/SceneObject.cpp" line="697"/>
+        <location filename="src/SceneObject.cpp" line="773"/>
+        <location filename="src/SceneObject.cpp" line="838"/>
         <source>Every primitive children must be an element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="72"/>
+        <location filename="src/SceneObject.cpp" line="73"/>
         <source>An equation has several position, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="83"/>
+        <location filename="src/SceneObject.cpp" line="84"/>
         <source>An equation has several rotation, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="94"/>
+        <location filename="src/SceneObject.cpp" line="95"/>
         <source>An equation has several equation, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="105"/>
-        <location filename="src/SceneObject.cpp" line="229"/>
-        <location filename="src/SceneObject.cpp" line="278"/>
-        <location filename="src/SceneObject.cpp" line="330"/>
-        <location filename="src/SceneObject.cpp" line="395"/>
-        <location filename="src/SceneObject.cpp" line="477"/>
-        <location filename="src/SceneObject.cpp" line="556"/>
-        <location filename="src/SceneObject.cpp" line="633"/>
-        <location filename="src/SceneObject.cpp" line="698"/>
-        <location filename="src/SceneObject.cpp" line="763"/>
+        <location filename="src/SceneObject.cpp" line="106"/>
+        <location filename="src/SceneObject.cpp" line="233"/>
+        <location filename="src/SceneObject.cpp" line="282"/>
+        <location filename="src/SceneObject.cpp" line="334"/>
+        <location filename="src/SceneObject.cpp" line="459"/>
+        <location filename="src/SceneObject.cpp" line="583"/>
+        <location filename="src/SceneObject.cpp" line="662"/>
+        <location filename="src/SceneObject.cpp" line="739"/>
+        <location filename="src/SceneObject.cpp" line="804"/>
+        <location filename="src/SceneObject.cpp" line="869"/>
         <source>Unknown element %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="112"/>
+        <location filename="src/SceneObject.cpp" line="113"/>
         <source>A equation must have a position, a rotation and an equation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="123"/>
+        <location filename="src/SceneObject.cpp" line="127"/>
         <source>The equation is not valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="159"/>
+        <location filename="src/SceneObject.cpp" line="163"/>
         <source>An parallelepipede has several position, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="171"/>
+        <location filename="src/SceneObject.cpp" line="175"/>
         <source>An parallelepipede has several width, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="183"/>
+        <location filename="src/SceneObject.cpp" line="187"/>
         <source>An parallelepipede has several depth, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="195"/>
+        <location filename="src/SceneObject.cpp" line="199"/>
         <source>An parallelepipede has several height, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="207"/>
+        <location filename="src/SceneObject.cpp" line="211"/>
         <source>An parallelepipede has several rotation, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="219"/>
+        <location filename="src/SceneObject.cpp" line="223"/>
         <source>An parallelepipede has several equation, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="235"/>
-        <source>A parallelepipede must have a position, a rotation, a width, a height, a depth, and an solid value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="src/SceneObject.cpp" line="268"/>
+        <location filename="src/SceneObject.cpp" line="272"/>
         <source>A sphere has several radius, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="287"/>
+        <location filename="src/SceneObject.cpp" line="291"/>
         <source>A sphere must have a position, rotation and a radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="320"/>
+        <location filename="src/SceneObject.cpp" line="324"/>
         <source>A cube has several coeff, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="339"/>
+        <location filename="src/SceneObject.cpp" line="343"/>
         <source>A cube must have a position, rotation and a coeff</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="373"/>
-        <source>A triangle has several vertex1, the first defined will be used</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="src/SceneObject.cpp" line="385"/>
-        <source>A triangle has several vertex2, the first defined will be used</source>
+        <source>A position must be defined beforeyou can define a vector1</source>
+        <oldsource>A triangle has several vertex2, the first defined will be used</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="404"/>
-        <source>A triangle must have a position, a rotation, a vertex1 and a vertext2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="src/SceneObject.cpp" line="439"/>
+        <location filename="src/SceneObject.cpp" line="506"/>
         <source>A parallelogram has several point2/vertor1, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="444"/>
+        <location filename="src/SceneObject.cpp" line="511"/>
         <source>Before defining a vector1, you must define a position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="459"/>
+        <location filename="src/SceneObject.cpp" line="526"/>
         <source>A parallelogram has several point3/vertor2, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="464"/>
+        <location filename="src/SceneObject.cpp" line="531"/>
         <source>Before defining a vector2, you must define a position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="486"/>
-        <source>A parallelogram must have a position, a rotation, a vertex1 and a vertext2</source>
+        <location filename="src/SceneObject.cpp" line="239"/>
+        <source>A parallelepipede must have a position, a width, a height, a depth, and an solid value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="522"/>
+        <location filename="src/SceneObject.cpp" line="380"/>
+        <source>A triangle has several vector1/point2, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="401"/>
+        <source>A triangle has several vector2/point3, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="406"/>
+        <source>A position must be defined beforeyou can define a vector2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="435"/>
+        <location filename="src/SceneObject.cpp" line="559"/>
+        <source>An element has several textureVertex2, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="448"/>
+        <location filename="src/SceneObject.cpp" line="572"/>
+        <source>An element has several textureVertex3, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="468"/>
+        <source>A triangle must have a position, a vertex1 and a vertext2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="592"/>
+        <source>A parallelogram must have a position, a vertex1 and a vertext2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="628"/>
         <source>A cone has several radius, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="534"/>
+        <location filename="src/SceneObject.cpp" line="640"/>
         <source>A cone has several limitMin, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="546"/>
+        <location filename="src/SceneObject.cpp" line="652"/>
         <source>A cone has several limitMax, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="565"/>
+        <location filename="src/SceneObject.cpp" line="671"/>
         <source>A cone must have a position, a rotation, and a radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="600"/>
+        <location filename="src/SceneObject.cpp" line="706"/>
         <source>A cylinder has several radius, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="612"/>
+        <location filename="src/SceneObject.cpp" line="718"/>
         <source>A cylinder has several limitMin, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="624"/>
+        <location filename="src/SceneObject.cpp" line="730"/>
         <source>A cylinder has several limitMax, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="642"/>
+        <location filename="src/SceneObject.cpp" line="748"/>
         <source>A cylinder must have a position, a rotation, and a radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="676"/>
+        <location filename="src/SceneObject.cpp" line="782"/>
         <source>A plane has several limitX, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="688"/>
+        <location filename="src/SceneObject.cpp" line="794"/>
         <source>A plane has several limitY, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="707"/>
+        <location filename="src/SceneObject.cpp" line="813"/>
         <source>A plane must have a position and a rotation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="741"/>
+        <location filename="src/SceneObject.cpp" line="847"/>
         <source>A torus has several minor, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="753"/>
+        <location filename="src/SceneObject.cpp" line="859"/>
         <source>A torus has several major, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="772"/>
+        <location filename="src/SceneObject.cpp" line="878"/>
         <source>A torus must have a position, rotation and a radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="793"/>
+        <location filename="src/SceneObject.cpp" line="899"/>
         <source>A primitives child cannot be empty and must be a primitive element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="800"/>
+        <location filename="src/SceneObject.cpp" line="906"/>
         <source>A primitive element cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="807"/>
+        <location filename="src/SceneObject.cpp" line="913"/>
         <source>At least one of the primitive attributes is missing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="815"/>
+        <location filename="src/SceneObject.cpp" line="921"/>
         <source>The material %1 doesnt exists  (you must define a material before using it)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="842"/>
+        <location filename="src/SceneObject.cpp" line="948"/>
         <source>%1 is not a valid primitive type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="855"/>
+        <location filename="src/SceneObject.cpp" line="961"/>
         <source>A primitives element cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="874"/>
+        <location filename="src/SceneObject.cpp" line="980"/>
         <source>Every object children must be an element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="881"/>
+        <location filename="src/SceneObject.cpp" line="987"/>
         <source>An object has several position, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="892"/>
+        <location filename="src/SceneObject.cpp" line="998"/>
         <source>An object has several solid value, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="903"/>
+        <location filename="src/SceneObject.cpp" line="1009"/>
         <source>An object has several rotations, the first defined will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="923"/>
+        <location filename="src/SceneObject.cpp" line="1029"/>
         <source>An object must have a position, rotation, solid, and a leat one primitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="942"/>
+        <location filename="src/SceneObject.cpp" line="1049"/>
+        <source>Every a3ds children must be an element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1056"/>
+        <source>A a3ds has several filename, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1067"/>
+        <source>A a3ds has several textureDir, the first defined will be used</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1083"/>
+        <source>An a3ds must have at leat a filename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1102"/>
+        <source>Loading %1 failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1108"/>
+        <location filename="src/SceneObject.cpp" line="1232"/>
+        <source>%1 faces retreived</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1135"/>
+        <location filename="src/SceneObject.cpp" line="1199"/>
+        <source>texture %1 (a3ds) not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1180"/>
+        <source>There is no meshes in %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1270"/>
         <source>An objects child cannot be empty and must be an object element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="948"/>
+        <location filename="src/SceneObject.cpp" line="1276"/>
         <source>An object element cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="956"/>
+        <location filename="src/SceneObject.cpp" line="1287"/>
+        <source>The lib used for the a3ds element is not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/SceneObject.cpp" line="1301"/>
         <source>The parallelepipede attributes are missing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="963"/>
+        <location filename="src/SceneObject.cpp" line="1308"/>
         <source>The material %1 doesnt exists (you must define a material before use it)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/SceneObject.cpp" line="980"/>
+        <location filename="src/SceneObject.cpp" line="1325"/>
         <source>An objects element cannot be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/A3DSParser.cpp" line="115"/>
+        <source>%1 is not openable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/A3DSParser.cpp" line="120"/>
+        <source>%1 is not a valid 3ds file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/A3DSParser.cpp" line="140"/>
+        <source>3ds version: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ClusterClient.cpp" line="77"/>
+        <source>Disconnected from cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ClusterClient.cpp" line="208"/>
+        <source>Début d&apos;une nouvelle session de rendu (%1)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RaytracerGUI</name>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="37"/>
-        <source>Un rendu est en cours.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="src/gui/guiInterface.cpp" line="38"/>
         <source>Etes-vous sur de vouloir fermer la fenetre?</source>
+        <translation type="obsolete">Are you sure you want to close the window?</translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiCluster.cpp" line="73"/>
+        <source>Libre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="42"/>
+        <location filename="src/gui/guiCluster.cpp" line="75"/>
+        <source>En attente</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiCluster.cpp" line="77"/>
+        <source>Traitement requête</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiCluster.cpp" line="79"/>
+        <source>Téléchargement ressources</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiCluster.cpp" line="81"/>
+        <source>Traitement ressources</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiCluster.cpp" line="83"/>
+        <source>Raytracing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiCluster.cpp" line="85"/>
+        <source>Envoi réponse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiCluster.cpp" line="132"/>
+        <location filename="src/gui/guiInterface.cpp" line="46"/>
         <source>Raytracer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="43"/>
+        <location filename="src/gui/guiCluster.cpp" line="133"/>
+        <source>Etes-vous sur de vouloir vous deconnecter du cluster?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="47"/>
         <source>Un rendu est en cours.
 Etes-vous sur de vouloir fermer la fenetre?</source>
         <translation>A render is started
 Are you sure you want to close the window?</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="63"/>
+        <location filename="src/gui/guiInterface.cpp" line="67"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="76"/>
+        <location filename="src/gui/guiInterface.cpp" line="80"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="89"/>
+        <location filename="src/gui/guiInterface.cpp" line="93"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Success</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="102"/>
+        <location filename="src/gui/guiInterface.cpp" line="106"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="110"/>
+        <location filename="src/gui/guiInterface.cpp" line="114"/>
         <source>Rendu mis en pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendering paused</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="121"/>
+        <location filename="src/gui/guiInterface.cpp" line="128"/>
         <source>Rendu termine</source>
         <translation>Rendering finished</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="135"/>
+        <location filename="src/gui/guiInterface.cpp" line="142"/>
         <source>D&amp;eacute;but de la g&amp;eacute;n&amp;eacute;ration de la carte de Photon</source>
-        <translation type="unfinished"></translation>
+        <translation>Start the generation of the photon mapping</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="141"/>
+        <location filename="src/gui/guiInterface.cpp" line="148"/>
         <source>G&amp;eacute;n&amp;eacute;ration de la carte de Photon termin&amp;eacute;e</source>
-        <translation type="unfinished"></translation>
+        <translation>Generation of the photon mapping finished</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="147"/>
+        <location filename="src/gui/guiInterface.cpp" line="154"/>
         <source>D&amp;eacute;but de la g&amp;eacute;n&amp;eacute;ration du Kdtree</source>
-        <translation type="unfinished"></translation>
+        <translation>Start the generation of the kdtree</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="152"/>
+        <location filename="src/gui/guiInterface.cpp" line="160"/>
         <source>G&amp;eacute;n&amp;eacute;ration du KdTree termin&amp;eacute;e</source>
-        <translation type="unfinished"></translation>
+        <translation>Kdtree generation finished</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="172"/>
+        <location filename="src/gui/guiInterface.cpp" line="184"/>
         <source>Charger une scene</source>
         <translation>Load a scene</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="223"/>
+        <location filename="src/gui/guiInterface.cpp" line="254"/>
         <source>Reprise du rendu</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendering unpaused</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="225"/>
+        <location filename="src/gui/guiInterface.cpp" line="256"/>
         <source>D&amp;eacute;part du rendu</source>
+        <translation>Start rendering</translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="275"/>
+        <source>Vous devez charger une sc&amp;egrave;ne avant de faire unrendu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="236"/>
+        <location filename="src/gui/guiInterface.cpp" line="393"/>
+        <source>Vous devez charger une scène et avoir une configuration valide pour pouvoir enregistrer un rendu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="404"/>
+        <source>Enregistrer un rendu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="452"/>
+        <source>Rendu enregistré</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="460"/>
+        <source>Charger un rendu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="468"/>
+        <source>Impossible d&apos;ouvrir le fichier de rendu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="484"/>
+        <source>Fichier de rendu invalide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/guiInterface.cpp" line="525"/>
+        <source>Rendu restauré</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Vous devez charger une sc&amp;egrave;ne avant de faire un rendu</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">You must load a scene before making a render</translation>
     </message>
     <message>
-        <location filename="src/gui/guiInterface.cpp" line="249"/>
+        <location filename="src/gui/guiInterface.cpp" line="291"/>
         <source>Enregistrer une sc&amp;egrave;ne</source>
-        <translation type="unfinished"></translation>
+        <translation>Save a scene</translation>
     </message>
     <message>
-        <location filename="src/gui/gui.cpp" line="133"/>
+        <location filename="src/gui/gui.cpp" line="155"/>
         <source>Cube Map: dossier invalide</source>
-        <translation type="unfinished"></translation>
+        <translation>Cube Map: invalid directory</translation>
     </message>
     <message>
-        <location filename="src/gui/gui.cpp" line="254"/>
+        <location filename="src/gui/gui.cpp" line="289"/>
         <source>Rendu</source>
-        <translation type="unfinished"></translation>
+        <translation>Render</translation>
     </message>
     <message>
-        <location filename="src/gui/gui.cpp" line="254"/>
+        <location filename="src/gui/gui.cpp" line="289"/>
         <source>Le rendu est terminé</source>
+        <translation>Rendering finished</translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="312"/>
+        <source>Temps restant: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/gui/gui.cpp" line="270"/>
+        <location filename="src/gui/gui.cpp" line="314"/>
+        <source>h </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="316"/>
+        <source>m </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="318"/>
+        <source>s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="344"/>
+        <source>Aleatoire horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="345"/>
+        <source>Aleatoire vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="346"/>
+        <source>Aleatoire</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="357"/>
         <source>Quitter</source>
+        <translation>Quit</translation>
+    </message>
+    <message>
+        <location filename="src/gui/gui.cpp" line="361"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServerEntry</name>
+    <message>
+        <location filename="src/ServerEntry.cpp" line="113"/>
+        <source>Connection etablished to server &lt;strong&gt;%1:%2&lt;/strong&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ServerEntry.cpp" line="126"/>
+        <source>Connection to server &lt;strong&gt;%1:%2&lt;/strong&gt; closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ServerEntry.cpp" line="215"/>
+        <source>Network error(%1): %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServersListManager</name>
+    <message>
+        <location filename="src/ServersListManager.cpp" line="67"/>
+        <source>Cannot connect to cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/ServersListManager.cpp" line="74"/>
+        <source>Connected to cluster</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>editMaterialDialog</name>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="14"/>
+        <source>Edition matériaux</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="23"/>
+        <source>Materiel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="60"/>
+        <source>Couleurs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="69"/>
+        <source>Couleur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="92"/>
+        <source>Texture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="107"/>
+        <location filename="forms/editMaterialDialog.ui" line="398"/>
+        <location filename="forms/editMaterialDialog.ui" line="578"/>
+        <source>Répétition X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="117"/>
+        <location filename="forms/editMaterialDialog.ui" line="143"/>
+        <location filename="forms/editMaterialDialog.ui" line="382"/>
+        <location filename="forms/editMaterialDialog.ui" line="408"/>
+        <source>x</source>
+        <translation type="unfinished">x</translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="133"/>
+        <location filename="forms/editMaterialDialog.ui" line="424"/>
+        <location filename="forms/editMaterialDialog.ui" line="585"/>
+        <source>Répétition Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="159"/>
+        <location filename="forms/editMaterialDialog.ui" line="192"/>
+        <location filename="forms/editMaterialDialog.ui" line="608"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="174"/>
+        <location filename="forms/editMaterialDialog.ui" line="470"/>
+        <location filename="forms/editMaterialDialog.ui" line="618"/>
+        <source>...</source>
+        <translation type="unfinished">…</translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="184"/>
+        <location filename="forms/editMaterialDialog.ui" line="431"/>
+        <location filename="forms/editMaterialDialog.ui" line="501"/>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="197"/>
+        <location filename="forms/editMaterialDialog.ui" line="444"/>
+        <source>Bruit de perlin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="202"/>
+        <source>Effet Marbre</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="207"/>
+        <source>Effet Bois</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="212"/>
+        <source>Damier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="226"/>
+        <source>Propriétés</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="235"/>
+        <source>Spéculaire</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="255"/>
+        <source>Réflection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="272"/>
+        <source>Puissance spéculaire</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="292"/>
+        <source>Transmission</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="299"/>
+        <source>Indice de réfraction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="332"/>
+        <source>Réflection diffuse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="358"/>
+        <source>Déformations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="364"/>
+        <source>Bumpmapping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="439"/>
+        <location filename="forms/editMaterialDialog.ui" line="452"/>
+        <source>Heightmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="forms/editMaterialDialog.ui" line="486"/>
+        <source>Déformation procédurale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="509"/>
+        <source>Vagues X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="514"/>
+        <source>Vagues Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="519"/>
+        <source>Vagues Z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="527"/>
+        <source>Coefficient</source>
+        <translation type="unfinished">Coefficient</translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="550"/>
+        <source>Texture limitante</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="forms/editMaterialDialog.ui" line="650"/>
+        <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
