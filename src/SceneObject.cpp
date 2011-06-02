@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Wed Jun  1 23:21:21 2011 melvin laplanche
+// Last update Thu Jun  2 11:19:54 2011 loick michard
 //
 
 #include "Scene.hpp"
@@ -1329,7 +1329,7 @@ void			Scene::_parseObject(QDomNode n)
 	    && n.attributes().contains("lib") == true)
 	{
 	  lib3ds = n.attributes().namedItem("lib").nodeValue();
-	  if (lib3ds != "lib3ds" || lib3ds != "intern")
+	  if (lib3ds != "lib3ds" && lib3ds != "intern")
 	  {
 	    this->_putError(QObject::tr("The lib used for the a3ds element "
 					"is not supported"), n);
