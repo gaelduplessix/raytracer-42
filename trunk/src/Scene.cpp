@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Thu Jun  2 12:18:38 2011 melvin laplanche
+// Last update Thu Jun  2 16:21:06 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -201,6 +201,19 @@ void			Scene::_putWarning(QString	msg,
 					   QDomNode	n)
 {
   this->_putWarning(msg.toStdString(), n);
+}
+
+void			Scene::_putWarning(string		msg)
+{
+  if (this->_interface != NULL)
+    this->_interface->sendWarningMessage(msg + "\n");
+  else
+    cerr << QObject::tr("Warning: ").toStdString() << msg << endl;
+}
+
+void			Scene::_putWarning(QString	msg)
+{
+  this->_putWarning(msg.toStdString());
 }
 
 bool			Scene::_checkContentIsSingleText(QDomNode	n,
@@ -533,28 +546,23 @@ void		Scene::_clearOldScene(void)
   this->_parsingDone = false;
   size = this->_cameras.size();
   for (int i = 0; i < size; i++)
-  {
-    delete this->_cameras[0];
-    this->_cameras.erase(this->_cameras.begin());
-  }
+    delete this->_cameras[i];
+  this->_cameras.clear();
   size = this->_lights.size();
   for (int i = 0; i < size; i++)
-  {
-    delete this->_lights[0];
-    this->_lights.erase(this->_lights.begin());
-  }
+    delete this->_lights[i];
+  this->_lights.clear();
   size = this->_materials.size();
   for (int i = 0; i < size; i++)
-  {
-    delete this->_materials[0];
-    this->_materials.erase(this->_materials.begin());
-  }
+    delete this->_materials[i];
+  this->_materials.clear();
   size = this->_objects.size();
   for (int i = 0; i < size; i++)
   {
-    delete this->_objects[0];
-    this->_objects.erase(this->_objects.begin());
+    this->_objects[i]->freePrimitives();
+    delete this->_objects[i];
   }
+  this->_objects.clear();
 }
 
 void		Scene::loadFromFile(string		filename,

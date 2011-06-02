@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Wed Jun  1 22:14:16 2011 melvin laplanche
+// Last update Thu Jun  2 15:36:52 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -119,6 +119,8 @@ private:
   Rotation		_parseRotation(QDomNode);
   bool			_checkContentIsSingleText(QDomNode, string);
   void			_putWarning(string, QDomNode);
+  void			_putWarning(string);
+  void			_putWarning(QString);
   void			_putWarning(QString, QDomNode);
   void			_putError(string, QDomNode);
   void			_putError(QString, QDomNode);

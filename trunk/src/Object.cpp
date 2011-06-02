@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:53:38 2011 loick michard
-// Last update Wed May 11 16:04:46 2011 samuel olivier
+// Last update Thu Jun  2 15:52:09 2011 melvin laplanche
 //
 
 #include "Object.hpp"
@@ -15,6 +15,20 @@ Object::Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
   _primitives(primitives), _rotation(rotation), _position(position),
   _isSolid(isSolid)
 {
+}
+
+Object::~Object(void)
+{
+
+}
+
+void	Object::freePrimitives(void)
+{
+  int	size = _primitives.size();
+
+  for (int i = 0; i < size; i++)
+    delete _primitives[i];
+  _primitives.clear();
 }
 
 Object::Object(void)
@@ -67,6 +81,7 @@ void			Object::addPrimitive(ObjectPrimitive* primitive)
 
 void			Object::removePrimitiveAtIndex(int index)
 {
+  delete _primitives[index];
   _primitives.erase(_primitives.begin() + index);
 }
 

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Sat May 21 10:42:27 2011 loick michard
+// Last update Thu Jun  2 14:25:36 2011 melvin laplanche
 //
 
 #ifndef _OBJECT_HPP_
@@ -27,7 +27,9 @@ public:
   	 const Point& position, bool isSolid);
 
   Object(void);
+  ~Object(void);
 
+  void					freePrimitives(void);
   int					getNbPrimitives() const;
   const ObjectPrimitive&		getPrimitiveAtIndex(int index) const;
   const vector<ObjectPrimitive*>&	getPrimitives(void) const;
