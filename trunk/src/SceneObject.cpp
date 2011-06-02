@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu Jun  2 12:02:39 2011 loick michard
+// Last update Thu Jun  2 12:40:37 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1122,17 +1122,13 @@ void		Scene::_parse3dsLib3ds(string	filename,
       Point		z(mesh->pointL[face->points[2]].pos[0],
 			  mesh->pointL[face->points[2]].pos[1],
 			  mesh->pointL[face->points[2]].pos[2]);
-      Triangle *triangle = new Triangle(obj, x, 
-					mat
-					, y, z);
-      //cout<<"["<<x._x<< " "<<x._y << " "<<x._z<<endl;
-      //cout<<y._x<< " "<<y._y << " "<<y._z<<endl;
-      //cout<<z._x<< " "<<z._y << " "<<z._z<<"]"<<endl;
+      Triangle *triangle = new Triangle(obj, x, mat, y, z);
       obj->addPrimitive(triangle);
       ++finishedFaces;
     }
   }
   this->_objects.push_back(obj);
+  delete normals;
   lib3ds_file_free(file);
 }
 
