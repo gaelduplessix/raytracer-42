@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu Jun  2 12:40:37 2011 melvin laplanche
+// Last update Thu Jun  2 16:35:25 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1102,16 +1102,48 @@ void		Scene::_parse3dsLib3ds(string	filename,
     this->_putError(QObject::tr("Loading %1 failed.").arg(filename.c_str()));
     return ;
   }
+  lib3ds_file_eval(file, 0);
   for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
     nbFaces += mesh->faces;
-  Lib3dsVector	*normals = new Lib3dsVector[nbFaces * 3];
+  this->_putInfo(QObject::tr("%1 faces retreived").arg(nbFaces));
   int		finishedFaces = 0;
-  Material *mat = new Material("caca");
   for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
   {
-    lib3ds_mesh_calculate_normals(mesh, &normals[finishedFaces * 3]);
     for (unsigned int currFace=0; currFace<mesh->faces; currFace++)
     {
+      Material *mat = new Material("$$$none");
+      if (mesh->texels)
+      {
+	Lib3dsFace	*f = &mesh->faceL[currFace];
+	if (f->material[0] != 0)
+	{
+	  delete mat;
+	  Lib3dsMaterial *m = lib3ds_file_material_by_name(file, f->material);
+	  if (this->_materialExists(m->name) == false)
+	  {
+	    Material	*mat = new Material(m->name);
+	    string	textName;
+
+	    mat->setColor(Color(m->diffuse[0] * 255, m->diffuse[1] * 255,
+				m->diffuse[2] * 255, m->diffuse[3] * 255));
+	    if (textDir.empty())
+	      textName = m->texture1_map.name;
+	    else
+	      textName = textDir + "/" + m->texture1_map.name;
+	    if (QFileInfo(textName.c_str()).exists() == false)
+	    {
+	      this->_putWarning(QObject::tr("texture %1 (a3ds) not found.")
+				.arg(textName.c_str()));
+	      mat->setTexture(NULL);
+	    }
+	    else
+	      mat->setTexture(new Texture(textName));
+	    this->_materials.push_back(mat);
+	  }
+	  else
+	    mat = this->_getMaterialByName(m->name);
+	}
+      }
       Lib3dsFace	*face = &mesh->faceL[currFace];
       Point		x(mesh->pointL[face->points[0]].pos[0],
 			  mesh->pointL[face->points[0]].pos[1],
@@ -1128,88 +1160,8 @@ void		Scene::_parse3dsLib3ds(string	filename,
     }
   }
   this->_objects.push_back(obj);
-  delete normals;
   lib3ds_file_free(file);
 }
-
-/*void		Scene::_parse3dsLib3ds(string	filename,
-				       string	textDir)
-{
-  Lib3dsFile	*file = NULL;
-
-  if ((file = lib3ds_file_load(filename.c_str())) == NULL)
-  {
-    this->_putError(QObject::tr("Loading %1 failed.").arg(filename.c_str()));
-    return ;
-  }
-  if (file->nodes == NULL)
-  {
-    Lib3dsNode	*node;
-
-    for (Lib3dsMesh *mesh = file->meshes; mesh != NULL; mesh = mesh->next)
-    {
-      node = lib3ds_node_new_object();
-      strcpy(node->name, mesh->name);
-      node->parent_id = LIB3DS_NO_PARENT;
-      lib3ds_file_insert_node(file, node);
-    }
-  }
-  lib3ds_file_eval(file, 1.0f);
-  lib3ds_file_eval(file, 0.);
-  for (Lib3dsNode *n = file->nodes; n!=NULL; n=n->next)
-  {
-    if (n->type == LIB3DS_OBJECT_NODE)
-    {
-      Lib3dsMesh	*mesh;
-      if (strcmp(n->name, "$$$DUMMY") == 0)
-	continue ;
-      mesh = lib3ds_file_mesh_by_name(file, n->data.object.morph);
-      if (mesh == NULL)
-	mesh = lib3ds_file_mesh_by_name(file, n->name);
-      if (!mesh->user.d)
-      {
-	{
-	  Lib3dsMaterial	*oldmat;
-
-	  oldmat = (Lib3dsMaterial *)-1;
-
-	  lib3ds_mesh_calculate_normals(mesh, normalL);
-	  for (unsigned int p=0; p<mesh->faces; ++p)
-	  {
-	    Lib3dsFace		*f = &mesh->faceL[p];
-	    Lib3dsMaterial	*mat = NULL;
-
-	    if (f->material[0])
-	      mat = lib3ds_file_material_by_name(file, f->material);
-	    if (mat != oldmat)
-	    {
-	      if (mat)
-	      {
-		if (mat->texture1_map.name[0])
-		{
-		  Lib3dsTextureMap *tex = &mat->texture1_map;
-		  if (!tex->user.p)
-		  {
-		    char textname[1024];
-		    strcpy(textname, textDir.c_str());
-		    strcpy(textname, "/");
-		    strcpy(textname, tex->name);
-
-		    // create Material HERE
-		  }
-		}
-		oldmat = mat;
-	      }
-	    }
-	  }
-	}
-	if (mesh->user.d)
-	{
-	}
-      }
-    }
-  }
-}*/
 
 void		Scene::_parse3dsIntern(string	filename,
 				       string	textDir)

@@ -1,17 +1,16 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-50, 0, 0</position>
+      <position>-250, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
     </camera>
   </cameras>
   <objects>
     <a3ds lib="lib3ds">
       <filename>3ds_models/female/female.3ds</filename>
-      <filename>3ds_models/female/</filename>
+      <textureDir>3ds_models/female/</textureDir>
     </a3ds>
   </objects>
-
   <lights>
     <light type="spot">
       <position>-50,1,0</position>

@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 18:30:51 2011 melvin laplanche
-// Last update Wed Jun  1 15:51:31 2011 melvin laplanche
+// Last update Thu Jun  2 16:01:05 2011 melvin laplanche
 
 #include "A3DSParser.hpp"
 
@@ -20,22 +20,16 @@ void	A3DSParser::_clearObjects(void)
     this->_file.close();
   size = this->_lights.size();
   for (int i = 0; i < size; i++)
-  {
-    delete this->_lights[0];
-    this->_lights.erase(this->_lights.begin());
-  }
+    delete this->_lights[i];
+  this->_lights.clear();
   size = this->_materials.size();
   for (int i = 0; i < size; i++)
-  {
-    delete this->_materials[0];
-    this->_materials.erase(this->_materials.begin());
-  }
+    delete this->_materials[i];
+  this->_materials.clear();
   size = this->_meshes.size();
   for (int i = 0; i < size; i++)
-  {
-    delete this->_meshes[0];
-    this->_meshes.erase(this->_meshes.begin());
-  }
+    delete this->_meshes[i];
+  this->_meshes.clear();
 }
 
 A3DSParser::~A3DSParser(void)

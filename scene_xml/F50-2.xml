@@ -1,0 +1,29 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>-150000, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <target>0, 0, 0</target>
+    </camera>
+  </cameras>
+  <objects>
+    <a3ds lib="lib3ds">
+      <filename>3ds_models/F50-2.3ds</filename>
+    </a3ds>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>-150000,1,0</position>
+      <color>100,180,110</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>-100000, 2, 2</position>
+      <color>160,120,155</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>
