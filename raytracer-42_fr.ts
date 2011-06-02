@@ -6,37 +6,37 @@
     <message>
         <location filename="forms/About.ui" line="14"/>
         <source>A propos</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos</translation>
     </message>
     <message>
         <location filename="forms/About.ui" line="43"/>
         <source>Raytracer 42</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/About.ui" line="101"/>
         <source>Gael Du Plessix</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/About.ui" line="146"/>
         <source>Loick Michard</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/About.ui" line="191"/>
         <source>Melvin Laplanche</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/About.ui" line="236"/>
         <source>Samuel Olivier</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/About.ui" line="281"/>
         <source>Franck Lavisse</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -90,32 +90,32 @@
     <message utf8="true">
         <location filename="forms/connectToServer.ui" line="14"/>
         <source>Se connecter à un cluster</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/connectToServer.ui" line="30"/>
         <source>Informations Cluster</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/connectToServer.ui" line="36"/>
         <source>http://perso.epitech.eu/~jochau_g/raytracer/</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/connectToServer.ui" line="43"/>
         <source>Adresse du cluster</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="forms/connectToServer.ui" line="50"/>
         <source>Nombre de subdivisions</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message utf8="true">
         <location filename="forms/connectToServer.ui" line="57"/>
         <source>0: Sélection automatique</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -123,17 +123,17 @@
     <message>
         <location filename="src/gui/guiEditMaterialDialog.cpp" line="207"/>
         <source>Selectionez une Texture</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/gui/guiEditMaterialDialog.cpp" line="219"/>
         <source>Selectionez une Texture limitante</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/gui/guiEditMaterialDialog.cpp" line="233"/>
         <source>Selectionez une heightmap</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -141,7 +141,7 @@
     <message>
         <location filename="forms/launchServerDialog.ui" line="14"/>
         <source>Selectionnez un cluster</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionnez un cluster</translation>
     </message>
     <message>
         <location filename="forms/launchServerDialog.ui" line="20"/>
@@ -198,7 +198,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="forms/raytracer.ui" line="152"/>
         <source>Temps restant: 0h 0m 0s</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps restant: 0h 0m 0s</translation>
     </message>
     <message>
         <location filename="forms/raytracer.ui" line="178"/>
@@ -223,12 +223,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="forms/raytracer.ui" line="213"/>
         <source>&amp;Aide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aide</translation>
     </message>
     <message>
         <location filename="forms/raytracer.ui" line="241"/>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration</translation>
     </message>
     <message utf8="true">
         <location filename="forms/raytracer.ui" line="289"/>
@@ -334,7 +334,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="forms/raytracer.ui" line="551"/>
         <source> Rendu 3D</source>
-        <translation type="unfinished"></translation>
+        <translation> Rendu 3D</translation>
     </message>
     <message>
         <location filename="forms/raytracer.ui" line="577"/>
@@ -344,17 +344,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="forms/raytracer.ui" line="592"/>
         <source>Anaglyphe Bleu/Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Anaglyphe Bleu/Cyan</translation>
     </message>
     <message>
         <location filename="forms/raytracer.ui" line="597"/>
         <source>Oeuil gauche</source>
-        <translation type="unfinished"></translation>
+        <translation>Œuil gauche</translation>
     </message>
     <message>
         <location filename="forms/raytracer.ui" line="602"/>
         <source>Oeuil droit</source>
-        <translation type="unfinished"></translation>
+        <translation>Œuil droit</translation>
     </message>
     <message utf8="true">
         <location filename="forms/raytracer.ui" line="656"/>
@@ -497,7 +497,7 @@ p, li { white-space: pre-wrap; }
         <location filename="forms/raytracer.ui" line="1540"/>
         <source>Se &amp;connecter à un cluster</source>
         <comment>test</comment>
-        <translation type="unfinished">Se &amp;connecter à un cluster</translation>
+        <translation>Se &amp;connecter à un cluster</translation>
     </message>
     <message>
         <location filename="forms/raytracer.ui" line="1546"/>
@@ -696,7 +696,7 @@ p, li { white-space: pre-wrap; }
         <location filename="forms/Preferences.ui" line="169"/>
         <location filename="forms/Preferences.ui" line="204"/>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <location filename="forms/Preferences.ui" line="59"/>
@@ -726,12 +726,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="forms/Preferences.ui" line="124"/>
         <source>Cluster</source>
-        <translation type="unfinished"></translation>
+        <translation>Cluster</translation>
     </message>
     <message>
         <location filename="forms/Preferences.ui" line="130"/>
         <source>Serveur</source>
-        <translation type="unfinished">Serveur</translation>
+        <translation>Serveur</translation>
     </message>
     <message>
         <location filename="forms/Preferences.ui" line="136"/>
@@ -746,7 +746,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="forms/Preferences.ui" line="188"/>
         <source>Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Client</translation>
     </message>
     <message>
         <location filename="forms/Preferences.ui" line="194"/>
@@ -756,7 +756,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="forms/Preferences.ui" line="243"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1961,7 +1961,7 @@ Etes-vous sur de vouloir fermer la fenetre ?</translation>
         <location filename="forms/editMaterialDialog.ui" line="470"/>
         <location filename="forms/editMaterialDialog.ui" line="618"/>
         <source>...</source>
-        <translation type="unfinished">…</translation>
+        <translation>…</translation>
     </message>
     <message>
         <location filename="forms/editMaterialDialog.ui" line="184"/>
