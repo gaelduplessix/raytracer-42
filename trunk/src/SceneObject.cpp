@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Fri Jun  3 13:36:11 2011 melvin laplanche
+// Last update Fri Jun  3 13:41:33 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1192,8 +1192,10 @@ void		Scene::_parse3dsIntern(string	filename,
 	Material *mat = new Material(materials[i]->getName());
 	string textureName;
 
-	color = materials[i]->getAmbientColor();
+	color = materials[i]->getDiffuseColor();
 	mat->setColor(Color(color[0], color[1], color[2], color[3]));
+	mat->setSpecularPow(materials[i]->getShininessStrength());
+	mat->setSpecularCoeff(materials[i]->getShininess());
 	if (materials[i]->getTextureName().empty() == false)
 	{
 	  if (textDir.empty() == false)
