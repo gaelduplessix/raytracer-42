@@ -135,6 +135,82 @@ La gui dispose de 3 fonctions pour g\'erer le d\'eroulement de votre rendu :
  \item [Mettre en pause :] Cette commande \`a pour effet de mettre en pause le rendu, ce dernier peut \^etre repris par la suite
  \item [Stopper :] Cette commande stoppe le rendu, il n'est plus possible de reprendre ce dernier. A utiliser pour changer de sc\`ene ou reconfigurer.
 \end{description}
-\chapter{Cluster}
-A venir
+\part{Fichiers .xml}
+\chapter{Les mat\'eriaux}
+Il est possible de cr\'eer des mat\'eriaux \`a l'aide d'un fichier xml, ils sont enti\`erement configurables \`a l'aide de diff\'erentes balises.
+\section{Syntaxe}
+Les mat\'eriaux doivent \^etre d\'eclar\'es entre les balises <materials></materials> \`a l'aide de la balise <material name="..."></material>
+\newline Il est possible de d\'eclarer plusieurs mat\'eriaux \`a l'int\`erieur d'une balise <materials>.
+\newline Les options du mat\'eriel se d\'eclareront de la mani\`ere <option>...</option>.
+\section{Couleur}
+On peut d\'efinir la couleur avec la balise <color>, elle peut \^etre indiqu\'e sous la forme R,G,B ou en hexadecimal.
+\newline Exemple : <color>200,120,255<color> ou encore <color>FFFFFF</color>.
+\section{Lumi\`ere sp\'eculaire}
+On peut d\'efinir la lumi\`ere sp\'eculaire avec la balise <specular> (valeur entre 0 et 1), et sa puissance avec <specularPow>.
+\section{R\'eflection et r\'efraction}
+On peut d\'efinir la r\'eflection avec la balise <reflection> et une valeur comprise entre 0 et 1.
+\newline Pour la r\'eflection diffuse on utilise <diffusedReflection> avec la valeur 1 (true).
+\newline On peut aussi d\'efinir la profondeur de la r\'eflection avec <refractionIndex> suivis d'une valeur.
+\newline Exemple :
+\newline <specular>0.5</specular>\newline <specularPow>50</specularPow>\newline<reflection>1</reflection>\newline<refractionIndex>5</refractionIndex>\newline<diffusedReflection>1</diffusedReflection>
+\chapter{Les objets}
+On peut d\'efinir les objets entre les balises <objects> et </objects>, et dans la sous-balise <primitives>.
+\newline Syntaxe : <objects>\newline<primitives>\newline</primitives>\newline</objects>.
+\section{Les sph\`eres, les cylindres, les c\^ones et les cubes trou\'es}
+Pour d\'efinir une sph\`ere on la d\'eclare avec la balise <primitive type="sphere" mat\'erial="...">.
+\newline Une sph\`ere est d\'efinie par :
+\begin{description}
+ \item [Sa position :] Avec la balise <position> sous la forme <position>x,y,z</position>.
+ \item [Sa rotation :] Avec la balise <rotation type="degree" ou "radian">x,y,z</rotation>.
+ \item [Son rayon :] Avec la balise <radius>x</radius>.
+\end{description}
+Les cylindres et les c\^ones se d\'efinissent de la m\^eme mani\`ere en d\'eclarant type="cylinder" ou type="cone" au lieu de type="sph\`ere".
+\newline Il en est de m\^eme pour les cubes trou\'es avec type="cubeTroue".
+\section{Les plans}
+Pour d\'efinir un plan on le d\'eclare avec la balise <primitive type="plane" mat\'erial="...">.
+\newline Un plan est d\'efinie par :
+\begin{description}
+ \item [Sa position :] Avec la balise <position> sous la forme <position>x,y,z</position>.
+ \item [Sa rotation :] Avec la balise <rotation type="degree" ou "radian">x,y,z</rotation>.
+\end{description}
+\section{Les tores}
+Pour d\'efinir un tore on utilise la balise <primitive type="torus" mat\'erial="...">.
+\newline Un tore est d\'efinie par :
+\begin{description}
+ \item [Sa position :] Avec la balise <position> sous la forme <position>x,y,z</position>.
+ \item [Sa rotation :] Avec la balise <rotation type="degree" ou "radian">x,y,z</rotation>.
+ \item [Son cercle mineur :] Avec la balise <minor>x</minor>.
+ \item [Son cercle majeur :] Avec la balise <major>x</major>.
+\end{description}
+\section{Les parall\'el\'epip\`edes}
+On peut d\'efinir un parall\'el\'epip\`ede sans balise <object> il suffit de d\'eclarer <parallelepipede mat\'erial="...">.
+\newline Un parall\'el\'epip\`ede est d\'efinie par :
+\begin{description}
+ \item [Sa position :] Avec la balise <position> sous la forme <position>x,y,z</position>.
+ \item [Sa rotation :] Avec la balise <rotation type="degree" ou "radian">x,y,z</rotation>.
+ \item [Sa largeur :] Avec la balise <width>0,y,0</width>.
+ \item [Sa profondeur :] Avec la balise <depth>x,0,0</depth>.
+ \item [Sa hauteur :] Avec la balise <height>0,0,z</height>.
+\end{description}
+\chapter{Les lumi\`eres}
+On peu d\'efinir des lumi\`eres avec un fichier .xml, apr\`es les objets, avec la balise <lights>.
+\section{Les spots}
+Pour d\'eclarer un spot on utilise la balise <light type="spot">.
+\newline Un spot est d\'efinie par :
+\begin{description}
+ \item [Sa position :] Avec la balise <position>x,y,z</position>.
+ \item [Sa couleur :] Avec la balise <color>R,G,B</color> ou <color>hexa</color>.
+ \item [Sa lumi\`ere direct :] <directLight>3000</directLight>.
+ \item [Son intensit\'e :] Avec la balise <intensity>x</intensity>.
+\end{description}
+\section{Les parall\'elogrammes}
+Pour d\'eclarer une lumi\`ere avec un parallelogramme on utilise <light type="parallelogram">.
+Un parallelogramme est d\'efinie par :
+\begin{description}
+ \item [Un point :] Avec la balise <point>x,y,z</point>.
+ \item [Deux vecteurs :] Avec les balises <vector1>x,y,z</vector1> et <vector2>x,y,z</vector2>.
+ \item [Sa couleur :] Avec la balise <color>R,G,B</color> ou <color>hexa</color>.
+ \item [Sa lumi\`ere direct :] <directLight>3000</directLight>.
+ \item [Son intensit\'e :] Avec la balise <intensity>x</intensity>.
+\end{description}
 \end{document}

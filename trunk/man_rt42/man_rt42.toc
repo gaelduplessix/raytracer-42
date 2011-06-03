@@ -44,4 +44,17 @@
 \contentsline {section}{\numberline {9.2}Enregistrer un rendu termin\'e}{15}
 \contentsline {section}{\numberline {9.3}Quitter et mettre la GUI en background}{15}
 \contentsline {chapter}{\numberline {10}G\'erer le d\'eroulement du rendu}{16}
-\contentsline {chapter}{\numberline {11}Cluster}{17}
+\contentsline {part}{IV\hspace {1em}Fichiers .xml}{17}
+\contentsline {chapter}{\numberline {11}Les mat\'eriaux}{18}
+\contentsline {section}{\numberline {11.1}Syntaxe}{18}
+\contentsline {section}{\numberline {11.2}Couleur}{18}
+\contentsline {section}{\numberline {11.3}Lumi\`ere sp\'eculaire}{18}
+\contentsline {section}{\numberline {11.4}R\'eflection et r\'efraction}{18}
+\contentsline {chapter}{\numberline {12}Les objets}{20}
+\contentsline {section}{\numberline {12.1}Les sph\`eres, les cylindres, les c\^ones et les cubes trou\'es}{20}
+\contentsline {section}{\numberline {12.2}Les plans}{20}
+\contentsline {section}{\numberline {12.3}Les tores}{21}
+\contentsline {section}{\numberline {12.4}Les parall\'el\'epip\`edes}{21}
+\contentsline {chapter}{\numberline {13}Les lumi\`eres}{22}
+\contentsline {section}{\numberline {13.1}Les spots}{22}
+\contentsline {section}{\numberline {13.2}Les parall\'elogrammes}{22}
