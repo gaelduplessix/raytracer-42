@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Tue May 17 18:30:51 2011 melvin laplanche
-// Last update Thu Jun  2 16:01:05 2011 melvin laplanche
+// Last update Fri Jun  3 15:11:14 2011 melvin laplanche
 
 #include "A3DSParser.hpp"
 
@@ -73,16 +73,16 @@ void	A3DSParser::_putError(QString	msg)
   this->_hasError = true;
   if (this->_interface != NULL)
     this->_interface->sendErrorMessage(msg.toStdString());
-  else
-    cerr << "Parse error: " << msg.toStdString() << endl;
+  /*else
+    cerr << "Parse error: " << msg.toStdString() << endl;*/
 }
 
 void	A3DSParser::_putInfo(QString	msg)
 {
   if (this->_interface != NULL)
     this->_interface->sendMessage(msg.toStdString());
-  else
-    cerr << "Info: " << msg.toStdString() << endl;
+  /*else
+    cerr << "Info: " << msg.toStdString() << endl;*/
 }
 
 void	A3DSParser::loadFile(string	filename)
@@ -140,11 +140,11 @@ void		A3DSParser::_parse(void)
       this->_putInfo(QObject::tr("3ds version: %1").arg(c.getInt()));
     else if (c.getId() == A3DSChunk::EDITOR3D_ID)
       this->_parseEditor3D(c.firstChild());
-    else
+    /*else
     {
       cerr << "Unsused main chunk :" << hex << c.getId();
       cerr << " (" << dec << c.getId() << ")" << endl;
-    }
+      }*/
     c = c.nextSibling();
   }
 }
@@ -157,18 +157,18 @@ void		A3DSParser::_parseEditor3D(A3DSChunk	c)
       this->_parseMaterial(c.firstChild());
     else if (c.getId() == A3DSChunk::OBJECT_ID)
       this->_parseObject(c);
-    else
+    /*else
     {
       cerr << "Unsused editor chunk :" << hex << c.getId();
       cerr << " (" << dec << c.getId() << ")" << endl;
-    }
+      }*/
     c = c.nextSibling();
   }
 }
 
 void		A3DSParser::_parseMaterial(A3DSChunk	c)
 {
-  cerr << "MATERIAL" << endl;
+  //cerr << "MATERIAL" << endl;
   this->_materials.push_back(new A3DSMaterial(c));
 }
 
@@ -194,12 +194,12 @@ void		A3DSParser::_parseObject(A3DSChunk	parent)
 	  this->_parseMesh(name, cc);
 	else if (cc.getId() == A3DSChunk::LIGHT_ID)
 	  this->_parseLight(name, cc);
-	else
+	/*else
 	{
 	  cerr << "Unsused unknown chunk :" << hex << cc.getId();
 	  cerr << " (" << dec << cc.getId() << ")" << endl;
 	  //this->_parseObject(c);
-	}
+	  }*/
       }
     }
     c = c.nextSibling();
@@ -209,14 +209,14 @@ void		A3DSParser::_parseObject(A3DSChunk	parent)
 void	A3DSParser::_parseLight(string		name,
 				A3DSChunk	c)
 {
-  cerr << "LIGHT" << endl;
+  //cerr << "LIGHT" << endl;
   this->_lights.push_back(new A3DSLight(name, c));
 }
 
 void	A3DSParser::_parseMesh(string		name,
 			       A3DSChunk	c)
 {
-  cerr << "MESH" << endl;
+  //cerr << "MESH" << endl;
   this->_meshes.push_back(new A3DSMesh(name, c.firstChild()));
 }
 

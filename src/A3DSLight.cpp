@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Sun May 22 16:08:31 2011 melvin laplanche
-// Last update Fri May 27 18:55:04 2011 melvin laplanche
+// Last update Fri Jun  3 15:11:28 2011 melvin laplanche
 //
 
 #include "A3DSLight.hpp"
@@ -30,11 +30,11 @@ A3DSLight::A3DSLight(string	name,
       this->_target.setY(c.getFloat());
       this->_target.setZ(c.getFloat());
     }
-    else
+    /*else
     {
       cerr << "Unsused light chunk :" << hex << c.getId();
       cerr << " (" << dec << c.getId() << ")" << endl;
-    }
+      }*/
     c = c.nextSibling();
   }
 }
