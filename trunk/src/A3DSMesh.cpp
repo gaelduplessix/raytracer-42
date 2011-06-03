@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 25 18:28:47 2011 melvin laplanche
-// Last update Mon May 30 12:12:17 2011 melvin laplanche
+// Last update Fri Jun  3 15:12:18 2011 melvin laplanche
 //
 
 #include "A3DSMesh.hpp"
@@ -26,11 +26,11 @@ A3DSMesh::A3DSMesh(string	name,
       this->_parseFaces(c);
     else if (c.getId() == A3DSChunk::MAPPING_COORD_ID)
       this->_parseTextCoord(c);
-    else
+    /*else
     {
       cerr << "Unsused mesh chunk :" << hex << c.getId();
       cerr << " (" << dec << c.getId() << ")" << endl;
-    }
+      }*/
     c = c.nextSibling();
   }
 }

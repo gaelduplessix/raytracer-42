@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Fri Jun  3 13:41:33 2011 melvin laplanche
+// Last update Fri Jun  3 16:11:23 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -116,14 +116,11 @@ EquationPrimitive*		Scene::_parseEquation(QDomNode n,
   }
   try
   {
-    cerr << "equation try" << endl;
     ret =  new EquationPrimitive(equationValue, obj,
 				 positionValue, rotationValue, mat);
-    cerr << "equation try over" << endl;
   }
   catch (int error)
   {
-    cerr << "equation catch" << endl;
     this->_putError(QObject::tr("The equation is not valid"), equationNode);
     ret = NULL;
   }
@@ -1104,7 +1101,6 @@ void		Scene::_parse3dsLib3ds(string	filename,
     return ;
   }
   this->_sceneFilenames.push_back(filename.c_str());
-  cerr << filename << endl;
   lib3ds_file_eval(file, 0);
   for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
     nbFaces += mesh->faces;
@@ -1130,6 +1126,8 @@ void		Scene::_parse3dsLib3ds(string	filename,
 	    mat->setSpecularPow(m->shin_strength);
 	    mat->setSpecularCoeff(m->shininess);
 	    mat->setReflectionCoeff(m->reflection_map.percent / 100);
+	    mat->setColor(Color(m->diffuse[0] * 255, m->diffuse[1] * 255,
+				m->diffuse[2] * 255, m->diffuse[3] * 255));
 	    mat->setColor(Color(m->diffuse[0] * 255, m->diffuse[1] * 255,
 				m->diffuse[2] * 255, m->diffuse[3] * 255));
 	    if (textDir.empty())
@@ -1161,6 +1159,12 @@ void		Scene::_parse3dsLib3ds(string	filename,
 			  mesh->pointL[face->points[2]].pos[1],
 			  mesh->pointL[face->points[2]].pos[2]);
       Triangle *triangle = new Triangle(obj, x, mat, y, z);
+      if (mesh->texels == mesh->points)
+      {
+	triangle->setTextureVertex1((Point&)mesh->texelL[0]);
+	triangle->setTextureVertex2((Point&)mesh->texelL[2]);
+	triangle->setTextureVertex3((Point&)mesh->texelL[3]);
+      }
       obj->addPrimitive(triangle);
       ++finishedFaces;
     }
@@ -1173,7 +1177,7 @@ void		Scene::_parse3dsIntern(string	filename,
 				       string	textDir)
 {
   A3DSParser	a3ds(Resources::getInstance()
-		     ->getNewPathName(filename), this->_interface);
+		       ->getNewPathName(filename), this->_interface);
   if (a3ds.hasError() == false)
   {
     this->_sceneFilenames.push_back(QString(filename.c_str()));

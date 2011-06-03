@@ -1,0 +1,28 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>-250, 0, 10</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+  <objects>
+    <a3ds lib="lib3ds">
+      <filename>3ds_models/Nanosuit/nanosuit2.3ds</filename>
+      <textureDir>3ds_models/Nanosuit/tex</textureDir>
+    </a3ds>
+  </objects>
+  <lights>
+    <light type="spot">
+      <position>-50,1,0</position>
+      <color>100,180,110</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>-50, 2, 2</position>
+      <color>160,120,155</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>
