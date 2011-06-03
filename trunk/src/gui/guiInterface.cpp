@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed Jun  1 18:33:11 2011 loick michard
+// Last update Fri Jun  3 10:44:21 2011 loick michard
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -234,6 +234,7 @@ void    RaytracerGUI::startRender()
       _ui->_height->setEnabled(false);
       _ui->_threads->setEnabled(false);
       _ui->action_Play->setEnabled(false);
+      _ui->_kdTree->setEnabled(false);
       if (!_timer->isActive())
 	{
 	  _timer->setSingleShot(false);
