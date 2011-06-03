@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu Jun  2 22:39:33 2011 melvin laplanche
+// Last update Fri Jun  3 13:36:11 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1103,7 +1103,8 @@ void		Scene::_parse3dsLib3ds(string	filename,
     this->_putError(QObject::tr("Loading %1 failed.").arg(filename.c_str()));
     return ;
   }
-  this->_sceneFilenames.push_back(QString(filename.c_str()));
+  this->_sceneFilenames.push_back(filename.c_str());
+  cerr << filename << endl;
   lib3ds_file_eval(file, 0);
   for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
     nbFaces += mesh->faces;
@@ -1126,6 +1127,9 @@ void		Scene::_parse3dsLib3ds(string	filename,
 	    Material	*mat = new Material(m->name);
 	    string	textName;
 
+	    mat->setSpecularPow(m->shin_strength);
+	    mat->setSpecularCoeff(m->shininess);
+	    mat->setReflectionCoeff(m->reflection_map.percent / 100);
 	    mat->setColor(Color(m->diffuse[0] * 255, m->diffuse[1] * 255,
 				m->diffuse[2] * 255, m->diffuse[3] * 255));
 	    if (textDir.empty())
