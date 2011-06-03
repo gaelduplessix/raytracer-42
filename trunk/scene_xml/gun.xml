@@ -7,7 +7,7 @@
     </camera>
   </cameras>
   <objects>
-    <a3ds>
+    <a3ds lib="lib3ds">
       <filename>3ds_models/Gun/M4a1an Pws4.3ds</filename>
       <textureDir>3ds_models/Gun</textureDir>
     </a3ds>
