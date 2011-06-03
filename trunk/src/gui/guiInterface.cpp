@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Fri Jun  3 10:44:21 2011 loick michard
+// Last update Fri Jun  3 13:43:24 2011 loick michard
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -39,7 +39,12 @@ void RaytracerGUI::closeEvent(QCloseEvent *event)
 void RaytracerGUI::realQuit()
 {
   if (!_isRendering)
-    qApp->quit();
+    {
+      _raytracer->stopRendering();
+      _timer->stop();
+      _clusterTimer->stop();
+      qApp->quit();
+    }
   else
     {
       int ret =
@@ -51,6 +56,7 @@ void RaytracerGUI::realQuit()
                              QMessageBox::Cancel);
       if (ret == QMessageBox::Yes)
 	{
+	  _clusterTimer->stop();
           _raytracer->stopRendering();
 	  qApp->quit();
         }
