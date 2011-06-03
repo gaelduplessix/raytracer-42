@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Thu Jun  2 22:26:37 2011 melvin laplanche
+// Last update Thu Jun  2 22:39:33 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1094,8 +1094,7 @@ void		Scene::_parse3dsLib3ds(string	filename,
 				       string	textDir)
 {
   Lib3dsFile	*file = lib3ds_file_load(Resources::getInstance()
-					 ->getNewPathName(filename).c_str()
-					 /*filename.c_str()*/);
+					 ->getNewPathName(filename).c_str());
   int		nbFaces = 0;
   Object	*obj = new Object();
 
