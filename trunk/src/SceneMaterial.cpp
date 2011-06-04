@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Sat Jun  4 17:18:18 2011 melvin laplanche
+// Last update Sat Jun  4 18:29:53 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -297,7 +297,6 @@ void			Scene::_parseMaterials(QDomNode n)
 QString			Scene::_parseTextureType(QDomNode n,
 						 string	  obj_name)
 {
-  //PerlinNoise		*perlin = new PerlinNoise();
   QString		attrValue;
 
   if (n.hasAttributes() == false || n.attributes().contains("type") == false)
@@ -307,28 +306,9 @@ QString			Scene::_parseTextureType(QDomNode n,
     return attrValue;
   }
   attrValue = n.attributes().namedItem("type").nodeValue();
-  if (attrValue == "procedural" && attrValue == "file")
+  if (attrValue != "procedural" && attrValue != "file")
     this->_putError(QObject::tr("Wrong texture type"), n);
   return attrValue;
-
-  /*
-  if (attrValue == "procedural")
-  {
-    if (value == "marble")
-      perlin->setMarbleProperties();
-    else if (value == "wood")
-      perlin->setWoodProperties();
-    else if (value == "checkerboard")
-      return (new CheckerBoard());
-    else if (value != "perlin")
-    this->_putError(QObject::tr("%1 is not a valid texture").arg(value), n);
-    return perlin;
-  }
-  else if (attrValue == "file")
-    return new Texture(this->_parseFile(n, obj_name));
-    this->_putError(QObject::tr("normalDeformation type must be an integer"), n);
-  return (perlin);
-  */
 }
 
 Texture*		Scene::_parseTextureSetTexture(QString type,
@@ -354,17 +334,22 @@ Texture*		Scene::_parseTextureSetTexture(QString type,
     return new Texture(this->_parseFile(n, "texture"));
 }
 
-Texture*	Scene::_parseTexture(QDomNode	n,
+Texture*	Scene::_parseTexture(QDomNode	parent,
 				     string	obj_name)
 {
   Texture*	tex = NULL;
-  QString	type = this->_parseTextureType(n, obj_name);
+  QString	type = this->_parseTextureType(parent, obj_name);
   bool		hasName = false;
   string	name;
   bool		hasRepeatX = false;
   int		repeatX = 1;
   int		repeatY = 1;
   bool		hasRepeatY = false;
+  bool		hasColor1 = false;
+  bool		hasColor2 = false;
+  QRgb		color2;
+  QRgb		color1;
+  QDomNode	n = parent.firstChild();
 
   while (n.isNull() == false && this->_hasError == false)
   {
@@ -416,6 +401,18 @@ Texture*	Scene::_parseTexture(QDomNode	n,
 	  hasRepeatY = true;
 	}
       }
+      else if (n.nodeName() == "color1")
+      {
+	if (hasColor1)
+	  this->_putWarning(QObject::tr("A %1 has several color1, "
+					"the first defined will be used")
+			    .arg(obj_name.c_str()), n);
+	else
+	{
+	  color1 = _parseColor(n);
+	  hasColor1 = true;
+	}
+      }
       else
 	this->_putError(QObject::tr("%1 is not a valid element")
 			.arg(n.nodeName()), n);
@@ -431,6 +428,20 @@ Texture*	Scene::_parseTexture(QDomNode	n,
       tex->_repeatWidth = repeatX;
     if (hasRepeatY)
       tex->_repeatHeight = repeatY;
+    if (hasColor1 && type == "procedural")
+    {
+      if (type == "perlin" || type == "wood" || type == "marble")
+	((PerlinNoise*)tex)->setColor1(Color(color1));
+      else if (type == "checkerboard")
+	((CheckerBoard*)tex)->setColor1(Color(color1));
+    }
+    if (hasColor2 && type == "procedural")
+    {
+      if (type == "perlin" || type == "wood" || type == "marble")
+	((PerlinNoise*)tex)->setColor2(Color(color2));
+      else if (type == "checkerboard")
+	((CheckerBoard*)tex)->setColor2(Color(color2));
+    }
   }
   return tex;
 }

@@ -1,11 +1,11 @@
 //
 // checkerBoard.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42/src
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Tue May  3 12:49:29 2011 loick michard
-// Last update Thu May 26 16:13:47 2011 loick michard
+// Last update Sat Jun  4 18:28:37 2011 melvin laplanche
 //
 
 #include "CheckerBoard.hpp"
@@ -37,4 +37,14 @@ Color CheckerBoard::getPixel(double x, double y) const
     return (_color1);
   else
     return (_color2);
+}
+
+void	CheckerBoard::setColor1(const Color& color1)
+{
+  _color1 = color1;
+}
+
+void	CheckerBoard::setColor2(const Color& color2)
+{
+  _color2 = color2;
 }
