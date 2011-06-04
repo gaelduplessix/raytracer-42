@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Wed Jun  1 17:15:36 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 20:28:24 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -16,6 +16,13 @@
 
 void		RaytracerGUI::logServerConsoleMessage(string message)
 {
+  if (_serverMode)
+    {
+      cout << QString(message.c_str())
+	.remove(QRegExp("<([^<>]+)>")).toStdString()
+	   << endl;
+      return ;
+    }
   if (_consoleLog != "")
     _consoleLog += "<br/>";
   _consoleLog += message;

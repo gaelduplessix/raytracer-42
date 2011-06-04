@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 26 18:14:23 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 13:57:34 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 22:06:03 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SERVERENTRY_HPP_
