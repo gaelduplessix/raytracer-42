@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Sat Jun  4 15:56:30 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 18:53:39 2011 gael jochaud-du-plessix
 //
 
 #include "Material.hpp"
@@ -29,6 +29,16 @@ Material::Material(const string& name):
   _hasNormalDeformation(false), _deformationType(-1), _deformationCoeff(10)
 {
 
+}
+
+Material::~Material()
+{
+  if (_texture)
+    delete _texture;
+  if (_limitTexture)
+    delete _limitTexture;
+  if (_heightmap)
+    delete _heightmap;
 }
 
 string	Material::getName(void) const
