@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Thu Jun  2 15:36:52 2011 melvin laplanche
+// Last update Sat Jun  4 17:00:14 2011 melvin laplanche
 //
 
 #ifndef _SCENE_HPP_
@@ -141,6 +141,7 @@ private:
   string		_parseFile(QDomNode, string);
   string		_parseDir(QDomNode, string);
   Texture*		_parseTexture(QDomNode, string);
+  QString		_parseTextureType(QDomNode, string);
   bool			_parseBoolean(QDomNode, string);
   void			_parsePrimitives(QDomNode, Object*);
   void			_parsePrimitive(QDomNode, Object*);
@@ -168,5 +169,6 @@ private:
 					    ObjectPrimitive*, bool&, bool&);
   bool			_materialExists(QString);
   Material*		_3dsgetFaceMat(int, const map<string, vector<int> >&);
+  Texture*		_parseTextureSetTexture(QString, string, QDomNode);
 };
 #endif

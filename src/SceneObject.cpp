@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sat Jun  4 14:13:01 2011 melvin laplanche
+// Last update Sat Jun  4 17:26:04 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1120,14 +1120,12 @@ void		Scene::_parse3dsLib3ds(string	filename,
 	  Lib3dsMaterial *m = lib3ds_file_material_by_name(file, f->material);
 	  if (this->_materialExists(m->name) == false)
 	  {
-	    Material	*mat = new Material(m->name);
+	    mat = new Material(m->name);
 	    string	textName;
 
 	    mat->setSpecularPow(m->shin_strength);
 	    mat->setSpecularCoeff(m->shininess);
 	    mat->setReflectionCoeff(m->reflection_map.percent / 100);
-	    mat->setColor(Color(m->diffuse[0] * 255, m->diffuse[1] * 255,
-				m->diffuse[2] * 255, m->diffuse[3] * 255));
 	    mat->setColor(Color(m->diffuse[0] * 255, m->diffuse[1] * 255,
 				m->diffuse[2] * 255, m->diffuse[3] * 255));
 	    if (textDir.empty())
@@ -1200,7 +1198,8 @@ void		Scene::_parse3dsIntern(string	filename,
 	string textureName;
 
 	color = materials[i]->getDiffuseColor();
-	mat->setColor(Color(color[0], color[1], color[2], color[3]));
+	mat->setColor(Color(color[0] * 255, color[1] * 255,
+			    color[2] * 255, color[3] * 255));
 	mat->setSpecularPow(materials[i]->getShininessStrength());
 	mat->setSpecularCoeff(materials[i]->getShininess());
 	if (materials[i]->getTextureName().empty() == false)
@@ -1211,12 +1210,12 @@ void		Scene::_parse3dsIntern(string	filename,
 	    textureName = materials[i]->getTextureName();
 	  if (QFileInfo(textureName.c_str()).exists() == false)
 	  {
-	    this->_putError(QObject::tr("texture %1 (a3ds) not found.")
+	    this->_putWarning(QObject::tr("texture %1 (a3ds) not found.")
 			    .arg(textureName.c_str()));
-	    delete mat;
-	    return ;
+	    mat->setTexture(NULL);
 	  }
-	  mat->setTexture(new Texture(textureName));
+	  else
+	    mat->setTexture(new Texture(textureName));
 	}
 	else
 	  mat->setTexture(NULL);

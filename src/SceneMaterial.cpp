@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Wed Jun  1 19:57:22 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 17:18:18 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -294,23 +294,24 @@ void			Scene::_parseMaterials(QDomNode n)
 }
 
 
-Texture*			Scene::_parseTexture(QDomNode	n,
-						     string	obj_name)
+QString			Scene::_parseTextureType(QDomNode n,
+						 string	  obj_name)
 {
-  PerlinNoise		*perlin = new PerlinNoise();
-  QString		value;
+  //PerlinNoise		*perlin = new PerlinNoise();
   QString		attrValue;
 
   if (n.hasAttributes() == false || n.attributes().contains("type") == false)
   {
     this->_putError(QObject::tr("%1 type not specified").arg(obj_name.c_str()),
 		    n);
-    return perlin;
+    return attrValue;
   }
-  if (!this->_checkContentIsSingleText(n, obj_name))
-    return perlin;
   attrValue = n.attributes().namedItem("type").nodeValue();
-  value = n.toElement().text();
+  if (attrValue == "procedural" && attrValue == "file")
+    this->_putError(QObject::tr("Wrong texture type"), n);
+  return attrValue;
+
+  /*
   if (attrValue == "procedural")
   {
     if (value == "marble")
@@ -320,11 +321,116 @@ Texture*			Scene::_parseTexture(QDomNode	n,
     else if (value == "checkerboard")
       return (new CheckerBoard());
     else if (value != "perlin")
-      this->_putError(QObject::tr("%1 is not a valid texture").arg(value), n);
+    this->_putError(QObject::tr("%1 is not a valid texture").arg(value), n);
     return perlin;
   }
   else if (attrValue == "file")
     return new Texture(this->_parseFile(n, obj_name));
-  this->_putError(QObject::tr("normalDeformation type must be an integer"), n);
+    this->_putError(QObject::tr("normalDeformation type must be an integer"), n);
   return (perlin);
+  */
+}
+
+Texture*		Scene::_parseTextureSetTexture(QString type,
+						       string  name,
+						       QDomNode n)
+{
+  PerlinNoise		*perlin = new PerlinNoise();
+
+  if (type == "procedural")
+  {
+    if (name == "marble")
+      perlin->setMarbleProperties();
+    else if (name == "wood")
+      perlin->setWoodProperties();
+    else if (name == "checkerboard")
+      return (new CheckerBoard());
+    else if (name != "perlin")
+      this->_putError(QObject::tr("%1 is not a valid texture")
+		      .arg(name.c_str()), n);
+    return perlin;
+  }
+  else // file
+    return new Texture(this->_parseFile(n, "texture"));
+}
+
+Texture*	Scene::_parseTexture(QDomNode	n,
+				     string	obj_name)
+{
+  Texture*	tex = NULL;
+  QString	type = this->_parseTextureType(n, obj_name);
+  bool		hasName = false;
+  string	name;
+  bool		hasRepeatX = false;
+  int		repeatX = 1;
+  int		repeatY = 1;
+  bool		hasRepeatY = false;
+
+  while (n.isNull() == false && this->_hasError == false)
+  {
+    if (n.isComment() == false)
+    {
+      if (n.hasChildNodes() == false || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("Every %1 children must "
+				    "be an element").arg(obj_name.c_str()), n);
+	return NULL;
+      }
+      if (n.nodeName() == "name")
+      {
+	if (hasName)
+	  this->_putWarning(QObject::tr("A %1 has several filename, "
+					"the first defined will be used")
+			    .arg(obj_name.c_str()), n);
+	else
+	{
+	  if (this->_checkContentIsSingleText(n, obj_name))
+	  {
+	    name = n.toElement().text().toStdString();
+	    tex = _parseTextureSetTexture(type, name, n);
+	  }
+	  hasName = true;
+	}
+      }
+      else if (n.nodeName() == "repeatX")
+      {
+	if (hasRepeatX)
+	  this->_putWarning(QObject::tr("A %1 has several repeatX, "
+					"the first defined will be used")
+			    .arg(obj_name.c_str()), n);
+	else
+	{
+	  repeatX = _parseInt(n, 0, 0, "repeatX");
+	  hasRepeatX = true;
+	}
+      }
+      else if (n.nodeName() == "repeatY")
+      {
+	if (hasRepeatY)
+	  this->_putWarning(QObject::tr("A %1 has several repeatY, "
+					"the first defined will be used")
+			    .arg(obj_name.c_str()), n);
+	else
+	{
+	  repeatY = _parseInt(n, 0, 0, "repeatY");
+	  hasRepeatY = true;
+	}
+      }
+      else
+	this->_putError(QObject::tr("%1 is not a valid element")
+			.arg(n.nodeName()), n);
+    }
+    n = n.nextSibling();
+  }
+  if (hasName == false)
+    this->_putError(QObject::tr("A %1 must have a name").arg(obj_name.c_str())
+		    , n);
+  if (this->_hasError == false)
+  {
+    if (hasRepeatX)
+      tex->_repeatWidth = repeatX;
+    if (hasRepeatY)
+      tex->_repeatHeight = repeatY;
+  }
+  return tex;
 }
