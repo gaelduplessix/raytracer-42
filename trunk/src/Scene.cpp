@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sat Jun  4 15:39:01 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 16:54:07 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
