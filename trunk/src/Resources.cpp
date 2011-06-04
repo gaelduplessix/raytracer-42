@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Fri Jun  3 13:15:00 2011 loick michard
+// Last update Sat Jun  4 16:09:52 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -60,6 +60,13 @@ void	Resources::createResources(const Scene* scene,
   	{
   	  Material*	mat =
   	    objects[i]->_primitives[j]->getMaterial();
+	  // cout << "a\n";
+	  // mat = mat;
+	  // cout << "b\n";
+	  // mat->_texture = mat->_texture;
+	  // cout << "c\n";
+	  // mat->_texture->_type = mat->_texture->_type;
+	  // cout << "d";
   	  if (mat && mat->_texture && mat->_texture->_type == 0)
   	    _resources.push_back(Resource(mat->_texture->_name));
   	  if (mat && mat->_limitTexture && mat->_limitTexture->_type == 0)
@@ -120,14 +127,18 @@ QByteArray	Resources::toByteArray(void)
 string	Resources::getNewPathName(const string& previous)
 {
   if (!_instance || !_instance->isInCluster())
-    return (previous);
+    {
+      return (previous);
+    }
   vector<Resource>	resources = _instance->getResources();
   int				j = resources.size();
 
   for (int i = 0 ; i < j ; i++)
     if (resources[i].getPathName() == previous)
-      return (_instance->getTmpResourceDir() + "/"
-	      + resources[i].getNewPathName());
+      {
+	return (_instance->getTmpResourceDir() + "/"
+		+ resources[i].getNewPathName());
+      }
   return (previous);
 }
 

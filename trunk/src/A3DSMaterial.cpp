@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 25 15:09:09 2011 melvin laplanche
-// Last update Fri Jun  3 15:11:46 2011 melvin laplanche
+// Last update Sat Jun  4 14:51:54 2011 gael jochaud-du-plessix
 //
 
 #include "A3DSMaterial.hpp"
@@ -13,9 +13,9 @@
 using namespace std;
 
 A3DSMaterial::A3DSMaterial(A3DSChunk	c) : _name(""),
-					     _ambientColor({0,0,0,0}),
-					     _diffuseColor({0,0,0,0}),
-					     _specularColor({0,0,0,0}),
+					     _ambientColor(),
+					     _diffuseColor(),
+					     _specularColor(),
 					     _transparency(0),
 					     _transparencyFalloff(0),
 					     _shininess(0),
@@ -23,6 +23,12 @@ A3DSMaterial::A3DSMaterial(A3DSChunk	c) : _name(""),
 					     _reflectionBlur(0),
 					     _textureName("")
 {
+  _ambientColor[0] = 0;_ambientColor[1] = 0;_ambientColor[2] = 0;
+  _ambientColor[3] = 0;
+  _diffuseColor[1] = 0;_diffuseColor[1] = 0;_diffuseColor[2] = 0;
+  _diffuseColor[3] = 0;
+  _specularColor[0] = 0;_specularColor[1] = 0;_specularColor[2] = 0;
+  _specularColor[3] = 0;
   while (c)
   {
     if (c.getId() == A3DSChunk::MAT_NAME_ID)

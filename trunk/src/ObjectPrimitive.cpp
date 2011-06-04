@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Mon May 30 13:13:25 2011 loick michard
+// Last update Sat Jun  4 15:53:42 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -14,9 +14,9 @@
 #include "Object.hpp"
 
 ObjectPrimitive::ObjectPrimitive(void):
-  _isLimited(false)
+  _absolutePosition(Point(0, 0, 0)), _rotation(Point(0, 0, 0)),
+  _material(NULL), _object(NULL), _isLimited(false)
 {
-
 }
 
 ObjectPrimitive::ObjectPrimitive(Object *object,

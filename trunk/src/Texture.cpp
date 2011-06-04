@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Tue May 31 15:27:27 2011 samuel olivier
+// Last update Sat Jun  4 16:08:14 2011 gael jochaud-du-plessix
 //
 
 #include <QString>
@@ -15,7 +15,8 @@
 #include "Resources.hpp"
 #include "Texture.hpp"
 
-Texture::Texture(): _type(0)
+Texture::Texture(): _repeatWidth(1), _repeatHeight(1), _type(0), _image(NULL),
+		    _name("")
 {
 }
 
