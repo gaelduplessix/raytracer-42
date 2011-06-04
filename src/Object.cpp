@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:53:38 2011 loick michard
-// Last update Thu Jun  2 15:52:09 2011 melvin laplanche
+// Last update Sat Jun  4 17:46:49 2011 melvin laplanche
 //
 
 #include "Object.hpp"
@@ -19,7 +19,7 @@ Object::Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
 
 Object::~Object(void)
 {
-
+  this->freePrimitives();
 }
 
 void	Object::freePrimitives(void)

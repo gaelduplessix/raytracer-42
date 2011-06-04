@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sat Jun  4 16:54:07 2011 melvin laplanche
+// Last update Sat Jun  4 17:47:07 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -559,10 +559,7 @@ void		Scene::_clearOldScene(void)
   this->_materials.clear();
   size = this->_objects.size();
   for (int i = 0; i < size; i++)
-  {
-    this->_objects[i]->freePrimitives();
     delete this->_objects[i];
-  }
   this->_objects.clear();
 }
 
