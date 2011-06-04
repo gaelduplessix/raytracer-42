@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Sat Jun  4 17:41:49 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 21:36:10 2011 loick michard
 //
 
 #include <QDir>
@@ -50,16 +50,11 @@ void	Resources::createResources(const Scene* scene,
 {
   while (_resources.size() > 0)
     _resources.pop_back();
-  const vector<Object*>&	objects = scene->getObjects();
-  int				nbObject = objects.size();
 
-  for (int i = 0 ; i < nbObject ; i++)
-    {
-      int			nbPrimitive = objects[i]->_primitives.size();
-      for (int j = 0 ; j < nbPrimitive ; j++)
+  const vector<Material*>&	materials = scene->getMaterials();
+  for (unsigned int i = 0; i < materials.size(); i++)
   	{
-  	  Material*	mat =
-  	    objects[i]->_primitives[j]->getMaterial();
+  	  Material*	mat = materials[i];
   	  if (mat != NULL && mat->_texture != NULL)
 	    {
 	      if (mat->_texture->_type == 0)
@@ -76,7 +71,6 @@ void	Resources::createResources(const Scene* scene,
 		_resources.push_back(Resource(mat->_heightmap->_name));
 	    }
   	}
-    }
   if (conf->getCubeMap())
     {
       string			cubeMapPath = conf->getCubeMap()->getName();
