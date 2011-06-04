@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Fri May 27 14:59:01 2011 samuel olivier
-// Last update Tue May 31 13:06:18 2011 samuel olivier
+// Last update Sat Jun  4 21:28:25 2011 loick michard
 //
 
 #include <iostream>
