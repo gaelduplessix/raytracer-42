@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Fri Jun  3 16:11:23 2011 melvin laplanche
+// Last update Sat Jun  4 14:13:01 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1161,9 +1161,12 @@ void		Scene::_parse3dsLib3ds(string	filename,
       Triangle *triangle = new Triangle(obj, x, mat, y, z);
       if (mesh->texels == mesh->points)
       {
-	triangle->setTextureVertex1((Point&)mesh->texelL[0]);
-	triangle->setTextureVertex2((Point&)mesh->texelL[2]);
-	triangle->setTextureVertex3((Point&)mesh->texelL[3]);
+	triangle->setTextureVertex1(Point(mesh->texelL[0][0],
+					  mesh->texelL[0][1]));
+	triangle->setTextureVertex2(Point(mesh->texelL[1][0],
+					  mesh->texelL[1][1]));
+	triangle->setTextureVertex3(Point(mesh->texelL[2][0],
+					  mesh->texelL[2][1]));
       }
       obj->addPrimitive(triangle);
       ++finishedFaces;
