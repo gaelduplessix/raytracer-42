@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Sat Jun  4 16:09:52 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 17:41:49 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -60,19 +60,21 @@ void	Resources::createResources(const Scene* scene,
   	{
   	  Material*	mat =
   	    objects[i]->_primitives[j]->getMaterial();
-	  // cout << "a\n";
-	  // mat = mat;
-	  // cout << "b\n";
-	  // mat->_texture = mat->_texture;
-	  // cout << "c\n";
-	  // mat->_texture->_type = mat->_texture->_type;
-	  // cout << "d";
-  	  if (mat && mat->_texture && mat->_texture->_type == 0)
-  	    _resources.push_back(Resource(mat->_texture->_name));
-  	  if (mat && mat->_limitTexture && mat->_limitTexture->_type == 0)
-  	    _resources.push_back(Resource(mat->_limitTexture->_name));
-  	  if (mat && mat->_heightmap && mat->_heightmap->_type == 0)
-  	    _resources.push_back(Resource(mat->_heightmap->_name));
+  	  if (mat != NULL && mat->_texture != NULL)
+	    {
+	      if (mat->_texture->_type == 0)
+		_resources.push_back(Resource(mat->_texture->_name));
+	    }
+  	  if (mat != NULL && mat->_limitTexture != NULL)
+	    {
+	      if (mat->_limitTexture->_type == 0)
+		_resources.push_back(Resource(mat->_limitTexture->_name));
+	    }
+  	  if (mat != NULL && mat->_heightmap != NULL)
+	    {
+	      if (mat->_heightmap->_type == 0)
+		_resources.push_back(Resource(mat->_heightmap->_name));
+	    }
   	}
     }
   if (conf->getCubeMap())
