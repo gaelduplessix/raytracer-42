@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Sat Jun  4 18:29:53 2011 melvin laplanche
+// Last update Sat Jun  4 18:50:53 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -430,16 +430,16 @@ Texture*	Scene::_parseTexture(QDomNode	parent,
       tex->_repeatHeight = repeatY;
     if (hasColor1 && type == "procedural")
     {
-      if (type == "perlin" || type == "wood" || type == "marble")
+      if (name == "perlin" || name == "wood" || name == "marble")
 	((PerlinNoise*)tex)->setColor1(Color(color1));
-      else if (type == "checkerboard")
+      else if (name == "checkerboard")
 	((CheckerBoard*)tex)->setColor1(Color(color1));
     }
     if (hasColor2 && type == "procedural")
     {
-      if (type == "perlin" || type == "wood" || type == "marble")
+      if (name == "perlin" || name == "wood" || name == "marble")
 	((PerlinNoise*)tex)->setColor2(Color(color2));
-      else if (type == "checkerboard")
+      else if (name == "checkerboard")
 	((CheckerBoard*)tex)->setColor2(Color(color2));
     }
   }
