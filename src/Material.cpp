@@ -5,17 +5,16 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Sun May  1 20:39:22 2011 samuel olivier
-// Last update Thu Jun  2 11:57:38 2011 loick michard
+// Last update Sat Jun  4 15:56:30 2011 gael jochaud-du-plessix
 //
 
 #include "Material.hpp"
 
 Material::Material():
   _name(""), _color(Color(255, 255, 255)), _isTextured(false),
-  _specularCoeff(0),
-  _specularPow(50), _reflectionCoeff(0), _transmissionCoeff(0),
-  _refractionIndex(1), _diffusedReflectionCoeff(0.1), _texture(NULL),
-  _limitTexture(NULL), _heightmap(NULL), _hasBumpMap(false),
+  _specularCoeff(0), _specularPow(50), _reflectionCoeff(0),
+  _transmissionCoeff(0), _refractionIndex(1), _diffusedReflectionCoeff(0.1),
+  _texture(NULL), _limitTexture(NULL), _heightmap(NULL), _hasBumpMap(false),
   _hasNormalDeformation(false), _deformationType(-1), _deformationCoeff(10)
 {
 
@@ -23,8 +22,8 @@ Material::Material():
 
 Material::Material(const string& name):
   _name(name), _color(Color(255, 255, 255)),
-  _isTextured(false), _specularCoeff(0),
-  _specularPow(50), _reflectionCoeff(0), _transmissionCoeff(0),
+  _isTextured(false), _specularCoeff(0), _specularPow(50),
+  _reflectionCoeff(0), _transmissionCoeff(0),
   _refractionIndex(1), _diffusedReflectionCoeff(0.1), _texture(NULL),
   _limitTexture(NULL), _heightmap(NULL), _hasBumpMap(false),
   _hasNormalDeformation(false), _deformationType(-1), _deformationCoeff(10)

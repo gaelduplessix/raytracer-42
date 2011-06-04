@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 17:11:11 2011 loick michard
+// Last update Thu Jun  2 15:31:01 2011 gael jochaud-du-plessix
 //
 
 #include <unistd.h>
@@ -73,7 +73,10 @@ ClusterClient::~ClusterClient()
   if (_serversListManager)
     delete _serversListManager;
   for (int i = 0, l = _servers.size(); i < l; i++)
-    delete _servers[i];
+    {
+      if (_servers[i])
+	delete _servers[i];
+    }
   _interface->sendMessage(QObject::tr("Disconnected from cluster")
 			  .toStdString());
 }
@@ -283,11 +286,17 @@ bool	ClusterClient::getSectionToRaytrace(QRect& section, bool raytracing)
 
 void	ClusterClient::processReceivedSection(QRect& section, QImage& image)
 {
+  if (_sessionId == -1)
+    return ;
   uint	sectionX = section.x() / section.width();
   uint	sectionY = section.y() / section.height();
+  if (_imageSections.size() < 1 || _imageSections[0].size() < 1)
+    return ;
   if (sectionX < _imageSections.size()
       && sectionY < _imageSections[sectionX].size())
     _imageSections[sectionX][sectionY] = ClusterClient::RAYTRACED;
+  else
+    return ;
   for (int i = 0, l = section.width(); i < l; i++)
     {
       for (int j = 0, m = section.height(); j < m; j++)
@@ -298,10 +307,12 @@ void	ClusterClient::processReceivedSection(QRect& section, QImage& image)
 	}
     }
 
-  for (int i = 0; i < _nbSubdivisions; i++)
+  for (uint i = 0; i < (uint)_nbSubdivisions; i++)
     {
-      for (int j = 0; j < _nbSubdivisions; j++)
+      for (uint j = 0; j < (uint)_nbSubdivisions; j++)
 	{
+	  if (i > _imageSections.size() || j > _imageSections[i].size())
+	    return ;
 	  if (_imageSections[i][j] != ClusterClient::RAYTRACED)
 	    return ;
 	}

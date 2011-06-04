@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Fri Jun  3 13:43:24 2011 loick michard
+// Last update Sat Jun  4 14:52:06 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -206,7 +206,9 @@ void  RaytracerGUI::pixelHasBeenRendered(int x, int y, Color color)
   _nbProgress++;
   _nbRender++;
   if (_image)
-    {      
+    {
+      if (_clusterClient && _clusterClient->getSessionId() == -1)
+	return ;
       _image->setPixel(x, y, QColor(color._r, color._g,
 				    color._b, color._a).rgba());
     }

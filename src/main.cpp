@@ -5,12 +5,11 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Wed Jun  1 01:33:34 2011 samuel olivier
+// Last update Thu Jun  2 13:52:15 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
 #include <iostream>
-#include <SDL/SDL.h>
 #include <cmath>
 
 #include "Raytracer.hpp"
@@ -42,8 +41,9 @@
 
 using namespace std;
 
+/*
+#include <SDL/SDL.h>
 SDL_Surface	*screen;
-
 class SDLInterface : public RenderingInterface
 {
   void pixelHasBeenRendered(int x, int y, Color color)
@@ -67,7 +67,7 @@ class SDLInterface : public RenderingInterface
     SDL_Flip(screen);
   }
 };
-
+*/
 #include <QTranslator>
 
 int main(int ac, char **av)
