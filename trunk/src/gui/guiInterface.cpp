@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Sat Jun  4 14:52:06 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 20:34:15 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -68,12 +68,19 @@ void RaytracerGUI::sendWarningMessage(string message)
   QDateTime time = QDateTime::currentDateTime();
   if (_message != "")
     _message += "<br/>";
-  _message += "<span style=\"color:blue;\">";
+  if (_serverMode)
+    _message = "<span style=\"color:blue;\">";
+  else
+    _message += "<span style=\"color:blue;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
   _message += tr("Attention").toStdString();
   _message += ": </b>";
   _message += message;
   _message += "</span>";
+  if (_serverMode)
+    cout << QString(message.c_str())
+      .remove(QRegExp("<([^<>]+)>")).toStdString()
+	 << endl;
 }
 
 void RaytracerGUI::sendErrorMessage(string message)
@@ -81,12 +88,19 @@ void RaytracerGUI::sendErrorMessage(string message)
   QDateTime time = QDateTime::currentDateTime();
   if (_message != "")
     _message += "<br/>";
-  _message += "<span style=\"color:red;\">";
+  if (_serverMode)
+    _message = "<span style=\"color:red;\">";
+  else
+    _message += "<span style=\"color:red;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
   _message += tr("Error").toStdString();
   _message += ": </b>";
   _message += message;
   _message += "</span>";
+  if (_serverMode)
+    cout << QString(message.c_str())
+      .remove(QRegExp("<([^<>]+)>")).toStdString()
+	 << endl;
 }
 
 void RaytracerGUI::sendSuccessMessage(string message)
@@ -94,12 +108,19 @@ void RaytracerGUI::sendSuccessMessage(string message)
   QDateTime time = QDateTime::currentDateTime();
   if (_message != "")
     _message += "<br/>";
-  _message += "<span style=\"color:green;\">";
+  if (_serverMode)
+    _message = "<span style=\"color:green;\">";
+  else
+    _message += "<span style=\"color:green;\">";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
   _message += tr("Success").toStdString();
   _message += ": </b>";
   _message += message;
   _message += "</span>";
+  if (_serverMode)
+    cout << QString(message.c_str())
+      .remove(QRegExp("<([^<>]+)>")).toStdString()
+	 << endl;
 }
 
 void RaytracerGUI::sendMessage(string message)
@@ -107,12 +128,19 @@ void RaytracerGUI::sendMessage(string message)
   QDateTime time = QDateTime::currentDateTime();
   if (_message != "")
     _message += "<br/>";
-  _message += "<span>";
+  if (_serverMode)
+    _message = "<span>";
+  else
+    _message += "<span>";
   _message += time.toString("<b>[dd/mm/yy hh:mm:ss] ").toStdString();
   _message += tr("Info").toStdString();
   _message += ": </b>";
   _message += message;
   _message += "</span>";
+  if (_serverMode)
+    cout << QString(message.c_str())
+      .remove(QRegExp("<([^<>]+)>")).toStdString()
+	 << endl;
 }
 
 void    RaytracerGUI::pauseRendering(void)

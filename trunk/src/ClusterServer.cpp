@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 21:14:13 2011 melvin laplanche
+// Last update Sat Jun  4 21:52:33 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -226,7 +226,7 @@ bool		ClusterServer::receiveSectionRequest(void)
 }
 
 void		ClusterServer::requestSessionData(void)
-{
+{  
   if (!isConnectedToClient())
     return ;
   QByteArray	packet;
@@ -249,7 +249,8 @@ bool		ClusterServer::receiveSessionDatas(void)
     }
   if (_currentClientSocket->bytesAvailable() < _currentPacketSize)
     {
-      setProgress(_currentClientSocket->bytesAvailable() / _currentPacketSize);
+      setProgress((double)_currentClientSocket->bytesAvailable()
+		  / _currentPacketSize);
       return (false);
     }
   Resources::getInstance()->removeResourcesFiles();

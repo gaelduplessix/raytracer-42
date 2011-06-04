@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 16:30:57 2011 loick michard
+// Last update Sat Jun  4 21:47:41 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERSERVER_HPP_

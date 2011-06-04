@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Fri May 27 14:59:01 2011 samuel olivier
-// Last update Sat Jun  4 21:28:25 2011 loick michard
+// Last update Sat Jun  4 22:24:06 2011 gael jochaud-du-plessix
 //
 
 #include <iostream>
@@ -23,7 +23,7 @@ Resource::Resource(const string& pathName,
 }
 
 Resource::Resource(const string& pathName,
-		     const string& newPathName) : _pathName(pathName)
+		   const string& newPathName) : _pathName(pathName)
 {
   ifstream	file(pathName.c_str(), ios_base::binary);
   file.seekg (0, ios::end);

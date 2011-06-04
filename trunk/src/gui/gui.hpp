@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Wed Jun  1 16:01:16 2011 loick michard
+// Last update Sat Jun  4 20:11:41 2011 gael jochaud-du-plessix
 //
 
 #ifndef _GUI_HPP_
@@ -50,9 +50,11 @@ class RaytracerGUI : public QMainWindow, public RenderingInterface
   Q_OBJECT
   
   public:
-  RaytracerGUI(QWidget *parent = 0);
+  RaytracerGUI(QWidget *parent, bool serverMode);
   virtual ~RaytracerGUI();
   
+  bool	isServerMode(void);
+
   bool	setConfiguration();
   void	renderingHasFinished(void);
   void	renderingHasBegun(void);
@@ -101,6 +103,7 @@ protected:
   void		setCameras();
 
 private:
+  bool				_serverMode;
   RenderingConfiguration	*_config;
   Raytracer			*_raytracer;
   QColor			*_backgroundColor;

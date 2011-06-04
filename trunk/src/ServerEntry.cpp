@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Thu May 26 18:17:38 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 21:20:47 2011 melvin laplanche
+// Last update Sat Jun  4 22:07:32 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -154,6 +154,7 @@ void		ServerEntry::onDataReceived(void)
       if ((size_t)_socket->bytesAvailable() < sizeof(int))
 	return ;
       stream >> _currentRequest;
+      _currentPacketSize = 0;
     }
   if (_currentRequest == ClusterServer::REQUEST_SESSION_DATA)
     {
@@ -185,6 +186,7 @@ void		ServerEntry::onDataReceived(void)
 	setStatus(ServerEntry::DOWNLOADING_RESOURCES);
       }
     }
+
   else if (_currentRequest == ClusterServer::SEND_RAYTRACE_RESPONSE)
     {
       if (_currentPacketSize == 0)

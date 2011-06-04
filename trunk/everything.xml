@@ -23,7 +23,6 @@
       <reflection>0</reflection>
       <texture type="procedural">
 	<name>checkerboard</name>
-	<color1>255, 0, 0</color1>
       </texture>
     </material>
 

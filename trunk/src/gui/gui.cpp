@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sat Jun  4 21:52:30 2011 loick michard
+// Last update Sat Jun  4 22:23:52 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -38,6 +38,7 @@
 #include "CubeMap.hpp"
 #include "Sett.hpp"
 #include "Resources.hpp"
+#include "ClusterServer.hpp"
 
 Scene           *createScene()
 {
@@ -187,6 +188,11 @@ bool RaytracerGUI::setConfiguration()
   // }
   Resources::getInstance()->createResources(_scene, _config);
   return (true);
+}
+
+bool	RaytracerGUI::isServerMode(void)
+{
+  return (_serverMode);
 }
 
 void	RaytracerGUI::selectCubeMap()
@@ -348,8 +354,9 @@ void RaytracerGUI::threadsChange(int i)
     }
 }
 
-RaytracerGUI::RaytracerGUI(QWidget *parent)
-  : QMainWindow(parent), _config(new RenderingConfiguration()),
+RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
+  : QMainWindow(parent), _serverMode(serverMode),
+    _config(new RenderingConfiguration()),
     _raytracer(new Raytracer()), _backgroundColor(new QColor(0, 0, 0)),
     _ambiantColor(new QColor(255, 255, 255)), _image(NULL),
     _cubeMap(NULL), _scene(NULL), _pixmap(new QPixmap()),
@@ -421,6 +428,33 @@ RaytracerGUI::RaytracerGUI(QWidget *parent)
   QObject::connect(_timer, SIGNAL(timeout()), this, SLOT(drawWindow()));
   QObject::connect(_ui->action_Charger, SIGNAL(triggered()),
                    this, SLOT(loadScene()));
+  if (_serverMode)
+    {
+      QString cluster_url = "http://perso.epitech.eu/~jochau_g/raytracer/";
+      int server_port = 0;
+      int server_log_interval = 500;
+      int server_nb_threads = 2;
+      int index;
+      index = qApp->arguments().indexOf("--url");
+      if (index != -1 && index + 1 < qApp->arguments().size())
+	cluster_url = qApp->arguments().at(index + 1);
+      index = qApp->arguments().indexOf("--port");
+      if (index != -1 && index + 1 < qApp->arguments().size())
+	server_port = qApp->arguments().at(index + 1).toInt();
+      index = qApp->arguments().indexOf("--interval");
+      if (index != -1 && index + 1 < qApp->arguments().size())
+	server_log_interval = qApp->arguments().at(index + 1).toInt();
+      index = qApp->arguments().indexOf("--threads");
+      if (index != -1 && index + 1 < qApp->arguments().size())
+	server_nb_threads = qApp->arguments().at(index + 1).toInt();
+      cout << cluster_url.toStdString() << endl << server_port << endl
+	   << server_log_interval << endl << server_nb_threads << endl;
+      ClusterServer*
+	server = new ClusterServer(this, cluster_url.toStdString(),
+				   server_port, server_log_interval,
+				   server_nb_threads);
+      (void)server;
+    }
 }
 
 RaytracerGUI::~RaytracerGUI()
@@ -454,10 +488,11 @@ void		gui(int ac, char **av)
   app.installTranslator(&translator);
   translator.load("raytracer-42_" + locale);
 
-  RaytracerGUI	gui;
+  RaytracerGUI	gui(NULL, app.arguments().indexOf("--server") != -1);
 
   app.setQuitOnLastWindowClosed(false);
   app.installTranslator(&translator);
-  gui.show();
+  if (!gui.isServerMode())
+    gui.show();
   app.exec();
 }
