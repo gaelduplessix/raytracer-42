@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sat Jun  4 17:26:04 2011 melvin laplanche
+// Last update Sat Jun  4 17:37:09 2011 melvin laplanche
 //
 
 #include "Scene.hpp"
@@ -1094,6 +1094,8 @@ void		Scene::_parse3dsLib3ds(string	filename,
 					 ->getNewPathName(filename).c_str());
   int		nbFaces = 0;
   Object	*obj = new Object();
+  Material	*mat;
+  int		finishedFaces = 0;
 
   if (file == NULL)
   {
@@ -1105,18 +1107,17 @@ void		Scene::_parse3dsLib3ds(string	filename,
   for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
     nbFaces += mesh->faces;
   this->_putInfo(QObject::tr("%1 faces retreived").arg(nbFaces));
-  int		finishedFaces = 0;
+  this->_materials.push_back(new Material("$$$none$$$"));
   for (Lib3dsMesh *mesh=file->meshes; mesh!= NULL; mesh = mesh->next)
   {
     for (unsigned int currFace=0; currFace<mesh->faces; currFace++)
     {
-      Material *mat = new Material("$$$none");
+      mat = this->_getMaterialByName("$$none$$$");
       if (mesh->texels)
       {
 	Lib3dsFace	*f = &mesh->faceL[currFace];
 	if (f->material[0] != 0)
 	{
-	  delete mat;
 	  Lib3dsMaterial *m = lib3ds_file_material_by_name(file, f->material);
 	  if (this->_materialExists(m->name) == false)
 	  {
