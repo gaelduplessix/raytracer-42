@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sat Jun  4 15:53:42 2011 gael jochaud-du-plessix
+// Last update Sat Jun  4 22:16:49 2011 loick michard
 //
 
 #include <cmath>
@@ -26,7 +26,8 @@ ObjectPrimitive::ObjectPrimitive(Object *object,
   _absolutePosition(absolutePosition), _rotation(rotation),
   _material(material), _object(object), _isLimited(false)
 {
-
+  if (!_material)
+    _material = new Material("NULL");
 }
 
 Object*		ObjectPrimitive::getObject(void) const
@@ -72,6 +73,8 @@ void		ObjectPrimitive::setRotation(const Rotation& rotation)
 void		ObjectPrimitive::setMaterial(Material* material)
 {
   _material = material;
+  if (!_material)
+    _material = new Material("NULL");
 }
 
 Color
@@ -81,14 +84,17 @@ ObjectPrimitive::getColor(const Point& intersectPoint) const
   double      y;
 
   getMappedCoords(intersectPoint, x, y);
-  return (_material->getColor(x, y));
+  if (_material)
+    return (_material->getColor(x, y));
+  else
+    return (Color(255, 255, 255));
 }
 #include <iostream>
 Vector
 ObjectPrimitive::getNormal(const Point& intersectPoint,
 			   const Vector& viewVector) const
 {
-  if (_material->_hasNormalDeformation)
+  if (_material && _material->_hasNormalDeformation)
     {
       Vector normal = this->getNormalVector(intersectPoint, viewVector);
 
