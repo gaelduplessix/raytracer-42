@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Sat Jun  4 18:50:53 2011 melvin laplanche
+// Last update Sat Jun  4 19:42:37 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -347,8 +347,8 @@ Texture*	Scene::_parseTexture(QDomNode	parent,
   bool		hasRepeatY = false;
   bool		hasColor1 = false;
   bool		hasColor2 = false;
-  QRgb		color2;
-  QRgb		color1;
+  QRgb		color2 = 0;
+  QRgb		color1 = 0;
   QDomNode	n = parent.firstChild();
 
   while (n.isNull() == false && this->_hasError == false)

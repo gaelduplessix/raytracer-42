@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May  4 17:40:55 2011 loick michard
-// Last update Thu May 26 22:47:56 2011 samuel olivier
+// Last update Sat Jun  4 18:49:58 2011 gael jochaud-du-plessix
 //
 
 #ifndef _MATERIAL_HPP_
@@ -27,6 +27,7 @@ public:
 
   Material();
   Material(const string& name);
+  ~Material();
 
   void		setName(string name);
   void		setColor(const Color& color);
