@@ -110,7 +110,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
   Color		lightColor = _color;
   double	absorptionCoeff = 0;
   if (!renderConf->isTransparencyEnabled()
-      || renderConf->isPhotonMappingEnabled() || 1)
+      || renderConf->isPhotonMappingEnabled())
     {
       double                k = -1;
       ObjectPrimitive*      nearestObject = NULL;
