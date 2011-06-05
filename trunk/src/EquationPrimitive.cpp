@@ -1,11 +1,11 @@
 //
 // EquationPrimitive.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Wed May 25 10:50:38 2011 loick michard
+// Last update Sun Jun  5 16:56:28 2011 melvin laplanche
 //
 
 #include <cmath>
@@ -39,7 +39,7 @@ EquationPrimitive::EquationPrimitive(string equation,
   replacements[2] = "(Z0 + k * VZ)";
   for (int i = 0; i < 3; i++)
     {
-      unsigned int pos;
+      size_t pos;
       while ((pos = equation.find(vars[i])) != string::npos)
   	equation.replace(pos, vars[i].size(), replacements[i]);
     }
@@ -66,7 +66,7 @@ addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>&
   Ray newRay = getRayAtSimplePosition(ray);
   vector< EqNode* >	coeffNodes;
   vector< double >	coeffs;
-  unsigned int		degree = _equation_intersect.getDegree();  
+  unsigned int		degree = _equation_intersect.getDegree();
   if (degree >= 1 && degree <= 4)
     {
       coeffNodes.resize(degree + 1);
@@ -79,7 +79,7 @@ addIntersectionWithRay(const Ray& ray, vector<struct s_intersected_object>&
 	  coeffs[i] = _equation_intersect.evalNode(coeffNodes[i], NULL);
 	  delete coeffNodes[i];
 	}
-      vector<double> solutions = 
+      vector<double> solutions =
 	EquationSolver::solveEquation(coeffs);
 
       vector<double> validSolutions;
@@ -98,7 +98,7 @@ void	EquationPrimitive::intersectWithRay(const Ray& ray,
   Ray newRay = getRayAtSimplePosition(ray);
   vector< EqNode* >	coeffNodes;
   vector< double >	coeffs;
-  unsigned int		degree = _equation_intersect.getDegree();  
+  unsigned int		degree = _equation_intersect.getDegree();
   if (degree >= 1 && degree <= 4)
     {
       coeffNodes.resize(degree + 1);
@@ -111,7 +111,7 @@ void	EquationPrimitive::intersectWithRay(const Ray& ray,
 	  coeffs[i] = _equation_intersect.evalNode(coeffNodes[i], NULL);
 	  delete coeffNodes[i];
 	}
-      vector<double> solutions = 
+      vector<double> solutions =
 	EquationSolver::solveEquation(coeffs);
       for (unsigned int i = 0; i < solutions.size(); i++)
 	{

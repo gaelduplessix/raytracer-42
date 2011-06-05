@@ -1,0 +1,286 @@
+<scene>
+<cameras>
+<camera type="cinema" name="main">
+  <position>-0.105, 0, 2</position>
+  <rotation type="radian">0, 0.875, 0</rotation>
+  <focus>7</focus>
+  </camera>
+  </cameras>
+  
+  <materials>
+  <material name="floor">
+  <color>100, 100, 100</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  </material>
+  <material name="cubesFaceTop">
+  <color>150, 150, 150</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  </material>
+  <material name="redLeftRight">
+  <color>150, 50, 50</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  <diffusedReflection>0.5</diffusedReflection>
+  </material>  
+  <material name="redMiddle">
+  <color>150, 50, 50</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  </material>  
+  <material name="greenLeftRight">
+  <color>50, 150, 50</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  <diffusedReflection>0.5</diffusedReflection>
+  </material>
+  <material name="greenMiddle">
+  <color>50, 150, 50</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  </material>
+  <material name="whiteLeftRight">
+  <color>200, 200, 200</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  <diffusedReflection>0.5</diffusedReflection>
+  </material>
+  <material name="whiteMiddle">
+  <color>200, 200, 200</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  </material>
+  <material name="blueLeftRight">
+  <color>50, 50, 150</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  <diffusedReflection>0.5</diffusedReflection>
+  </material>
+  <material name="blueMiddle">
+  <color>50, 50, 150</color>
+  <specular>0.5</specular>
+  <specularPow>50</specularPow>
+  <reflection>0.5</reflection>
+  </material>
+  </materials>
+  
+  <objects>
+  <object>
+  <position>0, 0, 0</position>
+  <rotation type="radian">0, 0, 0</rotation>
+  <solid>false</solid>
+  <primitives>
+  <primitive type="plane" material="floor">
+  <position>0, 0, -6</position>
+  <rotation type="radian">0, 0, 0</rotation>
+  </primitive>
+  </primitives>
+  </object>
+  <parallelepipede material="redLeftRight">
+<position>3.5, -3.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="whiteLeftRight">
+<position>5, -3.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="greenLeftRight">
+<position>6.5, -3.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="blueLeftRight">
+<position>8, -3.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="redLeftRight">
+<position>3.5, -2, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="whiteLeftRight">
+<position>5, -2, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="greenLeftRight">
+<position>6.5, -2, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="blueLeftRight">
+<position>8, -2, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="redMiddle">
+<position>3.5, -0.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 1</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="whiteMiddle">
+<position>5, -0.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 1</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="greenMiddle">
+<position>6.5, -0.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 1</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="blueMiddle">
+<position>8, -0.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 1</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="redLeftRight">
+<position>3.5, 1, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="whiteLeftRight">
+<position>5, 1, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="greenLeftRight">
+<position>6.5, 1, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="blueLeftRight">
+<position>8, 1, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.6</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="redLeftRight">
+<position>3.5, 2.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="whiteLeftRight">
+<position>5, 2.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="greenLeftRight">
+<position>6.5, 2.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+<parallelepipede material="blueLeftRight">
+<position>8, 2.5, -6</position>
+<width>0, 1, 0</width>
+<depth>1, 0, 0</depth>
+<height>0, 0, 0.2</height>
+<solid>true</solid>
+<rotation type="radian">0, 0, 0</rotation>
+</parallelepipede>
+</objects>
+<lights>
+    
+    <light type="parallelogram">
+      <point>3.5, -2, 1</point>
+      <vector1>0, 4, 0</vector1>
+      <vector2>1, 0, 0</vector2>
+      <directLight>3000</directLight>
+      <intensity>0.8</intensity>
+      <color>50, 50, 200</color>
+    </light>
+    
+    <light type="parallelogram">
+      <point>5, -2, 1</point>
+      <vector1>0, 4, 0</vector1>
+      <vector2>1, 0, 0</vector2>
+      <directLight>3000</directLight>
+      <intensity>0.8</intensity>
+      <color>50, 200, 50</color>
+    </light>
+    
+    <light type="parallelogram">
+      <point>6.5, -2, 1</point>
+      <vector1>0, 4, 0</vector1>
+      <vector2>1, 0, 0</vector2>
+      <directLight>3000</directLight>
+      <intensity>0.8</intensity>
+      <color>50, 200, 50</color>
+    </light>
+    
+    <light type="parallelogram">
+      <point>8, -2, 1</point>
+      <vector1>0, 4, 0</vector1>
+      <vector2>1, 0, 0</vector2>
+      <directLight>3000</directLight>
+      <intensity>0.8</intensity>
+      <color>200, 50, 50</color>
+    </light>
+</lights>
+</scene>
