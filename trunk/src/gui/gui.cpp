@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sat Jun  4 22:23:52 2011 gael jochaud-du-plessix
+// Last update Sun Jun  5 16:42:41 2011 loick michard
 //
 
 #include <QApplication>
@@ -361,7 +361,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
     _ambiantColor(new QColor(255, 255, 255)), _image(NULL),
     _cubeMap(NULL), _scene(NULL), _pixmap(new QPixmap()),
     _ui(new Ui::MainWindow), _progress(0), _isRendering(false), _pause(false),
-    _sticon(new QSystemTrayIcon(QIcon("images/image.png"))),
+    _sticon(new QSystemTrayIcon(QIcon(":images/image.png"))),
     _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this)),
     _clusterTimer(NULL), _clusterClient(NULL), _isConnected(false),
     _isMultiThreading(false), _restored(false)
