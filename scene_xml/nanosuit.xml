@@ -1,7 +1,7 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-250, 0, 10</position>
+      <position>-350, 0, 50</position>
       <rotation type="radian">0, 0, 0</rotation>
     </camera>
   </cameras>
