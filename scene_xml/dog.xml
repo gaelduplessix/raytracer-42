@@ -1,7 +1,7 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-70250, 0, 0</position>
+      <position>-150250, 0, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
     </camera>
   </cameras>
@@ -14,13 +14,13 @@
 
   <lights>
     <light type="spot">
-      <position>-50,1,0</position>
+      <position>-500000,1,0</position>
       <color>100,180,110</color>
       <intensity>3</intensity>
       <directLight>3000</directLight>
     </light>
     <light type="spot">
-      <position>-50, 2, 2</position>
+      <position>-500000, 2, 2</position>
       <color>160,120,155</color>
       <intensity>3</intensity>
       <directLight>3000</directLight>

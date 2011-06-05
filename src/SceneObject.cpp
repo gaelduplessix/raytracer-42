@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sat Jun  4 17:37:09 2011 melvin laplanche
+// Last update Sun Jun  5 15:57:05 2011 loick michard
 //
 
 #include "Scene.hpp"
@@ -1112,7 +1112,7 @@ void		Scene::_parse3dsLib3ds(string	filename,
   {
     for (unsigned int currFace=0; currFace<mesh->faces; currFace++)
     {
-      mat = this->_getMaterialByName("$$none$$$");
+      mat = this->_getMaterialByName("$$$none$$$");
       if (mesh->texels)
       {
 	Lib3dsFace	*f = &mesh->faceL[currFace];
@@ -1160,13 +1160,14 @@ void		Scene::_parse3dsLib3ds(string	filename,
       Triangle *triangle = new Triangle(obj, x, mat, y, z);
       if (mesh->texels == mesh->points)
       {
-	triangle->setTextureVertex1(Point(mesh->texelL[0][0],
-					  mesh->texelL[0][1]));
-	triangle->setTextureVertex2(Point(mesh->texelL[1][0],
-					  mesh->texelL[1][1]));
-	triangle->setTextureVertex3(Point(mesh->texelL[2][0],
-					  mesh->texelL[2][1]));
+	triangle->setTextureVertex1(Point(mesh->texelL[face->points[0]][0],
+					  mesh->texelL[face->points[0]][1]));
+	triangle->setTextureVertex2(Point(mesh->texelL[face->points[1]][0],
+					  mesh->texelL[face->points[1]][1]));
+	triangle->setTextureVertex3(Point(mesh->texelL[face->points[2]][0],
+					  mesh->texelL[face->points[2]][1]));
       }
+      triangle->setCachedValues();
       obj->addPrimitive(triangle);
       ++finishedFaces;
     }
