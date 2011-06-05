@@ -1,11 +1,11 @@
 //
 // guiEditMaterialDialog.cpp for raytracer in /home/michar_l//Raytracer/raytracer-42
-// 
+//
 // Made by loick michard
 // Login   <michar_l@epitech.net>
-// 
+//
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Tue May 31 23:19:12 2011 gael jochaud-du-plessix
+// Last update Sun Jun  5 15:18:50 2011 melvin laplanche
 //
 
 #include <QMutexLocker>
@@ -17,7 +17,7 @@
 #include "CubeMap.hpp"
 #include "guiEditMaterialDialog.hpp"
 
-GuiEditMaterialDialog::GuiEditMaterialDialog()
+GuiEditMaterialDialog::GuiEditMaterialDialog(): _currentMat(NULL)
 {
   _isSet = false;
   _dialog = new Ui::editMaterialDialog;
@@ -138,7 +138,7 @@ void GuiEditMaterialDialog::setConfiguration()
   _config->setHeight(150);
   _config->setNbThreads(2);
   _config->setCurrentCamera(0);
-  // _config->setCubeMap(new CubeMap(":cubemap/cubemaps/Maskonaive3"), 
+  // _config->setCubeMap(new CubeMap(":cubemap/cubemaps/Maskonaive3"),
   // 		      ":cubemap/cubemaps/Maskonaive3");
   _config->setAntialiasing(2);
   _config->setFieldDepthEnabled(false);
@@ -170,7 +170,7 @@ void GuiEditMaterialDialog::paintEvent(QPaintEvent*)
 
 GuiEditMaterialDialog::~GuiEditMaterialDialog()
 {
-  
+
 }
 
 void    GuiEditMaterialDialog::selectColor()
@@ -202,7 +202,7 @@ void GuiEditMaterialDialog::fillColor()
 
 void GuiEditMaterialDialog::getImage()
 {
-  QString image = 
+  QString image =
     QFileDialog::getOpenFileName(this,
 				 tr("Selectionez une Texture"),
 				 QString(), "*.png *.gif *.jpeg *.bmp *.jpg",
@@ -254,7 +254,7 @@ void GuiEditMaterialDialog::updateMaterial()
 	    {
 	      if (_dialog->_imagePath->text() != "" &&
 		  (!_materials->at(index)->_texture ||
-		   _dialog->_imagePath->text().toStdString() != 
+		   _dialog->_imagePath->text().toStdString() !=
 		   _materials->at(index)->_texture->getName()))
 		{
 		  _materials->at(index)->
@@ -285,7 +285,7 @@ void GuiEditMaterialDialog::updateMaterial()
 		  if (_dialog->_textureType->currentIndex() == 2)
 		    texture->setMarbleProperties();
 		  else if (_dialog->_textureType->currentIndex() == 3)
-		    texture->setWoodProperties(); 
+		    texture->setWoodProperties();
 		  _materials->at(index)->setTexture(texture);
 		  _materials->at(index)->_texture->_type =
 		    _dialog->_textureType->currentIndex();
@@ -307,7 +307,7 @@ void GuiEditMaterialDialog::updateMaterial()
       _materials->at(index)->_transmissionCoeff =
 	_dialog->_transmission->value();
       _materials->at(index)->_refractionIndex = _dialog->_refraction->value();
-      _materials->at(index)->_diffusedReflectionCoeff = 
+      _materials->at(index)->_diffusedReflectionCoeff =
 	_dialog->_diffuseReflection->value();
 
       _materials->at(index)->_hasBumpMap = _dialog->_bumpmapping->isChecked();
@@ -500,7 +500,7 @@ void GuiEditMaterialDialog::fillFields()
   updateMaterial();
 }
 
-void 
+void
 GuiEditMaterialDialog::setMaterials(const vector<Material*>& materials)
 {
   _isSet = false;
