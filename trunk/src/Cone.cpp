@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Thu May 26 12:26:16 2011 samuel olivier
+// Last update Sun Jun  5 21:14:34 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -173,8 +173,7 @@ Vector		Cone::getNormalVector(const Point& intersectPoint,
   intersect += _absolutePosition;
   Vector	normal(intersect._x - _absolutePosition._x,
 		       intersect._y - _absolutePosition._y,
-		       (intersect._z - _absolutePosition._z)
-		       * _angle * -1);
+		       -1.0 * _angle * (intersect._z - _absolutePosition._z));
   double	cosA = viewVector * normal
     / (viewVector.getNorm() * normal.getNorm());
 

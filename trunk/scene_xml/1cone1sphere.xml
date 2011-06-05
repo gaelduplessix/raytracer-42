@@ -15,7 +15,6 @@
      <color>120, 220,55</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <reflection>1</reflection>
     </material>
     <material name="solcone">
       <color>60, 180, 180</color>
@@ -27,8 +26,6 @@
       <color>40, 255, 100</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <transmission>1</transmission>
-      <refractionIndex>1</refractionIndex>
     </material>
   </materials>
 
