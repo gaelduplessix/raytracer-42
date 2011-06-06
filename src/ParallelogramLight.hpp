@@ -5,12 +5,13 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Sun May  8 22:43:24 2011 gael jochaud-du-plessix
-// Last update Mon May 23 13:07:54 2011 samuel olivier
+// Last update Mon Jun  6 17:48:32 2011 loick michard
 //
 
 #ifndef _PARALLELOGRAM_LIGHT_HPP_
 #define _PARALLELOGRAM_LIGHT_HPP_
 
+#include "Parallelogram.hpp"
 #include "Light.hpp"
 
 class	ParallelogramLight : public Light
@@ -43,6 +44,7 @@ private:
   double	_directLightPow;
   Point		_point2;
   Point		_point3;
+  Parallelogram	_par;
 };
 
 #endif
