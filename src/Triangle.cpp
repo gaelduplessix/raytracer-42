@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Tue May 31 15:07:17 2011 samuel olivier
+// Last update Mon Jun  6 20:23:33 2011 samuel olivier
 //
 
 #include <cmath>
@@ -26,9 +26,6 @@ Triangle::Triangle(Object*object,
     _vertex1(vertex1), _vertex2(vertex2), _textureVertex1(textureVertex1),
     _textureVertex2(textureVertex2), _textureVertex3(textureVertex3)
 {
-  _absolutePosition *= 10;
-  _vertex1 *= 10;
-  _vertex2 *= 10;
   setCachedValues();
   _isLimited = true;
 }
@@ -40,10 +37,16 @@ Triangle::Triangle(void):
   _textureVertex3(Point(1, 0))
 {
   _isLimited = true;
+  _textureVertex1._z = 0;
+  _textureVertex2._z = 0;
+  _textureVertex3._z = 0;
 }
 
 void		Triangle::setCachedValues(void)
 {
+  _textureVertex1._z = 0;
+  _textureVertex2._z = 0;
+  _textureVertex3._z = 0;
   _v1 = _vertex1 - _absolutePosition;
   _v2 = _vertex2 - _absolutePosition;
   _var1 = -_v1._z * _v2._x;
@@ -97,16 +100,19 @@ void		Triangle::setVertex2(const Point& vertex2)
 void		Triangle::setTextureVertex1(const Point& textureVertex1)
 {
   _textureVertex1 = textureVertex1;
+  _textureVertex1._z = 0;
 }
 
 void		Triangle::setTextureVertex2(const Point& textureVertex2)
 {
   _textureVertex2 = textureVertex2;
+  _textureVertex2._z = 0;
 }
 
 void		Triangle::setTextureVertex3(const Point& textureVertex3)
 {
   _textureVertex3 = textureVertex3;
+  _textureVertex3._z = 0;
 }
 
 const Point& 	Triangle::getTextureVertex1(void)
@@ -133,6 +139,7 @@ double		Triangle::calcArea(const Point& vertex1,
   double	na = a.getNorm();
   double	nb = b.getNorm();
   double	cosA = (a * b) / (na * nb);
+
   cosA = acos(cosA);
   return (0.5 * na * nb * sin(cosA));
 }
@@ -140,15 +147,17 @@ double		Triangle::calcArea(const Point& vertex1,
 void		Triangle::getMappedCoords(const Point& intersectPoint,
 					  double& x, double &y) const
 {
-  double	areaC = calcArea(_absolutePosition, _vertex1, intersectPoint);
+  double	areaA = calcArea(_absolutePosition, _vertex1, intersectPoint);
   double	areaB = calcArea(_vertex1, _vertex2, intersectPoint);
-  double	areaA = calcArea(_vertex2, _absolutePosition, intersectPoint);
+  double	areaC = calcArea(_vertex2, _absolutePosition, intersectPoint);
   double	sum = areaA + areaB + areaC;
-  double	b = areaA / sum;
-  double	c = areaB / sum;
-  Point		texturePoint = _textureVertex1
-    + (b * _textureV1 + c * _textureV2);
-  x = -texturePoint._x;
+  double	b = areaC / sum;
+  double	c = areaA / sum;
+  double	a = areaB / sum;
+  Point		texturePoint = _textureVertex1 +
+    (b * _textureV1 + c * _textureV2) / (a + b + c);
+
+  x = texturePoint._x;
   y = -texturePoint._y;
 }
 

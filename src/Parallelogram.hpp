@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Tue May 31 15:09:29 2011 loick michard
+// Last update Mon Jun  6 21:06:25 2011 samuel olivier
 //
 
 #ifndef _PARALLELOGRAM_HPP_
@@ -55,12 +55,14 @@ public:
 private:
   Point		_vertex1;
   Point		_vertex2;
+  Point		_vertex3;
   Vector        _normal;
   Point		_textureVertex1;
   Point		_textureVertex2;
   Point		_textureVertex3;
   Vector	_textureV1;
   Vector	_textureV2;
+  Vector	_textureV3;
   Vector        _v1;
   Vector        _v2;
   double        _var1;
