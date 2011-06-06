@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Sun Jun  5 16:44:27 2011 loick michard
+// Last update Mon Jun  6 16:16:53 2011 loick michard
 //
 
 #include "Scene.hpp"
@@ -1124,7 +1124,7 @@ void		Scene::_parse3dsLib3ds(string	filename,
 	    mat = new Material(m->name);
 	    string	textName;
 
-	    mat->setSpecularPow(m->shin_strength);
+	    mat->setSpecularPow(50);
 	    mat->setSpecularCoeff(m->shininess);
 	    mat->setReflectionCoeff(m->reflection_map.percent / 100);
 	    mat->setColor(Color(m->diffuse[0] * 255, m->diffuse[1] * 255,
