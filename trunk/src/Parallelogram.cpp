@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Tue May 31 15:09:14 2011 loick michard
+// Last update Mon Jun  6 21:26:01 2011 samuel olivier
 //
 
 #include <cmath>
@@ -21,7 +21,7 @@ Parallelogram::Parallelogram(void) : ObjectPrimitive(NULL, Point(0, 0, 0),
 				     _vertex2(Point(0, 0, 0)),
 				     _textureVertex1(Point(0, 0)),
 				     _textureVertex2(Point(0, 1)),
-				     _textureVertex3(Point(1, 1))
+				     _textureVertex3(Point(1, 0))
 {
   _isLimited = true;  
 }
@@ -82,6 +82,8 @@ void            Parallelogram::setCachedValues(void)
   _normal.normalize();
   _textureV1 = _textureVertex2 - _textureVertex1;
   _textureV2 = _textureVertex3 - _textureVertex1;
+  _textureV3 = _textureV1 + _textureV2;
+  _vertex3 = _absolutePosition + _v1 + _v2;
 }
 
 void		Parallelogram::setVertex1(const Point& vertex1)
@@ -129,19 +131,26 @@ const Point&	Parallelogram::getTextureVertex3(void)
 void            Parallelogram::getMappedCoords(const Point& intersectPoint,
 					       double& x, double &y) const
 {
-  double        areaC =
+  double        areaA =
     Triangle::calcArea(_absolutePosition, _vertex1, intersectPoint);
   double        areaB =
-    Triangle::calcArea(_vertex1, _vertex2, intersectPoint);
-  double        areaA =
+    Triangle::calcArea(_vertex1, _vertex3, intersectPoint);
+  double        areaC =
+    Triangle::calcArea(_vertex3, _vertex2, intersectPoint);
+  double        areaD =
     Triangle::calcArea(_vertex2, _absolutePosition, intersectPoint);
-  double        sum = areaA + areaB + areaC;
-  double        b = areaA / sum;
-  double        c = areaB / sum;
-  Point         texturePoint = _textureVertex1
-    + (b * _textureV1 + c * _textureV2);
-  x = -texturePoint._x;
+  double        sum = areaA + areaB + areaC + areaD;
+  sum *= 2;
+  double        a = (areaB + areaC) / sum;
+  double        b = (areaC + areaD) / sum;
+  double        c = (areaD + areaA) / sum;
+  double        d = (areaA + areaB) / sum;
+  Point         texturePoint = _textureVertex1 +
+    (b * _textureV1 + c * _textureV3 + d * _textureV2);
+
+  x = texturePoint._x;
   y = -texturePoint._y;
+  cout << x << " " << y << endl;
 }
 
 void
