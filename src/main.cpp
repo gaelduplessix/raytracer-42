@@ -5,37 +5,11 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 15:48:47 2011 loick michard
-// Last update Thu Jun  2 13:52:15 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 18:17:08 2011 gael jochaud-du-plessix
 //
 
 #include <vector>
-#include <iostream>
 #include <cmath>
-
-#include "Raytracer.hpp"
-#include "CinemaCamera.hpp"
-#include "Color.hpp"
-#include "Point.hpp"
-#include "Vector.hpp"
-#include "Rotation.hpp"
-#include "ObjectPrimitive.hpp"
-#include "EquationPrimitive.hpp"
-#include "Sphere.hpp"
-#include "Parallelogram.hpp"
-#include "Spot.hpp"
-#include "ParallelogramLight.hpp"
-#include "SphericalLight.hpp"
-#include "ParallelLight.hpp"
-#include "Plane.hpp"
-#include "Texture.hpp"
-#include "PerlinNoise.hpp"
-#include "CheckerBoard.hpp"
-#include "Cone.hpp"
-#include "Cylinder.hpp"
-#include "Torus.hpp"
-#include "CubeTroue.hpp"
-#include "Sett.hpp"
-#include "RenderingInterface.hpp"
 
 #include "gui/gui.hpp"
 
@@ -68,7 +42,6 @@ class SDLInterface : public RenderingInterface
   }
 };
 */
-#include <QTranslator>
 
 int main(int ac, char **av)
 {

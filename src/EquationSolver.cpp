@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 11:44:41 2011 loick michard
-// Last update Thu May 12 16:22:16 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 18:16:37 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -89,7 +89,7 @@ EquationSolver::CardanMethod(double p, double q)
     }
   return (solutions);
 }
-#include <iostream>
+
 vector<double> 
 EquationSolver::solveCubicEquation(double a, double b, 
 				   double c, double d,
@@ -115,13 +115,12 @@ EquationSolver::solveCubicEquation(double a, double b,
     return (solutions);
   return (final);
 }
-#include <iostream>
+
 vector<double>
 EquationSolver::solveQuarticEquation(double a, double b,
 				     double c, double d,
 				     double e, bool all)
 {
-  //std::cout<<a<<" "<<b<<" "<<c<<" "<<d<<" "<<e<<std::endl;
   b /= a;
   c /= a;
   d /= a;
@@ -166,7 +165,5 @@ EquationSolver::solveQuarticEquation(double a, double b,
       if (all || sol2[i] > EPSILON)
 	solutions.push_back(sol2[i]);
     }
-  //  if (solutions.size() == 0)
-  //std::cout << "WHATS THE FUCK?"<<std::endl;
   return (solutions);
 }

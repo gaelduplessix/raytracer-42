@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Mon May 23 16:03:25 2011 samuel olivier
-// Last update Tue May 31 20:40:01 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 17:01:55 2011 gael jochaud-du-plessix
 //
 
 #ifndef _RESOURCES_
@@ -59,6 +59,7 @@ private:
   vector<Resource>	_resources;
   string		_tmpResourceDir;
   bool			_inCluster;
+  bool			_created;
 
 public:
   static Resources*	getInstance(void)

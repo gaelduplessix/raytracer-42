@@ -5,14 +5,13 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Thu May 19 15:41:28 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 00:36:26 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 18:18:01 2011 gael jochaud-du-plessix
 //
 
 #include "Raytracer.hpp"
 #include "RaytracerThread.hpp"
 #include "RaytracerSubThread.hpp"
 
-#include <iostream>
 RaytracerSubThread::RaytracerSubThread(RaytracerThread* mainThread,
 				       double startProgress,
 				       double endProgress):

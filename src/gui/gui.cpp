@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon Jun  6 17:26:44 2011 loick michard
+// Last update Mon Jun  6 18:11:44 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -186,7 +186,8 @@ bool RaytracerGUI::setConfiguration()
   // boost::archive::text_iarchive ia(ifs);
   // ia >> newConf;
   // }
-  Resources::getInstance()->createResources(_scene, _config);
+  if (!_restored)
+    Resources::getInstance()->createResources(_scene, _config);
   return (true);
 }
 

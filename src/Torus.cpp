@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May  5 18:31:12 2011 loick michard
-// Last update Thu May 26 12:42:05 2011 samuel olivier
+// Last update Mon Jun  6 18:14:08 2011 gael jochaud-du-plessix
 //
 
 #include "Torus.hpp"
@@ -74,7 +74,6 @@ Torus::addIntersectionWithRay(const Ray& ray,
      2.0 * newRay._vector._y * newRay._point._y);
   double e = sq3 * sq3 - 4.0 * _R * _R * (newRay._point._x * newRay._point._x +
                                           newRay._point._y * newRay._point._y);
-  //  std::cout<<a<<" "<<b<<" "<<c<<" "<<d<<" "<<e<<std::endl;
   vector<double> solutions =
     EquationSolver::solveQuarticEquation(a, b, c, d, e, true);
   vector<double> validSolutions;
