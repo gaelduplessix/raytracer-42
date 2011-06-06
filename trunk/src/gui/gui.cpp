@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Sun Jun  5 16:42:41 2011 loick michard
+// Last update Mon Jun  6 17:26:44 2011 loick michard
 //
 
 #include <QApplication>
@@ -256,7 +256,7 @@ void RaytracerGUI::paintEvent(QPaintEvent*)
   QMutexLocker	locker(&_mutex);
   if (_image)
     {
-      *_pixmap = _pixmap->fromImage(*_image);
+      *_pixmap = QPixmap::fromImage(*_image);
       _ui->_image->setPixmap(*_pixmap);
     }
   if (!_isRendering)

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 16:51:44 2011 loick michard
-// Last update Wed May 25 10:54:07 2011 loick michard
+// Last update Mon Jun  6 17:59:33 2011 loick michard
 //
 
 #include <cmath>
@@ -13,7 +13,9 @@
 #include "Raytracer.hpp"
 #include "Parallelogram.hpp"
 
-ParallelogramLight::ParallelogramLight(void) : _directLightPow(10000)
+ParallelogramLight::ParallelogramLight(void) :
+  _directLightPow(10000),
+  _par(NULL, _position, _point2, _point3, NULL)
 {
 
 }
@@ -24,19 +26,22 @@ ParallelogramLight::ParallelogramLight(const Point &position,
 				       const Color &color,
 				       double intensity):
   Light(position, color, intensity), _directLightPow(10000),
-  _point2(position2), _point3(position3)
+  _point2(position2), _point3(position3),
+  _par(NULL, _position, _point2, _point3, NULL)
 {
-
+ 
 }
 
 void	ParallelogramLight::setPoint2(const Point& point2)
 {
   _point2 = point2;
+  _par = Parallelogram(NULL, _position, _point2, _point3, NULL);
 }
 
 void	ParallelogramLight::setPoint3(const Point& point3)
 {
   _point3 = point3;
+  _par = Parallelogram(NULL, _position, _point2, _point3, NULL);
 }
 
 void	ParallelogramLight::setDirectLightPow(double value)
@@ -95,11 +100,10 @@ void	ParallelogramLight::getLighting(const ObjectPrimitive& primitive,
 Color	ParallelogramLight::getDirectLighting(const Raytracer& raytracer,
 					      Ray& ray) const
 {
-  Parallelogram		tmpPar(NULL, _position, _point2, _point3, NULL);
   ObjectPrimitive*	primitive = NULL;
   double		kLight = -1;
 
-  tmpPar.intersectWithRay(ray, primitive, kLight);
+  _par.intersectWithRay(ray, primitive, kLight);
   if (primitive)
     {
       Color lightColor = _color;
