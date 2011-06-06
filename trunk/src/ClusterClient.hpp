@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Wed Jun  1 17:10:46 2011 loick michard
+// Last update Mon Jun  6 15:40:09 2011 gael jochaud-du-plessix
 //
 
 #ifndef _CLUSTERCLIENT_HPP_
@@ -40,7 +40,7 @@ public:
   ClusterClient(RenderingInterface* interface, string url, int nbSubdibisions,
 		int interval);
   ClusterClient(RenderingInterface* interface, QByteArray& data,
-		int interval);
+		int interval, QString* newUrl=NULL);
   ~ClusterClient();
 
   RenderingInterface*		getInterface();

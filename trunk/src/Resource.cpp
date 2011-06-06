@@ -5,10 +5,9 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Fri May 27 14:59:01 2011 samuel olivier
-// Last update Sat Jun  4 22:24:06 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 18:18:15 2011 gael jochaud-du-plessix
 //
 
-#include <iostream>
 #include <fstream>
 
 #include "Resource.hpp"

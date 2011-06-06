@@ -1,7 +1,7 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>0, 0, 0</position>
+      <position>0, 2, 0</position>
       <rotation type="radian">0, 0, 0</rotation>
     </camera>
   </cameras>
@@ -28,13 +28,13 @@
       <solid>false</solid>
       <primitives>
 	<primitive type="sphere" material="materialSphere">
-	  <position>25, -3, 3</position>
+	  <position>25, 9, 0</position>
 	  <rotation type="radian">0, 0, 0</rotation>
-	  <radius>2</radius>
+	  <radius>4</radius>
 	</primitive>
 	<primitive type="cylinder" material="materialCylinder">
 	  <position>30, 9, 0</position>
-	  <rotation type="degree">30, 0, 0</rotation>
+	  <rotation type="degree">0, 80, 0</rotation>
 	  <radius>3</radius>
 	</primitive>
       </primitives>

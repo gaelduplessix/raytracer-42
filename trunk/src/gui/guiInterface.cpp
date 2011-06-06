@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Sat Jun  4 20:34:15 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 17:40:19 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -13,6 +13,7 @@
 #include <QFileDialog>
 #include <QMutexLocker>
 #include <QSystemTrayIcon>
+#include <QInputDialog>
 
 #include "gui.hpp"
 #include "Resources.hpp"
@@ -221,6 +222,7 @@ void    RaytracerGUI::loadScene(void)
   if (scene != "")
     {
       _raytracer->stopRendering();
+      Resources::getInstance()->removeResourcesFiles();
       _scene->loadFromFile(scene, this);
       _ui->_console->setHtml(_message.c_str());
       _ui->_console->moveCursor(QTextCursor::End);
@@ -450,7 +452,6 @@ void            RaytracerGUI::saveRender()
           if (format != "rt")
 	    filename += ".rt";	  
 	  QByteArray configBytes = _config->toByteArray();
-	  Resources::getInstance()->removeResourcesFiles();
 	  Resources::getInstance()->createResources(_scene, _config);
 	  QByteArray resourcesBytes = Resources::getInstance()->toByteArray();
 	  QFile	file(filename);
@@ -573,9 +574,21 @@ void            RaytracerGUI::openRender()
 	{
 	  QByteArray clusterState;
 	  stream >> clusterState;
+	  QUrl	url;
+	  QDataStream	clusterStateStream(&clusterState,
+					   QIODevice::ReadWrite);
+	  clusterStateStream.device()->seek(0);
+	  clusterStateStream >> url;
+	  QString newUrl =
+	    QInputDialog::getText(this, tr("Url du cluster"),
+				  tr("Url:"), QLineEdit::Normal,
+				  url.toString());
+	  if (newUrl == "")
+	    newUrl = url.toString();
 	  _clusterClient =
 	    new ClusterClient(this, clusterState,
-			      _preferencesDialogUi->_clientLogTime->value());
+			      _preferencesDialogUi->_clientLogTime->value(),
+			      &newUrl);
 	  _ui->_clusterDock->show();
 	  _ui->actionDeconnexion->setVisible(true);
 	  _ui->actionSe_connecter_un_serveur->setVisible(false);

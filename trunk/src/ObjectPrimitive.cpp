@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:55:34 2011 loick michard
-// Last update Sun Jun  5 16:09:18 2011 loick michard
+// Last update Mon Jun  6 18:17:45 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -89,7 +89,7 @@ ObjectPrimitive::getColor(const Point& intersectPoint) const
   else
     return (Color(255, 255, 255));
 }
-#include <iostream>
+
 Vector
 ObjectPrimitive::getNormal(const Point& intersectPoint,
 			   const Vector& viewVector) const
@@ -165,8 +165,6 @@ inline Ray	ObjectPrimitive::getRayAtSimplePosition(const Ray& ray) const
   return (modified);
 }
 
-#include <iostream>
-
 Vector
 ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
 				    const Vector& vector,
@@ -180,8 +178,6 @@ ObjectPrimitive::getReflectedVector(const Point& intersectPoint,
   normal = normal * (-2 * scal) + vector;
   return (normal);
 }
-
-#include <stdio.h>
 
 Ray		ObjectPrimitive::getRefractedRay(const Point& intersectPoint,
 						 const Ray& ray,

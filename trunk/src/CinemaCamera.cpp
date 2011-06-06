@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 15:33:54 2011 loick michard
-// Last update Sat May 28 10:06:53 2011 loick michard
+// Last update Mon Jun  6 18:15:42 2011 gael jochaud-du-plessix
 //
 
 #include <stdlib.h>
@@ -42,7 +42,7 @@ CinemaCamera::CinemaCamera(Point position, const Point& target,
   _apertureSize = 0.2;
   _focus = 2;
 }
-#include <iostream>
+
 Ray		CinemaCamera::getRay(double x, double y,
 				     bool other, double space) const
 {

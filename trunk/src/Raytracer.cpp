@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon Jun  6 17:44:41 2011 loick michard
+// Last update Mon Jun  6 18:12:46 2011 gael jochaud-du-plessix
 //
 
 #include <stdio.h>
@@ -166,19 +166,6 @@ Raytracer::launchRendering(void)
     throw (Raytracer::NO_INTERFACE_SPECIFIED);
   _thread->start();
   _interface->renderingHasBegun();
-  // vector<Object*>	objects = _scene->getObjects();
-  // int			nbObject = objects.size();
-
-  // for (int i = 0; i < nbObject ; i++)
-  //   {
-  //     vector<ObjectPrimitive*>	primitives = objects[i]->getPrimitives();
-  //     int			nbPrimitives = primitives.size();
-
-  //     for (int j = 0 ; j < 1 ; j++)
-  //     	cout << primitives[j]->getPosition().getX() << " "
-  //     	     << primitives[j]->getPosition().getY() << " "
-  //     	     << primitives[j]->getPosition().getZ() << "\n";
-  //   }
 }
 
 void

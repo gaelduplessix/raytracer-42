@@ -5,11 +5,10 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue May  3 16:29:38 2011 gael jochaud-du-plessix
-// Last update Tue May 31 00:25:35 2011 loick michard
+// Last update Mon Jun  6 18:16:14 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
-#include <iostream>
 #include <fstream>
 
 #include "CubeMap.hpp"

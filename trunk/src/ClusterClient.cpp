@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Thu Jun  2 15:31:01 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 16:51:26 2011 gael jochaud-du-plessix
 //
 
 #include <unistd.h>
@@ -30,7 +30,7 @@ ClusterClient::ClusterClient(RenderingInterface* interface,
 }
 
 ClusterClient::ClusterClient(RenderingInterface* interface, QByteArray& data,
-			     int interval):
+			     int interval, QString* newUrl):
   _interface(interface), _centralServerUrl(),
   _nbSubdivisions(0), _servers(0), _sessionId(-1),
   _imageSections(0), _renderingConfiguration(), _scene(NULL),
@@ -39,6 +39,8 @@ ClusterClient::ClusterClient(RenderingInterface* interface, QByteArray& data,
   QDataStream		stream(&data, QIODevice::ReadWrite);
 
   stream >> _centralServerUrl;
+  if (newUrl)
+    _centralServerUrl = QUrl(*newUrl);
   stream >> (int&)_nbSubdivisions;
   srand(time(NULL));
   _serversListManager = new ServersListManager(this, interval);

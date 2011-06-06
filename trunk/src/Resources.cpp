@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Sat Jun  4 21:36:10 2011 loick michard
+// Last update Mon Jun  6 18:18:35 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -18,7 +18,7 @@
 Resources*     Resources::_instance = NULL;
 
 Resources::Resources(void) : _resources(0), _tmpResourceDir(""),
-			     _inCluster(false)
+			     _inCluster(false), _created(false)
 {
 }
 
@@ -34,6 +34,9 @@ void		Resources::setResources(const vector<Resource>& resources)
 
 void		Resources::createResources(const string& stringClass)
 {
+  if (_created)
+    return ;
+  _created = true;
   istringstream	ifs;
   ifs.str(stringClass);
   boost::archive::text_iarchive ia(ifs);
@@ -48,6 +51,9 @@ void		Resources::createResources(const QByteArray& bytes)
 void	Resources::createResources(const Scene* scene,
 				   const RenderingConfiguration* conf)
 {
+  if (_created)
+    return ;
+  _created = true;
   while (_resources.size() > 0)
     _resources.pop_back();
 
@@ -178,4 +184,5 @@ void		Resources::removeResourcesFiles(void)
 	cerr << "Could not remove temporary file '" <<
 	  _resources[i].getNewPathName() << "'.\n";
     }
+  _created = false;
 }

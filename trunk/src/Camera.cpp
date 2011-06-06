@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Sat May 28 10:00:42 2011 loick michard
+// Last update Mon Jun  6 18:15:25 2011 gael jochaud-du-plessix
 //
 
 #include "Camera.hpp"
@@ -104,7 +104,7 @@ void		Camera::setPosition(const Point& position)
 {
   _position = position;
 }
-#include <iostream>
+
 void		Camera::setRotation(const Rotation& rotation)
 {
   _rotation = rotation;

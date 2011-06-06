@@ -30,7 +30,7 @@
 	<primitives>
 	  <primitive type="plane" material="sol">
 	    <position>0, 0, -2</position>
-	    <rotation type="radian">0, 0, 50</rotation>
+	    <rotation type="degree">20, 0, 0</rotation>
 	  </primitive>
 	</primitives>
     </object>
