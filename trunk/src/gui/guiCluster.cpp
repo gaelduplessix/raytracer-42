@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Mon May 23 15:55:20 2011 loick michard
-// Last update Sat Jun  4 20:28:24 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 23:10:36 2011 gael jochaud-du-plessix
 //
 
 #include <QMessageBox>
@@ -165,11 +165,57 @@ void		RaytracerGUI::connectToCluster()
       _isConnected = true;
       if (!_timer->isActive())
 	_timer->start();
-      _clusterClient =
-	new ClusterClient(this, _connectToServerDialogUi
-			  ->_addres->text().toStdString(),
-			  _connectToServerDialogUi->_subdivisions->value(),
-			  _preferencesDialogUi->_clientLogTime->value());
-      _clusterTimer->start();
+      if (_isRendering && _image && _raytracer && _raytracer->_thread)
+	{
+	  int			nbSubdivisions =
+	    _connectToServerDialogUi->_subdivisions->value();
+	  if ((nbSubdivisions < 1)
+	       || nbSubdivisions > _image->width())
+	    nbSubdivisions = sqrt(_image->width());
+	  QByteArray            clusterState;
+	  QDataStream           stream(&clusterState, QIODevice::ReadWrite);
+	  QString		urlStr(_connectToServerDialogUi
+				       ->_addres->text());
+	  QUrl			url(urlStr);
+
+	  stream << url;
+	  stream << (int)nbSubdivisions;
+	  for (int i = 0; i < nbSubdivisions; i++)
+	    {
+	      for (int j = 0; j < nbSubdivisions; j++)
+		{
+		  ClusterClient::ImageSection status =
+		    ClusterClient::RAYTRACED;
+		  for (int k = 0, l = (double)_image->width() / nbSubdivisions;
+			 k < l; k++)
+		    {
+		      for (int m = 0, n = (double)_image->height()
+			     / nbSubdivisions; m < n; m++)
+			{
+			  if(!_raytracer->_thread
+			     ->isRaytracedPixel(_image->width()
+						/ nbSubdivisions * i + k,
+						_image->height()
+						/ nbSubdivisions * j + m))
+			    status = ClusterClient::NOT_RAYTRACED;
+			}
+		    }
+		  stream << (int)status;
+		}
+	    }
+	  _clusterClient =
+	    new ClusterClient(this, clusterState,
+			      _preferencesDialogUi->_clientLogTime->value(),
+			      &urlStr);
+	}
+      else
+	{
+	  _clusterClient =
+	    new ClusterClient(this, _connectToServerDialogUi
+			      ->_addres->text().toStdString(),
+			      _connectToServerDialogUi->_subdivisions->value(),
+			      _preferencesDialogUi->_clientLogTime->value());
+	}
+	  _clusterTimer->start();
     }
 }

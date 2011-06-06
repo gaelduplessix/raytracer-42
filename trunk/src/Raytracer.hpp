@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue Apr 26 12:24:26 2011 loick michard
-// Last update Tue May 31 23:48:34 2011 gael jochaud-du-plessix
+// Last update Mon Jun  6 22:17:29 2011 gael jochaud-du-plessix
 // Last update Sat May 21 16:49:29 2011 gael jochaud-du-plessix
 //
 
@@ -113,11 +113,11 @@ public:
   PhotonMap*			_photonMap;
   KdTree*			_kdTree;
   Scene*			_scene;
+  RaytracerThread*		_thread;
 
 private:
   RenderingConfiguration*	_config;
   RenderingInterface*		_interface;
-  RaytracerThread*		_thread;
   mutable QMutex		_mutex;
   bool				_otherEyes;
 };
