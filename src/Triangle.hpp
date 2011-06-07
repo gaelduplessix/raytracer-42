@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Sun May 29 22:01:45 2011 melvin laplanche
+// Last update Tue Jun  7 14:57:59 2011 gael jochaud-du-plessix
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -30,6 +30,8 @@ public:
 
   void		setVertex1(const Point& vertex1);
   void		setVertex2(const Point& vertex2);
+  Point		getVertex1(void);
+  Point		getVertex2(void);
   void		setTextureVertex1(const Point& textureVertex1);
   void		setTextureVertex2(const Point& textureVertex2);
   void		setTextureVertex3(const Point& textureVertex3);

@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Sat Jun  4 17:00:14 2011 melvin laplanche
+// Last update Tue Jun  7 14:42:41 2011 gael jochaud-du-plessix
 //
 
 #ifndef _SCENE_HPP_
@@ -155,8 +155,8 @@ private:
   EquationPrimitive*	_parseEquation(QDomNode, QString, Object*);
   Parallelogram*	_parseParallelogram(QDomNode, QString, Object*);
   void			_parse3dsFile(QDomNode, QString);
-  void			_parse3dsIntern(string, string);
-  void			_parse3dsLib3ds(string, string);
+  bool			_parse3dsIntern(string, string, Object*);
+  bool			_parse3dsLib3ds(string, string, Object*);
   void			_parseSett(QDomNode, QString);
   Material*		_getMaterialByName(QString);
   void			_parseLight(QDomNode);
