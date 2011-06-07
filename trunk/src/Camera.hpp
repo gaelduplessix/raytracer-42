@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue Apr 26 18:54:28 2011 gael jochaud-du-plessix
-// Last update Sat May 28 10:01:03 2011 loick michard
+// Last update Tue Jun  7 14:11:17 2011 loick michard
 //
 
 #ifndef _CAMERA_H_
@@ -68,6 +68,8 @@ protected:
   Vector	_target;
   Vector	_realTarget;
   Vector	_vectorSpace;
+  Vector	_newV1;
+  Vector	_newV2;
 };
 
 #endif

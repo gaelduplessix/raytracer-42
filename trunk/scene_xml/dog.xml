@@ -14,13 +14,13 @@
 
   <lights>
     <light type="spot">
-      <position>-500000,1,0</position>
+      <position>-50000,1000,0</position>
       <color>FFFFFF</color>
       <intensity>0.3</intensity>
       <directLight>3000</directLight>
     </light>
     <light type="spot">
-      <position>-500000, 2, 2</position>
+      <position>-50000, 2000, 2</position>
       <color>FFFFFF</color>
       <intensity>0.3</intensity>
       <directLight>3000</directLight>

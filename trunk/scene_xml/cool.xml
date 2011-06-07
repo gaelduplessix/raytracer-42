@@ -1,8 +1,9 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>0, 0, 3</position>
-      <rotation type="degree">0, 15, 0</rotation>
+      <position>0, 10, 10</position>
+      <rotation type="degree">0, 0, 0</rotation>
+      <target>24, 0, -1.9</target>
     </camera>
   </cameras>
 
