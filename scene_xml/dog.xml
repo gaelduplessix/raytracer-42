@@ -9,7 +9,7 @@
     <a3ds lib="lib3ds">
       <position>0, 0, 0</position>
       <rotation type="degree">0, 0, -45</rotation>
-      <scale>0.1, 0.1, 0.1</scale>
+      <scale>0.7, 0.7, 0.7</scale>
       <filename>3ds_models/Dog/BRACO_M.3DS</filename>
       <textureDir>3ds_models/Dog</textureDir>
     </a3ds>
