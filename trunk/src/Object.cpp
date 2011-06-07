@@ -5,11 +5,17 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:53:38 2011 loick michard
-// Last update Tue Jun  7 16:07:26 2011 gael jochaud-du-plessix
+// Last update Tue Jun  7 16:33:52 2011 gael jochaud-du-plessix
 //
 
 #include "Object.hpp"
 #include "Triangle.hpp"
+
+Object::Object():
+  _primitives(0), _rotation(0, 0, 0), _scale(1, 1, 1), _position(0, 0, 0),
+  _isSolid(false)
+{
+}
 
 Object::Object(vector<ObjectPrimitive*> primitives, const Rotation& rotation,
 	       const Point& position, bool isSolid):
@@ -30,10 +36,6 @@ void	Object::freePrimitives(void)
   for (int i = 0; i < size; i++)
     delete _primitives[i];
   _primitives.clear();
-}
-
-Object::Object(void)
-{
 }
 
 const Vector&		Object::getRefractedVector(const Point& intersectPoint,
@@ -132,9 +134,9 @@ void			Object::applyTransformations(void)
       p1.rotate(_rotation);
       p2.rotate(_rotation);
       p3.rotate(_rotation);
-      p1 += middle + _position;
-      p2 += middle + _position;
-      p3 += middle + _position;
+      p1 += _position;
+      p2 += _position;
+      p3 += _position;
       ((Triangle*)_primitives[i])->setPosition(p1);
       ((Triangle*)_primitives[i])->setVertex1(p2);
       ((Triangle*)_primitives[i])->setVertex2(p3);

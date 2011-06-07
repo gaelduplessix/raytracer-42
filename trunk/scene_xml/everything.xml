@@ -110,26 +110,58 @@
     	</primitive>
 
 	<!-- Sphere 1 -->
-    	<primitive type="sphere" material="sphere1">
-    	  <position>12, -2.3, 2.3</position>
-    	  <rotation type="degree">0, 0, 0</rotation>
-	  <radius>0.8</radius>
-    	</primitive>
+    	<!-- <primitive type="sphere" material="sphere1"> -->
+    	<!--   <position>12, -2.3, 2.3</position> -->
+    	<!--   <rotation type="degree">0, 0, 0</rotation> -->
+	<!--   <radius>0.8</radius> -->
+    	<!-- </primitive> -->
 	<!-- Sphere 2 -->
-    	<primitive type="sphere" material="sphere2">
-    	  <position>10, 0, 2.3</position>
-    	  <rotation type="degree">0, 0, 0</rotation>
-	  <radius>0.8</radius>
-    	</primitive>
+    	<!-- <primitive type="sphere" material="sphere2"> -->
+    	<!--   <position>10, 0, 2.3</position> -->
+    	<!--   <rotation type="degree">0, 0, 0</rotation> -->
+	<!--   <radius>0.8</radius> -->
+    	<!-- </primitive> -->
 	<!-- Sphere 3 -->
-    	<primitive type="sphere" material="sphere3">
-    	  <position>12, 2.3, 2.3</position>
-    	  <rotation type="degree">0, 0, 0</rotation>
-	  <radius>0.8</radius>
-    	</primitive>
+    	<!-- <primitive type="sphere" material="sphere3"> -->
+    	<!--   <position>12, 2.3, 2.3</position> -->
+    	<!--   <rotation type="degree">0, 0, 0</rotation> -->
+	<!--   <radius>0.8</radius> -->
+    	<!-- </primitive> -->
 
       </primitives>
     </object>
+
+   <a3ds lib="lib3ds">
+      <position>10, 0, 1.62</position>
+      <rotation type="degree">0, 0, -45</rotation>
+      <scale>0.0002, 0.0002, 0.0002</scale>
+      <filename>3ds_models/F50-2.3DS</filename>
+    </a3ds>
+
+    <a3ds lib="lib3ds">
+      <position>12, -2.3, 1.58</position>
+      <rotation type="degree">0, 0, -45</rotation>
+      <scale>0.4, 0.4, 0.4</scale>
+      <filename>3ds_models/Girl/girl.3ds</filename>
+      <textureDir>3ds_models/Girl/Texture</textureDir>
+    </a3ds>
+
+    <a3ds lib="lib3ds">
+      <position>8, 0.1, 0.8</position>
+      <scale>0.0025, 0.0025, 0.0025</scale>
+      <rotation type="degree">0, -80, 0</rotation>
+      <filename>3ds_models/Gun/M4a1an Pws4.3ds</filename>
+      <textureDir>3ds_models/Gun</textureDir>
+    </a3ds>
+
+    <a3ds lib="lib3ds">
+      <position>12, 2, 2.0</position>
+      <scale>0.032, 0.032, 0.032</scale>
+      <rotation type="degree">0, 0, -75</rotation>
+      <filename>3ds_models/Altair Model/altair.3ds</filename>
+      <textureDir>3ds_models/Altair Model/tex</textureDir>
+    </a3ds>
+
 
     <!-- Support 1 -->
     <parallelepipede material="support">
@@ -150,14 +182,14 @@
       <rotation type="degree">0,0,0</rotation>
     </parallelepipede>
     <!-- Support 3 -->
-    <parallelepipede material="support">
-      <position>11,1.5, 0</position>
-      <solid>true</solid>
-      <width>2,0,0</width>
-      <height>0,1.5,0</height>
-      <depth>0,0,1.5</depth>
-      <rotation type="degree">0,0,0</rotation>
-    </parallelepipede>
+    <!-- <parallelepipede material="support"> -->
+    <!--   <position>11,1.5, 0</position> -->
+    <!--   <solid>true</solid> -->
+    <!--   <width>2,0,0</width> -->
+    <!--   <height>0,1.5,0</height> -->
+    <!--   <depth>0,0,1.5</depth> -->
+    <!--   <rotation type="degree">0,0,0</rotation> -->
+    <!-- </parallelepipede> -->
 
   </objects>
 
