@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:41:20 2011 loick michard
-// Last update Mon Jun  6 20:23:33 2011 samuel olivier
+// Last update Tue Jun  7 14:58:32 2011 gael jochaud-du-plessix
 //
 
 #include <cmath>
@@ -95,6 +95,16 @@ void		Triangle::setVertex1(const Point& vertex1)
 void		Triangle::setVertex2(const Point& vertex2)
 {
   _vertex2 = vertex2;
+}
+
+Point		Triangle::getVertex1(void)
+{
+  return (_vertex1);
+}
+
+Point		Triangle::getVertex2(void)
+{
+  return (_vertex2);
 }
 
 void		Triangle::setTextureVertex1(const Point& textureVertex1)

@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue Jun  7 15:54:58 2011 loick michard
+// Last update Tue Jun  7 16:13:17 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -1036,6 +1036,11 @@ void			Scene::_parse3dsFile(QDomNode	n,
   bool			hasFilename = false;
   string		textDir;
   bool			hasTextDir = false;
+  Object		*obj = new Object();
+  bool			position = false;
+  bool			rotation = false;
+  bool			scale = false;
+  bool			solid = false;
 
   while (n.isNull() == false && this->_hasError == false)
   {
@@ -1047,7 +1052,51 @@ void			Scene::_parse3dsFile(QDomNode	n,
 				    "be an element"), n);
 	return ;
       }
-      if (n.nodeName() == "filename")
+      if (n.nodeName() == "position")
+      {
+	if (position)
+	  this->_putWarning(QObject::tr("An object has several position, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setPosition(_parsePosition(n, "position"));
+	  position = true;
+	}
+      }
+      else if (n.nodeName() == "solid")
+      {
+	if (solid)
+	  this->_putWarning(QObject::tr("An object has several solid value, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setSolid(_parseBoolean(n, "solid"));
+	  solid = true;
+	}
+      }
+      else if (n.nodeName() == "rotation")
+      {
+	if (rotation)
+	  this->_putWarning(QObject::tr("An object has several rotations, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setRotation(_parseRotation(n));
+	  rotation = true;
+	}
+      }
+      else if (n.nodeName() == "scale")
+      {
+	if (scale)
+	  this->_putWarning(QObject::tr("An object has several scale, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setScale(_parsePosition(n, "scale"));
+	  scale = true;
+	}
+      }
+      else if (n.nodeName() == "filename")
       {
 	if (hasFilename)
 	  this->_putWarning(QObject::tr("A a3ds has several filename, "
@@ -1080,27 +1129,35 @@ void			Scene::_parse3dsFile(QDomNode	n,
     this->_putError(QObject::tr("An a3ds must have at leat a filename"), n);
   else if (this->_hasError == false)
   {
+    bool ok = false;
     if (lib3ds == "intern")
-      this->_parse3dsIntern(filename, textDir);
+      ok = this->_parse3dsIntern(filename, textDir, obj);
     else
-      this->_parse3dsLib3ds(filename, textDir);
+      ok = this->_parse3dsLib3ds(filename, textDir, obj);
+    if (ok)
+      {
+	obj->applyTransformations();
+	this->_objects.push_back(obj);
+      }
+    else
+      delete (obj);
   }
 }
 
-void		Scene::_parse3dsLib3ds(string	filename,
-				       string	textDir)
+bool		Scene::_parse3dsLib3ds(string	filename,
+				       string	textDir,
+				       Object*	obj)
 {
   Lib3dsFile	*file = lib3ds_file_load(Resources::getInstance()
 					 ->getNewPathName(filename).c_str());
   int		nbFaces = 0;
-  Object	*obj = new Object();
   Material	*mat;
   int		finishedFaces = 0;
 
   if (file == NULL)
   {
     this->_putError(QObject::tr("Loading %1 failed.").arg(filename.c_str()));
-    return ;
+    return (false);
   }
   this->_sceneFilenames.push_back(filename.c_str());
   lib3ds_file_eval(file, 0);
@@ -1172,12 +1229,13 @@ void		Scene::_parse3dsLib3ds(string	filename,
       ++finishedFaces;
     }
   }
-  this->_objects.push_back(obj);
   lib3ds_file_free(file);
+  return (true);
 }
 
-void		Scene::_parse3dsIntern(string	filename,
-				       string	textDir)
+bool		Scene::_parse3dsIntern(string	filename,
+				       string	textDir,
+				       Object*	obj)
 {
   A3DSParser	a3ds(Resources::getInstance()
 		       ->getNewPathName(filename), this->_interface);
@@ -1224,7 +1282,6 @@ void		Scene::_parse3dsIntern(string	filename,
 	this->_materials.push_back(mat);
       }
 
-      Object		*obj = new Object();
       int		totalFaces = 0;
 
       for (unsigned int i=0; i<meshes.size(); i++)
@@ -1244,10 +1301,11 @@ void		Scene::_parse3dsIntern(string	filename,
 	  obj->addPrimitive(triangle);
 	}
       }
-      this->_objects.push_back(obj);
       this->_putInfo(QObject::tr("%1 faces retreived").arg(totalFaces));
+      return (true);
     }
   }
+  return (false);
 }
 
 Material*	Scene::_3dsgetFaceMat(int	j,

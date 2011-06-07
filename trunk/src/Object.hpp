@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 16:52:19 2011 loick michard
-// Last update Thu Jun  2 14:25:36 2011 melvin laplanche
+// Last update Tue Jun  7 16:02:57 2011 gael jochaud-du-plessix
 //
 
 #ifndef _OBJECT_HPP_
@@ -38,8 +38,10 @@ public:
   bool					isSolid();
   void				addPrimitive(ObjectPrimitive *primitive);
   void				removePrimitiveAtIndex(int index);
+  void				applyTransformations(void);
   void				setPosition(const Point& position);
   void				setRotation(const Rotation& rotation);
+  void				setScale(const Vector& scale);
   void				setSolid(bool solid = true);
 
   virtual const Vector&		getRefractedVector(const Point& intersectPoint,
@@ -52,8 +54,9 @@ public:
   vector<ObjectPrimitive*>	_primitives;
 protected:
   Rotation			_rotation;
+  Vector			_scale;
   Point				_position;
-  bool				_isSolid;
+  bool				_isSolid;  
 };
 
 #endif
