@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Fri Apr 29 15:33:54 2011 loick michard
-// Last update Mon Jun  6 18:15:42 2011 gael jochaud-du-plessix
+// Last update Tue Jun  7 14:15:19 2011 loick michard
 //
 
 #include <stdlib.h>
@@ -59,12 +59,9 @@ Ray		CinemaCamera::getRay(double x, double y,
 
   if (_hasTarget)
     {
-      Vector        newV1(target._z, target._y, -target._x);
-      Vector        newV2 = newV1;
-      newV2 *= target;
       Vector vector = target * _focalLength;
-      vector += newV2 * (-_width) * (x - 0.5);
-      vector += newV1 * (-_height) * (0.5 - y);
+      vector += _newV2 * (-_width) * (x - 0.5);
+      vector += _newV1 * (-_height) * (0.5 - y);
       vector.normalize();
      	return (Ray(position, vector));
     }
@@ -104,12 +101,9 @@ CinemaCamera::getRayWithSampling(double x, double y,
 	vector.rotate(_rotation);
       if (_hasTarget)
         {
-	  Vector        newV1(target._z, target._y, -target._x);
-	  Vector        newV2 = newV1;
-	  newV2 *= target;
 	  vector = target * _focalLength;
-	  vector += newV2 * (-_width) * (x - 0.5);
-	  vector += newV1 * (-_height) * (0.5 - y);
+	  vector += _newV2 * (-_width) * (x - 0.5);
+	  vector += _newV1 * (-_height) * (0.5 - y);
         }
       Point start = position + vector;
       vector.normalize();

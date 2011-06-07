@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Mon Jun  6 18:15:25 2011 gael jochaud-du-plessix
+// Last update Tue Jun  7 14:51:45 2011 loick michard
 //
 
 #include "Camera.hpp"
@@ -48,8 +48,21 @@ void Camera::updateTarget()
   Vector    vector(_focalLength,
                    0,
                    0);
+  Vector        newV1(vector._z, vector._y, -vector._x);
+  Vector        newV2 = newV1;
+
+  newV2 *= vector;
+  newV1.normalize();
+  newV2.normalize();
   if (_rotation._x || _rotation._y || _rotation._z)
-    vector.rotate(_rotation);
+    {
+      vector.rotate(_rotation);
+      newV1.rotate(_rotation);
+      newV2.rotate(_rotation);
+    }
+
+  _newV1 = newV1;
+  _newV2 = newV2;
   vector.normalize();
   vector *= _focus;
   _realTarget = _position + vector;
@@ -57,11 +70,7 @@ void Camera::updateTarget()
   _target = vector;
   _hasDepthOfField = true;
 
-  Vector        newV1(_target._z, _target._y, -_target._x);
-  Vector        newV2 = newV1;
-  newV2 *= _target;
   newV2.normalize();
-
   _vectorSpace = newV2;
 }
 
@@ -138,5 +147,19 @@ void		Camera::setTarget(const Point& target)
   _realTarget = target;
   _target = target - _position;
   _hasTarget = true;
+
+  Vector        newV1(_target._z, _target._y, -_target._x);
+  Vector        newV2 = newV1;
+
+  newV2 *= _target;
+  newV1.normalize();
+  newV2.normalize();
+  if (_rotation._x || _rotation._y || _rotation._z)
+    {
+      newV1.rotate(_rotation);
+      newV2.rotate(_rotation);
+    }
+  _newV1 = newV1;
+  _newV2 = newV2;
   _target.normalize();
 }
