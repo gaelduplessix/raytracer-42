@@ -1,28 +1,49 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-10000, 0, 0</position>
+      <position>-10000, 0, 600</position>
       <rotation type="radian">0, 0, 0</rotation>
       <target>0, 0, 0</target>
     </camera>
   </cameras>
+
+  <materials>
+    <material name="mat">
+      <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+  </materials>
+
   <objects>
     <a3ds lib="lib3ds">
       <filename>3ds_models/F_modena_N1_90210.3ds</filename>
     </a3ds>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+      <primitives>
+        <primitive type="plane" material="mat">
+          <position>0, 0, 0</position>
+          <rotation type="radian">0, 0, 0</rotation>
+        </primitive>
+      </primitives>
+    </object>
   </objects>
 
   <lights>
     <light type="spot">
-      <position>-150000,1,0</position>
-      <color>100,180,110</color>
-      <intensity>3</intensity>
+      <position>-15000,1,10000</position>
+      <color>F0F0F0</color>
+      <intensity>0.8</intensity>
       <directLight>3000</directLight>
     </light>
     <light type="spot">
-      <position>-100000, 2, 2</position>
-      <color>160,120,155</color>
-      <intensity>3</intensity>
+      <position>-10000, 2, 1000</position>
+      <color>F0F0F0</color>
+      <intensity>0.8</intensity>
       <directLight>3000</directLight>
     </light>
   </lights>
