@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue Jun  7 16:13:17 2011 gael jochaud-du-plessix
+// Last update Tue Jun  7 20:20:25 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -1195,6 +1195,7 @@ bool		Scene::_parse3dsLib3ds(string	filename,
 	      this->_putWarning(QObject::tr("texture %1 (a3ds) not found.")
 				.arg(textName.c_str()));
 	      mat->setTexture(NULL);
+	      mat->setColor(Color(255, 255, 255, 255));
 	    }
 	    else
 	      mat->setTexture(new Texture(textName));

@@ -1,23 +1,22 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-4.5, -4.5, 1</position>
-      <rotation type="degree">0, 0, 45</rotation>
+      <position>-2.5, -2.5, 1</position>
+      <rotation type="degree">0, 10, 40</rotation>
     </camera>
   </cameras>
 
   <materials>
     <material name="mat">
       <color>255, 255, 255</color>
-      <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <reflection>0</reflection>
+      <reflection>0.5</reflection>
     </material>
   </materials>
 
   <objects>
     <a3ds lib="lib3ds">
-      <position>0, 0, 0</position>
+      <position>1.5, 1.5, -0.20</position>
       <scale>1, 1, 1</scale>
       <filename>3ds_models/LP670/lp670.3ds</filename>
       <textureDir>3ds_models/LP670/</textureDir>
@@ -48,14 +47,23 @@
   </objects>
 
   <lights>
-    <light type="spot">
+    <light type="spherical">
       <position>-50,1,0</position>
+      <size>5</size>
       <color>FFFFFF</color>
       <intensity>0.4</intensity>
       <directLight>3000</directLight>
     </light>
-    <light type="spot">
+    <light type="spherical">
       <position>-50, 2, 20</position>
+      <size>5</size>
+      <color>FFFFFF</color>
+      <intensity>0.4</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spherical">
+      <position>0, 0, 1000000000</position>
+      <size>5</size>
       <color>FFFFFF</color>
       <intensity>0.4</intensity>
       <directLight>3000</directLight>

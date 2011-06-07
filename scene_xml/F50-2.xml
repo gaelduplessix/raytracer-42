@@ -1,29 +1,54 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-10000, -1000, 5000</position>
-      <rotation type="radian">0, 0, 0</rotation>
+      <position>-15, -20, 8</position>
+      <rotation type="degree">-50, 0, 5</rotation>
       <target>0, 0, 0</target>
     </camera>
   </cameras>
+
+  <materials>
+    <material name="floor">
+      <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
+  </materials>
+
   <objects>
     <a3ds lib="lib3ds">
+      <position>0, 0, 2</position>
+      <rotation>0, 0, 0</rotation>
+      <scale>0.001, 0.001, 0.001</scale>
       <filename>3ds_models/F50-2.3DS</filename>
     </a3ds>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="degree">0, 0, 0</rotation>
+      <solid>false</solid>
+      <primitives>
+        <primitive type="plane" material="floor">
+          <position>0,0,0</position>
+          <rotation type="degree">0, 0, 0</rotation>
+        </primitive>
+      </primitives>
+    </object>
   </objects>
 
   <lights>
-    <light type="spot">
-      <position>-150000,1,0</position>
+    <light type="parallel">
+      <direction>0,0,1</direction>
       <color>ffffff</color>
       <intensity>1</intensity>
-      <directLight>3000</directLight>
     </light>
-    <light type="spot">
-      <position>0, 2, 10000</position>
-      <color>ffffff</color>
+    <light type="parallelogram">
+      <point>100,-10, 40.44</point>
+      <point2>80,-10, 40.44</point2>
+      <point3>100, 10, 40.44</point3>
+      <color>255, 255, 255</color>
       <intensity>1</intensity>
       <directLight>3000</directLight>
-    </light>
+    </light>    
   </lights>
 </scene>
