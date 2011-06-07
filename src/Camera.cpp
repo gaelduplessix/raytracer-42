@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:47:14 2011 loick michard
-// Last update Tue Jun  7 14:51:45 2011 loick michard
+// Last update Tue Jun  7 16:41:52 2011 loick michard
 //
 
 #include "Camera.hpp"
@@ -61,6 +61,8 @@ void Camera::updateTarget()
       newV2.rotate(_rotation);
     }
 
+  newV1.normalize();
+  newV2.normalize();
   _newV1 = newV1;
   _newV2 = newV2;
   vector.normalize();
@@ -159,6 +161,8 @@ void		Camera::setTarget(const Point& target)
       newV1.rotate(_rotation);
       newV2.rotate(_rotation);
     }
+  newV1.normalize();
+  newV2.normalize();
   _newV1 = newV1;
   _newV2 = newV2;
   _target.normalize();
