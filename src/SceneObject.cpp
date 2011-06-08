@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Tue Jun  7 20:28:29 2011 samuel olivier
+// Last update Wed Jun  8 14:47:34 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -1131,9 +1131,12 @@ void			Scene::_parse3dsFile(QDomNode	n,
   {
     bool ok = false;
     if (lib3ds == "intern")
-      ok = this->_parse3dsIntern(filename, textDir, obj);
+      ok = this->_parse3dsIntern(Resources::getInstance()
+				 ->getNewPathName(filename),
+				 textDir, obj);
     else
-      ok = this->_parse3dsLib3ds(filename, textDir, obj);
+      ok = this->_parse3dsLib3ds(Resources::getInstance()
+				 ->getNewPathName(filename), textDir, obj);
     if (ok)
       {
 	obj->applyTransformations();
@@ -1148,8 +1151,7 @@ bool		Scene::_parse3dsLib3ds(string	filename,
 				       string	textDir,
 				       Object*	obj)
 {
-  Lib3dsFile	*file = lib3ds_file_load(Resources::getInstance()
-					 ->getNewPathName(filename).c_str());
+  Lib3dsFile	*file = lib3ds_file_load(filename.c_str());
   int		nbFaces = 0;
   Material	*mat;
   int		finishedFaces = 0;
@@ -1190,9 +1192,10 @@ bool		Scene::_parse3dsLib3ds(string	filename,
 	      textName = m->texture1_map.name;
 	    else
 	      textName = textDir + "/" + m->texture1_map.name;
-	    if (QFileInfo(textName.c_str()).exists() == false)
+	    string	newTxtName = Resources::getInstance()
+	      ->getNewPathName(textName);
+	    if (QFileInfo(newTxtName.c_str()).exists() == false)
 	    {
-	      cout << textName << endl;
 	      this->_putWarning(QObject::tr("texture %1 (a3ds) not found.")
 				.arg(textName.c_str()));
 	      mat->setTexture(NULL);
