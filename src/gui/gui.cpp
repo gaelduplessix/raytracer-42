@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed Jun  8 11:46:36 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 12:42:15 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -351,7 +351,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
   _scene = new Scene();
   for (int i = 1, l = qApp->arguments().size(); i < l; i++)
     {
-      if (qApp->arguments().at(i).indexOf("--") != 0)
+      int index = qApp->arguments().at(i).indexOf("--");
+      if (index > 0 && qApp->arguments().at(index - 1).indexOf("--") == -1)
 	{
 	  _scene->loadFromFile(qApp->arguments().at(i).toStdString(), this);
 	  break;
