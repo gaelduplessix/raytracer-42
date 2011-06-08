@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Wed Jun  8 13:01:22 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 14:25:44 2011 gael jochaud-du-plessix
 //
 
 #include <QDir>
@@ -59,24 +59,24 @@ void	Resources::createResources(const Scene* scene,
 
   const vector<Material*>&	materials = scene->getMaterials();
   for (unsigned int i = 0; i < materials.size(); i++)
-  	{
-  	  Material*	mat = materials[i];
-  	  if (mat != NULL && mat->_texture != NULL)
-	    {
-	      if (mat->_texture->_type == 0)
-		_resources.push_back(Resource(mat->_texture->_name));
-	    }
-  	  if (mat != NULL && mat->_limitTexture != NULL)
-	    {
-	      if (mat->_limitTexture->_type == 0)
-		_resources.push_back(Resource(mat->_limitTexture->_name));
-	    }
-  	  if (mat != NULL && mat->_heightmap != NULL)
-	    {
-	      if (mat->_heightmap->_type == 0)
-		_resources.push_back(Resource(mat->_heightmap->_name));
-	    }
-  	}
+    {
+      Material*	mat = materials[i];
+      if (mat != NULL && mat->_texture != NULL)
+	{
+	  if (mat->_texture->_type == 0)
+	    _resources.push_back(Resource(mat->_texture->_name));
+	}
+      if (mat != NULL && mat->_limitTexture != NULL)
+	{
+	  if (mat->_limitTexture->_type == 0)
+	    _resources.push_back(Resource(mat->_limitTexture->_name));
+	}
+      if (mat != NULL && mat->_heightmap != NULL)
+	{
+	  if (mat->_heightmap->_type == 0)
+	    _resources.push_back(Resource(mat->_heightmap->_name));
+	}
+    }
   if (conf->getCubeMap())
     {
       string			cubeMapPath = conf->getCubeMap()->getName();
