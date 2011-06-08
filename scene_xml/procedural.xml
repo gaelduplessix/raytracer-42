@@ -1,0 +1,157 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="left">
+      <position>-20, -8, 5</position>
+      <rotation type="degree">-30, 0, 0</rotation>
+      <target>0, 0, 0</target>
+    </camera>
+    <camera type="cinema" name="right">
+      <position>-15, 0, 5</position>
+      <target>20, 0, 0</target>
+    </camera>
+  </cameras>
+
+  <materials>
+    <material name="sol">
+     <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <texture type="procedural">
+	<name>checkerboard</name>
+	<repeatX>2</repeatX>
+	<repeatY>2</repeatY>
+	<color1>ff00ff</color1>
+	<color2>00ff00</color2>
+      </texture>
+    </material>
+
+    <material name="wood">
+      <color>150,180,100</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <texture type="procedural">
+	<name>wood</name>
+	<!-- <color1>ff00ff</color1> -->
+	<!-- <color2>00ff00</color2> -->
+      </texture>
+    </material>
+
+    <material name="bump">
+      <color>150,180,100</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <heightmap type="procedural">
+	<name>perlin</name>
+      </heightmap>
+    </material>
+
+    <material name="marble">
+      <color>150,180,100</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0.2</reflection>
+      <texture type="procedural">
+	<name>marble</name>
+      </texture>
+    </material>
+
+    <material name="perlin">
+      <color>150,180,100</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <texture type="procedural">
+	<name>perlin</name>
+      </texture>
+    </material>
+
+  </materials>
+
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+      <primitives>
+	<primitive type="plane" material="sol">
+	  <position>0,0,-5</position>
+	  <rotation type="degree">0, 0, 0</rotation>
+	</primitive>
+
+	<primitive type="sphere" material="wood">
+	  <position>24,-4,2</position>
+	  <rotation type="degree">0,0,0</rotation>
+	  <radius>3</radius>
+	</primitive>
+
+	<primitive type="sphere" material="bump">
+	  <position>24,4,0</position>
+	  <rotation type="degree">0,0,0</rotation>
+	  <radius>3</radius>
+	</primitive>
+	
+	<primitive type="sphere" material="marble">
+	  <position>12,12,1</position>
+	  <rotation type="degree">0,0,0</rotation>
+	  <radius>3</radius>
+	</primitive>
+
+	<primitive type="cylinder" material="marble">
+	  <position>18,12,1</position>
+	  <rotation type="degree">0,45,0</rotation>
+	  <limitMin>2</limitMin>
+	  <limitMax>5</limitMax>
+	  <radius>3</radius>
+	</primitive>
+
+	<primitive type="cone" material="marble">
+	  <position>18,0,1</position>
+	  <rotation type="degree">-10,0,0</rotation>
+	  <limitMin>2</limitMin>
+	  <limitMax>5</limitMax>
+	  <radius>1</radius>
+	</primitive>
+
+      </primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="parallelogram">
+      <point>0,9,0</point>
+      <point2>10,9,0</point2>
+      <point3>10,9,10</point3>
+      <color>ffffff</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="parallelogram">
+      <point>0,-9,0</point>
+      <point2>10,-9,0</point2>
+      <point3>10,-9,10</point3>
+      <color>ffffff</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="parallelogram">
+      <point>10,5,5</point>
+      <point2>10,-5,5</point2>
+      <point3>15,5,5</point3>
+      <color>120,220,100</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="parallelogram">
+      <point>10,5,-5</point>
+      <point2>10,-5,-5</point2>
+      <point3>15,5,-5</point3>
+      <color>120,90,120</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+
+  </lights>
+</scene>

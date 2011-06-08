@@ -22,9 +22,9 @@
       <solid>false</solid>
 	<primitives>
 	  <primitive type="equation" material="sol">
-	    <position>16, -3, -3</position>
+	    <position>16, 0, 0</position>
 	    <rotation type="radian">0, 0, 0</rotation>
-	    <equation>x^2 + y ^ 2 + z^2 - </equation>
+	    <equation>x^2 + y ^ 2 - z ^ 2</equation>
 	  </primitive>
 	</primitives>
     </object>
@@ -32,7 +32,7 @@
 
   <lights>
     <light type="spot">
-      <position>30,0,5</position>
+      <position>16,20,5</position>
       <color>FFFFFF</color>
       <intensity>1</intensity>
       <directLight>3000</directLight>

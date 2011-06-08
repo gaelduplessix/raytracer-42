@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 16:59:26 2011 melvin laplanche
-// Last update Sat Jun  4 19:42:37 2011 gael jochaud-du-plessix
+// Last update Thu Jun  9 00:07:58 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -411,6 +411,18 @@ Texture*	Scene::_parseTexture(QDomNode	parent,
 	{
 	  color1 = _parseColor(n);
 	  hasColor1 = true;
+	}
+      }
+      else if (n.nodeName() == "color2")
+      {
+	if (hasColor2)
+	  this->_putWarning(QObject::tr("A %1 has several color2, "
+					"the first defined will be used")
+			    .arg(obj_name.c_str()), n);
+	else
+	{
+	  color2 = _parseColor(n);
+	  hasColor2 = true;
 	}
       }
       else

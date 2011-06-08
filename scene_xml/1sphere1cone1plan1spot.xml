@@ -12,17 +12,20 @@
 
   <materials>
     <material name="sol">
-     <color>200, 200, 200</color>
+     <color>120, 220,55</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+    </material>
+    <material name="solcone">
+      <color>60, 180, 180</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
       <reflection>0</reflection>
     </material>
     <material name="refraction">
-      <color>255, 255, 255</color>
+      <color>40, 255, 100</color>
       <specular>0.5</specular>
       <specularPow>50</specularPow>
-      <transmission>1</transmission>
-      <refractionIndex>1</refractionIndex>
     </material>
   </materials>
 
@@ -32,24 +35,19 @@
       <rotation type="radian">0, 0, 0</rotation>
       <solid>false</solid>
 	<primitives>
-	  <primitive type="plane" material="sol">
-	    <position>0, 0, -2</position>
-	    <rotation type="radian">0, 0, 50</rotation>
-	  </primitive>
 	  <primitive type="sphere" material="sol">
-	    <position>30, 0, -1</position>
-	    <rotation type="radian">0, 0, 0</rotation>
-	    <radius>2</radius>	 
-	  </primitive>
-	  <primitive type="sphere" material="sol">
-	    <position>20, 3, -1</position>
-	    <rotation type="radian">0, 0, 0</rotation>
-	    <radius>1</radius>	 
-	  </primitive>
-	  <primitive type="sphere" material="sol">
-	    <position>40, -2, -1</position>
+	    <position>40, 5, 0</position>
 	    <rotation type="radian">0, 0, 0</rotation>
 	    <radius>3</radius>	 
+	  </primitive>
+	  <primitive type="cone" material="solcone">
+	    <position>40, 5, 0</position>
+	    <rotation type="degree">-45, 0, 0</rotation>
+	    <radius>1</radius>
+	  </primitive>
+	  <primitive type="plane" material="sol">
+	    <position>0, 0, -4</position>
+	    <rotation type="radian">0, 0, 0</rotation>
 	  </primitive>
 	</primitives>
     </object>
@@ -57,15 +55,10 @@
 
   <lights>
     <light type="spot">
-      <position>20, -3, 2</position>
-      <color>80,240,100</color>
-      <intensity>3</intensity>
+      <position>-10, 1, 0</position>
+      <color>255,255,255</color>
+      <intensity>1</intensity>
       <directLight>3000</directLight>
-    </light>
-    <light type="parallel">
-      <direction>1,5,2</direction>
-      <color>180,100,30</color>
-      <intensity>2</intensity>
     </light>
   </lights>
 </scene>
