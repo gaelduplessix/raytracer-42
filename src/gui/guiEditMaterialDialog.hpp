@@ -5,8 +5,11 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Tue May 24 18:21:30 2011 loick michard
-// Last update Mon May 30 18:00:35 2011 loick michard
+// Last update Wed Jun  8 11:09:24 2011 gael jochaud-du-plessix
 //
+
+#ifndef _GUIEDITMATERIALDIALOG_HPP_
+#define _GUIEDITMATERIALDIALOG_HPP_
 
 #include <QMutex>
 #include <QWidget>
@@ -17,6 +20,8 @@
 #include "ui_editMaterialDialog.h"
 #include "Material.hpp"
 
+class RaytracerGUI;
+
 namespace Ui {
   class editMaterialDialog;
 };
@@ -26,7 +31,7 @@ class GuiEditMaterialDialog : public QDialog, public RenderingInterface
   Q_OBJECT
 
   public:
-  GuiEditMaterialDialog();
+  GuiEditMaterialDialog(RaytracerGUI* gui);
   ~GuiEditMaterialDialog();
 
   void paintEvent(QPaintEvent*);
@@ -50,6 +55,7 @@ public slots:
 public:
   RenderingConfiguration        *_config;
 private:
+  RaytracerGUI			*_gui;
   Scene                         *_scene;
   Raytracer                     *_raytracer;
   Ui::editMaterialDialog*	_dialog;
@@ -62,3 +68,5 @@ private:
   Material			*_currentMat;
   QMutex			_mutex;
 };
+
+#endif
