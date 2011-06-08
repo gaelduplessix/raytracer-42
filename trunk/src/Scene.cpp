@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sat Jun  4 17:52:33 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 13:53:24 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -70,6 +70,8 @@ const vector<Material*>& Scene::getMaterials(void) const
 
 const Camera&		Scene::getCamera(int index) const
 {
+  if (index < 0)
+    index = 0;
   return(*_cameras[index]);
 }
 
