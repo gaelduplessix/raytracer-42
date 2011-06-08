@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon Jun  6 18:11:44 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 10:36:24 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -448,8 +448,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
       index = qApp->arguments().indexOf("--threads");
       if (index != -1 && index + 1 < qApp->arguments().size())
 	server_nb_threads = qApp->arguments().at(index + 1).toInt();
-      cout << cluster_url.toStdString() << endl << server_port << endl
-	   << server_log_interval << endl << server_nb_threads << endl;
+      cout << "Launching Raytracer-42 server with " << server_nb_threads
+	   << " threads" << endl;
       ClusterServer*
 	server = new ClusterServer(this, cluster_url.toStdString(),
 				   server_port, server_log_interval,
