@@ -1,0 +1,80 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+    </camera>
+  </cameras>
+  
+  <materials>
+
+    <material name="sphere_top">
+      <color>90,150,200</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <transmission>0.9</transmission>
+      <refractionIndex>1.33</refractionIndex>
+    </material>
+
+    <material name="sphere">
+      <color>90,150,200</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+      <transmission>1</transmission>
+      <refractionIndex>1</refractionIndex>
+    </material>
+
+    <material name="reflection">
+      <color>90,150,200</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>1</reflection>
+      <diffusedReflection>0.8</diffusedReflection>
+    </material>
+  </materials>
+  
+  <objects>
+    <object>
+      <position>0, 0, 0</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <solid>false</solid>
+      <primitives>
+	<primitive type="sphere" material="sphere_top">
+	  <position>8, -2, 0</position>
+	  <rotation type="degree">0, 0, 0</rotation>
+	  <radius>1.5</radius>
+	</primitive>
+
+	<primitive type="sphere" material="sphere">
+	  <position>8, -2, 0</position>
+	  <rotation type="degree">0, 0, 0</rotation>
+	  <radius>1</radius>
+	</primitive>
+
+	<primitive type="sphere" material="reflection">
+	  <position>8, 2, 0</position>
+	  <rotation type="degree">0, 0, 0</rotation>
+	  <radius>1</radius>
+	</primitive>
+
+      </primitives>
+    </object>
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>0,1,0</position>
+      <color>100,180,110</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>5, 2, 2</position>
+      <color>160,120,155</color>
+      <intensity>3</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>

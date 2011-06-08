@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Wed Jun  8 14:47:34 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 23:55:00 2011 gael jochaud-du-plessix
 //
 
 #include "Scene.hpp"
@@ -587,7 +587,7 @@ Parallelogram*			Scene::_parseParallelogram(QDomNode n,
   if (!p1 || !p2 || !p3)
   {
     this->_putError(QObject::tr("A parallelogram must have a position, "
-				"a vertex1 and a vertext2"), n);
+				"a poin2 and a point3"), n);
     return NULL;
   }
   para->setMaterial(_getMaterialByName(material));

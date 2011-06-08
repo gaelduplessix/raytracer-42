@@ -1,0 +1,35 @@
+<scene>
+  <cameras>
+    <camera type="cinema" name="main">
+      <position>-10, 0, 10</position>
+      <rotation type="radian">0, 0, 0</rotation>
+      <target>0, 0, 0</target>
+    </camera>
+  </cameras>
+  <objects>
+
+    <a3ds lib="lib3ds">
+      <position>0, 0, 0</position>
+      <scale>0.1, 0.1, 0.1</scale>
+      <rotation type="degree">0, 0, 0</rotation>
+      <filename>3ds_models/ferrari/f458.3DS</filename>
+      <textureDir>3ds_models/ferrari/tex/</textureDir>
+    </a3ds>
+
+  </objects>
+
+  <lights>
+    <light type="spot">
+      <position>0,1,1000</position>
+      <color>200,200,200</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spot">
+      <position>-1000, 2, 2</position>
+      <color>200, 200, 200</color>
+      <intensity>1</intensity>
+      <directLight>3000</directLight>
+    </light>
+  </lights>
+</scene>
