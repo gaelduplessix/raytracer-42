@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 19:02:25 2011 loick michard
-// Last update Sun Jun  5 21:23:54 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 11:01:21 2011 samuel olivier
 //
 
 #include <cmath>
@@ -115,7 +115,7 @@ Light::getLightingFromLightRay(const Vector& lightVector,
       double                k = -1;
       ObjectPrimitive*      nearestObject = NULL;
       nearestObject = raytracer.getNearestObject(ray, k);
-      if (nearestObject)
+      if (nearestObject && k < 1)
 	return ;
     }
   else

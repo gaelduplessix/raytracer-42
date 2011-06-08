@@ -1,9 +1,8 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-10000, 0, 600</position>
-      <rotation type="radian">0, 0, 0</rotation>
-      <target>0, 0, 0</target>
+      <position>-720, 0, 840</position>
+      <rotation type="degree">0, 45, 0</rotation>
     </camera>
   </cameras>
 
@@ -18,6 +17,7 @@
 
   <objects>
     <a3ds lib="lib3ds">
+      <position>0, 0, 110</position>
       <filename>3ds_models/F_modena_N1_90210.3ds</filename>
     </a3ds>
     <object>
@@ -36,14 +36,14 @@
   <lights>
     <light type="spot">
       <position>-15000,1,10000</position>
-      <color>F0F0F0</color>
-      <intensity>0.8</intensity>
+      <color>FFFFFF</color>
+      <intensity>0.7</intensity>
       <directLight>3000</directLight>
     </light>
     <light type="spot">
       <position>-10000, 2, 1000</position>
-      <color>F0F0F0</color>
-      <intensity>0.8</intensity>
+      <color>FFFFFF</color>
+      <intensity>0.7</intensity>
       <directLight>3000</directLight>
     </light>
   </lights>
