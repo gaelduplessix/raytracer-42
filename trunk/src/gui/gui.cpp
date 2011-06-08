@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed Jun  8 11:07:49 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 11:46:36 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -349,6 +349,14 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
   QObject::connect(_ui->_threads, SIGNAL(valueChanged(int)),
                    this, SLOT(threadsChange(int)));
   _scene = new Scene();
+  for (int i = 1, l = qApp->arguments().size(); i < l; i++)
+    {
+      if (qApp->arguments().at(i).indexOf("--") != 0)
+	{
+	  _scene->loadFromFile(qApp->arguments().at(i).toStdString(), this);
+	  break;
+	}
+    }
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);
@@ -386,6 +394,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
 				   server_nb_threads);
       (void)server;
     }
+  if (qApp->arguments().indexOf("--auto-render") != -1)
+    startRender();
 }
 
 RaytracerGUI::~RaytracerGUI()
