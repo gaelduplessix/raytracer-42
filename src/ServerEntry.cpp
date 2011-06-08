@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Thu May 26 18:17:38 2011 gael jochaud-du-plessix
-// Last update Sat Jun  4 22:07:32 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 13:45:15 2011 gael jochaud-du-plessix
 //
 
 #include <sstream>
@@ -176,7 +176,7 @@ void		ServerEntry::onDataReceived(void)
 	QByteArray  packet;
 	QDataStream stream(&packet, QIODevice::ReadWrite);
 	stream << (int)0;
-	stream << _clusterClient->getSessionId();
+	stream << (int)_clusterClient->getSessionId();
 	stream << resourcesBytes;
 	stream << renderingConfBytes;
 	stream << _clusterClient->getScene()->getFilename();

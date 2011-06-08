@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed Jun  8 10:34:50 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 13:51:22 2011 gael jochaud-du-plessix
 //
 
 #include "ClusterServer.hpp"
@@ -257,7 +257,7 @@ bool		ClusterServer::receiveSessionDatas(void)
   QByteArray	resourcesBytes;
   QByteArray	renderingConfBytes;
   QString	sceneFilename;
-  stream >> _currentSessionId;
+  stream >> (int&)_currentSessionId;
   stream >> resourcesBytes;
   stream >> renderingConfBytes;
   stream >> sceneFilename;

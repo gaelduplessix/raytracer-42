@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Mon Jun  6 16:51:26 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 13:51:13 2011 gael jochaud-du-plessix
 //
 
 #include <unistd.h>
@@ -186,7 +186,7 @@ void	ClusterClient::launchRendering(RenderingConfiguration* config,
 void	ClusterClient::launchNewSession(RenderingConfiguration* config,
 					Scene* scene)
 {
-  _sessionId = rand();
+  _sessionId = rand();  
   _renderingConfiguration = *config;
   _scene = scene;
   if (!_restored)

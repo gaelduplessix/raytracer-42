@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Wed Jun  8 10:53:45 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 13:51:19 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -257,7 +257,7 @@ void    RaytracerGUI::startRender()
     }
   if (_scene != NULL && _scene->isValid())
     {
-      if (!setConfiguration())
+      if (!_restored && !setConfiguration())
 	{
 	  _ui->_console->setHtml(_message.c_str());
 	  _ui->_console->moveCursor(QTextCursor::End);
@@ -561,7 +561,6 @@ void            RaytracerGUI::openRender()
 
       this->updateGUIConfig();
       sendSuccessMessage(tr("Rendu restauré").toStdString());
-
       bool cluster;
       stream >> cluster;
       if (!cluster)
