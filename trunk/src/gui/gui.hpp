@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 11 18:59:19 2011 loick michard
-// Last update Sat Jun  4 20:11:41 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 11:13:02 2011 gael jochaud-du-plessix
 //
 
 #ifndef _GUI_HPP_
@@ -123,7 +123,8 @@ private:
   bool				_endOfRendering;
   QMenu				*_menuSticon;
   QAction			*_actionRealQuit;
-  
+
+public:
   void				_initDialogCluster();
   Ui::ClusterDialog*		_clusterDialogUi;
   QDialog*			_clusterDialog;
@@ -138,6 +139,7 @@ private:
   QDialog*                      _aboutDialog;
   string			_consoleLog;
   QTimer*			_clusterTimer;
+protected:
 
   GuiEditMaterialDialog		_editMaterialDialog;
 

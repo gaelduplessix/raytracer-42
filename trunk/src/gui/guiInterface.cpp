@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Thu May 12 00:09:02 2011 loick michard
-// Last update Mon Jun  6 17:40:19 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 10:53:45 2011 gael jochaud-du-plessix
 // Last update Mon May 30 20:30:33 2011 gael jochaud-du-plessix
 //
 
@@ -312,7 +312,7 @@ void    RaytracerGUI::startRender()
     }
   else
     sendErrorMessage(tr("Vous devez charger une sc&egrave;ne avant de faire un"
-			"rendu").toStdString());
+			" rendu").toStdString());
 }
 
 void		RaytracerGUI::saveImage()

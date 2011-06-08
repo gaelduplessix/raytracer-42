@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue May 24 18:27:53 2011 loick michard
-// Last update Sun Jun  5 15:18:50 2011 melvin laplanche
+// Last update Wed Jun  8 11:12:21 2011 gael jochaud-du-plessix
 //
 
 #include <QMutexLocker>
@@ -16,8 +16,10 @@
 #include "CheckerBoard.hpp"
 #include "CubeMap.hpp"
 #include "guiEditMaterialDialog.hpp"
+#include "gui.hpp"
 
-GuiEditMaterialDialog::GuiEditMaterialDialog(): _currentMat(NULL)
+GuiEditMaterialDialog::GuiEditMaterialDialog(RaytracerGUI* gui):
+  _gui(gui), _currentMat(NULL)
 {
   _isSet = false;
   _dialog = new Ui::editMaterialDialog;
@@ -138,8 +140,6 @@ void GuiEditMaterialDialog::setConfiguration()
   _config->setHeight(150);
   _config->setNbThreads(2);
   _config->setCurrentCamera(0);
-  // _config->setCubeMap(new CubeMap(":cubemap/cubemaps/Maskonaive3"),
-  // 		      ":cubemap/cubemaps/Maskonaive3");
   _config->setAntialiasing(2);
   _config->setFieldDepthEnabled(false);
   _config->setKdTreeEnabled(false);
@@ -246,6 +246,10 @@ void GuiEditMaterialDialog::updateMaterial()
 
   if (index >= 0 && _isSet)
     {
+      if (!_config->getCubeMap()
+	  && _gui->_preferencesDialogUi->_cubeMap->isChecked())
+	_config->setCubeMap(new CubeMap(":cubemap/cubemaps/Maskonaive3"),
+			    ":cubemap/cubemaps/Maskonaive3");
       _currentMat = _materials->at(index);
       _materials->at(index)->setColor(_color->rgba());
       if (_dialog->_texture->isChecked())

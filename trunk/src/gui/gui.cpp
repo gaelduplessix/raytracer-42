@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed Jun  8 10:36:24 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 11:07:49 2011 gael jochaud-du-plessix
 //
 
 #include <QApplication>
@@ -39,65 +39,6 @@
 #include "Sett.hpp"
 #include "Resources.hpp"
 #include "ClusterServer.hpp"
-
-Scene           *createScene()
-{
-  Material      mat("base");
-  mat.setColor(Color(255, 255, 255));
-  mat.setSpecularCoeff(0.5);
-  mat.setSpecularPow(50);
-  Material      *reflection = new Material("Reflection");
-  Material      *plan = new Material("plan");
-  *plan = mat;
-  *reflection = mat;
-  reflection->setTransmissionCoeff(1);
-  reflection->setRefractionIndex(1.4);
-  //reflection->setLimitTexture(new Texture("stripes.png"));
-  // Material      refraction = mat;
-  // refraction.setTransmissionCoeff(0);
-  // refraction.setRefractionIndex(1.33);
-  // Material      matFloor("sol");
-  // matFloor.setReflectionCoeff(0);
-  // matFloor.setColor(Color(255, 255, 255));
-  // matFloor.setSpecularCoeff(0.5);
-  // matFloor.setSpecularPow(50);
-
-  vector<Camera*> cam;
-  Camera* camera = new CinemaCamera(Point(-2, 0, 0), Rotation(0, 0, 0));
-  camera->setFocus(20);
-  // camera->setTarget(Point(20, 0, 0));
-  cam.push_back(camera);
-
-  // reflection->setTexture(new Texture("terre.jpg"));
-  vector<ObjectPrimitive*> primitives;
-  primitives.push_back(new Parallelogram(NULL, Point(16, -4, -5),
-					 Point(24, -4, -5), Point(16, 4, -5),
-					 plan));
-
-  primitives.push_back(new Sphere(NULL, Point(20, 0, -3),
-				  Rotation(0, 0, 0), reflection, 2));
-  // primitives.push_back(new Sphere(NULL, Point(40, -6, -1),
-  //                                 Rotation(0, 0, 0), reflection, 2));
-  // Material special = refraction;
-  // PerlinNoise *perlin = new PerlinNoise();
-  // special.setTransmissionCoeff(0);
-  // special.setTexture(perlin);
-
-  // refraction.setTransmissionCoeff(0.9);
-  // refraction.setRefractionIndex(1.5);
-  vector<Object*> obj;
-  obj.push_back(new Object(primitives, Rotation(0, 0, 0), Point(0, 0, 0),
-			   true));
-
-  vector<Light*> light;
-  //light.push_back(new Spot(Point(10, 5, 2), Color(255, 255, 255)));
-  light.push_back(new ParallelogramLight(Point(24, 8, 5), Point(16, 8, 5),
-					 Point(24, 11, 3),
-					 Color(255, 255, 255)));
-
-  Scene         *res = new Scene(cam, obj, light);
-  return (res);
-}
 
 bool RaytracerGUI::setConfiguration()
 {
@@ -176,16 +117,6 @@ bool RaytracerGUI::setConfiguration()
   _config->setPhotonMappingSampling(_ui->
 				    _photonMappingValue->value());
   _config->setPhotonMappingEnabled(_ui->_photonMapping->isChecked());
-  // {
-  //   std::ofstream ofs("fichierDeSerialisation");
-  //   boost::archive::text_oarchive oa(ofs);
-  //   oa << *_config;
-
-  //   RenderingConfiguration newConf;
-  //   std::ifstream ifs("fichierDeSerialisation");
-  // boost::archive::text_iarchive ia(ifs);
-  // ia >> newConf;
-  // }
   if (!_restored)
     Resources::getInstance()->createResources(_scene, _config);
   return (true);
@@ -364,7 +295,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
     _ui(new Ui::MainWindow), _progress(0), _isRendering(false), _pause(false),
     _sticon(new QSystemTrayIcon(QIcon(":images/image.png"))),
     _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this)),
-    _clusterTimer(NULL), _clusterClient(NULL), _isConnected(false),
+    _clusterTimer(NULL), _editMaterialDialog(this),
+    _clusterClient(NULL), _isConnected(false),
     _isMultiThreading(false), _restored(false)
 {
   _actionRealQuit->setShortcut(tr("Ctrl+Q"));
@@ -416,9 +348,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
                    this, SLOT(disconnect()));
   QObject::connect(_ui->_threads, SIGNAL(valueChanged(int)),
                    this, SLOT(threadsChange(int)));
-  _scene = createScene();
-  //_scene = new Scene();
-  //_scene->loadFromFile("scene_xml/default.xml", this);
+  _scene = new Scene();
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);
