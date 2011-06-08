@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 18:02:30 2011 loick michard
-// Last update Mon Jun  6 18:12:46 2011 gael jochaud-du-plessix
+// Last update Wed Jun  8 11:27:32 2011 samuel olivier
 //
 
 #include <stdio.h>
@@ -371,8 +371,8 @@ Color			Raytracer::throwRay(Ray& ray)
 	  + (reflectedLight
 	     * nearestObject->getMaterial()->getReflectionCoeff()))
 	 * (1.0 - nearestObject->getMaterial()->getTransmissionCoeff()))
-	+ refractedLight
-	* nearestObject->getMaterial()->getTransmissionCoeff();
+	+ (refractedLight
+	   * nearestObject->getMaterial()->getTransmissionCoeff());
       mixedColor += calcDirectLight(ray);
       mixedColor = (ambientOcclusion * mixedColor) / 255;
       mixedColor *= (1 - ambientOcclusionCoeff);
@@ -568,11 +568,15 @@ Color	Raytracer::calcTransmetedLight(const ObjectPrimitive* nearestObject,
 				       const Point& intersectPoint,
 				       Ray& ray)
 {
+  // cout << nearestObject << " " <<
+  //   nearestObject->getMaterial()->getTransmissionCoeff() << endl;
   if (_config->isTransparencyEnabled() &&
       nearestObject->getMaterial()->getTransmissionCoeff() >
       Raytracer::EPSILON_REFRACTION && ray._refractionLevel <
       _config->getTransparencyMaxDepth())
     {
+
+      // cout << _refractivePath.size() << endl;
       if (_refractivePath.size() > 0)
 	ray._refractiveIndex =
 	  _refractivePath.top()->getMaterial()->getRefractionIndex();
