@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Thu Apr 28 18:10:14 2011 loick michard
-// Last update Mon Jun  6 18:13:59 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 20:04:50 2012 samuel olivier
 //
 
 #include <QString>
@@ -24,10 +24,10 @@ Texture::Texture(const string& path,
 		 double repeatWidth, double repeatHeight):
   _repeatWidth(repeatWidth), _repeatHeight(repeatHeight), _type(0), _name(path)
 {
-  _image = new QImage(QString(Resources::getNewPathName(path).c_str()));
+  _image = new QImage(QString(Resources::getInstance()->getNewPathName(path).c_str()));
   if (_image->isNull())
     {
-      cerr << "Can't Load "<< Resources::getNewPathName(path).c_str() << endl;
+      cerr << "Can't Load "<< Resources::getInstance()->getNewPathName(path).c_str() << endl;
       delete _image;
       _image = NULL;
     }
