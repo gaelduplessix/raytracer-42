@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Mon May 23 13:12:10 2011 gael jochaud-du-plessix
-// Last update Mon Oct  8 18:13:50 2012 samuel olivier
+// Last update Mon Oct  8 18:24:01 2012 samuel olivier
 //
 
 #include <unistd.h>
@@ -279,9 +279,6 @@ bool	ClusterClient::getSectionToRaytrace(QRect& section, bool raytracing)
 			   / _nbSubdivisions);
 	  section.setHeight((double)_renderingConfiguration.getHeight()
 			    / _nbSubdivisions);
-	  qDebug() << ((double)_renderingConfiguration.getWidth()
-		       / _nbSubdivisions)
-		   << section.width();
 	  _imageSections[i][j] = ClusterClient::RAYTRACING;
 	  return (true);
 	}
