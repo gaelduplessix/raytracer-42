@@ -45,47 +45,47 @@
   </materials>
 
   <objects>
-    <a3ds lib="lib3ds">
-      <position>1.5, 1.5, -0.20</position>
+    <model>
+      <position>1.5, 2.2, 0</position>
+      <rotation type="degree">90, 0, 0</rotation>
       <scale>1, 1, 1</scale>
       <filename>3ds_models/LP670/lp670.3ds</filename>
       <textureDir>3ds_models/LP670/</textureDir>
-    </a3ds>
+    </model>
     <object>
       <position>0, 0, 0</position>
-      <rotation type="radian">0, 0, 0</rotation>
+      <rotation type="degree">0, 0, 0</rotation>
       <solid>false</solid>
       <primitives>
-	<!-- Sol -->
     	<primitive type="plane" material="sol">
-    	  <position>0, 0, -0.515</position>
+    	  <position>0, 0, -0.58</position>
     	  <rotation type="radian">0, 0, 0</rotation>
     	</primitive>
-	<!-- Plafond -->
-    	<primitive type="plane" material="plafond">
-    	  <position>0, 0, 2.5</position>
-    	  <rotation type="degree">0, 0, 0</rotation>
-    	</primitive>
-	<!-- Mur de gauche -->
-    	<primitive type="plane" material="gauche">
-    	  <position>0, -5, 0</position>
-    	  <rotation type="degree">90, 0, 0</rotation>
-    	</primitive>
-	<!-- Mur de droite -->
-    	<primitive type="plane" material="droite">
-    	  <position>0, 5, 0</position>
-    	  <rotation type="degree">90, 0, 0</rotation>
-    	</primitive>
-	<!-- Mur du fond -->
-    	<primitive type="plane" material="devant">
-    	  <position>7, 0, 0</position>
-    	  <rotation type="degree">0, 90, 0</rotation>
-    	</primitive>
-	<!-- Mur de derriere -->
-    	<primitive type="plane" material="derriere">
-    	  <position>-6, 0, 0</position>
-    	  <rotation type="degree">0, 90, 0</rotation>
-    	</primitive>
+
+    <!-- 	<primitive type="plane" material="plafond"> -->
+    <!-- 	  <position>0, 0, 2.5</position> -->
+    <!-- 	  <rotation type="degree">0, 0, 0</rotation> -->
+    <!-- 	</primitive> -->
+
+    <!-- 	<primitive type="plane" material="gauche"> -->
+    <!-- 	  <position>0, -5, 0</position> -->
+    <!-- 	  <rotation type="degree">90, 0, 0</rotation> -->
+    <!-- 	</primitive> -->
+
+    <!-- 	<primitive type="plane" material="droite"> -->
+    <!-- 	  <position>0, 5, 0</position> -->
+    <!-- 	  <rotation type="degree">90, 0, 0</rotation> -->
+    <!-- 	</primitive> -->
+
+    <!-- 	<primitive type="plane" material="devant"> -->
+    <!-- 	  <position>7, 0, 0</position> -->
+    <!-- 	  <rotation type="degree">0, 90, 0</rotation> -->
+    <!-- 	</primitive> -->
+
+    <!-- 	<primitive type="plane" material="derriere"> -->
+    <!-- 	  <position>-6, 0, 0</position> -->
+    <!-- 	  <rotation type="degree">0, 90, 0</rotation> -->
+    <!-- 	</primitive> -->
       </primitives>
     </object>
   </objects>

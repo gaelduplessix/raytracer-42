@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Wed Jun  8 12:42:15 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 16:59:40 2012 samuel olivier
 //
 
 #include <QApplication>
@@ -349,15 +349,16 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
   QObject::connect(_ui->_threads, SIGNAL(valueChanged(int)),
                    this, SLOT(threadsChange(int)));
   _scene = new Scene();
-  for (int i = 1, l = qApp->arguments().size(); i < l; i++)
-    {
-      int index = qApp->arguments().at(i).indexOf("--");
-      if (index > 0 && qApp->arguments().at(index - 1).indexOf("--") == -1)
-	{
-	  _scene->loadFromFile(qApp->arguments().at(i).toStdString(), this);
-	  break;
-	}
-    }
+  if (!_serverMode)
+    for (int i = 1, l = qApp->arguments().size(); i < l; i++)
+      {
+	int index = qApp->arguments().at(i).indexOf("--");
+	if (index == -1)
+	  {
+	    _scene->loadFromFile(qApp->arguments().at(i).toStdString(), this);
+	    break;
+	  }
+      }
   _raytracer->setScene(*_scene);
   _raytracer->setRenderingConfiguration(_config);
   _raytracer->setRenderingInterface(this);
@@ -370,7 +371,7 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
                    this, SLOT(loadScene()));
   if (_serverMode)
     {
-      QString cluster_url = "http://perso.epitech.eu/~jochau_g/raytracer/";
+      QString cluster_url = "http://10.17.72.238:8888/rt/";
       int server_port = 0;
       int server_log_interval = 500;
       int server_nb_threads = 2;

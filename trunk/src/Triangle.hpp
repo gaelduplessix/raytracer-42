@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Fri Apr 29 10:36:38 2011 loick michard
-// Last update Tue Jun  7 14:57:59 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 15:48:59 2012 samuel olivier
 //
 
 #ifndef _TRIANGLE_HPP_
@@ -38,6 +38,9 @@ public:
   const Point&	getTextureVertex1(void);
   const Point&	getTextureVertex2(void);
   const Point&	getTextureVertex3(void);
+
+  void		setNormal(const Point& n0);
+  void		setNormals(const Point& n0, const Point& n1, const Point& n2);
 
   void		getMappedCoords(const Point& intersectPoint,
 				double& x, double &y) const;
@@ -97,6 +100,10 @@ private:
   double	_var25;
   double	_var26;
   double	_var27;
+  bool		_normalSet;
+  Point		_normal0;
+  Point		_normal1;
+  Point		_normal2;
 };
 
 #endif

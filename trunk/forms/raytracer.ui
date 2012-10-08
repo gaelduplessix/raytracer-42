@@ -50,7 +50,7 @@
          <x>0</x>
          <y>0</y>
          <width>991</width>
-         <height>515</height>
+         <height>514</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
@@ -125,8 +125,8 @@
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans'; font-size:10pt;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -167,7 +167,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1427</width>
-     <height>28</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -275,7 +275,7 @@ border-color: rgb(108, 108, 108);</string>
           <x>0</x>
           <y>0</y>
           <width>377</width>
-          <height>489</height>
+          <height>499</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -317,7 +317,7 @@ border-color: rgb(108, 108, 108);</string>
                <number>100000</number>
               </property>
               <property name="value">
-               <number>854</number>
+               <number>427</number>
               </property>
              </widget>
             </item>
@@ -343,7 +343,7 @@ border-color: rgb(108, 108, 108);</string>
                <number>100000</number>
               </property>
               <property name="value">
-               <number>480</number>
+               <number>240</number>
               </property>
              </widget>
             </item>
@@ -439,6 +439,9 @@ border-color: rgb(108, 108, 108);</string>
             </item>
             <item row="0" column="1">
              <widget class="QComboBox" name="_mode">
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
               </property>
@@ -481,50 +484,6 @@ border-color: rgb(108, 108, 108);</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="0" colspan="2">
-             <widget class="QGroupBox" name="_kdTree">
-              <property name="title">
-               <string>KdTree</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_22">
-               <property name="leftMargin">
-                <number>15</number>
-               </property>
-               <property name="topMargin">
-                <number>15</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <item row="0" column="1">
-                <widget class="QSpinBox" name="_kdTreeDepth">
-                 <property name="buttonSymbols">
-                  <enum>QAbstractSpinBox::PlusMinus</enum>
-                 </property>
-                 <property name="maximum">
-                  <number>1000</number>
-                 </property>
-                 <property name="value">
-                  <number>10</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_18">
-                 <property name="text">
-                  <string>Prodondeur</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_17">
               <property name="text">
@@ -542,6 +501,9 @@ border-color: rgb(108, 108, 108);</string>
               </property>
               <property name="maximum">
                <number>100</number>
+              </property>
+              <property name="value">
+               <number>4</number>
               </property>
              </widget>
             </item>
@@ -620,6 +582,50 @@ border-color: rgb(108, 108, 108);</string>
               </layout>
              </widget>
             </item>
+            <item row="10" column="0" colspan="2">
+             <widget class="QGroupBox" name="_kdTree">
+              <property name="title">
+               <string>KdTree</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_22">
+               <property name="leftMargin">
+                <number>15</number>
+               </property>
+               <property name="topMargin">
+                <number>15</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <item row="0" column="1">
+                <widget class="QSpinBox" name="_kdTreeDepth">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::PlusMinus</enum>
+                 </property>
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                 <property name="value">
+                  <number>10</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_18">
+                 <property name="text">
+                  <string>Prodondeur</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -643,8 +649,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>377</width>
-          <height>262</height>
+          <width>224</width>
+          <height>267</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -822,8 +828,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>377</width>
-          <height>243</height>
+          <width>200</width>
+          <height>246</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1000,8 +1006,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>392</width>
-          <height>242</height>
+          <width>230</width>
+          <height>244</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1173,8 +1179,8 @@ border-color: rgb(108, 108, 108);</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>392</width>
-          <height>242</height>
+          <width>287</width>
+          <height>234</height>
          </rect>
         </property>
         <attribute name="label">

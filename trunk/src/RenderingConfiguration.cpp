@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 // 
 // Started on  Wed May 25 10:36:28 2011 samuel olivier
-// Last update Wed Jun  1 18:26:23 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 15:24:13 2012 samuel olivier
 //
 
 #include <sstream>
