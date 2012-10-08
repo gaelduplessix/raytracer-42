@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon Oct  8 20:14:27 2012 samuel olivier
+// Last update Mon Oct  8 21:10:57 2012 samuel olivier
 //
 
 #include <QDebug>
@@ -1531,8 +1531,11 @@ Material		*Scene::_loadAssimpMaterial(const aiScene *scene,
 {
   aiString		name;
   mat->Get<aiString>(AI_MATKEY_NAME, name);
-  Material		*material = new Material(name.data);
+  Material		*material;
 
+  if ((material = _getMaterialByName(name.data)) != NULL)
+    return (new Material(*material));
+  material = new Material(name.data);
   aiColor4D		color;
   if (mat->Get<aiColor4D>(AI_MATKEY_COLOR_AMBIENT, color) == AI_SUCCESS)
     material->setColor(Color(color.r * 255, color.g * 255,

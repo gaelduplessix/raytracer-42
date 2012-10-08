@@ -42,6 +42,12 @@
       <specularPow>50</specularPow>
       <reflection>0</reflection>
     </material>
+    <material name="c0">
+      <color>255, 255, 255</color>
+      <specular>0.5</specular>
+      <specularPow>50</specularPow>
+      <reflection>0</reflection>
+    </material>
   </materials>
 
   <objects>
