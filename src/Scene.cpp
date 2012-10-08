@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed Apr 27 18:24:15 2011 loick michard
-// Last update Sun Oct  7 23:40:14 2012 samuel olivier
+// Last update Mon Oct  8 19:58:33 2012 samuel olivier
 //
 
 #include "Scene.hpp"
@@ -512,13 +512,15 @@ string			Scene::_parseFile(QDomNode	n,
   QString		value;
 
   if (this->_checkContentIsSingleText(n, obj))
-  {
-    value = n.toElement().text();
-    if (QFileInfo(QString(Resources::getNewPathName(value.toStdString())
-			  .c_str())).exists() == false)
-      this->_putError(QObject::tr("The file %1 does not exists").arg(value),
-		      n);
-  }
+    {
+      value = n.toElement().text();
+      if (QFileInfo(QString(Resources::getInstance()->getNewPathName(value.toStdString()).c_str())).exists() == false)
+	{
+	  qDebug() << Resources::getInstance()->getNewPathName(value.toStdString()).c_str();
+	  this->_putError(QObject::tr("The file %1 does not exists").arg(value),
+			n);
+	}
+    }
   else
     value = "empty";
   return (value.toStdString());

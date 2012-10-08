@@ -5,7 +5,7 @@
 // Login   <olivie_a@epitech.net>
 //
 // Started on  Mon May 23 16:15:05 2011 samuel olivier
-// Last update Wed Jun  8 14:25:44 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 20:25:12 2012 samuel olivier
 //
 
 #include <QDir>
@@ -128,19 +128,15 @@ QByteArray	Resources::toByteArray(void)
 
 string	Resources::getNewPathName(const string& previous)
 {
-  if (!_instance || !_instance->isInCluster())
-    {
-      return (previous);
-    }
+  if (!_instance->isInCluster())
+    return (previous);
   vector<Resource>	resources = _instance->getResources();
   int				j = resources.size();
 
   for (int i = 0 ; i < j ; i++)
     if (resources[i].getPathName() == previous)
-      {
-	return (_instance->getTmpResourceDir() + "/"
-		+ resources[i].getNewPathName());
-      }
+      return (_instance->getTmpResourceDir() + "/"
+	      + resources[i].getNewPathName());
   return (previous);
 }
 

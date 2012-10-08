@@ -5,7 +5,7 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Mon Oct  8 16:55:09 2012 samuel olivier
+// Last update Mon Oct  8 20:14:27 2012 samuel olivier
 //
 
 #include <QDebug>
@@ -1104,10 +1104,10 @@ void			Scene::_parse3dsFile(QDomNode	n,
 	  this->_putWarning(QObject::tr("A a3ds has several filename, "
 					"the first defined will be used"), n);
 	else
-	{
-	  filename = _parseFile(n, "filename");
-	  hasFilename = true;
-	}
+	  {
+	    filename = _parseFile(n, "filename");
+	    hasFilename = true;
+	  }
       }
       else if (n.nodeName() == "textureDir")
       {
@@ -1551,7 +1551,8 @@ Material		*Scene::_loadAssimpMaterial(const aiScene *scene,
       AI_SUCCESS)
     {
       string texture = textureFilePath.data;
-      material->setTexture(new Texture(textureDir + "/" + texture));
+      material->setTexture(new Texture(Resources::getInstance()
+				       ->getNewPathName(textureDir + "/" + texture)));
     }
       
   return (material);
@@ -1640,13 +1641,16 @@ bool			Scene::_parseModelAssimp(string filename,
 {
   Assimp::Importer importer;
   const aiScene* scene =
-    importer.ReadFile(filename,0|
+    importer.ReadFile(Resources::getInstance()
+		      ->getNewPathName(filename),
+		      0|
 		      aiProcess_Triangulate |
 		      aiProcess_JoinIdenticalVertices |
 		      aiProcess_GenSmoothNormals
 		      );
   if(!scene)
     return (false);
+  _sceneFilenames.push_back(filename.c_str());
   int	tmp = _materials.size();
   _materials.resize(_materials.size() + scene->mNumMaterials);
   for (uint i = 0; i < scene->mNumMaterials; ++i)

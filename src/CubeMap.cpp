@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 // 
 // Started on  Tue May  3 16:29:38 2011 gael jochaud-du-plessix
-// Last update Mon Jun  6 18:16:14 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 20:04:09 2012 samuel olivier
 //
 
 #include <cmath>
@@ -18,17 +18,17 @@ CubeMap::CubeMap(const string& path)
 {
   _facesFiles.resize(6);
   _facesFiles[CubeMap::Top] =
-    new QImage(Resources::getNewPathName(path + "/posy.jpg").c_str());
+    new QImage(Resources::getInstance()->getNewPathName(path + "/posy.jpg").c_str());
   _facesFiles[CubeMap::Left] =
-    new QImage(Resources::getNewPathName(path + "/posx.jpg").c_str());
+    new QImage(Resources::getInstance()->getNewPathName(path + "/posx.jpg").c_str());
   _facesFiles[CubeMap::Front] =
-    new QImage(Resources::getNewPathName(path + "/posz.jpg").c_str());
+    new QImage(Resources::getInstance()->getNewPathName(path + "/posz.jpg").c_str());
   _facesFiles[CubeMap::Right] =
-    new QImage(Resources::getNewPathName(path + "/negx.jpg").c_str());
+    new QImage(Resources::getInstance()->getNewPathName(path + "/negx.jpg").c_str());
   _facesFiles[CubeMap::Bottom] =
-    new QImage(Resources::getNewPathName(path + "/negy.jpg").c_str());
+    new QImage(Resources::getInstance()->getNewPathName(path + "/negy.jpg").c_str());
   _facesFiles[CubeMap::Rear] =
-    new QImage(Resources::getNewPathName(path + "/negz.jpg").c_str());
+    new QImage(Resources::getInstance()->getNewPathName(path + "/negz.jpg").c_str());
   for (uint i = 0; i < _facesFiles.size(); i++)
     if (_facesFiles[i]->isNull())
       throw CubeMap::ERROR_INVALID_FILE;
