@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Wed May 11 18:57:40 2011 loick michard
-// Last update Mon Oct  8 16:59:40 2012 samuel olivier
+// Last update Mon Oct  8 18:30:51 2012 samuel olivier
 //
 
 #include <QApplication>
@@ -185,6 +185,8 @@ void RaytracerGUI::clearConsole()
 
 void RaytracerGUI::paintEvent(QPaintEvent*)
 {
+  if (_serverMode)
+    return ;
   QMutexLocker	locker(&_mutex);
   if (_image)
     {
@@ -222,6 +224,8 @@ void RaytracerGUI::setCameras()
 
 void RaytracerGUI::drawWindow()
 {
+  if (_serverMode)
+    return ;
   if (_endOfRendering)
     {
       _endOfRendering = false;
@@ -293,7 +297,8 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
     _ambiantColor(new QColor(255, 255, 255)), _image(NULL),
     _cubeMap(NULL), _scene(NULL), _pixmap(new QPixmap()),
     _ui(new Ui::MainWindow), _progress(0), _isRendering(false), _pause(false),
-    _sticon(new QSystemTrayIcon(QIcon(":images/image.png"))),
+    _sticon(serverMode ? new QSystemTrayIcon(QIcon(":images/image.png")) :
+	    NULL),
     _endOfRendering(false), _actionRealQuit(new QAction(tr("Quitter"), this)),
     _clusterTimer(NULL), _editMaterialDialog(this),
     _clusterClient(NULL), _isConnected(false),
@@ -305,15 +310,20 @@ RaytracerGUI::RaytracerGUI(QWidget *parent, bool serverMode)
   _ui->menuFichier->addAction(_actionRealQuit);
   _initDialogCluster();
   _initPreferencesDialog();
-  _menuSticon = new QMenu();
-  _menuSticon->addAction(_ui->action_Play);
-  _menuSticon->addAction(_ui->action_Pause);
-  _menuSticon->addAction(_ui->action_Stop);
-  _menuSticon->addAction(_actionRealQuit);
-  _sticon->setContextMenu(_menuSticon);
-  connect(_sticon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-	  this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
-  _sticon->show();
+  if (_serverMode)
+    _menuSticon = NULL;
+  else
+    {
+      _menuSticon = new QMenu();
+      _menuSticon->addAction(_ui->action_Play);
+      _menuSticon->addAction(_ui->action_Pause);
+      _menuSticon->addAction(_ui->action_Stop);
+      _menuSticon->addAction(_actionRealQuit);
+      _sticon->setContextMenu(_menuSticon);
+      connect(_sticon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+	      this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+      _sticon->show();
+    }
   _ui->_clusterDock->hide();
   _ui->actionDeconnexion->setVisible(false);
   QObject::connect(_ui->_cubeMapButton, SIGNAL(clicked()),
