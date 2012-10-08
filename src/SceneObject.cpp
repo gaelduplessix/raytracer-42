@@ -5,8 +5,10 @@
 // Login   <laplan_m@epitech.net>
 //
 // Started on  Wed May 11 17:09:06 2011 melvin laplanche
-// Last update Wed Jun  8 23:55:00 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 16:55:09 2012 samuel olivier
 //
+
+#include <QDebug>
 
 #include "Scene.hpp"
 #include "Resources.hpp"
@@ -1336,66 +1338,69 @@ void			Scene::_parseObject(QDomNode n)
   QString		name;
   QString		material;
   QString		lib3ds;
-
+  
   while (n.isNull() == false && this->_hasError == false)
-  {
-    if (n.isComment() == false)
     {
-      if ((n.nodeName() != "object"
-	   && n.nodeName() != "parallelepipede"
-	   && n.nodeName() != "a3ds")
-	  || n.isElement() == false)
-      {
-	this->_putError(QObject::tr("An objects child cannot be empty and "
-				    "must be an object element"), n);
-	return ;
-      }
-      if (n.hasChildNodes() == false)
-      {
-	this->_putError(QObject::tr("An object element cannot be empty"), n);
-	return;
-      }
-      if (n.nodeName() == "a3ds")
-      {
-	if (n.hasAttributes() == true
-	    && n.attributes().contains("lib") == true)
+      if (n.isComment() == false)
 	{
-	  lib3ds = n.attributes().namedItem("lib").nodeValue();
-	  if (lib3ds != "lib3ds" && lib3ds != "intern")
-	  {
-	    this->_putError(QObject::tr("The lib used for the a3ds element "
-					"is not supported"), n);
-	    return ;
-	  }
+	  if ((n.nodeName() != "object"
+	       && n.nodeName() != "parallelepipede"
+	       && n.nodeName() != "model"
+	       && n.nodeName() != "a3ds")
+	      || n.isElement() == false)
+	    {
+	      this->_putError(QObject::tr("An objects child cannot be empty and "
+					  "must be an object element"), n);
+	      return ;
+	    }
+	  if (n.hasChildNodes() == false)
+	    {
+	      this->_putError(QObject::tr("An object element cannot be empty"), n);
+	      return;
+	    }
+	  if (n.nodeName() == "a3ds")
+	    {
+	      if (n.hasAttributes() == true
+		  && n.attributes().contains("lib") == true)
+		{
+		  lib3ds = n.attributes().namedItem("lib").nodeValue();
+		  if (lib3ds != "lib3ds" && lib3ds != "intern")
+		    {
+		      this->_putError(QObject::tr("The lib used for the a3ds element "
+						  "is not supported"), n);
+		      return ;
+		    }
+		}
+	      else
+		lib3ds = "intern";
+	      this->_parse3dsFile(n.firstChild(), lib3ds);
+	    }
+	  else if (n.nodeName() == "model")
+	    this->_parseModel(n.firstChild());
+	  else if (n.nodeName() == "parallelepipede")
+	    {
+	      if (n.hasAttributes() == false
+		  || n.attributes().contains("material") == false)
+		{
+		  this->_putError(QObject::tr("The parallelepipede attributes "
+					      "are missing"), n);
+		  return ;
+		}
+	      material = n.attributes().namedItem("material").nodeValue();
+	      if (this->_materialExists(material) == false)
+		{
+		  this->_putError(QObject::tr("The material %1 doesnt exists (you "
+					      "must define a material before use it)")
+				  .arg(material), n);
+		  return ;
+		}
+	      this->_parseSett(n.firstChild(), material);
+	    }
+	  else
+	    this->_parseObjectOptions(n.firstChild());
 	}
-	else
-	  lib3ds = "intern";
-	this->_parse3dsFile(n.firstChild(), lib3ds);
-      }
-      else if (n.nodeName() == "parallelepipede")
-      {
-	if (n.hasAttributes() == false
-	    || n.attributes().contains("material") == false)
-	{
-	  this->_putError(QObject::tr("The parallelepipede attributes "
-				      "are missing"), n);
-	  return ;
-	}
-	material = n.attributes().namedItem("material").nodeValue();
-	if (this->_materialExists(material) == false)
-	{
-	  this->_putError(QObject::tr("The material %1 doesnt exists (you "
-				      "must define a material before use it)")
-			  .arg(material), n);
-	  return ;
-	}
-	this->_parseSett(n.firstChild(), material);
-      }
-      else
-	this->_parseObjectOptions(n.firstChild());
+      n = n.nextSibling();
     }
-    n = n.nextSibling();
-  }
 }
 
 void			Scene::_parseObjects(QDomNode n)
@@ -1404,4 +1409,249 @@ void			Scene::_parseObjects(QDomNode n)
     this->_putError(QObject::tr("An objects element cannot be empty"), n);
   else
     this->_parseObject(n.firstChild());
+}
+
+
+void			Scene::_parseModel(QDomNode n)
+{
+  string		filename;
+  bool			hasFilename = false;
+  string		textDir;
+  bool			hasTextDir = false;
+  Object		*obj = new Object();
+  bool			position = false;
+  bool			rotation = false;
+  bool			scale = false;
+  bool			solid = false;
+
+  while (n.isNull() == false && this->_hasError == false)
+  {
+    if (n.isComment() == false)
+    {
+      if (n.hasChildNodes() == false || n.isElement() == false)
+      {
+	this->_putError(QObject::tr("Every a3ds children must "
+				    "be an element"), n);
+	return ;
+      }
+      if (n.nodeName() == "position")
+      {
+	if (position)
+	  this->_putWarning(QObject::tr("An object has several position, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setPosition(_parsePosition(n, "position"));
+	  position = true;
+	}
+      }
+      else if (n.nodeName() == "solid")
+      {
+	if (solid)
+	  this->_putWarning(QObject::tr("An object has several solid value, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setSolid(_parseBoolean(n, "solid"));
+	  solid = true;
+	}
+      }
+      else if (n.nodeName() == "rotation")
+      {
+	if (rotation)
+	  this->_putWarning(QObject::tr("An object has several rotations, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setRotation(_parseRotation(n));
+	  rotation = true;
+	}
+      }
+      else if (n.nodeName() == "scale")
+      {
+	if (scale)
+	  this->_putWarning(QObject::tr("An object has several scale, "
+					"the first defined will be used"), n);
+	else
+	{
+	  obj->setScale(_parsePosition(n, "scale"));
+	  scale = true;
+	}
+      }
+      else if (n.nodeName() == "filename")
+      {
+	if (hasFilename)
+	  this->_putWarning(QObject::tr("A a3ds has several filename, "
+					"the first defined will be used"), n);
+	else
+	{
+	  filename = _parseFile(n, "filename");
+	  hasFilename = true;
+	}
+      }
+      else if (n.nodeName() == "textureDir")
+      {
+	if (hasTextDir)
+	  this->_putWarning(QObject::tr("A a3ds has several textureDir, "
+					"the first defined will be used"),
+			    n);
+	else
+	{
+	  textDir = _parseDir(n, "textureDir");
+	  hasTextDir = true;
+	}
+      }
+      else
+	this->_putError(QObject::tr("%1 is not a valid element")
+			.arg(n.nodeName()), n);
+    }
+    n = n.nextSibling();
+  }
+  if (!hasFilename)
+    this->_putError(QObject::tr("An model must have at leat a filename"), n);
+  else if (this->_hasError == false)
+  {
+    if (this->_parseModelAssimp(Resources::getInstance()->getNewPathName(filename),
+				textDir, obj))
+      {
+	obj->applyTransformations();
+	this->_objects.push_back(obj);
+      }
+    else
+      {
+	this->_putError(QObject::tr("Assimp model loading error"), n);
+	delete (obj);
+      }
+  }
+}
+
+Material		*Scene::_loadAssimpMaterial(const aiScene *scene,
+						    aiMaterial *mat,
+						    string textureDir)
+{
+  aiString		name;
+  mat->Get<aiString>(AI_MATKEY_NAME, name);
+  Material		*material = new Material(name.data);
+
+  aiColor4D		color;
+  if (mat->Get<aiColor4D>(AI_MATKEY_COLOR_AMBIENT, color) == AI_SUCCESS)
+    material->setColor(Color(color.r * 255, color.g * 255,
+			     color.b * 255, 255));
+  if (mat->Get<aiColor4D>(AI_MATKEY_COLOR_DIFFUSE, color) == AI_SUCCESS)
+    material->setColor(Color(color.r * 255, color.g * 255,
+			     color.b * 255, 255));
+
+  float shininess, strength;
+
+  if (mat->Get<float>(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS &&
+      mat->Get<float>(AI_MATKEY_SHININESS_STRENGTH, strength) == AI_SUCCESS)
+    material->setSpecularPow(shininess * strength);
+  aiString	textureFilePath;
+  if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath) ==
+      AI_SUCCESS)
+    {
+      string texture = textureFilePath.data;
+      material->setTexture(new Texture(textureDir + "/" + texture));
+    }
+      
+  return (material);
+}
+
+void			Scene::_loadAssimpNode(const aiScene *scene,
+					       aiNode *node,
+					       Object *obj,
+					       int matIndex)
+{
+  int	nbAttr = 8;
+  for (uint i = 0; i < node->mNumMeshes; ++i)
+    {
+      aiMesh	*mesh = scene->mMeshes[node->mMeshes[i]];
+
+      if (!(mesh->mPrimitiveTypes & aiPrimitiveType_TRIANGLE) ||
+	  mesh->mNumVertices <= 0)
+	continue ;
+      double	*vertexes = new double[mesh->mNumVertices * nbAttr];
+      for (uint j = 0; j < mesh->mNumVertices; ++j)
+	{
+	  vertexes[j * nbAttr + 0] = mesh->mVertices[j].x;
+	  vertexes[j * nbAttr + 1] = mesh->mVertices[j].y;
+	  vertexes[j * nbAttr + 2] = mesh->mVertices[j].z;
+	  if (mesh->mNormals)
+	    {
+	      vertexes[j * nbAttr + 3] = mesh->mNormals[j].x;
+	      vertexes[j * nbAttr + 4] = mesh->mNormals[j].y;
+	      vertexes[j * nbAttr + 5] = mesh->mNormals[j].z;
+	    }
+	  if (mesh->mTextureCoords[0])
+	    {
+	      vertexes[j * nbAttr + 6] = mesh->mTextureCoords[0][j].x;
+	      vertexes[j * nbAttr + 7] = mesh->mTextureCoords[0][j].y;
+	    }
+	}
+      for (uint j = 0; j < mesh->mNumFaces; ++j)
+	{
+	  if (mesh->mFaces[j].mNumIndices == 3)
+	    {
+	      Point	v1(vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 0],
+			   vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 1],
+			   vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 2]);
+	      Point	v2(vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 0],
+			   vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 1],
+			   vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 2]);
+	      Point	v3(vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 0],
+			   vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 1],
+			   vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 2]);
+	      Point	n1(vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 3],
+			   vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 4],
+			   vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 5]);
+	      Point	n2(vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 3],
+			   vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 4],
+			   vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 5]);
+	      Point	n3(vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 3],
+			   vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 4],
+			   vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 5]);
+	      Point	t1(vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 6],
+			   vertexes[mesh->mFaces[j].mIndices[0] * nbAttr + 7]);
+	      Point	t2(vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 6],
+			   vertexes[mesh->mFaces[j].mIndices[1] * nbAttr + 7]);
+	      Point	t3(vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 6],
+			   vertexes[mesh->mFaces[j].mIndices[2] * nbAttr + 7]);
+	      Triangle	*prim =
+		new Triangle(obj, v1,
+			     _materials[mesh->mMaterialIndex + matIndex],
+			     v2, v3);
+	      prim->setNormals(n1, n2, n3);
+	      prim->setTextureVertex1(t1);
+	      prim->setTextureVertex2(t2);
+	      prim->setTextureVertex3(t3);
+	      prim->setCachedValues();
+	      obj->addPrimitive(prim);
+	    }
+	}
+      delete[] vertexes;
+    }
+  for (uint i = 0; i < node->mNumChildren; ++i)
+    _loadAssimpNode(scene, node->mChildren[i], obj, matIndex);
+}
+
+bool			Scene::_parseModelAssimp(string filename,
+						 string texturedir,
+						 Object *obj)
+{
+  Assimp::Importer importer;
+  const aiScene* scene =
+    importer.ReadFile(filename,0|
+		      aiProcess_Triangulate |
+		      aiProcess_JoinIdenticalVertices |
+		      aiProcess_GenSmoothNormals
+		      );
+  if(!scene)
+    return (false);
+  int	tmp = _materials.size();
+  _materials.resize(_materials.size() + scene->mNumMaterials);
+  for (uint i = 0; i < scene->mNumMaterials; ++i)
+    _materials[tmp + i] = _loadAssimpMaterial(scene, scene->mMaterials[i],
+					      texturedir);
+  _loadAssimpNode(scene, scene->mRootNode, obj, tmp);
+  return (true);
 }

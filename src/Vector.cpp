@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:40:10 2011 loick michard
-// Last update Thu May 26 12:16:44 2011 samuel olivier
+// Last update Mon Oct  8 02:18:48 2012 samuel olivier
 //
 
 #include <cmath>
@@ -162,4 +162,12 @@ double   operator*(const Vector& vector, const Vector& vector2)
 {
   return (vector._x * vector2._x + vector._y * vector2._y +
 	  vector._z * vector2._z);
+}
+
+Vector   operator^(const Vector& u, const Vector& v)
+{
+  Vector newVector(u._y * v._z - u._z * v._y,
+		   u._z * v._x - u._x * v._z,
+		   u._x * v._y - u._y * v._x);
+  return (newVector);
 }

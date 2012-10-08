@@ -5,7 +5,7 @@
 // Login   <jochau_g@epitech.net>
 //
 // Started on  Mon May 23 13:05:47 2011 gael jochaud-du-plessix
-// Last update Wed Jun  8 13:51:22 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 18:08:44 2012 samuel olivier
 //
 
 #include "ClusterServer.hpp"
@@ -323,6 +323,7 @@ void	ClusterServer::renderingHasFinished(void)
     stream << (int)0;
     stream << _currentSection;
     stream << *_raytracedImage;
+    _raytracedImage->save("test.png");
     stream.device()->seek(0);
     stream << (int)(packet.size() - sizeof(int));
     _currentClientSocket->write(packet);

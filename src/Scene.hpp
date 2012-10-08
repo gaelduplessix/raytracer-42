@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 //
 // Started on  Tue Apr 26 11:43:19 2011 loick michard
-// Last update Tue Jun  7 14:42:41 2011 gael jochaud-du-plessix
+// Last update Mon Oct  8 16:40:50 2012 samuel olivier
 //
 
 #ifndef _SCENE_HPP_
@@ -29,6 +29,9 @@
 #include <lib3ds/matrix.h>
 #include <lib3ds/vector.h>
 #include <lib3ds/light.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 #include "CinemaCamera.hpp"
 #include "RenderingInterface.hpp"
@@ -155,7 +158,10 @@ private:
   EquationPrimitive*	_parseEquation(QDomNode, QString, Object*);
   Parallelogram*	_parseParallelogram(QDomNode, QString, Object*);
   void			_parse3dsFile(QDomNode, QString);
+  void			_parseModel(QDomNode);
   bool			_parse3dsIntern(string, string, Object*);
+  bool			_parseModel(string, string, Object*);
+  bool			_parseModelAssimp(string, string, Object*);
   bool			_parse3dsLib3ds(string, string, Object*);
   void			_parseSett(QDomNode, QString);
   Material*		_getMaterialByName(QString);
@@ -170,5 +176,11 @@ private:
   bool			_materialExists(QString);
   Material*		_3dsgetFaceMat(int, const map<string, vector<int> >&);
   Texture*		_parseTextureSetTexture(QString, string, QDomNode);
+  Material		*_loadAssimpMaterial(const aiScene *scene,
+					     aiMaterial *mat,
+					     string textureDir);
+  void			_loadAssimpNode(const aiScene *scene,
+					aiNode *node, Object *obj,
+					int matIndex);
 };
 #endif

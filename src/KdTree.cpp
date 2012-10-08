@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed May 18 10:28:17 2011 loick michard
-// Last update Mon May 30 13:14:18 2011 loick michard
+// Last update Mon Oct  8 15:52:42 2012 samuel olivier
 //
 
 #include <algorithm>
@@ -54,8 +54,8 @@ KdTree::getNearestIntersect(Ray &ray,
       double resTmp = res;
       for (unsigned int i = 0; i < node->primitives.size(); i++)
       	node->primitives[i]->intersectWithRay(ray, primitive, res);
-      if (resTmp != res)
-	return (true);
+      // if (resTmp != res)
+      // 	return (true);
       return (false);
     }
   double left = node->leftChild->box->intersectWithRay(ray);
@@ -183,6 +183,13 @@ void	KdTree::subdivideKdTree(KdTreeNode *node, int depth, int plane)
   node->leftChild = new KdTreeNode;
   node->rightChild = new KdTreeNode;
   node->leftChild->parent = node->rightChild->parent = node;
+
+  if (plane == xPlane)
+    median = (node->box->getVertex2()._x + node->box->getVertex1()._x) / 2;
+  if (plane == yPlane)
+    median = (node->box->getVertex2()._y + node->box->getVertex1()._y) / 2;
+  if (plane == zPlane)
+    median = (node->box->getVertex2()._z + node->box->getVertex1()._z) / 2;
 
   Point		medianP = node->box->getVertex2();
   if (plane == xPlane)

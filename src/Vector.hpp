@@ -5,7 +5,7 @@
 // Login   <michar_l@epitech.net>
 // 
 // Started on  Wed Apr 27 22:39:57 2011 loick michard
-// Last update Sun May  8 13:10:45 2011 samuel olivier
+// Last update Mon Oct  8 02:19:25 2012 samuel olivier
 //
 
 #ifndef _VECTOR_H_
@@ -41,6 +41,7 @@ public:
   template <typename T>
   Vector&       operator/=(T value);
   friend double	operator*(const Vector& vector, const Vector& vector2);
+  friend Vector	operator^(const Vector& vector, const Vector& vector2);
   
   void		rotateX(double alpha);
   void		rotateY(double alpha);
@@ -61,6 +62,9 @@ template <class T>
 Vector   operator*(T value, const Vector& vector);
 template <class T>
 Vector   operator/(const Vector& vector, T value);
+
+Vector	operator^(const Vector& vector1, const Vector& vector2);
+
 
 template <class T>
 Vector&	Vector::operator+=(T value)
