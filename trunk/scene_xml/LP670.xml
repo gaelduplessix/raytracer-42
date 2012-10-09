@@ -1,8 +1,10 @@
 <scene>
   <cameras>
     <camera type="cinema" name="main">
-      <position>-2.5, -2.5, 1</position>
+      <position>-25, -25, 6</position>
       <rotation type="degree">0, 10, 40</rotation>
+      <focus>40</focus>
+      <apertureSize>1</apertureSize>
     </camera>
   </cameras>
 
@@ -48,13 +50,21 @@
       <specularPow>50</specularPow>
       <reflection>0</reflection>
     </material>
+    <material name="badge">
+      <color>255, 255, 255</color>    
+      <transmission>1</transmission>
+    </material>
+    <material name="glass">
+      <color>0, 0, 0</color>    
+      <transmission>1</transmission>
+    </material>
   </materials>
 
   <objects>
     <model>
-      <position>1.5, 2.2, 0</position>
+      <position>15, 22, 0</position>
       <rotation type="degree">90, 0, 0</rotation>
-      <scale>1, 1, 1</scale>
+      <scale>10, 10, 10</scale>
       <filename>3ds_models/LP670/lp670.3ds</filename>
       <textureDir>3ds_models/LP670/</textureDir>
     </model>
@@ -64,7 +74,7 @@
       <solid>false</solid>
       <primitives>
     	<primitive type="plane" material="sol">
-    	  <position>0, 0, -0.58</position>
+    	  <position>0, 0, -5.8</position>
     	  <rotation type="radian">0, 0, 0</rotation>
     	</primitive>
 
@@ -99,16 +109,23 @@
   <lights>
     <light type="spherical">
       <position>-4, 0, 1.5</position>
-      <size>5</size>
+      <size>50</size>
       <color>FFFFFF</color>
       <intensity>0.8</intensity>
       <directLight>3000</directLight>
     </light>
     <light type="spherical">
       <position>-50, 2, 20</position>
-      <size>5</size>
+      <size>50</size>
       <color>FFFFFF</color>
       <intensity>0.4</intensity>
+      <directLight>3000</directLight>
+    </light>
+    <light type="spherical">
+      <position>-1000, 1000, 1000</position>
+      <size>50</size>
+      <color>FFFFFF</color>
+      <intensity>1</intensity>
       <directLight>3000</directLight>
     </light>
     <light type="spherical">
